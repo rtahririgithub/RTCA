@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+   xmlns="http://dozer.sourceforge.net"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.ActivationOption</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.ActivationOption</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.ActivationOptionNameType</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.ActivationOptionNameType</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.Address</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.Address</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.AddressType</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.AddressType</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.AddressValidationResult</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.AddressValidationResult</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.AuditInfo</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.AuditInfo</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.BankAccount</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.BankAccount</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.BillingAccountAssociation</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.BillingAccountAssociation</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.BillState</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.BillState</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.BusinessCreditIdentity</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.BusinessCreditIdentity</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.BusinessCreditInformation</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.BusinessCreditInformation</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.BusinessRole</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.BusinessRole</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.Cheque</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.Cheque</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.ConsumerName</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.ConsumerName</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.CoverageType</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.CoverageType</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.CreditCard</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.CreditCard</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.CreditCheckResult</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.CreditCheckResult</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.CreditCheckResultDeposit</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.CreditCheckResultDeposit</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.CreditDecision</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.CreditDecision</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.DebtSummary</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.DebtSummary</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.EligibilityResult</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.EligibilityResult</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.FinancialHistory</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.FinancialHistory</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.FollowUp</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.FollowUp</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.FollowUpText</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.FollowUpText</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.InvoiceStatus</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.InvoiceStatus</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.Language</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.Language</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.Memo</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.Memo</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.MonthlyFinancialActivity</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.MonthlyFinancialActivity</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.NameFormat</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.NameFormat</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.OtherPhoneType</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.OtherPhoneType</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.PaymentMethod</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.PaymentMethod</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.PaymentMethodAuthorization</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.PaymentMethodAuthorization</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.PaymentType</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.PaymentType</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.PersonalCreditInformation</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.PersonalCreditInformation</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.Privilege</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.Privilege</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.ProvinceCode</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.ProvinceCode</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.ReferToCreditAnalyst</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.ReferToCreditAnalyst</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.RewardRedemptionResult</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.RewardRedemptionResult</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.ServiceDeclined</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.ServiceDeclined</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.ValidationMessage</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.ValidationMessage</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.customer.domain.common.WPSServiceType</class-a>
+      <class-b>com.telus.credit.customer.domain.common_v1_1.WPSServiceType</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.entprflmgt.domain.BillingAccountIdentification</class-a>
+      <class-b>com.telus.credit.entprflmgt.domain_v1_1.BillingAccountIdentification</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.entprflmgt.domain.ConsumerCreditIdentification</class-a>
+      <class-b>com.telus.credit.entprflmgt.domain_v1_1.ConsumerCreditIdentification</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.entprflmgt.domain.ConsumerCreditProfileInfo</class-a>
+      <class-b>com.telus.credit.entprflmgt.domain_v1_1.ConsumerCreditProfileInfo</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.entprflmgt.domain.Identification</class-a>
+      <class-b>com.telus.credit.entprflmgt.domain_v1_1.Identification</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.entprflmgt.domain.UpdateCreditProfile</class-a>
+      <class-b>com.telus.credit.entprflmgt.domain_v1_1.UpdateCreditProfile</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.entprflmgt.domain.UpdateCreditProfileResponse</class-a>
+      <class-b>com.telus.credit.entprflmgt.domain_v1_1.UpdateCreditProfileResponse</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.AdjudicationResult</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.AdjudicationResult</class-b>
+      <field>
+         <a>creditScoreCd</a>
+         <b>creditScore</b>
+      </field>
+      <field>
+         <a>creditLimitAmt</a>
+         <b>creditLimit</b>
+      </field>
+      <field>
+         <a>depositAmt</a>
+         <b>depositAmount</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.BureauInformation</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.BureauInformation</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditAddress</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditAddress</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditAssessmentResult</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditAssessmentResult</class-b>
+      <field>
+         <a>depositAmt</a>
+         <b>depositAmount</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditBureauDocument</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditBureauDocument</class-b>
+      <field>
+         <a>documentID</a>
+         <b>documentId</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditBureauResult</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditBureauResult</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditCardCode</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditCardCode</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditCustomerInfo</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditCustomerInfo</class-b>
+      <field>
+         <a>customerID</a>
+         <b>customerId</b>
+      </field>
+      <field>
+         <a>customerMasterSourceID</a>
+         <b>customerMasterSourceId</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditDecision</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditDecision</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditIdentification</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditIdentification</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CreditProfileData</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CreditProfileData</class-b>
+      <field>
+         <a>creditProfileID</a>
+         <b>creditProfileId</b>
+      </field>
+      <field>
+         <a>customerID</a>
+         <b>customerId</b>
+      </field>
+      <field>
+         <a>commentTxt</a>
+         <b>comment</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.CustomerGuarantor</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.CustomerGuarantor</class-b>
+      <field>
+         <a>guarantorCustomerID</a>
+         <b>guarantorCustomerId</b>
+      </field>
+      <field>
+         <a>guarantorCreditProfileID</a>
+         <b>guarantorCreditProfileId</b>
+      </field>
+      <field>
+         <a>guaranteedAmt</a>
+         <b>guaranteedAmount</b>
+      </field>
+      <field>
+         <a>guarantorPhoneNum</a>
+         <b>guarantorPhoneNumber</b>
+      </field>
+      <field>
+         <a>referenceNum</a>
+         <b>referenceNumber</b>
+      </field>
+      <field>
+         <a>commentTxt</a>
+         <b>comment</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.DriverLicense</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.DriverLicense</class-b>
+      <field>
+         <a>driverLicenseNum</a>
+         <b>driverLicenseNumber</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.FraudWarning</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.FraudWarning</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.HealthCard</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.HealthCard</class-b>
+      <field>
+         <a>healthCardNum</a>
+         <b>healthCardNumber</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.Passport</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.Passport</class-b>
+      <field>
+         <a>passportNum</a>
+         <b>passportNumber</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.PersonalInfo</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.PersonalInfo</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.PersonName</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.PersonName</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.ProductCategory</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.ProductCategory</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.ProductCategoryQualification</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.ProductCategoryQualification</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.ProvincialIdCard</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.ProvincialIdCard</class-b>
+      <field>
+         <a>provincialIdNum</a>
+         <b>provincialIdNumber</b>
+      </field>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.RiskIndicator</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.RiskIndicator</class-b>
+   </mapping>
+
+   <mapping>
+      <class-a>com.telus.credit.wlnprfldmgt.domain.ScoreCardAttribute</class-a>
+      <class-b>com.telus.credit.wlnprfldmgt.domain_v1_1.ScoreCardAttribute</class-b>
+   </mapping>
+
+</mappings>

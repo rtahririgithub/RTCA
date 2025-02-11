@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+
+   <bean id="configurationFramework"
+      class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>joinReports1</value>
+               </property>
+             </bean>
+             <bean id="STEP02" parent="baseStep">
+                <property name="moduleName" value="cmdExec-Step01"/>
+             </bean>
+         </list>
+      </property>
+
+   </bean>
+   <bean id="joinReports1" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_join_credit_assessment2.sh</value></property>
+      <property name="arg"> <value>${processbox}/${report_rtca_1/outputFilename}1_${L_CRDA_ODATE}.dat ${processbox}/${report_rtca_1/outputFilename}4_${L_CRDA_ODATE}.dat  ${processbox}/${report_rtca_1/outputFilename}_Score_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+   <bean id="cmdExec-Step01" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-report.sh"/>
+      <property name="arg"> <value>${syncsort}/rtca_crd_asses_rpt_header2.txt ${L_RPT_START_DATE} ${L_RPT_END_DATE} ${processbox}/${report_rtca_1/outputFilename}_Score_${L_CRDA_ODATE}.dat ${outbox}/${report_rtca_1/outputFilename}_Score_${L_CRDA_ODATE}.csv  ${processbox}/RTCA_Credit_Assessment_Report_Date_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output" value="${report/log1}"/>
+   </bean>
+</beans>

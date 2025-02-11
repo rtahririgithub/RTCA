@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+
+<sqlMapConfig>
+	<settings 
+		useStatementNamespaces="true"
+		cacheModelsEnabled="false"
+		lazyLoadingEnabled="false"
+	/>
+	<typeHandler javaType="com.telus.framework.math.Money"
+        callback="com.telus.framework.util.ibatis.MoneyTypeHandler" />
+	<!--
+	<transactionManager type="JDBC">
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@iedm3301da:41521:odscmdv"/>
+			<property name="JDBC.Username" value="APPCR"/>
+			<property name="JDBC.Password" value="APPCR"/>
+			<property name="JDBC.DefaultAutoCommit" value="true" />
+		</dataSource>
+	</transactionManager>
+	-->
+	<sqlMap resource="sqlmaps/CreditProfile.xml"/>
+	<sqlMap resource="sqlmaps/CustomerGuarantor.xml"/>
+	<sqlMap resource="sqlmaps/CreditValue.xml"/>
+	<sqlMap resource="sqlmaps/CreditAddress.xml"/>
+	<sqlMap resource="sqlmaps/CreditIDCard.xml"/>
+	<sqlMap resource="sqlmaps/CreditAttribute.xml"/>
+</sqlMapConfig>

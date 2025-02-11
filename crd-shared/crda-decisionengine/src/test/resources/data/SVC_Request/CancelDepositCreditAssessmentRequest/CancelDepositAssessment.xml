@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tns:CancelDepositCreditAssessmentRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICOCreditAssessmentInterfaceTypes_v2" xsi:schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICOCreditAssessmentInterfaceTypes_v2 FICOCreditAssessmentInterfaceTypes_v2_1.xsd">
+	<tns:creditAssessmentTypeCd>OVRD_ASSESSMENT</tns:creditAssessmentTypeCd>
+	<tns:creditAssessmentSubTypeCd>CANCEL_DEPOSIT_INV</tns:creditAssessmentSubTypeCd>
+	<tns:depositData>
+		<crdc:depositPaid>0</crdc:depositPaid>
+		<crdc:depositPending>0</crdc:depositPending>
+		<crdc:depositReleased>0</crdc:depositReleased>
+	</tns:depositData>
+	<tns:creditWorthinessData>
+		<crdc:decisionCd>OVERCM000004</crdc:decisionCd>
+		<crdc:assessmentMessageCd>REGCA02</crdc:assessmentMessageCd>
+		<crdc:creditValueCd>D</crdc:creditValueCd>
+		<crdc:creditRiskLevel>9000</crdc:creditRiskLevel>
+	</tns:creditWorthinessData>
+</tns:CancelDepositCreditAssessmentRequest>
+

@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+        <groupId>telus.credit.crdmgmt</groupId>
+        <artifactId>crd</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>telus.credit.crdmgmt.crd-esb-deploy</groupId>
+    <artifactId>pom-crd-esb-deploy</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>pom-crd-esb-deploy</name>
+
+   <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>crda-esb</module>
+        <module>emheader-esb</module>
+        <module>entprflmgt-esb</module>
+        <module>orderproxy-esb</module>
+        <module>wlneligibility-esb</module>        
+    </modules>
+
+
+    <description>Build All crd modules Aggregator</description>
+</project>

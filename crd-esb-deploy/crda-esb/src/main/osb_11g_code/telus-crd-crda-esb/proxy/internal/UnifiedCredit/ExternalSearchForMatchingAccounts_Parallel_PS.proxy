@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-5885535624269734156-77356c03.16972c84e91.-6e32">
+    <con:pipeline type="request" name="ExternalSearchForMatchingAccounts_Parallel_PipelinePairNode_request">
+      <con:stage name="get_input_Stage">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="performCreditAssessmentRequest">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-79c0</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='performCreditAssessment'])</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="constants">
+            <con2:id>_ActionId-8296355084766482616--1e7b4d8a.168f44b7b9a.-7a1e</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/constants"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="format_PostalCode_Stage">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="creditAddress">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-799d</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='creditAddress'])</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="postalcodeOrig">
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6b5d</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($creditAddress//*[local-name()='postalCd'])</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="postalcodeLastFormatted">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7972</con2:id>
+            <con1:expr>
+              <con2:xqueryText>let $postalcodeCleaned := replace($postalcodeOrig, '[^A-Za-z_0-9]', '')
+let $postalcodeFirst3Chars := substring($postalcodeCleaned, 1, 3)
+let $postalcodeLast3Chars := substring($postalcodeCleaned, 4, 3)
+let $postalcodeLastFormatted := concat($postalcodeFirst3Chars, ' ', $postalcodeLast3Chars)
+return
+$postalcodeLastFormatted</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="create_findPartyParallel_Request_Stage">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="lastname">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-795b</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='lastName'])/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="driverLicenseNum">
+            <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7fad</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='driverLicenseNum'])/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="sin">
+            <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7f59</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='sin'])/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="birthDate">
+            <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7f20</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='birthDate'])/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="findPartyParallelRequest">
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-61c0</con2:id>
+            <con1:expr>
+              <con2:xqueryText><![CDATA[<tns:findPartyParallelRequest xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1 FindPartySplitJoinRequestResponse_v1_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1">
+	<lastname>{$lastname}</lastname>
+	<postalCd>{$postalcodeLastFormatted}</postalCd>
+	<DL>{$driverLicenseNum}</DL>
+	<SIN>{$sin}</SIN>
+	<DOB>{$birthDate}</DOB>
+</tns:findPartyParallelRequest>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con4:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-61b1</con2:id>
+            <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:outboundTransform>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-61b0</con2:id>
+                <con1:location>
+                  <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>&lt;UC_Log>
+
+{$findPartyParallelRequest}
+
+&lt;/UC_Log></con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con4:outboundTransform>
+          </con4:route>
+        </con:actions>
+      </con:stage>
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6a69</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:empty($postalcodeOrig) or fn:empty($lastname)
+and
+( 
+ fn:empty($driverLicenseNum) or 
+ fn:empty($sin) or 
+ fn:empty($birthDate)
+ )</con2:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con1:replace contents-only="true" varName="body">
+                  <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-69c1</con2:id>
+                  <con1:location>
+                    <con2:xpathText>.</con2:xpathText>
+                  </con1:location>
+                  <con1:expr>
+                    <con2:xqueryText><![CDATA[<ExternalSearchForMatchingAccountsResponse>
+		<fmsr:findMatchingSearchResultList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmsr="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+				<fmsr:findMatchingSearchResultIndicator>
+					<fmsr:indicator>false</fmsr:indicator>
+					<fmsr:reasonCd>{$constants/constant[@value="MISSING_LNAME_POSTALCD"]/text()}</fmsr:reasonCd>
+				</fmsr:findMatchingSearchResultIndicator>
+		</fmsr:findMatchingSearchResultList>
+	</ExternalSearchForMatchingAccountsResponse>]]></con2:xqueryText>
+                  </con1:expr>
+                </con1:replace>
+                <con2:reply>
+                  <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-699d</con2:id>
+                </con2:reply>
+              </con1:actions>
+            </con1:case>
+            <con1:default/>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="call_findPartyParallel_Stage" errorHandler="_onErrorHandler-3203460142129454737-116880b7.16896510a72.-7746">
+        <con:context/>
+        <con:actions>
+          <con1:wsCallout>
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7914</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/findPartyParallelSplitJoin" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>findPartyParallel</con1:operation>
+            <con1:request>
+              <con1:body>$findPartyParallelRequest</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>findPartyParallelResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform>
+              <con1:assign varName="findPartyResponse">
+                <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7ec3</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>($findPartyParallelResponse //*[local-name()='findPartyResponse'])</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:responseTransform>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Convert result to internal schema FindMatchingSearchResult_Stage">
+        <con:context>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult" prefix="fmsr"/>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" prefix="ecrda"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="findMatchingSearchResultList">
+            <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7e4c</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/transformation/TOCP/convert_FindPartyResponse_to_FindMatchingSearchResult"/>
+                <con2:param name="fparty_findPartyResponse">
+                  <con2:path>$findPartyResponse</con2:path>
+                </con2:param>
+                <con2:param name="constants">
+                  <con2:path>$constants</con2:path>
+                </con2:param>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con4:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-61f9</con2:id>
+            <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:outboundTransform>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-61f8</con2:id>
+                <con1:location>
+                  <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>&lt;UC_Log>
+&lt;findPartyRessponse_Converted>
+{$findMatchingSearchResultList}
+&lt;/findPartyRessponse_Converted>
+&lt;/UC_Log></con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con4:outboundTransform>
+          </con4:route>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7e50</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:exists($findMatchingSearchResultList/fmsr:findMatchingSearchResult)</con2:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con1:assign varName="fullcreditAssessmentRequest">
+                  <con2:id>_ActionId-6563850037306094843-386ce02e.1690d2fcf47.-7fab</con2:id>
+                  <con1:expr>
+                    <con2:xqueryText>$performCreditAssessmentRequest/ecrda:creditAssessmentRequest</con2:xqueryText>
+                  </con1:expr>
+                </con1:assign>
+                <con1:assign varName="findMatchingSearchResultList">
+                  <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7e48</con2:id>
+                  <con1:expr>
+                    <con2:xqueryTransform>
+                      <con2:resource ref="telus-crd-crda-esb/xquery/transformation/TOCP/findMatch_by_SIN_DL_DOB"/>
+                      <con2:param name="ecrda_FullCreditAssessmentRequest">
+                        <con2:path>$fullcreditAssessmentRequest</con2:path>
+                      </con2:param>
+                      <con2:param name="fmsr_findMatchingSearchResultList">
+                        <con2:path>$findMatchingSearchResultList</con2:path>
+                      </con2:param>
+                      <con2:param name="constants">
+                        <con2:path>$constants</con2:path>
+                      </con2:param>
+                    </con2:xqueryTransform>
+                  </con1:expr>
+                </con1:assign>
+                <con1:javaCallout varName="validated ">
+                  <con2:id>_ActionId-8407743492263874271--2c1c599c.169354ccecc.-7e06</con2:id>
+                  <con1:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                  <con1:className>com.telus.credit.util.UnifiedCreditUtil_v2</con1:className>
+                  <con1:method>public static boolean validateMDMResponse(org.apache.xmlbeans.XmlObject)</con1:method>
+                  <con1:expr>
+                    <con2:xqueryText>$findMatchingSearchResultList</con2:xqueryText>
+                  </con1:expr>
+                </con1:javaCallout>
+                <con1:ifThenElse>
+                  <con2:id>_ActionId-8407743492263874271--2c1c599c.169354ccecc.-7ed2</con2:id>
+                  <con1:case>
+                    <con1:condition>
+                      <con2:xqueryText>$validated='true'</con2:xqueryText>
+                    </con1:condition>
+                    <con1:actions/>
+                  </con1:case>
+                  <con1:default>
+                    <con1:replace varName="body" contents-only="true">
+                      <con2:id>_ActionId-8407743492263874271--2c1c599c.169354ccecc.-7e7e</con2:id>
+                      <con1:location>
+                        <con2:xpathText>.</con2:xpathText>
+                      </con1:location>
+                      <con1:expr>
+                        <con2:xqueryText><![CDATA[<ExternalSearchForMatchingAccountsResponse>
+		<fmsr:findMatchingSearchResultList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmsr="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+				<fmsr:findMatchingSearchResultIndicator>
+					<fmsr:indicator>false</fmsr:indicator>
+					<fmsr:reasonCd>{$constants/constant[@value="MISSING_DATA_FROM_MDM"]/text()}</fmsr:reasonCd>
+				</fmsr:findMatchingSearchResultIndicator>
+		</fmsr:findMatchingSearchResultList>
+	</ExternalSearchForMatchingAccountsResponse>]]></con2:xqueryText>
+                      </con1:expr>
+                    </con1:replace>
+                    <con2:reply>
+                      <con2:id>_ActionId-8407743492263874271--2c1c599c.169354ccecc.-7e28</con2:id>
+                    </con2:reply>
+                  </con1:default>
+                </con1:ifThenElse>
+              </con1:actions>
+            </con1:case>
+            <con1:default>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7e4f</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText><![CDATA[<ExternalSearchForMatchingAccountsResponse>
+		<fmsr:findMatchingSearchResultList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmsr="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+				<fmsr:findMatchingSearchResultIndicator>
+					<fmsr:indicator>false</fmsr:indicator>
+					<fmsr:reasonCd>{$constants/constant[@value="NO_RESULT_FROM_MDM_AFTER_CONVERSION"]/text()}</fmsr:reasonCd>
+				</fmsr:findMatchingSearchResultIndicator>
+		</fmsr:findMatchingSearchResultList>
+	</ExternalSearchForMatchingAccountsResponse>]]></con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+              <con2:reply>
+                <con2:id>_ActionId-6160350850361940888-71b0d345.16908c645fe.-7e4e</con2:id>
+              </con2:reply>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ExternalSearchForMatchingAccounts_Parallel_PipelinePairNode_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6373</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText>&lt;ExternalSearchForMatchingAccountsResponse>
+{$findMatchingSearchResultList}
+&lt;/ExternalSearchForMatchingAccountsResponse></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-3203460142129454737-116880b7.16896510a72.-7746">
+      <con:stage name="call_findPartyParallel_Stage_ErrorHandler_stage">
+        <con:context/>
+        <con:actions>
+          <con3:log>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-70aa</con2:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>$fault
+,
+$findPartyParallelRequest
+,
+$body</con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+          <con1:assign varName="ErrorCodes">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7717</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/ErrorCodes"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:replace varName="body">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-76f0</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText><![CDATA[<SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" xmlns:xsd="http://www.w3.org/1999/XMLSchema"> 
+      <SOAP-ENV:Fault> 
+         <faultcode>
+         {$ErrorCodes/ErrorCode[@value="EXTERNAL_SEARCH_SVC_CALL"]/text()}
+         </faultcode> 
+      </SOAP-ENV:Fault> 
+   </SOAP-ENV:Body>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+          <con2:reply isError="true">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-76d5</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-5885535624269734156-77356c03.16972c84e91.-6e32">
+      <con:stage name="ExternalSearchForMatchingAccounts_Parallel_ErrorHandler_stage">
+        <con:context/>
+        <con:actions>
+          <con3:log>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6dfc</con2:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="ExternalSearchForMatchingAccounts_Parallel_PipelinePairNode">
+        <con:request>ExternalSearchForMatchingAccounts_Parallel_PipelinePairNode_request</con:request>
+        <con:response>ExternalSearchForMatchingAccounts_Parallel_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <import resource="classpath:refpds-access-client-spring.xml" />
+   <!--import resource="classpath:crd-wlnprflmgt-performance-logging-spring.xml" /-->  
+
+   <bean class="com.telus.framework.config.spring.PlaceholderConfigurer" />   
+   <bean id="txManager" class="org.springframework.transaction.jta.WebLogicJtaTransactionManager" />
+   
+   <!-- Original code: POJO implementation of WLN credit profile data management web-service interface.-->
+   <bean id="wlnCrdProfileMgtService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+      <property name="transactionManager" ref="txManager" />
+      <property name="target" ref="wlnCrdProfileMgtServiceTarget" />
+      <property name="transactionAttributes">
+         <props>
+            <prop key="createCreditProfile">PROPAGATION_REQUIRED,-Exception</prop>
+            <prop key="searchCreditProfileByCreditAndCustomerData">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+            <prop key="unmergeCreditProfile">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+            <prop key="getCreditProfileByCustomerId">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+            <prop key="searchCreditProfileByCreditId">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+            <prop key="searchLinkedCreditProfileList">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+            <prop key="expireCreditProfileByCustomerId">PROPAGATION_REQUIRED,-Exception</prop>
+         </props>
+      </property>
+   </bean>
+   
+   
+
+   	<!-- Add performance logging
+ 	<bean id="wlnCrdProfileMgtService" class="org.springframework.aop.framework.ProxyFactoryBean">
+   		<property name="interceptorNames">
+    		<list>
+    			<value>pfPerformanceAdvisor</value>
+       		</list>
+      	</property>  
+      	<property name="target" ref="wlnCrdProfileMgtServiceDef" />
+   	</bean>
+
+	<bean id="wlnCrdProfileMgtServiceDef" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="txManager" />
+		<property name="target" ref="wlnCrdProfileMgtServiceTarget" />
+	    <property name="transactionAttributes">
+			<props>
+	 	    	<prop key="createCreditProfile">PROPAGATION_REQUIRED,-Exception</prop>
+	            <prop key="searchCreditProfileByCreditAndCustomerData">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+	            <prop key="unmergeCreditProfile">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+	            <prop key="getCreditProfileByCustomerId">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+	            <prop key="searchCreditProfileByCreditId">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+	            <prop key="searchLinkedCreditProfileList">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+	            <prop key="expireCreditProfileByCustomerId">PROPAGATION_REQUIRED,-Exception</prop>
+	         </props>
+      </property>
+   	</bean-->
+   	<!-- End of performance logging -->
+
+   <bean id="wlnCrdProfileMgtServiceTarget" class="com.telus.credit.wlnprflmgt.webservice.impl.WLNCreditProfileManagementServiceImpl" lazy-init="true">
+      <property name="creditProfileDao" ref="creditProfileDao" />
+      <property name="creditIDCardDao" ref="creditIDCardDao" />
+      <property name="creditStatusDao" ref="creditStatusDao" />
+      <property name="customerGuarantorDao" ref="customerGuarantorDao" />
+      <property name="creditAttributeDao" ref="creditAttributeDao" />
+      <property name="creditProfileBr" ref="creditProfileBr" />
+      <property name="creditIDCardBr" ref="creditIDCardBr" />
+      <property name="transactionManager" ref="txManager" />
+      <property name="creditProfileMgmtProxyServiceMediator" ref="creditProfileMgmtProxyServiceMediator" />
+	  <property name="creditPubSubConnector" ref="creditPubSubConnector" />
+   </bean>
+
+   <bean id="creditProfileDao" class="com.telus.credit.dao.CreditProfileDaoSqlmap" lazy-init="true">
+      <property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+      <property name="creditIDCardDao" ref="creditIDCardDao" />
+      <property name="creditValueDao" ref="creditValueDao" />
+      <property name="creditAddressDao" ref="creditAddressDao" />
+      <property name="customerGuarantorDao" ref="customerGuarantorDao" />
+   </bean>
+ 
+   <bean id="creditIDCardDao" class="com.telus.credit.dao.CreditIDCardDaoSqlmap" lazy-init="true">
+      <property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+   </bean>
+
+   <bean id="creditStatusDao" class="com.telus.credit.dao.CreditStatusDaoSqlmap" lazy-init="true">
+      <property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+   </bean> 
+ 
+   <bean id="customerGuarantorDao" class="com.telus.credit.dao.CustomerGuarantorDaoSqlmap" lazy-init="true">
+      <property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+   </bean> 
+
+   <bean id="creditValueDao" class="com.telus.credit.dao.CreditValueDaoSqlmap">
+      <property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+      <property name="creditProfileDao" ref="creditProfileDao" />
+   </bean>
+
+   <bean id="creditAddressDao" class="com.telus.credit.dao.CreditAddressDaoSqlmap">
+      <property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+   </bean>
+   
+   <bean id="creditAttributeDao" class="com.telus.credit.dao.CreditAttributeDaoSqlmap">
+      <property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+   </bean>   
+
+   <bean id="creditProfileBr" class="com.telus.credit.domain.CreditProfileBr">
+     <property name="creditIDCardBr" ref="creditIDCardBr" />
+   </bean>
+
+   <bean id="creditIDCardBr" class="com.telus.credit.domain.CreditIDCardBr">
+      <property name="isServiceLayer" value="true" />
+   </bean>
+   
+   <bean id="creditProfileMgmtProxyServiceMediator" class="com.telus.credit.wlnprflmgt.client.WLNCreditProfileMgmtProxyServiceIntermediator">
+      <constructor-arg ref="wlnCreditProfileMgmtProxyService" />
+   </bean>
+
+   <!-- Original code-->
+   <bean id="wlnCreditProfileMgmtProxyService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean" lazy-init="true">
+      <property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.wlncreditprofilemanagementproxyservice_2.WLNCreditProfileManagementProxyServicePortType" />
+      <property name="wsdlDocumentUrl" value="classpath:wsdls/WLNCreditProfileManagementProxyService_v2_0.wsdl" />
+      
+      <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2" />  
+      <property name="serviceName" value="WLNCreditProfileManagementProxyService_v2_0" />
+      <property name="portName" value="WLNCreditProfileManagementProxyServicePortType" />
+      <property name="lookupServiceOnStartup" value="false" />
+      <property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+      <property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+      <property name="handlerResolver" ref="handlerResolverCreditProfileMgmtProxySvc" />
+   </bean>
+   
+
+	<!-- Add performance logging
+	<bean id="wlnCreditProfileMgmtProxyService" class="org.springframework.aop.framework.ProxyFactoryBean">
+   		<property name="interceptorNames">
+    		<list>
+    			<value>pfPerformanceAdvisor</value>
+   	        </list>
+      	</property>    
+      	<property name="target" ref="wlnCreditProfileMgmtProxyServiceTgt" />
+   	</bean>
+   	
+   	<bean id="wlnCreditProfileMgmtProxyServiceTgt" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean" lazy-init="true">
+	    <property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.wlncreditprofilemanagementproxyservice_2.WLNCreditProfileManagementProxyServicePortType" />
+	    <property name="wsdlDocumentUrl" value="classpath:wsdls/WLNCreditProfileManagementProxyService_v2_0.wsdl" />
+	      
+	    <Web service URL configured in env.xml file.>
+	    <property name="endpointAddress" value="${connections/SOA/serviceURLs/wirelineCreditPrflMgtProxyServiceBaseUrl}_v2_0_vs0" />
+	    <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2" />  
+	    <property name="serviceName" value="WLNCreditProfileManagementProxyService_v2_0" />
+	    <property name="portName" value="WLNCreditProfileManagementProxyServicePort" />
+	    <property name="lookupServiceOnStartup" value="false" />
+	    <property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+	    <property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+   	</bean-->
+   	<!-- End of performance logging -->
+   	
+  
+   <bean id="handlerResolverCreditProfileMgmtProxySvc" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver" lazy-init="true">
+      <property name="handlerList">
+         <list>
+            <bean class="com.telus.framework.ws.em.soaphandler.JaxWsRoutingHandler" init-method="init">
+               <property name="handlerConfig">
+                  <map>
+                     <entry key="physicalEndpoint" value="${connections/servers/WirelineCreditProfileManagementProxy}" />
+                     <entry key="envString" value="${metadata/envId}" />
+                  </map>
+               </property>
+            </bean>
+         </list>
+      </property>
+   </bean>
+   
+      
+      
+   <!-- encryption -->   
+   <bean id="encryptUtil" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+      <property name="staticMethod" value="com.telus.framework.crypto.EncryptionUtil.setCrypto" />
+      <property name="arguments">
+         <list>
+             <ref bean="cryptoImpl" />
+         </list>
+      </property>
+   </bean>
+
+   <bean id="cryptoImpl" class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl" init-method="init">
+      <property name="key1" value="EbT5a8Fuq" />
+      <property name="key2" value="aYt2gv6R" />
+      <property name="key3" value="9bFp3Gz4k" />
+   </bean>
+
+   <bean id="creditProfileSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+      <property name="configLocation" value="classpath:sqlmaps/creditMgt-sqlmap-config.xml" />
+      <property name="dataSource" ref="dataSource" />
+   </bean>
+
+   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@an05103:41521:TCMDV"/>
+        <property name="username" value="APPCOL_BATCH_WK05"/>
+        <property name="password" value="APPCOL_BATCH_WK05"/>
+    </bean>
+  
+   <bean id="creditPubSubConnector" class="com.telus.credit.util.CreditPubSubConnector" lazy-init="true">
+         <property name="pubSubURL" value="https://enterprisemessagewebk-is02.tsl.telus.com/publisher/publish/" />
+         <property name="pubSubTopic" value="Party.Customer.CreditInfo" />
+         <property name="username" value="9343" />
+         <property name="password" value="LvQX&amp;98B" />
+         <property name="envId" value="PT05" />
+   </bean>
+   
+</beans>

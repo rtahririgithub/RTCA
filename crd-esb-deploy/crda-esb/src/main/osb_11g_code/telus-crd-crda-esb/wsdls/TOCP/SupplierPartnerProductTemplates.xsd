@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="SupplierPartnerProductChoice">
+        <xsd:choice>
+            <xsd:element
+                name="DomainNameMediationSupplierPartnerProduct" type="tns:DomainNameMediationSupplierPartnerProduct"/>
+            <xsd:element
+                name="DomainNameRegistrationSupplierPartnerProduct" type="tns:DomainNameRegistrationSupplierPartnerProduct"/>
+            <xsd:element name="PromotionalItemSupplierPartnerProduct" type="tns:PromotionalItemSupplierPartnerProduct"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="DomainNameMediationSupplierPartnerProduct">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="SecondaryDNSIPAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Remark" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CompanyName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PrimaryDNSName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PrimaryDNSIPAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SecondaryDNSName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="DomainNameRegistrationSupplierPartnerProduct">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="DomainType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DomainName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="HostName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="PromotionalItemSupplierPartnerProduct">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="ProductName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SupplierID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SupplierName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ProductID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

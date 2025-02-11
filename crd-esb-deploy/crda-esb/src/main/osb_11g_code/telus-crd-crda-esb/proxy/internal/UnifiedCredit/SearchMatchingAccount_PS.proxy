@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-2931434669256956019-66394996.1689b5ddffe.-7e13">
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="get_input_Stage">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="performCreditAssessmentRequest">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7b17</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='performCreditAssessment'])</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="constants">
+            <con2:id>_ActionId-8296355084766482616--1e7b4d8a.168f44b7b9a.-7c0e</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/constants"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Stage">
+        <con:context/>
+        <con:actions>
+          <con1:wsCallout>
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7afd</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/refpds/exclude_CreditAssessmentRequestAttributes_per_UC_SEARCH_EXCLUSION_RULES_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:request>
+              <con1:payload>$Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Request</con1:payload>
+            </con1:request>
+            <con1:response>
+              <con1:payload>Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Response</con1:payload>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Request">
+                <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7ade</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>&lt;Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Request>
+{$performCreditAssessmentRequest}
+&lt;/Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Request></con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform>
+              <con1:assign varName="exclusionDataFoundInd">
+                <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7acc</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>$Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Response/text()</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+              <con4:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-5e10</con2:id>
+                <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con4:outboundTransform>
+                  <con1:replace varName="body" contents-only="true">
+                    <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-5e0f</con2:id>
+                    <con1:location>
+                      <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                    </con1:location>
+                    <con1:expr>
+                      <con2:xqueryText>&lt;UC_LOG>
+&lt;Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES>
+{$Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Request}
+,
+{$Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES_Response} 
+&lt;/Exclude_Matching_SearchCriteria_per_UC_SEARCH_EXCLUSION_RULES>
+&lt;/UC_LOG></con2:xqueryText>
+                    </con1:expr>
+                  </con1:replace>
+                </con4:outboundTransform>
+              </con4:route>
+              <con1:ifThenElse>
+                <con2:id>_ActionId-6224009557589688747-905c1f9.16aeb5977f1.-7fda</con2:id>
+                <con1:case>
+                  <con1:condition>
+                    <con2:xqueryText>$exclusionDataFoundInd='true'</con2:xqueryText>
+                  </con1:condition>
+                  <con1:actions>
+                    <con1:replace contents-only="true" varName="body">
+                      <con2:id>_ActionId-6224009557589688747-905c1f9.16aeb5977f1.-7fd9</con2:id>
+                      <con1:location>
+                        <con2:xpathText>.</con2:xpathText>
+                      </con1:location>
+                      <con1:expr>
+                        <con2:xqueryText><![CDATA[<SearchMatchingAccountResponse>
+		<fmsr:findMatchingSearchResultList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmsr="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+				<fmsr:findMatchingSearchResultIndicator>
+					<fmsr:indicator>false</fmsr:indicator>
+					<fmsr:reasonCd>{$constants/constant[@value="SEARCH_ATTR_REMOVED_PER_UC_SEARCH_EXCLUSION_RULES"]/text()}</fmsr:reasonCd>
+				</fmsr:findMatchingSearchResultIndicator>
+		</fmsr:findMatchingSearchResultList>
+</SearchMatchingAccountResponse>]]></con2:xqueryText>
+                      </con1:expr>
+                    </con1:replace>
+                    <con2:reply>
+                      <con2:id>_ActionId-6224009557589688747-905c1f9.16aeb5977f1.-7fd8</con2:id>
+                    </con2:reply>
+                  </con1:actions>
+                </con1:case>
+                <con1:default/>
+              </con1:ifThenElse>
+            </con1:responseTransform>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ExternalSearchForMatchingAccounts_Stage">
+        <con:context>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult" prefix="fmsr"/>
+        </con:context>
+        <con:actions>
+          <con1:wsCallout>
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-769e</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/internal/UnifiedCredit/ExternalSearchForMatchingAccounts_Parallel_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:request>
+              <con1:payload>$ExternalSearchForMatchingAccountsRequest</con1:payload>
+            </con1:request>
+            <con1:response>
+              <con1:payload>ExternalSearchForMatchingAccountsResponse</con1:payload>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="ExternalSearchForMatchingAccountsRequest">
+                <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-767e</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>&lt;ExternalSearchForMatchingAccountsRequest>
+{$performCreditAssessmentRequest}
+&lt;/ExternalSearchForMatchingAccountsRequest></con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform>
+              <con1:assign varName="findMatchingSearchResultList">
+                <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7667</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>($ExternalSearchForMatchingAccountsResponse//*[local-name()='findMatchingSearchResultList'])</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+              <con4:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-59ec</con2:id>
+                <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con4:outboundTransform>
+                  <con1:replace varName="body" contents-only="true">
+                    <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-59eb</con2:id>
+                    <con1:location>
+                      <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                    </con1:location>
+                    <con1:expr>
+                      <con2:xqueryText>&lt;UC_LOG>
+&lt;ExternalSearchForMatchingAccounts_Parallel_PS>
+{$ExternalSearchForMatchingAccountsRequest}
+,
+{$ExternalSearchForMatchingAccountsResponse} 
+&lt;/ExternalSearchForMatchingAccounts_Parallel_PS>
+&lt;/UC_LOG></con2:xqueryText>
+                    </con1:expr>
+                  </con1:replace>
+                </con4:outboundTransform>
+              </con4:route>
+            </con1:responseTransform>
+          </con1:wsCallout>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-8296355084766482616--1e7b4d8a.168f44b7b9a.-7dfa</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:exists(($findMatchingSearchResultList//*[local-name()='accountData']))</con2:xqueryText>
+              </con1:condition>
+              <con1:actions/>
+            </con1:case>
+            <con1:default>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-3852459149343921278-7da47db2.168f9a00dee.-7f68</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>&lt;SearchMatchingAccountResponse>
+{$findMatchingSearchResultList}
+&lt;/SearchMatchingAccountResponse></con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+              <con2:reply>
+                <con2:id>_ActionId-3852459149343921278-7da47db2.168f9a00dee.-7f66</con2:id>
+              </con2:reply>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Stage">
+        <con:context>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult" prefix="fmsr"/>
+        </con:context>
+        <con:actions>
+          <con1:wsCallout>
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7627</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/refpds/exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:request>
+              <con1:payload>$Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Request</con1:payload>
+            </con1:request>
+            <con1:response>
+              <con1:payload>Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Response</con1:payload>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Request">
+                <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-75e1</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>&lt;Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Request>
+{$findMatchingSearchResultList}
+&lt;/Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Request></con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform>
+              <con1:assign varName="findMatchingSearchResultList">
+                <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7606</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>($Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Response//*[local-name()='findMatchingSearchResultList'])</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+              <con4:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-5f5e</con2:id>
+                <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con4:outboundTransform>
+                  <con1:replace varName="body" contents-only="true">
+                    <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-5f5d</con2:id>
+                    <con1:location>
+                      <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                    </con1:location>
+                    <con1:expr>
+                      <con2:xqueryText>&lt;UC_LOG>
+&lt;Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES>
+{$Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Request} 
+,
+{$Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Response}
+&lt;/Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES>
+&lt;/UC_LOG></con2:xqueryText>
+                    </con1:expr>
+                  </con1:replace>
+                </con4:outboundTransform>
+              </con4:route>
+            </con1:responseTransform>
+          </con1:wsCallout>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-8296355084766482616--1e7b4d8a.168f44b7b9a.-7b99</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:exists(($findMatchingSearchResultList//*[local-name()='accountData']))</con2:xqueryText>
+              </con1:condition>
+              <con1:actions/>
+            </con1:case>
+            <con1:default>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-313016738049874400--4ab380c2.168f84dba27.-7db1</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText><![CDATA[<SearchMatchingAccountResponse>
+		<fmsr:findMatchingSearchResultList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmsr="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+				<fmsr:findMatchingSearchResultIndicator>
+					<fmsr:indicator>false</fmsr:indicator>
+					<fmsr:reasonCd>{$constants/constant[@value="NO_MATCH_BY_UC_MATCH_FILTERING_RULES"]/text()}</fmsr:reasonCd>
+				</fmsr:findMatchingSearchResultIndicator>
+		</fmsr:findMatchingSearchResultList>
+</SearchMatchingAccountResponse>]]></con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+              <con2:reply>
+                <con2:id>_ActionId-8296355084766482616--1e7b4d8a.168f44b7b9a.-7ad8</con2:id>
+              </con2:reply>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Stage">
+        <con:context>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult" prefix="fmsr"/>
+        </con:context>
+        <con:actions>
+          <con1:wsCallout>
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-75bf</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/refpds/exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:request>
+              <con1:payload>$Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Request</con1:payload>
+            </con1:request>
+            <con1:response>
+              <con1:payload>Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Response</con1:payload>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Request">
+                <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7590</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>&lt;Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Request>
+{$findMatchingSearchResultList}
+&lt;/Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Request></con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform>
+              <con1:assign varName="findMatchingSearchResultList">
+                <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7567</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>($Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Response//*[local-name()='findMatchingSearchResultList'])</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+              <con4:route xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-5ed3</con2:id>
+                <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con4:outboundTransform>
+                  <con1:replace varName="body" contents-only="true">
+                    <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-5ed2</con2:id>
+                    <con1:location>
+                      <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                    </con1:location>
+                    <con1:expr>
+                      <con2:xqueryText>&lt;UC_LOG>
+&lt;Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES>
+{$Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Request}
+,
+{$Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES_Response} 
+&lt;/Exclude_MatchedAccounts_per_UC_SEARCH_EXCLUSION_RULES>
+&lt;/UC_LOG></con2:xqueryText>
+                    </con1:expr>
+                  </con1:replace>
+                </con4:outboundTransform>
+              </con4:route>
+            </con1:responseTransform>
+          </con1:wsCallout>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-8296355084766482616--1e7b4d8a.168f44b7b9a.-7d49</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:exists(($findMatchingSearchResultList//*[local-name()='accountData']))</con2:xqueryText>
+              </con1:condition>
+              <con1:actions/>
+            </con1:case>
+            <con1:default>
+              <con1:insert varName="findMatchingSearchResultList">
+                <con2:id>_ActionId-8296355084766482616--1e7b4d8a.168f44b7b9a.-7adc</con2:id>
+                <con1:location>
+                  <con2:xpathText>fmsr:findMatchingSearchResultList</con2:xpathText>
+                </con1:location>
+                <con1:where>first-child</con1:where>
+                <con1:expr>
+                  <con2:xqueryText><![CDATA[<fmsr:findMatchingSearchResultIndicator>
+		<fmsr:indicator>false</fmsr:indicator>
+		<fmsr:reasonCd>{$constants/constant[@value="NO_MATCH_BY_UC_SEARCH_EXCLUSION_RULES"]/text()}</fmsr:reasonCd>
+	</fmsr:findMatchingSearchResultIndicator>]]></con2:xqueryText>
+                </con1:expr>
+              </con1:insert>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-7107858534000073898--3b411c9d.16b1ef6780a.-7fc8</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText><![CDATA[<SearchMatchingAccountResponse>
+		<fmsr:findMatchingSearchResultList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmsr="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+				<fmsr:findMatchingSearchResultIndicator>
+					<fmsr:indicator>false</fmsr:indicator>
+					<fmsr:reasonCd>{$constants/constant[@value="NO_MATCH_BY_UC_SEARCH_EXCLUSION_RULES"]/text()}</fmsr:reasonCd>
+				</fmsr:findMatchingSearchResultIndicator>
+		</fmsr:findMatchingSearchResultList>
+</SearchMatchingAccountResponse>]]></con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+              <con2:reply>
+                <con2:id>_ActionId-7107858534000073898--3b411c9d.16b1ef6780a.-7f8f</con2:id>
+              </con2:reply>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-645f</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText>&lt;SearchMatchingAccountResponse>
+{$findMatchingSearchResultList}
+&lt;/SearchMatchingAccountResponse></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-2931434669256956019-66394996.1689b5ddffe.-7e13">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con3:log>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-7207</con2:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+          <con1:replace varName="body">
+            <con2:id>_ActionId-2931434669256956019-66394996.1689b5ddffe.-7dee</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText><![CDATA[<SOAP-ENV:Body xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" xmlns:xsd="http://www.w3.org/1999/XMLSchema"> 
+      <SOAP-ENV:Fault> 
+         <faultcode>{$fault/ctx:details/con1:ReceivedFaultDetail/con1:faultcode/text()}</faultcode> 
+      </SOAP-ENV:Fault> 
+   </SOAP-ENV:Body>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+          <con2:reply isError="true">
+            <con2:id>_ActionId-2931434669256956019-66394996.1689b5ddffe.-7dd3</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

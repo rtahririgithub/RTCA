@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+   
+   <import resource="classpath:fw-base.jdef"/>
+<!--    <import resource="base-defn.xml" /> --> 
+
+   <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>in_files_merge</value>
+               </property>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName">
+                  <value>sort_prev</value>
+               </property>
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName">
+                  <value>sort_processed</value>
+               </property>
+            </bean>
+            <bean id="STEP04" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_existed</value>
+               </property>
+            </bean>
+            <bean id="STEP05" parent="baseStep">
+               <property name="moduleName">
+                  <value>merge_new</value>
+               </property>
+            </bean>
+
+            <bean id="STEP06" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_duplicates</value>
+               </property>
+            </bean>
+         </list>
+      </property>
+
+   </bean>
+   <bean id="in_files_merge" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable">  <value>${step}/rtca-mug-drive.sh</value></property>
+      <property name="arg"> <value>${temp} ${L_CRDA_PREV} ${L_CRDA_ODATE} CustomerDriverFile*.dat  mupdg-cv-*.dat  CustomerDriverTemp0_${L_CRDA_ODATE}.dat  mupdg-processed-prev0-${L_CRDA_ODATE}.dat CustomerDriverTemp* mupdg-processed-prev* CustomerDriverFile_${L_CRDA_PREV}.dat mupdg-cv-1-${L_CRDA_PREV}.dat ${inbox}</value></property>
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+   <bean id="sort_prev" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_cust_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/CustomerDriverTemp0_${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/CustomerDriverTemp01_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log1}</value></property>
+  </bean>
+   <bean id="sort_processed" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_cust_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-processed-prev0-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-processed-prev-${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log2}</value></property>
+  </bean>
+  <bean id="remove_existed" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_cust_rm_existed.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/CustomerDriverTemp01_${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_PREV}/CustomerDriverFile_${L_CRDA_PREV}.dat ${temp}/${L_CRDA_ODATE}/CustomerDriverTemp_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log3}</value></property>
+  </bean>
+
+   <bean id="merge_new" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_mug_customer_drv.sh</value></property>
+       <property name="arg"> <value>${passbox}/${L_CRDA_PREV} ${temp}/${L_CRDA_ODATE}/CustomerDriverTemp_${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-processed-prev-${L_CRDA_ODATE}.dat  ${temp}/${L_CRDA_ODATE}/CustomerDriverTemp1_${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/CustomerDriverTemp2_${L_CRDA_ODATE}.dat CustomerDriverFile_${L_CRDA_PREV}.dat</value></property>
+        <property name="output"><value>${report/log4}</value></property>
+   </bean>
+   <bean id="remove_duplicates" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_cust_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/CustomerDriverTemp2_${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/CustomerDriverFile_${L_CRDA_ODATE}.dat </value></property>
+      <property name="output"><value>${report/log5}</value></property>
+   </bean>
+</beans>

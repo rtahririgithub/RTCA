@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings
+   xmlns="http://java.sun.com/xml/ns/jaxws"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   wsdlLocation="ConsumerCustomerManagementService_v2_6.wsdl">
+
+    <enableWrapperStyle>false</enableWrapperStyle>
+	
+   <bindings node="wsdl:definitions/wsdl:service[@name='ConsumerCustomerManagementService_v2_6']">
+      <class name="ConsumerCustomerManagementServiceStub" />
+   </bindings>
+
+   <bindings node="wsdl:definitions/wsdl:portType[@name='ConsumerCustomerManagementService_v2_6_PortType']">
+      <class name="ConsumerCustomerManagementServicePortType" />
+   </bindings>
+
+</bindings>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jms="http://www.bea.com/wli/sb/transports/jms" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="true">
+    <ser:description/>
+    <ser:binding type="Mixed" xsi:type="con3:MixedBindingType" xmlns:con3="http://www.bea.com/wli/sb/services/bindings/config">
+      <con3:request type="XML"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="true">
+      <ser:aggregationInterval>3</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Action</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:throttling enabled="false">
+      <ser:capacity>0</ser:capacity>
+      <ser:maxQueueLength>0</ser:maxQueueLength>
+      <ser:timeToLive>0</ser:timeToLive>
+    </ser:throttling>
+    <ser:messageTracing enabled="true">
+      <ser:detailsLevel>Full</ser:detailsLevel>
+      <ser:maxSize>8192</ser:maxSize>
+    </ser:messageTracing>
+    <ser:transactions sameTxForResponse="false" isRequired="false"/>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>jms</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>jms://ln98945.corp.ads:21671,ln98946.corp.ads:21671/eai.jms.wl.connection.CREDIT_PERSISTENT_CONN_FACTORY/eai.jms.wl.queue.WCPMPXY_INCOMMING_TRB_QUEUE</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+    <tran:provider-specific>
+      <jms:is-queue>true</jms:is-queue>
+      <jms:is-secure>false</jms:is-secure>
+      <jms:inbound-properties>
+        <jms:response-required>false</jms:response-required>
+        <jms:XA-required>true</jms:XA-required>
+      </jms:inbound-properties>
+      <jms:dispatch-policy>WLNCreditProfileManagmentProxyService_WorkManager</jms:dispatch-policy>
+      <jms:request-encoding>UTF-8</jms:request-encoding>
+      <jms:jndi-timeout>0</jms:jndi-timeout>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-2507102051252998313--638d0863.14334d459d4.-8000">
+    <con:pipeline name="InboundQueue_MessageConsumer_PS_PipelinePairNode_request" type="request">
+      <con:stage name="Init_stage">
+        <con:context/>
+        <con:actions>
+          <con4:assign varName="queueInput">
+            <con2:comment>Transform the TRB msg to assessCreditWorthiness.
+Getting customer ID Logic:
+=========================
+if EntityType=CUSTOMER then customer ID =EntitiyID
+else 
+if TransactionCode=REOPENPCN then 
+customerID =TRB_TRX/DATA/OpenBillingArrangement/BillingArrangement/BillingArrangementContext/CustomerNo
+else 
+customerID =TRB_TRX/DATA/OpenPayChannel/PayChannel/PayChannelContext/CustomerNo</con2:comment>
+            <con2:id>_ActionId-5631155433196985115--255e8e0c.1443d108407.-7eed</con2:id>
+            <con4:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/transformation/TRB/TRBTRX_AssessCreditWorthinessRequest"/>
+                <con2:param name="tRB_TRX1">
+                  <con2:path>$body/*</con2:path>
+                </con2:param>
+              </con2:xqueryTransform>
+            </con4:expr>
+          </con4:assign>
+          <con4:wsCallout>
+            <con2:comment>validate TRB Message</con2:comment>
+            <con2:id>_ActionId-5631155433196985115--255e8e0c.1443d108407.-7ee3</con2:id>
+            <con4:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/async/TRB/validateTRB_Message_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:request>
+              <con4:payload>$validateTRB_MessageRequest</con4:payload>
+            </con4:request>
+            <con4:response>
+              <con4:payload>validateTRB_MessageResponse</con4:payload>
+            </con4:response>
+            <con4:requestTransform>
+              <con4:assign varName="validateTRB_MessageRequest">
+                <con2:comment>validateTRB_MessageResquest</con2:comment>
+                <con2:id>_ActionId-5631155433196985115--255e8e0c.1443d108407.-7ee7</con2:id>
+                <con4:expr>
+                  <con2:xqueryText>$queueInput</con2:xqueryText>
+                </con4:expr>
+              </con4:assign>
+            </con4:requestTransform>
+            <con4:responseTransform>
+              <con4:ifThenElse>
+                <con2:comment>is  validateTRB_Message?</con2:comment>
+                <con2:id>_ActionId-5631155433196985115--255e8e0c.1443d108407.-7ee6</con2:id>
+                <con4:case>
+                  <con4:condition>
+                    <con2:xqueryText>$validateTRB_MessageResponse/isValidTRBMessage/text()='true'</con2:xqueryText>
+                  </con4:condition>
+                  <con4:actions/>
+                </con4:case>
+                <con4:default>
+                  <con5:log>
+                    <con2:comment>Log Invalid TRB Message before discarding.</con2:comment>
+                    <con2:id>_ActionId-5631155433196985115--255e8e0c.1443d108407.-7ee5</con2:id>
+                    <con5:logLevel>debug</con5:logLevel>
+                    <con5:expr>
+                      <con2:xqueryText>$tmp_trb_msg</con2:xqueryText>
+                    </con5:expr>
+                    <con5:message>Invalid TRB Message</con5:message>
+                  </con5:log>
+                  <con2:reply>
+                    <con2:id>_ActionId-5631155433196985115--255e8e0c.1443d108407.-7ee4</con2:id>
+                  </con2:reply>
+                </con4:default>
+              </con4:ifThenElse>
+            </con4:responseTransform>
+          </con4:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="prepareTransportHeaders_stage1">
+        <con:context/>
+        <con:actions>
+          <con4:assign varName="QueueTransportHeaders">
+            <con2:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7de6</con2:id>
+            <con4:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/QueueTransportHeaders"/>
+              </con2:xqueryTransform>
+            </con4:expr>
+          </con4:assign>
+          <con4:assign varName="tmp_trb_msg">
+            <con2:id>_ActionId-2507102051252998313--638d0863.14334d459d4.-7fce</con2:id>
+            <con4:expr>
+              <con2:xqueryText>$body/*</con2:xqueryText>
+            </con4:expr>
+          </con4:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="PostToQueue_stage1">
+        <con:context>
+          <con2:varNsDecl prefix="ent1" namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8"/>
+          <con2:varNsDecl prefix="for" namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FormLetterServiceTypes_v2"/>
+          <con2:varNsDecl prefix="ent" namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseFormLetterManagementServiceRequestResponse_v1"/>
+          <con2:varNsDecl prefix="ping" namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"/>
+        </con:context>
+        <con:actions>
+          <con4:wsCallout>
+            <con2:comment>call PostToFastQueue BS</con2:comment>
+            <con2:id>_ActionId-5924483957398881620--4b01e079.14256c43ac0.-7bf8</con2:id>
+            <con4:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/async/postToQueue/PostToFastQueue_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:request>
+              <con4:payload>$queueInput</con4:payload>
+            </con4:request>
+            <con4:response>
+              <con4:payload>queueOutput</con4:payload>
+            </con4:response>
+            <con4:requestTransform>
+              <con1:transport-headers copy-all="false" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7d3e</con2:id>
+                <con1:header-set>outbound-request</con1:header-set>
+                <con1:header name="WCPPRXY_VERSION_PROPERTY" value="expression">
+                  <con2:xqueryText>$QueueTransportHeaders/COMMON/WCPPRXY_VERSION_PROPERTY/text()</con2:xqueryText>
+                </con1:header>
+                <con1:header name="ARFM_APPLICATION_ID" value="expression">
+                  <con2:xqueryText>$QueueTransportHeaders/COMMON/ARFM_APPLICATION_ID/text()</con2:xqueryText>
+                </con1:header>
+                <con1:header name="ARFM_SERVICE_NAME" value="expression">
+                  <con2:xqueryText>$QueueTransportHeaders/TRB/ARFM_SERVICE_NAME/text()</con2:xqueryText>
+                </con1:header>
+                <con1:header name="ARFM_CUSTOMER_ID" value="expression">
+                  <con2:xqueryText>($queueInput//*[local-name()='customerID'])[1]/text()</con2:xqueryText>
+                </con1:header>
+                <con1:header name="ARFM_RESOURCE_ID" value="expression">
+                  <con2:xqueryText>$QueueTransportHeaders/COMMON/ARFM_RESOURCE_ID/text()</con2:xqueryText>
+                </con1:header>
+                <con1:header name="Q_MSG_TYPE" value="expression">
+                  <con2:xqueryText>$QueueTransportHeaders/TRB/Q_MSG_TYPE/text()</con2:xqueryText>
+                </con1:header>
+                <con1:header name="MESSAGE_ORIGIN" value="expression">
+                  <con2:xqueryText>$QueueTransportHeaders/TRB/Q_NAME/text()</con2:xqueryText>
+                </con1:header>
+              </con1:transport-headers>
+            </con4:requestTransform>
+            <con4:responseTransform>
+              <con4:assign varName="logConfigData">
+                <con2:id>_ActionId-1135813543616193875-19f8a9ce.1441f65026f.-7fe4</con2:id>
+                <con4:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="telus-crd-crda-esb/xquery/config/logConfig"/>
+                  </con2:xqueryTransform>
+                </con4:expr>
+              </con4:assign>
+              <con4:ifThenElse>
+                <con2:id>_ActionId-1135813543616193875-19f8a9ce.1441f65026f.-7fe1</con2:id>
+                <con4:case>
+                  <con4:condition>
+                    <con2:xqueryText>$logConfigData/PS[@name="InboundQueue_MessageConsumer_PS"]/prop[@name="log.info"]/text()="true"</con2:xqueryText>
+                  </con4:condition>
+                  <con4:actions>
+                    <con5:log>
+                      <con2:id>_ActionId-1135813543616193875-19f8a9ce.1441f65026f.-7fe0</con2:id>
+                      <con5:logLevel>debug</con5:logLevel>
+                      <con5:expr>
+                        <con2:xqueryText>'InboundQueue_MessageConsumer_PS_LogCustomerID='
+,data($body/HEADER/@EntityId) 
+,
+$tmp_trb_msg
+,
+$queueInput
+,
+$outbound/ctx:transport</con2:xqueryText>
+                      </con5:expr>
+                    </con5:log>
+                  </con4:actions>
+                </con4:case>
+                <con4:default/>
+              </con4:ifThenElse>
+              <con6:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-5924483957398881620--4b01e079.14256c43ac0.-7bfa</con2:id>
+                <con6:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con6:location>
+                <con6:expr>
+                  <con2:xqueryText>&lt;FastQueue_Response/></con2:xqueryText>
+                </con6:expr>
+              </con6:replace>
+              <con2:reply isError="false">
+                <con2:id>_ActionId-5924483957398881620--4b01e079.14256c43ac0.-7bf9</con2:id>
+              </con2:reply>
+            </con4:responseTransform>
+          </con4:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline name="InboundQueue_MessageConsumer_PS_PipelinePairNode_response" type="response"/>
+    <con:pipeline type="error" name="_onErrorHandler-2507102051252998313--638d0863.14334d459d4.-8000">
+      <con:stage name="InboundQueue_MessageConsumer_PS_Error_Handler_stage">
+        <con:context/>
+        <con:actions>
+          <con4:assign varName="logConfigData">
+            <con2:id>_ActionId-7350597931879019201--24c9e542.1441739b928.-7a42</con2:id>
+            <con4:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/logConfig"/>
+              </con2:xqueryTransform>
+            </con4:expr>
+          </con4:assign>
+          <con4:ifThenElse>
+            <con2:id>_ActionId-7350597931879019201--24c9e542.1441739b928.-7a41</con2:id>
+            <con4:case>
+              <con4:condition>
+                <con2:xqueryText>$logConfigData/PS[@name="InboundQueue_MessageConsumer_PS_ERROR"]/prop[@name="log.info"]/text()="true"</con2:xqueryText>
+              </con4:condition>
+              <con4:actions>
+                <con5:log>
+                  <con2:id>_ActionId-7350597931879019201--24c9e542.1441739b928.-7a40</con2:id>
+                  <con5:logLevel>debug</con5:logLevel>
+                  <con5:expr>
+                    <con2:xqueryText>'InboundQueue_MessageConsumer_PS_ERROR customerID='
+,data($body/HEADER/@EntityId) 
+,
+$fault
+,
+$tmp_trb_msg
+,
+$queueInput
+,
+$outbound/ctx:transport</con2:xqueryText>
+                  </con5:expr>
+                </con5:log>
+              </con4:actions>
+            </con4:case>
+            <con4:default/>
+          </con4:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="InboundQueue_MessageConsumer_PS_PipelinePairNode">
+        <con:comment/>
+        <con:request>InboundQueue_MessageConsumer_PS_PipelinePairNode_request</con:request>
+        <con:response>InboundQueue_MessageConsumer_PS_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

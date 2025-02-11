@@ -1,0 +1,69 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditProfileManagementServiceTypes_v2" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditProfileManagementServiceTypes_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="CustomerManagementCommonTypes_v4_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" schemaLocation="CreditCommon_v1_1.xsd"/>
+    <xs:complexType name="ConsumerCreditProfileInfo">
+        <xs:sequence>
+            <xs:element name="identification" type="tns:Identification">
+                <xs:annotation>
+                    <xs:documentation>Represents wireline customerId or
+                        wireless BAN of a customer
+                        whose credit profile needs to be updated.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditAddress" type="crdc:CreditAddress"/>
+            <xs:element minOccurs="0" name="personalInfo" type="crdc:PersonalInfo">
+                <xs:annotation>
+                    <xs:documentation>Contains information like
+                        employment status, date of birth,
+                        residency code, under legal care code.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditIdentification" type="tns:ConsumerCreditIdentification">
+                <xs:annotation>
+                    <xs:documentation>All values except of credit card
+                        are expected to be in clear
+                        text. The service will take care of encryption
+                        before passing the values                         downstream.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditValueCd" type="crdc:creditValueCodeType"/>
+            <xs:element minOccurs="0" name="fraudIndicatorCd" type="crdc:fraudIndicatorType"/>
+            <xs:element minOccurs="0" name="creditCardCode" type="crdc:CreditCardCode">
+                <xs:annotation>
+                    <xs:documentation>primary and secondary credit card
+                        code fields.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="applicationProvinceCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="customerGuarantor" type="crdc:CustomerGuarantor"/>
+            <xs:element minOccurs="0" name="comment" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Identification">
+        <xs:choice>
+            <xs:element name="customerId" type="cus:CustomerId"/>
+            <xs:element name="billingAccountIdentification" type="tns:BillingAccountIdentification"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="BillingAccountIdentification">
+        <xs:sequence>
+            <xs:element name="billingAccountNumber" type="cus:AccountNumber"/>
+            <xs:element name="billingSystemId" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>Represents billing system id.
+                        Indicates which billing system
+                        should be used to look up BAN.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ConsumerCreditIdentification">
+        <xs:complexContent>
+            <xs:extension base="crdc:CreditIdentification">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="creditCardToken" type="cus:CreditCard"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.1">
+	<view uin="V574ng9e6mnseil-h5lcqw">
+		<property name="$defaultDiagram" value="true"/>
+		<property name="$metaclass" value="Package Diagram"/>
+		<property name="@url" value="element://model:project::Line Speed/design:view:::V574ng9e6zk0yag-5k71ts"/>
+	</view>
+</nodeSet>

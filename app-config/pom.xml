@@ -1,0 +1,180 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+	
+	<parent>
+		<groupId>telus.credit.crdmgmt</groupId>
+		<artifactId>crd</artifactId>
+		<version>4.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>crd-app-config</artifactId>
+
+	<profiles>
+		<profile>
+			<id>BuildServer</id>
+			<build>
+				<plugins>
+				        
+                  <!-- For how to create the configure files for different environments, 
+                  please see https://team.collaborate.tsl.telus.com/sites/BTEM/EMCADBC/Shared%20documents/envSettings%20Consolidation/Environment%20Configuration%20management.docx 
+                  
+                  This plugin 
+                  - Creates the environment cofiguration files under app-config/conf folder 
+                  - When you run in DOS, you must pass the profile, BuildServer like 
+                    mvn clean install -PBuildServer 
+                  - Place the template files under app-config/envxml 
+                    folder and make sure you find out the location of the spreadsheet and change 
+                    the settingsFile location on the app-config/pom.xml when running this plugin on the UNIX 
+                    builder. 
+                  - To test the setup locally, you change the settingsFile to<settingsFile>c:/project/crd/envxml/envSettings.xls</settingsFile> -->
+					<plugin>
+						<groupId>telus-maven.plugins</groupId>
+						<artifactId>telus-config-plugin</artifactId>
+						<executions>
+							<execution>
+								<configuration>
+									<!-- Get the location of the spreadsheet from the Middleware Deployment team -->
+									<!-- Uncomment when you are ready to build the config files in build server-->
+									<settingsFile>/work/staging/envsettings/envsettings_src/compass_env/2010_July/envSettings.xls</settingsFile>
+                                    
+									
+									<!-- Comment out settingsFile if building in desktop to use the local 
+									<settingsFile>${basedir}/envxml/envSettings.xls</settingsFile>
+									-->
+
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-resources-entprflmgt</id>
+                                <!-- here the phase you need -->
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/conf/esbs/entprflmgt-esb</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/../crd-esb-deploy/entprflmgt-esb/src/main/resources</directory>
+                                            <filtering>false</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-resources-crda</id>
+                                <!-- here the phase you need -->
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/conf/esbs/crda-esb</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/../crd-esb-deploy/crda-esb/src/main/resources</directory>
+                                            <filtering>false</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-resources-dmanager</id>
+                                <!-- here the phase you need -->
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/conf/adb/CrdDecisioningService15</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/services/CrdDecisioningService15</directory>
+                                            <filtering>true</filtering>
+                                            <include>**/*.dmanager</include>
+                                            <include>**/*.server</include>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-resources-pubsubconfig</id>
+                                <!-- here the phase you need -->
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/conf/pubsub</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/config/pubsub</directory>
+                                            <filtering>false</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-resources-loglevel</id>
+                                <!-- here the phase you need -->
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/conf/loglevel</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/config/loglevel</directory>
+                                            <filtering>false</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<configuration>
+							<skip>false</skip>
+							<artifactItems>
+								<artifactItem>
+									<groupId>telus.credit.wlnuc</groupId>
+									<artifactId>wlnuc_ruleserviceserver_service</artifactId>
+									<version>20.2.20191220.0</version>
+									<type>adb</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${basedir}/conf/adb/CrdDecisioningService15</outputDirectory>
+									<destFileName>RTCA_RuleServiceServer_service_0.adb</destFileName>
+								</artifactItem>
+								<!--artifactItem>
+									<groupId>telus.credit.wlnuc</groupId>
+									<artifactId>wlnuc_ruleserviceserver_service</artifactId>
+									<version>19.4.20190121.0</version>
+									<type>server</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${basedir}/conf/adb/CrdDecisioningService15</outputDirectory>
+									<destFileName>RTCA_RuleService.server</destFileName>
+								</artifactItem-->
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

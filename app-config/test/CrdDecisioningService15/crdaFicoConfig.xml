@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+<group name="config">
+
+    <group name="fico">
+        <group name="entrypoint">
+	    <prop name="bureauSimulator">getSimulatedCreditBureauResultEntryPoint</prop>
+	    <prop name="creditAssessment">performCreditAssessmentEntryPoint</prop>
+	    <prop name="calculateDeposit">calculateDepositEntryPoint</prop>
+	    <prop name="exportAssessmentMsgs">exportAssessmentMessageContents</prop>
+	    <prop name="exportErrorMsgs">exportErrorMessageContents</prop>
+	    <prop name="exportFraudMsgs">exportFraudMessageContents</prop>
+	    <prop name="ping">ping</prop>
+        </group>
+	<prop name="rtcaRuleServiceName">RTCA_RuleService</prop>
+	<prop name="msgExportDelimiter">;</prop>
+	<prop name="dManagerConfigFileName">RTCA_RuleServiceServer_ser.dmanager</prop>
+	<prop name="ruleServerConfigFileName">RTCA_RuleService.server</prop>
+    </group>
+    
+</group>

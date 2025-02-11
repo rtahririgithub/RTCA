@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE delimited-record-layout PUBLIC "-//TELUS.com//DTD DelimitedRecordLayout 1.0//EN" "http://www.telus.com/dtd/DelimitedRecordLayout.dtd">
+
+<delimited-record-layout delimiter="|">
+
+   <typehandlers>
+      <typehandler id="DateHandler" class="com.telus.framework.recordparser2.typehandler.DateHandler">
+         <prop name="pattern">yyyy-MM-dd</prop>
+      </typehandler>
+   </typehandlers>
+
+   <structure name="record" type="com.telus.crd.assessment.batch.domain.BillingAccountAgencyRecord">
+      <field name="customerId" maxLength="10000" />
+      <field name="billingAccountNum" maxLength="10000" />
+      <field name="agencyAmount" maxLength="10000" />
+      <field name="agencyCode" maxLength="10000" />
+      <field name="agencyStatus" maxLength="10000" />
+      <field name="agencyDateStr" maxLength="10000" />
+      <field name="recordTime" maxLength="10000" />
+   </structure>
+
+</delimited-record-layout>

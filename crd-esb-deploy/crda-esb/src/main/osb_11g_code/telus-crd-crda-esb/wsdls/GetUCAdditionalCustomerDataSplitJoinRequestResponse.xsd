@@ -1,0 +1,17 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoinRequestResponse" version="2.0" xmlns:ecrda="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" xmlns:gucacdsj="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoinRequestResponse" xmlns:wcpm="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" schemaLocation="EnterpriseCreditAssessmentServiceRequestResponse_v2_1.xsd"/>
+    <xs:element name="getUCAdditionalCustomerData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="unifiedCreditSearchResult" type="ecrda:WlsUnifiedCreditSearchResult"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getUCAdditionalCustomerDataResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="unifiedCreditSearchResult" type="ecrda:WlsUnifiedCreditSearchResult"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans 
+   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd"
+   >
+   <import resource="classpath:ws-client-spring.xml" />
+   <import resource="classpath:crd-entprflmgt-performance-logging-spring.xml" /> 
+   
+   <bean class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+	<context:annotation-config/>
+   <!-- Original POJO implementation of Enterprise credit profile management web-service interface.
+   <bean id="entCrdProfileMgtService" class="com.telus.credit.entprflmgt.webservice.impl.EnterpriseCreditProfileManagementServiceImpl" lazy-init="true">
+      <constructor-arg ref="jmsCrdPrflUpdateSender" />
+      <constructor-arg ref="wlnCreditProfileUpdater" />
+      <constructor-arg ref="wlsCreditProfileUpdater" />
+      <constructor-arg ref="customerMgtSvcIntermediator" />
+      <constructor-arg ref="wlnCreditProfileMgtSvcIntermediator" />
+      <constructor-arg ref="wlnCreditProfileMgtProxySvcIntermediator" />
+      <property name="crdProfileSyncEnabled" value="${enterpriseCreditProfileMgmtServiceJMSConfig/crdProfileSyncEnabled}" />
+      <property name="creditAssessmentAnalyzer" ref="creditAssessmentAnalyzer" />
+   </bean>
+   -->
+   
+   	<!-- Add performance logging -->   	
+	<bean id="entCrdProfileMgtService" class="com.telus.framework.util.spring.ServiceProxy">
+	 	<property name="serviceType" value="pojo" />
+	 	<property name="businessInterface" value="com.telus.wsdl.cmo.ordermgmt.enterprisecreditprofilemanagementsvc_2.EnterpriseCreditProfileManagementServicePortType" />
+	 	<property name="interceptorNames">
+			<list>
+		   		<value>pfPerformanceAdvisor</value>
+			</list>
+	 	</property>
+	 	<property name="target" ref="entCrdProfileMgtServicePojoTgt" />             
+  	</bean>
+  	
+  	<bean id="entCrdProfileMgtServicePojoTgt" class="com.telus.credit.entprflmgt.webservice.impl.EnterpriseCreditProfileManagementServiceImpl" lazy-init="true">
+	    <property name="crdProfileSyncEnabled" value="${enterpriseCreditProfileMgmtServiceJMSConfig/crdProfileSyncEnabled}" />
+	    <property name="creditAssessmentAnalyzer" ref="creditAssessmentAnalyzer" />
+  	</bean>
+   	<!-- End of performance logging -->
+    
+   <bean id="creditAssessmentAnalyzer" class="com.telus.credit.entprflmgt.util.CreditAssessmentAnalyzer" factory-method="getInstance">
+      <property name="testMode" value="${creditAssessmentAnalyzer/testMode}" />
+      <property name="analyzerOn" value="${creditAssessmentAnalyzer/analyzerOn}" />
+      <property name="checkCreditValueInRequest" value="${creditAssessmentAnalyzer/checkCreditValueInRequest}" />
+      <property name="checkCustomerStatus" value="${creditAssessmentAnalyzer/checkCustomerStatus}" />
+      <property name="checkNoOfWLNAccounts" value="${creditAssessmentAnalyzer/checkNoOfWLNAccounts}" />
+      <property name="checkNoOfWLSAccounts" value="${creditAssessmentAnalyzer/checkNoOfWLSAccounts}" />
+      <property name="checkWLNAccountCreationDate" value="${creditAssessmentAnalyzer/checkWLNAccountCreationDate}" />
+      <property name="checkCreditValueCondition" value="${creditAssessmentAnalyzer/checkCreditValueCondition}" />
+      <property name="rtcaLaunchDateAsString" value="${creditAssessmentAnalyzer/rtcaLaunchDate}" />
+   </bean>
+
+   <!-- Intermediary classes to external web-services to update wln/wls credit profiles. -->
+   <bean id="wlnCreditProfileUpdater" class="com.telus.credit.entprflmgt.client.WLNCrdProfileUpdater">
+      <constructor-arg ref="wirelineCreditProfileDataMgtService" />
+   </bean>
+    
+   <bean id="wlsCreditProfileUpdater" class="com.telus.credit.entprflmgt.client.WLSCrdProfileUpdater">
+      <constructor-arg ref="wirelessCreditProfileDataMgtService" /> 
+   </bean>
+
+   <bean id="customerMgtSvcIntermediator" class="com.telus.credit.entprflmgt.client.CustomerManagementServiceIntermediator">
+      <constructor-arg ref="consumerCustMgtService" />
+   </bean>
+
+   <bean id="wlnCreditProfileMgtSvcIntermediator" class="com.telus.credit.entprflmgt.client.WLNCreditProfileMgtServiceIntermediator">
+      <constructor-arg ref="wirelineCreditProfileMgtService" />
+   </bean>
+
+   <bean id="wlnCreditProfileMgtProxySvcIntermediator" class="com.telus.credit.entprflmgt.client.WLNCreditProfileMgtProxyServiceIntermediator">
+      <constructor-arg ref="wirelineCreditProfileMgtProxyService"/>
+   </bean>
+
+   <!-- Helper class to store messages in jms queue to update credit profiles. -->
+   <bean id="jmsCrdPrflUpdateSender" class="com.telus.credit.entprflmgt.asyncprocessing.JMSCreditProfileUpdateSender">
+      <constructor-arg ref="jmsTemplate" />
+      <property name="injectEMHeader" value="${emHeaderConfig/injectEMHeader}"/>
+   </bean>
+
+   <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+      <property name="connectionFactory" ref="jmsConnectionFactory" />
+      <property name="defaultDestination" ref="jmsDestination" />
+   </bean>
+
+   <bean name="jmsDestination" class="org.springframework.jndi.JndiObjectFactoryBean">
+      <property name="jndiTemplate" ref="jndiTemplate"/>
+      <!-- eai.jms.wl.queue.CREDIT_PROFILE_FQ -->
+      <property name="jndiName" value="${enterpriseCreditProfileMgmtServiceJMSConfig/jmsDestination}" />
+   </bean>
+
+   <bean name="jmsConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+      <property name="jndiTemplate" ref="jndiTemplate" />
+      <!-- eai.jms.wl.connection.CREDIT_PERSISTENT_CONN_FACTORY -->
+      <property name="jndiName" value="${enterpriseCreditProfileMgmtServiceJMSConfig/jmsConnectionFactory}" />
+   </bean>
+
+   <bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate" >
+      <property name="environment">
+         <props>
+            <prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+            <!-- t3://ln98421.corp.ads:10671 -->
+            <prop key="java.naming.provider.url">${enterpriseCreditProfileMgmtServiceJMSConfig/jndiProviderUrl}</prop>
+            <prop key="java.naming.security.principal">${enterpriseCreditProfileMgmtServiceJMSConfig/jndiPrincipal}</prop>
+            <prop key="java.naming.security.credentials">${enterpriseCreditProfileMgmtServiceJMSConfig/jndiCredentials}</prop>
+         </props>
+      </property>
+   </bean>
+
+   <!-- EncryptUtil initialization -->
+   <bean id="encryptUtil" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+      <property name="staticMethod" value="com.telus.framework.crypto.EncryptionUtil.setCrypto" />
+      <property name="arguments">
+         <list>
+            <ref bean="cryptoImpl" />
+         </list>
+      </property>
+   </bean>    
+
+   <bean id="cryptoImpl" class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl" init-method="init">
+      <property name="key1" value="${encryption/key1}" />
+      <property name="key2" value="${encryption/key2}" />
+      <property name="key3" value="${encryption/key3}" />                
+   </bean> 
+
+</beans>

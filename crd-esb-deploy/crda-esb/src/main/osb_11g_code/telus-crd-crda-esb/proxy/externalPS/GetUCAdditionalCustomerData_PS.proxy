@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/telus-crd-crda-esb/proxy/externalPS/GetUCAdditionalCustomerData_PS</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="GetUCAdditionalCustomerData_PipelinePairNode_request">
+      <con:stage name="stage2">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="errorsCodes">
+            <con2:id>_ActionId-6563850037306094843-386ce02e.1690d2fcf47.-7f8c</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/ErrorCodes"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="topMatchAccount">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7cdc</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='WlsUnifiedCreditSearchResult'])[1]</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="topMatchAccountBan">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7e26</con2:id>
+            <con1:expr>
+              <con2:xqueryText>(($topMatchAccount//*[local-name()='billingAccountNumber'])[1])/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="getAccount_Stage" errorHandler="_onErrorHandler-6654069824431371335-11d48802.1689115aa15.-7def">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="getAccountByAccountNumberResponse">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7b84</con2:id>
+            <con1:expr>
+              <con2:xqueryText>&lt;ns7:getAccountByAccountNumberResponse xmlns:ns7="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/AccountInformationServiceRequestResponse_v3" > &lt;/ns7:getAccountByAccountNumberResponse></con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7e61</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/AccountInformationService_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>getAccountByAccountNumber</con1:operation>
+            <con1:request>
+              <con1:body>$getAccountByAccountNumberRequest</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>getAccountByAccountNumberResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="getAccountByAccountNumberRequest">
+                <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7e4d</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>&lt;tns:getAccountByAccountNumber xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/AccountInformationServiceRequestResponse_v3 AccountInformationServiceRequestResponse_v3_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/AccountInformationServiceRequestResponse_v3"> &lt;tns:billingAccountNumber>{$topMatchAccountBan}&lt;/tns:billingAccountNumber> &lt;/tns:getAccountByAccountNumber></con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="getCreditWorthiness_Stage" errorHandler="_onErrorHandler-6654069824431371335-11d48802.1689115aa15.-7d3c">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="getCreditWorthinessResponse">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7b5e</con2:id>
+            <con1:expr>
+              <con2:xqueryText>&lt;ns0:getCreditWorthinessResponse xmlns:ns0="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" xmlns:ns3="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelessCreditTypes_v2"> &lt;/ns0:getCreditWorthinessResponse></con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7d72</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/WLSCreditManagementSvc_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>getCreditWorthiness</con1:operation>
+            <con1:request>
+              <con1:body>$getCreditWorthinessRequest</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>getCreditWorthinessResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="getCreditWorthinessRequest">
+                <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7d3d</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>&lt;tns:getCreditWorthiness xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2 http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2_1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2"> &lt;tns:billingAccountNumber>{$topMatchAccountBan}&lt;/tns:billingAccountNumber> &lt;/tns:getCreditWorthiness></con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:insert varName="topMatchAccount">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7cc1</con2:id>
+            <con1:location>
+              <con2:xpathText>//*[local-name()='matchFound']</con2:xpathText>
+            </con1:location>
+            <con1:where>after</con1:where>
+            <con1:expr>
+              <con2:xqueryText>$getAccountInformation_DataInquiryErrorCode_Container//*[local-name()='dataInquiryErrorCodeList']</con2:xqueryText>
+            </con1:expr>
+          </con1:insert>
+          <con1:insert varName="topMatchAccount">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7c88</con2:id>
+            <con1:location>
+              <con2:xpathText>//*[local-name()='matchFound']</con2:xpathText>
+            </con1:location>
+            <con1:where>after</con1:where>
+            <con1:expr>
+              <con2:xqueryText>$getCreditWorthiness_DataInquiryErrorCode_Container//*[local-name()='dataInquiryErrorCodeList']</con2:xqueryText>
+            </con1:expr>
+          </con1:insert>
+          <con1:assign varName="topMatchAccount_WithAdditionalData">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7c17</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/transformation/add_UC_AdditionalInfo_to_topmatchAccount"/>
+                <con2:param name="getAccountByAccountNumberResponse">
+                  <con2:path>$getAccountByAccountNumberResponse</con2:path>
+                </con2:param>
+                <con2:param name="getCreditWorthinessResponse">
+                  <con2:path>$getCreditWorthinessResponse</con2:path>
+                </con2:param>
+                <con2:param name="wlsUnifiedCreditSearchResult">
+                  <con2:path>$topMatchAccount</con2:path>
+                </con2:param>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="getUCAdditionalCustomerDataResponse">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7bfe</con2:id>
+            <con1:expr>
+              <con2:xqueryText>&lt;gucacdsj:getUCAdditionalCustomerDataResponse xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoinRequestResponse GetUCAdditionalCustomerDataSplitJoinRequestResponse.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gucacdsj="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoinRequestResponse"> {$topMatchAccount_WithAdditionalData} &lt;/gucacdsj:getUCAdditionalCustomerDataResponse></con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="GetUCAdditionalCustomerData_PipelinePairNode_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7be3</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText>$getUCAdditionalCustomerDataResponse</con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-6654069824431371335-11d48802.1689115aa15.-7def">
+      <con:stage name="stage1">
+        <con:context>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" prefix="wcda"/>
+        </con:context>
+        <con:actions>
+          <con3:log>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-7266</con2:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+          <con1:assign varName="getAccountInformation_DataInquiryErrorCode_Container">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7dbc</con2:id>
+            <con1:expr>
+              <con2:xqueryText>&lt;getAccountInformation_DataInquiryErrorCode_Container> 
+&lt;wcda:dataInquiryErrorCodeList>
+{$errorCodes/ErrorCode[@value="WLS_ACCOUNT_RETRV_ERROR"]/text()}
+&lt;/wcda:dataInquiryErrorCodeList> 
+
+&lt;/getAccountInformation_DataInquiryErrorCode_Container></con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con2:resume>
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7d92</con2:id>
+          </con2:resume>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-6654069824431371335-11d48802.1689115aa15.-7d3c">
+      <con:stage name="stage1">
+        <con:context>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" prefix="wcda"/>
+        </con:context>
+        <con:actions>
+          <con3:log>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-722b</con2:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+          <con1:assign varName="getCreditWorthiness_DataInquiryErrorCode_Container">
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7d18</con2:id>
+            <con1:expr>
+              <con2:xqueryText><![CDATA[<getCreditWorthiness_DataInquiryErrorCode_Container> 
+<wcda:dataInquiryErrorCodeList>
+<wcda:dataInquiryErrorCodeList>
+{$errorCodes/ErrorCode[@value="WLS_CREDITWORTHINESS_RETRV_ERROR"]/text()}
+</wcda:dataInquiryErrorCodeList> 
+</wcda:dataInquiryErrorCodeList> </getCreditWorthiness_DataInquiryErrorCode_Container>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con2:resume>
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7cff</con2:id>
+          </con2:resume>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="GetUCAdditionalCustomerData_PipelinePairNode">
+        <con:request>GetUCAdditionalCustomerData_PipelinePairNode_request</con:request>
+        <con:response>GetUCAdditionalCustomerData_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

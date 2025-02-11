@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="sqlPlusExtract-Step01"/>
+            </bean>
+         </list>
+      </property>
+   </bean>
+   <bean id="sqlPlusExtract-Step01" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/CgwConnection/dbconnectionvalue} @${sql}/${report_rtca_4/sqlFilename} ${outbox}/${report_rtca_4/outputFilename}"/>
+      <property name="output" value="${report_rtca_4/log}"/>
+   </bean>
+</beans>
+
+

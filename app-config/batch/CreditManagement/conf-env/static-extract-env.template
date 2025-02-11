@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="extractBatch">
+
+  <group name="fileSplitter">
+    <prop name="inputFile">${processbox}/extract/creditProfileCustomerMappingData.dat</prop>
+    <prop name="singleCustomerOutputFile">${processbox}/extract/singleCustomers.dat</prop>
+    <prop name="multiCustomerOutputFile">${processbox}/extract/linkedCustomers.dat</prop>
+  </group>
+
+  <group name="groupExtract">
+    <prop name="inputFileSortByProfileId">${processbox}/extract/linkedCustomers.dat</prop>
+    <prop name="inputFileSortByCustomerId">${processbox}/extract/linkedCustomers2.dat</prop>
+    <prop name="outputFile">${processbox}/extract/groupCustomer.dat</prop>
+  </group>
+  
+  <group name="fileConverter">
+    <prop name="inputFile">${processbox}/extract/personList.dat</prop>
+    <prop name="outputFile">${processbox}/extract/personListWithLn.dat</prop>
+  </group>
+
+</group>

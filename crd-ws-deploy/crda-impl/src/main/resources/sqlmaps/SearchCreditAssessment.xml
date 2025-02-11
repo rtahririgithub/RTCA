@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="search_credit_assessment">
+
+    <resultMap id="searchCreditAssessmentDecisionResultDtlMap" class="java.util.HashMap">
+        <result property="intCrdtDscnTrnRsltId" javaType="long" column="INT_CRDT_DSCN_TRN_RSLT_ID"/>
+        <result property="intCrdtDscnTrnRsltDtlId" javaType="long" column="INT_CRDT_DSCN_TRN_RSLT_DTL_ID"/>
+        <result property="fraudMsgCd" column="FRAUD_MSG_CD"/>
+        <result property="intCrdtDscnTrnRsltDtlCd" column="INT_CRDT_DSCN_TRN_RSLT_DTL_CD"/>
+        <result property="productQualInd" column="PRODUCT_QUAL_IND"/>
+        <result property="depositAmt" javaType="double" column="DEPOSIT_AMT"/>
+        <result property="bureauInfoTypCd" column="BUREAU_INFO_TYP_CD"/>
+        <result property="bureauCd" column="BUREAU_CD"/>
+        <result property="bureauInfoPriorityCd" column="BUREAU_INFO_PRIORITY_CD"/>
+        <result property="creditApprvdProdCatgyCd" column="CREDIT_APPRVD_PROD_CATGY_CD"/>
+    </resultMap>
+
+    <resultMap id="searchCreditAssessmentMap" class="java.util.HashMap">
+        <result property="carId" javaType="long" column="CREDIT_ASSESSMENT_REQUEST_ID"/>
+        <result property="customerId" javaType="long" column="customer_id"/>
+        <result property="channelOrgCd" column="CHANNEL_ORG_CD"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createTs" javaType="date" column="CREATE_TS"/>
+        <result property="carTypCd" column="CAR_TYP_CD"/>
+        <result property="carSubtypeCd" column="CAR_SUBTYPE_CD"/>
+        <result property="dataSourceId" javaType="long" column="DATA_SOURCE_ID"/>
+        <result property="carStatusTypeCd" column="CAR_STATUS_TYP_CD"/>
+        <result property="carStatusEffectiveDate" javaType="date" column="eff_start_ts"/>
+        <result property="creditBureauTrnId" javaType="long" column="CREDIT_BUREAU_TRN_ID"/>
+        <result property="reportSourceCd" column="REPORT_SOURCE_CD"/>
+        <result property="adjdctnCreditScoreTxt" column="ADJDCTN_CREDIT_SCORE_TXT"/>
+        <result property="adjdctnCreditScoreTypeCd" column="ADJDCTN_CREDIT_SCORE_TYPE_CD"/>        
+        <result property="adjdctnCreditClassCd" column="ADJDCTN_CREDIT_CLASS_CD"/>
+        <result property="adjdctnDscnCd" column="ADJDCTN_DSCN_CD"/>
+        <result property="adjdctnDscnMsgTxt" column="ADJDCTN_DSCN_MSG_TXT"/>
+        <result property="adjdctnDepositAmt" column="ADJDCTN_DEPOSIT_AMT"/>
+        <result property="commentTxt" column="COMMENT_TXT"/>
+        <result property="carActivityReasonCd" column="CAR_ACTIVITY_REASON_CD"/>
+        <result property="creditBureauTrnDtlId" javaType="long" column="CREDIT_BUREAU_TRN_DTL_ID"/>
+        <result property="extDocFormatTyp" column="EXT_DOC_FORMAT_TYP"/>
+        <result property="extDocPathStr" column="EXT_DOC_PATH_STR"/>
+        <result property="creditBureauDataDocNm" column="CREDIT_BUREAU_DATA_DOC_NM"/>
+        <result property="extDocPathStr" column="EXT_DOC_PATH_STR"/>
+        <result property="assessmentRsltCd" column="ASSESSMENT_RSLT_CD"/>
+        <result property="assessmentRsltReasonCd" column="ASSESSMENT_RSLT_REASON_CD"/>
+        <result property="intCrdtDscnTrnRsltId" javaType="long" column="INT_CRDT_DSCN_TRN_RSLT_ID"/>
+        <result property="assessmentMsgCd" column="ASSESSMENT_MSG_CD"/>
+        <result property="creditValueCd" column="CREDIT_VALUE_CD"/>
+        <result property="fraudIndCd" column="FRAUD_IND_CD"/>
+        <result property="productCategoryBoltOn" column="PRODUCT_CATEGORY_BOLT_ON"/>
+        <result property="decisionCd"   column="DECISION_CD"/>
+    </resultMap>
+
+
+  <resultMap id="search_nondcn_credit_assessmentsMap" class="java.util.HashMap">
+        <result property="carId" javaType="long" column="CREDIT_ASSESSMENT_REQUEST_ID"/>
+        <result property="customerId" javaType="long" column="customer_id"/>
+        <result property="channelOrgCd" column="CHANNEL_ORG_CD"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createTs" javaType="date" column="CREATE_TS"/>
+        <result property="carTypCd" column="CAR_TYP_CD"/>
+        <result property="carSubtypeCd" column="CAR_SUBTYPE_CD"/>
+        <result property="dataSourceId" javaType="long" column="DATA_SOURCE_ID"/>
+        <result property="carStatusTypeCd" column="CAR_STATUS_TYP_CD"/>
+        <result property="carStatusEffectiveDate" javaType="date" column="eff_start_ts"/>
+        <result property="commentTxt" column="COMMENT_TXT"/>
+        <result property="carActivityReasonCd" column="CAR_ACTIVITY_REASON_CD"/>
+      </resultMap>
+
+    <statement id="search_credit_assessment_decision_result_dtl" parameterClass="java.util.Map"
+               resultMap="searchCreditAssessmentDecisionResultDtlMap">
+        SELECT /*+ first_rows(10) */
+        	int_crd_trn_result_dtl.INT_CRDT_DSCN_TRN_RSLT_ID,
+        	int_crd_trn_result_dtl.INT_CRDT_DSCN_TRN_RSLT_DTL_ID,
+	        FRAUD_MSG_CD,
+	        INT_CRDT_DSCN_TRN_RSLT_DTL_CD,
+	        PRODUCT_QUAL_IND,
+	        DEPOSIT_AMT,
+	        BUREAU_INFO_TYP_CD,
+	        BUREAU_CD,
+	        BUREAU_INFO_PRIORITY_CD,
+	        CREDIT_APPRVD_PROD_CATGY_CD
+        FROM credit_assessment_request car
+	        INNER JOIN car_status car_status
+	        ON 
+		        ( 
+		        car.CREDIT_ASSESSMENT_REQUEST_ID = car_status.CREDIT_ASSESSMENT_REQUEST_ID
+		        AND (car.CAR_SUBTYPE_CD  <![CDATA[ <> ]]>  'BUREAU_CONSENT' OR car.CAR_SUBTYPE_CD  <![CDATA[ <> ]]> 'DEPOSIT_DOWNGRADE')	       
+		        AND car_status.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') 
+	       		)
+	        INNER JOIN CAR_CREDIT_PROFILE car_credit_profile
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = car_credit_profile.CREDIT_ASSESSMENT_REQUEST_ID
+	        and car_credit_profile.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        INNER JOIN CPROFL_CUSTOMER_MAP customer_map
+	        ON ( car_credit_profile.CREDIT_PROFILE_ID = customer_map.CREDIT_PROFILE_ID
+	        AND customer_map.CPROFL_CUST_MAP_TYP_CD = 'PRI'
+	        AND customer_map.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD') )
+	        LEFT OUTER JOIN INT_CRDT_DCSN_TRN int_crd_decision_trn
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = int_crd_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID
+	        AND int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        LEFT OUTER JOIN INT_CRDT_DCSN_TRN_STAT int_crd_decision_trn_stat
+	        ON ( int_crd_decision_trn.INT_CRDT_DSCN_TRN_ID = int_crd_decision_trn_stat.INT_CRDT_DSCN_TRN_ID
+	        AND int_crd_decision_trn_stat.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+	        AND int_crd_decision_trn_stat.CREDIT_DSCN_TRN_STAT_CD = '2' )
+	        LEFT OUTER JOIN INT_CRDT_DCSN_TRN_RSLT int_crd_decision_trn_result
+	        ON ( int_crd_decision_trn.INT_CRDT_DSCN_TRN_ID = int_crd_decision_trn_result.INT_CRDT_DSCN_TRN_ID
+	        AND int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        LEFT OUTER JOIN INT_CRDT_DCSN_TRN_RSLT_DTL int_crd_trn_result_dtl
+	        ON ( int_crd_decision_trn_result.INT_CRDT_DSCN_TRN_RSLT_ID = int_crd_trn_result_dtl.INT_CRDT_DSCN_TRN_RSLT_ID
+	        AND int_crd_trn_result_dtl.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        WHERE customer_map.customer_id = #customerId#
+	        AND int_crd_decision_trn.ASSESSMENT_RSLT_CD='SUCCESS'
+	        AND (  int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD IS NULL  OR int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD ='NO_CHANGE' )
+	        <isPropertyAvailable prepend="AND" property="assessmentFromDate">
+	            car.create_ts &gt; #assessmentFromDate#
+	        </isPropertyAvailable>
+	        <isPropertyAvailable prepend="AND" property="assessmentToDate">
+	            car.create_ts &lt; #assessmentToDate#
+	        </isPropertyAvailable>
+	        <isPropertyAvailable prepend="AND" property="creditAssessmentTypeCode">
+	            car.CAR_TYP_CD = #creditAssessmentTypeCode#
+	        </isPropertyAvailable>
+	        <isPropertyAvailable prepend="AND" property="creditAssessmentSubTypeCd">
+	            car.CAR_SUBTYPE_CD = #creditAssessmentSubTypeCd#
+	        </isPropertyAvailable>
+	        <isPropertyAvailable prepend="AND" property="creditAssessmentStatus">
+	            car_status.CAR_STATUS_TYP_CD =#creditAssessmentStatus#
+	        </isPropertyAvailable>
+    </statement>
+
+    <statement id="search_credit_assessments" parameterClass="java.util.Map" resultMap="searchCreditAssessmentMap">
+        SELECT 
+	        car.CREDIT_ASSESSMENT_REQUEST_ID,
+	        customer_map.customer_id,
+	        car.CHANNEL_ORG_CD,
+	        car.create_user_id,
+	        car.CREATE_TS,
+	        car.CAR_TYP_CD,
+	        car.CAR_SUBTYPE_CD,
+	        car.DATA_SOURCE_ID,
+	        car_status.CAR_STATUS_TYP_CD,
+	        car_status.eff_start_ts,
+	        
+	        credit_bureau_trn.CREDIT_BUREAU_TRN_ID,
+	        credit_bureau_trn.REPORT_SOURCE_CD,
+	        credit_bureau_trn.REPORT_TYP_TXT,
+	        credit_bureau_trn.ADJDCTN_CREDIT_SCORE_TXT,
+	        credit_bureau_trn.ADJDCTN_CREDIT_SCORE_TYPE_CD,
+	        credit_bureau_trn.ADJDCTN_CREDIT_CLASS_CD, 
+	        credit_bureau_trn.ADJDCTN_DSCN_CD,
+	        credit_bureau_trn.ADJDCTN_DSCN_MSG_TXT,
+	        credit_bureau_trn.ADJDCTN_DEPOSIT_AMT,
+	        
+	        cmnt.COMMENT_TXT,
+	        
+	        car_activity.CAR_ACTIVITY_REASON_CD,
+	        
+	        credit_bureau_trn_dtl_doc.CREDIT_BUREAU_TRN_DTL_ID,
+	        credit_bureau_trn_dtl_doc.CREDIT_BUREAU_DATA_DOC_NM,
+	        credit_bureau_trn_dtl_doc.EXT_DOC_FORMAT_TYP,
+	        credit_bureau_trn_dtl_doc.EXT_DOC_PATH_STR,
+	        
+	        int_crd_decision_trn.ASSESSMENT_RSLT_CD,
+	        int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD,
+	        int_crd_decision_trn_result.INT_CRDT_DSCN_TRN_RSLT_ID,
+	        int_crd_decision_trn_result.ASSESSMENT_MSG_CD,
+	        int_crd_decision_trn_result.CREDIT_VALUE_CD,
+	        int_crd_decision_trn_result.FRAUD_IND_CD,
+	        int_crd_decision_trn_result.PRODUCT_CATEGORY_BOLT_ON,
+	        int_crd_decision_trn_result.DECISION_CD
+        
+        FROM credit_assessment_request car
+	        INNER JOIN car_status car_status
+	        ON 
+	        	( 
+	        	car.CREDIT_ASSESSMENT_REQUEST_ID = car_status.CREDIT_ASSESSMENT_REQUEST_ID
+	        	AND (car.CAR_SUBTYPE_CD  <![CDATA[ <> ]]>  'BUREAU_CONSENT' OR car.CAR_SUBTYPE_CD  <![CDATA[ <> ]]> 'DEPOSIT_DOWNGRADE')	       
+	        	AND car_status.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') 
+	        	)
+	        INNER JOIN CAR_CREDIT_PROFILE car_credit_profile
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = car_credit_profile.CREDIT_ASSESSMENT_REQUEST_ID
+	        and car_credit_profile.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        INNER JOIN CPROFL_CUSTOMER_MAP customer_map
+	        ON ( car_credit_profile.CREDIT_PROFILE_ID = customer_map.CREDIT_PROFILE_ID
+	        AND customer_map.CPROFL_CUST_MAP_TYP_CD = 'PRI'
+	        AND customer_map.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD') )
+	        
+	        INNER JOIN INT_CRDT_DCSN_TRN int_crd_decision_trn
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = int_crd_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID
+	        	AND int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+	        	AND int_crd_decision_trn.ASSESSMENT_RSLT_CD='SUCCESS'
+	        	AND (  int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD IS NULL  OR int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD ='NO_CHANGE' )
+	        	)
+	        LEFT OUTER JOIN INT_CRDT_DCSN_TRN_STAT int_crd_decision_trn_stat
+	        ON ( int_crd_decision_trn.INT_CRDT_DSCN_TRN_ID = int_crd_decision_trn_stat.INT_CRDT_DSCN_TRN_ID
+	        AND int_crd_decision_trn_stat.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+	        AND int_crd_decision_trn_stat.CREDIT_DSCN_TRN_STAT_CD = '2' )
+	        
+	        LEFT OUTER JOIN INT_CRDT_DCSN_TRN_RSLT int_crd_decision_trn_result
+	        ON ( int_crd_decision_trn.INT_CRDT_DSCN_TRN_ID = int_crd_decision_trn_result.INT_CRDT_DSCN_TRN_ID
+	        AND int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        LEFT OUTER JOIN CREDIT_BUREAU_TRN credit_bureau_trn
+	        ON ( int_crd_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID = credit_bureau_trn.CREDIT_ASSESSMENT_REQUEST_ID
+	        AND credit_bureau_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        LEFT OUTER JOIN CREDIT_BUREAU_TRN_DTL credit_bureau_trn_dtl_doc
+	        ON ( credit_bureau_trn.CREDIT_BUREAU_TRN_ID = credit_bureau_trn_dtl_doc.CREDIT_BUREAU_TRN_ID
+	        AND credit_bureau_trn_dtl_doc.CREDIT_BUREAU_TRN_DTL_CD = '4'
+	        AND credit_bureau_trn_dtl_doc.EXT_DOC_FORMAT_TYP = 'TXT'
+	        AND credit_bureau_trn_dtl_doc.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        LEFT OUTER JOIN CAR_ACTIVITY car_activity
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = car_activity.CREDIT_ASSESSMENT_REQUEST_ID
+	        AND car_activity.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+	        LEFT OUTER JOIN CAR_ACTIVITY_TYPE car_activity_type
+	        ON ( car_activity.CAR_ACTIVITY_TYPE_ID = car_activity_type.CAR_ACTIVITY_TYPE_ID
+	        AND car_activity_type.EFF_STOP_TS = TO_DATE('99991231','YYYYMMDD')
+	        AND car_activity_type.ACTIVITY_TYPE_CD = 'VOID' )
+	        LEFT OUTER JOIN credit_mgmnt_comment cmnt
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = cmnt.OBJECT_ID
+	        AND cmnt.OBJECT_TYPE_CD = 'CRD_ASMNT_REQUEST'
+	        AND cmnt.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        WHERE customer_map.customer_id = #customerId#
+        <isPropertyAvailable prepend="AND" property="assessmentFromDate">
+            car.create_ts &gt; #assessmentFromDate#
+        </isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="assessmentToDate">
+            car.create_ts &lt; #assessmentToDate#
+        </isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="creditAssessmentTypeCode">
+            car.CAR_TYP_CD = #creditAssessmentTypeCode#
+        </isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="creditAssessmentSubTypeCd">
+            car.CAR_SUBTYPE_CD = #creditAssessmentSubTypeCd#
+        </isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="creditAssessmentStatus">
+            car_status.CAR_STATUS_TYP_CD =#creditAssessmentStatus#
+        </isPropertyAvailable>
+    </statement>
+
+    <statement id="get_bureau_report_ind" parameterClass="long" resultClass="java.lang.Integer">
+        select 1
+        from CREDIT_BUREAU_TRN bt
+        inner join CREDIT_BUREAU_TRN_DTL btd
+        on ( bt.CREDIT_BUREAU_TRN_ID = btd.CREDIT_BUREAU_TRN_ID
+        AND btd.CREDIT_BUREAU_TRN_DTL_CD = '4'
+        AND btd.EXT_DOC_FORMAT_TYP = 'TXT' )
+        where bt.CREDIT_ASSESSMENT_REQUEST_ID = #value#
+        and bt.REPORT_SOURCE_CD in ( 'EQUIFAX', 'TRANSUNION', 'UNIFIEDCREDIT' )
+        and bt.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+        and btd.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+    </statement>
+
+   <statement id="search_nondcn_credit_assessments" parameterClass="java.util.Map" resultMap="search_nondcn_credit_assessmentsMap">
+
+     SELECT 
+            car.CREDIT_ASSESSMENT_REQUEST_ID,
+            customer_map.customer_id,
+            car.CHANNEL_ORG_CD,
+            car.create_user_id,
+            car.CREATE_TS,
+            car.CAR_TYP_CD,
+            car.CAR_SUBTYPE_CD,
+            car.DATA_SOURCE_ID,
+            car_status.CAR_STATUS_TYP_CD,
+            car_status.eff_start_ts,
+            cmnt.COMMENT_TXT,
+             car_activity.CAR_ACTIVITY_REASON_CD
+         FROM credit_assessment_request car
+            INNER JOIN car_status car_status
+             ON
+                 ( 
+                    car.CREDIT_ASSESSMENT_REQUEST_ID = car_status.CREDIT_ASSESSMENT_REQUEST_ID
+                    AND (car.CAR_SUBTYPE_CD='BUREAU_CONSENT' OR car.CAR_SUBTYPE_CD='DEPOSIT_DOWNGRADE')
+                    AND car_status.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') 
+                )
+            INNER JOIN CAR_CREDIT_PROFILE car_credit_profile
+             ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = car_credit_profile.CREDIT_ASSESSMENT_REQUEST_ID
+                and car_credit_profile.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+                 )
+            INNER JOIN CPROFL_CUSTOMER_MAP customer_map
+            ON ( car_credit_profile.CREDIT_PROFILE_ID = customer_map.CREDIT_PROFILE_ID
+            AND customer_map.CPROFL_CUST_MAP_TYP_CD = 'PRI'
+            AND customer_map.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD') )
+            
+
+            LEFT OUTER JOIN CAR_ACTIVITY car_activity
+            ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = car_activity.CREDIT_ASSESSMENT_REQUEST_ID
+            AND car_activity.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+            LEFT OUTER JOIN CAR_ACTIVITY_TYPE car_activity_type
+            ON ( car_activity.CAR_ACTIVITY_TYPE_ID = car_activity_type.CAR_ACTIVITY_TYPE_ID
+            AND car_activity_type.EFF_STOP_TS = TO_DATE('99991231','YYYYMMDD')
+            AND car_activity_type.ACTIVITY_TYPE_CD = 'VOID' )
+            LEFT OUTER JOIN credit_mgmnt_comment cmnt
+            ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = cmnt.OBJECT_ID
+            AND cmnt.OBJECT_TYPE_CD = 'CRD_ASMNT_REQUEST'
+            AND cmnt.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+         WHERE customer_map.customer_id = #customerId#
+        <isPropertyAvailable prepend="AND" property="assessmentFromDate">
+            car.create_ts &gt; #assessmentFromDate#
+        </isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="assessmentToDate">
+            car.create_ts &lt; #assessmentToDate#
+        </isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="creditAssessmentTypeCode">
+            car.CAR_TYP_CD = #creditAssessmentTypeCode#
+        </isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="creditAssessmentSubTypeCd">
+            car.CAR_SUBTYPE_CD = #creditAssessmentSubTypeCd#
+        </isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="creditAssessmentStatus">
+            car_status.CAR_STATUS_TYP_CD =#creditAssessmentStatus#
+        </isPropertyAvailable>
+    </statement>
+
+</sqlMap>

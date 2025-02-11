@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CreditAssessmentResult xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2">
+    <assessmentResultCd>SUCCESS</assessmentResultCd>
+    <assessmentResultReasonCd>BUREAU_REQUIRED</assessmentResultReasonCd>
+    <decisionCd></decisionCd>
+    <assessmentMessageCd></assessmentMessageCd>
+    <creditValueCd></creditValueCd>
+    <productCategoryQualification>
+        <boltOnInd>false</boltOnInd>
+    </productCategoryQualification>
+    <bureauInformationList>
+        <bureauType>EXTERNAL</bureauType>
+        <bureauPriority>PRIMARY</bureauPriority>
+        <bureauCd>EQFXIC</bureauCd>
+    </bureauInformationList>
+    <rulesExecuted>DATE=2019-06-10T17:41:14.300-07:00, VERSION=20190610</rulesExecuted>
+    <rulesExecuted>280_060_New_Assessment_Trigger: TYPE/SUB=FULL_ASSESSMENT/AUTO_ASSESSMENT:  TRIGGER=NEW_ASSESSMENT_TRIGGER</rulesExecuted>
+    <rulesExecuted>100_999_Default_Rule: no validation issues</rulesExecuted>
+    <rulesExecuted>260_040_Existing_Customer_Not_Assessed: CUSTOMER TYPE=EXISTING_CUSTOMER</rulesExecuted>
+    <rulesExecuted>270_020_Inactive_Costomer_No_Assess: CUSTOMER ACTIVITY=INACTIVE</rulesExecuted>
+    <rulesExecuted>250_060_Long_Tenure_Customer CHAMPION: TENURE=LONG_TENURE</rulesExecuted>
+    <rulesExecuted>220_010_No_Bureau_Report_Date: BureauExists=false</rulesExecuted>
+    <rulesExecuted>210_100_Inactive_No_Bureau_Exists: BureauRequired=true</rulesExecuted>
+    <rulesExecuted>R_470_010_Dormant_Flag_ON: Unified Credit Indicator=false,Unified Credit Indicator ReasonCode=UCDORMANT1</rulesExecuted>
+    <rulesExecuted>R_435_010_Set_Unified_Credit_Indicator: Unified Credit Indicator=false,Unified Credit Indicator ReasonCode=UCDORMANT1</rulesExecuted>
+    <rulesExecuted>R_435_30_Default: </rulesExecuted>
+    <rulesExecuted>130_010_Default_Credit_Bureau: BureauType=EXTERNAL,BureauPriority=PRIMARY,BureauCode=EQFXIC</rulesExecuted>
+    <rulesExecuted>430_001_Bureau_Required: REASON=, MESSAGE=, RESULT=SUCCESS</rulesExecuted>
+    <creditAssessmentStrategies>
+        <depositLookupStrategy>CHAM</depositLookupStrategy>
+        <cvudStrategy>CHAM</cvudStrategy>
+        <creditValueAssignmentStrategy>CHAM</creditValueAssignmentStrategy>
+        <customerActivityStrategy>CHAM</customerActivityStrategy>
+        <tenureStrategy>CHAM</tenureStrategy>
+    </creditAssessmentStrategies>
+    <unifiedCreditAssessmentResult>
+        <unifiedCreditAssessmentIndicator>
+            <indicator>false</indicator>
+            <reasonCd>UCDORMANT1</reasonCd>
+        </unifiedCreditAssessmentIndicator>
+    </unifiedCreditAssessmentResult>
+</CreditAssessmentResult>
+

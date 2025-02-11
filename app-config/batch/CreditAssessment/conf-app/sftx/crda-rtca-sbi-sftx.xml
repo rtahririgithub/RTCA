@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <!-- =============================================================== -->
+  <bean id="telusSpringConfigurer" lazy-init="true"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+
+  <!-- =============================================================== -->
+  <bean id="extractsftx" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.RequestConfiguration">
+
+    <property name="requestNm" value="extractsftx" />
+    <!-- For push, Execution server = sourceServerName -->
+    <property name="sourceSftpUserId" value="${G_ENV}crd" />   
+    <property name="sourceServerName" value="${G_CRD_BATCH2_SVR}" />
+    <property name="sourceServerTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}"/>
+    <property name="reqTransferTypeCd" value="${SFTX_TRF_TYPE_SFTP}" />
+    <property name="pushOrPullInd" value="push" />
+    <property name="recipients">
+     <list>
+        <bean id="recipient1" lazy-init="true" class="com.telus.framework.filetransfer.config.RecipientConfiguration">
+        <property name="serverName" value="${G_CAN_PWRCTR9_SVR}" />
+        <property name="serverTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}"/>
+        <property name="sftpUserId" value="${G_SFTP_UX_ACCT_PREFIX}${G_SFTP_CAN_ACCT_SUFFIX}" />
+        <property name="files">
+      	 	<list>
+        	<bean id="file1" lazy-init="true" class="com.telus.framework.filetransfer.config.FileConfiguration">
+         		<property name="sourcePath" value="${DATA_HOME}/data/outbox"/>
+			<property name="overwrite" value="true"/>
+				<property name="recipientPath" value="${G_CAN_NS_UX_SFTP}/${G_ENV}/inbox/crd"/>
+         		<property name="filePattern" value="CrAssmtRqst*.*"/>
+        	</bean>
+        	</list>
+        </property>
+       </bean>
+     </list>
+  </property>
+  </bean>
+</beans>
+

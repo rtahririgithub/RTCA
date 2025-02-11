@@ -1,0 +1,83 @@
+#!/bin/bash
+#set -x
+
+if [ "" == "$1" ] || [ "" == "$2" ] || [ "" == "$3" ]; then
+	echo "Usage ./getAllLogWLNcrda <BAN> <ENV> <Past#Days> Note: Since yesterday put 1, last week 7 etc."
+	echo "  example : ./getAllLogWLNcrda 19385813 PT05 1"
+	exit
+fi
+
+if [ "PT05" == "$2" ]; then
+        logfileLoc=/shared/logs/NONPR/ln9843*/logs/PT05/CrdPrflDataMgt/logs/EnterpriseCreditAssessmentService_v2_1*.log
+fi
+
+logfileList=`find $logfileLoc -type f -mtime -$3`
+if [ $? != 0 ]; then
+	exit -1;
+fi
+
+TARGET_FOLDER=~/getLogsScripts
+now=$(date '+%Y%m%d%H%M%S')
+
+echo "logfileLoc="$logfileLoc
+echo "......................."
+echo "TARGET_FOLDER="$TARGET_FOLDER
+
+find $logfileLoc -type f -mtime -$3 |xargs grep -n $1 > $TARGET_FOLDER/$1_$2_$now.tmp
+
+hasReqRes=`wc -l $TARGET_FOLDER/$1_$2_$now.tmp|awk '{print $1}'`
+echo "lines found in the logs: " $hasReqRes
+
+if [[ "0" != "$hasReqRes" ]]; then
+
+logFile="nolog"
+lastLine=""
+startLine=0
+stopLine=0
+log="nolog"
+iter=1
+
+while read -r line; do
+	log=`echo $line|awk -F\: '{print $1}'`
+	echo "\$iter     :" $iter
+	echo "\$log      :" $log
+	echo "\$logFile  :" $logFile
+
+	if [ "$logFile" = "nolog" ]; then
+	  logFile=`echo $log`
+	  startLine=`echo $line|awk -F\: '{print $2}'`	  
+	  echo "log record found: $logFile $startLine"
+	else
+	 if [ "$log" != "$logFile" ]; then
+	  echo "*****  Stop logFile found, output logs to tmp file."
+	  stopLine=`echo $lastLine|awk -F\: '{print $2}'`
+	  now=$(date '+%Y%m%d%H%M%S')
+	  awk "NR >= $startLine && NR <= $stopLine" $logFile > $TARGET_FOLDER/$1_$2_Asmt_"$iter"_$now.log 
+	  echo "Multiple logs exists:...... " $TARGET_FOLDER/$1_$2_Asmt_"$iter"_$now.log 
+	  logFile=$log
+	  startLine=`echo $line|awk -F\: '{print $2}'`	  
+
+	 else
+	  echo "***** Same logFile so passing no change. "
+	  lastLine=$line
+	  stopLine=`echo $line|awk -F\: '{print $2}'`
+	 fi
+	fi
+	echo "\$startLine:" $startLine
+	echo "\$stopLine :" $stopLine
+	iter=$(($iter+1))
+done < $TARGET_FOLDER/$1_$2_$now.tmp
+
+stopLine=`echo $lastLine|awk -F\: '{print $2}'`
+now=$(date '+%Y%m%d%H%M%S')
+echo "\$startLine:" $startLine
+echo "\$stopLine :" $stopLine
+
+awk "NR >= $startLine && NR <= $stopLine" $logFile > $TARGET_FOLDER/$1_$2_Asmt_last_$now.log 
+echo "Multiple logs may exists:...... " $TARGET_FOLDER/$1_$2_Asmt_last_$now.log  
+
+#if id not found in the log target
+else 
+ echo "No $1 id found in the logs"
+
+fi

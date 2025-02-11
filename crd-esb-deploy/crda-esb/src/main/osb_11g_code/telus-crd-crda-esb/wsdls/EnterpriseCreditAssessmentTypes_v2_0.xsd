@@ -1,0 +1,63 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditAssessmentTypes_v2" version="2.0" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditAssessmentTypes_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" schemaLocation="CreditCommon_v1_1.xsd"/>
+    <xs:complexType name="CreditAssessmentTransaction">
+        <xs:sequence>
+            <xs:element name="creditAssessmentID" type="crdc:creditAssessmentIdType"/>
+            <xs:element name="customerID" type="xs:long"/>
+            <xs:element minOccurs="0" name="creditAssessmentDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="creditAssessmentTypeCd" type="crdc:creditAssessmentRequestType"/>
+            <xs:element minOccurs="0" name="creditAssessmentSubTypeCd" type="crdc:creditAssessmentRequestSubType"/>
+            <xs:element minOccurs="0" name="creditAssessmentStatus" type="crdc:creditAssessmentStatusType"/>
+            <xs:element minOccurs="0" name="creditAssessmentStatusReasonCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditAssessmentStatusDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="creditDecisioningResult" type="crdc:CreditAssessmentResult"/>
+            <xs:element minOccurs="0" name="creditAssessmentDataSourceCd" type="crdc:creditAssessmentSourceType">
+                <xs:annotation>
+                    <xs:documentation>Indicates the source of data
+                        decisioning engine used to perform the assessment.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditBureauReportInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>Indicates if there is a credit
+                        bureau report associated with this assessment result.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditBureauReportSourceCd" type="crdc:CreditBureauReportSourceType">
+                <xs:annotation>
+                    <xs:documentation>Indicate the Vendor providing the
+                        credit bureau report. Equifax,Transunion</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="depositAmt" type="crdc:moneyType">
+                <xs:annotation>
+                    <xs:documentation>Returned from credit bureau</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditScoreCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Returned from credit bureau</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditScoreTypeCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Returned from credit bureau</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditClass" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Returned from credit bureau</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditDecisionCd" type="crdc:CreditDecision">
+                <xs:annotation>
+                    <xs:documentation>bureau Credit decision as defined
+                        in external Credit bureau for TELUS.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="userID" type="xs:string"/>
+            <xs:element minOccurs="0" name="channelID" type="xs:string"/>
+            <xs:element minOccurs="0" name="commentTxt" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

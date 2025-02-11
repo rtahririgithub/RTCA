@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="ProductOfferingChoice">
+        <xsd:choice>
+            <xsd:element name="ResidentialVoIPProductOffering" type="tns:ResidentialVoIPProductOffering"/>
+            <xsd:element name="MobileInternet25ProductOffering" type="tns:MobileInternet25ProductOffering"/>
+            <xsd:element name="MobileInternet50ProductOffering" type="tns:MobileInternet50ProductOffering"/>
+            <xsd:element name="VoiceAndText100ProductOffering" type="tns:VoiceAndText100ProductOffering"/>
+            <xsd:element name="VoiceAndText50ProductOffering" type="tns:VoiceAndText50ProductOffering"/>
+            <xsd:element name="VoiceAndText75ProductOffering" type="tns:VoiceAndText75ProductOffering"/>
+            <xsd:element name="MobileVoiceAndInternetProductOffering" type="tns:MobileVoiceAndInternetProductOffering"/>
+            <xsd:element name="CustomizedTVPackageProductOffering" type="tns:CustomizedTVPackageProductOffering"/>
+            <xsd:element name="TopPicksProductOffering" type="tns:TopPicksProductOffering"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="ResidentialVoIPProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MobileInternet25ProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Term" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MobileInternet50ProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Term" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="VoiceAndText100ProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Term" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="VoiceAndText50ProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Term" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="VoiceAndText75ProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Term" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MobileVoiceAndInternetProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Term" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="CustomizedTVPackageProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="TopPicksProductOffering">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Term" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

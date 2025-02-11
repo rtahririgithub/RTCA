@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+   <import resource="classpath:fw-base.jdef"/>
+<!--    <import resource="base-defn.xml" /> --> 
+
+    <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+    </bean>
+
+    <bean id="job" parent="baseJob">
+
+       <property name="steps">
+          <list>
+             <bean id="STEP01" parent="baseStep">
+                <property name="moduleName">
+                   <value>in_file_pre_process1</value>
+                </property>
+             </bean>
+             <bean id="STEP02" parent="baseStep">
+                <property name="moduleName">
+                   <value>in_file_pre_process2</value>
+                </property>
+             </bean>
+             <bean id="STEP03" parent="baseStep">
+                <property name="moduleName">
+                   <value>get_customer</value>
+                </property>
+             </bean>
+             <bean id="STEP04" parent="baseStep">
+                <property name="moduleName">
+                   <value>remove_duplicates</value>
+                </property>
+             </bean>
+             <bean id="STEP05" parent="baseStep">
+                <property name="moduleName">
+                   <value>prepare_temp_table</value>
+                </property>
+             </bean>
+             <bean id="STEP06" parent="baseStep">
+                <property name="moduleName">
+                   <value>load_customer</value>
+                </property>
+             </bean>
+
+           </list>
+       </property>
+
+   </bean>
+   <bean id="in_file_pre_process1" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_cods_billing_7_year.sh</value></property>
+      <property name="arg"> <value>${inbox}/${L_CUST_ODS_BILLING} ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_7_YEAR_CLOSED_${L_CRDA_ODATE}.dat  ${processbox}/${L_CRDA_ODATE} </value></property>
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+   <bean id="in_file_pre_process2" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_cods_billing_7_less_year.sh</value></property>
+      <property name="arg"> <value>${inbox}/${L_CUST_ODS_BILLING} ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_7_YEAR_LESS_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log1}</value></property>
+   </bean>
+   <bean id="get_customer" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_join_7_year_ban.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_7_YEAR_CLOSED_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_7_YEAR_LESS_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_CLOSED_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log2}</value></property>
+   </bean>
+   <bean id="remove_duplicates" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_customer_drive_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_CLOSED_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_CLOSED_NODUPLICATES_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log2}</value></property>
+   </bean>
+   <bean id="prepare_temp_table" lazy-init="true" parent="baseSqlplusStep">
+      <property name="arg"><value>${sqlplus/connection/dbconnectionvalue} @${sql}/rtca_purge_customers_table.sql</value></property>
+      <property name="output"><value>${logs}/${jobname}_purge_customer_stage_table</value></property>
+   </bean>
+   <bean id="load_customer" lazy-init="true" parent="baseSqlloaderStep">
+      <property name="arg"><value>userid=${sqlplus/connection/dbconnectionvalue} control=${sql}/rtca_pre_load_purge_customer.ctl data=${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_CLOSED_NODUPLICATES_${L_CRDA_ODATE}.dat log=${logs}/${jobname}-load_purge_customer.log bad=${error}/crda_pre_load_purge_customer.bad errors=10000</value></property>
+      <property name="output"><value>${logs}/${jobname}_load_purge_customer_stdout.log</value></property>
+   </bean> 
+</beans>

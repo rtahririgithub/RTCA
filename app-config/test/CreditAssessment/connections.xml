@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+"-//TELUS.com//DTD PropertyNode 1.0//EN" 
+"http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="connections">
+    <!-- =============================================================== -->
+    <!-- The beantype can be overridden  with "jta" or "stub" in the     -->
+    <!-- application configuration framework file                        -->
+    <!-- =============================================================== -->
+    <!-- <prop name="beantype">tcmDb</prop> -->
+
+
+    <!-- =============================================================== -->
+    <!-- The batchDS can be overridden  with application's datasource    -->
+    <!-- =============================================================== -->
+   <!-- <prop name="batchDS">${beantype}-DS</prop>
+    <prop name="tcmDataSource">${beantype}-DS</prop> -->
+
+    <group name="sqlplus">
+        <group name="connection">
+            <prop name="username">APPCRD_BATCH_AT06</prop>
+            <prop name="password">APPCRD_BATCH_AT06</prop>
+            <prop name="oraclesid">TCMATsvb1</prop>
+            <prop name="dbconnectionvalue">${sqlplus/connection/username}/${sqlplus/connection/password}@${sqlplus/connection/oraclesid}</prop>
+            <prop name="archiveDbConnection">${sqlplus/connection/username}/${sqlplus/connection/password}@ATCMPR</prop>
+        </group>
+        <group name="CgwConnection">
+	    <prop name="username">APPCRD_BATCH_WK05</prop>
+	    <prop name="password">APPCRD_BATCH_WK05</prop>
+	    <prop name="oraclesid">TCMDVsvb1</prop>
+	    <prop name="dbconnectionvalue">${sqlplus/connection/username}/${sqlplus/connection/password}@${sqlplus/connection/oraclesid}</prop>
+        </group>
+        <group name="CusProfileConnection">           
+            <prop name="username">APPCCR_BATCH2_AT06</prop>
+            <prop name="password">APPCCR_BATCH2_AT06</prop>
+            <prop name="oraclesid">ODSCMATsvb1</prop>
+            <prop name="dbconnectionvalue">${sqlplus/CusProfileConnection/username}/${sqlplus/CusProfileConnection/password}@${sqlplus/CusProfileConnection/oraclesid}</prop>
+        </group>
+    </group>
+    <group name="sftx">
+        <prop name="url">jdbc:oracle:thin:@//an05109:41521/TCMATsvb1</prop>
+        <prop name="username">APPCRD_BATCH_AT06</prop>
+        <prop name="password">APPCRD_BATCH_AT06</prop>
+    </group>
+
+    <group name="jdbc">
+        <prop name="url">jdbc:oracle:thin:@//an05103:41521/TCMDVsvb1</prop>
+        <prop name="username">APPCRD_BATCH_WK05</prop>
+        <prop name="password">APPCRD_BATCH_WK05</prop>
+    </group>
+    <group name="obpmSetup">
+        <prop name="home">/work/staging/emtools/software/obpm/OraBPMwlHome</prop>
+    </group>
+    
+    
+    <!-- Global Vars -->
+    <prop name="CRDA_WN_PASSWORD">28404e42562872367353616b2b</prop>
+    <prop name="G_SFTP_CRDA_WN_ACCT">svc_crdcrda</prop>
+    <prop name="G_CRDA_NS_WN_SFTP">/crdcrda/Reports/Testing</prop>
+    <prop name="G_WINSFTX_SERVER">bcsftp001.tsl.telus.com</prop>
+    <!-- RTCA 1.5 Global Vars -->
+    <prop name="G_PWRCTR_CAN_LAIRD">ln98505.corp.ads</prop>
+    <prop name="G_COL_BATCH2_SVR">batchptk</prop>
+</group>
+
+

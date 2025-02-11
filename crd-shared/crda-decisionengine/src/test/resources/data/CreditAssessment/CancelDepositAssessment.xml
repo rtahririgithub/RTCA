@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:performCreditAssessment xmlns:ns2="http://www.fico.com/blazeService/performCreditCheckTypes" xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICOCreditAssessmentInterfaceTypes_v2" xmlns:ns3="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2">
+	<ns2:creditAssessmentRequest xsi:type="CancelDepositCreditAssessmentRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<creditAssessmentTypeCd>OVRD_ASSESSMENT</creditAssessmentTypeCd>
+		<creditAssessmentSubTypeCd>CANCEL_DEPOSIT_INV</creditAssessmentSubTypeCd>
+		<depositData>
+			<ns3:depositPaid>0.00</ns3:depositPaid>
+			<ns3:depositPending>0.00</ns3:depositPending>
+			<ns3:depositReleased>0.00</ns3:depositReleased>
+		</depositData>
+		<creditWorthinessData>
+			<ns3:decisionCd>OVERCM000004</ns3:decisionCd>
+			<ns3:assessmentMessageCd>REGCA02</ns3:assessmentMessageCd>
+			<ns3:creditValueCd>D</ns3:creditValueCd>
+		</creditWorthinessData>
+		<newCreditValueCd>E</newCreditValueCd>
+	</ns2:creditAssessmentRequest>
+</ns2:performCreditAssessment>

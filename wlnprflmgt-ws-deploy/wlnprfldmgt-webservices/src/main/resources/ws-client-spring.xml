@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <!-- Consumer Customer Mgmt Web service  -->
+   <!-- Consumer Customer Mgmt Web service is not needed in R1.5, so we will comment it out -->
+   <!-- 
+   <bean id="consumerCustMgtService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+      <property name="serviceInterface" value="com.telus.wsdl.cmo.informationmgmt.consumercustomermanagementservice_2.ConsumerCustomerManagementServicePortType" />
+      <property name="wsdlDocumentUrl" value="classpath:wsdls/ConsumerCustomerManagementService_v2_3.wsdl" />
+       -->
+      <!-- Web service URL configured in env.xml file. -->
+      <!-- 
+      <property name="endpointAddress" value="${connections/SOA/serviceURLs/consumerCustMgtServiceBaseUrl}_v2_3_vs0" />
+      <property name="namespaceUri" value="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" />
+      <property name="serviceName" value="ConsumerCustomerManagementService_v2_3" />
+      <property name="portName" value="ConsumerCustomerManagementServicePort" />
+      <property name="lookupServiceOnStartup" value="false" />
+      <property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+      <property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+      <property name="handlerResolver" ref="handlerResolverConsumerCustMgmt" />
+   </bean>
+
+   <bean id="handlerResolverConsumerCustMgmt" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver">
+      <property name="handlerList">
+         <list>
+            <bean class="com.telus.framework.ws.em.soaphandler.JaxWsRoutingHandler" init-method="init">
+               <property name="handlerConfig">
+                  <map>
+                     <entry key="physicalEndpoint" value="${connections/servers/ConsumerCustomerManagement}" />
+                     <entry key="envString" value="${metadata/envId}" />
+                  </map>
+               </property>
+            </bean>
+         </list>
+      </property>
+   </bean>
+    -->
+
+   <!-- Enterprise Credit Assessment Web service -->
+   <!-- Enterprise Credit Assessment Web service is not needed in R1.5, so we will comment it out -->
+   <!-- 
+   <bean id="enterpriseCreditAssessmentService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+       <property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.enterprisecreditassessmentservice_2.EnterpriseCreditAssessmentServicePortType" />
+       <property name="wsdlDocumentUrl" value="classpath:wsdls/EnterpriseCreditAssessmentService_v2_0.wsdl" />
+        -->
+       <!-- Web service URL configured in env.xml file. -->
+       <!-- 
+       <property name="endpointAddress" value="${connections/SOA/serviceURLs/enterpriseCreditAssessmentServiceUrl}" />
+       <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/EnterpriseCreditAssessmentService_2" />
+       <property name="serviceName" value="EnterpriseCreditAssessmentService_v2_0" />
+       <property name="portName" value="EnterpriseCreditAssessmentServicePort" />
+       <property name="lookupServiceOnStartup" value="false" />
+       <property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+       <property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+       <property name="handlerResolver" ref="handlerResolverEnterpriseCRDA" />
+   </bean>
+
+   <bean id="handlerResolverEnterpriseCRDA" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver">
+      <property name="handlerList">
+         <list>
+            <bean class="com.telus.framework.ws.em.soaphandler.JaxWsRoutingHandler" init-method="init">
+               <property name="handlerConfig">
+                  <map>
+                     <entry key="physicalEndpoint" value="${connections/servers/EnterpriseCreditAssessment}" />
+                     <entry key="envString" value="${metadata/envId}" />
+                  </map>
+               </property>
+            </bean>
+         </list>
+      </property>
+   </bean>
+    -->
+   
+   <!-- Definition of WLNCreditProfileManagementProxyService client bean.. -->
+   <bean id="wlnCreditProfileMgmtProxyService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+      <property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.wlncreditprofilemanagementproxyservice_2.WLNCreditProfileManagementProxyServicePortType" />
+      <property name="wsdlDocumentUrl" value="classpath:wsdls/WLNCreditProfileManagementProxyService_v2_0.wsdl" />
+      <!-- Web service URL configured in env.xml file. -->
+      <property name="endpointAddress" value="${connections/SOA/serviceURLs/wirelineCreditPrflMgtProxyServiceBaseUrl}_v2_0_vs0" />
+       <!-- 
+      <property name="endpointAddress" value="https://servicemngr-dv03.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileManagementProxy/WLNCreditProfileManagementProxyService_v2_0_vs0" />
+       -->
+      <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2" />
+      <property name="serviceName" value="WLNCreditProfileManagementProxyService_v2_0" />
+      <property name="portName" value="WLNCreditProfileManagementProxyServicePort" />
+      <property name="lookupServiceOnStartup" value="false" />
+      <property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+      <property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+      <!-- 
+      <property name="handlerResolver" ref="handlerResolverWLNCrdMgmtProxy" />
+       -->
+   </bean>
+	<!-- handlerResolver has been removed for the SOA v6 -->
+	<!-- 
+   <bean id="handlerResolverWLNCrdMgmtProxy" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver">
+      <property name="handlerList">
+         <list>
+            <bean class="com.telus.framework.ws.em.soaphandler.JaxWsRoutingHandler" init-method="init">
+               <property name="handlerConfig">
+                  <map>
+                     <entry key="physicalEndpoint" value="${connections/servers/WirelineCreditProfileManagementProxy}" />
+                     <entry key="envString" value="${metadata/envId}" />
+                  </map>
+               </property>
+            </bean>
+         </list>
+      </property>
+   </bean>
+    -->
+
+</beans>

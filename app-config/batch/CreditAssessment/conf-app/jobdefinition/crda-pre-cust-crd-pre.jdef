@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+   
+   <import resource="classpath:fw-base.jdef"/>
+<!--    <import resource="base-defn.xml" /> --> 
+
+   <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>in_file_pre_process</value>
+               </property>
+            </bean>
+         </list>
+      </property>
+
+   </bean>
+   <bean id="in_file_pre_process" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_crd_customer.sh</value></property>
+      <property name="arg"> <value>${inbox}/${L_CUST_CRD} ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_CRD_CUSTOMER_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+</beans>

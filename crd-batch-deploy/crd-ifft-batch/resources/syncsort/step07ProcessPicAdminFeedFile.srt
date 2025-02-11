@@ -1,0 +1,18 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace}
+
+   /INFILE ${processbox}/PIC_ADMIN_FEED_FILE_SORTED.DAT 
+    
+   /KEYS WTN
+   /FIELDS  WTN 11 character 10
+   /FIELDS PIC_CD 21 EN 5 
+   /OUTFILE ${processbox}/PIC_ADMIN_FEED_FILE.DAT OVERWRITE
+   /REFORMAT WTN, PIC_NEW_CODE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+
+   /DERIVEDFIELD PIC_NEW_CODE PIC_CD  (Z[5])    
+   /padbyte x"20"
+   /SILENT
+   /END
+

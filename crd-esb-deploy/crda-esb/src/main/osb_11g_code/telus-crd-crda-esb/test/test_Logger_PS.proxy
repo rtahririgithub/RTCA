@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/telus-crd-crda-esb/test_Logger_PS</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="test_func_PS_PipelinePairNode_request">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="someMessage">
+            <con2:id>_ActionId-4716937181224509304-3f27fa37.1695ed188dd.-7331</con2:id>
+            <con1:expr>
+              <con2:xqueryText>$body</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Log_stage">
+        <con:context>
+          <con2:userNsDecl namespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" prefix="par"/>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult" prefix="fmsr"/>
+        </con:context>
+        <con:actions>
+          <con4:route>
+            <con2:id>_ActionId-4716937181224509304-3f27fa37.1695ed188dd.-747e</con2:id>
+            <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:outboundTransform>
+              <con1:assign varName="body">
+                <con2:id>_ActionId-4716937181224509304-3f27fa37.1695ed188dd.-744e</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>$someMessage</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-7dde</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>$someMessage</con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con4:outboundTransform>
+          </con4:route>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="test_func_PS_PipelinePairNode_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions/>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="test_func_PS_PipelinePairNode">
+        <con:request>test_func_PS_PipelinePairNode_request</con:request>
+        <con:response>test_func_PS_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

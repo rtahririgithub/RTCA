@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1"
+    xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="moneyType">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="CustomerCollectionData">
+        <xs:annotation>
+            <xs:documentation>Collection Summary Data summarized at
+                customer level.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="activeAccountsCollectionInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>Indicates whether account is in
+                        collection or not</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="latestCollectionStartDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Latest Collection Start Date</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="latestCollectionEndDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation/>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="collectionScore" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Collection Score assigned at
+                        customer level based upon collection strategies evaluations.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="numberOfAccountsInAgency" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>#of assigned to external agency accounts.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="accountsInAgencyBalance" type="tns:moneyType">
+                <xs:annotation>
+                    <xs:documentation>Balance of accounts in agency.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="latestAgencyAssignmentDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Date of most recent assignment to
+                        external agency.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0"
+                name="involuntaryCancelledAccounts" type="xs:int"/>
+            <xs:element minOccurs="0"
+                name="involuntaryCancelledAccountsBalance" type="tns:moneyType"/>
+            <xs:element minOccurs="0"
+                name="latestInvoluntaryCancelledDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="numberOfNSFCheques" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>No of NSF Cheques in the past 12 months.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

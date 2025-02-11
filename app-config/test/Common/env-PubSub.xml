@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+		<!-- PubSub Config -->
+	<group name="creditPubSubConnector">
+         <prop name="pubSubURL">https://enterprisemessagewebk-is02.tsl.telus.com/publisher/publish/</prop>
+         <prop name="pubSubTopic">Party.Customer.CreditInfo</prop>
+         <prop name="username">9343</prop>
+         <prop name="password">LvQX&amp;98B</prop>
+         <prop name="envId">PT05</prop>
+	</group>
+	<!-- End of PubSub config -->
+
+
+</group>

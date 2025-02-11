@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <import resource="classpath:fw-base.jdef" />
+   <import resource="classpath:sftx/crda-rtca-1-sftx.xml" />
+ 
+   <bean id="telusSpringConfigurer" class="com.telus.framework.config.spring.PlaceholderConfigurer" lazy-init="true">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+	       <property name="moduleName" value="crda-rtca-cp" />
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName" value="crda-rtca-sftx-step" />
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+	       <property name="moduleName" value="crda-rtca-rm" />
+            </bean>
+         </list>
+      </property> 
+   </bean> 
+   <bean id="crda-rtca-cp" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca_copy.sh"/>
+      <property name="arg" value="${outbox}/${report_rtca_1/outputFilename}_${L_CRDA_ODATE}.csv ${outbox}/${report_rtca_1/outputFilename}_Fraud_${L_CRDA_ODATE}.csv ${outbox}/${report_rtca_1/outputFilename}_Score_${L_CRDA_ODATE}.csv  ${outbox}/${report_rtca_1/outputFilename}.csv ${outbox}/${report_rtca_1/outputFilename}_Fraud.csv ${outbox}/${report_rtca_1/outputFilename}_Score.csv "/>
+      <property name="output" value="${report/log}"/>
+   </bean> 
+   <!-- ====================================================================  
+         SFTP Step
+         ====================================================================
+   -->
+   <bean id="crda-rtca-sftx-step"  class="com.telus.framework.filetransfer.FileTransferController" lazy-init="true"> 
+      <property name="request" ref="crda-rtca-1-sftx" />
+   </bean> 
+   <bean id="crda-rtca-rm" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca_rm.sh"/>
+      <property name="arg" value="${outbox}"/>
+      <property name="output" value="${report/log2}"/>
+   </bean>  
+</beans>
+

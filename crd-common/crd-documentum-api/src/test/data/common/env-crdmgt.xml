@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+    <group name="metadata">
+        <prop name="envId">@environment@</prop>
+    </group>
+
+    <group name="dirs">
+        <group name="log4j">
+            <prop name="pods">@dirs.log4j.pods@</prop>
+            <prop name="ebsf">@dirs.log4j.ebsf@</prop>
+            <prop name="opeLogDir">@dirs.log4j.opeLogDir@</prop>
+            <prop name="entCrdPrflDataMgtService">/work/users/custmgtdv01/documentumtest/test/logs</prop>
+        </group>
+    </group>
+    <group name="log4j">
+        <group name="severity">
+            <prop name="FATAL">FATAL</prop>
+            <prop name="ERROR">ERROR</prop>
+            <prop name="WARN">WARN</prop>
+            <prop name="INFO">INFO</prop>
+            <prop name="DEBUG">DEBUG</prop>
+            <prop name="TRACE">TRACE</prop>
+        </group>
+    </group>
+
+     <group name="encryption">
+        <prop name="key1">EbT5a8Fuq</prop>
+        <prop name="key2">aYt2gv6R</prop>
+        <prop name="key3">9bFp3Gz4k</prop>
+	<prop name="cipherProvider">SunJCE</prop>
+	<prop name="cipherTransformation">AES/CBC/PKCS5Padding</prop>
+	<prop name="keystoreType">JCEKS</prop>
+	<prop name="enableCrdDocumentEncryption">true</prop>
+    </group>
+
+   <group name="configure">
+
+     <group name="creditDocumentum">
+       <prop name="user">crda</prop>
+       <prop name="password">crda</prop>
+       <prop name="repository">d2archive</prop>
+       <prop name="cabinet">/crda</prop>
+     </group>
+
+   </group>
+
+   <group name="storage">
+     <prop name="url">file:///work/users/custmgtdv01/wls/domains/DV01CustMgtEntSvcWest/servers/EntColMgtSvc/rtca.jck</prop>
+     <prop name="bdu"><![CDATA[xV.T]]></prop>
+     <prop name="bdu_entry"><![CDATA[ X.&Efe)]]></prop>
+   </group>
+</group>

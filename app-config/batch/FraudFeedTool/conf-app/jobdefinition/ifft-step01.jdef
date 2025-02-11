@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+         <list>
+            <bean id="STEP011" parent="baseStep">
+               <property name="moduleName" value="cmdExec-Step011"/>
+            </bean>
+            <bean id="STEP012" parent="baseStep">
+               <property name="moduleName" value="javaExec-Step012"/>
+            </bean>
+         </list>
+		</property>
+	</bean>
+	<bean id="cmdExec-Step011" parent="baseSyncsortCmdStep">
+      <property name="controlFile" value="${step011/syncsortFile}"/>
+      <property name="output" value="${step011/log}"/>
+	</bean>
+   <bean id="javaExec-Step012" class="com.telus.credit.fraud.batch.step01.FileProcessor" lazy-init="true">
+      <property name="inputFilename" value="${fileProcessor/inputFilename}"/>
+      <property name="lineWidth" value="${fileProcessor/lineWidth}"/>
+      <property name="keyWidth" value="${fileProcessor/keyWidth}"/>
+      <property name="wtnOffset" value="${fileProcessor/wtnOffset}"/>
+   </bean>
+</beans>

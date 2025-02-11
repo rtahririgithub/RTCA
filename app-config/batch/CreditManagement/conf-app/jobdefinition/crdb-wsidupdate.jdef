@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:util="http://www.springframework.org/schema/util"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+
+  <import resource="classpath:fw-base.jdef" />
+   
+  <bean id="job" parent="baseJob">
+    <property name="steps">
+      <list>
+         <bean id="STEP01" parent="baseStep" >
+          <property name="moduleName"><value>creditIdUpdate</value></property>
+        </bean>
+  <!--      <bean id="STEP02" parent="baseStep" >
+          <property name="moduleName"><value>clean</value></property>
+        </bean>
+     --> </list>
+    </property>
+  </bean>
+   
+  <bean id="creditIdUpdate" class="com.telus.credit.batch.merge.CreditIDUpdateBatch" >
+    <constructor-arg ref="enterpriseCreditProfileManagementService"/>
+    <property name="inputFile"><value>${merge/outputWSFile}${L_CRDB_ODATE}.dat</value></property>
+    <property name="outputFile"><value>${merge/notupdatedCreditIdReport}${L_CRDB_ODATE}.dat</value></property>
+    <property name="profileCustomerMapDao"><ref bean="profileCustomerMapDao"/></property>
+  </bean>
+
+  <!--Definition of Enterprise Credit Profile Mgmt client bean. This service call is used to update Enterprise Credit Profile Mgmt credit profile.-->
+  <bean id="enterpriseCreditProfileManagementService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.enterprisecreditprofilemanagementservice_1.EnterpriseCreditProfileManagementServicePortType"/>
+        <property name="wsdlDocumentUrl" value="classpath:EnterpriseCreditProfileManagementService_v1_3.wsdl" />
+        <!-- Web service URL configured in env.xml file. -->
+        <property name="endpointAddress" value="${connections/SOA/serviceURLs_v6/EnterpriseCreditProfileManagement}_v1_3_vs0" />
+        <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/EnterpriseCreditProfileManagementService_1" />
+        <property name="serviceName" value="EnterpriseCreditProfileManagementService_v1_3" />
+        <property name="portName" value="EnterpriseCreditProfileManagementServicePort" />
+        <property name="lookupServiceOnStartup" value="false" />
+        <property name="username" value="${connections/SOA/soaCreditWsClientUsername}"/>
+        <property name="password" value="${connections/SOA/soaCreditWsClientPassword}"/>
+   </bean>
+
+   <!--  Encryption configuration (pilot ready) -->
+     <bean id="encryptUtil" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="com.telus.framework.crypto.EncryptionUtil.setCrypto"/>
+        <property name="arguments">
+           <list>
+              <ref bean="cryptoImpl"/>
+           </list>
+        </property>
+     </bean>
+     <bean id="cryptoImpl" class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl" init-method="init">  
+        <property name="key1" value="${encryption/key1}"/>
+        <property name="key2" value="${encryption/key2}"/>
+        <property name="key3" value="${encryption/key3}"/>
+       
+   </bean>
+
+  <!-- ===================================================================== -->
+<bean id="profileCustomerMapDao" lazy-init="true"
+        class="com.telus.credit.batch.dao.CreditProfileCustomerMapDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileSqlMapClient"/></property>
+  </bean>
+   <bean id="creditProfileSqlMapClient" lazy-init="true"
+        class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+    <property name="configLocation">
+      <value>sqlmap/creditBatch-sqlmap-config.xml</value>
+      </property>
+    <property name="dataSource"><ref bean="${appBeanName/appDbDS}"/></property>
+  </bean>
+<bean id="jdbc-appDbDS" lazy-init="true"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName">
+        <value>oracle.jdbc.driver.OracleDriver</value>
+        </property>
+    <property name="url"><value>${jdbc/url}</value></property>
+    <property name="username"><value>${jdbc/username}</value></property>
+    <property name="password"><value>${jdbc/password}</value></property>
+</bean>     
+ <!--  end credit profile dao -->
+<bean id="telusSpringConfigurer" class="com.telus.framework.config.spring.PlaceholderConfigurer">
+</bean>
+</beans>

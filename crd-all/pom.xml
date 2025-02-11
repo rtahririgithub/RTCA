@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+
+	<groupId>telus.credit.crdmgmt</groupId>
+	<artifactId>pom-crd-all</artifactId>
+	<version>4.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>pom-crd-all</name>
+
+
+	<modules>
+		<module>../</module>
+		<module>../app-config</module>
+		<module>../crd-common</module>
+
+		<module>../wlnprflmgt-ws-deploy</module>
+		<module>../wlncprflmatch-ws-deploy</module>
+		<module>../wlsprflmgt-ws-deploy</module>
+		<module>../entprflmgt-ws-deploy</module>
+
+		<module>../crd-shared</module>
+		<module>../crd-ws-deploy</module>
+		
+		<module>../orderdepositcal-ws-deploy</module>
+		
+		<module>../crd-esb-deploy</module>
+		<module>../crd-documentum-ws-deploy</module>
+
+		<!-- <module>../crd-batch-deploy</module> temporary comment out -->
+		
+	</modules>
+
+</project>

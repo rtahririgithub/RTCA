@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2" xmlns:unifiedCreditTypes="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/UnifiedCreditTypes_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:simpleType name="creditValueCodeType">
+		<xs:annotation>
+			<xs:documentation>Represents credit value codes. Possible
+                values are: &quot;V&quot; - VIP, &quot;E&quot; -
+                Established, &quot;U&quot; - Un-established,
+                &quot;D&quot; - Deposit, &quot;R&quot; - Restricted,
+                &quot;N&quot; - No Credit Information, &quot;G&quot; -
+                Guaranteed. Its value must be one of the values defined
+                in reference ods table.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="CreditIdentification">
+		<xs:sequence>
+			<xs:element name="driverLicense" type="tns:DriverLicense" minOccurs="0"/>
+			<xs:element name="sin" type="tns:sinType" minOccurs="0"/>
+			<xs:element name="healthCard" type="tns:HealthCard" minOccurs="0"/>
+			<xs:element name="passport" type="tns:Passport" minOccurs="0"/>
+			<xs:element name="provincialIdCard" type="tns:ProvincialIdCard" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DriverLicense">
+		<xs:sequence>
+			<xs:element name="driverLicenseNumber" type="xs:string"/>
+			<xs:element name="provinceCd" type="tns:provinceCodeType"/>
+			<xs:element name="expiryDate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProvincialIdCard">
+		<xs:sequence>
+			<xs:element name="provincialIdNumber" type="xs:string"/>
+			<xs:element name="provinceCd" type="tns:provinceCodeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Passport">
+		<xs:sequence>
+			<xs:element name="passportNumber" type="xs:string"/>
+			<xs:element name="countryCd" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HealthCard">
+		<xs:sequence>
+			<xs:element name="healthCardNumber" type="xs:string"/>
+			<xs:element name="provinceCd" type="tns:provinceCodeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCardCode">
+		<xs:annotation>
+			<xs:documentation>Credit Card type : visa/master,...</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="primaryCreditCardCode" type="tns:primaryCreditCardCodeType" minOccurs="0"/>
+			<xs:element name="secondaryCreditCardCd" type="tns:secondaryCreditCardCodeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonalInfo">
+		<xs:sequence>
+			<xs:element name="employmentStatusCd" type="tns:employmentStatusCodeType" minOccurs="0"/>
+			<xs:element name="residencyCd" type="tns:residencyCodeType" minOccurs="0"/>
+			<xs:element name="creditCheckConsentCd" type="tns:creditCheckConsentCodeType" minOccurs="0"/>
+			<xs:element name="birthDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="underLegalCareCd" type="tns:underLegalCareCodeType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditBureauDocument">
+		<xs:sequence>
+			<xs:element name="documentId" type="xs:long" minOccurs="0"/>
+			<xs:element name="documentPath" type="xs:long" minOccurs="0"/>
+			<xs:element name="documentType" type="xs:string" minOccurs="0"/>
+			<xs:element name="documentContent" type="xs:base64Binary" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="creditProfileStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Status of credit profile in the Credit
+                Management PDS. Possible values are: &quot;A&quot; -
+                Active, &quot;C&quot; - Consolidated.  Default status -
+                &quot;A&quot; (Active). All possible values will be
+                defined in reference ods and service will do validation
+                against the values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="bureauReportStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>correspond to credit asmt status with
+                values Active, Void.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditAssessmentVoidReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>All possible values will be defined in
+                reference ods and service will do validation against the
+                values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditProfileFormatCodeType">
+		<xs:annotation>
+			<xs:documentation>Format of credit profile in the Credit
+                Management PDS. Possible values are: &quot;P&quot; -
+                Person, &quot;O&quot; - Organization.  Default format -
+                &quot;P&quot; (Person). All possible values will be
+                defined in reference ods and service will do validation
+                against the values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditProfileMethodCodeType">
+		<xs:annotation>
+			<xs:documentation>Method of creation of Credit Profile in
+                the Credit Management PDS. Possible values are:
+                &quot;OO&quot; - Online Override, &quot;BC&quot; - Batch
+                Conversion, &quot;BP&quot; - Batch Process,
+                &quot;UN&quot; - Unknown, &quot;NA&quot; - Not
+                Applicable.  Default method  - &quot;OO&quot; (Online
+                Override). All possible values will be defined in
+                reference ods and service will do validation against the
+                values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditCheckConsentCodeType">
+		<xs:annotation>
+			<xs:documentation>Credit check consent code. Possible values
+                are: &quot;Y&quot; - Yes, &quot;N&quot; - No,
+                &quot;NA&quot; - Non Applicable.  All possible values
+                will be defined in reference ods and service will do
+                validation against the values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditAssessmentSourceType">
+		<xs:annotation>
+			<xs:documentation>Its value must be one of the values
+                defined in reference ods table named: FICO,EQUIFAX, SIMULATOR</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="CreditBureauReportSourceType">
+		<xs:annotation>
+			<xs:documentation>Its value must be one of the values
+                defined in reference ods table named: FICO,EQUIFAX,TU,..</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="employmentStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Employment status code. Possible values
+                are: &quot;EM&quot; - Employee, &quot;SE&quot; -
+                Self-Employeed, &quot;UE&quot; - Unemployeed,
+                &quot;ST&quot; - Student, &quot;SA&quot; - Social
+                Assistance, &quot;NA&quot; - Non Applicable.  All
+                possible values will be defined in reference ods and
+                service will do validation against the values defined in
+                reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="residencyCodeType">
+		<xs:annotation>
+			<xs:documentation>Residency code. Possible values are:
+                &quot;O&quot; - Own, &quot;R&quot; - Rent,
+                &quot;LP&quot; - Living with Parents, &quot;NA&quot; -
+                Non Applicable.  All possible values will be defined in
+                reference ods and service will do validation against the
+                values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="primaryCreditCardCodeType">
+		<xs:annotation>
+			<xs:documentation>Primary credit card code. Possible values
+                are: &quot;VS&quot; - Visa, &quot;MC&quot; - Mastercard,
+                &quot;AM&quot; - American Express, &quot;OT&quot; -
+                Other, &quot;NA&quot; - Non Applicable.  All possible
+                values will be defined in reference ods and service will
+                do validation against the values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="secondaryCreditCardCodeType">
+		<xs:annotation>
+			<xs:documentation>Secondary credit card code. Possible
+                values are: &quot;DPT&quot; - Department Store Card,
+                &quot;FI&quot; - Financial Institution, &quot;GAS&quot;
+                - Gas, &quot;OT&quot; - Other, &quot;NA&quot; - Non
+                Applicable.  All possible values will be defined in
+                reference ods and service will do validation against the
+                values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="underLegalCareCodeType">
+		<xs:annotation>
+			<xs:documentation>Code describing if the owner of the credit
+                profile is under legal care. Possible values are:
+                &quot;Y&quot; - Yes, &quot;N&quot; - No, &quot;NA&quot;
+                - Non Applicable.  All possible values will be defined
+                in reference ods and service will do validation against
+                the values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="lineOfBusinessType">
+		<xs:annotation>
+			<xs:documentation> All possible values will be defined in
+                reference ods and service will do validation against the
+                values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditProfileIdType">
+		<xs:annotation>
+			<xs:documentation>Credit Profile Id Type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditAssessmentIdType">
+		<xs:annotation>
+			<xs:documentation>Credit assessment Id Type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="moneyType">
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sinType">
+		<xs:annotation>
+			<xs:documentation>It is validated by the service to ensure
+                it is valid.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditAddressCodeType">
+		<xs:annotation>
+			<xs:documentation>Credit address type code. Possible values
+                are: &quot;CB&quot; - Credit Bureau Address. All
+                possible values will be defined in reference ods and
+                service will do validation against the values defined in
+                reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="addressCodeType">
+		<xs:annotation>
+			<xs:documentation>Credit address type code. Possible values
+                are: &quot;C&quot; - City, &quot;D&quot; - Rural,
+                &quot;F&quot; - Foreign. All possible values will be
+                defined in reference ods and service will do validation
+                against the values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="provinceCodeType">
+		<xs:annotation>
+			<xs:documentation>Province Code Type representing Canadian
+                provinces and US states. Its value must be one of the
+                values defined in reference ods table named: PROVINCE
+                for candian provinces, xxx for US states.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditAssessmentRequestType">
+		<xs:annotation>
+			<xs:documentation>Its value must be one of the values
+                defined in reference ods table named: PROVINCE for
+                candian provinces, xxx for US states.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditAssessmentStatusType">
+		<xs:annotation>
+			<xs:documentation>Its value must be one of the values
+                defined in reference ods table named: PROVINCE for
+                candian provinces, xxx for US states.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="creditAssessmentRequestSubType">
+		<xs:annotation>
+			<xs:documentation>Its value must be one of the values
+                defined in reference ods table named: PROVINCE for
+                candian provinces, xxx for US states.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="fraudMessageType">
+		<xs:annotation>
+			<xs:documentation> All possible values will be defined in
+                reference ods and service will do validation against the
+                values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="fraudIndicatorType">
+		<xs:annotation>
+			<xs:documentation> All possible values will be defined in
+                reference ods and service will do validation against the
+                values defined in reference ods.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="phoneType">
+		<xs:annotation>
+			<xs:documentation>Phone Type, like Residential, Business,
+                Mobile, etc. Its value must be one of the values defined
+                in reference ods table named: PHONE_TYP.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="CreditDecision">
+		<xs:annotation>
+			<xs:documentation>BureauCredit decision as defined in
+                external Credit bureau for TELUS.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="creditDecisionCd" type="xs:string"/>
+			<xs:element name="creditDecisionMessage" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BureauInformation">
+		<xs:annotation>
+			<xs:documentation>Defines a bureau: e.g. Equifax ( external
+                , primary, EQX)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bureauType" type="xs:string"/>
+			<xs:element name="bureauPriority" type="xs:string" minOccurs="0"/>
+			<xs:element name="bureauCd" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ScoreCardAttribute">
+		<xs:annotation>
+			<xs:documentation>ScoreCardAttribute , name/value pair</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="scoreName" type="xs:string"/>
+			<xs:element name="scoreValue" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RiskIndicator">
+		<xs:sequence>
+			<xs:element name="writeOffInd" type="xs:string" minOccurs="0"/>
+			<xs:element name="noHitThinFileInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="trueThinFileInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="highRiskThinFileInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="bankcrupcyInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="tempSINInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="underAgeInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="primaryRiskInd" type="xs:string"/>
+			<xs:element name="secondaryRiskInd" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FraudWarning">
+		<xs:annotation>
+			<xs:documentation>Fraud/credit warnings received from bureau</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fraudType" type="xs:string"/>
+			<xs:element name="fraudCd" type="xs:string"/>
+			<xs:element name="fraudMessage" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditProfileData">
+		<xs:sequence>
+			<xs:element name="employmentStatusCd" type="tns:employmentStatusCodeType" minOccurs="0"/>
+			<xs:element name="residencyCd" type="tns:residencyCodeType" minOccurs="0"/>
+			<xs:element name="creditCheckConsentCd" type="tns:creditCheckConsentCodeType" minOccurs="0"/>
+			<xs:element name="birthDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="underLegalCareCd" type="tns:underLegalCareCodeType" minOccurs="0"/>
+			<xs:element name="provinceOfCurrentResidence" type="xs:string"/>
+			<xs:element name="applicationProvinceCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Province to identify which
+                        scorecard to use in bureau.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bypassMatchIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>indicates users has decided to
+                        create a new customer even though the sys found matches</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="countryCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditValueEffectiveDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="firstCreditAssessmentDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="latestCreditAssessmentDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="creditWorthinessData" type="tns:CreditWorthinessData" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditCustomerInfo">
+		<xs:sequence>
+			<xs:element name="customerId" type="xs:long"/>
+			<xs:element name="personName" type="tns:PersonName"/>
+			<xs:element name="customerCreationDate" type="xs:date"/>
+			<xs:element name="customerMasterSourceId" type="xs:long" minOccurs="0"/>
+			<xs:element name="customerStatusCd" type="xs:string"/>
+			<xs:element name="customerTypeCd" type="xs:string"/>
+			<xs:element name="customerSubTypeCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="revenueSegmentCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="employeeInd" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductCategory">
+		<xs:sequence>
+			<xs:element name="categoryCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="qualified" type="xs:boolean" minOccurs="0"/>
+			<!-- Need to add max no of equipment in the interface -->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductEquipment">
+		<xs:sequence>
+			<xs:element name="productCd" type="xs:string"/>
+			<xs:element name="maxNumberOfEquipment" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductCategoryQualification">
+		<xs:annotation>
+			<xs:documentation>Category level eligibility (TV,SL,..)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="productCategoryList" type="tns:ProductCategory" minOccurs="0" maxOccurs="100"/>
+			<xs:element name="boltOnInd" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>  If customer is eligible for gift
+                        offers with purchase.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductEquipmentQualification">
+		<xs:annotation>
+			<xs:documentation>Equipment level eligibility </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="productEquipmentList" type="tns:ProductEquipment" minOccurs="0" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>RTCA1.5</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdjudicationResult">
+		<xs:sequence>
+			<xs:element name="creditScoreType" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditScore" type="xs:string"/>
+			<xs:element name="creditClass" type="xs:string"/>
+			<xs:element name="creditDecision" type="tns:CreditDecision" minOccurs="0"/>
+			<xs:element name="scoreCardAttributeList" type="tns:ScoreCardAttribute" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditWorthinessData">
+		<xs:annotation>
+			<xs:documentation>Credit Worthiness Input Data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="decisionCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Decision Code from FICO.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="assessmentMessageCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>As provided by Decision-ing
+                        engine. such deposit required,...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditValueCd" type="tns:creditValueCodeType" minOccurs="0"/>
+			<xs:element name="fraudIndicatorCd" type="tns:fraudIndicatorType" minOccurs="0"/>
+			<xs:element name="fraudMessageCdList" type="tns:fraudMessageType" minOccurs="0" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>As determined by Decision-ing
+                        engine rule. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!--Added in PTCA 1.6-->
+			<xs:element name="creditRiskLevel" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>RTCA risk level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CollectionData">
+		<xs:annotation>
+			<xs:documentation>Collection Data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="collectionInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Only needed for monthly UD process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastCollectionStartDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Only needed for monthly UD process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastCollectionEndDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Only needed for monthly UD process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- replaced by BA score in RTCA 1.6
+            <xs:element minOccurs="0" name="bdsScore" type="xs:string"/>
+            -->
+			<xs:element name="noOfAccountsInAgency" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>#of assigned to external agency accounts.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="balanceOwingOnAccountsInAgency" type="tns:moneyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>#of assigned to external agency accounts.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="latestAccountsInAgencyDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date of most recent assignment to
+                        external agency.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="involuntaryCancelledAccounts" type="xs:int" minOccurs="0"/>
+			<xs:element name="balanceOwingOnICA" type="tns:moneyType" minOccurs="0"/>
+			<xs:element name="latestInvoluntaryCancelledDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="noOfNSFCheques" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>No of NSF Cheques in the past 12 months.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- added following 4 attribute in RTCA 1.6 -->
+			<xs:element name="baScore" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>BA Score</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="collectionSegment" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Collection Segmenet</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="scoreCardID" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Score card ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="delinquencyCycle" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>delinquency cycle</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CreditAssessmentResult">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Credit decision-ing (FICO) assessment
+                result </xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="assessmentResultCd" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>As provided by Decision-ing
+                        engine. operation result code . Sucessfull,
+                        Partilly ,...</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="assessmentResultReasonCd" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>As provided by Decision-ing
+                        engine. operation result code reason.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="decisionCd" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Decision Code from FICO. RTCA1.5</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="assessmentMessageCd" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>As provided by Decision-ing
+                        engine. such deposit required,...</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="creditValueCd" type="tns:creditValueCodeType"/>
+				<xs:element name="productCategoryQualification" type="tns:ProductCategoryQualification" minOccurs="0"/>
+				<xs:element name="fraudIndicatorCd" type="tns:fraudIndicatorType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>As determined by Decision-ing
+                        engine  or overriden by agent.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="fraudMessageCdList" type="tns:fraudMessageType" minOccurs="0" maxOccurs="100">
+					<xs:annotation>
+						<xs:documentation>As determined by Decision-ing
+                        engine rule. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="bureauInformationList" type="tns:BureauInformation" minOccurs="0" maxOccurs="100"/>
+				<xs:element name="rulesExecuted" type="xs:string" minOccurs="0" maxOccurs="100"/>
+				<xs:element name="creditAssessmentStrategies" type="tns:CreditAssessmentStrategies" minOccurs="0"/>
+				<xs:element name="creditRiskLevel" type="xs:int" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>RTCA risk level</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="unifiedCreditAssessmentResult" type="tns:UnifiedCreditAssessmentResult" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CreditAssessmentStrategies">
+		<xs:annotation>
+			<xs:documentation>Credit Assessment Strategies, Possible
+                values are:CHAM (Champion Strategy),CHAL (Challenger Strategy)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="depositLookupStrategy" type="xs:string" minOccurs="0"/>
+			<xs:element name="cvudStrategy" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditValueAssignmentStrategy" type="xs:string" minOccurs="0"/>
+			<xs:element name="customerActivityStrategy" type="xs:string" minOccurs="0"/>
+			<xs:element name="tenureStrategy" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreditBureauResult">
+		<xs:annotation>
+			<xs:documentation>Credit Gateway or Credit Decision-ing
+                Simulator result</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" minOccurs="0"/>
+			<xs:element name="personName" type="tns:PersonName" minOccurs="0"/>
+			<xs:element name="errorCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Error code returned from Vendor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reportSourceCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vendor name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reportType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Credit report type: consumer,
+                        commerical,corporate registery, etc </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="printImageReportTxt" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Print image report (PI or readable format) representing  simulated credit bureau report text </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adjudicationResult" type="tns:AdjudicationResult" minOccurs="0"/>
+			<xs:element name="riskIndicator" type="tns:RiskIndicator" minOccurs="0"/>
+			<xs:element name="fraudWarningList" type="tns:FraudWarning" minOccurs="0" maxOccurs="100"/>
+			<xs:element name="creationDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>credit check timestamp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonName">
+		<xs:sequence>
+			<xs:element name="firstName" type="xs:string"/>
+			<xs:element name="lastName" type="xs:string"/>
+			<xs:element name="middleName" type="xs:string" minOccurs="0"/>
+			<xs:element name="nameSuffix" type="xs:string" minOccurs="0"/>
+			<xs:element name="title" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--RTCA 1.5 -->
+	<xs:complexType name="DepositData">
+		<xs:annotation>
+			<xs:documentation>Deposit Data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="depositPaid" type="tns:moneyType" minOccurs="0"/>
+			<xs:element name="depositPending" type="tns:moneyType" minOccurs="0"/>
+			<xs:element name="depositReleased" type="tns:moneyType" minOccurs="0"/>
+			<xs:element name="mostRecentDepositPaidDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="mostRecentDepositPendingDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="mostRecentDepositReleaseDate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Unified Credit-->
+	<!-- *************************************common***********************************************************-->
+	<xs:complexType name="IndicatorType">
+		<xs:sequence>
+			<xs:element name="indicator" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="reasonCd" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- *************************************wln***********************************************************-->
+	<xs:complexType name="WlnMatchedCustomer">
+		<xs:sequence>
+			<xs:element name="customerData" type="tns:WlnCustomerInfo"/>
+			<xs:element name="accountData" type="tns:WlnAccountInfo"/>
+			<xs:element name="creditWorthinessData" type="tns:WlnCreditWorthinessData"/>
+			<xs:element name="collectionData" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:WlnCreditCollectionData">
+							<xs:sequence>
+								<xs:element name="collectionInd" type="xs:boolean" minOccurs="0"/>
+								<!-- added following 4 attribute in RTCA 1.6 -->
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="creditBureauResult" type="tns:WlnCreditBureauResult" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlnCustomerInfo">
+		<xs:sequence>
+			<xs:element name="customerId" type="xs:long"/>
+			<xs:element name="customerCreationDate" type="xs:date"/>
+			<xs:element name="customerStatusCd" type="xs:string"/>
+			<xs:element name="customerTypeCd" type="xs:string"/>
+			<xs:element name="customerSubTypeCd" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlnCreditWorthinessData">
+		<xs:annotation>
+			<xs:documentation>Credit Worthiness Input Data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="creditValueCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditRiskLevel" type="xs:int" minOccurs="0"/>
+			<xs:element name="decisionCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>represent the rules that led to this assessment result.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fraudIndicatorCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="fraudMessageCdList" type="xs:string" minOccurs="0" maxOccurs="100"/>
+			<!--Added in PTCA 1.6-->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlnCreditProfileData">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="WlnCreditBureauResult">
+		<xs:annotation>
+			<xs:documentation>Credit Gateway or Credit Decision-ing
+ Simulator result</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reportSourceCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vendor name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adjudicationResult" type="tns:WlnAdjudicationResult" minOccurs="0"/>
+			<xs:element name="errorCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Error code returned from Vendor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creationDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>credit check timestamp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlnAdjudicationResult">
+		<xs:sequence>
+			<xs:element name="creditDecision" type="tns:CreditDecision" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlnCreditCollectionData">
+		<xs:annotation>
+			<xs:documentation>Collection Data</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="WlnAccountInfo">
+		<xs:annotation>
+			<xs:documentation>Rrepresent an account in CODS. The account could be a wln or a wls account residing in CODS.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:long"/>
+			<xs:element name="billingMasterSourceId" type="xs:long"/>
+			<xs:element name="brandId" type="xs:long" minOccurs="0"/>
+			<xs:element name="openDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="statusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="statusDate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- *************************************wls***********************************************************-->
+	<xs:complexType name="WlsMatchedAccount">
+		<xs:sequence>
+			<xs:element name="accountData" type="tns:WlsAccountInfo"/>
+			<xs:element name="creditWorthinessData" type="tns:WlsCreditWorthinessData"/>
+			<xs:element name="warningHistoryList" type="tns:WlsWarningHistory" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Represent the list of new and past warning associated to an account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountFinancialHistory" type="tns:WlsAccountFinancialHistory"/>
+			<xs:element name="creditBureauResult" type="tns:WlsCreditBureauResult" minOccurs="0"/>
+			<xs:element name="totalSubscribers">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="totalActiveSubscribersNumber" type="xs:int"/>
+						<xs:element name="totalReservedSubscribersNumber" type="xs:int"/>
+						<xs:element name="totalSuspendedSubscribersNumber" type="xs:int"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlsAccountInfo">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:long"/>
+			<xs:element name="accountType" type="xs:string"/>
+			<xs:element name="accountSubType" type="xs:string"/>
+			<xs:element name="brandId" type="xs:string"/>
+			<xs:element name="accountCreationDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Same as startServiceDate if startServiceDate is not empty otherwise same as accountStatusDate </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startServiceDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Represents the date when account became open (status O) – which is the date when the first subscriber was activated. This date does not change if the subscriber is canceled or more subs are added to the account.    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountStatus" type="xs:string"/>
+			<xs:element name="accountStatusDate" type="xs:dateTime"/>
+			<xs:element name="statusActivityCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="statusActivityReasonCode" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlsWarningHistoryBase">
+		<xs:sequence>
+			<xs:element name="warningCategoryCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Represent the category of warnings ( internal value) : Iany warning stored in fraud db , Warning from Bureua , .... . </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="warningCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unique Code representing a warning.  for example  warningCd=Frepresent a Written off Blacklisted ID  exist, DNA (Do Not Activate) , or warningCD=ID_FRAUD_01 represent a Identifiy Fraud </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="warningTypeCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Represent the type of warning such as SAFESCAN,HAWK,..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="warningStatusCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>populated by credit decisioning, stored in cda DB </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlsWarningHistory">
+		<xs:complexContent>
+			<xs:extension base="tns:WlsWarningHistoryBase"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WlsCreditWorthinessData">
+		<xs:sequence>
+			<xs:element name="riskLevelNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A numeric value representing the risk level assessed for an account .( the higher the number the higher the risk)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="riskLevelDecisionCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>It uniquely identifies a decision made which determines the Risk Level, for reporting and analytic purpose only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditClassCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>represents the credit class . It is stored in account's creditprofile(CDA and KB Databases)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlsAccountFinancialHistory">
+		<xs:sequence>
+			<xs:element name="delinquentInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation> </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WlsCreditBureauResult">
+		<xs:annotation>
+			<xs:documentation>Credit Gateway or Credit Decision-ing
+ Simulator result</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reportSourceCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vendor name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="errorCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Error code returned from Vendor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adjudicationResult" type="tns:WlnAdjudicationResult" minOccurs="0"/>
+			<xs:element name="creationDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>credit check timestamp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- *************************************Unified Credit input***********************************************************-->
+	<xs:complexType name="BaseUnifiedCreditSearchResult" abstract="true">
+		<xs:sequence>
+			<xs:element name="matchFound" type="tns:IndicatorType"/>
+			<xs:element name="dataInquiryErrorCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="lineOfBusiness" type="xs:string" minOccurs="0"/>
+			<xs:element name="unifiedCreditDormantInd" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- *************************************Unified Credit output***********************************************************-->
+	<xs:complexType name="WlnUnifiedCreditSearchResult">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseUnifiedCreditSearchResult">
+				<xs:sequence>
+					<xs:element name="matchedCustomer" type="tns:WlnMatchedCustomer" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WlsUnifiedCreditSearchResult">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseUnifiedCreditSearchResult">
+				<xs:sequence>
+					<xs:element name="matchedAccount" type="tns:WlsMatchedAccount" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UnifiedCreditAssessmentResult">
+		<xs:sequence>
+			<xs:element name="unifiedCreditAssessmentIndicator" type="tns:IndicatorType">
+				<xs:annotation>
+					<xs:documentation>Indicates  whether the assessment result is based on Unified Credit Rules or not . And provides reason code(s) to indicate why the top match customer/account cannot be utilized</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unifiedCreditSimulatedBureauResultData" type="tns:CreditBureauResult" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

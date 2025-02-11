@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+
+<group name="irrelevant">
+    <group name="logging">
+      <prop name="log4j.debug">true</prop>
+      <prop name="log4j.rootLogger">DEBUG, CONSOLE</prop>
+
+      <prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+      <prop name="log4j.appender.CONSOLE.Threshold">DEBUG</prop>
+      <prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+      <prop name="log4j.appender.CONSOLE.layout.ConversionPattern">%d %-5p [%c] %m%n</prop>
+    <!-- ================== -->
+    <!-- Loggers -->
+
+    <!-- Enterprise Credit Profile Data Management Service -->
+    <prop name="log4j.logger.com.fico.telus.rtca.blaze">DEBUG, CONSOLE</prop>
+    <prop name="log4j.logger.com.blazesoft.server.deploy.manager">DEBUG, CONSOLE</prop>
+    <prop name="log4j.logger.com.telus.framework">DEBUG, CONSOLE</prop>
+    <prop name="log4j.logger.java.sql.PreparedStatement">DEBUG, CONSOLE</prop>
+    <prop name="log4j.logger.java.sql.Connection">DEBUG, CONSOLE</prop>
+    <prop name="log4j.logger.org.springframework">DEBUG, CONSOLE</prop>
+    <prop name="log4j.logger.com.ibatis.common.jdbc">DEBUG, CONSOLE</prop>
+    <!--   <prop name="log4j.additivity.com.fico.telus.rtca.blaze">false</prop> -->
+
+    <!-- END Of Loggers -->
+    <!-- ================== -->
+  </group>
+</group>

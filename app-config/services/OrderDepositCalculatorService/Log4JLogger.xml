@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+    <group name="fw_logging">
+      <prop name="status">${creditService/logLevel}</prop>
+             
+             <prop name="appenders">console,file</prop>
+             
+             <prop name="appender.console.type">Console</prop>
+             <prop name="appender.console.name">CONSOLE</prop>
+             <prop name="appender.console.layout.type">PatternLayout</prop>
+             <prop name="appender.console.layout.pattern">[%d{DATE} %c %t %-5p]- %m%n%n</prop>
+             <prop name="appender.console.filters">threshold</prop>
+             <prop name="appender.console.filter.threshold.type">ThresholdFilter</prop>
+             <prop name="appender.console.filter.threshold.level">${creditService/logLevel}</prop>
+             <prop name="appender.console.filter.threshold.onMatch">ACCEPT</prop>
+             
+             <prop name="appender.file.type">RollingFile</prop>
+             <prop name="appender.file.name">FILE</prop>
+             <prop name="appender.file.fileName">${dirs/log4j/depositCalculatorService}/OrderDepositCalculatorService.log</prop>
+             <prop name="appender.file.filePattern">${dirs/log4j/depositCalculatorService}/OrderDepositCalculatorService-%d{MM-dd-yyyy}.log</prop>
+             <prop name="appender.file.layout.type">PatternLayout</prop>
+             <prop name="appender.file.layout.pattern">[%d{DATE} %c %t %-5p]- %m%n%n</prop>
+             <prop name="appender.file.append">true</prop>
+             <prop name="appender.file.immediateFlush">true</prop>
+             <prop name="appender.file.policies.type">Policies</prop>
+             <prop name="appender.file.policies.time.type">TimeBasedTriggeringPolicy</prop>
+             <prop name="appender.file.policies.time.interval">${log4j/config/timeInterval}</prop>
+             <prop name="appender.file.policies.time.modulate">true</prop>
+             <prop name="appender.file.policies.size.type">SizeBasedTriggeringPolicy</prop>
+             <prop name="appender.file.policies.size.size">${log4j/config/maxSize}</prop>
+             <prop name="appender.file.strategy.type">DefaultRolloverStrategy</prop>
+             <prop name="appender.file.strategy.max">${log4j/config/maxFiles}</prop>
+             <prop name="appender.file.filters">threshold</prop>
+             <prop name="appender.file.filter.threshold.type">ThresholdFilter</prop>
+             <prop name="appender.file.filter.threshold.level">${creditService/logLevel}</prop>
+             <prop name="appender.file.filter.threshold.onMatch">ACCEPT</prop>
+                          
+             <prop name="loggers">placeholderconfigurer,telus,sql,springframework</prop>
+        
+             <prop name="logger.placeholderconfigurer.name">com.telus.framework.config.spring.PlaceholderConfigurer</prop>
+             <prop name="logger.placeholderconfigurer.level">${creditService/logLevel}</prop>
+             <prop name="logger.placeholderconfigurer.additivity">false</prop>
+             <prop name="logger.placeholderconfigurer.appenderRefs">file</prop>
+             <prop name="logger.placeholderconfigurer.appenderRef.file.ref">FILE</prop>
+        
+             <prop name="logger.telus.name">com.telus</prop>
+             <prop name="logger.telus.level">${creditService/logLevel}</prop>
+             <prop name="logger.telus.additivity">false</prop>
+             <prop name="logger.telus.appenderRefs">file</prop>
+             <prop name="logger.telus.appenderRef.file.ref">FILE</prop>
+        
+            <prop name="logger.sql.name">java.sql</prop>
+            <prop name="logger.sql.level">${creditService/logLevel}</prop>
+            <prop name="logger.sql.additivity">false</prop>
+            <prop name="logger.sql.appenderRefs">file</prop>
+            <prop name="logger.sql.appenderRef.file.ref">FILE</prop>
+        
+            <prop name="logger.springframework.name">org.springframework.web.filter</prop>
+            <prop name="logger.springframework.level">${creditService/logLevel}</prop>
+            <prop name="logger.springframework.additivity">false</prop>
+            <prop name="logger.springframework.appenderRefs">file</prop>
+            <prop name="logger.springframework.appenderRef.file.ref">FILE</prop>
+ 
+            <prop name="rootLogger.level">${creditService/logLevel}</prop>
+            <prop name="rootLogger.appenderRefs">console</prop>
+            <prop name="rootLogger.appenderRef.console.ref">CONSOLE</prop>
+               
+            <!-- END Of Loggers -->
+            <!-- ================== -->
+  </group>
+</group>

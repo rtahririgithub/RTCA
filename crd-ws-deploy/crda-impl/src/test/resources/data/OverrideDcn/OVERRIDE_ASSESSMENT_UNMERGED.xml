@@ -1,0 +1,104 @@
+<ent:performCreditAssessment xmlns:ent="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2">
+	<ent:creditAssessmentRequest xsi:type="ent:OverrideCreditAssessmentRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<ent:creditAssessmentTypeCd>OVRD_ASSESSMENT</ent:creditAssessmentTypeCd>
+		<ent:creditAssessmentSubTypeCd>UNMERGED</ent:creditAssessmentSubTypeCd>
+		<ent:customerID>119047223</ent:customerID>
+		<ent:applicationID>123</ent:applicationID>
+		<ent:channelID>123</ent:channelID>
+		<ent:lineOfBusiness>WIRELINE</ent:lineOfBusiness>
+		<ent:commentTxt>123</ent:commentTxt>
+		<ent:creditCustomerInfo>
+			<cred:customerID xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">119047223</cred:customerID>
+			<cred:personName xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">
+				<cred:firstName>Testing</cred:firstName>
+				<cred:lastName>FGLastname</cred:lastName>
+			</cred:personName>
+			<cred:customerCreationDate xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">2014-02-05Z</cred:customerCreationDate>
+			<cred:customerMasterSourceID xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">1012</cred:customerMasterSourceID>
+			<cred:customerStatusCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">AC</cred:customerStatusCd>
+			<cred:customerTypeCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">R</cred:customerTypeCd>
+			<cred:customerSubTypeCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">I</cred:customerSubTypeCd>
+			<cred:revenueSegmentCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">N</cred:revenueSegmentCd>
+			<cred:employeeInd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">false</cred:employeeInd>
+		</ent:creditCustomerInfo>
+		<ent:creditProfileData>
+			<cred:creditProfileID xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">8619452420</cred:creditProfileID>
+			<cred:customerID xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">119047223</cred:customerID>
+			<cred:creditIdentification xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1"/>
+			<cred:creditAddress xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">
+				<cred:creditAddressTypeCd>CB</cred:creditAddressTypeCd>
+				<cred:addressTypeCd>CB</cred:addressTypeCd>
+				<cred:addressLineOne>1278 haro street</cred:addressLineOne>
+				<cred:cityName>Vancouver</cred:cityName>
+				<cred:provinceCd>BC</cred:provinceCd>
+				<cred:countryCd>CAN</cred:countryCd>
+				<cred:postalCd>V3J7V4</cred:postalCd>
+			</cred:creditAddress>
+			<cred:applicationProvinceCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">BC</cred:applicationProvinceCd>
+			<cred:personalInfo xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">
+				<cred:employmentStatusCd>EM</cred:employmentStatusCd>
+				<cred:residencyCd>R</cred:residencyCd>
+				<cred:creditCheckConsentCd>Y</cred:creditCheckConsentCd>
+				<cred:birthDate>1968-10-08Z</cred:birthDate>
+				<cred:underLegalCareCd>N</cred:underLegalCareCd>
+			</cred:personalInfo>
+			<cred:creditCardCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">
+				<cred:primaryCreditCardCd>NA</cred:primaryCreditCardCd>
+				<cred:secondaryCreditCardCd>NA</cred:secondaryCreditCardCd>
+			</cred:creditCardCd>
+			<cred:creditProfileStatusCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">A</cred:creditProfileStatusCd>
+			<cred:businessLastUpdateTimestamp xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">2014-02-05T18:04:42.567Z</cred:businessLastUpdateTimestamp>
+			<cred:bypassMatchIndicator xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">false</cred:bypassMatchIndicator>
+			<cred:formatCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">P</cred:formatCd>
+			<cred:methodCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">OO</cred:methodCd>
+			<cred:commentTxt xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">123</cred:commentTxt>
+			<wir:creditWorthiness xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2">
+				<wir:customerID>119047223</wir:customerID>
+				<wir:creditAssessmentId>23344</wir:creditAssessmentId>
+				<wir:creditValueCd>D</wir:creditValueCd>
+				<wir:assessmentMessageCd>ODFRD01</wir:assessmentMessageCd>
+				<wir:productCategoryQualification>
+					<ns5:productCategoryList xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns8="http://schemas.telus.com/eca/common_types_2_1">
+						<ns5:categoryCd>SING</ns5:categoryCd>
+						<ns5:qualified>true</ns5:qualified>
+					</ns5:productCategoryList>
+					<ns5:productCategoryList xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns8="http://schemas.telus.com/eca/common_types_2_1">
+						<ns5:categoryCd>HSIC</ns5:categoryCd>
+						<ns5:qualified>true</ns5:qualified>
+					</ns5:productCategoryList>
+					<ns5:productCategoryList xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns8="http://schemas.telus.com/eca/common_types_2_1">
+						<ns5:categoryCd>TTV</ns5:categoryCd>
+						<ns5:qualified>true</ns5:qualified>
+					</ns5:productCategoryList>
+					<ns5:boltOnInd xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns8="http://schemas.telus.com/eca/common_types_2_1">false</ns5:boltOnInd>
+				</wir:productCategoryQualification>
+				<wir:fraudIndicatorCd>Y</wir:fraudIndicatorCd>
+				<wir:fraudMessageCdList>FRAUD01</wir:fraudMessageCdList>
+				<wir:fraudMessageCdList>FRAUD08</wir:fraudMessageCdList>
+				<wir:fraudMessageCdList>FRAUD03</wir:fraudMessageCdList>
+				<wir:fraudMessageCdList>FRAUD02</wir:fraudMessageCdList>
+				<wir:creditAssessmentTypeCd>OVRD_ASSESSMENT</wir:creditAssessmentTypeCd>
+				<wir:creditAssessmentSubTypeCd>MANUAL_OVERRIDE</wir:creditAssessmentSubTypeCd>
+				<wir:creditAssessmentCreationDate>2014-02-05T18:05:15.096Z</wir:creditAssessmentCreationDate>
+				<wir:decisionCd>OVERCM000003</wir:decisionCd>
+			</wir:creditWorthiness>
+			<wir:reportIndicator xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2">false</wir:reportIndicator>
+			<wir:creditValueEffectiveDate xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2">2014-02-05Z</wir:creditValueEffectiveDate>
+			<wir:firstCreditAssessmentDate xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2">2014-02-05Z</wir:firstCreditAssessmentDate>
+			<wir:latestCreditAssessmentDate xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2">2014-02-05Z</wir:latestCreditAssessmentDate>
+		</ent:creditProfileData>
+		<ent:customerCollectionData/>
+		<ent:depositItemList/>
+		<ent:newCreditValueCd>E</ent:newCreditValueCd>
+	</ent:creditAssessmentRequest>
+	<ent:auditInfo>
+		<ent:userId xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">119047223</ent:userId>
+		<ent:userTypeCode xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">123</ent:userTypeCode>
+		<ent:salesRepresentativeId xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">123</ent:salesRepresentativeId>
+		<ent:channelOrganizationId xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">123</ent:channelOrganizationId>
+		<ent:outletId xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">123</ent:outletId>
+		<ent:originatorApplicationId xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">123</ent:originatorApplicationId>
+		<ent:correlationId xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">123</ent:correlationId>
+		<ent:timestamp xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">2008-09-28T18:49:45</ent:timestamp>
+	</ent:auditInfo>
+</ent:performCreditAssessment>

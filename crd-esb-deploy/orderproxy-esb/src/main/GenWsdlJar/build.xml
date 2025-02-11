@@ -1,0 +1,50 @@
+<project default="generate-from-wsdl">
+  <!-- set global properties for this build -->
+  <property name="compiledWsdl-dir" value="Wsdljars" />
+  <property name="impl-dir" value="impl" />
+  <property name="weblogic.lib.dir" value="C:\bea1033\wlserver_10.3\server\lib" /> 
+
+
+  	<!-- classpath for group build-->		
+	<path id="weblogic.classpath">
+		<fileset dir="${weblogic.lib.dir}" includes="*.jar" />
+		<fileset dir="${weblogic.lib.dir}">
+				<include name="weblogic.jar" />
+		</fileset>		
+	</path>
+    <!-- taskdef-->
+  <taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask" classpathref="weblogic.classpath" />
+  
+      <!-- target-->
+  <target name="generate-from-wsdl">
+	
+	<echo message="OrderDepositCalculatorProxyService_v1_0.wsdl" /> 
+    <wsdlc
+        srcWsdl="wsdls/OrderDepositCalculatorProxyService_v1_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+	
+	<echo message="OrderDepositCalculatorService_v1_0.wsdl" /> 	
+    <wsdlc
+        srcWsdl="wsdls/OrderDepositCalculatorService_v1_0.wsdl" 
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+	
+	<echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+    <wsdlc
+        srcWsdl="wsdls/ConsumerBillingAccountManagementService_v1_1.wsdl" 
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+
+   <echo message="DepositManagementService_v1_0.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/DepositManagementService_v1_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+		
+ </target>
+</project>

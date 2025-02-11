@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
+      <con4:wsdl ref="telus-crd-crda-esb/wsdls/EnterpriseCreditAssessmentService_v2_1"/>
+      <con4:binding>
+        <con4:name>EnterpriseCreditAssessmentService_v2_1_SOAP</con4:name>
+        <con4:namespace>http://telus.com/wsdl/CMO/OrderMgmt/EnterpriseCreditAssessmentService_2</con4:namespace>
+      </con4:binding>
+      <con4:selector type="SOAP body"/>
+      <con4:WSI-compliant>false</con4:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/telus-crd-crda-esb/proxy/externalPS/EnterpriseCreditAssessmentServicePS</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-5480951143018384665--7fb45856.1426dbc31a6.-7e85">
+    <con:pipeline type="request" name="performCreditAssessment_PipelinePairNode_request">
+      <con:stage name="performCreditAssessment_Stage">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con4:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="ns9" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="con" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/Proxy_ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="prox" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" prefix="ent" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" prefix="ping" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con4:wsCallout xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:comment>performCreditAssessment by calling eCrda</con1:comment>
+            <con1:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-75ff</con1:id>
+            <con4:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/EnterpriseCreditAssessmentService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:operation>performCreditAssessment</con4:operation>
+            <con4:request>
+              <con4:body wrapped="true">$performCreditAssessmentRequest</con4:body>
+            </con4:request>
+            <con4:response>
+              <con4:body wrapped="true">performCreditAssessmentResponse</con4:body>
+            </con4:response>
+            <con4:requestTransform>
+              <con4:assign varName="performCreditAssessmentRequest">
+                <con1:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-7601</con1:id>
+                <con4:expr>
+                  <con1:xqueryText>$body</con1:xqueryText>
+                </con4:expr>
+              </con4:assign>
+            </con4:requestTransform>
+            <con4:responseTransform>
+              <con1:replace varName="body" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-3964955770189850754-78b55e4e.14229a74801.-7e69</con5:id>
+                <con1:location>
+                  <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$performCreditAssessmentResponse</con5:xqueryText>
+                </con1:expr>
+              </con1:replace>
+              <con4:route xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-5885535624269734156-77356c03.16972c84e91.-60ae</con5:id>
+                <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con4:outboundTransform>
+                  <con1:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con6:id xmlns:con6="http://www.bea.com/wli/sb/stages/config">_ActionId-5885535624269734156-77356c03.16972c84e91.-60ad</con6:id>
+                    <con1:location>
+                      <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                    </con1:location>
+                    <con1:expr>
+                      <con6:xqueryText xmlns:con6="http://www.bea.com/wli/sb/stages/config">&lt;EnterpriseCreditAssessmentServicePS>
+{$performCreditAssessmentRequest}
+,
+{$performCreditAssessmentResponse} 
+&lt;/EnterpriseCreditAssessmentServicePS></con6:xqueryText>
+                    </con1:expr>
+                  </con1:replace>
+                </con4:outboundTransform>
+              </con4:route>
+            </con4:responseTransform>
+          </con4:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="performCreditAssessment_PipelinePairNode_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-5480951143018384665--7fb45856.1426dbc31a6.-7e85">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con3:log>
+            <con1:id>_ActionId-11980453206678483-6127f240.14282257ec8.-7fff</con1:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con1:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+,
+{$performCreditAssessmentRequest}
+&lt;/WLN_WCDAP_ERROR></con1:xqueryText>
+            </con3:expr>
+          </con3:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="performCreditAssessment_BranchNode">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="performCreditAssessment">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="performCreditAssessment_PipelinePairNode">
+                <con:request>performCreditAssessment_PipelinePairNode_request</con:request>
+                <con:response>performCreditAssessment_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

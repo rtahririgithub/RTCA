@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+
+<group name="irrelevant">
+    <group name="logging">
+        <prop name="log4j.rootCategory">${log4j/severity/INFO}, CONSOLE</prop>
+        <!--<prop name="log4j.debug">true</prop>-->
+    
+        <!--Console appender-->
+        <prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+        <prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+        <prop name="log4j.appender.CONSOLE.layout.ConversionPattern">[%d{DATE} %c %-5p] - %m%n</prop>
+    
+        <!--  File appender for Credit Assessment services -->
+        <prop name="log4j.appender.ENT_CRD_CRAL">org.apache.log4j.DailyRollingFileAppender</prop> 
+        <prop name="log4j.appender.ENT_CRD_CRAL.Append">true</prop>
+        <prop name="log4j.appender.ENT_CRD_CRAL.layout">org.apache.log4j.PatternLayout</prop>
+        <prop name="log4j.appender.ENT_CRD_CRAL.layout.ConversionPattern">%d{yyyy-MM-dd/HH:mm:ss.SSS/zzz} %-5p %c{2} - %m%n</prop>
+        <prop name="log4j.appender.ENT_CRD_CRAL.file">${dirs/log4j/entCrdAsmtService}/EnterpriseCreditAssessmentService_v2_0.log</prop>
+    
+    
+    <!-- ================== -->
+    <!-- Loggers -->
+
+    <!-- Enterprise Credit Profile Data Management Service -->
+     <prop name="log4j.logger.com.telus.credit.crda">${log4j/severity/DEBUG}, ENT_CRD_CRAL</prop>
+    <prop name="log4j.logger.com.fico.telus">${log4j/severity/DEBUG}, ENT_CRD_CRAL</prop>
+    <prop name="log4j.logger.com.telus.framework">${log4j/severity/DEBUG}, ENT_CRD_CRAL</prop>
+    <prop name="log4j.logger.java.sql.PreparedStatement">${log4j/severity/DEBUG}, ENT_CRD_CRAL</prop>
+    <prop name="log4j.logger.java.sql.Connection">${log4j/severity/DEBUG}, ENT_CRD_CRAL</prop>
+    <prop name="log4j.logger.org.springframework">${log4j/severity/DEBUG}, ENT_CRD_CRAL</prop>
+    <prop name="log4j.logger.com.ibatis.common.jdbc">${log4j/severity/DEBUG}, ENT_CRD_CRAL</prop>
+    <prop name="log4j.additivity.com.telus.credit.crda">false</prop>
+    <prop name="log4j.logger.org.dozer">DEBUG</prop>
+    <prop name="log4j.logger.org.apache.commons.beanutils.converters">DEBUG</prop>
+    <prop name="log4j.category.org.dozer.MappingProcessor">DEBUG</prop>
+    
+
+    <!-- END Of Loggers -->
+    <!-- ================== -->
+  </group>
+</group>

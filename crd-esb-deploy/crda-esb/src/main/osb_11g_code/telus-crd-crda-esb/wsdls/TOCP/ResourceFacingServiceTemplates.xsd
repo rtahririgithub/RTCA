@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="ResourceFacingServiceChoice">
+        <xsd:choice>
+            <xsd:element
+                name="FixedDataConnectivityResourceFacingService" type="tns:FixedDataConnectivityResourceFacingService"/>
+            <xsd:element
+                name="FixedVideoConnectivityResourceFacingService" type="tns:FixedVideoConnectivityResourceFacingService"/>
+            <xsd:element
+                name="FixedVoIPConnectivityResourceFacingService" type="tns:FixedVoIPConnectivityResourceFacingService"/>
+            <xsd:element name="GigEStackedVLANResourceFacingService" type="tns:GigEStackedVLANResourceFacingService"/>
+            <xsd:element name="GigEVLANResourceFacingService" type="tns:GigEVLANResourceFacingService"/>
+            <xsd:element name="InternetAccessResourceFacingService" type="tns:InternetAccessResourceFacingService"/>
+            <xsd:element name="VoiceIPServiceResourceFacingService" type="tns:VoiceIPServiceResourceFacingService"/>
+            <xsd:element
+                name="DomainNameRegistrationResourceFacingService" type="tns:DomainNameRegistrationResourceFacingService"/>
+            <xsd:element name="IMSVoiceMailResourceFacingService" type="tns:IMSVoiceMailResourceFacingService"/>
+            <xsd:element name="IMSVoIPResourceFacingService" type="tns:IMSVoIPResourceFacingService"/>
+            <xsd:element name="CDMAResourceFacingService" type="tns:CDMAResourceFacingService"/>
+            <xsd:element name="TDMAResourceFacingService" type="tns:TDMAResourceFacingService"/>
+            <xsd:element name="EDGEResourceFacingService" type="tns:EDGEResourceFacingService"/>
+            <xsd:element name="GPRSResourceFacingService" type="tns:GPRSResourceFacingService"/>
+            <xsd:element name="UMTSResourceFacingService" type="tns:UMTSResourceFacingService"/>
+            <xsd:element name="GSMResourceFacingService" type="tns:GSMResourceFacingService"/>
+            <xsd:element name="GSM2GResourceFacingService" type="tns:GSM2GResourceFacingService"/>
+            <xsd:element name="GSM3GResourceFacingService" type="tns:GSM3GResourceFacingService"/>
+            <xsd:element name="IPTVResourceFacingService" type="tns:IPTVResourceFacingService"/>
+            <xsd:element name="MediaroomResourceFacingService" type="tns:MediaroomResourceFacingService"/>
+            <xsd:element name="UnixWebsiteResourceFacingService" type="tns:UnixWebsiteResourceFacingService"/>
+            <xsd:element name="WindowsWebsiteResourceFacingService" type="tns:WindowsWebsiteResourceFacingService"/>
+            <xsd:element name="IMAPeMailResourceFacingService" type="tns:IMAPeMailResourceFacingService"/>
+            <xsd:element name="POPeMailResourceFacingService" type="tns:POPeMailResourceFacingService"/>
+            <xsd:element
+                name="BusinessIPTVRealTimeChargingResourceFacingService" type="tns:BusinessIPTVRealTimeChargingResourceFacingService"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="FixedDataConnectivityResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DownstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UpstreamSpeed" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="FixedVideoConnectivityResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NumberOfHDStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NumberOfSDStreams" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="FixedVoIPConnectivityResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NumberOfLines" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GigEStackedVLANResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="SVLANID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GigEVLANResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="SVLANID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="VLANID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="InternetAccessResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NbrIPAddresses" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ModemSelection" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SelfInstallationOption" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="VoiceIPServiceResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="IDD" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="DomainNameRegistrationResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="DomainType" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="IMSVoiceMailResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="OwnerName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TotalMessageDuration" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="BoxSelectionDigit" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MaximumMessageDuration" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="IMSVoIPResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MaxCallLegs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CallingLineIdPhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Admin" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Language" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="BarringIndicator" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RoamingAllowed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TimeZone" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MaxSessions" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CallingLineIdLastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Password" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RegistrationStatus" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CallingLineIdFirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="CDMAResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="IDD" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternationalRoaming" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="TDMAResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="IDD" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternationalRoaming" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="EDGEResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="DownstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UpstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Datalimit" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GPRSResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="DownstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UpstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Datalimit" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="UMTSResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="DownstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UpstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Datalimit" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GSMResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="InternationalRoaming" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IDD" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CLIP" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GSM2GResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="IDD" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternationalRoaming" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GSM3GResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="IDD" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternationalRoaming" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="IPTVResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NumberOfTVs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RegionID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PurchasePIN" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Language" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ParentalPIN" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ConsumerID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MarketSegment" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TimeZone" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MediaroomResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="CreditLimit" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ParentalPIN" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InstantChannelChange" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NumberOfTVs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RecordingDeviceId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SDStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ServiceGroupName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="HDStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PurchasePIN" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TimeZone" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="UnixWebsiteResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="BackupOption" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Database" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CronJobs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Diskspace" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WebsiteProfile" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ServerSideInc" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ExtraSpace" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DataTrafficPerMonth" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="WindowsWebsiteResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="BackupOption" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ASP" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Database" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Diskspace" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WebsiteProfile" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ServerSideInc" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ExtraSpace" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DataTrafficPerMonth" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="IMAPeMailResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MessageLifetime" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MailboxSize" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="POPeMailResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MailboxSize" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="BusinessIPTVRealTimeChargingResourceFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RegionID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="credit_assessment">
+
+    <!-- INSERT CAR ACTIVITY -->
+    <insert id="insert_car_activity" parameterClass="java.util.Map">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select
+            CAR_ACTIVITY_ID_SEQ.NEXTVAL AS pk from dual
+        </selectKey>
+        INSERT INTO CAR_ACTIVITY
+	       ( 
+	        CAR_ACTIVITY_ID,
+	        CREDIT_ASSESSMENT_REQUEST_ID,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS,
+	        CAR_ACTIVITY_TYPE_ID,
+	        CAR_STATUS_ID,
+	        CAR_ACTIVITY_REASON_CD )
+	    VALUES ( 
+	    	#pk#,
+	        #carId#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        (select CAR_ACTIVITY_TYPE_ID from CAR_ACTIVITY_TYPE where ACTIVITY_TYPE_CD = #activityTypeCd# AND EFF_STOP_TS = TO_DATE('99991231','YYYYMMDD')),
+	        #carStatusId#,
+        	#carActivityReasonCd# )
+    </insert>
+    <!-- UPDATE CREDIT BUREAU TRANSACTION -->
+    <update id="expire_credit_bureau_transaction" parameterClass="java.util.Map">
+        update CREDIT_BUREAU_TRN
+        set
+        CREDIT_BUREAU_TRN_RSLT_STAT_CD = #status#,
+        LAST_UPDT_TS = SYSTIMESTAMP,
+        LAST_UPDT_USER_ID = #userId#
+        where
+        	CREDIT_ASSESSMENT_REQUEST_ID = #carId#
+    </update>
+    <!-- Expire CREDIT ASSESSMENT TRANSACTION STATUS -->
+    <update id="expire_car_status" parameterClass="java.util.Map">
+        update 
+	        CAR_STATUS
+	    set
+	        EFF_STOP_TS=SYSTIMESTAMP,
+	        LAST_UPDT_TS = SYSTIMESTAMP,
+	        LAST_UPDT_USER_ID = #userId#
+        where
+        	CREDIT_ASSESSMENT_REQUEST_ID = #carId#
+    </update>
+
+    <!-- CREATE CREDIT ASSESSMENT REQUEST -->
+    <insert id="insert_car" parameterClass="java.util.Map">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select
+            CREDIT_ASSMNT_RQST_ID_SEQ.NEXTVAL AS pk from dual
+        </selectKey>
+        insert into CREDIT_ASSESSMENT_REQUEST
+	        (
+	        CREDIT_ASSESSMENT_REQUEST_ID,
+	        CAR_TYP_CD,
+	        CREATE_USER_ID,
+	        CREATE_TS,
+	        LAST_UPDT_TS,
+	        CUSTOMER_TYP_CD,
+	        LAST_UPDT_USER_ID,
+	        LOB_CD,
+	        CAR_SUBTYPE_CD,
+	        DATA_SOURCE_ID,
+	        CHANNEL_ORG_CD
+	        )
+	    VALUES
+	        (
+	        #pk#,
+	        #carTypeCode#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        SYSTIMESTAMP,
+	        #customerTypeCode#,
+	        #userId#,
+	        #lineOfBusinessCode#,
+	        #carSubTypeCode#,
+	        #datasourceId#,
+	        #channelOrgCode#
+	        )
+    </insert>
+    <insert id="insert_car_status" parameterClass="java.util.Map">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select CAR_STATUS_ID_SEQ.NEXTVAL AS pk from dual
+        </selectKey>
+        insert into CAR_STATUS
+        (
+	        CAR_STATUS_ID,
+	        CREDIT_ASSESSMENT_REQUEST_ID,
+	        CAR_STATUS_TYP_CD,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS
+        )
+        VALUES
+	        (
+	        #pk#,
+	        #carId#,
+	        #carStatusType#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP
+	        )
+    </insert>
+
+    <update id="expire_crdmgt_comment" parameterClass="java.util.HashMap">
+        update CREDIT_MGMNT_COMMENT
+        set
+	        LAST_UPDT_TS = SYSTIMESTAMP,
+	        LAST_UPDT_USER_ID = #userId#,
+	        EFF_STOP_TS = SYSTIMESTAMP
+        where
+	        OBJECT_ID = #objectId#
+	        and OBJECT_TYPE_CD = #objectTypeCd#
+	        and EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+    </update>
+
+    <insert id="insert_crdmgt_comment" parameterClass="java.util.HashMap">
+        insert into CREDIT_MGMNT_COMMENT
+	        (
+	        CREDIT_MGMNT_COMMENT_ID,
+	        OBJECT_ID,
+	        OBJECT_TYPE_CD,
+	        CREDIT_MGMNT_COMMENT_TYP_CD,
+	        COMMENT_TXT,
+	        COMMENT_DISPLAY_SEQ_NUM,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_TS,
+	        LAST_UPDT_USER_ID
+	        )
+        values (
+	        CREDIT_MGMNT_COMMENT_ID_SEQ.NEXTVAL,
+	        #objectId#,
+	        #objectTypeCd#,
+	        #commentTypeCd#,
+	        #commentText#,
+	        #displaySeqNum#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        #userId#
+        )
+    </insert>
+
+    <insert id="insert_car_credit_profile" parameterClass="java.util.HashMap">
+        INSERT INTO CAR_CREDIT_PROFILE(
+	        CAR_CREDIT_PROFILE_ID,
+	        CREDIT_ASSESSMENT_REQUEST_ID,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS,
+	        CAR_CREDIT_PROFILE_TYP_CD,
+	        CREDIT_PROFILE_ID )
+        VALUES ( CAR_CREDIT_PROFILE_ID_SEQ.NEXTVAL,
+	        #carId#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        #creditProfileType#,
+	        ( select credit_profile_id from cprofl_customer_map
+	        where customer_id = #customerId#
+	        and CPROFL_CUST_MAP_TYP_CD = 'PRI'
+	        and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD') )
+        )
+    </insert>
+
+    <statement id="get_primary_credit_profile_id" parameterClass="long" resultClass="java.lang.Long">
+        select 
+        	credit_profile_id 
+        from cprofl_customer_map
+        where 
+        	customer_id = #customerId#
+	        and CPROFL_CUST_MAP_TYP_CD = 'PRI'
+	        and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+    </statement>
+
+    <insert id="cust_credit_assmnt_rqst" parameterClass="java.util.HashMap">
+        INSERT INTO CUST_CREDIT_ASSMNT_RQST (
+	        CUST_CREDIT_ASSMNT_RQST_ID,
+	        CREDIT_ASSESSMENT_REQUEST_ID,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS,
+	        CUSTOMER_ID )
+        VALUES 
+        	( CUST_CREDIT_ASSMNT_RQST_ID_SEQ.NEXTVAL,
+	        #carId#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        #customerId# )
+    </insert>
+</sqlMap>

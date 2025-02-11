@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://DummyURLGetviaClassPath/spring-beans.dtd">
+<!--  
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+-->
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+
+   <import resource="classpath:fw-mailsender-smtp-spring.xml"/> 
+  
+   <bean id="configurationFramework"
+       class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep" >
+               <property name="moduleName"><value>emailReport</value></property>
+            </bean>
+         </list>
+      </property>
+   </bean>
+   <!-- =========================================================================== -->
+   <!--  N.B. lazy-init ensures the module is not instantiated until its required -->
+
+   <bean id="emailReport" lazy-init="true"
+      class="com.telus.crd.assessment.batch.EmailReportBatch" >
+      <property name="m_filePath">
+         <value>${outbox}</value>
+      </property>  
+      <property name="m_filePattern">
+         <value>${report_rtca_2/outputFilename}</value>
+      </property>    
+   </bean>  
+</beans>

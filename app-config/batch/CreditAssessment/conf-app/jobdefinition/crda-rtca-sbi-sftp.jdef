@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <import resource="classpath:fw-base.jdef" />
+  <import resource="classpath:sftx/crda-rtca-sbi-sftx.xml" />
+
+  	<!-- ===================================================================== -->
+	<!-- STEP01 executes Batch, Transfer files to remote server through SFTX   -->
+	<!-- ===================================================================== -->
+
+  <bean id="job" parent="baseJob">
+    <property name="steps">
+      <list>
+         <bean id="STEP01" parent="baseStep">
+           <property name="moduleName" value="extractsftxstep" />
+         </bean>
+      </list>
+    </property>
+  </bean>
+
+  <!-- ================================================================ -->
+  <bean id="extractsftxstep" lazy-init="true"
+        class="com.telus.framework.filetransfer.FileTransferController">
+    <property name="request" ref="extractsftx" />
+ </bean>
+
+</beans>
+
+

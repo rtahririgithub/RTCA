@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="irrelevant">
+    <group name="handler">
+        <prop name="processorBean">mailSenderMdbProcessor</prop>
+    </group>
+    <group name="mail">
+		<prop name="email_From">@CRD_CRDA_FROM_EMAILADDRESS@</prop>
+		<prop name="email_subject">RTCA Credit Assessment Report</prop>  
+
+        <list name="emailiRecipients_TO">
+        	<string>@CRD_CRDA_TO_EMAILADDRESS@</string>               
+        </list>
+        <list name="emailiRecipients_CC">
+            <!--     <string>@CRD_CRDA_UPD_CC_EMAILADDRESS@</string>--> 
+        </list>					
+        <list name="emailiRecipients_BCC">
+        <!-- 	<string>enter valid bcc emails </string> -->     	     	
+        </list>	
+        
+		<prop name="email_Body">The attachment contains: the RTCA credit assessment report for ${L_RPT_START_DATE} (MS Office Excel spreadsheet).</prop>          
+        				
+    </group>    	
+    
+          
+</group>

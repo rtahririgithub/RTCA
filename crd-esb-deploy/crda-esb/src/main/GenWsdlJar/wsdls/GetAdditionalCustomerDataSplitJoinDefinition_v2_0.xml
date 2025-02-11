@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service xsi:noNamespaceSchemaLocation="http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServiceDefinition>
+		<Name>GetAdditionalCustomerDataSplitJoin</Name>
+		<Documentation>GetAdditionalCustomerDataSplitJoin.Internal ESB service to return additional data required for performing an assessment.</Documentation>
+		<TAM_LevelZeroAndOne>CMO/OrderMgmt</TAM_LevelZeroAndOne>
+		<ServiceTaxonomy>/GetAdditionalCustomerDataSplitJoin</ServiceTaxonomy>
+		<MajorVersion>2</MajorVersion>
+		<MinorVersion>0</MinorVersion>
+		<soapAddress>http://customermanagementwestesb-dv01.tsl.telus.com</soapAddress>
+		<SchemaLocation>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v1_0.xsd</SchemaLocation>
+		<NameSpace>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v1</NameSpace>
+		<nsAbbrev>gacd</nsAbbrev> 
+		<OutputDir/>
+		<SecurityToken>
+			<Token>Wssp1.2-2007-Saml1.1-SenderVouches-Wss1.0</Token>
+		</SecurityToken>
+	</ServiceDefinition>
+	<Operation>
+		<OperationName>GetAdditionalCustomerData</OperationName>
+		<Documentation>Operation to return additional data required for performing an assessment.</Documentation>
+		<InputType wsp="true">GetAdditionalCustomerData</InputType>
+		<OutputType>GetAdditionalCustomerDataResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+
+</Service>

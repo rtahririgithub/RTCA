@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICODepositCalculatorInterfaceTypes_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICODepositCalculatorInterfaceTypes_v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2" schemaLocation="CreditCommon_v2_1.xsd"/>
+	<xs:complexType name="DepositRequest">
+		<xs:annotation>
+			<xs:documentation>Deposit Request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="depositRequestType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>valid values are DEPOSIT_CALCULATOR_TYPE,DEPOSIT_EQUIPMENT_TYPE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="decisionCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Decision Code from FICO.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditValueCd" type="crdc:creditValueCodeType" minOccurs="0"/>
+			<xs:element name="creditRiskLevel" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>RTCA risk level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DepositEquipmentRequest">
+		<xs:complexType mixed="false">
+			<xs:annotation>
+				<xs:documentation>Deposit Equipment Request</xs:documentation>
+			</xs:annotation>
+			<xs:complexContent mixed="false">
+				<xs:extension base="tns:DepositRequest">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Deposit Calculator Request -->
+	<xs:element name="DepositCalculatorRequest">
+		<xs:complexType mixed="false">
+			<xs:annotation>
+				<xs:documentation>Deposit Calculator Request</xs:documentation>
+			</xs:annotation>
+			<xs:complexContent mixed="false">
+				<xs:extension base="tns:DepositRequest">
+					<xs:sequence>
+						<xs:element name="calculationTypeCd" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>ESTIMATE. FINAL.Defined in
+                                Ref PDS</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="orderData" type="tns:OrderData"/>
+						<xs:element name="depositData" type="crdc:DepositData" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="BaseProduct" abstract="true">
+		<xs:sequence>
+			<xs:element name="serviceTypeCd" type="xs:string"/>
+			<xs:element name="assignedProductID" type="xs:string" minOccurs="0"/>
+			<!-- zero dollar products do not need to be passed to FICO 
+			<xs:element name="zeroDollarRateProductInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For HS or SL products.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			-->
+			<xs:element name="rentedEquipmentCnt" type="xs:int" minOccurs="0"/>
+			<xs:element name="purchasedEquipmentCnt" type="xs:int" minOccurs="0"/>
+			<xs:element name="previouslyAssessedDepositAmt" type="crdc:moneyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Previously assessed deposit amount
+                        for the product</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CurrentProduct" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseProduct">
+				<xs:sequence>
+					<xs:element name="productOrderCanceledInd" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>??? need more details :
+                                Indicate that this product was
+                                ordered/provisioned  previously and now
+                                is cancelled.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="monthlyRecurringCharge" type="crdc:moneyType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>is a static monthly fee
+                                for the product. It does not depend on
+                                the usage of the product. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="estimatedUsageCharge" type="crdc:moneyType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>is a dynamic monthly fee
+                                for the product. It depends on the usage
+                                of the product.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="forborneInd" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Forborne indicator per
+                                service type.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lrt" type="crdc:moneyType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>is an equipment fee. It
+                                stands for &quot;lost rental
+                                telephone&quot;. Exact amt or just flat
+                                rate pending Amdocs confirmation???</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PendingProduct" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseProduct"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AssignedProduct" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseProduct"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CurrentOrderProducts">
+		<xs:sequence>
+			<xs:element name="currentProduct" type="tns:CurrentProduct" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PendingOrderProducts">
+		<xs:sequence>
+			<xs:element name="pendingProduct" type="tns:PendingProduct" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssignedOrderProducts">
+		<xs:sequence>
+			<xs:element name="assignedProduct" type="tns:AssignedProduct" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrderData">
+		<xs:sequence>
+			<xs:element name="customerID" type="xs:long"/>
+			<xs:element name="orderId" type="xs:string" minOccurs="0"/>
+			<xs:element name="currentOrderProducts" type="tns:CurrentOrderProducts"/>
+			<xs:element name="pendingOrderProductList" type="tns:PendingOrderProducts" minOccurs="0"/>
+			<xs:element name="assignedOrderProductList" type="tns:AssignedOrderProducts" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ************** Response ********************-->
+	<xs:complexType name="DepositResult">
+		<xs:annotation>
+			<xs:documentation>Deposit Result</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="rulesExecuted" type="xs:string" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DepositEquipmentResult">
+		<xs:complexType mixed="false">
+			<xs:annotation>
+				<xs:documentation>Response returned to consumer for Deposit
+                Equipment Request</xs:documentation>
+			</xs:annotation>
+			<xs:complexContent mixed="false">
+				<xs:extension base="tns:DepositResult">
+					<xs:sequence>
+						<xs:element name="productEquipmentQualification" type="crdc:ProductEquipmentQualification">
+							<xs:annotation>
+								<xs:documentation>Product Equipment Qualification.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositCalculationResult">
+		<xs:complexType mixed="false">
+			<xs:annotation>
+				<xs:documentation>Response returned to consumer for Deposit
+                Calculation Request</xs:documentation>
+			</xs:annotation>
+			<xs:complexContent mixed="false">
+				<xs:extension base="tns:DepositResult">
+					<xs:sequence>
+						<xs:element name="customerId" type="xs:int"/>
+						<xs:element name="calculationTypeCd" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>ESTIMATE. FINAL.Defined in
+                                Ref PDS</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="totalDepositAmt" type="crdc:moneyType">
+							<xs:annotation>
+								<xs:documentation>total deposit required for
+                                asked service,product,equipment for a
+                                customer.       Deposit at order level.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="depositAdjustmentAmt" type="crdc:moneyType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>static deposit adjustment
+                                amount used in estimated deposit calculation.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="productDepositResultList" type="tns:ProductDepositResultList">
+							<xs:annotation>
+								<xs:documentation>deposit result for
+                                current/New changed products.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="calculationResultMessageCd" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Operation result messge
+                                code as provided by Decision-ing engine
+                                to indicate Sucessfull, Failed ,...</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="calculationResultReasonCd" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Operation result reason
+                                code as provided by Decision-ing engine
+                                to indicate the reason for calculationResultMessageCd.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ProductDepositResultList">
+		<xs:annotation>
+			<xs:documentation>List of prod deposit result </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="productDepositResult" type="tns:ProductDepositResult" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductDepositResult">
+		<xs:annotation>
+			<xs:documentation>calculated deposit info per product.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="serviceTypeCd" type="xs:string"/>
+			<xs:element name="assignedProductID" type="xs:string" minOccurs="0"/>
+			<xs:element name="assessedDepositAmt" type="crdc:moneyType">
+				<xs:annotation>
+					<xs:documentation>Deposit amount for the product</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

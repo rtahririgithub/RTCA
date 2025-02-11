@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="credit_value">
+
+	<typeAlias alias="CreditValue" type="com.telus.credit.domain.CreditValue" />
+	<typeAlias alias="CreditValueDetail" type="com.telus.credit.service.dto.CreditValueDetailDto" />
+	
+	<resultMap id="select-creditvalue-result" class="CreditValue">
+		<result property="_id" column="CREDIT_VALUE_ID"/>
+		<result property="method" column="POPULATE_METHOD_CD"/>
+		<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+		<result property="creditValueCode" column="CREDIT_VALUE_CD"/>
+		<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+		<result property="createUserId" column="CREATE_USER_ID"/>
+		<result property="lastUpdateUserId" column="LAST_UPDT_USER_ID"/>
+		<result property="depositAmount" javaType="java.lang.Double" column="DEPOSIT_AMT"/>
+		<result property="assessmentMsgCd" column="ASSESSMENT_MSG_CD"/>
+		<result property="prodCategoryBoltOn" column="PRODUCT_CATEGORY_BOLT_ON"/>
+		<result property="creditDecisionCd" column="DECISION_CD"/>
+		<result property="creditDecisionMsgTxt" column="CREDIT_DECISION_MSG_TXT"/>
+		<result property="fraudIndicatorCd" column="FRAUD_IND_CD"/>
+		<result property="creditScoreNumber" column="CREDIT_SCORE_NUM"/>
+		<result property="creditClassCd" column="CREDIT_CLASS_CD"/>
+		<result property="carId" javaType="java.lang.Long" column="CREDIT_ASSESSMENT_REQUEST_ID"/>
+		<result property="decisionCd" column="DECISION_CD"/>
+		<result property="riskLevelNum" column="RISK_LEVEL_NUM"/>
+	</resultMap>
+	
+	<resultMap id="select-creditvaluedetail-result" class="CreditValueDetail">
+		<result property="fraudMessageCd" column="FRAUD_MSG_CD"/>
+		<result property="productQualificationInd" column="PRODUCT_QUAL_IND"/>
+		<result property="creditValueDetailTypeCd" column="CREDIT_VALUE_DTL_TYP_CD"/>
+		<result property="creditApprvdProductCatCd" column="CREDIT_APPRVD_PROD_CATGY_CD"/>
+	</resultMap>
+	
+	<resultMap id="select-creditassessment-result" class="CreditValue">
+		<result property="creditAssessmentTypeCd" column="CAR_TYP_CD"/>
+		<result property="creditAssessmentCreationDate" column="CREATE_TS"/>
+		<result property="creditAssessmentSubTypeCd" column="CAR_SUBTYPE_CD"/>
+	</resultMap>
+	
+	<insert id="insert_credit_value" parameterClass="java.util.Map">
+	
+	<selectKey resultClass="java.lang.Long" keyProperty="credit_value._id">
+			select CREDIT_VALUE_ID_SEQ.NEXTVAL from dual 
+  		</selectKey>
+  		
+  		insert into CREDIT_VALUE
+  			(	
+  			CREDIT_VALUE_ID,
+			CREDIT_PROFILE_ID, 
+			POPULATE_METHOD_CD, 
+			CREDIT_VALUE_CD,
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID,
+			DEPOSIT_AMT,
+			ASSESSMENT_MSG_CD,
+			PRODUCT_CATEGORY_BOLT_ON,
+			CREDIT_DECISION_CD,
+			CREDIT_DECISION_MSG_TXT,
+			FRAUD_IND_CD,
+			CREDIT_SCORE_NUM,
+			CREDIT_CLASS_CD,
+			CREDIT_ASSESSMENT_REQUEST_ID,
+			DECISION_CD,
+			RISK_LEVEL_NUM
+ 			) 
+  		values 
+    		(
+    		#credit_value._id#,
+			#credit_value.creditProfileId#, 
+			#credit_value.method#,
+			#credit_value.creditValueCode#,
+			SYSTIMESTAMP,      
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#,
+			#credit_value.depositAmount#,
+			#credit_value.assessmentMsgCd#,
+			#prodCatBoltOn#,
+			#credit_value.creditDecisionCd#,
+			#credit_value.creditDecisionMsgTxt#,
+			#credit_value.fraudIndicatorCd#,
+			#credit_value.creditScoreNumber#,
+			#credit_value.creditClassCd#,
+			#credit_value.carId#,
+			#credit_value.decisionCd#,
+			#credit_value.riskLevelNum#
+    		)
+	</insert>
+	
+	<insert id="insert_credit_value_detail" parameterClass="java.util.Map">
+		insert into CREDIT_VALUE_DTL
+  			(
+  			CREDIT_VALUE_DTL_ID,
+  			EFF_START_TS,
+  			EFF_STOP_TS,
+  			CREATE_TS,
+  			CREATE_USER_ID,
+  			LAST_UPDT_USER_ID,
+  			LAST_UPDT_TS,
+  			FRAUD_MSG_CD,
+  			PRODUCT_QUAL_IND,
+  			CREDIT_VALUE_ID,
+  			CREDIT_VALUE_DTL_TYP_CD,
+  			CREDIT_APPRVD_PROD_CATGY_CD
+  			) 
+  		values 
+    		(
+    		SEQ_CREDIT_VALUE_DTL.NEXTVAL,
+    		SYSTIMESTAMP,
+    		TO_DATE('44441231','YYYYMMDD'),
+    		SYSTIMESTAMP,
+    		#userId#,
+    		#userId#,
+    		SYSTIMESTAMP,
+    		#fraudMsgCd#,
+    		#prodQualificationInd#,
+    		#creditValueId#,
+    		#creditValueDtlTypeCd#,
+    		#creditApprovedProdCategoryCd#
+    		)
+	</insert>
+	
+	<statement id="get_credit_value_by_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="select-creditvalue-result">
+		select  
+			CREDIT_VALUE_ID, 
+			POPULATE_METHOD_CD,
+			CREDIT_PROFILE_ID,
+			LAST_UPDT_TS,
+			CREDIT_VALUE_CD,
+			CREATE_USER_ID,
+			LAST_UPDT_USER_ID,
+			DEPOSIT_AMT,
+			ASSESSMENT_MSG_CD,
+			decode(PRODUCT_CATEGORY_BOLT_ON, 'Y', 1, '1', 1, 0) as PRODUCT_CATEGORY_BOLT_ON,
+			DECISION_CD,
+			CREDIT_DECISION_MSG_TXT,
+			FRAUD_IND_CD,
+			CREDIT_SCORE_NUM,
+			CREDIT_CLASS_CD,
+			CREDIT_ASSESSMENT_REQUEST_ID,
+			DECISION_CD,
+			RISK_LEVEL_NUM 
+		from 
+			CREDIT_VALUE 
+		where 
+			EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+			and CREDIT_PROFILE_ID=#value#
+			
+	</statement>
+	
+	<statement id="get_credit_value_effective_start_dtm_by_credit_profile_id" 
+				parameterClass="long" 
+				resultClass="String">
+		
+		select 
+			TO_CHAR((EFF_START_DTM), 'YYYY-MM-DD HH24:MI:SS') "EFF_START_DTM" 
+		from 
+			CREDIT_VALUE 
+		where 
+			EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+			and CREDIT_PROFILE_ID=#value#
+				
+	</statement>
+	
+	<statement id="get_credit_value_detail_by_credit_value_id" 
+				parameterClass="long" 
+				resultMap="select-creditvaluedetail-result">
+		select  
+			FRAUD_MSG_CD, 
+			decode(PRODUCT_QUAL_IND, 'Y', 1, '1', 1, 0) as PRODUCT_QUAL_IND,
+			CREDIT_VALUE_DTL_TYP_CD,
+			CREDIT_APPRVD_PROD_CATGY_CD 
+		from 
+			CREDIT_VALUE_DTL
+		where 
+			EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+			and CREDIT_VALUE_ID=#value#
+			
+	</statement>
+	
+	<statement id="get_credit_assessment_by_car_id" 
+				parameterClass="long" 
+				resultMap="select-creditassessment-result">
+		select  
+			CAR_TYP_CD, 
+			CREATE_TS,
+			CAR_SUBTYPE_CD
+		from 
+			CREDIT_ASSESSMENT_REQUEST
+		where 
+			CREDIT_ASSESSMENT_REQUEST_ID=#value#
+			
+	</statement>
+	
+	<statement id="get_credit_bureau_report_indicator" 
+				parameterClass="long" 
+				resultClass="long">
+		select 
+			1
+		from 
+			CREDIT_BUREAU_TRN bt
+		inner join 
+			CREDIT_BUREAU_TRN_DTL btd
+		on 
+			( bt.CREDIT_BUREAU_TRN_ID = btd.CREDIT_BUREAU_TRN_ID
+     		AND btd.CREDIT_BUREAU_TRN_DTL_CD = '4'
+     		AND btd.EXT_DOC_FORMAT_TYP = 'TXT' ) 
+		where 
+			bt.CREDIT_ASSESSMENT_REQUEST_ID = #value#
+			and bt.REPORT_SOURCE_CD in ( 'EQUIFAX', 'TRANSUNION', 'UNIFIEDCREDIT' )
+			and bt.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+			and btd.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+	
+	</statement>
+	
+	<update id="delete_credit_value" parameterClass="java.util.Map">
+  		update 
+  			CREDIT_VALUE
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP,
+			DATA_SOURCE_ID = #sourceId# 
+  		where 
+			CREDIT_PROFILE_ID = #credit_value.creditProfileId#
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</update>
+	
+	<update id="delete_credit_value_detail" parameterClass="java.util.Map">
+  		update 
+  			CREDIT_VALUE_DTL
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_TS = SYSTIMESTAMP
+  		where 
+			CREDIT_VALUE_ID = #credit_value._id#
+			and EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+	</update>		
+</sqlMap>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+
+<group name="UserTransactionManagerConfig">
+
+	<!-- ===================================================================== -->
+	<!-- The following overrides the settings in fw-bec.xml which is default   -->
+	<!-- to "jdbc". Valid values are "jdbc" "jta" or "stub".                   -->
+	<!-- If needed override it to "jta" or "stub" in connection-bec.xml        -->
+	<!--                                                                       -->
+	<!-- If you just need to doing unit testing of your batch program and      -->
+	<!-- do not yet need to have the Batch Execution Container framework to    -->
+	<!-- test checkpoint/restarts, then override "beantype" to                 -->
+	<!--    <prop name="beantype">stub</prop> in connections-bec.xml           -->
+	<!-- ===================================================================== -->
+	<prop name="beantype">stub</prop>
+   <prop name="batchDS">${beantype}-jobDS</prop> 
+
+</group>   

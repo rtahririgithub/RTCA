@@ -1,0 +1,62 @@
+-Add MAVEN_REPO to Eclipse as a VARIABLE.
+-make sure cccollect group is added to eclipse, preferences,ClearnCase
+
+----------------------------------	
+-manually down 
+	http://sedm3301da.ent.agt.ab.ca:2080/maven/serializer/jars/ to MAVEN_REPO/serializer/jars/serializer-2.7.0.jar   (for local CGW WS calls)
+	http://sedm3301da.ent.agt.ab.ca:2080/maven/xalan/jars/ to MAVEN_REPO/xalan/jars/xalan-2.7.0.jar
+----------------------------------	
+-Hijack <YOUR LOCAL PATH>\vobs\crdmgt_src\crdmgtSH\telus-crd-crda-webservices\test\conf\common\env-crdmgt-rtca15.xml
+	change local references
+	change ficoCrdaAsmtConfigDir to 
+	<YOUR LOCAL PATH>/vobs/crdmgt_src/crdmgtSH/telus-crd-crda-webservices/test/conf/CrdDecisioningService
+----------------------------------
+-To setup up the trust in eclipse in order to be able to call other WS  from eclipse run the below command. 
+Locate the JDK/JRE for Eclipse and/or Weblogic and
+Run the following command to import the attached crt into JAVA default trust store:
+>Import a certificate to an existing Java keystore
+*Replace jdk location in the following command
+keytool -import -alias telusroot -file "<CC PATH>\vobs\crdmgt_src\crdmgtSH\telus-crd-crda-webservices\test\conf\telus-root.crt"  -keystore "<JRE PATH>\lib\security\cacerts" -storepass changeit
+
+
+C:\bea1033\wlserver_10.3\server\lib\cacerts
+C:\bea1033B\jdk160_18\jre\lib\security\cacerts
+C:\bea1033\jrockit_160_17_R28.0.0-679\jre\lib\security\cacerts
+C:\bea1033\jdk160_18\fastdebug\jre\lib\security\cacerts
+
+>for instance
+ 
+keytool -import -alias telusroot -file "C:\Clearcase_Views\COL\dev\t828927_crdmgtSH_4.0_dev\vobs\crdmgt_src\crdmgtSH\telus-crd-crda-impl\test\Telus-CSO-Bundle.crt" -keystore "C:\bea1033B\jdk160_18\jre\lib\security\cacerts" -storepass changeit
+
+
+keytool -import -alias telusroot2 -file  "C:\Clearcase_Views\COL\dev\t828927_crdmgtSH_4.0_dev\vobs\crdmgt_src\crdmgtSH\telus-crd-crda-impl\test\telus-root.crt"  -keystore "C:\bea1033\jdk160_18\fastdebug\jre\lib\security\cacerts" -storepass changeit
+
+
+and answer yest to Trust this certificate? [no]:   
+
+
+
+
+
+
+more info
+===============
+>keystore type/subtype for C:\bea1033B\jdk160_18\jre\lib\security\cacerts
+Keystore type: JKS
+Keystore provider: SUN
+
+>Check a stand-alone certificate
+keytool -printcert -v -file "C:\Clearcase_Views\COL\dev\t828927_crdmgtSH_4.0_dev\vobs\crdmgt_src\crdmgtSH\telus-crd-crda-impl\test\Telus-CSO-Bundle.crt"
+
+>Check which certificates are in a Java keystore
+keytool -list -v -keystore "C:\bea1033B\jdk160_18\jre\lib\security\cacerts" -storepass changeit
+
+>Check a particular keystore entry using an alias
+keytool -list -v -keystore "C:\bea1033\jdk160_18\jre\lib\security\cacerts" -storepass changeit -alias telusroot
+
+
+
+>Delete a certificate from a Java Keytool keystore
+keytool -delete -alias telusroot -keystore "C:\bea1033\jdk160_18\jre\lib\security\cacerts" -storepass changeit
+
+

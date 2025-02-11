@@ -1,0 +1,25 @@
+
+      <con:createCustomerEvent xmlns:con="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerDiaryServiceRequestResponse_v1">
+         <customerEvent>
+            <eventTypeId>942</eventTypeId>
+            <systemMessageId>86</systemMessageId>
+            <categoryCode>BASIC</categoryCode>
+            <customerId>10</customerId>
+            <referenceEntityTypeCode>BACCT</referenceEntityTypeCode>
+            <referenceEntitySourceId>1003</referenceEntitySourceId>
+            <retentionCode>TMP</retentionCode>
+            <sourceId>1003</sourceId>
+            <userId>123</userId>
+            <eventDate>2018-11-20T13:38:52Z</eventDate>
+            <highlightedInd>false</highlightedInd>
+            <systemGeneratedInd>true</systemGeneratedInd>
+            <commentText>$performCreditAssessmentResponse/tns:creditAssessmentTransactionResult/tns:unifiedCreditAssessmentResult/tns:diaryComment</commentText>
+         </customerEvent>
+      </con:createCustomerEvent>
+<!--
+https://soa-mp-toll-pr.tsl.telus.com/CMO/InformationMgmt/CustomerManagement/ConsumerCustomerManagementService_v2_6_vs0
+-->
+$performCreditAssessmentResponse/tns:creditAssessmentTransactionResult/tns:unifiedCreditAssessmentResult/tns:diaryComment
+$performCreditAssessmentResponse/tns:creditAssessmentTransactionResult/ecrda:customerID
+
+    <ns1:customerID>{ data($performCreditAssessmentResponse/ns8:assessCreditWorthinessRequest/ns8:customerID) }</ns1:customerID>

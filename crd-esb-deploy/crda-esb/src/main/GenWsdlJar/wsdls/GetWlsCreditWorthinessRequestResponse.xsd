@@ -1,0 +1,16 @@
+<xs:schema xmlns:gwlscw="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetWlsCreditWorthinessRequestResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetWlsCreditWorthinessRequestResponse" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:element name="getWlsCreditWorthiness">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="billingAccountNumber" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getWlsCreditWorthinessResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

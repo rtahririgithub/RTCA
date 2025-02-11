@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+   <context:annotation-config />
+   <import resource="classpath:fw-base.jdef" />
+   <import resource="classpath:fw-mailsender-smtp-spring.xml" />
+   <import resource="classpath:collectionMgtUtil-spring.xml" />
+   <import resource="crda-refpds-client-spring.xml"/>
+   <import resource="classpath:telus-crd-crda-impl-batch-spring.xml" />
+   
+   <!--import resource="crda-ds.xml" /-->
+   <import resource="crda-creditDao.xml" />
+   <alias name="jdbc-jobDS" alias="${beantype}-DS"/>
+
+   <!-- ===================================================================== -->
+   <!-- ===================================================================== -->
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="monthlyUpDownModule" />
+               <property name="commitFrequency" value="100" />
+            </bean>
+         </list>
+      </property>
+   </bean>
+
+
+   <!-- =================================================================== -->
+   <bean id="monthlyUpDownModule" lazy-init="true" class="com.telus.crd.assessment.batch.MonthlyUpDownModule">
+      <property name="controlFile" value="${mupdg/controlFile}" />
+      <property name="orderDate" value="${L_CRDA_ODATE}" />
+      <property name="errorThreshold" value="${mupdg/errorThreshold}" />
+      <property name="cvudTrialRun" value="${FULL_ASSESSMENT_MONTHLY_CVUD/cVUDTrialRun}" />
+   </bean>
+
+   <bean lazy-init="true" class="com.telus.crd.assessment.batch.MonthlyUpDownModuleHelper">
+      <property name="emailTo" value="${mupdg/emailTo}" />
+      <property name="emailFrom" value="${mupdg/emailFrom}" />
+      <property name="emailSubject" value="${mupdg/emailSubject}" />
+      <property name="emailBody" value="${mupdg/emailBody}" />
+   </bean>
+
+   <bean id="updateCreditWorthinessImpl" class="com.telus.credit.wlnprfldmgt.webservice.util.UpdateCreditWorthinessImpl">
+     <property name="creditProfileDao" ref="CreditProfileDaoImpl" />
+     <property name="creditValueDao" ref="CreditValueDaoImpl" />
+     <property name="creditAttributeDao" ref="CreditAttributeDaoImpl" />
+   </bean>
+
+   <!--   <bean class="com.telus.credit.crda.webservice.impl.EnterpriseCreditAssessmentServiceImpl" lazy-init="true" />
+   -->
+
+   <!-- =================================================================== -->
+   <bean id="driverReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.LineRecordReader">
+      <property name="name" value="driverReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/driver/inputFilePattern}" />
+   </bean>
+
+   <bean id="customerReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+      <property name="name" value="customerReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/customer/inputFilePattern}" />
+      <property name="recordReader">
+         <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+            <property name="layoutConfigFile" value="${mupdg/readers/customer/layoutConfigFile}" />
+         </bean>
+      </property>
+   </bean>
+
+   <bean id="customerCreditBureauReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+      <property name="name" value="customerCreditBureauReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/customerCreditBureau/inputFilePattern}" />
+      <property name="recordReader">
+         <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+            <property name="layoutConfigFile" value="${mupdg/readers/customerCreditBureau/layoutConfigFile}" />
+         </bean>
+      </property>
+   </bean>
+   <bean id="customerCreditBureauDtlReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+      <property name="name" value="customerCreditBureauDtlReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/customerCreditBureauDtl/inputFilePattern}" />
+      <property name="recordReader">
+         <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+            <property name="layoutConfigFile" value="${mupdg/readers/customerCreditBureauDtl/layoutConfigFile}" />
+         </bean>
+      </property>
+   </bean>
+
+   <bean id="customerCreditProfileReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+     <property name="name" value="customerCreditProfileReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/customerCreditProfile/inputFilePattern}" />
+      <property name="recordReader">
+         <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+            <property name="layoutConfigFile" value="${mupdg/readers/customerCreditProfile/layoutConfigFile}" />
+         </bean>
+      </property>
+   </bean>
+   
+   <bean id="customerCreditProfileFraudReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+        <property name="name" value="customerCreditProfileFraudReader" />
+         <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+         <property name="inputFilePattern" value="${mupdg/readers/customerCreditProfileFraud/inputFilePattern}" />
+         <property name="recordReader">
+            <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+               <property name="layoutConfigFile" value="${mupdg/readers/customerCreditProfileFraud/layoutConfigFile}" />
+            </bean>
+         </property>
+   </bean>
+
+   <bean id="billingAccountReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+      <property name="name" value="billingAccountReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/billingAccount/inputFilePattern}" />
+      <property name="recordReader">
+         <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+            <property name="layoutConfigFile" value="${mupdg/readers/billingAccount/layoutConfigFile}" />
+         </bean>
+      </property>
+   </bean>
+
+   <bean id="billingAccountAgencyReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+      <property name="name" value="billingAccountAgencyReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/billingAccountAgency/inputFilePattern}" />
+      <property name="recordReader">
+         <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+            <property name="layoutConfigFile" value="${mupdg/readers/billingAccountAgency/layoutConfigFile}" />
+         </bean>
+      </property>
+   </bean>
+
+   <bean id="billingAccountCollectionReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+      <property name="name" value="billingAccountCollectionReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/billingAccountCollection/inputFilePattern}" />
+      <property name="recordReader">
+         <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+            <property name="layoutConfigFile" value="${mupdg/readers/billingAccountCollection/layoutConfigFile}" />
+         </bean>
+      </property>
+   </bean>
+
+   <bean id="billingAccountDepositReader" lazy-init="true" class="com.telus.formletters.framework.batch.io.RecordCollectorReader">
+      <property name="name" value="billingAccountDepositReader" />
+      <property name="inputDirectory" value="${mupdg/inputDirectory}" />
+      <property name="inputFilePattern" value="${mupdg/readers/billingAccountDeposit/inputFilePattern}" />
+      <property name="recordReader">
+         <bean class="com.telus.formletters.framework.batch.io.RecordParser2RecordReader">
+            <property name="layoutConfigFile" value="${mupdg/readers/billingAccountDeposit/layoutConfigFile}" />
+         </bean>
+      </property>
+   </bean>
+
+   <!-- =================================================================== -->
+   <bean id="errorWriter" lazy-init="true" class="com.telus.formletters.framework.batch.io.LineRecordWriter">
+      <property name="name" value="errorWriter" />
+      <property name="outputDirectory" value="${error}" />
+      <property name="outputFileFormat" value="'${jobname}-error-record-${L_CRDA_ODATE}'-yyyyMMdd'.dat'" />
+   </bean>
+
+   <bean id="errorReportWriter" lazy-init="true" class="com.telus.formletters.framework.batch.io.LineRecordWriter">
+      <property name="name" value="errorReportWriter" />
+      <property name="outputDirectory" value="${error}" />
+      <property name="outputFileFormat" value="'${jobname}-error-report-${L_CRDA_ODATE}'-yyyyMMdd'.csv'" />
+   </bean>
+   <bean id="creditValueWriter" lazy-init="true" class="com.telus.formletters.framework.batch.io.LineRecordWriter">
+      <property name="name" value="creditValueWriter" />
+      <property name="outputDirectory" value="${temp}/${L_CRDA_ODATE}" />
+      <property name="outputFileFormat" value="'mupdg-cv${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat'" />
+   </bean>
+   <bean id="leftoverWriter" lazy-init="true" class="com.telus.formletters.framework.batch.io.LineRecordWriter">
+      <property name="name" value="leftoverWriter" />
+      <property name="outputDirectory" value="${inbox}/leftover" />
+      <property name="outputFileFormat" value="'mupdg-leftover${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat'" />
+   </bean>
+   
+   <bean id="collectionSummarizationSvc" class="com.telus.crd.assessment.util.CollectionSummarizationService">
+   	  <property name="aggregatedSoldExternalAmount"><value>${wlnCollectionMgmt/summarization/aggregatedSoldExternalAgencyAmount}</value></property>
+	  <property name="externalAgencyAssignmentMonthPeriod"><value>${wlnCollectionMgmt/summarization/externalAgencyAssignmentMonthPeriod}</value></property>
+	  <property name="externalAgencySoldAssignmentMonthPeriod"><value>${wlnCollectionMgmt/summarization/externalAgencySoldAssignmentMonthPeriod}</value></property>
+	  <property name="involuntaryCancelledMonthPeriod"><value>${wlnCollectionMgmt/summarization/involuntaryCancelledMonthPeriod}</value></property>
+      <property name="internalAgencyCodes"><value>${wlnCollectionMgmt/summarization/internalAgencyCodes}</value></property>
+   </bean>
+</beans>

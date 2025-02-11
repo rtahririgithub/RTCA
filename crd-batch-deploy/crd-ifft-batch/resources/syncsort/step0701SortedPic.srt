@@ -1,0 +1,14 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace}
+
+   /INFILE ${inbox}/PIC_ADMIN_FEED_FILE.DAT 619 
+	/FIELDS WTN 11 character 10
+   /KEYS WTN
+
+   /OUTFILE ${processbox}/PIC_ADMIN_FEED_FILE_SORTED.DAT  OVERWRITE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+

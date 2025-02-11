@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="telus-crd-crda-esb/wsdls/ConsumerCustomerManagementService_v2_3"/>
+      <con:port>
+        <con:name>ConsumerCustomerManagementServicePort</con:name>
+        <con:namespace>http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-3550949470056089221--15c61a5c.1410de0c3eb.-7d8e">
+    <con:pipeline type="request" name="getCustomerWithContact_PipelinePairNode_request">
+      <con:stage name="getCustomerWithContact_Stage">
+        <con:context xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="ns9"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="con"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/Proxy_ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="prox"/>
+        </con:context>
+        <con:actions xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con1:wsCallout>
+            <con2:id>_ActionId-3550949470056089221--15c61a5c.1410de0c3eb.-7ea1</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/ConsumerCustomerManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>getCustomerWithContacts</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$body</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">getCustomerWithContactsResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform>
+              <con1:replace varName="body">
+                <con2:id>_ActionId-1152899525587268894-7f62b4ff.14179652cbd.-7738</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>$getCustomerWithContactsResponse</con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con1:responseTransform>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="getCustomerWithContact_PipelinePairNode_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-3550949470056089221--15c61a5c.1410de0c3eb.-7d8e">
+      <con:stage name="ConsumerCustomerManagmentService_Operations__ErrorHandling_stage">
+        <con:context xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config"/>
+        <con:actions xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con3:log>
+            <con2:id>_ActionId-5317842431879957875--457bcc1b.1435a4f6c9d.-7fec</con2:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="updateCustomer_PipelinePairNode_request">
+      <con:stage name="updateCustomer_Stage">
+        <con:context xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="ns9"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="con"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/Proxy_ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="prox"/>
+        </con:context>
+        <con:actions xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con1:wsCallout>
+            <con2:id>_ActionId-6983983460812746682-477f3048.1423d0ecabd.-7588</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/ConsumerCustomerManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>updateCustomer</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$body</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">updateCustomerResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform>
+              <con1:replace varName="body">
+                <con2:id>_ActionId-6983983460812746682-477f3048.1423d0ecabd.-7589</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>$updateCustomerResponse</con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con1:responseTransform>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="updateCustomer_PipelinePairNode_response"/>
+    <con:pipeline type="request" name="getCustomer_PipelinePairNode_request">
+      <con:stage name="getCustomer_Stage">
+        <con:context xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="ns9"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="con"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/Proxy_ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="prox"/>
+        </con:context>
+        <con:actions xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con1:wsCallout>
+            <con2:id>_ActionId-559415758537853675--48af24fa.14251a1d0c1.-7f17</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/ConsumerCustomerManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>getCustomer</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$body</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">getCustomerResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform>
+              <con1:replace varName="body">
+                <con2:id>_ActionId-559415758537853675--48af24fa.14251a1d0c1.-7f18</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>$getCustomerResponse</con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con1:responseTransform>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="getCustomer_PipelinePairNode_response"/>
+    <con:flow>
+      <con:branch-node type="operation" name="ConsumerCustomerManagmentService_Operations_Stage">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="getCustomerWithContacts">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="getCustomerWithContact_PipelinePairNode">
+                <con:request>getCustomerWithContact_PipelinePairNode_request</con:request>
+                <con:response>getCustomerWithContact_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="updateCustomer">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="updateCustomer_PipelinePairNode">
+                <con:request>updateCustomer_PipelinePairNode_request</con:request>
+                <con:response>updateCustomer_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="getCustomer">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="getCustomer_PipelinePairNode">
+                <con:request>getCustomer_PipelinePairNode_request</con:request>
+                <con:response>getCustomer_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

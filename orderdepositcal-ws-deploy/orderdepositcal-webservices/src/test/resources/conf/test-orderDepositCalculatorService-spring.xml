@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:annotation-config />
+
+	<import
+		resource="classpath:orderDepositCalculatorSvc-performance-logging-spring.xml" />
+
+	<!-- This is needed to invoke configurationFramework so you can make use 
+		of Placeholders ${...} -->
+	<bean class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+
+	<!-- Fico -->
+	<import resource="classpath:crda-decisionengine-spring.xml" />
+	<!-- refpds -->
+	<!-- <import resource="classpath:refpds-access-client-spring.xml" /> -->
+
+	<bean id="txManager"
+		class="org.springframework.transaction.jta.WebLogicJtaTransactionManager" />
+
+	<!-- original code before adding performance logging <bean id="orderDepositCalculatorService" 
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"> 
+		<property name="transactionManager" ref="txManager" /> <property name="target" 
+		ref="orderDepositCalculatorServiceTarget" /> <property name="transactionAttributes"> 
+		<props> <prop key="calculateDeposit">PROPAGATION_REQUIRED,-Exception</prop> 
+		<prop key="getEquipmentQualificationList">PROPAGATION_NOT_SUPPORTED,-Exception</prop> 
+		</props> </property> </bean> -->
+
+	<!-- Add performance logging -->
+	<bean id="orderDepositCalculatorService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="interceptorNames">
+			<list>
+				<value>pfPerformanceAdvisor</value>
+			</list>
+		</property>
+		<property name="target" ref="orderDepositCalculatorServiceDef" />
+	</bean>
+
+	<bean id="orderDepositCalculatorServiceDef"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="txManager" />
+		<property name="target" ref="orderDepositCalculatorServiceTarget" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="calculateDeposit">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="getEquipmentQualificationList">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- End of performance logging -->
+
+	<bean id="orderDepositCalculatorServiceTarget"
+		class="com.telus.credit.orderDepositCalculator.webservice.impl.OrderDepositCalculatorServiceImpl"
+		lazy-init="true">
+	</bean>
+
+	<bean id="DozerBeanMapper" class="org.dozer.DozerBeanMapper"
+		scope="singleton">
+		<property name="mappingFiles" value="mapping/fico-mapping.xml" />
+	</bean>
+
+	<bean id="creditProfileDao" class="com.telus.credit.dao.CreditProfileDaoSqlmap"
+		lazy-init="true">
+		<property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+		<property name="creditIDCardDao" ref="creditIDCardDao" />
+		<property name="creditValueDao" ref="creditValueDao" />
+		<property name="creditAddressDao" ref="creditAddressDao" />
+		<property name="customerGuarantorDao" ref="customerGuarantorDao" />
+	</bean>
+
+	<bean id="creditIDCardDao" class="com.telus.credit.dao.CreditIDCardDaoSqlmap"
+		lazy-init="true">
+		<property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+	</bean>
+
+	<bean id="customerGuarantorDao" class="com.telus.credit.dao.CustomerGuarantorDaoSqlmap"
+		lazy-init="true">
+		<property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+	</bean>
+
+	<bean id="creditValueDao" class="com.telus.credit.dao.CreditValueDaoSqlmap"
+		lazy-init="true">
+		<property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+		<property name="creditProfileDao" ref="creditProfileDao" />
+	</bean>
+
+	<bean id="creditAddressDao" class="com.telus.credit.dao.CreditAddressDaoSqlmap"
+		lazy-init="true">
+		<property name="sqlMapClient" ref="creditProfileSqlMapClient" />
+	</bean>
+
+	<bean id="creditProfileSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:sqlmaps/creditMgt-sqlmap-config.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="DepositCalculationTransactionDao"
+		class="com.telus.credit.orderDepositCalculator.dao.DepositCalculationTransactionDaoSqlmap"
+		lazy-init="true">
+		<property name="sqlMapClient" ref="orderDepositCalculationTrxSqlMapClient" />
+	</bean>
+
+	<bean id="orderDepositCalculationTrxSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:sqlmaps/orderDepositCal-sqlmap-config.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="orderDataBr"
+		class="com.telus.credit.orderDepositCalculator.webservice.dto.OrderDataBr"
+		init-method="getInstance">
+	</bean>
+
+	<bean id="orderDepositProperties"
+		class="com.telus.credit.orderDepositCalculator.webservice.dto.OrderDepositProperties">
+		<property name="offerNameCDForSINGRestrict" value="Single Line Credit Restrict" />
+	</bean>
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@an05103:41521:TCMDV" />
+		<property name="username" value="APPCOL_BATCH_WK05" />
+		<property name="password" value="APPCOL_BATCH_WK05" />
+	</bean>
+
+</beans>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false" isAutoPublish="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-8630507784815679676-4e68cf49.14403fef45f.-7600">
+    <con:pipeline type="request" name="WLNCreditProfileManagementProxyService_ErrorHanlder_PS_PipelinePairNode_request">
+      <con:stage name="Handle Policy Exception stage">
+        <con:context>
+          <con1:userNsDecl namespace="http://www.bea.com/wli/sb/context" prefix="con"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="bodySave">
+            <con1:id>_ActionId-8630507784815679676-4e68cf49.14403fef45f.-7601</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con1:ifThenElse xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con4:comment xmlns:con4="http://www.bea.com/wli/sb/stages/config">for any runtime/system exception , apply resillent solution 
+for policy excepton rethrow the exception</con4:comment>
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7da7</con4:id>
+            <con1:case>
+              <con1:condition>
+                <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">fn:exists(($body//*[local-name()='PolicyException'])[1])</con4:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con1:replace varName="body" contents-only="true">
+                  <con4:comment xmlns:con4="http://www.bea.com/wli/sb/stages/config">create soap fault response with policy exception</con4:comment>
+                  <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7da6</con4:id>
+                  <con1:location>
+                    <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+                  </con1:location>
+                  <con1:expr>
+                    <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                      <con4:resource ref="telus-crd-crda-esb/xquery/util/construct_SoapFault"/>
+                      <con4:param name="soapbodyFault">
+                        <con4:path>$body/input/soap-env:Fault</con4:path>
+                      </con4:param>
+                      <con4:param name="osbfault">
+                        <con4:path>$body/input/con:fault</con4:path>
+                      </con4:param>
+                      <con4:param name="osbinbound">
+                        <con4:path>$body/input/con:endpoint</con4:path>
+                      </con4:param>
+                    </con4:xqueryTransform>
+                  </con1:expr>
+                </con1:replace>
+                <con4:reply isError="false" xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                  <con4:id>_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7da5</con4:id>
+                </con4:reply>
+              </con1:actions>
+            </con1:case>
+            <con1:default/>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Handle Service Exception stage" errorHandler="_onErrorHandler-6245470524044125509-50eb8912.1421c2105eb.-7a4a">
+        <con:context/>
+        <con:actions>
+          <con1:wsCallout xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:comment xmlns:con4="http://www.bea.com/wli/sb/stages/config">call getCreditProfileByCustomerId to get the previouse creditworthiness</con4:comment>
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7a6b</con4:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/WLNCreditProfileManagementServicePS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>getCreditProfileByCustomerId</con1:operation>
+            <con1:request>
+              <con1:body>$getCreditProfileByCustomerIdRequest</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>getCreditProfileByCustomerIdResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="getCreditProfileByCustomerIdRequest">
+                <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7a6c</con4:id>
+                <con1:expr>
+                  <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">&lt;wcpm:getCreditProfileByCustomerId xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2 WLNCreditProfileManagementServiceRequestResponse_v2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wcpm="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2">
+	&lt;wcpm:customerId>
+	{($body//*[local-name()='customerID'])[1]/text()}
+    &lt;/wcpm:customerId>
+	{($body//*[local-name()='auditInfo'])[1]}
+&lt;/wcpm:getCreditProfileByCustomerId></con4:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:ifThenElse xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:comment xmlns:con4="http://www.bea.com/wli/sb/stages/config">create resillency response for override or assess creditworthiness</con4:comment>
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7a6a</con4:id>
+            <con1:case>
+              <con1:condition>
+                <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">fn:exists(($requestBody//*[local-name()='overrideCreditWorthiness'])[1])</con4:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con4:replace varName="body" contents-only="true" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                  <con5:comment xmlns:con5="http://www.bea.com/wli/sb/stages/config">create override resillency response</con5:comment>
+                  <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7a69</con5:id>
+                  <con4:location>
+                    <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+                  </con4:location>
+                  <con4:expr>
+                    <con5:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                      <con5:resource ref="telus-crd-crda-esb/xquery/Resiliency/Resiliency_overrideCreditWorthinessResponse"/>
+                      <con5:param name="consumerCreditProfile1">
+                        <con5:path>($getCreditProfileByCustomerIdResponse//*[local-name()='creditProfile'])[1]</con5:path>
+                      </con5:param>
+                    </con5:xqueryTransform>
+                  </con4:expr>
+                </con4:replace>
+              </con1:actions>
+            </con1:case>
+            <con1:default>
+              <con4:replace varName="body" contents-only="true" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                <con5:comment xmlns:con5="http://www.bea.com/wli/sb/stages/config">create assesss resillency response</con5:comment>
+                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7a68</con5:id>
+                <con4:location>
+                  <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+                </con4:location>
+                <con4:expr>
+                  <con5:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                    <con5:resource ref="telus-crd-crda-esb/xquery/Resiliency/Resiliency_assessCreditWorthinessResponse"/>
+                    <con5:param name="consumerCreditProfile1">
+                      <con5:path>($getCreditProfileByCustomerIdResponse//*[local-name()='creditProfile'])[1]</con5:path>
+                    </con5:param>
+                  </con5:xqueryTransform>
+                </con4:expr>
+              </con4:replace>
+            </con1:default>
+          </con1:ifThenElse>
+          <con1:reply isError="false" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con1:id>_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7a67</con1:id>
+          </con1:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="WLNCreditProfileManagementProxyService_ErrorHanlder_PS_PipelinePairNode_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-6245470524044125509-50eb8912.1421c2105eb.-7a4a">
+      <con:stage name="dormant stgy for getCreditProfileByCustomerId_ErrorHandler stage">
+        <con:context/>
+        <con:actions>
+          <con1:ifThenElse xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:comment xmlns:con4="http://www.bea.com/wli/sb/stages/config">overrideCreditWorthiness or assessCreditWorthiness?</con4:comment>
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-780c</con4:id>
+            <con1:case>
+              <con1:condition>
+                <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">fn:exists(($body//*[local-name()='overrideCreditWorthiness'])[1])</con4:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con4:replace varName="body" contents-only="true" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                  <con5:comment xmlns:con5="http://www.bea.com/wli/sb/stages/config">create override resillency response</con5:comment>
+                  <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7808</con5:id>
+                  <con4:location>
+                    <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+                  </con4:location>
+                  <con4:expr>
+                    <con5:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                      <con5:resource ref="telus-crd-crda-esb/xquery/dormant/dormantOverrideCreditWorthinessResponse"/>
+                      <con5:param name="overrideCreditWorthiness1">
+                        <con5:path>($body//*[local-name()='overrideCreditWorthiness'])[1]</con5:path>
+                      </con5:param>
+                    </con5:xqueryTransform>
+                  </con4:expr>
+                </con4:replace>
+              </con1:actions>
+            </con1:case>
+            <con1:default>
+              <con4:replace varName="body" contents-only="true" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                <con5:comment xmlns:con5="http://www.bea.com/wli/sb/stages/config">create assesss resillency response</con5:comment>
+                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-6245470524044125509-50eb8912.1421c2105eb.-780a</con5:id>
+                <con4:location>
+                  <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+                </con4:location>
+                <con4:expr>
+                  <con5:xqueryTransform xmlns:con5="http://www.bea.com/wli/sb/stages/config">
+                    <con5:resource ref="telus-crd-crda-esb/xquery/dormant/dormantAssessCreditWorthinessResponse"/>
+                    <con5:param name="assessCreditWorthiness1">
+                      <con5:path>($body//*[local-name()='assessCreditWorthiness'])[1]</con5:path>
+                    </con5:param>
+                  </con5:xqueryTransform>
+                </con4:expr>
+              </con4:replace>
+            </con1:default>
+          </con1:ifThenElse>
+          <con1:reply isError="false" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con1:id>_ActionId-6245470524044125509-50eb8912.1421c2105eb.-7a12</con1:id>
+          </con1:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-8630507784815679676-4e68cf49.14403fef45f.-7600">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con3:log xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con1:id>_ActionId-8630507784815679676-4e68cf49.14403fef45f.-75ac</con1:id>
+            <con3:logLevel>debug</con3:logLevel>
+            <con3:expr>
+              <con1:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con1:xqueryText>
+            </con3:expr>
+          </con3:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="WLNCreditProfileManagementProxyService_ErrorHanlder_PS_PipelinePairNode">
+        <con:request>WLNCreditProfileManagementProxyService_ErrorHanlder_PS_PipelinePairNode_request</con:request>
+        <con:response>WLNCreditProfileManagementProxyService_ErrorHanlder_PS_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+  
+   <bean class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+
+   <bean id="RuleServicesBean" class="com.fico.telus.rtca.blaze.RuleServicesBean" init-method="initServer">
+      <property name="dManager" ref="dManager" />
+      <property name="rulesServer" ref="rulesServer" />
+      <property name="csvDelimiter" value="${fico/msgExportDelimiter}" />
+   </bean>
+
+   <bean id="dManager" class="com.fico.telus.rtca.blaze.DManager" lazy-init="true">
+      <constructor-arg value="${ficoConfig/ficoCrdaAsmtConfigDir}/${fico/dManagerConfigFileName}" />
+   </bean>
+
+   <bean id="rulesServer" class="com.fico.telus.rtca.blaze.RulesServer" factory-method="createServer" lazy-init="true">
+      <constructor-arg value="${ficoConfig/ficoCrdaAsmtConfigDir}/${fico/ruleServerConfigFileName}" />
+      <property name="rtcaRuleServiceName" value="${fico/rtcaRuleServiceName}" />
+      <property name="simulatedBureauEntryPoint" value="${fico/entrypoint/bureauSimulator}" />
+      <property name="creditAssessmentEntryPoint" value="${fico/entrypoint/creditAssessment}" />
+      <property name="calculateDepositEntryPoint" value="${fico/entrypoint/calculateDeposit}" />
+      <property name="exportAssessmentMessagesEntryPoint" value="${fico/entrypoint/exportAssessmentMsgs}" />
+      <property name="exportErrorMessagesEntryPoint" value="${fico/entrypoint/exportErrorMsgs}" />
+      <property name="exportFraudMessagesEntryPoint" value="${fico/entrypoint/exportFraudMsgs}" />
+      <property name="pingEntryPoint" value="${fico/entrypoint/ping}" />
+   </bean>
+
+</beans>

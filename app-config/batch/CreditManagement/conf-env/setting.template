@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="irrelevant">
+    <group name="sqlplus">
+        <group name="connection">
+		<group name="wls">
+           		<prop name="username">@CRDB_BATCH_ACCOUNT@</prop>
+           		<prop name="password">@CRDB_BATCH_PASSWORD@</prop>
+           		<prop name="oraclesid">@SID_CRDB@</prop>
+           		<prop name="dbconnectionvalue">${sqlplus/connection/wls/username}/${sqlplus/connection/wls/password}@${sqlplus/connection/wls/oraclesid}</prop>
+		</group>
+        </group>
+    </group>
+</group>
+

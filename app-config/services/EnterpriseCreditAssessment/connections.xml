@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="config">
+
+  <!-- =============================================================== -->
+  <!-- The beantype can be overridden  with "tcmJta" or "tcmDb" in the     -->
+  <!-- application configuration framework file                        -->
+  <!-- =============================================================== -->
+  <prop name="beantype">tcmJta</prop>
+
+  <prop name="tcmDataSource">${beantype}-DS</prop>
+
+  <group name="jdbc">
+    <prop name="url">DUMMY</prop>
+    <prop name="username">DUMMY</prop>
+    <prop name="password">DUMMY</prop>
+  </group>
+
+
+
+</group>

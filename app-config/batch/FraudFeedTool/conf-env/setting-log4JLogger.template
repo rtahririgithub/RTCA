@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+
+<group name="config">
+
+  <group name="logging">
+
+    <prop name="log4j.rootCategory">@COL_IFFT_LOG_LEVEL@, CONSOLE</prop>
+
+
+    <prop name="log4j.debug">true</prop>
+
+    <prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+    <prop name="log4j.appender.CONSOLE.Threshold">@COL_IFFT_LOG_LEVEL@</prop>
+    <prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+    <prop name="log4j.appender.CONSOLE.layout.ConversionPattern">[%d{DATE} %c %-5p]- %m%n</prop>
+
+    <prop name="log4j.appender.FILE">org.apache.log4j.DailyRollingFileAppender</prop>
+    <prop name="log4j.appender.FILE.Append">true</prop>
+    <prop name="log4j.appender.FILE.Threshold">@COL_IFFT_LOG_LEVEL@</prop>
+    <prop name="log4j.appender.FILE.layout">org.apache.log4j.PatternLayout</prop>
+    <prop name="log4j.appender.FILE.layout.ConversionPattern">%-25d %-5p [%-10t] %c{3} - %m%n</prop>
+    <prop name="log4j.appender.FILE.file">${logs}/${jobname}-BEC.log</prop>
+
+    <prop name="log4j.logger.com.telus.framework.batch">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.com.telus.framework.samplebatch">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.com.telus.framework.samplebatch">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+
+    <!--  sftx configuration... --> 
+    <prop name="log4j.additivity.FILE">false</prop>
+    <prop name="log4j.additivity.SFTX">false</prop>
+    <prop name="log4j.additivity.sftx-operator">false</prop>
+
+    <prop name="log4j.additivity.java.sql.Connection">false</prop>
+    <prop name="log4j.additivity.java.sql.Statement">false</prop>
+    <prop name="log4j.additivity.java.sql.PreparedStatement">false</prop>
+    <prop name="log4j.additivity.java.sql.ResultSet">false</prop>
+    <prop name="log4j.additivity.org.springframework">false</prop>
+
+    <prop name="log4j.logger.java.sql.Connection">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.java.sql.Statement">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.java.sql.PreparedStatement">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.java.sql.ResultSet">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+
+    <prop name="log4j.logger.org.springframework">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+
+    <prop name="log4j.logger.com.telus.framework">@COL_IFFT_LOG_LEVEL@, CONSOLE</prop>
+    <prop name="log4j.additivity.com.telus.framework.filetransfer">false</prop>
+    <prop name="log4j.logger.com.telus.framework.filetransfer">@COL_IFFT_LOG_LEVEL@, SFTX</prop>
+    <prop name="log4j.additivity.com.telus.framework.filetransfer.FileTransferTransmission">false</prop>
+    <prop name="log4j.additivity.com.telus.framework.filetransfer.FileTransferRecipient">false</prop>
+    <prop name="log4j.additivity.com.telus.framework.filetransfer.FileTransferRequestAccessor">false</prop>
+    <prop name="log4j.logger.com.telus.framework.filetransfer.FileTransferTransmission">@COL_IFFT_LOG_LEVEL@, SFTX</prop>
+    <prop name="log4j.logger.com.telus.framework.filetransfer.FileTransferRecipient">@COL_IFFT_LOG_LEVEL@, SFTX</prop>
+    <prop name="log4j.logger.com.telus.framework.filetransfer.FileTransferRequestAccessor">@COL_IFFT_LOG_LEVEL@, SFTX</prop>
+        
+     <!-- console messages for the operator -->
+    <prop name="log4j.logger.sftx-operator">@COL_IFFT_LOG_LEVEL@, CONSOLE</prop>
+
+    <!--  SqlMap logging configuration... --> 
+    <prop name="log4j.logger.java.sql.PreparedStatement">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.com.ibatis">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.com.ibatis.common.jdbc.SimpleDataSource">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.com.ibatis.common.jdbc.ScriptRunner">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+    <prop name="log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+
+    <prop name="log4j.logger.java.sql.Connection">@COL_IFFT_LOG_LEVEL@, FILE</prop> 
+    <prop name="log4j.logger.java.sql.Statement">@COL_IFFT_LOG_LEVEL@, FILE</prop> 
+    <prop name="log4j.logger.java.sql.PreparedStatement">@COL_IFFT_LOG_LEVEL@, FILE</prop> 
+    <prop name="log4j.logger.java.sql.ResultSet">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+ 
+     <!-- Fraud Feed Tool Batch logging configuration -->
+     <prop name="log4j.logger.com.telus.collections.fraud.batch">@COL_IFFT_LOG_LEVEL@, FILE</prop>
+  </group>
+
+</group>
+
+
+
+

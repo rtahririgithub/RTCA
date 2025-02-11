@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="reviewBatch">
+
+  <group name="customerGroup">
+    <prop name="groupCustomerInputFile">${processbox}/review/groupCustomer.dat</prop>
+    <prop name="customerODSExtractInputFile">${processbox}/review/DRCustomerODSBillingAccount.dat</prop>
+    <prop name="outputFile">${processbox}/review/groupedDRCustomerODSBillingAccount.dat</prop>
+  </group>
+     
+   <group name="resultReview">
+    <prop name="customerInputFile">${processbox}/review/sortedGroupedDRCustomerODSBillingAccount.dat</prop>
+    <prop name="tcmInputFile">${processbox}/review/sortedTCMReviewResult.dat</prop>
+    <prop name="outputFile">${processbox}/review/reviewedGroupedDRCustomerODSBillingAccount.dat</prop>
+  </group>
+  
+  
+  <group name="creditValueMerge">
+    <prop name="inputFile">${processbox}/review/sortedReviewedGroupedDRCustomerODSBillingAccount.dat</prop>
+    <prop name="outputFile">${processbox}/review/finalResult.dat</prop>
+  </group>
+  
+  <group name="creditValueUpdate">
+    <prop name="inputFile">${processbox}/review/finalResult.dat</prop>
+    <prop name="outputFile">${processbox}/review/invalidCreditProfile.dat</prop>
+  </group>
+  
+  <group name="sendErrorReport">
+    <prop name="inputFile">${processbox}/review/invalidCreditProfile.dat</prop>
+  </group>
+  
+</group>

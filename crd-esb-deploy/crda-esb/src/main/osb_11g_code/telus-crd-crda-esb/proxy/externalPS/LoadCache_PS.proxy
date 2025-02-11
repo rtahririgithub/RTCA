@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/telus-crd-crda-esb/proxy/externalPS/LoadCacheSvc_PS</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-5885535624269734156-77356c03.16972c84e91.-6e63">
+    <con:pipeline type="error" name="_onErrorHandler-5885535624269734156-77356c03.16972c84e91.-6e63">
+      <con:stage name="LoadCache_ErrorHandler_stage">
+        <con:context/>
+        <con:actions>
+          <con3:log>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6e4d</con2:id>
+            <con3:logLevel>debug</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7912</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText>&lt;LoadCache_Response>
+LoadCache Failed.
+&lt;/LoadCache_Response></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+          <con2:reply>
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7a29</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="LoadCache_PipelinePairNode_request">
+      <con:stage name="stage1">
+        <con:context>
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/ERM/RefPds/ReferencePDSDataServiceRequestResponse_v1_0" prefix="ref"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" prefix="ping"/>
+        </con:context>
+        <con:actions>
+          <con5:assign varName="constants" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-643c</con2:id>
+            <con5:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/constants"/>
+              </con2:xqueryTransform>
+            </con5:expr>
+          </con5:assign>
+          <con1:javaCallout varName="uc_isCacheLoadedInd">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7ac3</con2:id>
+            <con1:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+            <con1:className>com.telus.credit.util.ESBCacheHelper</con1:className>
+            <con1:method>public static java.lang.Object getObjectFromCache(java.lang.String)</con1:method>
+            <con1:expr>
+              <con2:xqueryText>$constants/constant[@value="UC_ISCACHELOADED_CACHE_KEY"]/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:javaCallout>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7ac2</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:not(fn:empty($uc_isCacheLoadedInd))
+and
+fn:boolean($uc_isCacheLoadedInd)</con2:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con1:assign varName="refpdsdataSource">
+                  <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-78bb</con2:id>
+                  <con1:expr>
+                    <con2:xqueryText>&lt;refpdsdataSource>cache&lt;/refpdsdataSource></con2:xqueryText>
+                  </con1:expr>
+                </con1:assign>
+              </con1:actions>
+            </con1:case>
+            <con1:default>
+              <con1:wsCallout>
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7abd</con2:id>
+                <con1:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/RefPdsService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con1:operation>getReferenceData</con1:operation>
+                <con1:request>
+                  <con1:body wrapped="true">$getReferenceDataRequest</con1:body>
+                </con1:request>
+                <con1:response>
+                  <con1:body wrapped="true">getReferenceDataResponse</con1:body>
+                </con1:response>
+                <con1:requestTransform>
+                  <con1:assign varName="getReferenceDataRequest">
+                    <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7ac0</con2:id>
+                    <con1:expr>
+                      <con2:xqueryText><![CDATA[<soap-env:Body>
+      <ref:getReferenceData xmlns:ref="http://xmlschema.tmi.telus.com/srv/ERM/RefPds/ReferencePDSDataServiceRequestResponse_v1_0">
+         <ref:appId>WLNCrdElgProxySvc</ref:appId>
+      </ref:getReferenceData>
+</soap-env:Body>]]></con2:xqueryText>
+                    </con1:expr>
+                  </con1:assign>
+                </con1:requestTransform>
+                <con1:responseTransform>
+                  <con1:assign varName="refpdsTables">
+                    <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7703</con2:id>
+                    <con1:expr>
+                      <con2:xqueryText>($getReferenceDataResponse//*[local-name()='getReferenceDataResponse'])</con2:xqueryText>
+                    </con1:expr>
+                  </con1:assign>
+                  <con1:javaCallout varName="isCacheLoadedInd">
+                    <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7abf</con2:id>
+                    <con1:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                    <con1:className>com.telus.credit.util.UnifiedCreditUtil_v2</con1:className>
+                    <con1:method>public static boolean loadUnifiedCreditCache(org.apache.xmlbeans.XmlObject)</con1:method>
+                    <con1:expr>
+                      <con2:xqueryText>$refpdsTables</con2:xqueryText>
+                    </con1:expr>
+                  </con1:javaCallout>
+                  <con1:assign varName="refpdsdataSource">
+                    <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7846</con2:id>
+                    <con1:expr>
+                      <con2:xqueryText>&lt;refpdsdataSource>refpdsSvc&lt;/refpdsdataSource></con2:xqueryText>
+                    </con1:expr>
+                  </con1:assign>
+                </con1:responseTransform>
+              </con1:wsCallout>
+              <con4:javaCallout varName="envId" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-754c</con2:id>
+                <con4:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                <con4:className>com.telus.credit.util.ESBCacheHelper</con4:className>
+                <con4:method>public static java.lang.Object getObjectFromCache(java.lang.String)</con4:method>
+                <con4:expr>
+                  <con2:xqueryText>$constants/constant[@value="UC_ENVID_CACHE_KEY"]/text()</con2:xqueryText>
+                </con4:expr>
+              </con4:javaCallout>
+              <con4:assign varName="loggingEnabledValue" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-74dc</con2:id>
+                <con4:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="telus-crd-crda-esb/xquery/dormant/getLogEnabledIndicatorByEnvId"/>
+                    <con2:param name="envId">
+                      <con2:path>$envId</con2:path>
+                    </con2:param>
+                    <con2:param name="body">
+                      <con2:path>$getReferenceDataResponse</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con4:expr>
+              </con4:assign>
+              <con5:ifThenElse xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7486</con2:id>
+                <con5:case>
+                  <con5:condition>
+                    <con2:xqueryText>$loggingEnabledValue</con2:xqueryText>
+                  </con5:condition>
+                  <con5:actions/>
+                </con5:case>
+                <con5:default>
+                  <con5:assign varName="loggingEnabledValue">
+                    <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7485</con2:id>
+                    <con5:expr>
+                      <con2:xqueryText>'N'</con2:xqueryText>
+                    </con5:expr>
+                  </con5:assign>
+                </con5:default>
+              </con5:ifThenElse>
+              <con5:javaCallout varName="" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-73d6</con2:id>
+                <con5:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                <con5:className>com.telus.credit.util.ESBCacheHelper</con5:className>
+                <con5:method>public static void addObjectToCache(java.lang.String, java.lang.Object)</con5:method>
+                <con5:expr>
+                  <con2:xqueryText>$constants/constant[@value="WLN_WCDAP_LOGGING_ENABLED_CACHE_KEY"]/text()</con2:xqueryText>
+                </con5:expr>
+                <con5:expr>
+                  <con2:xqueryText>$loggingEnabledValue</con2:xqueryText>
+                </con5:expr>
+              </con5:javaCallout>
+              <con1:assign varName="ucDormantFlag">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7366</con2:id>
+                <con1:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="telus-crd-crda-esb/xquery/dormant/getUCDromantIndicatorByEnvId"/>
+                    <con2:param name="envId">
+                      <con2:path>$envId</con2:path>
+                    </con2:param>
+                    <con2:param name="body">
+                      <con2:path>$getReferenceDataResponse</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con1:expr>
+              </con1:assign>
+              <con5:javaCallout varName="" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7282</con2:id>
+                <con5:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                <con5:className>com.telus.credit.util.ESBCacheHelper</con5:className>
+                <con5:method>public static void addObjectToCache(java.lang.String, java.lang.Object)</con5:method>
+                <con5:expr>
+                  <con2:xqueryText>$constants/constant[@value="UCDORMANTFLAG_CACHE_KEY"]/text()</con2:xqueryText>
+                </con5:expr>
+                <con5:expr>
+                  <con2:xqueryText>$ucDormantFlag</con2:xqueryText>
+                </con5:expr>
+              </con5:javaCallout>
+              <con1:assign varName="UCTopMatchSimFlag">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-71dd</con2:id>
+                <con1:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="telus-crd-crda-esb/xquery/dormant/getUCTopMatchSimulatorFlagByEnvId"/>
+                    <con2:param name="envId">
+                      <con2:path>$envId</con2:path>
+                    </con2:param>
+                    <con2:param name="body">
+                      <con2:path>$getReferenceDataResponse</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con1:expr>
+              </con1:assign>
+              <con5:javaCallout varName="" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-71a4</con2:id>
+                <con5:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                <con5:className>com.telus.credit.util.ESBCacheHelper</con5:className>
+                <con5:method>public static void addObjectToCache(java.lang.String, java.lang.Object)</con5:method>
+                <con5:expr>
+                  <con2:xqueryText>$constants/constant[@value="UCTOPMATCHSIMFLAG_CACHE_KEY"]/text()</con2:xqueryText>
+                </con5:expr>
+                <con5:expr>
+                  <con2:xqueryText>$UCTopMatchSimFlag</con2:xqueryText>
+                </con5:expr>
+              </con5:javaCallout>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="LoadCache_PipelinePairNode_response">
+      <con:stage name="get content of the cache">
+        <con:context/>
+        <con:actions>
+          <con1:javaCallout varName="cacheContent">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7604</con2:id>
+            <con1:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+            <con1:className>com.telus.credit.util.ESBCacheHelper</con1:className>
+            <con1:method>public static java.lang.String getAllObjectFromCache()</con1:method>
+          </con1:javaCallout>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7603</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText><![CDATA[<LoadCache_Response>
+<refpdsdataSource>
+{$refpdsdataSource}
+</refpdsdataSource>
+<cacheContent>
+{$cacheContent}
+</cacheContent>
+
+</LoadCache_Response>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="LoadCache_PipelinePairNode">
+        <con:request>LoadCache_PipelinePairNode_request</con:request>
+        <con:response>LoadCache_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

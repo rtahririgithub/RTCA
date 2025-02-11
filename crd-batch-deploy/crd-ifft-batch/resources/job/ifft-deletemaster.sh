@@ -1,0 +1,13 @@
+G_COL_IFFT_BOX=$1
+G_ENV=$2
+
+rm $G_COL_IFFT_BOX/passbox/HEADER_FILE_NIK_M.DAT
+rm $G_COL_IFFT_BOX/passbox/FOOTER_FILE_NIK_M.DAT
+rm $G_COL_IFFT_BOX/passbox/MASTER_NIK.DAT
+rm $G_COL_IFFT_BOX/processbox/RECORD_COUNT_MASTER_NIK.DAT
+rm $G_COL_IFFT_BOX/outbox/SCODS_FCustomer_DFRAU*
+return $?
+
+
+
+

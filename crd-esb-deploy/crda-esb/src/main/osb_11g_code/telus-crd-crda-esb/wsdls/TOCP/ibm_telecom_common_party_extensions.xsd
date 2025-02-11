@@ -1,0 +1,25 @@
+<xs:schema targetNamespace="http://www.ibm.com/telecom/common/schema/party_extensions/v3_0" xmlns:bons0="http://www.ibm.com/telecom/templates/schema/party_extensions/v3_0" xmlns:bons1="http://www.ibm.com/telecom/templates/schema/party_role_extensions/v3_0" xmlns:bons2="http://www.ibm.com/telecom/templates/schema/contact_medium_extensions/v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/contact_medium_extensions/v3_0" schemaLocation="ContactMediumTemplates.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/party_role_extensions/v3_0" schemaLocation="PartyRoleTemplates.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/party_extensions/v3_0" schemaLocation="PartyTemplates.xsd"/>
+    <!-- The type: base.Party -->
+    <xs:complexType name="PartyExtensions">
+        <xs:sequence>
+            <xs:element name="PartyChoice" type="bons0:PartyChoice"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- The type: party.ContactMedium -->
+    <xs:complexType name="ContactMediumExtensions">
+        <xs:sequence>
+            <xs:element name="ContactMediumChoice" type="bons2:ContactMediumChoice"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- The type: base.PartyRole -->
+    <xs:complexType name="PartyRoleExtensions">
+        <xs:sequence>
+            <xs:element name="PartyRoleChoice" type="bons1:PartyRoleChoice"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- The type: customer.ContactPerson -->
+    <xs:complexType name="ContactPersonExtensions"/>
+</xs:schema>

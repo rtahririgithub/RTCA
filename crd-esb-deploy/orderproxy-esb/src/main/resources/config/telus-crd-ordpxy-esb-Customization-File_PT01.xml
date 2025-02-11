@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cus:Customizations xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
+  <cus:customization xsi:type="cus:EnvValueCustomizationType">
+    <cus:description/>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/CalculateDeposit_PreProcessor_PS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-toll-pt01.tsl.telus.com/CMO/OrderMgmt/OrderDepositCalculatorService/OrderDepositCalculatorService_v1_0_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-toll-pt01.tsl.telus.com/CMO/OrderMgmt/OrderDepositCalculatorService/OrderDepositCalculatorService_v1_0_vs0</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">WLNCreditProfileManagmentProxyService_WorkManager</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-toll-pt01.tsl.telus.com/CMO/InformationMgmt/BillingAccountManagement/ConsumerBillingAccountManagementService_v1_1_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-toll-pt01.tsl.telus.com/CMO/InformationMgmt/BillingAccountManagement/ConsumerBillingAccountManagementService_v1_1_vs0</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">WLNCreditProfileManagmentProxyService_WorkManager</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">flow:telus-crd-ordcpxy-esb/split/GetDepositPaymentListByAccountListSplitJoin</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>flow:telus-crd-ordcpxy-esb/split/GetDepositPaymentListByAccountListSplitJoin</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Split-Join Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>FLOW</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/split/GetDepositPaymentListByAccountListSplitJoin</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/OrderDepositCalculatorProxyService_v1_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/OrderDepositCalculatorProxyService_v1_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/CMO/OrderMgmt/OrderDepositCalculatorProxyService/OrderDepositCalculatorProxyService_v1_0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/OrderDepositCalculatorProxyService_v1_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">WLNCreditProfileManagmentProxyService_WorkManager</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/EstimateCalcualteDeposit_PS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/DepositManagementServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/OrderDepositCalculatorServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/ConsumerBillingAccountManagementServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/Ping_BackendServices_PS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/ValidateInput_CurrentProductPCNs</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/ProcessCurrentOrderProductList</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/FinalCalcualteDeposit_PS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-toll-pt01.tsl.telus.com/v1/cmo/billingaccountmgmt/compass/dms/depositmanagementservice-v1-0_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-toll-pt01.tsl.telus.com/v1/cmo/billingaccountmgmt/compass/dms/depositmanagementservice-v1-0_vs0</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">WLNCreditProfileManagmentProxyService_WorkManager</xt:value>
+    </cus:envValueAssignments>
+
+  </cus:customization>
+  <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
+    <cus:description/>
+    <cus:query>
+      <xt:resourceTypes>ProxyService</xt:resourceTypes>
+      <xt:resourceTypes>BusinessService</xt:resourceTypes>
+      <xt:resourceTypes>FLOW</xt:resourceTypes>
+      <xt:envValueTypes>Service Retry Iteration Interval</xt:envValueTypes>
+      <xt:envValueTypes>Work Manager</xt:envValueTypes>
+      <xt:envValueTypes>UDDI Auto Publish</xt:envValueTypes>
+      <xt:envValueTypes>Split-Join Work Manager</xt:envValueTypes>
+      <xt:envValueTypes>Service URI Weight</xt:envValueTypes>
+      <xt:envValueTypes>Service Retry Count</xt:envValueTypes>
+      <xt:envValueTypes>Service URI</xt:envValueTypes>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/CalculateDeposit_PreProcessor_PS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/ConsumerBillingAccountManagementServicePS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/Ping_BackendServices_PS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>FLOW</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/split/GetDepositPaymentListByAccountListSplitJoin</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/ValidateInput_CurrentProductPCNs</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/ProcessCurrentOrderProductList</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/FinalCalcualteDeposit_PS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/OrderDepositCalculatorProxyService_v1_0</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/OrderDepositCalculatorServicePS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/DepositManagementServicePS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/EstimateCalcualteDeposit_PS</xt:path>
+      </xt:refsToSearch>
+      <xt:includeOnlyModifiedResources>false</xt:includeOnlyModifiedResources>
+      <xt:searchString>Search String</xt:searchString>
+      <xt:isCompleteMatch>false</xt:isCompleteMatch>
+    </cus:query>
+    <cus:replacement>Replacement String</cus:replacement>
+  </cus:customization>
+  <cus:customization xsi:type="cus:ReferenceCustomizationType">
+    <cus:description/>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/internal/CalculateDeposit_PreProcessor_PS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorServiceRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/GetDepositPaymentListByAccountListSplitJoinRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/ConsumerBillingAccountManagementServicePS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/Ping_BackendServices_PS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/Customer_Billing_Sub_Domain_v2_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorProxyService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>FLOW</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/split/GetDepositPaymentListByAccountListSplitJoin</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/ConsumerBillingAccountMgmtSvcRequestResponse_v1_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/OrderDepositCalculatorProxyService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/internal/EstimateCalcualteDeposit_PS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/DepositManagementServicePS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerSubDomain_v3_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/GetDepositPaymentListByAccountListSplitJoin_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/CreditCommon_v1_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/ConsumerBillingAccountManagementService_v1_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/DepositManagementService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/CreditDepositTypes_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/DepositManagementServiceRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorProxyServiceRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/internal/ValidateInput_CurrentProductPCNs</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/internal/ProcessCurrentOrderProductList</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/internal/FinalCalcualteDeposit_PS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/OrderDepositCalculatorServicePS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/SearchDepositPaymentByCustomerIDRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>telus-crd-ordcpxy-esb/wsdls/SearchDepositPaymentByCustomerID_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/CalculateDeposit_PreProcessor_PS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/CalculateDeposit_PreProcessor_PS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>telus-crd-crda-esb/Throttle</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>telus-crd-crda-esb/Throttle</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/transformation/getBillingAccountListByCustomerIdResponse_getDepositPaymentListByAccountListRequest</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/transformation/getBillingAccountListByCustomerIdResponse_getDepositPaymentListByAccountListRequest</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/dormant/Resilient_OrderDepositCalculatorProxyService_calculateDeposit_Response</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/dormant/Resilient_OrderDepositCalculatorProxyService_calculateDeposit_Response</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/OrderDepositCalculatorService_BS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/GetDepositPaymentListByAccountListSplitJoinRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/GetDepositPaymentListByAccountListSplitJoinRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/dormant/dormant_OrderDepositCalculatorProxyService_calculateDeposit_Response</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/dormant/dormant_OrderDepositCalculatorProxyService_calculateDeposit_Response</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorProxyService_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorProxyService_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/Customer_Billing_Sub_Domain_v2_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/Customer_Billing_Sub_Domain_v2_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ServiceAccount</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/security/ServiceAccount</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ServiceAccount</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/security/ServiceAccount</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorService_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorService_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/ConsumerBillingAccountManagementService_BS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/GetDepositPaymentListByAccountListSplitJoin_BS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>FLOW</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/split/GetDepositPaymentListByAccountListSplitJoin</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>FLOW</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/split/GetDepositPaymentListByAccountListSplitJoin</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/DepositManagementServicePS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/DepositManagementServicePS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/EstimateCalcualteDeposit_PS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/EstimateCalcualteDeposit_PS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ConsumerBillingAccountManagementService_v1_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ConsumerBillingAccountManagementService_v1_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CreditDepositTypes_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CreditDepositTypes_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/util/Compare_InputPCN_ExistingPCN</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/util/Compare_InputPCN_ExistingPCN</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/WirelineCollectionManagementTypes_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/WirelineCollectionManagementTypes_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/transformation/create_CalculateDeposit_WebserviceRequest</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/transformation/create_CalculateDeposit_WebserviceRequest</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/DepositManagementServiceRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/DepositManagementServiceRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorProxyServiceRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorProxyServiceRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/OrderDepositCalculatorServicePS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/OrderDepositCalculatorServicePS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/config/logConfig</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/config/logConfig</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/SearchDepositPaymentByCustomerIDRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/SearchDepositPaymentByCustomerIDRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerCommon_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerCommon_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorServiceRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/OrderDepositCalculatorServiceRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ping_v1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ping_v1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ping_v2</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ping_v2</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerCommon_v3_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerCommon_v3_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/util/createPolicyException</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/util/createPolicyException</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/ConsumerBillingAccountManagementServicePS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/externalPS/ConsumerBillingAccountManagementServicePS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/Ping_BackendServices_PS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/Ping_BackendServices_PS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/EnterpriseCommonTypes_v9_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/EnterpriseCommonTypes_v9_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ConsumerBillingAccountMgmtSvcRequestResponse_v1_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ConsumerBillingAccountMgmtSvcRequestResponse_v1_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-emheader-esb/EMHeaderPS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-emheader-esb/EMHeaderPS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/dormant/isDormantDepositCalculator</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/dormant/isDormantDepositCalculator</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/GetDepositPaymentListByAccountListSplitJoin_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/GetDepositPaymentListByAccountListSplitJoin_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ECA_CommonTypes_2_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/ECA_CommonTypes_2_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CreditCommon_v1_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CreditCommon_v1_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/DepositManagementService_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/DepositManagementService_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/EnterpriseCommonTypes_v4_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/EnterpriseCommonTypes_v4_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/ValidateInput_CurrentProductPCNs</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/ValidateInput_CurrentProductPCNs</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/Exceptions_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/Exceptions_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerCommon_v4_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/CustomerCommon_v4_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/FinalCalcualteDeposit_PS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/proxy/internal/FinalCalcualteDeposit_PS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/business/DepositManagementService_BS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/util/constructSoapFault</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/util/constructSoapFault</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/config/DEPOSIT_CALC_CONFIG</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/xquery/config/DEPOSIT_CALC_CONFIG</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/EnterpriseCommonTypes_v7_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>telus-crd-ordcpxy-esb/wsdls/EnterpriseCommonTypes_v7_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+  </cus:customization>
+</cus:Customizations>

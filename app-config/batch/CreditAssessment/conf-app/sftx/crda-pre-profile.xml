@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <!-- =============================================================== -->
+  <bean id="telusSpringConfigurer" lazy-init="true"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+
+  <!-- =============================================================== -->
+  <bean id="crda-pre-profile" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.RequestConfiguration">
+    <property name="requestNm" value="crda-pre-profile" />
+    <property name="sourceSftpUserId" value="${G_ENV}col" /> 
+    <property name="sourceServerName" value="${G_COL_BATCH_SERVER}" />
+    <property name="sourceServerTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+    <property name="recipients">
+      <list>
+        <bean id="recipient1" lazy-init="true"      
+      class="com.telus.framework.filetransfer.config.RecipientConfiguration">
+          <property name="serverName" value="${G_CRD_BATCH_SERVER}" />
+          <property name="serverTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+          <property name="sftpUserId" 
+              value="${G_SFTP_UX_ACCT_PREFIX}${G_SFTP_CRD_ACCT_SUFFIX}" />
+          <property name="files">
+            <list>
+               <ref bean="targetfile1" />
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+  <bean id="targetfile1" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.FileConfiguration">
+        <property name="overwrite" value="true" />
+        <property name="sourcePath" value="${G_DATA_HOME_PREFIX}col/trt/data/outbox" />
+        <property name="filePattern" value="TRT_CRDA_PROFILE_HISTORY.DAT*" />
+        <property name="recipientPath" value="${G_CRD_NS_UX_SFTP}/${G_ENV}/inbox/crda" />
+    </bean>
+</beans>
+

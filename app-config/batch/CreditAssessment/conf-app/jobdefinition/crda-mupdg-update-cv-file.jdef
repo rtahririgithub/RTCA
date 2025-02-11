@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+   
+   <import resource="classpath:fw-base.jdef"/>
+<!--    <import resource="base-defn.xml" /> --> 
+
+   <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>in_files_merge1</value>
+               </property>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName">
+                  <value>in_process1</value>
+               </property>
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName">
+                  <value>in_process2</value>
+               </property>
+            </bean>
+
+            <bean id="STEP04" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_merge_duplicates1</value>
+               </property>
+            </bean>
+             <bean id="STEP05" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_merge_duplicates2</value>
+               </property>
+            </bean>
+
+            <bean id="STEP06" parent="baseStep">
+               <property name="moduleName">
+                  <value>merge</value>
+               </property>
+            </bean>
+             <bean id="STEP07" parent="baseStep">
+               <property name="moduleName">
+                  <value>sort</value>
+               </property>
+            </bean>
+            <bean id="STEP08" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_duplicates</value>
+               </property>
+            </bean>
+         </list>
+      </property>
+   </bean>
+   <bean id="in_files_merge1" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable">  <value>${step}/rtca-cv-drive.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_PREV}/mupdg-cv${JOB_SUBGROUP}*.dat ${temp}/${L_CRDA_PREV}/mupdg-cv-updated${JOB_SUBGROUP}-*.dat ${temp}/${L_CRDA_ODATE} mupdg-cv-temp1${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat mupdg-cv-updated-temp1${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat  mupdg-cv-temp*${JOB_SUBGROUP}-* mupdg-cv-updated-temp*${JOB_SUBGROUP}-* ${temp}/${L_CRDA_PREV}/mupdg-cv${JOB_SUBGROUP}*.dat ${temp}/${L_CRDA_PREV}/mupdg-cv-updated${JOB_SUBGROUP}-${L_CRDA_PREV}.dat  </value></property> 
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+  <bean id="in_process1" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_mug_cv_update_sort.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-temp1${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-temp2${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat </value></property>
+    <property name="output"><value>${report/log1}</value></property>
+   </bean>
+   <bean id="in_process2" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_mug_cv_update_sort.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-updated-temp1${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-updated-temp2${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat </value></property>
+      <property name="output"><value>${report/log2}</value></property>
+   </bean>
+
+   <bean id="remove_merge_duplicates1" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_mug_cust_rm_duplication.sh</value></property>  
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-temp2${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-temp3${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat</value></property> 
+      <property name="output"><value>${report/log3}</value></property>
+   </bean>
+   <bean id="remove_merge_duplicates2" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_mug_cust_rm_duplication.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-updated-temp2${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-updated-temp3${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log4}</value></property>
+   </bean>
+ 
+   <bean id="merge" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_mug_cv_updat.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-temp3${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat  ${temp}/${L_CRDA_ODATE}/mupdg-cv-updated-temp3${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat  ${temp}/${L_CRDA_ODATE}/mupdg-cv${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-temp${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-temp4${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat  </value></property>
+      <property name="output"><value>${report/log5}</value></property>
+   </bean>
+
+   <bean id="sort" lazy-init="true" parent="baseSyncsortScriptStep"> 
+      <property name="executable">    <value>${syncsort}/rtca_mug_cv_update_sort.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-temp${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-temp-sorted${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat </value></property>
+      <property name="output"><value>${report/log6}</value></property>
+   </bean>
+   <bean id="remove_duplicates" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_mug_cust_rm_duplication.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-temp-sorted${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv${JOB_SUBGROUP}-input-${L_CRDA_ODATE}.dat </value></property>
+      <property name="output"><value>${report/log7}</value></property>
+   </bean>
+</beans>

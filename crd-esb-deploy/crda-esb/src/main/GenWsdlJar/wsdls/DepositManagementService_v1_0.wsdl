@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<wsdl:definitions xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v2" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:shttp="http://soa.com/wsdl/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:iface="http://telus.com/wsdl/CMO/BillingAccountMgmt/DepositManagementService_1" xmlns:dms="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" targetNamespace="http://telus.com/wsdl/CMO/BillingAccountMgmt/DepositManagementService_1">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://telus.com/wsdl/CMO/BillingAccountMgmt/DepositManagementService_1">
+			<xsd:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" schemaLocation="DepositManagementServiceRequestResponse_v1_0.xsd"/>
+			<xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" schemaLocation="Exceptions_v1_0.xsd"/>
+			<xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v2" schemaLocation="ping_v2.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="createDeposit">
+		<wsdl:part name="parameters" element="dms:createDeposit"/>
+	</wsdl:message>
+	<wsdl:message name="createDepositResponse">
+		<wsdl:part name="result" element="dms:createDepositResponse"/>
+	</wsdl:message>
+	<wsdl:message name="cancelDeposit">
+		<wsdl:part name="parameters" element="dms:cancelDeposit"/>
+	</wsdl:message>
+	<wsdl:message name="cancelDepositResponse">
+		<wsdl:part name="result" element="dms:cancelDepositResponse"/>
+	</wsdl:message>
+	<wsdl:message name="searchDeposit">
+		<wsdl:part name="parameters" element="dms:searchDeposit"/>
+	</wsdl:message>
+	<wsdl:message name="searchDepositResponse">
+		<wsdl:part name="result" element="dms:searchDepositResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ping">
+		<wsdl:part name="parameters" element="ping:ping"/>
+	</wsdl:message>
+	<wsdl:message name="pingResponse">
+		<wsdl:part name="result" element="ping:pingResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ServiceException">
+		<wsdl:part name="fault" element="ex:ServiceException"/>
+	</wsdl:message>
+	<wsdl:portType name="DepositManagementService_v1_0_PortType">
+		<wsdl:operation name="createDeposit">
+			<wsdl:input message="iface:createDeposit"/>
+			<wsdl:output message="iface:createDepositResponse"/>
+			<wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+		</wsdl:operation>
+		<wsdl:operation name="cancelDeposit">
+			<wsdl:input message="iface:cancelDeposit"/>
+			<wsdl:output message="iface:cancelDepositResponse"/>
+			<wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+		</wsdl:operation>
+		<wsdl:operation name="searchDeposit">
+			<wsdl:input message="iface:searchDeposit"/>
+			<wsdl:output message="iface:searchDepositResponse"/>
+			<wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+		</wsdl:operation>
+		<wsdl:operation name="ping">
+			<wsdl:input message="iface:ping"/>
+			<wsdl:output message="iface:pingResponse"/>
+			<wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="DepositManagementService_v1_0_SOAP" type="iface:DepositManagementService_v1_0_PortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="createDeposit">
+			<wsdl:documentation>Creates a deposit invoice in the Enabler-AR for the input pay channel and deposit context. Returns the corresponding invoiceId and request amount. If the deposit already exists for such pay channel and context then simply returns the corresponding invoiceId and corresponding amount</wsdl:documentation>
+			<soap:operation soapAction="createDeposit"/>
+			<wsdl:input>
+				<soap:body parts="parameters" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="result" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault name="ServiceException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="cancelDeposit">
+			<wsdl:documentation>Cancels the deposit corresponding to input invoice. If the deposit does not exist or is already paid then throws an exception</wsdl:documentation>
+			<soap:operation soapAction="cancelDeposit"/>
+			<wsdl:input>
+				<soap:body parts="parameters" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="result" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault name="ServiceException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="searchDeposit">
+			<wsdl:documentation>Searches and returns deposits corresponding to input accountId and other optional parameters. Maximum number of deposits that will be retunred is limited by a configuration parameter in Enabler-AR</wsdl:documentation>
+			<soap:operation soapAction="searchDeposit"/>
+			<wsdl:input>
+				<soap:body parts="parameters" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="result" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault name="ServiceException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ping">
+			<wsdl:documentation/>
+			<soap:operation soapAction="ping"/>
+			<wsdl:input>
+				<soap:body parts="parameters" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="result" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault name="ServiceException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DepositManagementService_v1_0">
+		<wsdl:port name="DepositManagementServicePort" binding="iface:DepositManagementService_v1_0_SOAP">
+			<soap:address location="http://cm-consumersvc-west-dv03.tsl.telus.com/v1/cmo/billingaccountmgmt/compass/dms/depositmanagementservice-v1-0"/>
+		</wsdl:port>
+	</wsdl:service>
+	<!--	
+	Generated File:
+		This file was generated by the following xslt:
+			http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/xmlToWsdl_v3_1.xslt
+		Based on a ServiceDefinition.xml file that conforms to the following schema:
+			http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_1.xsd
+			-->
+</wsdl:definitions>

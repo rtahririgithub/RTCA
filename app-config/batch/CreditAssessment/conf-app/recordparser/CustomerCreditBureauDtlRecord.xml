@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE delimited-record-layout PUBLIC "-//TELUS.com//DTD DelimitedRecordLayout 1.0//EN" "http://www.telus.com/dtd/DelimitedRecordLayout.dtd">
+
+<delimited-record-layout delimiter="|">
+
+   <typehandlers>
+      <typehandler id="DateHandler" class="com.telus.framework.recordparser2.typehandler.DateHandler">
+         <prop name="pattern">yyyy-MM-dd</prop>
+      </typehandler>
+   </typehandlers>
+
+   <structure name="record" type="com.telus.crd.assessment.batch.domain.CustomerCreditBureauDtlRecord">
+      <field name="customerId" maxLength="10000" />
+      <field name="bureauTranId" maxLength="10000" />
+      <field name="bureauTranDtlId" maxLength="10000" />
+      <field name="bureauTranDtlCd" maxLength="10000" />
+      <field name="scoreName" maxLength="10000" />
+      <field name="scoreText" maxLength="10000" />
+      <field name="riskIndType" maxLength="10000" />
+      <field name="riskIndValue" maxLength="10000" />
+      <field name="fraudType" maxLength="10000"  />
+      <field name="fraudCd" maxLength="10000" />
+      <field name="fraudMsg" maxLength="10000"  />
+      <field name="bureauDataDocName" maxLength="10000" />
+      <field name="extSrcSysCd" maxLength="10000" />
+<!--      <field name="extDocPathStr" maxLength="10000" /-->
+      <field name="extDocFormatType" maxLength="10000" />
+      <field name="recordTime" maxLength="10000" />
+   </structure>
+
+</delimited-record-layout>

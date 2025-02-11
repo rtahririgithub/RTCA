@@ -1,0 +1,6 @@
+#Level 1 Match String,Level 2 Match String,System/Service,Message,Team To Investigate,Groups to Notify,Severity of the Exception
+ServiceException,ServiceException,WLSCreditMgmtService,Service Exception occurred.,EnvMgmt,EnvMgmt:OADCredit,Major
+PolicyException,PolicyException,WLSCreditMgmtService,Policy Exception occurred.,OADCredit,OADCredit,Minor
+SocketTimeoutException,ServiceException,WLSCreditAssessmentService,Service Exception occurred.,EnvMgmt,EnvMgmt:OADCredit,Major
+ClientTransportException,ServiceException,WLSCreditAssessmentService,Service Exception occurred.,EnvMgmt,EnvMgmt:OADCredit,Major
+STUCK,ServiceException,WLSCreditAssessmentService,Service Exception occurred.,EnvMgmt,EnvMgmt:OADCredit,Major

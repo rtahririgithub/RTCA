@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ <!-- To prevent spring circular references warning , a different ID is assigned to DecisioningEngineAdapter required by an asmt type/subtype -->
+ 
+           <bean id="NewCustomerCreditAssessmentRequestDecisioningEngineAdapter" class="com.telus.credit.crda.adapter.DecisioningEngineAdapter">  
+                 <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+				 <property name="ruleServicesBean" ref="RuleServicesBean"/>                            
+           </bean>
+           <bean id="UnifiedCreditAssessmentRequestDecisioningEngineAdapter" class="com.telus.credit.crda.adapter.DecisioningEngineAdapter">  
+                 <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+                 <property name="ruleServicesBean" ref="RuleServicesBean"/>                            
+           </bean>
+           <bean id="ManualInquiryCreditAssessmentRequestDecisioningEngineAdapter" class="com.telus.credit.crda.adapter.DecisioningEngineAdapter">
+                 <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+				 <property name="ruleServicesBean" ref="RuleServicesBean"/>                   
+           </bean>
+           <bean id="ExistingCustomerCreditAssessmentRequestDecisioningEngineAdapter" class="com.telus.credit.crda.adapter.DecisioningEngineAdapter">
+                 <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+				 <property name="ruleServicesBean" ref="RuleServicesBean"/>                      
+           </bean> 
+           <bean id="MonthlyUDCreditAssessmentRequestDecisioningEngineAdapter" class="com.telus.credit.crda.adapter.DecisioningEngineAdapter">
+                 <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+				 <property name="ruleServicesBean" ref="RuleServicesBean"/>  
+		   </bean>   
+           <bean id="OverrideCreditAssessmentRequestDecisioningEngineAdapter" class="com.telus.credit.crda.adapter.DecisioningEngineAdapter">
+                 <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+				 <property name="ruleServicesBean" ref="RuleServicesBean"/>                     
+           </bean>
+           <bean id="CancelDepositCreditAssessmentRequestDecisioningEngineAdapter"  class="com.telus.credit.crda.adapter.DecisioningEngineAdapter">
+                 <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+				 <property name="ruleServicesBean" ref="RuleServicesBean"/>                      
+           </bean>
+
+
+</beans>
+
+

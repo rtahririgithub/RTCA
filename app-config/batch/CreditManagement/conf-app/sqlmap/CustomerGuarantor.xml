@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="customer_guarantor">
+	<typeAlias alias="CustomerGuarantor" type="com.telus.credit.domain.CustomerGuarantor" />
+	
+	<resultMap id="select-customer_guarantor-result" class="CustomerGuarantor">
+		<result property="_id" column="CUSTOMER_GUARANTOR_ID"/>
+		<result property="guarantorCreditProfileId" column="CREDIT_PROFILE_ID" />
+		<result property="comment" column="REMARKS_TXT" />
+		<result property="expiryDate" column="C90_EXPIRY_DT" />
+		<result property="guaranteedAmount" column="GUARANTEED_AMT" />
+		<result property="guaranteedCustomerId" column="GUARANTEED_CUSTOMER_ID" />
+		<result property="guarantorCustomerId" column="GUARANTOR_CUSTOMER_ID" />
+		<result property="guarantorFullName" column="C90_FULL_NM" />
+		<result property="guarantorPhoneNumber" column="GUARANTOR_PHONE_NUM" />
+		<result property="referenceNumber" column="C90_REFERENCE_NUM" />
+		<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+	</resultMap>
+
+
+	<statement id="get_customer_guarantor_by_guarantee_id" 
+				parameterClass="int" 
+				resultMap="select-customer_guarantor-result">
+	select  
+		CUSTOMER_GUARANTOR_ID,
+		CREDIT_PROFILE_ID,
+		REMARKS_TXT,
+		C90_EXPIRY_DT,
+		GUARANTEED_AMT,
+		GUARANTEED_CUSTOMER_ID,
+		GUARANTOR_CUSTOMER_ID,
+		C90_FULL_NM,
+		GUARANTOR_PHONE_NUM,
+		C90_REFERENCE_NUM,
+		LAST_UPDT_TS
+	from 
+		CUSTOMER_GUARANTOR
+	where 
+		GUARANTEED_CUSTOMER_ID=#value#
+		and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</statement>
+	
+	<insert id="insert_customer_guarantor" parameterClass="java.util.Map">
+  		<selectKey resultClass="java.lang.Long" keyProperty="customer_guarantor._id">
+			select CUSTOMER_GUARANTOR_ID_SEQ.NEXTVAL from dual
+  		</selectKey>
+  		insert into CUSTOMER_GUARANTOR
+  			(	
+  			CUSTOMER_GUARANTOR_ID, 
+			CREDIT_PROFILE_ID, 
+			GUARANTEED_CUSTOMER_ID,
+			C90_REFERENCE_NUM,
+			C90_FULL_NM,		
+			C90_EXPIRY_DT,
+			GUARANTEED_AMT,
+			GUARANTOR_CUSTOMER_ID,
+			GUARANTOR_PHONE_NUM,
+			REMARKS_TXT,
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID,
+			LAST_UPDT_TS,
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values 
+    		(
+			#customer_guarantor._id#,
+			#customer_guarantor.guarantorCreditProfileId#,	
+			#customer_guarantor.guaranteedCustomerId#,		 
+			#customer_guarantor.referenceNumber:VARCHAR#,
+			#customer_guarantor.guarantorFullName:VARCHAR#,
+			#customer_guarantor.expiryDate#,			
+			#customer_guarantor.guaranteedAmount#,
+			#customer_guarantor.guarantorCustomerId:DECIMAL#,
+			#customer_guarantor.guarantorPhoneNumber:VARCHAR#,
+			#customer_guarantor.comment:VARCHAR#,
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#
+    		)
+	</insert>
+	<update id="delete_customer_guarantor" parameterClass="java.util.Map">
+  		update 
+  			CUSTOMER_GUARANTOR
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP,
+			DATA_SOURCE_ID = #sourceId#
+  		where 
+			CUSTOMER_GUARANTOR_ID = #id# 
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</update>	
+
+	<statement id="get_guar_by_cust_n_credit" resultMap="select-customer_guarantor-result" parameterClass="java.util.Map">
+		select 
+			* 
+		from 
+			CUSTOMER_GUARANTOR
+	  	WHERE 
+	  		EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	  		and GUARANTOR_CUSTOMER_ID=#guarantorCustId#
+	  		and CREDIT_PROFILE_ID=#creditProfileId#	  
+	</statement>
+
+
+	<update id="update_guar_stop_date" parameterClass="java.util.Map">
+	  	update 
+	  		CUSTOMER_GUARANTOR
+		set 
+			EFF_STOP_DTM = SYSTIMESTAMP,
+	  		LAST_UPDT_USER_ID = #userId#,
+	  		DATA_SOURCE_ID = #sourceId#
+		where 
+			CUSTOMER_GUARANTOR_ID=#guarantorIdPrimaryKey#
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</update>
+	
+</sqlMap>
+	

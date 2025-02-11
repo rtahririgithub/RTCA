@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+<!-- *********** JOB ******************************************** -->
+
+<resultMap id="job-result" class="com.telus.framework.batch.domain.Job">
+  <result property="jobId"             column="BATCH_RUN_ID"/>
+  <result property="applicationName"   column="APPLICATION_NM"/>
+  <result property="jobName"           column="BATCH_PROCESS_NM"/>
+  <result property="status"            column="BATCH_STATUS_CD"/>
+  <result property="startMode"         column="START_MODE_CD"/>
+  <result property="originalJobId"     column="ORIGINAL_BATCH_RUN_ID" nullValue="0"/>
+  <result property="jobDefinitionFile" column="OVRD_JOB_DEFN_FILE_NM"/>
+  <result property="startDate"         column="RUN_START_TS"/>
+  <result property="endDate"           column="RUN_END_TS"/>
+  <result property="message"           column="MESSAGE_TXT"/>
+  <result property="runtimeEnv"        column="RUNTIME_ENVIRONMENT_DESC"/>
+  <result property="schedulerJobInstanceId"  column="SCHEDULER_INSTNC_ID"/>
+</resultMap>
+
+
+<insert id="insertJob" parameterClass="com.telus.framework.batch.domain.Job">
+  <selectKey resultClass="int" keyProperty="jobId" >
+    select BATCH_RUN_ID_SEQ.NEXTVAL as ID from DUAL
+  </selectKey>
+  insert into BATCH_RUN (
+    BATCH_RUN_ID,APPLICATION_NM, BATCH_PROCESS_NM, 
+    BATCH_STATUS_CD, START_MODE_CD, 
+    ORIGINAL_BATCH_RUN_ID, OVRD_JOB_DEFN_FILE_NM, 
+    RUN_START_TS, RUN_END_TS, MESSAGE_TXT, RUNTIME_ENVIRONMENT_DESC,
+    SCHEDULER_INSTNC_ID,
+    CREATE_USER_ID,  CREATE_TS,  LAST_UPDATE_USER_ID,  LAST_UPDATE_TS
+    ) 
+  values (
+    #jobId#, #applicationName#, #jobName#, 
+    #status#, #startMode#,
+    #originalJobId#, #jobDefinitionFile#,
+    #startDate:TIMESTAMP#,   #endDate:TIMESTAMP#,     #message:VARCHAR#, #runtimeEnv:VARCHAR#,
+    #schedulerJobInstanceId#,
+    'BEC',     sysdate, 'BEC',     sysdate
+    )
+</insert>
+
+
+<select id="getActiveJob" resultMap="job-result">
+<![CDATA[
+  select * from (
+    select * from BATCH_RUN 
+      where APPLICATION_NM=#applicationName# 
+      and BATCH_PROCESS_NM=#jobName# 
+      and BATCH_STATUS_CD IN ('RUNNING', 'FAILED')
+          order by RUN_START_TS desc
+  )
+  where rownum < 2
+]]>
+</select>
+
+
+<select id="getFirstJob" resultMap="job-result">
+<![CDATA[
+  select * from (
+    select * from BATCH_RUN 
+      where APPLICATION_NM=#applicationName# 
+      and BATCH_PROCESS_NM=#jobName# 
+      and ORIGINAL_BATCH_RUN_ID IS NULL
+          order by RUN_START_TS desc
+  )
+  where rownum < 2
+]]>
+</select>
+
+
+
+
+<update id="updateJob" parameterClass="com.telus.framework.batch.domain.Job">
+  update BATCH_RUN set 
+    BATCH_STATUS_CD = #status#, 
+    MESSAGE_TXT = #message:VARCHAR#, 
+    RUN_END_TS = #endDate:TIMESTAMP#,
+    LAST_UPDATE_USER_ID = 'BEC',  
+    LAST_UPDATE_TS = sysdate
+  where BATCH_RUN_ID = #jobId#
+</update>
+
+
+<!-- *********** JOB_STEP ******************************************** -->
+
+<resultMap id="step-list-result" class="com.telus.framework.batch.domain.JobStep">
+  <result property="stepId"       column="BATCH_RUN_STEP_ID"/>
+  <result property="jobId"        column="BATCH_RUN_ID"/>
+  <result property="stepName"     column="STEP_NM"/>
+  <result property="moduleName"   column="OVERRIDE_MODULE_NM"/>
+  <result property="status"       column="BATCH_STATUS_CD"/>
+  <result property="returnCode"   column="RETURN_CD"/>
+  <result property="startMode"    column="START_MODE_CD"/>
+  <result property="startDate"    column="STEP_START_TS"/>
+  <result property="endDate"      column="STEP_END_TS"/>
+  <result property="checkpointState"    column="CHECKPOINT_STATE_TXT"/>
+  <result property="moduleSummary"      column="MODULE_SUMMARY_TXT"/>
+  <result property="checkpointCount"    column="CHECKPOINT_CNT"/>
+  <result property="luwCount"           column="LOGICAL_UNIT_OF_WORK_CNT"/>
+  <result property="lastCheckpointDate" column="LAST_CHECKPOINT_TS"/>
+</resultMap>
+
+
+
+<insert id="insertStep" parameterClass="com.telus.framework.batch.domain.JobStep">
+  <selectKey resultClass="int" keyProperty="stepId" >
+    select BATCH_RUN_STEP_ID_SEQ.NEXTVAL as ID from DUAL
+  </selectKey>
+  insert into BATCH_RUN_STEP (
+    BATCH_RUN_STEP_ID, BATCH_RUN_ID, 
+    STEP_NM, OVERRIDE_MODULE_NM, 
+    BATCH_STATUS_CD, RETURN_CD, START_MODE_CD, 
+    STEP_START_TS, STEP_END_TS, 
+    CHECKPOINT_STATE_TXT, MODULE_SUMMARY_TXT, 
+    CHECKPOINT_CNT, LOGICAL_UNIT_OF_WORK_CNT, LAST_CHECKPOINT_TS,
+    CREATE_USER_ID,  CREATE_TS,  LAST_UPDATE_USER_ID,  LAST_UPDATE_TS,
+    APPLICATION_NM, BATCH_PROCESS_NM
+    )
+  values (
+    #stepId#, #jobId#, 
+    #stepName#, #moduleName#, 
+    #status#, #returnCode#, #startMode#, 
+    #startDate:TIMESTAMP#, #endDate:TIMESTAMP#, 
+    #checkpointState:VARCHAR#,     #moduleSummary:VARCHAR#, 
+    #checkpointCount#, #luwCount#, #lastCheckpointDate:TIMESTAMP#,
+    'BEC',     sysdate,    'BEC',   sysdate,
+    #applicationName#, #jobName#
+
+    )
+</insert>
+
+
+<select id="getStepList" resultMap="step-list-result">
+  select * from BATCH_RUN_STEP 
+  where BATCH_RUN_ID=#value# 
+  order by BATCH_RUN_STEP_ID asc
+</select>
+
+<update id="updateStep" parameterClass="com.telus.framework.batch.domain.JobStep">
+  update BATCH_RUN_STEP set 
+    BATCH_STATUS_CD = #status#, 
+    RETURN_CD = #returnCode#, 
+    STEP_END_TS = #endDate:TIMESTAMP#, 
+    CHECKPOINT_STATE_TXT = #checkpointState:VARCHAR#, 
+    MODULE_SUMMARY_TXT = #moduleSummary:VARCHAR#, 
+    CHECKPOINT_CNT = #checkpointCount#, 
+    LOGICAL_UNIT_OF_WORK_CNT = #luwCount#, 
+    LAST_CHECKPOINT_TS = #lastCheckpointDate:TIMESTAMP#,
+    LAST_UPDATE_USER_ID = 'BEC',  
+    LAST_UPDATE_TS = sysdate
+  where BATCH_RUN_STEP_ID = #stepId#
+</update>
+
+
+
+<!-- *********** BATCH_PROCESS ******************************************** -->
+
+<resultMap id="batchProcess-result" class="com.telus.framework.batch.domain.BatchProcess">
+  <result property="batchProcessId"    column="BATCH_PROCESS_ID"/>
+  <result property="applicationName"   column="APPLICATION_NM"/>
+  <result property="jobName"           column="BATCH_PROCESS_NM"/>
+  <result property="jobDefinitionFile" column="JOB_DEFN_FILE_NM"/>
+</resultMap>
+
+
+<insert id="insertBatchProcess" 
+        parameterClass="com.telus.framework.batch.domain.BatchProcess">
+  <selectKey resultClass="int" keyProperty="batchProcessId" >
+    select BATCH_PROCESS_ID_SEQ.NEXTVAL as ID from DUAL
+  </selectKey>
+
+  insert into BATCH_PROCESS (
+    BATCH_PROCESS_ID,
+    APPLICATION_NM, BATCH_PROCESS_NM, 
+    JOB_DEFN_FILE_NM, 
+    BATCH_PROCESS_DESC, SCHEDULER_PROCESS_NM,
+    CREATE_USER_ID,  CREATE_TS,      LAST_UPDATE_USER_ID,  LAST_UPDATE_TS
+    ) 
+  values (
+    #batchProcessId#,
+    #applicationName#, #jobName#, 
+    #jobDefinitionFile#,   
+    'BEC Inserted default description',  'BEC inserted default CTM JobName',
+    'BEC',     sysdate,      'BEC',     sysdate
+    )
+</insert>
+
+
+
+<select id="getBatchProcess" resultMap="batchProcess-result">
+<![CDATA[
+  select * from (
+    select * from BATCH_PROCESS
+      where APPLICATION_NM=#applicationName# 
+      and BATCH_PROCESS_NM=#jobName# 
+  )
+  where rownum < 2
+]]>
+</select>
+
+
+
+<!-- *********** BATCH_PROCESS_STEP ******************************************** -->
+
+<resultMap id="batchProcessStep-result" 
+           class="com.telus.framework.batch.domain.BatchProcessStep">
+  <result property="batchProcessStepId" column="BATCH_PROCESS_STEP_ID"/>
+  <result property="batchProcessId"     column="BATCH_PROCESS_ID"/>
+  <result property="applicationName"    column="APPLICATION_NM"/>
+  <result property="jobName"            column="BATCH_PROCESS_NM"/>
+  <result property="stepName"           column="STEP_NM"/>
+  <result property="moduleName"         column="MODULE_NM"/>
+</resultMap>
+
+
+<insert id="insertBatchProcessStep" 
+        parameterClass="com.telus.framework.batch.domain.BatchProcessStep">
+  <selectKey resultClass="int" keyProperty="batchProcessStepId" >
+    select BATCH_PROCESS_STEP_ID_SEQ.NEXTVAL as ID from DUAL
+  </selectKey>
+
+  insert into BATCH_PROCESS_STEP (
+    BATCH_PROCESS_STEP_ID,  BATCH_PROCESS_ID,
+    APPLICATION_NM, BATCH_PROCESS_NM, 
+    STEP_NM, MODULE_NM, STEP_DESC,
+    CREATE_USER_ID,  CREATE_TS,      LAST_UPDATE_USER_ID,  LAST_UPDATE_TS
+    ) 
+  values (
+    #batchProcessStepId#,  #batchProcessId#,
+    #applicationName#, #jobName#, 
+    #stepName#,  #moduleName#,     'BEC Inserted default description', 
+    'BEC',     sysdate,      'BEC',     sysdate
+    )
+</insert>
+
+
+
+<select id="getBatchProcessStep" resultMap="batchProcessStep-result">
+<![CDATA[
+  select * from (
+    select * from BATCH_PROCESS_STEP
+      where APPLICATION_NM=#applicationName# 
+      and BATCH_PROCESS_NM=#jobName# 
+      and STEP_NM=#stepName#
+  )
+  where rownum < 2
+]]>
+</select>
+
+
+
+
+
+
+
+</sqlMap>

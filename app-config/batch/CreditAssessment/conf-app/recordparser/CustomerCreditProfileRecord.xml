@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fixed-record-layout PUBLIC "-//TELUS.com//DTD FixedRecordLayout 1.0//EN" "http://www.telus.com/dtd/FixedRecordLayout.dtd">
+<fixed-record-layout initChar=" ">
+   <typehandlers>
+      <typehandler id="BooleanHandler" class="com.telus.framework.recordparser2.typehandler.BooleanHandler">
+         <prop name="caseSensitivity">lowercase</prop>
+         <prop name="trueValue">1</prop>
+         <prop name="falseValue">0</prop>
+      </typehandler>
+      <typehandler id="DateHandler" class="com.telus.framework.recordparser2.typehandler.DateHandler">
+         <prop name="pattern">yyyy-MM-dd</prop>
+      </typehandler>
+   </typehandlers>
+   <structure name="record" type="com.telus.crd.assessment.batch.domain.CustomerCreditProfileRecord">
+      <field name="creditProfileId" length="18" />
+      <field name="customerId" length="9"  />
+      <field name="cproflStatusCd" length="1" />
+      <field name="cproflFormatCd" length="2" />
+      <field name="busLastUpdateTs" length="21" typehandler="DateHandler" />
+      <field name="populatemethodCd" length="3" />
+      <field name="sinNumber" length="50" />
+      <field name="dlNumber" length="50" />
+      <field name="dlProvinceCd" length="2" />
+      <field name="passportNumber" length="50" />
+      <field name="passportCountry" length="3" />
+      <field name="healthCardNumber" length="50" />
+      <field name="provinceIdNumer" length="50" />
+      <field name="provinceIdCd" length="2" />
+      <field name="cproflAddressTypeCd" length="2" />
+      <field name="addressLine1" length="50" />
+      <field name="addressLine2" length="50" />
+      <field name="addressLine3" length="50" />
+      <field name="addressLine4" length="50" />
+      <field name="addressLine5" length="50" />
+      <field name="municNm" length="40" />
+      <field name="postalZipCd" length="9" />
+      <field name="provinceCd" length="2" />
+      <field name="countryCode" length="3" />
+      <field name="birthDateStr" length="10" />
+      <field name="creditCheckConsentCode" length="2" />
+      <field name="employmentStatusCode" length="2" />
+      <field name="residencyCode" length="2" />
+      <field name="primCreditCardTypeCd" length="3" />
+      <field name="secondCreditCardTypeCd" length="4" />
+      <field name="underLegalCareCode" length="2" />
+      <field name="applicationProvinceCode" length="2" />
+      <field name="bypassMatchIndicatorStr" length="1" />
+      <field name="provinceOfCurrentResidence" length="60" /> 
+      <field name="credProfAttrValueReportInd" length="60" />
+      <field name="creditValueEffectiveDateStr" length="60"  />
+      <field name="firstCreditAssessmentDateStr" length="60"  />
+      <field name="latestCreditAssessmentDateStr" length="60" />
+      <field name="creditValueCode" length="1" />
+      <field name="assessmentMessageCode" length="30" />
+      <field name="productCatBoltOnStr" length="1" />
+      <field name="decisionCode" length="30" />
+      <field name="fraudIndicatorCode" length="18" />
+      <field name="creditScoreNumber" length="9" />
+      <field name="creditClassCd" length="2" />
+      <field name="creditAssessReqIdStr" length="18" />
+      <field name="commentText" length="1000" />
+      <field name="recordTime" length="8" />
+   </structure>
+</fixed-record-layout>
+

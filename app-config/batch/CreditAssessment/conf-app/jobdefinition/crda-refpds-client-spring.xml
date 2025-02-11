@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <bean class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+   	<bean id="refPdsWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.telus.erm.refpds.ws.client.ReferencePDSDataServicePortType" />
+		<!-- for the WSDL recommended to use the local reference rather than a URL -->
+		
+		<!-- wsdls/ReferencePDSDataService_v1_0.wsdl not passed in control-M(wk05) -->
+		<property name="wsdlDocumentUrl" value="ReferencePDSDataService_v1_0.wsdl" />
+		<property name="endpointAddress"><value>${connections/webServices/refpds/endpointAddress}</value></property>
+		<property name="namespaceUri" value="http://telus.com/wsdl/ERM/RefPds/ReferencePDSDataService_1" />
+		<property name="serviceName" value="ReferencePDSDataService" />
+		<property name="portName" value="ReferencePDSDataServicePort" />
+		<property name="lookupServiceOnStartup" value="false" />
+	</bean>
+	
+	<bean id="refPdsAccessBootstrap" class="com.telus.erm.refpds.access.client.ReferencePdsAccess" init-method="initializeCache">
+		<property name="service" ref="refPdsWebService"/>
+	</bean>
+	
+	<!-- Mbeans Definiions 
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean"/>
+	
+	<bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+		<property name="beans">
+	      <map>
+	        <entry key="referencepds" value-ref="mbean"/>
+	      </map>
+	    </property>
+	    <property name="namingStrategy" ref="namingStrategy" />
+	    <property name="registrationBehaviorName" value="REGISTRATION_REPLACE_EXISTING"/>
+	</bean>
+	
+	<bean id="mbean" class="com.telus.erm.refpds.access.client.ReferencePdsAccessMBean"/>
+	<bean id="namingStrategy" class="com.telus.erm.refpds.access.client.ReferencePdsAccessObjectNamingStrategy"/>
+	-->
+
+</beans>

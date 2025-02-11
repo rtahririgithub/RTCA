@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service 
+xsi:noNamespaceSchemaLocation="http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServiceDefinition>
+		<Name>OrderDepositCalculatorService</Name>
+		<Documentation>
+		Provides the ability to calculate: 
+		Estimated or Final deposit amount for each requested product in a new order 
+		and 
+		Returns list of max number of service type codes (product)  that a cusotmer is eligible .
+		</Documentation>
+		
+		<TAM_LevelZeroAndOne>CMO/OrderMgmt</TAM_LevelZeroAndOne>
+		<ServiceTaxonomy>/OrderDepositCalculatorService</ServiceTaxonomy>
+		<MajorVersion>1</MajorVersion>
+		<MinorVersion>0</MinorVersion> 
+		<soapAddress>http://cm-billingsvc-west-dv01.tsl.telus.com</soapAddress>
+		<SchemaLocation>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1_0.xsd</SchemaLocation> 
+		<NameSpace>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1</NameSpace>
+		<nsAbbrev>ODC</nsAbbrev>
+		<OutputDir/>
+		<SecurityToken>
+		<Token>Wssp1.2-2007-Saml1.1-SenderVouches-Wss1.0</Token>			
+		</SecurityToken>
+	</ServiceDefinition>
+	<Operation>
+		<OperationName>calculateDeposit</OperationName>
+		<Documentation>calculate deposit for a given order on requested products by customer</Documentation>
+		<InputType wsp="true">calculateDeposit</InputType>
+		<OutputType>calculateDepositResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>		
+	<Operation>
+		<OperationName>getEquipmentQualificationList</OperationName>
+		<Documentation>Returns list of service type codes (product) and max number  that a cusotmer is eligible .</Documentation>
+		<InputType wsp="true">getEquipmentQualificationList</InputType>
+		<OutputType>getEquipmentQualificationListResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>		
+</Service>

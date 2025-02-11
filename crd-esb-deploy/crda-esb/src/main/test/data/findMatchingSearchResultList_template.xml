@@ -1,0 +1,50 @@
+<fmsr:findMatchingSearchResultList>
+	
+	<fmsr:findMatchingSearchResult>
+		<fmsr:customerData>
+			<fmsr:sourceSystemID/>
+			<fmsr:customerId/>
+			<fmsr:customerCreationDate/>
+			<fmsr:customerStatusCd/>
+			<fmsr:customerTypeCd/>
+			<fmsr:customerSubTypeCd/>
+			<fmsr:creditIdentification>
+				<fmsr:driverLicense>
+					<fmsr:driverLicenseNumber/>
+					<fmsr:provinceCd/>
+					<fmsr:expiryDate/>
+				</fmsr:driverLicense>
+				<fmsr:socialInsuranceNum/>
+				<fmsr:creditCardTokenTxt/>
+				<fmsr:creditCardFirstSixNum/>
+				<fmsr:creditCardLastFourNum/>
+				<fmsr:healthCardNumber/>
+				<fmsr:passport>
+					<fmsr:passportNumber/>
+					<fmsr:countryCd/>
+				</fmsr:passport>
+				<fmsr:provincialIdCard>
+					<fmsr:provincialId/>
+					<fmsr:provinceCd/>
+				</fmsr:provincialIdCard>
+			</fmsr:creditIdentification>
+			<fmsr:firstName/>
+			<fmsr:lastName/>
+			<fmsr:middleName/>
+			<fmsr:birthDate/> 
+		</fmsr:customerData>
+		<fmsr:accountData>
+			<fmsr:billingMasterSourceId/>
+			<fmsr:billingAccountNumber/>
+			<fmsr:brandId/>
+			<fmsr:accountType/>
+			<fmsr:accountSubType/>
+			<fmsr:accountCreationDate/>
+			<fmsr:startServiceDate/>
+			<fmsr:statusCode/>
+			<fmsr:statusDate/>
+			<fmsr:matchReasonCd/>
+		</fmsr:accountData>
+	</fmsr:findMatchingSearchResult>
+
+</fmsr:findMatchingSearchResultList>

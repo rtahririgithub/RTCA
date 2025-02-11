@@ -1,0 +1,12 @@
+<jxb:bindings 
+          xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+          xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+          xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+          version="2.0" schemaLocation="PubSubQueueObject_v1_0.xsd">
+        <jxb:schemaBindings>
+            <jxb:package name="com.telus.credit.publisher" />
+        </jxb:schemaBindings>
+   
+</jxb:bindings>
+	

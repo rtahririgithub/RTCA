@@ -1,0 +1,17 @@
+<xs:schema targetNamespace="http://www.ibm.com/telecom/common/schema/urban_property_address/v3_0" xmlns:bons0="http://www.ibm.com/telecom/common/schema/place_extensions/v3_0" xmlns:place="http://www.ibm.com/telecom/common/schema/place/v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/place_extensions/v3_0" schemaLocation="ibm_telecom_common_place_extensions.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/place/v3_0" schemaLocation="ibm_telecom_common_place.xsd"/>
+    <!-- The type: urbanPropertyAddress.UrbanPropertyAddress -->
+    <xs:complexType name="UrbanPropertyAddress">
+        <xs:complexContent>
+            <xs:extension base="place:GeographicAddress">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="StreetNrFirst" type="xs:string"/>
+                    <xs:element minOccurs="0" name="StreetNrLast" type="xs:string"/>
+                    <xs:element minOccurs="0" name="StreetName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="UrbanPropertyAddressExtensions" type="bons0:UrbanPropertyAddressExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

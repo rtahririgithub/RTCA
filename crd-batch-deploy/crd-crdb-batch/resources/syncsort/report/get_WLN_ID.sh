@@ -1,0 +1,117 @@
+#!/usr/bin/ksh
+# Title: join_input_to_customer_data.sh
+# desc: This script takes two CSV files and joins them by RCID present in both files 
+#       to produce third file with all the records matched.
+#
+# Validate the number of input parameters
+MYDATE="`date +%Y%m%d`"
+if [ $# -eq 4 ]; then
+    CREDIT_PROFILE_IDENTIFICATION=$1.$MYDATE
+    OUTPUT_FILE=$2
+    OUTPUT_FILE2=$3
+    OUTPUT_FILE3=$4
+else
+    echo ""
+    echo "Error INPUT FILES"
+    exit 1
+fi
+syncsort <<-EOF
+${sortstatistic}
+${sortworkspace}
+
+/INFILE $CREDIT_PROFILE_IDENTIFICATION 94
+/FIELDS CPROF_ID 19 en 18
+/FIELDS CPROF_ID_TYP_CD 37 character 3
+/FIELDS CPROF_DL 40 character 50
+/FIELDS CPROF_PROV 90 character 2
+
+/CONDITION IS_DL CPROF_ID_TYP_CD = "DL "
+/INCLUDE IS_DL
+
+/PADBYTE X"20"
+
+/OUTFILE ${OUTPUT_FILE} OVERWRITE
+/REFORMAT CPROF_ID, CPROF_PROV, CPROF_DL
+/SILENT
+/WARNINGS 100
+/END
+EOF
+
+syncsort <<-EOF
+${sortstatistic}
+${sortworkspace}
+
+/INFILE $CREDIT_PROFILE_IDENTIFICATION 94
+/FIELDS CPROF_ID 19 en 18
+/FIELDS CPROF_ID_TYP_CD 37 character 3
+/FIELDS CPROF_SIN 40 character 9
+
+/CONDITION IS_SIN CPROF_ID_TYP_CD = "SIN"
+/INCLUDE IS_SIN
+
+/PADBYTE X"20"
+
+/OUTFILE ${OUTPUT_FILE2} OVERWRITE
+/REFORMAT CPROF_ID, CPROF_SIN
+/SILENT
+/WARNINGS 100
+/END
+
+EOF
+
+syncsort <<-EOF
+${sortstatistic}
+${sortworkspace}
+
+/INFILE ${OUTPUT_FILE} 70
+/FIELDS CPROF_ID 1 en 18
+/FIELDS CPROF_DL 19 character 52
+/JOINKEY CPROF_ID
+
+/INFILE ${OUTPUT_FILE2} 27
+/FIELDS CPROF_ID2 1 en 18
+/FIELDS CPROF_SIN 19 character 9
+/JOINKEY CPROF_ID2
+
+/JOIN UNPAIRED LEFTSIDE RIGHTSIDE
+
+/PADBYTE X"20"
+
+/OUTFILE ${OUTPUT_FILE3} OVERWRITE
+/REFORMAT LEFTSIDE:CPROF_ID,CPROF_DL, RIGHTSIDE:CPROF_ID2,CPROF_SIN
+
+/SILENT
+/WARNINGS 100
+/END
+
+EOF
+
+syncsort <<-EOF
+${sortstatistic}
+${sortworkspace}
+
+/INFILE ${OUTPUT_FILE3} 97
+/FIELDS CPROF_ID 1 character 18
+/FIELDS CPROF_DL 19 character 52
+/FIELDS CPROF_ID2 71 character 18
+/FIELDS CPROF_SIN 89 character 9
+
+/CONDITION IS_WITH_DL CPROF_ID = "                  "
+/DERIVEDFIELD DERIVED_CPROF_ID IF IS_WITH_DL THEN CPROF_ID2 ELSE CPROF_ID
+
+/PADBYTE X"20"
+
+/OUTFILE ${OUTPUT_FILE3} OVERWRITE
+
+/REFORMAT DERIVED_CPROF_ID,CPROF_DL,CPROF_SIN
+
+/SILENT
+/WARNINGS 100
+/END
+
+EOF
+
+rm ${OUTPUT_FILE}
+rm ${OUTPUT_FILE2}
+
+return $?

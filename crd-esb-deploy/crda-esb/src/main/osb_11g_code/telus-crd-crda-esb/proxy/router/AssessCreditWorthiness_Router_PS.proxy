@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="telus-crd-crda-esb/wsdls/WLNCreditProfileManagementProxyService_v2_0"/>
+      <con:port>
+        <con:name>WLNCreditProfileManagementProxyServicePort</con:name>
+        <con:namespace>http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="AssessCreditWorthiness_Router_PS_PipelinePairNode1_request">
+      <con:stage name="Initi_Stage">
+        <con:context>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="FullAssessmentRoutingVar">
+            <con2:comment>Loads the XQuery resource FullaAssessmentRoutingConfiguration in variable FullAssessmentRoutingVar.
+FullAssessmentRoutingConfiguration XQuery resource  contains configuration to determine what service should be called for a credit assessment subtype . 
+
+For instance :
+for CreditAssessmentSubType = GET_BUREAU_DATA call GetBureuaData_PS Service</con2:comment>
+            <con2:id>_ActionId-6229273726574352322-1dfd5691.141191ab5d4.-7f71</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/FullAssessmentRoutingConfiguration"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="varAssessmentSubType">
+            <con2:comment>stores the value of credit assessment sub type element in the payload in ‘varAssessmentSubType’ variable using the xpath</con2:comment>
+            <con2:id>_ActionId-6229273726574352322-1dfd5691.141191ab5d4.-7f52</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='creditAssessmentSubTypeCd'])[1]/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con5:assign varName="constants" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6373</con2:id>
+            <con5:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/constants"/>
+              </con2:xqueryTransform>
+            </con5:expr>
+          </con5:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="GetUCDormantFlag_Stage">
+        <con:context/>
+        <con:actions>
+          <con5:javaCallout varName="UCDormantFlagValue" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-7e94</con2:id>
+            <con5:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+            <con5:className>com.telus.credit.util.ESBCacheHelper</con5:className>
+            <con5:method>public static java.lang.Object getObjectFromCache(java.lang.String)</con5:method>
+            <con5:expr>
+              <con2:xqueryText>$constants/constant[@value="UCDORMANTFLAG_CACHE_KEY"]/text()</con2:xqueryText>
+            </con5:expr>
+          </con5:javaCallout>
+          <con1:assign varName="UCDormantFlagValue" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6027</con2:id>
+            <con1:expr>
+              <con2:xqueryText>upper-case($UCDormantFlagValue)</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6a82</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>$UCDormantFlagValue</con2:xqueryText>
+              </con1:condition>
+              <con1:actions/>
+            </con1:case>
+            <con1:default>
+              <con1:assign varName="UCDormantFlagValue">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6a59</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>'ON'</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="get_serviceProxyName_Stage">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="serviceProxyName">
+            <con2:id>_ActionId-4680723409317455123-595efe17.16895dc8ee7.-7bd9</con2:id>
+            <con1:expr>
+              <con2:xqueryText>$FullAssessmentRoutingVar/CreditAssessmentSubType[@value=$varAssessmentSubType][@UCDormantFlagValue=$UCDormantFlagValue]/Service/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="AssessCreditWorthiness_Router_PS_PipelinePairNode1_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-6444467027900665385--3e605d6a.141db8801e9.-7609">
+      <con:stage name="AssessCreditWorthiness_Router_PS_FullAssessmentRouteNode_ErrorHandler_stage">
+        <con:comment>Given Routing is used here we have to catch the error and reply the fault so that the caller of this service can  have access to the original fault details.</con:comment>
+        <con:context/>
+        <con:actions>
+          <con4:log>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-75f4</con2:id>
+            <con4:logLevel>error</con4:logLevel>
+            <con4:expr>
+              <con2:xqueryText>&lt;WCDAP_ERROR>
+{($body//*[local-name()='customerID'])[1]}
+{$fault}
+&lt;/WCDAP_ERROR></con2:xqueryText>
+            </con4:expr>
+          </con4:log>
+          <con2:reply isError="true">
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-75c4</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="AssessCreditWorthiness_Router_PS_PipelinePairNode1">
+        <con:request>AssessCreditWorthiness_Router_PS_PipelinePairNode1_request</con:request>
+        <con:response>AssessCreditWorthiness_Router_PS_PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+      <con:route-node name="RouteNode" error-handler="_onErrorHandler-6444467027900665385--3e605d6a.141db8801e9.-7609">
+        <con:comment>Dynamically routes the request to a full assessment proxy based on CreditAssessmentSubType in payload</con:comment>
+        <con:context/>
+        <con:actions>
+          <con3:dynamic-route>
+            <con2:id>_ActionId-6229273726574352322-1dfd5691.141191ab5d4.-7ed7</con2:id>
+            <con3:service>
+              <con2:xqueryText><![CDATA[<ctx:route>
+  <ctx:service isProxy="true">{$serviceProxyName}</ctx:service>
+  <ctx:operation>assessCreditWorthiness</ctx:operation>
+</ctx:route>]]></con2:xqueryText>
+            </con3:service>
+            <con3:outboundTransform/>
+            <con3:responseTransform/>
+          </con3:dynamic-route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

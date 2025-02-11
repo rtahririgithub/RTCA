@@ -1,0 +1,50 @@
+<wln:updateCreditProfile xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6">
+
+   <wln:creditProfile>
+           
+            <cred:customerID>999999964</cred:customerID>
+                       <cred:creditIdentification>
+               <!--Optional:-->
+               <cred:driverLicense>
+                  <cred:driverLicenseNum>1112233422</cred:driverLicenseNum>
+                  <!--Optional:-->
+                  <cred:provinceCd>BC</cred:provinceCd>
+               </cred:driverLicense>
+            </cred:creditIdentification>
+            <!-- <cred:applicationProvinceCd>BC</cred:applicationProvinceCd> -->
+            
+            <!--Optional:-->
+            <cred:businessLastUpdateTimestamp>2018-11-11T10:33:28.768Z</cred:businessLastUpdateTimestamp>
+           
+            <!--Optional:-->
+            <cred:methodCd>OO</cred:methodCd>
+            
+            <cred:creditAddress>
+               <!--Optional:-->
+               <cred:creditAddressTypeCd>CB</cred:creditAddressTypeCd>
+               <cred:provinceCd>BC</cred:provinceCd>
+               
+            </cred:creditAddress>
+            
+            <!--Optional:-->
+            <cred:personalInfo>
+               <cred:birthDate>02/01/1983</cred:birthDate>
+               <!--Optional:-->
+               <cred:provinceOfCurrentResidenceCd>ON</cred:provinceOfCurrentResidenceCd>
+            </cred:personalInfo>
+            
+            <!--Optional:-->
+            <cred:commentTxt>DV Testing121</cred:commentTxt>
+         </wln:creditProfile>
+         <!--Optional:-->
+         <wln:creditValueCd>R</wln:creditValueCd>
+         <!--Optional:-->
+         <!-- <wln:fraudIndicatorCd>?</wln:fraudIndicatorCd> -->
+         <wln:auditInfo>
+            <!--Optional:-->
+            <ent:userId>122365</ent:userId>
+            
+            <ent:originatorApplicationId>1234</ent:originatorApplicationId>
+            <ent:timestamp>2019-08-22T12:33:28.768Z</ent:timestamp>
+         </wln:auditInfo>
+ </wln:updateCreditProfile>

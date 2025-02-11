@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+         <list>
+            <bean id="STEP1506" parent="baseStep">
+               <property name="moduleName" value="cmdExec-Step1506"/>
+            </bean>
+            <bean id="STEP1507" parent="baseStep">
+               <property name="moduleName" value="cmdExec-Step1507"/>
+            </bean>
+         </list>
+		</property>
+	</bean>
+   <bean id="cmdExec-Step1506" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step15/scriptFile1}"/>
+      <property name="arg" value="${step15/outputFilename1} ${step15/outputFilename2} ${step15/outputFilename} ${step15/masterbodyFilename} ${step15/inputFilename}"/>
+   </bean>
+    <bean id="cmdExec-Step1507" class="com.telus.framework.batch.module.ExecModule">
+
+      <property name="executable" value="${step15/scriptFile2}"/>
+
+      <property name="arg" value="${step15/masterbodyFilename} ${step15/recordCountFilename} "/>
+
+   </bean>
+</beans>
+
+

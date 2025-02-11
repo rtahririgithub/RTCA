@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+    
+    <bean id="CreditGatewayAdapter" class="com.telus.credit.crda.adapter.CreditGatewayAdapter" lazy-init="true">
+        <constructor-arg ref="CreditGatewayService"/>
+        <constructor-arg ref="EcrdaDozerBeanMapper"/>
+	</bean>	   
+    <!--Credit Gateway service client bean.-->
+    <bean id="CreditGatewayService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean" lazy-init="true">
+ 		<property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.creditgatewayservice_1.CreditGatewayServicePortType"/>
+        <property name="wsdlDocumentUrl" value="classpath:wsdls\CreditGatewayService_v1_2.wsdl" />        
+        <property name="endpointAddress" value="${connections/SOA/serviceURLs/creditGatewayServiceUrl}" />         
+        <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/CreditGatewayService_1" />
+        <property name="serviceName" value="CreditGatewayService_v1_2" /> 
+        <property name="portName" value="CreditGatewayServicePort" />
+        <property name="lookupServiceOnStartup" value="false"/>
+        <property name="username" value="${connections/SOA/soaCreditWsClientUsername}"/>
+        <property name="password" value="${connections/SOA/soaCreditWsClientPassword}"/>
+		<property name="handlerResolver" ref="defaultHandlerResolver"/> 
+    </bean>
+
+    <bean id="defaultHandlerResolver" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver" lazy-init="true">
+		<property name="handlerList">
+		    <list>
+				<bean id="CrdaClientSoapHandler" class="com.telus.credit.crda.webservice.handler.CrdaClientSoapHandler" lazy-init="true"></bean>
+		    </list>
+		</property>
+    </bean>
+
+</beans>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+         <list>
+            <bean id="STEP14" parent="baseStep">
+               <property name="moduleName" value="javaExec-Step14"/>
+            </bean>
+         </list>
+		</property>
+	</bean>
+   <bean id="javaExec-Step14" class="com.telus.credit.fraud.batch.step14.FormatCandidateTargetFile" lazy-init="true">
+      <property name="inputFilename" value="${formatCandidateTargetFile/inputFilenamenik}"/>
+      <property name="outputFilename" value="${formatCandidateTargetFile/outputFilenamenik}"/>
+      <property name="serviceStartPoint" value="${formatCandidateTargetFile/serviceStartPoint}"/>
+      <property name="serviceEndPoint" value="${formatCandidateTargetFile/serviceEndPoint}"/>
+      <property name="billingStartPoint" value="${formatCandidateTargetFile/billingStartPoint}"/>
+      <property name="billingEndPoint" value="${formatCandidateTargetFile/billingEndPoint}"/>
+      <property name="bufferStartPoint" value="${formatCandidateTargetFile/bufferStartPoint}"/>
+      <property name="bufferEndPoint" value="${formatCandidateTargetFile/bufferEndPoint}"/>
+      <property name="fieldSize" value="${formatCandidateTargetFile/fieldSize}"/>
+      <property name="padding" value="${formatCandidateTargetFile/padding}"/>
+   </bean>
+</beans>
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+         <list>
+            <bean id="STEP05" parent="baseStep">
+               <property name="moduleName" value="javaExec-Step05"/>
+            </bean>
+            <bean id="STEP050" parent="baseStep">
+
+               <property name="moduleName" value="cmdExec-Step050"/>
+
+            </bean>
+         </list>
+		</property>
+	</bean>
+   <bean id="javaExec-Step05" class="com.telus.credit.fraud.batch.step05.FileProcessor" lazy-init="true">
+      <property name="inputFilename" value="${decryptCreditFeedFile/inputFilename}"/>
+      <property name="outputFilename" value="${decryptCreditFeedFile/outputFilename}"/>
+      <property name="customerIdStartPoint" value="${decryptCreditFeedFile/customerIdStartPoint}"/>
+      <property name="customerIdEndPoint" value="${decryptCreditFeedFile/customerIdEndPoint}"/>
+      <property name="DLStartPoint" value="${decryptCreditFeedFile/DLStartPoint}"/>
+      <property name="DLEndPoint" value="${decryptCreditFeedFile/DLEndPoint}"/>
+      <property name="SINStartPoint" value="${decryptCreditFeedFile/SINStartPoint}"/>
+      <property name="SINEndPoint" value="${decryptCreditFeedFile/SINEndPoint}"/>
+      <property name="fieldSize" value="${decryptCreditFeedFile/fieldSize}"/>
+   </bean>
+   
+   <!--  Encryption configuration (pilot ready) -->
+   <bean id="encryptUtil" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+      <property name="staticMethod" value="com.telus.framework.crypto.EncryptionUtil.setCrypto"/>
+      <property name="arguments">
+         <list>
+            <ref bean="cryptoImpl"/>
+         </list>
+      </property>
+   </bean>
+   <bean id="cryptoImpl" class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl" init-method="init">
+      <property name="key1" value="EbT5a8Fuq"/>
+      <property name="key2" value="aYt2gv6R"/>
+      <property name="key3" value="9bFp3Gz4k"/>
+      <!--
+      uncomment when these properties are defined in an env.xml and loaded by file which will be loaded by the configuration framework
+      <property name="key1" value="${encryption/key1}"/>
+      <property name="key2" value="${encryption/key2}"/>
+      <property name="key3" value="${encryption/key3}"/>
+      -->
+   </bean>
+   <bean id="cmdExec-Step050" parent="baseSyncsortCmdStep">
+
+      <property name="controlFile" value="${step050/syncsortFile}"/>
+
+      <property name="output" value="${step050/log}"/>
+
+   </bean>
+</beans>
+
+

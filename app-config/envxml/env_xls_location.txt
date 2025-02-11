@@ -1,0 +1,1 @@
+ENVFILEPATH=compass_env/2010_July

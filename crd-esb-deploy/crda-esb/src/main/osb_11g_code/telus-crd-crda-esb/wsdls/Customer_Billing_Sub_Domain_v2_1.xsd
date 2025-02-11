@@ -1,0 +1,211 @@
+<xs:schema targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" version="1.0" xmlns:cc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v3" xmlns:cmc="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v3" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v3" schemaLocation="CustomerCommon_v3_0.xsd"/>
+    <!-- Billing Account (full information) -->
+    <!-- Check the array-ed elements for correct length -->
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v3" schemaLocation="CustomerManagementCommonTypes_v3_0.xsd"/>
+    <xs:complexType name="BillingAccount">
+        <xs:sequence>
+            <xs:element maxOccurs="100" minOccurs="0" name="addresses" nillable="true" type="cc:Address"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="billingNames" nillable="true" type="cc:Name"/>
+            <xs:element minOccurs="0" name="billingAccountId" type="cc:billingAccountIdType"/>
+            <xs:element name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+            <xs:element name="billingMasterSourceId" type="xs:long"/>
+            <xs:element minOccurs="0" name="customerId" type="cc:customerIdType"/>
+            <xs:element maxOccurs="50" minOccurs="0" name="customerMarketSegment" nillable="true" type="cc:CustomerMarketSegment"/>
+            <xs:element maxOccurs="50" minOccurs="0" name="billingAccountRelationship" nillable="true" type="tns:BillingAccountRelationship"/>
+            <xs:element minOccurs="0" name="billingAccountExtension" type="tns:BillingAccountExtension"/>
+            <xs:element minOccurs="0" name="batchRunDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="batchRunId" type="xs:long"/>
+            <xs:element minOccurs="0" name="billCycleCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>       Current billing cycle.      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="newBillCycleCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>       Pending billing cycle.
+                        Billing system will determine       when this
+                        bill cycle will become the current.      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="billCycleFreqCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="billInsertSuppressionIndicator" type="xs:string"/>
+            <xs:element minOccurs="0" name="billPreferredLanguageCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="billRedirectAddressText" type="xs:string"/>
+            <xs:element minOccurs="0" name="billRedirectEffectiveEndDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="billRedirectEffectiveStartDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="billRedirectOperatorId" type="xs:string"/>
+            <xs:element minOccurs="0" name="billRedirectOperatorName" type="xs:string"/>
+            <xs:element minOccurs="0" name="billRedirectReasonCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="billReturnEnvelopeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="brandId" type="xs:long"/>
+            <xs:element minOccurs="0" name="checkDigitNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="collectionStartDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="collectionEndDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="collectionsInd" type="xs:string"/>
+            <xs:element minOccurs="0" name="currencyCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="currentBalanceAmount" type="xs:double"/>
+            <xs:element minOccurs="0" name="entityTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="followUpDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="openDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="PAPSSuspensionIndicator" type="xs:string"/>
+            <xs:element minOccurs="0" name="riskIndicatorCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="statusCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="statusDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="suppressionEndDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="suppressionStartDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="telephoneNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="collectionsAgencyReferral" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>       Represents a referrral of a
+                        Billing Account to a       collections Agency      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="collectionsSupInd" type="xs:string"/>
+            <xs:element minOccurs="0" name="lastBillTotalDueAmount" type="xs:double"/>
+            <xs:element minOccurs="0" name="lastPaymentAmount" type="xs:double"/>
+            <xs:element minOccurs="0" name="lastPaymentReturnAmount" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation>       Amount of the most recent
+                        returned NSF       payment since last statement      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="lastPaymentReturnDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>       Date of the most recent
+                        returned NSF payment      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="paymentDueDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="paymentSinceLastStatement" type="xs:double"/>
+            <xs:element minOccurs="0" name="returnDueDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>       Date of the most recent
+                        returned NSF payment      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="writeOffDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>       Writeoff date. (used by
+                        Collections)      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="100" minOccurs="0" name="billMediaList" type="tns:BillMedia"/>
+            <xs:element minOccurs="0" name="payChannel" type="tns:PayChannel"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="associatedBillingAccountList" type="cmc:BillingAccountAssociation"/>
+            <xs:element minOccurs="0" name="billingArrangementId" type="xs:long"/>
+            <xs:element minOccurs="0" name="billingArrangementNumber" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- Billing Account Extension -->
+    <xs:complexType name="BillingAccountExtension">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="billingAccountId" type="cc:billingAccountIdType"/>
+            <xs:element minOccurs="0" name="billingAccountExtensionId" type="xs:long"/>
+            <xs:element minOccurs="0" name="activeIndicator" type="xs:string"/>
+            <xs:element minOccurs="0" name="billingAccntAssgntStatusCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="billingAccountClassCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="billingAccountNodeTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="billingAccountRefId" type="xs:long"/>
+            <xs:element minOccurs="0" name="directAssignableIndicator" type="xs:string"/>
+            <xs:element minOccurs="0" name="primaryServiceResourceTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="primaryServiceResourceValueId" type="xs:string"/>
+            <xs:element minOccurs="0" name="referenceTelephoneNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="subscriberCount" type="xs:string"/>
+            <xs:element minOccurs="0" name="sourceAccountTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="sourceAccountSubTypeCode" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- Billing Account Relationship -->
+    <xs:complexType name="BillingAccountRelationship">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="billingAccountId" type="cc:billingAccountIdType"/>
+            <xs:element minOccurs="0" name="billingAccountRelationshipId" type="xs:long"/>
+            <xs:element minOccurs="0" name="billingRelationshipTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="relatedBillingAccountId" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PayChannel">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="id" type="cc:payChannelIdType"/>
+            <xs:element minOccurs="0" name="payChannelNumber" type="cc:payChannelNumberType"/>
+            <xs:element minOccurs="0" name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+            <xs:element minOccurs="0" name="billingMasterSourceId" type="xs:long"/>
+            <xs:element minOccurs="0" name="payChannelCategoryCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="paymentMethodCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>       This describes the choice
+                        of payment such as       preauthorized, Credit
+                        Card and Direct Debit or       Invoice, Check,
+                        etc.      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="payChannelOpenDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="payChannelStatusCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>       Status of Pay channel C -
+                        CANCELLED N -       NOT_APPLICATIVE O - OPENED T
+                        - TENTATIVE      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="payChannelStatusDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="maxPAPSDeductionAmount" type="xs:float">
+                <xs:annotation>
+                    <xs:documentation>       Maximum amount deducted for
+                        Payment Method       (Direct Debit/Credit Card).
+                        If the balance       amount is greater than the
+                        maximum the remaining       amount will be
+                        invoiced. All amounts are       invoiced but the
+                        bill includes indication as to       the total
+                        amount due.      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="PAPSSuspensionInd" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditCardTypeCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditCardExipryDt" type="xs:date"/>
+            <xs:element minOccurs="0" name="creditCardLastNDigitNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditCardSecurityNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="bankTransitNum" type="xs:string"/>
+            <xs:element minOccurs="0" name="bankBranchNum" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BillMedia">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="id" type="cc:billMediaIdType">
+                <xs:annotation>
+                    <xs:documentation>       Internal Customer ODS
+                        identifier of this record      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="mediaTypeCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>       Bill media type code as
+                        defined in the codes       table      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="copyCount" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>       Number of copies delivered
+                        to the owner of the       billing account for
+                        this bill media type      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="formatCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="detailLevelCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="eBillEmail" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>       The email where the eBill
+                        will be sent to.  It is mandatory field if the
+                        media type code is eBill      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="ePostUserId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>       The user ID of ePost
+                        registration.  It is manadatory field if the
+                        media type code is ePost      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

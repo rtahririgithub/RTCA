@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings
+   xmlns="http://java.sun.com/xml/ns/jaxws"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   wsdlLocation="EnterpriseCreditProfileManagementSvc_v2_0.wsdl">
+
+   <enableWrapperStyle>false</enableWrapperStyle>
+   
+   <bindings node="wsdl:definitions/wsdl:service[@name='EnterpriseCreditProfileManagementSvc_v2_0']">
+      <class name="EnterpriseCreditProfileManagementServiceStub" />
+   </bindings>
+
+   <bindings node="wsdl:definitions/wsdl:portType[@name='EnterpriseCreditProfileManagementSvc_v2_0_PortType']">
+      <class name="EnterpriseCreditProfileManagementServicePortType" />
+   </bindings>
+
+</bindings>

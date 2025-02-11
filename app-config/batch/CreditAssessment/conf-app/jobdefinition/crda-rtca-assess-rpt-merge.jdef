@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+
+   <bean id="configurationFramework"
+      class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>joinReports1</value>
+               </property>
+            </bean>
+            <bean id="STEP02" parent="baseStep">		      
+	       <property name="moduleName">
+	          <value>joinReports2</value>
+	       </property>
+            </bean>
+            <bean id="STEP03" parent="baseStep">		      
+	       <property name="moduleName">
+	          <value>joinReports3</value>
+	       </property>
+            </bean>
+            <bean id="STEP04" parent="baseStep">		      
+	       <property name="moduleName">
+	          <value>joinReports4</value>
+	       </property>
+            </bean>
+            <bean id="STEP05" parent="baseStep">		      
+	       <property name="moduleName">
+	          <value>joinReports5</value>
+	       </property>
+            </bean> 
+            <bean id="STEP06" parent="baseStep">
+               <property name="moduleName" value="cmdExec-Step01"/>
+            </bean>
+         </list>
+       </property>
+    </bean>
+    <bean id="joinReports1" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_join_credit_assessment.sh</value></property>
+       <property name="arg"> <value>${processbox}/${report_rtca_1/outputFilename}1_${L_CRDA_ODATE}.dat ${processbox}/${report_rtca_1/outputFilename}2_${L_CRDA_ODATE}.dat  ${processbox}/${report_rtca_1/outputFilename}_m1_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log}</value></property>
+    </bean>
+    <bean id="joinReports2" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_join_credit_assessment1.sh</value></property>
+       <property name="arg"> <value>${processbox}/${report_rtca_1/outputFilename}_m1_${L_CRDA_ODATE}.dat ${processbox}/${report_rtca_1/outputFilename}3_${L_CRDA_ODATE}.dat  ${processbox}/${report_rtca_1/outputFilename}_m2_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log1}</value></property>              
+    </bean>
+    <bean id="joinReports3" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_join_credit_assessment4.sh</value></property>
+       <property name="arg"> <value>${processbox}/${report_rtca_1/outputFilename}_m2_${L_CRDA_ODATE}.dat ${processbox}/${report_rtca_1/outputFilename}6_${L_CRDA_ODATE}.dat  ${processbox}/${report_rtca_1/outputFilename}_m3_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log2}</value></property>
+    </bean>
+    <bean id="joinReports4" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_join_credit_assessment5.sh</value></property>
+       <property name="arg"> <value>${processbox}/${report_rtca_1/outputFilename}_m3_${L_CRDA_ODATE}.dat ${processbox}/${report_rtca_1/outputFilename}7_${L_CRDA_ODATE}.dat  ${processbox}/${report_rtca_1/outputFilename}_m4_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log3}</value></property>
+    </bean>
+    <bean id="joinReports5" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_filter.sh</value></property>
+       <property name="arg"> <value>${processbox}/${report_rtca_1/outputFilename}_m4_${L_CRDA_ODATE}.dat  ${processbox}/${report_rtca_1/outputFilename}_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log4}</value></property>
+    </bean> 
+    <bean id="cmdExec-Step01" class="com.telus.framework.batch.module.ExecModule">
+       <property name="executable" value="${step}/rtca-report.sh"/>
+       <property name="arg"> <value>${syncsort}/rtca_crd_asses_rpt_header.txt ${L_RPT_START_DATE} ${L_RPT_END_DATE} ${processbox}/${report_rtca_1/outputFilename}_${L_CRDA_ODATE}.dat ${outbox}/${report_rtca_1/outputFilename}_${L_CRDA_ODATE}.csv  ${processbox}/RTCA_Credit_Assessment_Report_Date_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output" value="${report/log5}"/>
+    </bean>
+</beans>

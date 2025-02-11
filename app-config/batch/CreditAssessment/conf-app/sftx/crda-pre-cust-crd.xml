@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <!-- =============================================================== -->
+  <bean id="telusSpringConfigurer" lazy-init="true"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+
+  <!-- =============================================================== -->
+  <bean id="crda-pre-cust-crd" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.RequestConfiguration">
+    <property name="requestNm" value="crda-pre-cust-crd" />
+    <property name="sourceSftpUserId" value="${G_SFTP_UX_ACCT_PREFIX}${G_SFTP_CRD_ACCT_SUFFIX}" /> 
+    <property name="sourceServerName" value="${G_CRD_BATCH_SERVER}" />
+    <property name="sourceServerTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+    <!--property name="reqTransferTypeCd" value="${SFTX_TRF_TYPE_SCP}" /-->
+    <property name="postAction" value="remove" />
+    <property name="pushOrPullInd" value="pull" />
+    <property name="recipients">
+      <list>
+        <bean id="recipient1" lazy-init="true"      
+      class="com.telus.framework.filetransfer.config.RecipientConfiguration">
+          <property name="serverName" value="${G_CRD_BATCH2_SVR}" />
+          <property name="serverTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+          <property name="sftpUserId" 
+              value="${G_SFTP_UX_ACCT_PREFIX}${G_SFTP_CRD_ACCT_SUFFIX}" />
+          <property name="files">
+            <list>
+               <ref bean="targetfile1" />
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+  <bean id="targetfile1" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.FileConfiguration">
+        <property name="overwrite" value="true" />
+        <property name="sourcePath" value="${G_CRD_NS_UX_SFTP}/${G_ENV}/outbox/crda" />
+        <property name="filePattern" value="CREDIT_PROFILE.DAT.*" />
+        <property name="recipientPath" value="${G_CRD_NS_UX_SFTP}/${G_ENV}/inbox/crda" />
+    </bean>
+</beans>

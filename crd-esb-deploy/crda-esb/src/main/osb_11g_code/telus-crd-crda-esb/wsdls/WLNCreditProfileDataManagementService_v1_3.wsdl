@@ -1,0 +1,151 @@
+<WL5G3N0:definitions name="WLNCreditProfileDataManagementService_v1_3.wsdl" targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileDataManagementService_1" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" xmlns:WL5G3N2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:WL5G3N3="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:WL5G3N4="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileDataManagementService_1" xmlns:WL5G3N5="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:documentation>Provides operations to manage Wireline Credit Profile.</WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xs:schema targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileDataManagementService_1" xmlns:cp="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:iface="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileDataManagementService_1" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" schemaLocation="WLNCreditProfileDataManagementServiceRequestResponse_v1_3.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" schemaLocation="Exceptions_v1_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="ping_v1.xsd"/>
+    </xs:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="updateCreditProfile">
+    <WL5G3N0:part element="WL5G3N1:updateCreditProfile" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCreditProfileResponse">
+    <WL5G3N0:part element="WL5G3N1:updateCreditProfileResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCreditWorthiness">
+    <WL5G3N0:part element="WL5G3N1:updateCreditWorthiness" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCreditWorthinessResponse">
+    <WL5G3N0:part element="WL5G3N1:updateCreditWorthinessResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part element="WL5G3N2:ping" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part element="WL5G3N2:pingResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ServiceException">
+    <WL5G3N0:part element="WL5G3N3:ServiceException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="PolicyException">
+    <WL5G3N0:part element="WL5G3N3:PolicyException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="WLNCreditProfileDataManagementService_v1_3_PortType">
+    <WL5G3N0:operation name="updateCreditProfile">
+      <WL5G3N0:input message="WL5G3N4:updateCreditProfile"/>
+      <WL5G3N0:output message="WL5G3N4:updateCreditProfileResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateCreditWorthiness">
+      <WL5G3N0:input message="WL5G3N4:updateCreditWorthiness"/>
+      <WL5G3N0:output message="WL5G3N4:updateCreditWorthinessResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input message="WL5G3N4:ping"/>
+      <WL5G3N0:output message="WL5G3N4:pingResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="WLNCreditProfileDataManagementService_v1_3_SOAP" type="WL5G3N4:WLNCreditProfileDataManagementService_v1_3_PortType">
+    <WL5G3N5:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="updateCreditProfile">
+      <WL5G3N0:documentation>This service operation updates primary credit profile in Credit Management PDS and links it with other customers whose credit profiles are "hard-matched" on either of five identification fields(SIN, Driver License, Passport Number, Provincial ID, and Healthcare Number). It also unlinks it from customers whose credit profiles no longer match the updated credit profile provided by the caller. From input perspective, only the fields that needs to be updated need to be passed except for CreditAddress and CreditValue where whole object needs to be passed if any of the fields inside CreditAddress and CreditValue is modified. Identification fields must be passed as encrypted according to TELUS framework.
+		RTCA Program changes: 
+		   Add support to update credit worthiness.
+		   FR573186: Remove logic to validate Credit Value during Credit Profile Update
+		   FR582163: Add Guarantor information in Credit Profile
+		   Upgrade Ref ODS to Ref PDS for all operations.
+		   Update credit value and fraud indicator, Any change in these attributes triggers a new credit assessment.
+		IO Phase 2 (CR581482):
+		   Add optional RemoveCreditIdentificationInfo complex type to indicate removal of credit ids ( Driving License, SIN, Health Card, Passport and Provincial Id ). This will expire the indicated credit id in the WLN system.
+		   Service will no longer accept empty value or zero( or zeros ) for credit ids. It will throw policy exception with the appropriate error code.
+		   As a result of update or remove of credit ids, WLN system will rebuild the linked customers based upon remaining credit ids.
+		RTCA 1.5:
+		   Add optional attribute "Province of Current Residence" part of credit profile
+		</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateCreditProfile"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateCreditWorthiness">
+      <WL5G3N0:documentation>This service operation updates credit worthiness related to the credit profile. It will be called by CreditAssessmentBusinessProcess service to update credit wortiness once full credit assessment has completed successfully.
+		RTCA 1.5:
+		  This operation will be enhanced to store new attributes in addition to existing attributes into Credit Profile DB(credit worthiness data).
+		     Decision Code
+		     Last assessment date
+		     First assessment date
+		     Credit Value Assessment Date
+		</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateCreditWorthiness"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:documentation>
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+    
+  
+  
+    
+      
+    
+  
+</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="ping"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="WLNCreditProfileDataManagementService_v1_3">
+    <WL5G3N0:port binding="WL5G3N4:WLNCreditProfileDataManagementService_v1_3_SOAP" name="WLNCreditProfileDataManagementServicePort">
+      <WL5G3N5:address location="http://cm-creditmgmt-west-dv01.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileDataManagement/WLNCreditProfileDataManagementService_v1_3"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

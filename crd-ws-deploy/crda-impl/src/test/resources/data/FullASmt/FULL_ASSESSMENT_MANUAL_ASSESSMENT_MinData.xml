@@ -1,0 +1,33 @@
+<ent:performCreditAssessment xmlns:ent="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2">
+	<ent:creditAssessmentRequest xsi:type="ent:ExistingCustomerCreditAssessmentRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<ent:creditAssessmentTypeCd>FULL_ASSESSMENT</ent:creditAssessmentTypeCd>
+		<ent:creditAssessmentSubTypeCd>MANUAL_ASSESSMENT</ent:creditAssessmentSubTypeCd>
+		<ent:customerID>119035483</ent:customerID>
+		<ent:applicationID>123</ent:applicationID>
+		<ent:lineOfBusiness>WIRELINE</ent:lineOfBusiness>
+		<ent:commentTxt>ful_auto_asmt text</ent:commentTxt>
+		<ent:creditCustomerInfo>
+			<cred:customerID xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">119035483</cred:customerID>
+			<cred:personName xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">
+				<cred:firstName>FN27350</cred:firstName>
+				<cred:lastName>LN27350</cred:lastName>
+			</cred:personName>
+			<cred:customerCreationDate xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">2014-01-13Z</cred:customerCreationDate>
+			<cred:customerMasterSourceID xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">1012</cred:customerMasterSourceID>
+			<cred:customerStatusCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">AC</cred:customerStatusCd>
+			<cred:customerTypeCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">R</cred:customerTypeCd>
+			<cred:customerSubTypeCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">I</cred:customerSubTypeCd>
+		</ent:creditCustomerInfo>
+		<ent:creditProfileData>
+			<cred:creditProfileID xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">8619450857</cred:creditProfileID>
+			<cred:customerID xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">119035483</cred:customerID>
+			<cred:creditProfileStatusCd xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1">A</cred:creditProfileStatusCd>
+			<wir:creditWorthiness xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2">
+				<wir:creditValueCd>R</wir:creditValueCd>
+			</wir:creditWorthiness>
+		</ent:creditProfileData>
+	</ent:creditAssessmentRequest>
+	<ent:auditInfo>
+		<ect:userId xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wlnpxcy="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ect:userId>
+	</ent:auditInfo>
+</ent:performCreditAssessment>

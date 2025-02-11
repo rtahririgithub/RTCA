@@ -1,0 +1,35 @@
+    <wcp:findMatchingSearchResultList xmlns:wcp="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+      <wcp:findMatchingSearchResult>
+        <wcp:customerData>
+          <!--<fmsr:sourceSystemID>{$sourceSystemID}</fmsr:sourceSystemID>-->
+          <wcp:customerId/>
+          <wcp:customerCreationDate>2018-06-13T10:34:39Z</wcp:customerCreationDate>
+          <wcp:customerStatusCd>2018-06-13T10:34:39Z</wcp:customerStatusCd>
+          <wcp:customerTypeCd>Tentative</wcp:customerTypeCd>
+          <wcp:customerSubTypeCd/>
+          <wcp:creditIdentification>
+            <wcp:socialInsuranceNum/>
+            <wcp:creditCardTokenTxt/>
+            <wcp:creditCardFirstSixNum/>
+            <wcp:creditCardLastFourNum/>
+            <wcp:healthCardNumber/>
+            <wcp:passport>
+              <wcp:passportNumber/>
+              <wcp:countryCd/>
+            </wcp:passport>
+            <wcp:provincialIdCard>
+              <wcp:provincialId/>
+              <wcp:provinceCd/>
+            </wcp:provincialIdCard>
+          </wcp:creditIdentification>
+          <wcp:firstName>CÃDEZ</wcp:firstName>
+          <wcp:lastName>ÃÂUVRE</wcp:lastName>
+          <wcp:middleName/>
+          <wcp:birthDate>1990-03-01T00:00:00Z</wcp:birthDate>
+        </wcp:customerData>
+      </wcp:findMatchingSearchResult>
+      <wcp:findMatchingSearchResultIndicator>
+        <wcp:indicator>true</wcp:indicator>
+        <wcp:reasonCd/>
+      </wcp:findMatchingSearchResultIndicator>
+    </wcp:findMatchingSearchResultList>

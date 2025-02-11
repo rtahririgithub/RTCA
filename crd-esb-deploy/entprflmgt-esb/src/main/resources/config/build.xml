@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="build-ESB-Config-files" default="all">
+	<property name="wl.home" value="C:/Oracle/Middleware/Oracle_Home/wlserver"/>
+	<taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="clientgen" classname="weblogic.wsee.tools.anttasks.ClientGenTask" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="xmlbean" classname="com.bea.xbean.tool.XMLBean" classpath="${wl.home}/server/lib/xbean.jar"/>
+	<property name="src" value="${basedir}/../src"/>
+
+	<target name="all">
+		<!-- Generate the AT01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_AT01.xml"/>
+			<!-- AT02 maps to AT01CustomerManagementEntWestESB  -->
+			<param name="jmsServer" value="ln98428.ent.agt.ab.ca:20671,ln98429.ent.agt.ab.ca:20671"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-pt168.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-at01.tsl.telus.com"/>
+		</antcall>
+
+		<!-- DV03 -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_DV03.xml"/>
+			<!-- AT02 maps to AT01CustomerManagementEntWestESB  -->
+			<param name="jmsServer" value="ln98421.corp.ads:10671"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-pt148.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-at02.tsl.telus.com"/>
+		</antcall>
+		
+		<!-- AT04 -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_AT04.xml"/>
+			<!-- AT02 maps to AT01CustomerManagementEntWestESB  -->
+			<param name="jmsServer" value="ln98945.corp.ads:24671,ln98946.corp.ads:24671"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-pt168.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-at04.tsl.telus.com"/>
+		</antcall>
+
+		<!-- Generate the PT01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_PT01.xml"/>
+			<!-- AT02 maps to PT01CustomerManagementEntWestESB -->
+			<param name="jmsServer" value="ln98440.ent.agt.ab.ca:30671,ln98441.ent.agt.ab.ca:30671"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-pt148.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-at02.tsl.telus.com"/>
+		</antcall>
+
+		<!-- Generate the PT06 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_PT06.xml"/>
+			<!-- AT02 maps to PT01CustomerManagementEntWestESB -->
+			<param name="jmsServer" value="ln98439.corp.ads:36671,ln98438.corp.ads:36671"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-pt148.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-pt06.tsl.telus.com"/>
+		</antcall>
+		
+			<!-- Generate the AT02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_AT02.xml"/>
+			<!-- AT02 maps to PT01CustomerManagementEntWestESB -->
+			<param name="jmsServer" value="ln98440.ent.agt.ab.ca:30671,ln98441.ent.agt.ab.ca:30671"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-pt148.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-at02.tsl.telus.com"/>
+		</antcall>
+
+
+		<!-- Generate the PT02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_PT02.xml"/>
+			<!-- It maps to PT02CustomerManagementEntWestESB -->
+			<param name="jmsServer" value="ln98432.ent.agt.ab.ca:31671,ln98433.ent.agt.ab.ca:31671"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-pt148.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-pt02.tsl.telus.com"/>
+		</antcall>
+
+		<!-- Generate the ST01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_ST01.xml"/>
+			<!-- It maps to STCustomerManagementEntWestESB -->
+			<param name="jmsServer" value="ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-st101.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-st01.tsl.telus.com"/>
+		</antcall>
+		<!-- Generate the ST02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_ST02.xml"/>
+			<!-- It maps to STCustomerManagementEntWestESB -->
+			<param name="jmsServer" value="ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-st101.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-st02.tsl.telus.com"/>
+		</antcall>
+		<!-- Generate the PS customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_PS.xml"/>
+			<!-- This is not known yet -->
+			<param name="jmsServer" value="ln98432.ent.agt.ab.ca:31671,ln98433.ent.agt.ab.ca:31671"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-ps101.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-ps.tsl.telus.com"/>
+		</antcall>
+
+		<!-- Generate the PR customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-entprflmgt-esb-CustomizationFile_Template.xml"/> 
+			<param name="destfile" value="telus-crd-entprflmgt-esb-CustomizationFile_PR.xml"/>
+			<!-- This is not known yet -->
+			<param name="jmsServer" value="lp97302.ent.agt.ab.ca:50681,lp97303.ent.agt.ab.ca:50681"/>
+			<!-- WLS Credit Profile Data Mgmt Service -->
+			<param name="wlsCreditProfileDataMgmtService" value="soa-mp-laird-pr.tsl.telus.com"/>
+			<!-- WLN Credit Profile Data Mgmt Service -->
+			<param name="wlnCreditProfileDataMgmtService" value="soa-mp-toll-pr.tsl.telus.com"/>
+		</antcall>
+	</target>
+	
+	<!-- target to generate a platform specific customization file -->
+	<target name="generateCustomizationFile">
+		<delete file="${destfile}"/>		
+		<copy file="${sourcefile}" tofile="${destfile}"/>
+		<replaceregexp file="${destfile}/"
+			match="JMS_HOST_PORT_PLACEHOLDER"
+			replace="${jmsServer}"
+			byline="true"/>
+		<replaceregexp file="${destfile}/"
+			match="soa-mp-laird-PLACEHOLDER" 
+			replace="${wlsCreditProfileDataMgmtService}"
+			byline="true"/>
+		<replaceregexp file="${destfile}/"
+			match="soa-mp-toll-PLACEHOLDER"
+			replace="${wlnCreditProfileDataMgmtService}"
+			byline="true"/>
+	</target>
+</project>

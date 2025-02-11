@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Module.WS -->
+
+	<parent>
+		<groupId>telus.credit.crdmgmt.crd-shared</groupId>
+		<artifactId>pom-crd-shared</artifactId>
+		<version>4.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>BlazeCreditSvc</artifactId>
+	<name>BlazeCreditSvc</name>
+	<version>2.0.3-SNAPSHOT</version>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+			<version>0.6.4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- http://geertschuring.wordpress.com/2009/06/26/how-to-create-a-webservice-client-with-maven-and-jax-ws/ 
+				How to create a webservice client with Maven and JAX-WS -->
+
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<configuration>
+					<verbose>true</verbose>
+                	<forceRegenerate>true</forceRegenerate>  
+                	<removeOldOutput>false</removeOldOutput>
+                	<vmArgs> <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg> </vmArgs> 
+                	<args>
+                    	<arg>-enableIntrospection</arg>
+                    	<arg>-XtoString</arg>
+                    	<arg>-Xequals</arg>
+                	</args>
+					<schemaDirectory>src/main/resources/wsdls</schemaDirectory>
+					
+					<schemaIncludes>
+						<include>CreditCommon_v2_1.xsd</include>
+						<include>FICOCreditAssessmentInterfaceTypes_v2_1.xsd</include>
+						<include>FICODepositCalculatorInterfaceTypes_v1_1.xsd</include>
+						<include>FICOSimulatorBureauInterfaceTypes_v1_1.xsd</include>
+						<include>Exceptions_v1_0.xsd</include>
+					</schemaIncludes>
+					<bindingDirectory>src/main/resources/wsdls</bindingDirectory>
+					
+					<bindingIncludes>
+						<include>binding_schemalocation_v1_0.xjb</include>
+					</bindingIncludes>
+					
+					<generateDirectory>src/main/generated-sources/</generateDirectory>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,2 @@
+${timestamp}
+${project.version}

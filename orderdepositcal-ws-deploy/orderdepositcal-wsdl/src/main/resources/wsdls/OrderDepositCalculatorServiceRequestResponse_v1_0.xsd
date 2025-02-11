@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wcpmt="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:wcmt="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2_1.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0"
+                     schemaLocation="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0.xsd"/>	
+    <xs:element name="calculateDeposit">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="calculationTypeCd" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>ESTIMATE. FINAL.Defined in Ref PDS</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="orderData" type="codt:OrderDataDetail" minOccurs="0"/>
+				<xs:element name="applicationID" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>CMDB ID</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="channelID" type="xs:string" minOccurs="0"/>
+				<xs:element name="customerActivePayChannelNumberList" type="codt:PayChannelNumberList" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>List of Pay Channel Numbers assigned owned by this customer.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="auditInfo" type="ent:AuditInfo">
+					<xs:annotation>
+						<xs:documentation>userId: is required with AgentID as value. Required for tracking info.
+orignatorApplicationId : is required . It is the same as ApplicationID  with caller application id CMDB ID as value</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="calculateDepositResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="codt:DepositCalulationResult"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getEquipmentQualificationList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerID" type="xs:long"/>
+				<xs:element name="creditWorthiness" type="wcpmt:CreditWorthiness" minOccurs="0"/>
+				<xs:element name="auditInfo" type="ent:AuditInfo">
+					<xs:annotation>
+						<xs:documentation>userId: is required with AgentID as value. Required for tracking info.
+orignatorApplicationId : is required . It is the same as ApplicationID  with caller application id CMDB ID as value</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getEquipmentQualificationListResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="equipmentCategoryQualificationList" type="codt:EquipmentCategoryQualificationList"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

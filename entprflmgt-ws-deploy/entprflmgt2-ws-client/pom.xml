@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20150306.Application.Complete -->
+
+	<parent>
+		<groupId>telus.credit.crdmgmt.entprflmgt-ws-deploy</groupId>
+		<artifactId>pom-entprflmgt-ws-deploy</artifactId>
+		<version>4.0.0-SNAPSHOT</version>
+    </parent>
+
+	<artifactId>entprflmgt2-ws-client</artifactId>
+	<name>crd-entprflmgt2-ws-client</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+		</dependency>		
+	</dependencies>	
+
+  <properties>
+      <genwsdl.service.definition>EnterpriseCreditProfileManagementSvcDefinition_v2_0.xml</genwsdl.service.definition>
+      <genwsdl.local.wsdl.file>EnterpriseCreditProfileManagementSvc_v2_0.wsdl</genwsdl.local.wsdl.file>
+	  <genwsdl.xmlToWsdl.xslt>http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/xmlToWsdl_v4_0.xslt</genwsdl.xmlToWsdl.xslt>
+   </properties>     
+ 
+
+
+   <build>
+      <plugins>
+			<plugin>
+				<groupId>org.jvnet.jax-ws-commons</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>	
+				<executions>
+					<execution>	
+						<id>GenService</id>	
+						<configuration>
+							<!--<genJWS>true</genJWS>-->
+								<target>2.1</target>
+								
+								<xjcArgs>
+									<xjcArg>-Xcollection-setter-injector</xjcArg>
+									<xjcArg>-XtoString</xjcArg>
+									<xjcArg>-Xequals</xjcArg>
+									<xjcArg>-Xbg</xjcArg>
+								</xjcArgs>	
+							
+								<bindingFiles>
+									<bindingFile>binding_wsdl.xjb</bindingFile>
+									<bindingFile>binding_schema.xjb</bindingFile>
+								</bindingFiles>							
+								<wsdlFiles>
+									<wsdlFile>${genwsdl.local.wsdl.file}</wsdlFile>
+								</wsdlFiles>
+								<wsdlLocation>/wsdls/${genwsdl.local.wsdl.file}</wsdlLocation>
+						</configuration>
+					</execution>
+				</executions>
+				
+				<dependencies>				
+					<dependency>
+							<groupId>net.java.dev.vcc.thirdparty</groupId>
+							<artifactId>collection-setter-injector</artifactId>
+							<version>0.5.0-1</version>
+					</dependency>
+				</dependencies>		
+				
+			</plugin>
+			
+		</plugins>
+	</build>
+	
+</project>

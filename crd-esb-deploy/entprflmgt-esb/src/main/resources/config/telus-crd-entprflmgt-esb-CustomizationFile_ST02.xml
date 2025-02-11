@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cus:Customizations xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
+  <cus:customization xsi:type="cus:EnvValueCustomizationType">
+    <cus:description/>
+    <cus:envValueAssignments>
+      <xt:envValueType>Alert SNMP Trap</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/alerts/AlertDestinationForLogging</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Alert To Log</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/alerts/AlertDestinationForLogging</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">true</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Alert To Reporting Data</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/alerts/AlertDestinationForLogging</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineFastProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineFastProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681/eai.jms.wl.connection.CREDIT_PERSISTENT_CONN_FACTORY/eai.jms.wl.queue.CREDIT_PROFILE_FQ</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineFastProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-toll-st02.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileDataManagement/WLNCreditProfileDataManagementService_v1_3_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-toll-st02.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileDataManagement/WLNCreditProfileDataManagementService_v1_3_vs0</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessFastProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessFastProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681/eai.jms.wl.connection.CREDIT_PERSISTENT_CONN_FACTORY/eai.jms.wl.queue.CREDIT_PROFILE_FQ</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessFastProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessSlowProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessSlowProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681/eai.jms.wl.connection.CREDIT_PERSISTENT_CONN_FACTORY/eai.jms.wl.queue.CREDIT_PROFILE_SQ</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessSlowProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">1</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-laird-st101.tsl.telus.com/CMO/OrderMgmt/WLSCreditProfileDataManagementService/WLSCreditProfileDataManagementSvc_v2_0_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-laird-st101.tsl.telus.com/CMO/OrderMgmt/WLSCreditProfileDataManagementService/WLSCreditProfileDataManagementSvc_v2_0_vs0</URI>
+          <weight>1</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineSlowProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineSlowProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681/eai.jms.wl.connection.CREDIT_PERSISTENT_CONN_FACTORY/eai.jms.wl.queue.CREDIT_PROFILE_SQ</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Secure Connections to JMS Server</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineSlowProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementService_v1_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementService_v1_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-laird-st101.tsl.telus.com/CMO/OrderMgmt/WLSCreditProfileDataManagementService/WLSCreditProfileDataManagementService_v1_0_1_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementService_v1_0</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-laird-st101.tsl.telus.com/CMO/OrderMgmt/WLSCreditProfileDataManagementService/WLSCreditProfileDataManagementService_v1_0_1_vs0</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementService_v1_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementService_v1_0</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineProxy</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+  </cus:customization>
+  <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
+    <cus:description/>
+    <cus:query>
+      <xt:resourceTypes>ProxyService</xt:resourceTypes>
+      <xt:resourceTypes>AlertDestination</xt:resourceTypes>
+      <xt:resourceTypes>BusinessService</xt:resourceTypes>
+      <xt:envValueTypes>Service Retry Iteration Interval</xt:envValueTypes>
+      <xt:envValueTypes>Alert SNMP Trap</xt:envValueTypes>
+      <xt:envValueTypes>UDDI Auto Publish</xt:envValueTypes>
+      <xt:envValueTypes>Alert To Log</xt:envValueTypes>
+      <xt:envValueTypes>Service URI Weight</xt:envValueTypes>
+      <xt:envValueTypes>Service Retry Count</xt:envValueTypes>
+      <xt:envValueTypes>Secure Connections to JMS Server</xt:envValueTypes>
+      <xt:envValueTypes>Service URI</xt:envValueTypes>
+      <xt:envValueTypes>Alert To Reporting Data</xt:envValueTypes>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineSlowProxy</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/alerts/AlertDestinationForLogging</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessProxy</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementService_v1_0</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineProxy</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessSlowProxy</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineFastProxy</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessFastProxy</xt:path>
+      </xt:refsToSearch>
+      <xt:includeOnlyModifiedResources>false</xt:includeOnlyModifiedResources>
+      <xt:searchString>Search String</xt:searchString>
+      <xt:isCompleteMatch>false</xt:isCompleteMatch>
+    </cus:query>
+    <cus:replacement>Replacement String</cus:replacement>
+  </cus:customization>
+  <cus:customization xsi:type="cus:ReferenceCustomizationType">
+    <cus:description/>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineSlowProxy</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerSubDomain_v3_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementServiceRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CreditDepositTypes_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementSvcRequestResponse_v2_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCreditAssessmentTypes_v2_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CreditCommon_v1_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLNCreditProfileDataManagementService_v1_3</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineFastProxy</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessFastProxy</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessProxy</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineProxy</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessSlowProxy</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLNCreditProfileDataManagementServiceRequestResponse_v1_3</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/alerts/AlertDestinationForLogging</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/alerts/AlertDestinationForLogging</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCommonTypes_v7_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCommonTypes_v7_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerSubDomain_v3_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerSubDomain_v3_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerCommon_v3_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerCommon_v3_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCreditAssessmentTypes_v2_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCreditAssessmentTypes_v2_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CreditCommon_v1_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CreditCommon_v1_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/Exceptions_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/Exceptions_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLNCreditProfileDataManagementService_v1_3</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessProxy</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelessProxy</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementService_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementService_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/Exceptions_v3_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/Exceptions_v3_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerCommon_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerCommon_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/business_services/WLSCreditProfileDataManagementSvc_v2_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/ECA_CommonTypes_2_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/ECA_CommonTypes_2_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCommonTypes_v3_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCommonTypes_v3_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementServiceRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementServiceRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/ping_v1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/ping_v1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementSvcRequestResponse_v2_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLSCreditProfileDataManagementSvcRequestResponse_v2_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ServiceAccount</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/service_accounts/Credit_Mgmt_Service_Account</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ServiceAccount</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/service_accounts/Credit_Mgmt_Service_Account</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCommonTypes_v6_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/EnterpriseCommonTypes_v6_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineProxy</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/proxies/CPMSWirelineProxy</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerCommon_v4_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/CustomerCommon_v4_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLNCreditProfileDataManagementServiceRequestResponse_v1_3</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>CMO/OrderMgmt/CreditProfileManagementServiceV2/wsdls/WLNCreditProfileDataManagementServiceRequestResponse_v1_3</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+  </cus:customization>
+</cus:Customizations>

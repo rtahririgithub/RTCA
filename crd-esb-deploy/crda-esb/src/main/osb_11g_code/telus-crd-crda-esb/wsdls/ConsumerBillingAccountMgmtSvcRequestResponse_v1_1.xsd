@@ -1,0 +1,102 @@
+<xs:schema targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerBillingAccountMgmtSvcRequestResponse_v1" version="1.1" xmlns:cbm="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" xmlns:cc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v3" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v4" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerBillingAccountMgmtSvcRequestResponse_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v4" schemaLocation="EnterpriseCommonTypes_v4_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v3" schemaLocation="CustomerCommon_v3_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" schemaLocation="Customer_Billing_Sub_Domain_v2_1.xsd"/>
+    <!-- BillingAcccount contains a list of BillingAccountAssociations, thus update to Customer_Billing_Sub_Domain is required  -->
+    <!--  Create Billing Account Request/Response messages -->
+    <xs:element name="createBillingAccount">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="newBillingAccount" type="cbm:BillingAccount"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createBillingAccountResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billingAccount" type="cbm:BillingAccount"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- Get Billing Account Request/Response messages -->
+    <xs:element name="getBillingAccount">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:annotation>
+                    <xs:documentation>        Billing system IDs:
+                        129  ADCOM    Advance Communications
+                        103  ARBOR    ARBOR          116  CABSA
+                        Carrier Access Billing AB          117  CABSB
+                        Carrier Access Billing BC          108  CADVISN
+                        Cadvision          119  CBSSTQ    TELUS Quebec
+                        CBSS          110  CONCERT   Concert
+                        101  COREA    Core AB          102  COREB
+                        Core BC          127  INFORM    Inform
+                        105  INFRANET   Infranet          107  PSINET
+                        PSINet          104  SAPSD    SAP-SD
+                        164  SAPSD_XD   Mobility Dealers data billed
+                        through        130  TM KNOWBILITY  TELUS
+                        Mobility - Knowbility        106  TNS/Williams
+                        TNS/Williams (TELUS National Services)       </xs:documentation>
+                </xs:annotation>
+                <xs:element name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+                <xs:element name="billingSystemId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getBillingAccountResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="billingAccount" type="cbm:BillingAccount"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getBillingAccountListByCustomerId">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getBillingAccountListByCustomerIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="500" minOccurs="0" name="billingAccountList" type="cbm:BillingAccount"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="registerBillDeliveryMethod">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billingSystemId" type="xs:int"/>
+                <xs:element name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+                <xs:element name="billMedia" type="cbm:BillMedia"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="registerBillDeliveryMethodResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deregisterBillDeliveryMethod">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billingSystemId" type="xs:int"/>
+                <xs:element name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+                <xs:element name="billMediaTypeCode" type="xs:string"/>
+                <xs:element minOccurs="0" name="epostUserid" type="xs:string"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deregisterBillDeliveryMethodResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billMedia" type="cbm:BillMedia"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

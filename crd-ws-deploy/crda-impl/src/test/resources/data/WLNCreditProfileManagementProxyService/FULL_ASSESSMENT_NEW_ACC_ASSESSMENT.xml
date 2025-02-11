@@ -1,0 +1,21 @@
+<tns:assessCreditWorthiness xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2 AssessCreditWorthinessRequest_RequestResponse_v2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7">
+	<tns:assessCreditWorthinessRequest xsi:type="tns:AssessCreditWorthinessRequest">
+		<tns:creditAssessmentTypeCd>FULL_ASSESSMENT</tns:creditAssessmentTypeCd>
+		<tns:creditAssessmentSubTypeCd>REOPEN_ASSESSMENT</tns:creditAssessmentSubTypeCd>
+		<tns:customerID>22189607</tns:customerID>
+		<tns:commentTxt>123</tns:commentTxt>
+		<tns:applicationID>123</tns:applicationID>
+		<tns:channelID>123</tns:channelID>
+		<tns:lineOfBusiness>WIRELINE</tns:lineOfBusiness>
+	</tns:assessCreditWorthinessRequest>
+	<tns:auditInfo>
+		<ect:userId>123</ect:userId>
+		<ect:userTypeCode>123</ect:userTypeCode>
+		<ect:salesRepresentativeId>123</ect:salesRepresentativeId>
+		<ect:channelOrganizationId>123</ect:channelOrganizationId>
+		<ect:outletId>123</ect:outletId>
+		<ect:originatorApplicationId>123</ect:originatorApplicationId>
+		<ect:correlationId>123</ect:correlationId>
+		<ect:timestamp>2001-12-17T09:30:47.0Z</ect:timestamp>
+	</tns:auditInfo>
+</tns:assessCreditWorthiness>

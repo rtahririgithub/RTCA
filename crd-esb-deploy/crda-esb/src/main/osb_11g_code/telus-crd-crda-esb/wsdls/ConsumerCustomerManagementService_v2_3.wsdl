@@ -1,0 +1,467 @@
+<WL5G3N0:definitions name="ConsumerCustomerManagementService_v2_3.wsdl" targetNamespace="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" xmlns:WL5G3N2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:WL5G3N3="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:WL5G3N4="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" xmlns:WL5G3N5="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:documentation>Service to manage consumer customer information</WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xs:schema targetNamespace="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:iface="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:rr="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" schemaLocation="ConsumerCustomerMgmtSvcRequestResponse_v2_3.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" schemaLocation="Exceptions_v1_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="ping_v1.xsd"/>
+    </xs:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="createCustomer">
+    <WL5G3N0:part element="WL5G3N1:createCustomer" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createCustomerResponse">
+    <WL5G3N0:part element="WL5G3N1:createCustomerResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCustomer">
+    <WL5G3N0:part element="WL5G3N1:updateCustomer" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCustomerResponse">
+    <WL5G3N0:part element="WL5G3N1:updateCustomerResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consolidateCustomer">
+    <WL5G3N0:part element="WL5G3N1:consolidateCustomer" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consolidateCustomerResponse">
+    <WL5G3N0:part element="WL5G3N1:consolidateCustomerResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getFullCustomerInfo">
+    <WL5G3N0:part element="WL5G3N1:getFullCustomerInfo" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getFullCustomerInfoResponse">
+    <WL5G3N0:part element="WL5G3N1:getFullCustomerInfoResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getFullCustomerInfoByBillingAccountNumber">
+    <WL5G3N0:part element="WL5G3N1:getFullCustomerInfoByBillingAccountNumber" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getFullCustomerInfoByBillingAccountNumberResponse">
+    <WL5G3N0:part element="WL5G3N1:getFullCustomerInfoByBillingAccountNumberResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCustomerWithContacts">
+    <WL5G3N0:part element="WL5G3N1:getCustomerWithContacts" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCustomerWithContactsResponse">
+    <WL5G3N0:part element="WL5G3N1:getCustomerWithContactsResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchCustomer">
+    <WL5G3N0:part element="WL5G3N1:searchCustomer" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchCustomerResponse">
+    <WL5G3N0:part element="WL5G3N1:searchCustomerResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="quickSearchCustomer">
+    <WL5G3N0:part element="WL5G3N1:quickSearchCustomer" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="quickSearchCustomerResponse">
+    <WL5G3N0:part element="WL5G3N1:quickSearchCustomerResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateContactIndividual">
+    <WL5G3N0:part element="WL5G3N1:updateContactIndividual" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateContactIndividualResponse">
+    <WL5G3N0:part element="WL5G3N1:updateContactIndividualResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCustomerOfficialAddress">
+    <WL5G3N0:part element="WL5G3N1:updateCustomerOfficialAddress" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCustomerOfficialAddressResponse">
+    <WL5G3N0:part element="WL5G3N1:updateCustomerOfficialAddressResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCustomer">
+    <WL5G3N0:part element="WL5G3N1:getCustomer" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCustomerResponse">
+    <WL5G3N0:part element="WL5G3N1:getCustomerResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCustomerMarketingInformation">
+    <WL5G3N0:part element="WL5G3N1:getCustomerMarketingInformation" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCustomerMarketingInformationResponse">
+    <WL5G3N0:part element="WL5G3N1:getCustomerMarketingInformationResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part element="WL5G3N2:ping" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part element="WL5G3N2:pingResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ServiceException">
+    <WL5G3N0:part element="WL5G3N3:ServiceException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="PolicyException">
+    <WL5G3N0:part element="WL5G3N3:PolicyException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="ConsumerCustomerManagementService_v2_3_PortType">
+    <WL5G3N0:operation name="createCustomer">
+      <WL5G3N0:input message="WL5G3N4:createCustomer"/>
+      <WL5G3N0:output message="WL5G3N4:createCustomerResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateCustomer">
+      <WL5G3N0:input message="WL5G3N4:updateCustomer"/>
+      <WL5G3N0:output message="WL5G3N4:updateCustomerResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consolidateCustomer">
+      <WL5G3N0:input message="WL5G3N4:consolidateCustomer"/>
+      <WL5G3N0:output message="WL5G3N4:consolidateCustomerResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getFullCustomerInfo">
+      <WL5G3N0:input message="WL5G3N4:getFullCustomerInfo"/>
+      <WL5G3N0:output message="WL5G3N4:getFullCustomerInfoResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getFullCustomerInfoByBillingAccountNumber">
+      <WL5G3N0:input message="WL5G3N4:getFullCustomerInfoByBillingAccountNumber"/>
+      <WL5G3N0:output message="WL5G3N4:getFullCustomerInfoByBillingAccountNumberResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCustomerWithContacts">
+      <WL5G3N0:input message="WL5G3N4:getCustomerWithContacts"/>
+      <WL5G3N0:output message="WL5G3N4:getCustomerWithContactsResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchCustomer">
+      <WL5G3N0:input message="WL5G3N4:searchCustomer"/>
+      <WL5G3N0:output message="WL5G3N4:searchCustomerResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="quickSearchCustomer">
+      <WL5G3N0:input message="WL5G3N4:quickSearchCustomer"/>
+      <WL5G3N0:output message="WL5G3N4:quickSearchCustomerResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateContactIndividual">
+      <WL5G3N0:input message="WL5G3N4:updateContactIndividual"/>
+      <WL5G3N0:output message="WL5G3N4:updateContactIndividualResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateCustomerOfficialAddress">
+      <WL5G3N0:input message="WL5G3N4:updateCustomerOfficialAddress"/>
+      <WL5G3N0:output message="WL5G3N4:updateCustomerOfficialAddressResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCustomer">
+      <WL5G3N0:input message="WL5G3N4:getCustomer"/>
+      <WL5G3N0:output message="WL5G3N4:getCustomerResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCustomerMarketingInformation">
+      <WL5G3N0:input message="WL5G3N4:getCustomerMarketingInformation"/>
+      <WL5G3N0:output message="WL5G3N4:getCustomerMarketingInformationResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input message="WL5G3N4:ping"/>
+      <WL5G3N0:output message="WL5G3N4:pingResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="ConsumerCustomerManagementService_v2_3_SOAP" type="WL5G3N4:ConsumerCustomerManagementService_v2_3_PortType">
+    <WL5G3N5:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="createCustomer">
+      <WL5G3N0:documentation>
+            This operation creates a customer. Credit Profile is optional and can be NULL. If the
+            Credit Profile is NULL then a restricted Credit Profile will be created for the customer.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="createCustomer"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateCustomer">
+      <WL5G3N0:documentation>
+            This operation updates a customer.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateCustomer"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consolidateCustomer">
+      <WL5G3N0:documentation>
+            Consolidates two customers into one. As part of the process the following will be done:
+            	1. Moves all information from one customer (accounts,products,contacts) to another customer
+            	and expires the old customer.
+            	2. Updates the chosen customer PIN to the surviving customer. 
+            	3. Creates the authenticated link between the two customers.
+            	4. Updates the chosen Credit Profile to the surviving customer.
+            	5. Expires the Credit Profile of the expired customer.
+            	
+            	The following rules will be applied:
+            		1. Customers can only be one FFH (a customer with at least 1 FFH account)and one Mobility
+            		or two Mobility Customers. If both customers are FFH, an exception will be thrown. 
+            		2. The Mobility Customer will always be merged into the FFH Customer.
+            		3. In the case of two Mobility Customers, the Customer specified by customerId1
+            		will be merged into the Customer specified by customerId2.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="consolidateCustomer"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getFullCustomerInfo">
+      <WL5G3N0:documentation>
+            This operation returns a customer object provided a customer Id.  This customer contains
+            accounts, products, contacts and PIN. However, credit information is not included.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getFullCustomerInfo"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getFullCustomerInfoByBillingAccountNumber">
+      <WL5G3N0:documentation>
+            This operation returns a customer object provided a billing account number.  This customer contains
+            accounts, products, contacts and PIN. However, credit information is not included.          
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getFullCustomerInfoByBillingAccountNumber"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCustomerWithContacts">
+      <WL5G3N0:documentation>
+			This operation returns a customer object provided a customer Id.
+			This customer only contains customer attributes and contacts.
+			This customer does not include accounts, products, PIN, and credit information.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCustomerWithContacts"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchCustomer">
+      <WL5G3N0:documentation>
+            This operation returns a list of customers that match a provided search criteria.  
+            To search by service telephone number specify:
+            	serviceResourceTypeCode - the type code of the resource (e.g. TN for telephone number)
+            	serviceResourceIdValue - the telephone number
+            	resourceEffectiveDate - the date the telephone number is active. To retrieve only customers
+            		with the active phone number, the date should be the current system date.  
+              includePendingServiceResourceInd - if this is true, the resource will be searched against pending
+              resources and may return multiple results even if the resourceEffectiveDate is set to the current
+              date/time.                  
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="searchCustomer"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="quickSearchCustomer">
+      <WL5G3N0:documentation>
+            This operation returns a list of customers that match a provided quick search criteria.  
+            To search by service telephone number specify:
+				- active telephone number
+			To search by billing account number specify:
+				- billing account number
+				- an arrary of billing system ids                  
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="quickSearchCustomer"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateContactIndividual">
+      <WL5G3N0:documentation>
+            This operation updates a contact individual.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateContactIndividual"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateCustomerOfficialAddress">
+      <WL5G3N0:documentation>
+            This operation updates the Customer's official address.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateCustomerOfficialAddress"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCustomer">
+      <WL5G3N0:documentation>
+            This operation returns a customer object provided a customer Id.  This customer only contains
+            the basic Customer attributes with no accounts, products, contacts or credit information.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCustomer"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCustomerMarketingInformation">
+      <WL5G3N0:documentation>
+            This operation returns customer's marketing information, based on customer Id. 
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCustomerMarketingInformation"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:documentation>
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+    
+  
+  
+    
+      
+    
+  
+</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="ping"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="ConsumerCustomerManagementService_v2_3">
+    <WL5G3N0:port binding="WL5G3N4:ConsumerCustomerManagementService_v2_3_SOAP" name="ConsumerCustomerManagementServicePort">
+      <WL5G3N5:address location="http://cm-custinfomgmt-west-dv01.tsl.telus.com/CMO/InformationMgmt/CustomerManagement/ConsumerCustomerManagementService_v2_3"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant2">
+
+  <!-- Override configuraion defined to the deposit calculator location -->
+   <group name="ficoConfig">
+     <prop name="ficoCrdaAsmtConfigDir">${ficoConfig/ficoDepCalConfigDir}</prop>
+   </group>
+
+</group>

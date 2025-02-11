@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con3:SoapBindingType" xmlns:con3="http://www.bea.com/wli/sb/services/bindings/config">
+      <con3:wsdl ref="telus-crd-crda-esb/wsdls/DepositManagementService_v1_0"/>
+      <con3:port>
+        <con3:name>DepositManagementServicePort</con3:name>
+        <con3:namespace>http://telus.com/wsdl/CMO/BillingAccountMgmt/DepositManagementService_1</con3:namespace>
+      </con3:port>
+      <con3:selector type="SOAP body"/>
+      <con3:WSI-compliant>false</con3:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-5480951143018384665--7fb45856.1426dbc31a6.-7e01">
+    <con:pipeline type="request" name="DepositManagementServicePSPipelinePairNode1_request">
+      <con:stage name="searchDeposit_Stage">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con4:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="ns9" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="con" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/Proxy_ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="prox" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" prefix="dep" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" prefix="ent" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con4:wsCallout xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-7553</con1:id>
+            <con4:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/DepositManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:operation>searchDeposit</con4:operation>
+            <con4:request>
+              <con4:body wrapped="true">$searchDepositRequest</con4:body>
+            </con4:request>
+            <con4:response>
+              <con4:body wrapped="true">searchDepositResponse</con4:body>
+            </con4:response>
+            <con4:requestTransform>
+              <con4:assign varName="searchDepositRequest">
+                <con1:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-7555</con1:id>
+                <con4:expr>
+                  <con1:xqueryText>$body</con1:xqueryText>
+                </con4:expr>
+              </con4:assign>
+            </con4:requestTransform>
+            <con4:responseTransform>
+              <con4:ifThenElse>
+                <con1:comment>handle non system errors.
+if the response's messageType is ERROR, create/throw a policy exception.</con1:comment>
+                <con1:id>_ActionId-7748536793574131027--d905c08.1426bd43cf3.-7faa</con1:id>
+                <con4:case>
+                  <con4:condition>
+                    <con1:xqueryText>'ERROR'=fn:upper-case($body//*[local-name()='messageType']/text())</con1:xqueryText>
+                  </con4:condition>
+                  <con4:actions>
+                    <con1:replace varName="body" contents-only="false" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                      <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-7748536793574131027--d905c08.1426bd43cf3.-7da3</con5:id>
+                      <con1:location>
+                        <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+                      </con1:location>
+                      <con1:expr>
+                        <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soap-env:Body xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+       <soap-env:Fault>
+           <faultcode>soap-env:Client</faultcode>
+           <faultstring>DepositManagementService business operation error.</faultstring>
+           <detail>
+               <exc:PolicyException xmlns:exc="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xsi:schemaLocation="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0 Exceptions_v1_0.xsd" >
+				<exc:errorCode>{$body//*[local-name()='errorCode']/text()}</exc:errorCode>
+				<exc:errorMessage>{$body//*[local-name()='message']/text()}</exc:errorMessage>
+               </exc:PolicyException>
+           </detail>
+       </soap-env:Fault>
+</soap-env:Body>]]></con5:xqueryText>
+                      </con1:expr>
+                    </con1:replace>
+                    <con1:reply isError="true">
+                      <con1:id>_ActionId-7748536793574131027--d905c08.1426bd43cf3.-7d88</con1:id>
+                    </con1:reply>
+                  </con4:actions>
+                </con4:case>
+                <con4:default/>
+              </con4:ifThenElse>
+              <con1:replace varName="body" contents-only="false" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-2054387661957449158-254ee32b.141838a9a9a.-7554</con5:id>
+                <con1:location>
+                  <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$searchDepositResponse</con5:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con4:responseTransform>
+          </con4:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="DepositManagementServicePSPipelinePairNode1_response">
+      <con:stage name="Logging_Stage1">
+        <con:context/>
+        <con:actions>
+          <con2:assign varName="logConfigData">
+            <con1:id>_ActionId-3203797859643018868--3ce57b95.1438c2a8c07.-7f73</con1:id>
+            <con2:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="telus-crd-crda-esb/xquery/config/logConfig"/>
+              </con1:xqueryTransform>
+            </con2:expr>
+          </con2:assign>
+          <con4:ifThenElse xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:id>_ActionId-3203797859643018868--3ce57b95.1438c2a8c07.-7f72</con1:id>
+            <con4:case>
+              <con4:condition>
+                <con1:xqueryText>$logConfigData/PS[@name="DepositManagementServicePS"]/prop[@name="log.info"]/text()="true"</con1:xqueryText>
+              </con4:condition>
+              <con4:actions>
+                <con3:log>
+                  <con1:id>_ActionId-3203797859643018868--3ce57b95.1438c2a8c07.-7f71</con1:id>
+                  <con3:logLevel>debug</con3:logLevel>
+                  <con3:expr>
+                    <con1:xqueryText>'DepositManagementServicePS_ERRORHANDLER accountID=',
+$body//*[local-name()='accountID']/text()
+,
+$searchDepositRequest
+,
+$searchDepositResponse</con1:xqueryText>
+                  </con3:expr>
+                </con3:log>
+              </con4:actions>
+            </con4:case>
+            <con4:default/>
+          </con4:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-5480951143018384665--7fb45856.1426dbc31a6.-7e01">
+      <con:stage name="DepositManagementServicePS">
+        <con:context/>
+        <con:actions>
+          <con3:log>
+            <con1:id>_ActionId-5480951143018384665--7fb45856.1426dbc31a6.-7df1</con1:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con1:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con1:xqueryText>
+            </con3:expr>
+          </con3:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="searchDeposit_BranchNode">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="searchDeposit">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="DepositManagementServicePSPipelinePairNode1">
+                <con:request>DepositManagementServicePSPipelinePairNode1_request</con:request>
+                <con:response>DepositManagementServicePSPipelinePairNode1_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

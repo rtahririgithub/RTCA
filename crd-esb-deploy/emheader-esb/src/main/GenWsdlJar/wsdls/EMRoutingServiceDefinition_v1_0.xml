@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service xsi:noNamespaceSchemaLocation="http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServiceDefinition>
+		<Name>EMRoutingService</Name>
+		<Documentation>EMRoutingService.for getting em header.</Documentation>
+		<TAM_LevelZeroAndOne>CMO/OrderMgmt</TAM_LevelZeroAndOne>
+		<ServiceTaxonomy>/EMRoutingService</ServiceTaxonomy>
+		<MajorVersion>1</MajorVersion>
+		<MinorVersion>0</MinorVersion>
+		<soapAddress>http://customermanagementwestesb-dv01.tsl.telus.com</soapAddress>
+		<SchemaLocation>EMRoutingServiceRequestResponse_v1_0.xsd</SchemaLocation>
+		<NameSpace>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EMRoutingServiceRequestResponse_v1</NameSpace>
+		<nsAbbrev>emrt</nsAbbrev>
+		<OutputDir/>
+		<SecurityToken>
+			<Token>Wssp1.2-2007-Saml1.1-SenderVouches-Wss1.0</Token>
+		</SecurityToken>
+	</ServiceDefinition>
+	<Operation>
+		<OperationName>getEmHeader</OperationName>
+		<Documentation>Operation to get a emheader by em header name as defined in the em header config file  .</Documentation>
+		<InputType wsp="true">getEmHeader</InputType>
+		<OutputType>getEmHeaderResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+	<Operation>
+		<OperationName>getAllEmHeader</OperationName>
+		<Documentation>Operation to get all emheader defined in the em header config file .</Documentation>
+		<InputType wsp="true">getAllEmHeader</InputType>
+		<OutputType>getEmHeaderResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+</Service>

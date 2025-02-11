@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<DeployRulesServerConfig>
+	<AllowUnusedValues> false </AllowUnusedValues>
+
+	<DeployRulesServiceConfig>
+		<ClassLoadingContextUpdatePolicy> 0 </ClassLoadingContextUpdatePolicy>
+
+		<DeployRulesServiceClientContextFactory>
+
+			<DeployRulesServiceEntryPointConfig>
+				<AlwaysMapObjectsForDefaultModeRuleSets> false </AlwaysMapObjectsForDefaultModeRuleSets>
+				<AlwaysMapPostedObjects> false </AlwaysMapPostedObjects>
+				<EntryPointId> getSimulatedCreditBureauResultEntryPoint </EntryPointId>
+
+				<SrlInvocationFunctional>
+					<SrlArgumentType> SimulatorCreditBureauRequest </SrlArgumentType>
+					<SrlName> getSimulatedCreditBureauResultEntryPoint </SrlName>
+					<SrlReturnType> CreditBureauResult </SrlReturnType>
+				</SrlInvocationFunctional>
+
+			</DeployRulesServiceEntryPointConfig>
+
+
+			<DeployRulesServiceEntryPointConfig>
+				<AlwaysMapObjectsForDefaultModeRuleSets> false </AlwaysMapObjectsForDefaultModeRuleSets>
+				<AlwaysMapPostedObjects> false </AlwaysMapPostedObjects>
+				<EntryPointId> performCreditAssessmentEntryPoint </EntryPointId>
+
+				<SrlInvocationFunctional>
+					<SrlArgumentType> CreditAssessmentRequest </SrlArgumentType>
+					<SrlName> performCreditAssessmentEntryPoint </SrlName>
+					<SrlReturnType> CreditAssessmentResult </SrlReturnType>
+				</SrlInvocationFunctional>
+
+			</DeployRulesServiceEntryPointConfig>
+
+			<DeployRulesServiceEntryPointConfig>
+				<AlwaysMapObjectsForDefaultModeRuleSets> false </AlwaysMapObjectsForDefaultModeRuleSets>
+				<AlwaysMapPostedObjects> false </AlwaysMapPostedObjects>
+				<EntryPointId> calculateDepositEntryPoint </EntryPointId>
+
+				<SrlInvocationFunctional>
+					<SrlArgumentType> DepositRequest </SrlArgumentType>
+					<SrlName> calculateDepositEntryPoint </SrlName>
+					<SrlReturnType> DepositResult </SrlReturnType>
+				</SrlInvocationFunctional>
+
+			</DeployRulesServiceEntryPointConfig>
+			
+			<DeployRulesServiceEntryPointConfig>
+				<AlwaysMapObjectsForDefaultModeRuleSets> false </AlwaysMapObjectsForDefaultModeRuleSets>
+				<AlwaysMapPostedObjects> false </AlwaysMapPostedObjects>
+				<EntryPointId> exportAssessmentMessageContents </EntryPointId>
+
+				<SrlInvocationFunctional>
+					<SrlArgumentType> string </SrlArgumentType>
+					<SrlName> exportAssessmentMessageContents </SrlName>
+					<SrlReturnType> string </SrlReturnType>
+				</SrlInvocationFunctional>
+
+			</DeployRulesServiceEntryPointConfig>
+
+
+			<DeployRulesServiceEntryPointConfig>
+				<AlwaysMapObjectsForDefaultModeRuleSets> false </AlwaysMapObjectsForDefaultModeRuleSets>
+				<AlwaysMapPostedObjects> false </AlwaysMapPostedObjects>
+				<EntryPointId> exportErrorMessageContents </EntryPointId>
+
+				<SrlInvocationFunctional>
+					<SrlArgumentType> string </SrlArgumentType>
+					<SrlName> exportErrorMessageContents </SrlName>
+					<SrlReturnType> string </SrlReturnType>
+				</SrlInvocationFunctional>
+
+			</DeployRulesServiceEntryPointConfig>
+
+
+			<DeployRulesServiceEntryPointConfig>
+				<AlwaysMapObjectsForDefaultModeRuleSets> false </AlwaysMapObjectsForDefaultModeRuleSets>
+				<AlwaysMapPostedObjects> false </AlwaysMapPostedObjects>
+				<EntryPointId> exportFraudMessageContents </EntryPointId>
+
+				<SrlInvocationFunctional>
+					<SrlArgumentType> string </SrlArgumentType>
+					<SrlName> exportFraudMessageContents </SrlName>
+					<SrlReturnType> string </SrlReturnType>
+				</SrlInvocationFunctional>
+
+			</DeployRulesServiceEntryPointConfig>
+
+
+			<DeployRulesServiceEntryPointConfig>
+				<AlwaysMapObjectsForDefaultModeRuleSets> false </AlwaysMapObjectsForDefaultModeRuleSets>
+				<AlwaysMapPostedObjects> false </AlwaysMapPostedObjects>
+				<EntryPointId> ping </EntryPointId>
+
+				<SrlInvocationFunctional>
+					<SrlName> ping </SrlName>
+				</SrlInvocationFunctional>
+
+			</DeployRulesServiceEntryPointConfig>
+
+			<JavaName> com.blazesoft.server.deploy.rules.NdDeployInvokerMapperRulesServiceClientContext </JavaName>
+			<MaxServiceInvocationCount> 1 </MaxServiceInvocationCount>
+		</DeployRulesServiceClientContextFactory>
+
+		<Name> RTCA_RuleService </Name>
+		<NumAgents> 10 </NumAgents>
+		<RecyclePolicy> 0 </RecyclePolicy>
+		<RuleExceptionHandlingPolicy> 0 </RuleExceptionHandlingPolicy>
+
+		<RulesServiceAgentFactoryFactory>
+			<JavaName> com.blazesoft.server.rules.NdScriptRulesServiceAgentFactory </JavaName>
+
+			<SerializedRulesProjectLoaderFactory>
+
+				<DeploymentManagerServiceInfoFactory>
+					<JavaName> com.blazesoft.server.deploy.manager.java.NdDeploymentManagerJavaServiceInfo </JavaName>
+				</DeploymentManagerServiceInfoFactory>
+
+				<Id> RTCA_RuleService1 </Id>
+				<JavaName> com.blazesoft.server.rules.NdSerializedRulesProjectFileLoader </JavaName>
+				<SerializationMode> 1 </SerializationMode>
+				<ServerManagerName> RTCA_RuleServiceServerManager0 </ServerManagerName>
+				<UseStream> false </UseStream>
+			</SerializedRulesProjectLoaderFactory>
+
+		</RulesServiceAgentFactoryFactory>
+
+
+		<ServiceAgentReloaderFactory>
+			<JavaName> com.blazesoft.server.local.NdLocalServiceAgentDispenserReloaderThread </JavaName>
+		</ServiceAgentReloaderFactory>
+
+
+		<ServiceAgentResetterFactory>
+			<JavaName> com.blazesoft.server.local.NdLocalServiceAgentDispenserResetterThread </JavaName>
+		</ServiceAgentResetterFactory>
+
+
+		<ServiceAgentValueMapperFactory>
+
+			<DeploymentValueMapperConfig>
+				<UseNativeTypesForArrayAndAssociation> true </UseNativeTypesForArrayAndAssociation>
+				<UseNativeTypesForCalendarValues> true </UseNativeTypesForCalendarValues>
+				<UseNativeTypesForMoneyValues> true </UseNativeTypesForMoneyValues>
+				<UseNativeTypesForPrimitiveValues> true </UseNativeTypesForPrimitiveValues>
+			</DeploymentValueMapperConfig>
+
+			<JavaName> com.blazesoft.engines.rules.java.NdRulesJavaValueMapper </JavaName>
+		</ServiceAgentValueMapperFactory>
+
+		<ServiceInvocationsDuringResetPolicy> 0 </ServiceInvocationsDuringResetPolicy>
+		<ServiceMonitorThreadGroupMaxPriority> 10 </ServiceMonitorThreadGroupMaxPriority>
+		<ServiceResetExceptionPolicy> 0 </ServiceResetExceptionPolicy>
+		<ServiceResetTimeout> 0 </ServiceResetTimeout>
+
+		<ServiceRuntimeExceptionMulticasterFactory>
+			<JavaName> com.blazesoft.server.local.NdServiceExceptionMulticaster </JavaName>
+		</ServiceRuntimeExceptionMulticasterFactory>
+
+		<ServiceSessionTimeout> 0 </ServiceSessionTimeout>
+		<ServiceThreadGroupMaxPriority> 10 </ServiceThreadGroupMaxPriority>
+
+		<ServiceThreadGroupsExceptionMulticasterFactory>
+			<JavaName> com.blazesoft.server.local.NdServiceThreadGroupsExceptionMulticaster </JavaName>
+		</ServiceThreadGroupsExceptionMulticasterFactory>
+
+		<UseDeploymentClassLoadingContext> false </UseDeploymentClassLoadingContext>
+	</DeployRulesServiceConfig>
+
+	<DeploymentEnvironment> Java </DeploymentEnvironment>
+
+	<DeploymentManagerServerManagerFactory>
+		<DeploymentManagerName> RTCA_RuleServiceDManager </DeploymentManagerName>
+		<JavaName> com.blazesoft.server.deploy.manager.java.NdDeploymentManagerJavaServerManager </JavaName>
+		<ServerManagerName> RTCA_RuleServiceServerManager0 </ServerManagerName>
+	</DeploymentManagerServerManagerFactory>
+
+	<Name> RTCA_RuleService </Name>
+
+	<ServerAsyncExceptionMulticasterFactory>
+		<JavaName> com.blazesoft.system.NdAsyncExceptionMulticaster </JavaName>
+	</ServerAsyncExceptionMulticasterFactory>
+
+
+	<ServerFactory>
+		<JavaName> com.fico.telus.rtca.blaze.RulesServer </JavaName>
+	</ServerFactory>
+
+	<ServerMonitorThreadGroupMaxPriority> 10 </ServerMonitorThreadGroupMaxPriority>
+	<ServerThreadGroupMaxPriority> 10 </ServerThreadGroupMaxPriority>
+
+	<ServiceManagerFactory>
+		<JavaName> com.blazesoft.server.local.NdLocalServiceManager </JavaName>
+	</ServiceManagerFactory>
+
+	<ShutdownOnZeroRefCount> false </ShutdownOnZeroRefCount>
+	<UseCallingContext> false </UseCallingContext>
+</DeployRulesServerConfig>
+
+
+<!--QDI
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaQDeployerSubConfig>
+	<ClientType> Spring_2_5_6 </ClientType>
+	<Directory> C:\fico\ws\Telus15\RTCA_Deployment </Directory>
+	<GeneratingWebService> false </GeneratingWebService>
+	<Package> com.fico.telus.rtca.blaze </Package>
+	<Prefix></Prefix>
+	<ServerClassName> com.blazesoft.server.deploy.NdStatelessServer </ServerClassName>
+	<TargetLanguage> Java </TargetLanguage>
+	<UseAbsolute> false </UseAbsolute>
+	<UseDebugLogger> false </UseDebugLogger>
+	<UseInCodeConfig> false </UseInCodeConfig>
+	<UseInitializer> false </UseInitializer>
+</JavaQDeployerSubConfig>
+-->

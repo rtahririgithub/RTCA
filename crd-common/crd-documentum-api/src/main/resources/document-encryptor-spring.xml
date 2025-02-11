@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <bean class="com.telus.framework.config.spring.PlaceholderConfigurer" />  
+
+   <bean id="encryptUtil" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+      <property name="staticMethod" value="com.telus.framework.crypto.EncryptionUtil.setCrypto" />
+      <property name="arguments">
+         <list>
+            <ref bean="cryptoImpl" />
+         </list>
+      </property>
+   </bean>
+
+   <bean id="cryptoImpl" class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl" init-method="init">
+      <property name="key1" value="${encryption/key1}" />
+      <property name="key2" value="${encryption/key2}" />
+      <property name="key3" value="${encryption/key3}" />
+   </bean>
+
+   <!-- JCE crypto impl -->
+   <bean id="jceCryptoImpl" class="com.telus.framework.crypto.impl.jce.JceCryptoImpl" init-method="init">
+      <property name="algorithmParamSpecGenerator">
+         <bean class="com.telus.framework.crypto.impl.jce.IvParamSpecGenerator">
+            <property name="appendIV" value="true" />
+         </bean>
+      </property>
+      <property name="cipherJceProvider" value="${encryption/cipherProvider}" />
+      <property name="cipherTransformation" value="${encryption/cipherTransformation}" />
+      <property name="encodeBase64" value="true" />
+      <property name="keyAlias">
+         <bean class="com.telus.framework.crypto.EncryptionUtil" factory-method="decrypt">
+            <constructor-arg value="${storage/bdu}" />
+         </bean>
+      </property>
+      <property name="keyPassword">
+         <bean class="com.telus.framework.crypto.EncryptionUtil" factory-method="decrypt">
+            <constructor-arg value="${storage/bdu_entry}" />
+         </bean>
+      </property>
+      <property name="keystoreType" value="${encryption/keystoreType}" />
+      <property name="keystoreURL" value="${storage/url}" />
+   </bean>
+    
+</beans>

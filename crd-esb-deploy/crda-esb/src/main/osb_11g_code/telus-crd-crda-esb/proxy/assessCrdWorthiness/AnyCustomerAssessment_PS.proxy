@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con3:SoapBindingType" xmlns:con3="http://www.bea.com/wli/sb/services/bindings/config">
+      <con3:wsdl ref="telus-crd-crda-esb/wsdls/WLNCreditProfileManagementProxyService_v2_0"/>
+      <con3:port>
+        <con3:name>WLNCreditProfileManagementProxyServicePort</con3:name>
+        <con3:namespace>http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2</con3:namespace>
+      </con3:port>
+      <con3:selector type="SOAP body"/>
+      <con3:WSI-compliant>false</con3:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="assessCreditworthiness_PipelinePairNode_request">
+      <con:stage name="getAdditionalCustomerData_stage">
+        <con:context>
+          <con1:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con2:wsCallout>
+            <con1:comment>getAdditionalCustomerData</con1:comment>
+            <con1:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-73cb</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/GetAdditionalCustomerData_SplitJoin_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>getAdditionalCustomerData</con2:operation>
+            <con2:request>
+              <con2:body>$getAdditionalCustomerDataRequest</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>getAdditionalCustomerDataResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="getAdditionalCustomerDataRequest">
+                <con1:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-736d</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;gacdsj:getAdditionalCustomerData xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2 GetAdditionalCustomerDataSplitJoinRequestResponse_v2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gacdsj="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2" xmlns:wcpmp="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7">
+{$body/wln:assessCreditWorthiness}
+{$body/wln:assessCreditWorthiness/wln:auditInfo}
+&lt;/gacdsj:getAdditionalCustomerData></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="assessCreditworthiness_performCreditAssessment_stage">
+        <con:context>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2" prefix="get"/>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" prefix="ns1"/>
+          <con1:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con2:wsCallout>
+            <con1:comment>call EnterpriseCreditAssessmentServicePS</con1:comment>
+            <con1:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-73a6</con1:id>
+            <con2:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/EnterpriseCreditAssessmentServicePS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>performCreditAssessment</con2:operation>
+            <con2:request>
+              <con2:body>$performCreditAssessmentRequest</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>performCreditAssessmentResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:ifThenElse>
+                <con1:comment>FullCreditAssessmentRequest or Existing CreditAssessmentRequest?</con1:comment>
+                <con1:id>_ActionId-7294651677470276653--455d890.141947676bc.-7f18</con1:id>
+                <con2:case>
+                  <con2:condition>
+                    <con1:xqueryText>$body/wln:assessCreditWorthiness/wln:assessCreditWorthinessRequest/wln:creditAssessmentSubTypeCd/text()='AUTO_ASSESSMENT'</con1:xqueryText>
+                  </con2:condition>
+                  <con2:actions>
+                    <con2:assign varName="performCreditAssessmentRequest">
+                      <con1:comment>create  performCreditAssessmentRequest for New customer</con1:comment>
+                      <con1:id>_ActionId-5199896181963680037-86ada86.1421ef9268a.-7e02</con1:id>
+                      <con2:expr>
+                        <con1:xqueryTransform>
+                          <con1:resource ref="telus-crd-crda-esb/xquery/transformation/external/create_PerformFullCreditAssessmentRequest"/>
+                          <con1:param name="assessCreditWorthiness1">
+                            <con1:path>$body/wln:assessCreditWorthiness</con1:path>
+                          </con1:param>
+                          <con1:param name="getAdditionalCustomerDataResponse1">
+                            <con1:path>$getAdditionalCustomerDataResponse</con1:path>
+                          </con1:param>
+                        </con1:xqueryTransform>
+                      </con2:expr>
+                    </con2:assign>
+                    <con2:assign varName="constants">
+                      <con1:id>_ActionId-3852459149343921278-7da47db2.168f9a00dee.-7e8f</con1:id>
+                      <con2:expr>
+                        <con1:xqueryTransform>
+                          <con1:resource ref="telus-crd-crda-esb/xquery/config/constants"/>
+                        </con1:xqueryTransform>
+                      </con2:expr>
+                    </con2:assign>
+                    <con2:insert varName="performCreditAssessmentRequest">
+                      <con1:id>_ActionId-3852459149343921278-7da47db2.168f9a00dee.-7f25</con1:id>
+                      <con2:location>
+                        <con1:xpathText>//(*[local-name()='creditAssessmentRequest'])[1]</con1:xpathText>
+                      </con2:location>
+                      <con2:where>last-child</con2:where>
+                      <con2:expr>
+                        <con1:xqueryText><![CDATA[<ent:unifiedCreditSearchResult xsi:type="ent:WlsUnifiedCreditSearchResult" xmlns:ent="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2"> 
+			<ent:matchFound >
+				<ent:indicator>false</ent:indicator>
+				<ent:reasonCd>{$constants/constant[@value="UC_DORMANT_ON"]/text()}</ent:reasonCd>
+			</ent:matchFound>
+			<ent:unifiedCreditDormantInd >true</ent:unifiedCreditDormantInd>
+		</ent:unifiedCreditSearchResult>]]></con1:xqueryText>
+                      </con2:expr>
+                    </con2:insert>
+                  </con2:actions>
+                </con2:case>
+                <con2:default>
+                  <con2:assign varName="performCreditAssessmentRequest">
+                    <con1:comment>create  performCreditAssessmentRequest for Existing customer</con1:comment>
+                    <con1:id>_ActionId-5199896181963680037-86ada86.1421ef9268a.-7e04</con1:id>
+                    <con2:expr>
+                      <con1:xqueryTransform>
+                        <con1:resource ref="telus-crd-crda-esb/xquery/transformation/external/create_PerformExistingCreditAssessmentRequest"/>
+                        <con1:param name="assessCreditWorthiness1">
+                          <con1:path>$body/wln:assessCreditWorthiness</con1:path>
+                        </con1:param>
+                        <con1:param name="getAdditionalCustomerDataResponse1">
+                          <con1:path>$getAdditionalCustomerDataResponse</con1:path>
+                        </con1:param>
+                      </con1:xqueryTransform>
+                    </con2:expr>
+                  </con2:assign>
+                </con2:default>
+              </con2:ifThenElse>
+            </con2:requestTransform>
+            <con2:responseTransform>
+              <con2:assign varName="assessCreditWorthinessResponseTmp">
+                <con1:id>_ActionId-5547059187238404398-48c21b89.142531d9400.-7863</con1:id>
+                <con2:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="telus-crd-crda-esb/xquery/transformation/performCreditAssessmentResponse_assessCreditWorthinessResponse"/>
+                    <con1:param name="performCreditAssessmentResponse1">
+                      <con1:path>$performCreditAssessmentResponse</con1:path>
+                    </con1:param>
+                  </con1:xqueryTransform>
+                </con2:expr>
+              </con2:assign>
+            </con2:responseTransform>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Update_CreditWorthiness_CustomerODS_stage">
+        <con:context>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" prefix="ecrda"/>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wlnpxcy"/>
+          <con1:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con2:wsCallout>
+            <con1:comment>call Update_CreditWorthiness_CustomerODS_STAGE</con1:comment>
+            <con1:id>_ActionId-5436017941295681131-4c6d5a3a.142a9cf8fae.-7ab4</con1:id>
+            <con2:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/internal/Update/Update_CreditWorthiness_CustomerODS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:request>
+              <con2:payload>$Update_CreditWorthiness_CustomerODS_STAGE_Request</con2:payload>
+            </con2:request>
+            <con2:response>
+              <con2:payload>Update_CreditWorthiness_CustomerODS_STAGE_Response</con2:payload>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="Update_CreditWorthiness_CustomerODS_STAGE_Request">
+                <con1:id>_ActionId-5436017941295681131-4c6d5a3a.142a9cf8fae.-7a90</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;input>
+{$performCreditAssessmentResponse/ecrda:creditAssessmentTransactionResult}
+{$body/wlnpxcy:assessCreditWorthiness/wlnpxcy:auditInfo}
+&lt;originalCreditWorthinessRequest>
+{$body/wln:assessCreditWorthiness}
+&lt;/originalCreditWorthinessRequest>
+&lt;/input></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform>
+              <con2:insert varName="assessCreditWorthinessResponseTmp" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                <con1:id>_ActionId-1254993740914659236--62936fa7.142f6b07b56.-7da7</con1:id>
+                <con2:location>
+                  <con1:xpathText>(//*[local-name()='assessedCreditWorthiness'])[1]</con1:xpathText>
+                </con2:location>
+                <con2:where>last-child</con2:where>
+                <con2:expr>
+                  <con1:xqueryText>($Update_CreditWorthiness_CustomerODS_STAGE_Response//*[local-name()='updateCreditWorthinessErrorCd'])[1]</con1:xqueryText>
+                </con2:expr>
+              </con2:insert>
+            </con2:responseTransform>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="assessCreditworthiness_PipelinePairNode_response">
+      <con:stage name="assessCreditWorthinessResponse_stage">
+        <con:context/>
+        <con:actions>
+          <con4:replace varName="body" contents-only="true" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+            <con5:comment xmlns:con5="http://www.bea.com/wli/sb/stages/config">create assessCreditWorthinessResponse</con5:comment>
+            <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-5547059187238404398-48c21b89.142531d9400.-786f</con5:id>
+            <con4:location>
+              <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+            </con4:location>
+            <con4:expr>
+              <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$assessCreditWorthinessResponseTmp</con5:xqueryText>
+            </con4:expr>
+          </con4:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="overrideCreditWorthiness_PipelinePairNode_request">
+      <con:stage name="overrideCreditAssessment_getAdditionalCustomerData_stage">
+        <con:context>
+          <con1:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con2:wsCallout>
+            <con1:comment>getAdditionalCustomerData</con1:comment>
+            <con1:id>_ActionId-174937366090312452-5958dc6f.141c6f75e2e.-7e1b</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/GetAdditionalCustomerData_SplitJoin_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>getAdditionalCustomerData</con2:operation>
+            <con2:request>
+              <con2:body>$getAdditionalCustomerDataRequest</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>getAdditionalCustomerDataResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="getAdditionalCustomerDataRequest">
+                <con1:comment>transform override request to assess request and create getAdditionalData request</con1:comment>
+                <con1:id>_ActionId-174937366090312452-5958dc6f.141c6f75e2e.-7e1c</con1:id>
+                <con2:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="telus-crd-crda-esb/xquery/transformation/overrideCreditWorthiness_to_getAdditionalCustomerData"/>
+                    <con1:param name="overrideCreditWorthiness1">
+                      <con1:path>$body/wln:overrideCreditWorthiness</con1:path>
+                    </con1:param>
+                  </con1:xqueryTransform>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="overrideCreditAssessment_performCreditAssessment_stage">
+        <con:context>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2" prefix="get"/>
+          <con1:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con2:wsCallout>
+            <con1:comment>call EnterpriseCreditAssessmentServicePS</con1:comment>
+            <con1:id>_ActionId-174937366090312452-5958dc6f.141c6f75e2e.-7e17</con1:id>
+            <con2:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/EnterpriseCreditAssessmentServicePS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>performCreditAssessment</con2:operation>
+            <con2:request>
+              <con2:body>$overridePerformCreditAssessmentRequest</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>performCreditAssessmentResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="overridePerformCreditAssessmentRequest">
+                <con1:id>_ActionId-174937366090312452-5958dc6f.141c6f75e2e.-7dd7</con1:id>
+                <con2:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="telus-crd-crda-esb/xquery/transformation/external/create_PerformOverrideCreditAssessmentRequest"/>
+                    <con1:param name="overrideCreditWorthiness1">
+                      <con1:path>$body/wln:overrideCreditWorthiness</con1:path>
+                    </con1:param>
+                    <con1:param name="getAdditionalCustomerDataResponse1">
+                      <con1:path>$getAdditionalCustomerDataResponse</con1:path>
+                    </con1:param>
+                  </con1:xqueryTransform>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform>
+              <con2:assign varName="overrideCreditWorthinessResponseTmp">
+                <con1:comment>create overrideCreditWorthinessResponse</con1:comment>
+                <con1:id>_ActionId-1850681830052577527-2902f7fd.142906d3a39.-7228</con1:id>
+                <con2:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="telus-crd-crda-esb/xquery/transformation/performCreditAssessmentResponse_overrideCreditWorthinessResponse"/>
+                    <con1:param name="performCreditAssessmentResponse1">
+                      <con1:path>$performCreditAssessmentResponse</con1:path>
+                    </con1:param>
+                  </con1:xqueryTransform>
+                </con2:expr>
+              </con2:assign>
+            </con2:responseTransform>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Update_CreditWorthiness_CustomerODS_stage">
+        <con:context>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" prefix="ecrda"/>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wlnpxcy"/>
+          <con1:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con2:wsCallout>
+            <con1:comment>call Update_CreditWorthiness_CustomerODS_STAGE</con1:comment>
+            <con1:id>_ActionId-2342284319040987221--21073446.142ba5b7884.-7beb</con1:id>
+            <con2:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/internal/Update/Update_CreditWorthiness_CustomerODS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:request>
+              <con2:payload>$Update_CreditWorthiness_CustomerODS_STAGE_Request</con2:payload>
+            </con2:request>
+            <con2:response>
+              <con2:payload>Update_CreditWorthiness_CustomerODS_STAGE_Response</con2:payload>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="Update_CreditWorthiness_CustomerODS_STAGE_Request">
+                <con1:id>_ActionId-2342284319040987221--21073446.142ba5b7884.-7bed</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;input>
+{$performCreditAssessmentResponse/ecrda:creditAssessmentTransactionResult}
+{$body/wlnpxcy:overrideCreditWorthiness/wlnpxcy:auditInfo}
+
+&lt;originalCreditWorthinessRequest>
+{$body/wln:overrideCreditWorthiness}
+&lt;/originalCreditWorthinessRequest>
+&lt;/input></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+              <con2:ifThenElse>
+                <con1:comment>FullCreditAssessmentRequest or Existing CreditAssessmentRequest?</con1:comment>
+                <con1:id>_ActionId-8340905928707145776-3e4eea32.1437da47a65.-7efc</con1:id>
+                <con2:case>
+                  <con2:condition>
+                    <con1:xqueryText>$body/wln:overrideCreditWorthiness/wln:overrideCreditWorthinessRequest/wln:creditAssessmentSubTypeCd/text()='MANUAL_OVERRIDE'</con1:xqueryText>
+                  </con2:condition>
+                  <con2:actions>
+                    <con2:replace varName="Update_CreditWorthiness_CustomerODS_STAGE_Request">
+                      <con1:comment>for MANUAL_OVERRIDE asmt , comment is not sent to updateCreditowrthiness op</con1:comment>
+                      <con1:id>_ActionId-8340905928707145776-3e4eea32.1437da47a65.-7ebb</con1:id>
+                      <con2:location>
+                        <con1:xpathText>//*[local-name()='commentTxt']</con1:xpathText>
+                      </con2:location>
+                      <con2:expr>
+                        <con1:xqueryText>''</con1:xqueryText>
+                      </con2:expr>
+                    </con2:replace>
+                  </con2:actions>
+                </con2:case>
+                <con2:default/>
+              </con2:ifThenElse>
+            </con2:requestTransform>
+            <con2:responseTransform>
+              <con2:insert varName="overrideCreditWorthinessResponseTmp" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+                <con1:id>_ActionId-1254993740914659236--62936fa7.142f6b07b56.-777b</con1:id>
+                <con2:location>
+                  <con1:xpathText>//(*[local-name()='overridenCreditWorthiness'])[1]</con1:xpathText>
+                </con2:location>
+                <con2:where>last-child</con2:where>
+                <con2:expr>
+                  <con1:xqueryText>($Update_CreditWorthiness_CustomerODS_STAGE_Response//*[local-name()='updateCreditWorthinessErrorCd'])[1]</con1:xqueryText>
+                </con2:expr>
+              </con2:insert>
+            </con2:responseTransform>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="overrideCreditWorthiness_PipelinePairNode_response">
+      <con:stage name="overrideCreditAssessment_Response_stage">
+        <con:context>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" prefix="tns"/>
+          <con1:userNsDecl namespace="http://schemas.xmlsoap.org/soap/envelope/" prefix="soapenv"/>
+          <con1:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="ns3"/>
+        </con:context>
+        <con:actions>
+          <con4:replace varName="body" contents-only="true" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+            <con5:comment xmlns:con5="http://www.bea.com/wli/sb/stages/config">create assessCreditWorthinessResponse</con5:comment>
+            <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-1850681830052577527-2902f7fd.142906d3a39.-71d4</con5:id>
+            <con4:location>
+              <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+            </con4:location>
+            <con4:expr>
+              <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">$overrideCreditWorthinessResponseTmp</con5:xqueryText>
+            </con4:expr>
+          </con4:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="AnyCustomerAssessment_BranchNode">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="assessCreditWorthiness">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="assessCreditworthiness_PipelinePairNode">
+                <con:request>assessCreditworthiness_PipelinePairNode_request</con:request>
+                <con:response>assessCreditworthiness_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="overrideCreditWorthiness">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="overrideCreditWorthiness_PipelinePairNode">
+                <con:request>overrideCreditWorthiness_PipelinePairNode_request</con:request>
+                <con:response>overrideCreditWorthiness_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

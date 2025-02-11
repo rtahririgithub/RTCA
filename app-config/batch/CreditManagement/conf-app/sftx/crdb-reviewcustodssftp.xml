@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <!-- =============================================================== -->
+  <bean id="telusSpringConfigurer" lazy-init="true" class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+  <!-- =============================================================== -->
+  <bean id="crdb-reviewcustodssftp" lazy-init="true" class="com.telus.framework.filetransfer.config.RequestConfiguration">
+    <property name="requestNm" value="crdb-reviewcustodssftp" />
+    <property name="sourceSftpUserId" value="${G_SFTP_UX_ACCT_PREFIX}${G_SFTP_CRD_ACCT_SUFFIX}" />
+    <property name="sourceServerName" value="${G_CCR_BATCH_SERVER}" />
+    <property name="sourceServerTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+    <property name="postAction" value="remove" />
+
+    <property name="recipients">
+      <list>
+        <bean id="recipient1" lazy-init="true" class="com.telus.framework.filetransfer.config.RecipientConfiguration">
+          <property name="serverName" value="${G_CRD_BATCH_SERVER}" />
+          <property name="serverTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+          <property name="sftpUserId" value="${G_SFTP_UX_ACCT_PREFIX}${G_SFTP_CRD_ACCT_SUFFIX}" />
+          <property name="files">
+            <list>
+              <bean id="file1" lazy-init="true" class="com.telus.framework.filetransfer.config.FileConfiguration">
+                <property name="sourcePath" value="${G_CRD_NS_UX_SFTP}/${G_ENV}/outbox/crdb" />
+                <property name="overwrite" value="true" />
+                <property name="recipientPath" value="${G_CRD_NS_UX_SFTP}/${G_ENV}/inbox/crdb" />
+                <property name="filePattern" value="CUSTODS_REF_BILLING_ACCOUNT.DAT*" />
+              </bean>
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+</beans>

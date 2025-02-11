@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="credit_attribute">
+
+	<typeAlias alias="CreditAttribute" type="com.telus.credit.domain.CreditAttribute" />
+	
+	<resultMap id="select-attribute-result" class="CreditAttribute">
+		<result property="id" column="CPROFL_ATTRIBUTE_ID"/>
+		<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+		<result property="attributeValue" column="CPROFL_ATTRIBUTE_VALUE"/>
+		<result property="attributeCode" column="CPROFL_ATTRIBUTE_CD"/>
+		<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+	</resultMap>
+	
+	<statement id="get_attributes_by_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="select-attribute-result">
+		
+		select
+			ca.CREDIT_PROFILE_ID,
+			ca.CPROFL_ATTRIBUTE_ID,
+			ca.CPROFL_ATTRIBUTE_CD,
+			ca.CPROFL_ATTRIBUTE_VALUE,
+			ca.LAST_UPDT_TS
+		from
+			CPROFL_ATTRIBUTE ca, CREDIT_PROFILE cp
+		where
+			ca.CREDIT_PROFILE_ID=cp.CREDIT_PROFILE_ID
+			and ca.CREDIT_PROFILE_ID=#value#
+			and cp.CPROFL_STATUS_CD='A'
+			and ca.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+		
+	</statement>
+	
+	<insert id="insert_credit_attribute" parameterClass="java.util.Map">
+	
+  		<selectKey resultClass="java.lang.Long" keyProperty="credit_attribute.id">
+			select CPROFL_ATTRIBUTE_ID_SEQ.NEXTVAL from dual 
+  		</selectKey>
+  		
+  		insert into CPROFL_ATTRIBUTE
+  			(	
+  			CREDIT_PROFILE_ID, 
+			CPROFL_ATTRIBUTE_ID, 
+			CPROFL_ATTRIBUTE_VALUE, 
+			EFF_START_DTM, 
+			CPROFL_ATTRIBUTE_CD,
+			LAST_UPDT_USER_ID,
+			CREATE_USER_ID
+ 			) 
+  		values 
+    		(
+			#credit_attribute.creditProfileId#,  
+			#credit_attribute.id#,
+			#credit_attribute.attributeValue:VARCHAR#, 
+			SYSTIMESTAMP,
+			#credit_attribute.attributeCode:VARCHAR#,
+			#userId#,
+			#userId#
+			)
+	</insert>
+	
+	<update id="delete_attribute" parameterClass="java.util.Map">
+  		update 
+  			CPROFL_ATTRIBUTE
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP
+  		where 
+			CREDIT_PROFILE_ID = #credit_attribute.creditProfileId# 
+			and CPROFL_ATTRIBUTE_CD = #credit_attribute.attributeCode#
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</update>
+
+
+</sqlMap>

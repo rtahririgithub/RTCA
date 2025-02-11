@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3"
+    xmlns:exc="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="ServiceException" type="exc:FaultExceptionDetailsType">
+        <xsd:annotation>
+            <xsd:documentation>Service exception fault when downstream
+                services are not available.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="Message">
+        <xsd:sequence>
+            <xsd:element name="locale" type="xsd:string"/>
+            <xsd:element name="errorMessage" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MessageList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="10" name="Message" type="exc:Message"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FaultExceptionDetailsType">
+        <xsd:sequence>
+            <xsd:element name="messageId" type="xsd:string"/>
+            <xsd:element name="errorCode" type="xsd:string"/>
+            <xsd:element name="errorMessage" type="xsd:string"/>
+            <xsd:element minOccurs="0"
+                name="additionalLanguageErrorMessages" type="exc:MessageList"/>
+            <xsd:element maxOccurs="100" minOccurs="0" name="variables" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

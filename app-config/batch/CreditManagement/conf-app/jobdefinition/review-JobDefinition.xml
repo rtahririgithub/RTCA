@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <import resource="base-defn-stub.xml"/>
+
+  <!-- ===================================================================== -->	
+  <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+  
+  <!-- ===================================================================== -->	
+  <bean id="job" parent="baseJob">
+
+    <property name="applicationName"><value>CreditMgmt-Batch</value></property>
+    <property name="jobName">        <value>CreditValueReview</value></property>
+    <property name="steps">
+      <list>
+        <!-- bean id="STEP01" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-sortGroupCid</value></property>
+        </bean>
+        <bean id="STEP02" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-selectBA</value></property>
+        </bean>
+        <bean id="STEP03" parent="baseStep" >
+          <property name="moduleName"><value>customerGroup</value></property>
+        </bean>
+        <bean id="STEP04" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-sortBAN</value></property>
+        </bean>
+        <bean id="STEP05" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-sortTCMBAN</value></property>
+        </bean>
+        <bean id="STEP06" parent="baseStep" >
+          <property name="moduleName"><value>resultReview</value></property>
+        </bean>
+        <bean id="STEP07" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-sortLine</value></property>
+        </bean>
+        <bean id="STEP08" parent="baseStep" >
+          <property name="moduleName"><value>creditValueMerge</value></property>
+        </bean-->
+        <bean id="STEP09" parent="baseStep" >
+          <property name="moduleName"><value>creditValueUpdate</value></property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+  
+  <bean id="cmdExec-sortGroupCid" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${cmdExec-sortGroupCid/exec}</value></property>
+    <property name="arg">           <value>${cmdExec-sortGroupCid/arg}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+   <bean id="cmdExec-selectBA" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${cmdExec-selectBA/exec}</value></property>
+    <property name="arg">           <value>${cmdExec-selectBA/arg}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+   <bean id="cmdExec-sortBAN" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${cmdExec-sortBAN/exec}</value></property>
+    <property name="arg">           <value>${cmdExec-sortBAN/arg}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+   <bean id="cmdExec-sortTCMBAN" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${cmdExec-sortTCMBAN/exec}</value></property>
+    <property name="arg">           <value>${cmdExec-sortTCMBAN/arg}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+   <bean id="cmdExec-sortLine" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${cmdExec-sortLine/exec}</value></property>
+    <property name="arg">           <value>${cmdExec-sortLine/arg}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+  <bean id="customerGroup" lazy-init="true"
+        class="com.telus.credit.batch.review.GroupCustomerBatch" >
+    <property name="groupCustomerInputFile"><value>${customerGroup/groupCustomerInputFile}</value></property>
+    <property name="customerODSExtractInputFile"><value>${customerGroup/customerODSExtractInputFile}</value></property>
+    <property name="outputFile"><value>${customerGroup/outputFile}</value></property>
+  </bean>
+  
+  <bean id="resultReview" lazy-init="true"
+        class="com.telus.credit.batch.review.AddReviewResultBatch" >
+    <property name="customerInputFile"><value>${resultReview/customerInputFile}</value></property>
+    <property name="tcmInputFile"><value>${resultReview/tcmInputFile}</value></property>
+    <property name="outputFile"><value>${resultReview/outputFile}</value></property>
+  </bean>
+  
+  <bean id="creditValueMerge" lazy-init="true"
+        class="com.telus.credit.batch.review.ConsolidateCustomerGroupCreditValueBatch" >
+    <property name="inputFile"><value>${creditValueMerge/inputFile}</value></property>
+    <property name="outputFile"><value>${creditValueMerge/outputFile}</value></property>
+  </bean>
+  
+  <bean id="creditValueUpdate" lazy-init="true"
+        class="com.telus.credit.batch.review.UpdateCreditValueBatch" >
+    <property name="inputFile"><value>${creditValueUpdate/inputFile}</value></property>
+    <property name="creditProfileSvc"><ref bean="creditProfileSvc"/></property>
+  </bean>
+
+  <!-- ===================================================================== -->
+   <!-- bean id="creditProfileSvc" lazy-init="true"
+        	class="org.springframework.ejb.access.SimpleRemoteStatelessSessionProxyFactoryBean">
+        <property name="jndiName"><value>com.telus.credit.service.CreditProfileService</value></property>
+        <property name="jndiTemplate"><ref bean="jndiTemplate"/></property>
+        <property name="businessInterface"><value>com.telus.credit.service.CreditProfileMgtSvc</value></property>
+   </bean>
+   
+   <bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate" >
+        <property name="environment">
+            <props>
+                <prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+                <prop key="java.naming.provider.url">t3://sedm3202.ent.agt.ab.ca:20022</prop>
+            </props>
+        </property>
+    </bean--> 
+    
+   <bean id="creditProfileSvc" class="com.telus.framework.util.spring.ServiceProxy">
+    <property name="lookupHomeOnStartup"><value>true</value></property> 
+    <property name="serviceType"><value>remote</value></property>   	
+    <property name="jndiName"><value>com.telus.credit.service.CreditProfileService</value></property>
+    <property name="jndiEnvironment"> 
+        <props>
+          <prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+          <prop key="java.naming.provider.url">t3://sedm3202.ent.agt.ab.ca:20022</prop>
+        </props>
+     </property>
+    <property name="businessInterface"><value>com.telus.credit.service.CreditProfileMgtSvc</value></property>
+</bean> 
+  
+</beans>

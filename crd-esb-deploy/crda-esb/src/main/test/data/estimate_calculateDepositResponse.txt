@@ -1,0 +1,8 @@
+<tns:calculateDepositResponse xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1 OrderDepositCalculatorServiceRequestResponse_v1_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1" xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1">
+	<codt:customerID>2147483647</codt:customerID>
+	<codt:orderID>11111</codt:orderID>
+	<codt:calculationTypeCd>Estimate</codt:calculationTypeCd>
+	<codt:totalDepositAmt>1.12</codt:totalDepositAmt>
+	<codt:calculationResultMessageCd>SUCCESS</codt:calculationResultMessageCd>
+	<codt:calculationResultReasonCd></codt:calculationResultReasonCd>
+</tns:calculateDepositResponse>

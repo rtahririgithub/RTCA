@@ -1,0 +1,368 @@
+<xs:schema targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" version="1.0" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" schemaLocation="EnterpriseCommonTypes_v9_1.xsd"/>
+    <xs:complexType name="DepositItem">
+        <xs:annotation>
+            <xs:documentation>Information describing a single deposit
+                returned by the search deposits API</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="depositID" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Unique identifier for deposit request.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="dueDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>The date by which the direct
+                        debit/deposit request is to be paid. According
+                        to this date and according to customization rule
+                        implementation the request will be extracted.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="depositDesignationID" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The external designation applied
+                        to a deposit payment. This is a pointer to the
+                        deposit and comes into play when a
+                        payment/credit needs to be mapped to the
+                        deposit. The payment for the deposit (once it is
+                        made) is mapped to the deposit using this
+                        deposit designation field.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="requestAmount" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>The amount of the direct debit /
+                        deposit request at the time the direct debit /
+                        deposit was created. This is the original amount
+                        the customer was requested to pay.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="requestDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Date deposit request was opened.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="requestReasonCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The reason for the deposit
+                        request. See the Deposit Reasons reference table
+                        where the Category is 'C'</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="requestReasonTxt" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The reason description for the
+                        deposit request. See the Deposit Reasons
+                        reference table where the Category is 'R'. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="paidAmount" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>The amount received in payment for
+                        the deposit request.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="paidDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>The date the amount was received. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="cancelledAmount" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>The amount cancelled from the deposit.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="cancelDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>The date the amount was cancelled.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="cancelReasonCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The reason for the deposit
+                        cancellation. Valid values are according to the
+                        Deposit Reasons reference table where the
+                        category is 'N'. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="cancelReasonTxt" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The reason description for the
+                        deposit cancel. See the Deposit Reasons
+                        reference table where the Category is 'R'.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="releasedAmount" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>The amount released from the
+                        deposit request.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="releaseDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>The amount released from the
+                        deposit request.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="releaseReasonCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The reason for the deposit
+                        release. See the Deposit Reasons reference table
+                        where the Category is 'R'.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="releaseReasonTxt" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The reason for the deposit
+                        release. See the Deposit Reasons reference table
+                        where the Category is 'R'.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="releaseMethodCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>When a deposit is released, the
+                        release method specifies what to do with the
+                        released amount. See the values in the generic
+                        codes reference table under
+                        DEPOSIT_RELEASE_METHOD type.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="releaseMethodTxt" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>When a deposit is released, the
+                        release method specifies what to do with the
+                        released amount. See the values in the generic
+                        codes reference table under
+                        DEPOSIT_RELEASE_METHOD type.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="interestAmount" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>The interest amount granted when
+                        the deposit is released.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="accountID" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>A technical unique numerical
+                        identifier of the account.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DepositItemList">
+        <xs:annotation>
+            <xs:documentation>Data array consisting of DepositItem
+                elements. Maximum number of array elements will be
+                limited by the maxDepositsNumber value in the service
+                spring file.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="depositItem" type="tns:DepositItem"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreateDepositInput">
+        <xs:annotation>
+            <xs:documentation>Input parameters for the the creation of
+                the deposit request. All values are mandatory.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="payChannelID" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Primary key for AR1_PAY_CHANNEL; </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="requestAmount" type="xs:decimal">
+                <xs:annotation>
+                    <xs:documentation>The amount of the direct debit /
+                        deposit request at the time the direct debit /
+                        deposit was created. This is the original amount
+                        the customer was requested to pay.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="depositContextID" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Unique context of the deposit -
+                        for e.g. orderId</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreateDepositOutput">
+        <xs:annotation>
+            <xs:documentation>Response object returned by createDeposit request.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ect:ResponseMessage">
+                <xs:sequence>
+                    <xs:element name="invoiceAmount" type="xs:decimal">
+                        <xs:annotation>
+                            <xs:documentation>Amount corresponding to
+                                the new invoice created or the existing
+                                invoice in Enabler-AR.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="invoiceID" type="xs:long">
+                        <xs:annotation>
+                            <xs:documentation>Id of the new invoice
+                                created or the existing invoice in Enabler-AR.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="createDeposit">
+        <xs:annotation>
+            <xs:documentation>Create deposit request.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="input" type="tns:CreateDepositInput"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createDepositResponse">
+        <xs:annotation>
+            <xs:documentation>Create deposit responce object.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:annotation>
+                    <xs:documentation>Output values for the
+                        createDeposit method. </xs:documentation>
+                </xs:annotation>
+                <xs:element name="output" type="tns:CreateDepositOutput"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="CancelDepositInput">
+        <xs:annotation>
+            <xs:documentation>Input parameters for the the creation of
+                the deposit request. All values are mandatory.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="invoiceID" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>The invoice ID of the deposit.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CancelDepositOutput">
+        <xs:annotation>
+            <xs:documentation>Response object returned by createDeposit request.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ect:ResponseMessage">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="cancelDeposit">
+        <xs:annotation>
+            <xs:documentation>Input object for deposit cancellation.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="input" type="tns:CancelDepositInput"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="cancelDepositResponse">
+        <xs:annotation>
+            <xs:documentation>Responce object returned by deposit cancellation.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:annotation>
+                    <xs:documentation>Output values for the
+                        cancelDeposit method. </xs:documentation>
+                </xs:annotation>
+                <xs:element name="output" type="tns:CancelDepositOutput"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="SearchDepositInput">
+        <xs:annotation>
+            <xs:documentation>Input values for deposit search functionality</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="accountID" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>A technical unique numerical
+                        identifier of the account.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="fromDepositDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Contains the earliest deposit date
+                        that will be returned in the search.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="toDepositDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Contains the latest deposit date
+                        that will be returned in the search.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="depositReasonCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The reason code for the deposit.
+                        Valid values are from the Deposit Reasons
+                        reference table.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SearchDepositOutput">
+        <xs:annotation>
+            <xs:documentation>Response object returned by sedarchDeposit method.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ect:ResponseMessage">
+                <xs:sequence>
+                    <xs:element name="rowCountNum" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>The number of deposits
+                                returned. This number will be limited by
+                                the maxDepositsNumber value in the
+                                service spring file.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="depositItemList" type="tns:DepositItemList"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="searchDeposit">
+        <xs:annotation>
+            <xs:documentation>Search deposit request.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:annotation>
+                    <xs:documentation>Input values for the search
+                        deposit method. </xs:documentation>
+                </xs:annotation>
+                <xs:element name="input" type="tns:SearchDepositInput"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchDepositResponse">
+        <xs:annotation>
+            <xs:documentation>Response object returned by the search
+                deposits method</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:annotation>
+                    <xs:documentation>Output values for searchDeposit
+                        method. </xs:documentation>
+                </xs:annotation>
+                <xs:element name="output" type="tns:SearchDepositOutput"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

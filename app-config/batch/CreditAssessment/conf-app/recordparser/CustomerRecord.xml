@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE delimited-record-layout PUBLIC "-//TELUS.com//DTD DelimitedRecordLayout 1.0//EN" "http://www.telus.com/dtd/DelimitedRecordLayout.dtd">
+
+<delimited-record-layout delimiter="|">
+
+   <typehandlers>
+      <typehandler id="BooleanHandler" class="com.telus.framework.recordparser2.typehandler.BooleanHandler">
+         <prop name="caseSensitivity">lowercase</prop>
+         <prop name="trueValue">true</prop>
+         <prop name="falseValue">false</prop>
+      </typehandler>
+
+      <typehandler id="DateHandler" class="com.telus.framework.recordparser2.typehandler.DateHandler">
+         <prop name="pattern">yyyy-MM-dd</prop>
+      </typehandler>
+   </typehandlers>
+
+   <structure name="record" type="com.telus.crd.assessment.batch.domain.CustomerRecord">
+      <field name="customerId" maxLength="10000" />
+      <field name="customerMasterSourceId" maxLength="10000" />
+      <field name="title" maxLength="10000" />
+      <field name="firstName" maxLength="10000" />
+      <field name="middleName" maxLength="10000" />
+      <field name="lastName" maxLength="10000" />
+      <field name="nameSuffix" maxLength="10000" />
+      <field name="createDate" maxLength="10000" typehandler="DateHandler" />
+      <field name="customerType" maxLength="10000" />
+      <field name="customerSubType" maxLength="10000" />
+      <field name="customerStatusCode" maxLength="10000" />
+      <field name="revenueSegmentCode" maxLength="10000" />
+      <field name="employeeIndicatorStr" maxLength="10000" />
+      <field name="recordTime" maxLength="10000" />
+   </structure>
+
+</delimited-record-layout>

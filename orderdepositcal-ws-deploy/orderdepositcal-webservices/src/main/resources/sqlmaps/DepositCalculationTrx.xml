@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+
+	<typeAlias alias="OrderDepositCalculationDto"
+		type="com.telus.credit.orderDepositCalculator.webservice.dto.OrderDepositCalculationDto" />
+	<typeAlias alias="currentProduct"
+		type="com.telus.credit.orderDepositCalculator.common.domain.CurrentProduct" />
+	<typeAlias alias="baseProduct"
+		type="com.telus.credit.orderDepositCalculator.common.domain.BaseProduct" />
+
+	<!--********************ORDER_DEPOSIT_CALC_TRN************************************ -->
+	<insert id="insert_order_deposit_calc_trn" parameterClass="OrderDepositCalculationDto">
+
+		<selectKey resultClass="java.lang.Long" keyProperty="depositCalculationTrnID">
+			select
+			SEQ_ORDER_DEPOSIT_CALC_TRN.NEXTVAL from dual
+		</selectKey>
+
+		insert into ORDER_DEPOSIT_CALC_TRN
+		(
+		ORDER_DEPOSIT_CALC_TRN_ID,
+		CUSTOMER_ID,
+		ORDER_ID,
+		ORDER_MASTER_SOURCE_ID,
+		DECISION_CD,
+		RISK_LEVEL_NUM,
+		APPLICATION_ID,
+		CHANNEL_ID,
+		TOTAL_AR_DEPOSIT_PAID_AMT,
+		LAST_AR_DEPOSIT_PAID_TS,
+		TOTAL_DEPOSIT_RELEASED_AMT_TOT,
+		LAST_AR_DEPOSIT_RELEASED_TS,
+		TOTAL_AR_DEPOSIT_PENDING_AMT,
+		LAST_AR_DEPOSIT_PENDING_TS,
+		DEPOSIT_ADJUSTMENT_AMT,
+		DEPOSIT_ON_HAND_AMT,
+		TOTAL_ASSESSED_DEPOSIT_AMT,
+		CALCULATION_RESULT_MSG_CD,
+		CALCULATION_RESULT_REASON_CD,
+		EFF_START_TS,
+		EFF_STOP_TS,
+		CREATE_TS,
+		CREATE_USER_ID,
+		LAST_UPDT_USER_ID,
+		LAST_UPDT_TS
+		)
+		values
+		(
+		#depositCalculationTrnID#,
+		#customerID#,
+		#orderID:VARCHAR#,
+		#orderMasterSrcID:VARCHAR#,
+		#decisionCD:VARCHAR#,
+		#riskLevelNum#,
+		#applicationID:VARCHAR#,
+		#channelID:VARCHAR#,
+		#totalDepositPaidAmt#,
+		#lastDepositPaidDate:DATE#,
+		#totalDepositReleaseAmt#,
+		#lastDepositReleaseDate:DATE#,
+		#totalDepositPendingAmt#,
+		#lastDepositPendingDate:DATE#,
+		#depositAdjustmentAmt#,
+		#depositOnHandAmt#,
+		#totalAssessedDepositAmt#,
+		#calculationResultMsgCD:VARCHAR#,
+		#calculationResultReasonCD:VARCHAR#,
+		SYSTIMESTAMP,
+		TO_DATE('44441231','YYYYMMDD'),
+		SYSTIMESTAMP,
+		#userID#,
+		#userID#,
+		SYSTIMESTAMP
+		)
+	</insert>
+
+	<!--********************ODC_PRODUCT_INSTANCE-CURRENT PRODUCT************************************ -->
+	<insert id="insert_current_order_product_instance"
+		parameterClass="java.util.Map">
+		<selectKey resultClass="java.lang.Long" keyProperty="productInstanceID">
+			select
+			SEQ_ODC_PRODUCT_INSTANCE.NEXTVAL from dual
+		</selectKey>
+
+		insert into ODC_PRODUCT_INSTANCE
+		(
+		ODC_PRODUCT_INSTANCE_ID,
+		ORDER_DEPOSIT_CALC_TRN_ID,
+		ORDER_PRD_STATUS_CD,
+		OFFER_NAME_CD,
+		PRODUCT_NAME_CD,
+		SERVICE_TYP_CD,
+		PRODUCT_INSTANCE_ID,
+		PRODUCT_INSTANCE_SOURCE_ID,
+		RENTED_EQUIPMENT_CNT,
+		PURCHASED_EQUIPMENT_CNT,
+		PREVIOUSLY_ASESED_DEPOSIT_AMT,
+		MONTHLY_CHARGE_AMT,
+		PRODUCT_ORDER_CANCELED_IND,
+		ESTIMATED_USAGE_CHARGE_AMT,
+		FORBORNE_IND,
+		LRT_CHARGE_AMT,
+		ASSESSED_DEPOSIT_AMT,
+		EFF_START_TS,
+		EFF_STOP_TS,
+		CREATE_TS,
+		CREATE_USER_ID,
+		LAST_UPDT_USER_ID,
+		LAST_UPDT_TS
+		)
+		values
+		(
+		#productInstanceID#,
+		#depositCalculationTrnID#,
+		#orderProductStatus#,
+		#currentProduct.offerNameCd#,
+		#currentProduct.productName#,
+		#currentProduct.serviceTypeCd#,
+		#currentProduct.assignedProductID#,
+		#currentProduct.assignedProductIDSourceSystemCd:VARCHAR#,
+		#currentProduct.rentedEquipmentCnt#,
+		#currentProduct.purchasedEquipmentCnt#,
+		#currentProduct.previouslyAssessedDepositAmt#,
+		#currentProduct.totalRecurringChargeAmt#,
+		#currentProduct.productOrderCanceledInd:CHAR#,
+		#currentProduct.estimatedUsageChargeAmt#,
+		#currentProduct.forborneInd:CHAR#,
+		#currentProduct.lossRentalEquipmentChargeAmt#,
+		#assessedDepositAmt#,
+		SYSTIMESTAMP,
+		TO_DATE('44441231','YYYYMMDD'),
+		SYSTIMESTAMP,
+		#userID#,
+		#userID#,
+		SYSTIMESTAMP
+		)
+	</insert>
+
+	<!--********************ODC_PRODUCT_INSTANCE-PENDING/ASSIGNED PRODUCT************************************ -->
+	<insert id="insert_assigned_pending_order_product_instance"
+		parameterClass="java.util.Map">
+		<selectKey resultClass="java.lang.Long" keyProperty="productInstanceID">
+			select
+			SEQ_ODC_PRODUCT_INSTANCE.NEXTVAL from dual
+		</selectKey>
+
+		insert into ODC_PRODUCT_INSTANCE
+		(
+		ODC_PRODUCT_INSTANCE_ID,
+		ORDER_DEPOSIT_CALC_TRN_ID,
+		ORDER_PRD_STATUS_CD,
+		OFFER_NAME_CD,
+		PRODUCT_NAME_CD,
+		SERVICE_TYP_CD,
+		PRODUCT_INSTANCE_ID,
+		PRODUCT_INSTANCE_SOURCE_ID,
+		RENTED_EQUIPMENT_CNT,
+		PURCHASED_EQUIPMENT_CNT,
+		PREVIOUSLY_ASESED_DEPOSIT_AMT,
+		EFF_START_TS,
+		EFF_STOP_TS,
+		CREATE_TS,
+		CREATE_USER_ID,
+		LAST_UPDT_USER_ID,
+		LAST_UPDT_TS
+		)
+		values
+		(
+		#productInstanceID#,
+		#depositCalculationTrnID#,
+		#orderProductStatus#,
+		#baseProduct.offerNameCd#,
+		#baseProduct.productName#,
+		#baseProduct.serviceTypeCd#,
+		#baseProduct.assignedProductID#,
+		#baseProduct.assignedProductIDSourceSystemCd:VARCHAR#,
+		#baseProduct.rentedEquipmentCnt#,
+		#baseProduct.purchasedEquipmentCnt#,
+		#baseProduct.previouslyAssessedDepositAmt#,
+		SYSTIMESTAMP,
+		TO_DATE('44441231','YYYYMMDD'),
+		SYSTIMESTAMP,
+		#userID#,
+		#userID#,
+		SYSTIMESTAMP
+		)
+	</insert>
+
+
+	<!--********************ODC_PRODUCT_PAY_CHANNEL ************************************ -->
+	<insert id="insert_order_product_pay_channel" parameterClass="java.util.Map">
+		insert into ODC_PRODUCT_PAY_CHANNEL
+		(
+		ODC_PRODUCT_PAY_CHANNEL_ID,
+		PAY_CHANNEL_NUMBER,
+		ODC_PRODUCT_INSTANCE_ID,
+		EFF_START_TS,
+		EFF_STOP_TS,
+		CREATE_TS,
+		CREATE_USER_ID,
+		LAST_UPDT_USER_ID,
+		LAST_UPDT_TS
+		)
+		values
+		(
+		SEQ_ODC_PRODUCT_PAY_CHANNEL.NEXTVAL,
+		#payChannelNumber#,
+		#productInstanceID#,
+		SYSTIMESTAMP,
+		TO_DATE('44441231','YYYYMMDD'),
+		SYSTIMESTAMP,
+		#userID#,
+		#userID#,
+		SYSTIMESTAMP
+		)
+	</insert>
+
+</sqlMap>
+	

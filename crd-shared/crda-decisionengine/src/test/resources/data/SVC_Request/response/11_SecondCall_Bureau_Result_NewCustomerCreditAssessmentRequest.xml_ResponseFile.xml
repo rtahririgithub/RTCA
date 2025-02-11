@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CreditAssessmentResult xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2">
+    <assessmentResultCd>SUCCESS</assessmentResultCd>
+    <assessmentResultReasonCd></assessmentResultReasonCd>
+    <decisionCd>NWTFCM000085</decisionCd>
+    <assessmentMessageCd>REGCA01</assessmentMessageCd>
+    <creditValueCd>E</creditValueCd>
+    <productCategoryQualification>
+        <productCategoryList>
+            <categoryCd>SING</categoryCd>
+            <qualified>true</qualified>
+        </productCategoryList>
+        <productCategoryList>
+            <categoryCd>HSIC</categoryCd>
+            <qualified>true</qualified>
+        </productCategoryList>
+        <productCategoryList>
+            <categoryCd>TTV</categoryCd>
+            <qualified>true</qualified>
+        </productCategoryList>
+        <boltOnInd>true</boltOnInd>
+    </productCategoryQualification>
+    <rulesExecuted>DATE=2019-06-10T17:41:12.700-07:00, VERSION=20190610</rulesExecuted>
+    <rulesExecuted>280_060_New_Assessment_Trigger: TYPE/SUB=FULL_ASSESSMENT/AUTO_ASSESSMENT:  TRIGGER=NEW_ASSESSMENT_TRIGGER</rulesExecuted>
+    <rulesExecuted>100_999_Default_Rule: no validation issues</rulesExecuted>
+    <rulesExecuted>260_030_New_Customer: CUSTOMER TYPE=NEW_CUSTOMER</rulesExecuted>
+    <rulesExecuted>270_020_Inactive_Costomer_No_Assess: CUSTOMER ACTIVITY=INACTIVE</rulesExecuted>
+    <rulesExecuted>250_020_Short_Tenure_New_Customer CHAMPION: TENURE=SHORT_TENURE</rulesExecuted>
+    <rulesExecuted>240_021_Short_Tenure_New_Assessment: ASSESSMENT TYPE=NEW_ASSESSMENT</rulesExecuted>
+    <rulesExecuted>230_050_Bureau_Report_Not_Expired: BureauExpired=false</rulesExecuted>
+    <rulesExecuted>220_060_Bureau_Report_Date_Exists: BureauExists=true</rulesExecuted>
+    <rulesExecuted>210_055_New_Cusomer_Has_Bureau_Report: BureauRequired=false</rulesExecuted>
+    <rulesExecuted>355_999_Default_Required: Mapping Required is true</rulesExecuted>
+    <rulesExecuted>370_020_Bureau_True_Thin_File: Thin File is true</rulesExecuted>
+    <rulesExecuted>400_130_CS2: Revenue Segment CS2 mapped to revenue band of 1</rulesExecuted>
+    <rulesExecuted>R_201_010_Non_True_Restricted_Knockout: trueRestricted=false</rulesExecuted>
+    <rulesExecuted>RISK TABLE INPUT: Credit Value=R,Delinquency Cycle=0,New Credit Value=,Decision Code Prefix=DF,Risk Indicator=REGULAR,Credit Score=159,Credit Class=D,depositLookupStrategy=false,BA Score Value=unknown,Revenue Segment=1,Province=AB,Number Of  Involuntary Cancelled Accounts=null,Number Of Accounts In Agency=null,Net Current Deposit=0.0,Tenure=1 month 8 days 17 hours 41 minutes 12 seconds 700 milliseconds,ThinFile  Indicator=true,ThinFile Risk Category Code=MEDIUM,Thin File Decision Code=ECBS00</rulesExecuted>
+    <rulesExecuted>310_100_New_Asses_Thin_File_CHAM: Executed THIN_FILE_CHAM_DT and ELIGIBILITY_DT:,Risk Level=300,Credit Value=E,Decision Code=NWTFCM000085</rulesExecuted>
+    <rulesExecuted>160_000_MapProduct: Assigned Product Eligibility Set: Everything  Bolt-on=true</rulesExecuted>
+    <rulesExecuted>430_998_Default_Rule: RESULT=SUCCESS</rulesExecuted>
+    <creditAssessmentStrategies>
+        <depositLookupStrategy>CHAM</depositLookupStrategy>
+        <cvudStrategy>CHAM</cvudStrategy>
+        <creditValueAssignmentStrategy>CHAM</creditValueAssignmentStrategy>
+        <customerActivityStrategy>CHAM</customerActivityStrategy>
+        <tenureStrategy>CHAM</tenureStrategy>
+    </creditAssessmentStrategies>
+    <creditRiskLevel>300</creditRiskLevel>
+</CreditAssessmentResult>
+

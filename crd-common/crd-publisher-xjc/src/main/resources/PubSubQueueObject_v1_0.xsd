@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/common/utils/PubSubQueueObject_v1" targetNamespace="http://xmlschema.tmi.telus.com/xsd/common/utils/PubSubQueueObject_v1" elementFormDefault="qualified">
+	<xsd:complexType name="Characteristic">
+		<xsd:sequence>
+			<xsd:element name="Value" type="xsd:string" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="Object">
+		<xsd:sequence>
+			<xsd:element name="Id" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Action" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Characteristic" type="tns:Characteristic" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Object" type="tns:Object" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="specName" type="xsd:string"/>
+		<xsd:attribute name="specType" type="xsd:string"/>
+		<xsd:attribute name="specCategory" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Event">
+		<xsd:complexContent>
+			<xsd:extension base="tns:Object">
+				<xsd:attribute name="source" type="xsd:string"/>
+				<xsd:attribute name="timestamp" type="xsd:dateTime" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

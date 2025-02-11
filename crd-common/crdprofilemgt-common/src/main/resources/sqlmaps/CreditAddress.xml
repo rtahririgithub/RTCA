@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="credit_address">
+
+	<typeAlias alias="CreditAddress" type="com.telus.credit.domain.CreditAddress" />
+	
+	<resultMap id="select-creditaddress-result" class="CreditAddress">
+		<result property="_id" column="CPROFL_ADDRESS_ID"/>
+		<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+		<result property="type" column="CPROFL_ADDRESS_TYP_CD"/>
+		<result property="addressTypeCode" column="CPROFL_ADDRESS_TYP_CD"/>
+		<result property="addressLineOne" column="RENDERED_ADDR_LN_1_TXT"/>
+		<result property="addressLineTwo" column="RENDERED_ADDR_LN_2_TXT"/>
+		<result property="addressLineThree" column="RENDERED_ADDR_LN_3_TXT"/>
+		<result property="addressLineFour" column="RENDERED_ADDR_LN_4_TXT"/>
+		<result property="addressLineFive" column="RENDERED_ADDR_LN_5_TXT"/>
+		<result property="city" column="MUNIC_NM"/>
+		<result property="postalCode" column="POSTAL_ZIP_CD_TXT"/>
+		<result property="provinceCode" column="PROVINCE_CD"/>
+		<result property="countryCode" column="COUNTRY_CD"/>
+		<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+	</resultMap>
+	
+	<insert id="insert_credit_address" parameterClass="java.util.Map">
+  		<selectKey resultClass="java.lang.Long" keyProperty="credit_address._id">
+			select CPROFL_ADDRESS_ID_SEQ.NEXTVAL from dual
+  		</selectKey>
+  		insert into CPROFL_ADDRESS
+  			(	
+  			CPROFL_ADDRESS_ID, 
+			CREDIT_PROFILE_ID, 
+			MUNIC_NM, 
+			POSTAL_ZIP_CD_TXT, 
+			RENDERED_ADDR_LN_1_TXT,
+			RENDERED_ADDR_LN_2_TXT,
+			RENDERED_ADDR_LN_3_TXT,
+			RENDERED_ADDR_LN_4_TXT,
+			RENDERED_ADDR_LN_5_TXT,
+			CPROFL_ADDRESS_TYP_CD,
+			PROVINCE_CD,
+			COUNTRY_CD,
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values 
+    		(
+			#credit_address._id#,
+			#credit_address.creditProfileId#, 
+			#credit_address.city:VARCHAR#, 
+			#credit_address.postalCode:VARCHAR#,
+			#credit_address.addressLineOne:VARCHAR#,
+			#credit_address.addressLineTwo:VARCHAR#,
+			#credit_address.addressLineThree:VARCHAR#,
+			#credit_address.addressLineFour:VARCHAR#,	
+			#credit_address.addressLineFive:VARCHAR#,
+			#credit_address.type:VARCHAR#,
+			#credit_address.provinceCode:VARCHAR#, 
+			#credit_address.countryCode:VARCHAR#, 
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#
+    		)
+	</insert>
+	
+	<statement id="get_credit_address_by_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="select-creditaddress-result">
+		select
+			CPROFL_ADDRESS_ID,
+			CREDIT_PROFILE_ID,
+			CPROFL_ADDRESS_TYP_CD,
+			RENDERED_ADDR_LN_1_TXT,
+			RENDERED_ADDR_LN_2_TXT,
+			RENDERED_ADDR_LN_3_TXT,
+			RENDERED_ADDR_LN_4_TXT,
+			RENDERED_ADDR_LN_5_TXT,
+			MUNIC_NM,
+			POSTAL_ZIP_CD_TXT,
+			PROVINCE_CD,
+			COUNTRY_CD,
+			LAST_UPDT_TS
+		from 
+			CPROFL_ADDRESS
+		where
+			CREDIT_PROFILE_ID=#value#
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+
+	</statement>
+	<update id="delete_credit_address" parameterClass="java.util.Map">
+  		update 
+  			CPROFL_ADDRESS
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			DATA_SOURCE_ID = #sourceId#,
+			EFF_STOP_DTM = SYSTIMESTAMP
+  		where 
+			CREDIT_PROFILE_ID = #credit_profile_id# 
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</update>		
+</sqlMap>

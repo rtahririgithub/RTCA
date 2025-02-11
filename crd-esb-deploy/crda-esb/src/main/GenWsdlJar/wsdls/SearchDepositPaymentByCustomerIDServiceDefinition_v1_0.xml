@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service xsi:noNamespaceSchemaLocation="http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServiceDefinition>
+		<Name>SearchDepositPaymentByCustomerID</Name>
+		<Documentation>SearchDepositPaymentByCustomerID.Internal ESB service for get deposit data by customerID</Documentation>
+		<TAM_LevelZeroAndOne>CMO/OrderMgmt</TAM_LevelZeroAndOne>
+		<ServiceTaxonomy>/SearchDepositPaymentByCustomerID</ServiceTaxonomy>
+		<MajorVersion>1</MajorVersion>
+		<MinorVersion>0</MinorVersion>
+		<soapAddress>http://customermanagementwestesb-dv01.tsl.telus.com</soapAddress>
+		<SchemaLocation>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/SearchDepositPaymentByCustomerIDRequestResponse_v1_0.xsd</SchemaLocation>
+		<NameSpace>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/SearchDepositPaymentByCustomerIDRequestResponse_v1</NameSpace>
+		<nsAbbrev>rtca</nsAbbrev>
+		<OutputDir/>
+		<SecurityToken>
+			<Token>Wssp1.2-2007-Saml1.1-SenderVouches-Wss1.0</Token>
+		</SecurityToken>
+	</ServiceDefinition>
+	<Operation>
+		<OperationName>searchDepositPaymentByCustomerID</OperationName>
+		<Documentation>Operation to get deposit data by customer id .</Documentation>
+		<InputType wsp="true">searchDepositPaymentByCustomerID</InputType>
+		<OutputType>searchDepositPaymentByCustomerIDResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+
+</Service>

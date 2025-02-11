@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+<group name="entCrdPrflMgmtConfig">
+
+  <group name="emHeaderConfig">
+  	<prop name="injectEMHeader">true</prop>
+  </group>
+  <group name="creditAssessmentAnalyzer">
+         <prop name="testMode">false</prop>
+         <prop name="analyzerOn">true</prop>
+         <prop name="checkCreditValueInRequest">true</prop>
+         <prop name="checkCustomerStatus">true</prop>
+         <prop name="checkNoOfWLNAccounts">true</prop>
+         <prop name="checkNoOfWLSAccounts">true</prop>
+         <prop name="checkWLNAccountCreationDate">true</prop>
+         <prop name="checkCreditValueCondition">true</prop>
+    
+         <prop name="rtcaLaunchDate">20130126</prop>
+  </group>
+    
+</group>

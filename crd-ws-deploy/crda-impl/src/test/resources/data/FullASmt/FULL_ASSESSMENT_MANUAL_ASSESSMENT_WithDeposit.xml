@@ -1,0 +1,174 @@
+		<ent:performCreditAssessment 
+		xmlns:ent="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2">
+			<ent:creditAssessmentRequest xsi:type="ent:ExistingCustomerCreditAssessmentRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+				<ent:creditAssessmentTypeCd>FULL_ASSESSMENT</ent:creditAssessmentTypeCd>
+				<ent:creditAssessmentSubTypeCd>MANUAL_ASSESSMENT</ent:creditAssessmentSubTypeCd>
+				<ent:customerID>118973471</ent:customerID>
+				<ent:applicationID>123</ent:applicationID>
+				<ent:channelID>123</ent:channelID>
+				<ent:lineOfBusiness>WIRELINE</ent:lineOfBusiness>
+				<ent:commentTxt>123</ent:commentTxt>
+				<ent:creditCustomerInfo>
+					<cred:customerID xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">118973471</cred:customerID>
+					<cred:personName xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">
+						<cred:firstName>Casper</cred:firstName>
+						<cred:lastName>Testcrdd1</cred:lastName>
+					</cred:personName>
+					<cred:customerCreationDate xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">2013-11-27Z</cred:customerCreationDate>
+					<cred:customerMasterSourceID xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">1012</cred:customerMasterSourceID>
+					<cred:customerStatusCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">AC</cred:customerStatusCd>
+					<cred:customerTypeCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">R</cred:customerTypeCd>
+					<cred:customerSubTypeCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">I</cred:customerSubTypeCd>
+					<cred:revenueSegmentCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">C1</cred:revenueSegmentCd>
+					<cred:employeeInd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">true</cred:employeeInd>
+				</ent:creditCustomerInfo>
+				<ent:creditProfileData>
+					<cred:creditProfileID xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">8619449548</cred:creditProfileID>
+					<cred:customerID xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">118973471</cred:customerID>
+					<cred:creditIdentification xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2"/>
+					<cred:creditAddress xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">
+						<cred:creditAddressTypeCd>CB</cred:creditAddressTypeCd>
+						<cred:addressTypeCd>CB</cred:addressTypeCd>
+						<cred:addressLineOne>31 Willowmere way</cred:addressLineOne>
+						<cred:cityName>Chestermere</cred:cityName>
+						<cred:provinceCd>AB</cred:provinceCd>
+						<cred:countryCd>CAN</cred:countryCd>
+						<cred:postalCd>T1X1S2</cred:postalCd>
+					</cred:creditAddress>
+					<cred:applicationProvinceCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">AB</cred:applicationProvinceCd>
+					<cred:personalInfo xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">
+						<cred:employmentStatusCd>EM</cred:employmentStatusCd>
+						<cred:residencyCd>O</cred:residencyCd>
+						<cred:creditCheckConsentCd>Y</cred:creditCheckConsentCd>
+						<cred:birthDate>1995-01-01Z</cred:birthDate>
+						<cred:underLegalCareCd>N</cred:underLegalCareCd>
+						<cred:provinceOfCurrentResidenceCd>AB</cred:provinceOfCurrentResidenceCd>
+					</cred:personalInfo>
+					<cred:creditCardCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">
+						<cred:primaryCreditCardCd>NA</cred:primaryCreditCardCd>
+						<cred:secondaryCreditCardCd>NA</cred:secondaryCreditCardCd>
+					</cred:creditCardCd>
+					<cred:creditProfileStatusCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">A</cred:creditProfileStatusCd>
+					<cred:businessLastUpdateTimestamp xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">2013-12-20T16:59:02.478Z</cred:businessLastUpdateTimestamp>
+					<cred:bypassMatchIndicator xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">false</cred:bypassMatchIndicator>
+					<cred:formatCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">P</cred:formatCd>
+					<cred:methodCd xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">OO</cred:methodCd>
+					<cred:commentTxt xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">test</cred:commentTxt>
+					<wir:creditWorthiness xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">
+						<wir:customerID>118973471</wir:customerID>
+						<wir:creditAssessmentId>13775</wir:creditAssessmentId>
+						<wir:creditValueCd>D</wir:creditValueCd>
+						<wir:assessmentMessageCd>REGCA02</wir:assessmentMessageCd>
+						<wir:productCategoryQualification>
+							<ns5:productCategoryList xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns8="http://schemas.telus.com/eca/common_types_2_1">
+								<ns5:categoryCd>SL</ns5:categoryCd>
+								<ns5:qualified>true</ns5:qualified>
+							</ns5:productCategoryList>
+							<ns5:productCategoryList xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns8="http://schemas.telus.com/eca/common_types_2_1">
+								<ns5:categoryCd>DSL</ns5:categoryCd>
+								<ns5:qualified>true</ns5:qualified>
+							</ns5:productCategoryList>
+							<ns5:productCategoryList xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns8="http://schemas.telus.com/eca/common_types_2_1">
+								<ns5:categoryCd>TTV</ns5:categoryCd>
+								<ns5:qualified>true</ns5:qualified>
+							</ns5:productCategoryList>
+							<ns5:boltOnInd xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns8="http://schemas.telus.com/eca/common_types_2_1">false</ns5:boltOnInd>
+						</wir:productCategoryQualification>
+						<wir:creditAssessmentTypeCd>FULL_ASSESSMENT</wir:creditAssessmentTypeCd>
+						<wir:creditAssessmentSubTypeCd>AUTO_ASSESSMENT</wir:creditAssessmentSubTypeCd>
+						<wir:creditAssessmentCreationDate>2013-11-27T22:27:07.016Z</wir:creditAssessmentCreationDate>
+					</wir:creditWorthiness>
+					<wir:reportIndicator xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">false</wir:reportIndicator>
+				</ent:creditProfileData>
+				<ent:customerCollectionData>
+					<wir:activeAccountsCollectionInd xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">false</wir:activeAccountsCollectionInd>
+					<wir:numberOfAccountsInAgency xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">0</wir:numberOfAccountsInAgency>
+					<wir:involuntaryCancelledAccounts xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">0</wir:involuntaryCancelledAccounts>
+					<wir:numberOfNSFCheques xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2">0</wir:numberOfNSFCheques>
+				</ent:customerCollectionData>
+				
+	
+	<ent:depositItemList xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1">
+			<cred:depositItem>
+				<cred:depositID>30301</cred:depositID>
+				<cred:dueDate>2113-11-08T00:00:00Z</cred:dueDate>
+				<cred:depositDesignationID>1</cred:depositDesignationID>
+				<cred:requestAmount>100.00</cred:requestAmount>
+				<cred:requestDate>2013-12-02T00:00:00Z</cred:requestDate>
+				<cred:requestReasonCd>DPSTRQ</cred:requestReasonCd>
+				<cred:requestReasonTxt>Deposit Request (Default) unknown Customer</cred:requestReasonTxt>
+				<cred:paidAmount>0.00</cred:paidAmount>
+				<cred:paidDate/>
+				<cred:cancelledAmount>0.00</cred:cancelledAmount>
+				<cred:cancelDate/>
+				<cred:cancelReasonCd/>
+				<cred:cancelReasonTxt/>
+				<cred:releasedAmount>0.00</cred:releasedAmount>
+				<cred:releaseDate/>
+				<cred:releaseReasonCd/>
+				<cred:releaseReasonTxt>Deposit Request (Default) unknown Customer</cred:releaseReasonTxt>
+				<cred:releaseMethodCd/>
+				<cred:releaseMethodTxt/>
+				<cred:interestAmount>0.00</cred:interestAmount>
+				<cred:accountID>600537613</cred:accountID>
+			</cred:depositItem>
+			<cred:depositItem>
+				<cred:depositID>32301</cred:depositID>
+				<cred:dueDate>2113-11-08T00:00:00Z</cred:dueDate>
+				<cred:depositDesignationID>30301</cred:depositDesignationID>
+				<cred:requestAmount>100.00</cred:requestAmount>
+				<cred:requestDate>2013-12-02T00:00:00Z</cred:requestDate>
+				<cred:requestReasonCd>DPSTRQ</cred:requestReasonCd>
+				<cred:requestReasonTxt>Deposit Request (Default) unknown Customer</cred:requestReasonTxt>
+				<cred:paidAmount>100.00</cred:paidAmount>
+				<cred:paidDate>2013-12-04T00:00:00Z</cred:paidDate>
+				<cred:cancelledAmount>0</cred:cancelledAmount>
+				<cred:cancelDate></cred:cancelDate>
+				<cred:cancelReasonCd></cred:cancelReasonCd>
+				<cred:cancelReasonTxt></cred:cancelReasonTxt>
+				<cred:releasedAmount>0.00</cred:releasedAmount>
+				<cred:releaseDate/>
+				<cred:releaseReasonCd/>
+				<cred:releaseReasonTxt>Deposit Request (Default) unknown Customer</cred:releaseReasonTxt>
+				<cred:releaseMethodCd/>
+				<cred:releaseMethodTxt/>
+				<cred:interestAmount>0.00</cred:interestAmount>
+				<cred:accountID>600537613</cred:accountID>
+			</cred:depositItem>
+			<cred:depositItem>
+				<cred:depositID>32301</cred:depositID>
+				<cred:dueDate>2113-11-08T00:00:00Z</cred:dueDate>
+				<cred:depositDesignationID>30301</cred:depositDesignationID>
+				<cred:requestAmount>100.00</cred:requestAmount>
+				<cred:requestDate>2013-12-02T00:00:00Z</cred:requestDate>
+				<cred:requestReasonCd>DPSTRQ</cred:requestReasonCd>
+				<cred:requestReasonTxt>Deposit Request (Default) unknown Customer</cred:requestReasonTxt>
+				<cred:paidAmount/>
+				<cred:paidDate/>
+				<cred:cancelledAmount/>
+				<cred:cancelDate/>>
+				<cred:cancelReasonCd></cred:cancelReasonCd>
+				<cred:cancelReasonTxt></cred:cancelReasonTxt>
+				<cred:releasedAmount>100.00</cred:releasedAmount>
+				<cred:releaseDate>2013-12-12T00:00:00Z</cred:releaseDate>
+				<cred:releaseReasonCd/>
+				<cred:releaseReasonTxt>Deposit Request (Default) unknown Customer</cred:releaseReasonTxt>
+				<cred:releaseMethodCd/>
+				<cred:releaseMethodTxt/>
+				<cred:interestAmount>0.00</cred:interestAmount>
+				<cred:accountID>600537613</cred:accountID>
+			</cred:depositItem>
+		</ent:depositItemList>
+				
+			</ent:creditAssessmentRequest>
+			<ent:auditInfo>
+				<ect:userId xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ect:userId>
+				<ect:userTypeCode xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ect:userTypeCode>
+				<ect:salesRepresentativeId xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ect:salesRepresentativeId>
+				<ect:channelOrganizationId xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ect:channelOrganizationId>
+				<ect:outletId xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ect:outletId>
+				<ect:originatorApplicationId xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ect:originatorApplicationId>
+				<ect:correlationId xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ect:correlationId>
+				<ect:timestamp xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">2001-12-17T09:30:47.0Z</ect:timestamp>
+			</ent:auditInfo>
+		</ent:performCreditAssessment>

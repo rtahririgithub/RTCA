@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service 
+xsi:noNamespaceSchemaLocation="http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServiceDefinition>
+		<Name>OrderDepositCalculatorProxyService</Name>
+		<Documentation>
+		The proxy service interfaces with OrderDepositCalculatorService webservice to provide ability to calculate deposit for a given order on requested products by customer.
+		</Documentation>
+		
+		<TAM_LevelZeroAndOne>CMO/OrderMgmt</TAM_LevelZeroAndOne>
+		<ServiceTaxonomy>/OrderDepositCalculatorProxyService</ServiceTaxonomy>
+		<MajorVersion>1</MajorVersion>
+		<MinorVersion>0</MinorVersion> 
+		<soapAddress>http://customermanagementwestesb-dv01.tsl.telus.com</soapAddress>
+		<SchemaLocation>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorProxyServiceRequestResponse_v1_0.xsd</SchemaLocation> 
+		<NameSpace>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorProxyServiceRequestResponse_v1</NameSpace>
+		<nsAbbrev>ODCP</nsAbbrev>
+		<OutputDir/>
+		<SecurityToken>
+			<Token>Wssp1.2-2007-Saml1.1-SenderVouches-Wss1.0</Token>
+		</SecurityToken>
+	</ServiceDefinition>
+	<Operation>
+		<OperationName>calculateDeposit</OperationName>
+		<Documentation>calculate deposit for a given order on requested products by customer</Documentation>
+		<InputType wsp="true">calculateDeposit</InputType>
+		<OutputType>calculateDepositResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>			
+</Service>

@@ -1,0 +1,7 @@
+
+<tns:findPartyParallelRequest xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1 FindPartySplitJoinRequestResponse_v1_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1">
+	<lastname>TEST</lastname>
+	<postalCd>L6X 0M4</postalCd>
+	<DL>P321456987456</DL>
+	<DOB>2000-01-22</DOB>
+</tns:findPartyParallelRequest>

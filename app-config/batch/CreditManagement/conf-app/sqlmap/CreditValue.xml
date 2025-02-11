@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="credit_value">
+
+	<typeAlias alias="CreditValue" type="com.telus.credit.domain.CreditValue" />
+	
+	<resultMap id="select-creditvalue-result" class="CreditValue">
+		<result property="_id" column="CREDIT_VALUE_ID"/>
+		<result property="method" column="POPULATE_METHOD_CD"/>
+		<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+		<result property="creditValueCode" column="CREDIT_VALUE_CD"/>
+		<result property="comment" column="COMMENT_TXT"/>
+		<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+	</resultMap>
+	
+	
+	<insert id="insert_credit_value" parameterClass="java.util.Map">
+  		insert into CREDIT_VALUE
+  			(	
+  			CREDIT_VALUE_ID,
+			CREDIT_PROFILE_ID, 
+			POPULATE_METHOD_CD, 
+			CREDIT_VALUE_CD,
+			COMMENT_TXT,
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values 
+    		(
+    		CREDIT_VALUE_ID_SEQ.NEXTVAL,
+			#credit_value.creditProfileId#, 
+			#credit_value.method#,
+			#credit_value.creditValueCode#,
+			NVL2(#credit_value.comment:VARCHAR#, #credit_value.comment:VARCHAR#, 'System Default'),
+			SYSTIMESTAMP,      
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#
+    		)
+	</insert>
+	
+	<statement id="get_credit_value_by_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="select-creditvalue-result">
+		select  
+			CREDIT_VALUE_ID, 
+			POPULATE_METHOD_CD,
+			CREDIT_PROFILE_ID,
+			LAST_UPDT_TS,
+			CREDIT_VALUE_CD, 
+			COMMENT_TXT 
+		from 
+			CREDIT_VALUE 
+		where 
+			EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+			and CREDIT_PROFILE_ID=#value#
+			
+	</statement>
+	
+	<update id="delete_credit_value" parameterClass="java.util.Map">
+  		update 
+  			CREDIT_VALUE
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP,
+			DATA_SOURCE_ID = #sourceId# 
+  		where 
+			CREDIT_PROFILE_ID = #credit_value.creditProfileId#
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</update>		
+</sqlMap>

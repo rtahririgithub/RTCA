@@ -1,0 +1,20 @@
+<bsewcppxy:assessCreditWorthiness xmlns:bseent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:bsewcppxy="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">
+	<bsewcppxy:assessCreditWorthinessRequest xsi:type="bsewcppxy:AssessCreditWorthinessRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<bsewcppxy:creditAssessmentTypeCd>FULL_ASSESSMENT</bsewcppxy:creditAssessmentTypeCd>
+		<bsewcppxy:creditAssessmentSubTypeCd>AUTO_ASSESSMENT</bsewcppxy:creditAssessmentSubTypeCd>
+		<bsewcppxy:customerID>120549903</bsewcppxy:customerID>
+		<bsewcppxy:applicationID>6161</bsewcppxy:applicationID>
+		<bsewcppxy:channelID>6161</bsewcppxy:channelID>
+		<bsewcppxy:lineOfBusiness>WIRELINE</bsewcppxy:lineOfBusiness>
+	</bsewcppxy:assessCreditWorthinessRequest>
+	<bsewcppxy:auditInfo>
+		<bseent:userId>T000001</bseent:userId>
+	</bsewcppxy:auditInfo>
+</bsewcppxy:assessCreditWorthiness>
+
+
+<!---
+pt05 = 95370333, 1111428 , 95293187, 95369797
+PR =1019397
+AT01= 120571876
+-->

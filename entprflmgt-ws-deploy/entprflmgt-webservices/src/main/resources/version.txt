@@ -1,0 +1,3 @@
+BuildDate:     ${timestamp}
+BuildArtifact: ${project.build.finalName}.${project.packaging}
+BuildVersion:  ${project.version}

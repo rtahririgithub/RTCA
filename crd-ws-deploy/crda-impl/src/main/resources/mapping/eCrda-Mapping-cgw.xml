@@ -1,0 +1,133 @@
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd" 
+          >
+	<mapping map-null="false" >
+        <class-a>com.telus.credit.domain.crda.FullCreditAssessmentRequest</class-a>
+        <class-b>com.telus.credit.crdgw.domain.ConsumerCreditReportRequest</class-b>  
+        
+        <field>
+            <a>customerID</a>
+            <b>customerRequestId</b> 
+        </field>             
+        <field>
+            <a>creditProfileData.personalInfo</a>
+            <b>personalInfo</b> 
+        </field>   
+        <field>
+            <a>creditProfileData.creditIdentification</a>
+            <b>creditIdentification</b> 
+        </field>     
+        <field custom-converter="com.telus.credit.crda.util.mapping.CanadianProvinceCustomConverter">
+            <a>creditProfileData.creditIdentification.driverLicense.provinceCd</a>
+            <b>creditIdentification.driverLicense.provinceCd</b> 
+        </field>    
+        <field>
+            <a>creditProfileData.creditAddress</a>
+            <b>creditAddress</b> 
+        </field>    
+        <field>
+            <a>creditProfileData.applicationProvinceCd</a>
+            <b>applicationProvinceCode</b> 
+        </field>   
+        <field>
+            <a>channelID</a>
+            <b>channelId</b> 
+        </field>                       	 		
+    </mapping>
+    
+    
+	<mapping map-null="false"   >
+        <class-a>com.telus.credit.crda.domain.CreditAssessmentTransactionDetails</class-a>             
+        <class-b>com.telus.credit.crdgw.domain.ConsumerCreditReportRequest</class-b> 
+        
+        <field>
+            <a>creditAssessmentID</a>
+            <b>referenceId</b> 
+        </field>
+
+     </mapping>
+     
+     
+      
+    
+    <mapping map-null="false"   >
+        <class-a>com.telus.credit.crda.domain.delegate.dcn.CreditAssessmentResultWrapper</class-a>
+        <class-b>com.telus.credit.crdgw.domain.ConsumerCreditReportRequest</class-b> 
+        
+        <field>
+            <a>bureauInformationList[0].bureauCd</a>
+            <b>externalServiceProvider.primaryProvider</b> 
+        </field>    	        
+            
+            
+     </mapping>
+
+	 <!--
+	 <mapping map-null="false"  >
+	        <class-a>com.fico.telus.blaze.creditCommon.CreditAssessmentResult</class-a>
+	        <class-b>com.telus.credit.crdgw.domain.ConsumerCreditReportRequest</class-b>
+        <field>
+            <a>bureauInformationList[0].bureauCd</a>
+            <b>externalServiceProvider.primaryProvider</b> 
+        </field>    	        
+	</mapping>  
+	
+	-->
+	
+	<mapping >
+       <class-a>com.telus.credit.crdgw.domain.ConsumerCreditReportResponse</class-a>
+       <class-b>com.telus.credit.crda.domain.CreditAssessmentTransactionDetails</class-b>
+		<field>
+            <a>creditBureauResult.adjudicationResult</a>
+            <b>this</b> 
+        </field>
+        <field>
+            <a>creditBureauResult.adjudicationResult.creditDecision</a>
+            <b>creditDecisionCd</b> 
+        </field>
+          
+          <field>
+            <a>creditBureauResult.reportSourceCd</a>
+            <b>creditAssessmentDataSourceCd</b> 
+        </field>
+          <field>
+            <a>creditBureauResult.reportSourceCd</a> 
+            <b>creditBureauReportSourceCd</b> 
+        </field>       
+        <field custom-converter="com.telus.credit.crda.util.mapping.BureauReportIndCustomerConverter">
+            <a>reportDocument</a>
+            <b is-accessible="true">creditBureauReportInd</b> 
+        </field>
+        
+
+	</mapping> 
+ 
+    <mapping >
+       <class-a>com.telus.credit.domain.common.CreditBureauResult</class-a>
+       <class-b>com.telus.credit.crda.domain.CreditAssessmentTransactionDetails</class-b>
+        <field>
+            <a>adjudicationResult</a>
+            <b>this</b> 
+        </field>
+        <field>
+            <a>adjudicationResult.creditDecision</a>
+            <b>creditDecisionCd</b> 
+        </field>
+          
+          <field>
+            <a>reportSourceCd</a>
+            <b>creditAssessmentDataSourceCd</b> 
+        </field>
+          <field>
+            <a>reportSourceCd</a> 
+            <b>creditBureauReportSourceCd</b> 
+        </field>       
+        <field custom-converter="com.telus.credit.crda.util.mapping.BureauReportIndUnifiedCreditConverter">
+            <a>reportSourceCd</a>
+            <b is-accessible="true">creditBureauReportInd</b> 
+        </field>
+    </mapping>    
+
+ </mappings>

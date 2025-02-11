@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+    <bean id="AssessmentEvaluationProcessorFactory"
+          class="com.telus.credit.crda.factory.AssessmentEvaluationProcessorFactory">
+    </bean>
+    
+    <bean id="BureauDataRequiredAssessmentEvaluationProcessor"
+          class="com.telus.credit.crda.stgy.eval.impl.BureauDataRequiredAssessmentEvaluationProcessor" lazy-init="true">
+                <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+                <property name="creditGatewayAdapter" ref="CreditGatewayAdapter"/>
+    </bean>
+    
+    <bean id="FailedAssessmentEvaluationProcessor"
+          class="com.telus.credit.crda.stgy.eval.impl.FailedAssessmentEvaluationProcessor" lazy-init="true">
+    </bean>
+    
+    <bean id="SuccessAssessmentEvaluationProcessor"
+          class="com.telus.credit.crda.stgy.eval.impl.SuccessAssessmentEvaluationProcessor" lazy-init="true">
+    </bean>
+    
+    <bean id="ResilienceAssessmentEvaluationProcessor"
+         class="com.telus.credit.crda.stgy.eval.impl.ResilienceAssessmentEvaluationProcessor" lazy-init="true">
+   		<property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+   </bean>   
+    
+    
+</beans>

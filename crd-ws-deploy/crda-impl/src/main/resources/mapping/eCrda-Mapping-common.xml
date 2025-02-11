@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd" 
+          >
+   
+ 	<mapping map-null="false">
+        <class-a>com.telus.credit.domain.common.CreditCustomerInfo</class-a>
+        <class-b>com.telus.credit.domain.common.CreditCustomerInfo</class-b> 
+		<field-exclude> 
+		  <a>phoneNumberList</a> 
+		  <b>phoneNumberList</b> 
+		</field-exclude>   
+      <field>
+            <a is-accessible="true">employeeInd</a>
+            <b is-accessible="true">employeeInd</b> 
+        </field> 
+	</mapping>
+
+
+
+ 	
+</mappings>  

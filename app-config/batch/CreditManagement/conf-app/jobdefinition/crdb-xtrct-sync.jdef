@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef" />
+  	<import resource="classpath:fw-mailsender-smtp-spring.xml"/>
+    	<bean id="configurationFramework" class="com.telus.framework.config.spring.PlaceholderConfigurer"></bean>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+			<list>
+				<bean id="STEP01" parent="baseStep">
+					<property name="moduleName" value="SyncCompare-STEP01" />
+				</bean>
+				<bean id="STEP02" parent="baseStep">
+					<property name="moduleName" value="sendReport" />
+				</bean>
+				<bean id="STEP03" parent="baseStep">
+					<property name="moduleName" value="cleanup" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="SyncCompare-STEP01" parent="baseSyncsortScriptStep">
+      	<property name="executable"><value>${syncCompare/step1/scriptFile}</value></property>
+		<property name="arg" value="${syncCompare/step1/inputFile1} ${syncCompare/step1/inputFile2} ${syncCompare/step1/outputFile}"/>
+      	<property name="output"><value>${logs}/${jobname}-step1.log</value></property>
+	</bean>
+  	<bean id="sendReport" class="com.telus.credit.batch.report.SendReportBatch" >  
+    		<property name="inputFile"><value>${syncCompare/step1/outputFile}</value></property>
+  	</bean>
+	<bean id="cleanup" parent="baseSyncsortScriptStep">
+      	<property name="executable"><value>${cleanup/scriptFile}</value></property>
+		<property name="arg" value="${cleanup/dir}"/>
+      	<property name="output"><value>${logs}/${jobname}-cleanup.log</value></property>
+	</bean>
+</beans>

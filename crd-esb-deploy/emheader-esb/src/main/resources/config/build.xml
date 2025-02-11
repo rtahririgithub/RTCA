@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="build-ESB-Config-files" default="all">
+	<property name="wl.home" value="C:/bea1033/wlserver_10.3"/>
+	<taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="clientgen" classname="weblogic.wsee.tools.anttasks.ClientGenTask" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="xmlbean" classname="com.bea.xbean.tool.XMLBean" classpath="${wl.home}/server/lib/xbean.jar"/>
+	<property name="src" value="${basedir}/../src"/>
+
+	<target name="all">
+
+		<!-- Generate the DV01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_DV_01.xml"/>
+			<param name="envemheader" value="dv01emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-dv01.tsl.telus.com"/>
+		</antcall>		
+		
+		
+		<!-- Generate the DV02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_DV_02.xml"/>
+			<param name="envemheader" value="dv02emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-dv02.tsl.telus.com"/>
+		</antcall>			
+
+		<!-- Generate the AT01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_at01.xml"/>
+			<param name="envemheader" value="at01emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-at01.tsl.telus.com"/>
+		</antcall>	
+		
+		<!-- Generate the AT02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_at02.xml"/>
+			<param name="envemheader" value="at02emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-at02.tsl.telus.com"/>
+		</antcall>	
+		
+		<!-- Generate the AT03 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_at03.xml"/>
+			<param name="envemheader" value="at03emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-at03.tsl.telus.com"/>
+		</antcall>	
+		
+		<!-- Generate the AT04 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_at04.xml"/>
+			<param name="envemheader" value="at04emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-at04.tsl.telus.com"/>
+		</antcall>			
+		<!-- Generate the PT01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_PT01.xml"/>
+			<param name="envemheader" value="pt01emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-pt01.tsl.telus.com"/>
+		</antcall>	
+		<!-- Generate the PT02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_PT02.xml"/>
+			<param name="envemheader" value="pt02emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-pt02.tsl.telus.com"/>
+		</antcall>	
+		<!-- Generate the PT03 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_PT03.xml"/>
+			<param name="envemheader" value="pt03emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-pt03.tsl.telus.com"/>
+		</antcall>		
+		<!-- Generate the PT04 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_PT04.xml"/>
+			<param name="envemheader" value="pt04emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-pt04.tsl.telus.com"/>
+		</antcall>		
+		<!-- Generate the PT05 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_PT05.xml"/>
+			<param name="envemheader" value="pt05emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-pt05.tsl.telus.com"/>
+		</antcall>			
+		<!-- Generate the PT06 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_PT06.xml"/>
+			<param name="envemheader" value="pt06emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-pt06.tsl.telus.com"/>
+		</antcall>		
+		
+		<!-- Generate the PS01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_PS01.xml"/>
+			<param name="envemheader" value="ps01emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-ps01.tsl.telus.com"/>
+		</antcall>			
+
+		<!-- Generate the ST01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_ST01.xml"/>
+			<param name="envemheader" value="st01emheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-st01.tsl.telus.com"/>
+		</antcall>	
+		
+		<!-- Generate the PR customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-emheader-esb-Customization-File_Local.xml"/> 
+			<param name="destfile" value="telus-crd-emheader-esb-Customization-File_PR.xml"/>
+			<param name="envemheader" value="premheader"/>
+			<param name="wsaddress" value="http://customermanagementwestesb-pr.tsl.telus.com"/>
+		</antcall>			
+	</target>
+	
+	<!-- target to generate a platform specific customization file -->
+	<target name="generateCustomizationFile">
+		<delete file="${destfile}"/>		
+		<copy file="${sourcefile}" tofile="${destfile}"/>
+		<replaceregexp file="${destfile}/"
+			match="envemheader"
+			replace="${envemheader}"
+			byline="true"/>			
+
+		<replaceregexp file="${destfile}/"
+			match="http://localhost:7001"
+			replace="${wsaddress}"
+			byline="true"/>				
+	</target>
+</project>

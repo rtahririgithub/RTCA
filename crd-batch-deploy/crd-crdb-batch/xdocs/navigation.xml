@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="telus-creditmanagement-batch">
+  <title>TELUS CreditManagement Batch Application</title>
+  <body>
+    <links>
+      <item name="HOME" href="../../index.html"/>
+    </links>
+  </body>
+</project>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="build-ESB-Config-files" default="all">
+	<property name="wl.home" value="C:/bea1033/wlserver_10.3"/>
+	<taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="clientgen" classname="weblogic.wsee.tools.anttasks.ClientGenTask" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="xmlbean" classname="com.bea.xbean.tool.XMLBean" classpath="${wl.home}/server/lib/xbean.jar"/>
+	<property name="src" value="${basedir}/../src"/>
+
+	<target name="all">
+
+		<!-- Generate the DV01 with local/dummy backend svccustomization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_DV01_WithDummyWS.xml"/>
+			<param name="oldwsaddress" value="http://customermanagementwestesb-dv01.tsl.telus.com"/>
+			<param name="newwsaddress" value="http://customermanagementwestesb-dv01.tsl.telus.com"/>
+		</antcall>	
+		
+		<!-- Generate the DV01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_DV01.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-dv03.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-dv.tsl.telus.com"/>
+		</antcall>	
+		<!-- Generate the AT01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_AT01.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-pt61.tsl.telus.com"/> 
+			<param name="newwsaddress" value="https://soa-mp-toll-at01.tsl.telus.com"/>
+		</antcall>
+		<!-- Generate the AT02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_AT02.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-pt41.tsl.telus.com"/> 
+			<param name="newwsaddress" value="https://soa-mp-toll-at02.tsl.telus.com"/>
+		</antcall>		
+		<!-- Generate the AT03 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_AT03.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-pt41.tsl.telus.com"/> 
+			<param name="newwsaddress" value="https://soa-mp-toll-at03.tsl.telus.com"/>
+		</antcall>		
+				
+		<!-- Generate the AT04 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_AT04.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-pt61.tsl.telus.com"/> 
+			<param name="newwsaddress" value="https://soa-mp-toll-at04.tsl.telus.com"/>
+		</antcall>		
+		
+		
+		<!-- Generate the PT01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_PT01.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-pt61.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-pt01.tsl.telus.com"/>
+		</antcall>	
+		<!-- Generate the PT02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_PT02.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-ps101.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-pt02.tsl.telus.com"/>
+		</antcall>	
+		<!-- Generate the PT03 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_PT03.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-ps101.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-pt03.tsl.telus.com"/>
+		</antcall>	
+		<!-- Generate the PT04 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_PT04.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-pt61.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-pt04.tsl.telus.com"/>
+		</antcall>			
+		<!-- Generate the PT05 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_PT05.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-ps101.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-pt05.tsl.telus.com"/>
+		</antcall>		
+		<!-- Generate the PT06 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_PT06.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-pt41.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-pt06.tsl.telus.com"/>
+		</antcall>			
+		<!-- Generate the ST01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_ST01.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-st01.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-st01.tsl.telus.com"/>
+		</antcall>
+		<!-- Generate the ST02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_ST02.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-st02.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-st02.tsl.telus.com"/>
+		</antcall>		
+		<!-- Generate the PS01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-ordpxy-esb-Customization-File_PS01.xml"/>
+			<param name="oldwsaddress"    value="https://servicemngr-ps.tsl.telus.com"/>
+			<param name="newwsaddress" value="https://soa-mp-toll-ps.tsl.telus.com"/>
+		</antcall>		
+		
+		<!-- Generate the PR customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-ordpxy-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-ordpxy-esb-Customization-File_PR.xml"/>
+			<param name="oldwsaddress"    		value="https://servicemngr1-pr.tsl.telus.com"/>
+			<param name="newwsaddress" 			value="https://soa-mp-toll-pr.tsl.telus.com"/>	
+		</antcall> 		
+	</target>
+	
+	<!-- target to generate a platform specific customization file -->
+	<target name="generateCustomizationFile">
+		<delete file="${destfile}"/>		
+		<copy file="${sourcefile}" tofile="${destfile}"/>
+		
+		<replaceregexp file="${destfile}/"
+			match="http://localhost:7001"
+			replace="${newwsaddress}"
+			byline="true"/>	
+			
+		<replaceregexp file="${destfile}/"
+			match="http://127.0.0.1:7001"  
+			replace="${newwsaddress}"
+			byline="true"/>	
+	</target>
+</project>

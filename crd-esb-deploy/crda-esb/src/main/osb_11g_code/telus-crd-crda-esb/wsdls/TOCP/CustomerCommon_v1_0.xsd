@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v1"
+    version="1.0"
+    xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- Simple Common Element Types -->
+    <xs:simpleType name="entityIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountNumberType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="civicNumberType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="civicNumberSuffixType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ruralRouteNumberType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ruralRouteTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="stationNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="stationQualifierType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="stationTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="additionalAddressInformationType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="renderedAddressType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addrAssgnmtIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressAssignmentSubTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressAssignmentTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressMatchingStatusCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressSearchTextType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="canadaPostBuildNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="canadaPostLocnNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="canadaPostRecordTypeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="careOfType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="countryCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="emailAddressTextType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="externalAddressIdType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="externalAddressSourceIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="externalServiceAddressIdType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="fleetMailOfficeNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="hmcsNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="mailingTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="municipalityNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="postOfficeBoxNumberType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="postalZipCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="provinceStateCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="relateAddressAssignmentIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="streetDirectionCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="streetNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="streetTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="unitNumberType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="unitTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="unitTypeDwellingType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="validateAddressIndicatorType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="firstNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="fullNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="languageType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="lastNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="middleNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameAssignmentSubTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameAssignmentTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameLineTextType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameRelTextType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameSearchTxtType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameSuffixCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="organizationNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="relateNameAssignmentIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="salutationCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="supplementaryNameType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="supplementaryNameOperatingCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <!-- Complex Common Types-->
+    <!-- Customer Market Segment Id -->
+    <xs:simpleType name="customerMarketSegmentId">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <!-- Customer Market Segment -->
+    <xs:complexType name="CustomerMarketSegment">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="customerMarketSegmentId" type="tns:customerMarketSegmentId"/>
+            <xs:element minOccurs="0" name="customerId" type="tns:customerIdType"/>
+            <xs:element minOccurs="0" name="marketSegmentCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="marketSegmentTypeCode" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- Address types -->
+    <xs:complexType name="CivicAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="civicNumber" type="tns:civicNumberType"/>
+            <xs:element minOccurs="0" name="civicNumberSuffix" type="tns:civicNumberSuffixType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RuralAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ruralRouteNumber" type="tns:ruralRouteNumberType"/>
+            <xs:element minOccurs="0" name="ruralRouteTypeCode" type="tns:ruralRouteTypeCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StationSquareAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="stationName" type="tns:stationNameType"/>
+            <xs:element minOccurs="0" name="stationQualifier" type="tns:stationQualifierType"/>
+            <xs:element minOccurs="0" name="stationTypeCode" type="tns:stationTypeCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MilitaryAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="fleetMailOfficeName" type="tns:fleetMailOfficeNameType"/>
+            <xs:element minOccurs="0" name="hmcsName" type="tns:hmcsNameType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Address">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="addressId" type="tns:addressIdType"/>
+            <xs:element minOccurs="0" name="addressTypeCode" type="tns:addressTypeCodeType"/>
+            <xs:element maxOccurs="10"
+                name="additionalAddressInformation" type="tns:additionalAddressInformationType"/>
+            <xs:element maxOccurs="10" name="renderedAddress" type="tns:renderedAddressType"/>
+            <xs:element minOccurs="0" name="addrAssgnmtId" type="tns:addrAssgnmtIdType"/>
+            <xs:element minOccurs="0"
+                name="addressAssignmentSubTypeCode" type="tns:addressAssignmentSubTypeCodeType"/>
+            <xs:element minOccurs="0" name="addressAssignmentTypeCode" type="tns:addressAssignmentTypeCodeType"/>
+            <xs:element minOccurs="0" name="addressMatchingStatusCode" type="tns:addressMatchingStatusCodeType"/>
+            <xs:element minOccurs="0" name="addressSearchText" type="tns:addressSearchTextType"/>
+            <xs:element minOccurs="0" name="canadaPostBuildName" type="tns:canadaPostBuildNameType"/>
+            <xs:element minOccurs="0" name="canadaPostLocnName" type="tns:canadaPostLocnNameType"/>
+            <xs:element minOccurs="0" name="canadaPostRecordType" type="tns:canadaPostRecordTypeType"/>
+            <xs:element minOccurs="0" name="careOf" type="tns:careOfType"/>
+            <xs:element minOccurs="0" name="countryCode" type="tns:countryCodeType"/>
+            <xs:element minOccurs="0" name="emailAddressText" type="tns:emailAddressTextType"/>
+            <xs:element minOccurs="0" name="externalAddressId" type="tns:externalAddressIdType"/>
+            <xs:element minOccurs="0" name="externalAddressSourceId" type="tns:externalAddressSourceIdType"/>
+            <xs:element minOccurs="0" name="externalServiceAddressId" type="tns:externalServiceAddressIdType"/>
+            <xs:element minOccurs="0" name="mailingTypeCode" type="tns:mailingTypeCodeType"/>
+            <xs:element minOccurs="0" name="municipalityName" type="tns:municipalityNameType"/>
+            <xs:element minOccurs="0" name="postOfficeBoxNumber" type="tns:postOfficeBoxNumberType"/>
+            <xs:element minOccurs="0" name="postalZipCode" type="tns:postalZipCodeType"/>
+            <xs:element minOccurs="0" name="provinceStateCode" type="tns:provinceStateCodeType"/>
+            <xs:element minOccurs="0" name="relateAddressAssignmentId" type="tns:relateAddressAssignmentIdType"/>
+            <xs:element minOccurs="0" name="streetDirectionCode" type="tns:streetDirectionCodeType"/>
+            <xs:element minOccurs="0" name="streetName" type="tns:streetNameType"/>
+            <xs:element minOccurs="0" name="streetTypeCode" type="tns:streetTypeCodeType"/>
+            <xs:element minOccurs="0" name="unitNumber" type="tns:unitNumberType"/>
+            <xs:element minOccurs="0" name="unitTypeCode" type="tns:unitTypeCodeType"/>
+            <xs:element minOccurs="0" name="validateAddressIndicator" type="tns:validateAddressIndicatorType"/>
+            <xs:choice>
+                <xs:element name="civicAddress" type="tns:CivicAddress"/>
+                <xs:element name="ruralAddress" type="tns:RuralAddress"/>
+                <xs:element name="stationSquareAddress" type="tns:StationSquareAddress"/>
+                <xs:element name="militaryAddress" type="tns:MilitaryAddress"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Name">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="nameId" type="tns:nameIdType"/>
+            <xs:element minOccurs="0" name="nameTypeCode" type="tns:nameTypeCodeType"/>
+            <xs:element minOccurs="0" name="firstName" type="tns:firstNameType"/>
+            <xs:element minOccurs="0" name="fullName" type="tns:fullNameType"/>
+            <xs:element minOccurs="0" name="language" type="tns:languageType"/>
+            <xs:element minOccurs="0" name="lastName" type="tns:lastNameType"/>
+            <xs:element minOccurs="0" name="middleName" type="tns:middleNameType"/>
+            <xs:element minOccurs="0" name="nameAssignmentSubTypeCode" type="tns:nameAssignmentSubTypeCodeType"/>
+            <xs:element minOccurs="0" name="nameAssignmentTypeCode" type="tns:nameAssignmentTypeCodeType"/>
+            <xs:element minOccurs="0" name="nameLine1Text" type="tns:nameLineTextType"/>
+            <xs:element minOccurs="0" name="nameLine2Text" type="tns:nameLineTextType"/>
+            <xs:element minOccurs="0" name="nameRelText" type="tns:nameRelTextType"/>
+            <xs:element minOccurs="0" name="nameSearchTxt" type="tns:nameSearchTxtType"/>
+            <xs:element minOccurs="0" name="nameSuffix2Code" type="tns:nameSuffixCodeType"/>
+            <xs:element minOccurs="0" name="nameSuffixCode" type="tns:nameSuffixCodeType"/>
+            <xs:element minOccurs="0" name="organizationName" type="tns:organizationNameType"/>
+            <xs:element minOccurs="0" name="relateNameAssignmentId" type="tns:relateNameAssignmentIdType"/>
+            <xs:element minOccurs="0" name="salutationCode" type="tns:salutationCodeType"/>
+            <xs:element minOccurs="0" name="supplementaryName" type="tns:supplementaryNameType"/>
+            <xs:element minOccurs="0"
+                name="supplementaryNameOperatingCode" type="tns:supplementaryNameOperatingCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,48 @@
+		<ent:depositItemList >
+			<ns11:depositItem xmlns:ns11="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1">>
+				<ns11:depositID>30301</ns11:depositID>
+				<ns11:dueDate>2113-11-08T00:00:00Z</ns11:dueDate>
+				<ns11:depositDesignationID>1</ns11:depositDesignationID>
+				<ns11:requestAmount>100.00</ns11:requestAmount>
+				<ns11:requestDate>2013-12-02T00:00:00Z</ns11:requestDate>
+				<ns11:requestReasonCd>DPSTRQ</ns11:requestReasonCd>
+				<ns11:requestReasonTxt>Deposit Request (Default) unknown Customer</ns11:requestReasonTxt>
+				<ns11:paidAmount>0.00</ns11:paidAmount>
+				<ns11:paidDate/>
+				<ns11:cancelledAmount>0.00</ns11:cancelledAmount>
+				<ns11:cancelDate/>
+				<ns11:cancelReasonCd/>
+				<ns11:cancelReasonTxt/>
+				<ns11:releasedAmount>0.00</ns11:releasedAmount>
+				<ns11:releaseDate/>
+				<ns11:releaseReasonCd/>
+				<ns11:releaseReasonTxt>Deposit Request (Default) unknown Customer</ns11:releaseReasonTxt>
+				<ns11:releaseMethodCd/>
+				<ns11:releaseMethodTxt/>
+				<ns11:interestAmount>0.00</ns11:interestAmount>
+				<ns11:accountID>600537613</ns11:accountID>
+			</ns11:depositItem>
+			<ns11:depositItem>
+				<ns11:depositID>32301</ns11:depositID>
+				<ns11:dueDate>2113-11-08T00:00:00Z</ns11:dueDate>
+				<ns11:depositDesignationID>30301</ns11:depositDesignationID>
+				<ns11:requestAmount>100.00</ns11:requestAmount>
+				<ns11:requestDate>2013-12-02T00:00:00Z</ns11:requestDate>
+				<ns11:requestReasonCd>DPSTRQ</ns11:requestReasonCd>
+				<ns11:requestReasonTxt>Deposit Request (Default) unknown Customer</ns11:requestReasonTxt>
+				<ns11:paidAmount>100.00</ns11:paidAmount>
+				<ns11:paidDate/>
+				<ns11:cancelledAmount>100.00</ns11:cancelledAmount>
+				<ns11:cancelDate>2013-12-02T00:00:00Z</ns11:cancelDate>
+				<ns11:cancelReasonCd>CANACC</ns11:cancelReasonCd>
+				<ns11:cancelReasonTxt>Account was cancelled</ns11:cancelReasonTxt>
+				<ns11:releasedAmount>0.00</ns11:releasedAmount>
+				<ns11:releaseDate/>
+				<ns11:releaseReasonCd/>
+				<ns11:releaseReasonTxt>Deposit Request (Default) unknown Customer</ns11:releaseReasonTxt>
+				<ns11:releaseMethodCd/>
+				<ns11:releaseMethodTxt/>
+				<ns11:interestAmount>0.00</ns11:interestAmount>
+				<ns11:accountID>600537613</ns11:accountID>
+			</ns11:depositItem>
+		</ent:depositItemList>

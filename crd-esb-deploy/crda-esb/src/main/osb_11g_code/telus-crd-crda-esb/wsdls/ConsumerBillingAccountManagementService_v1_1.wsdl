@@ -1,0 +1,248 @@
+<WL5G3N0:definitions name="ConsumerBillingAccountManagementService_v1_1.wsdl" targetNamespace="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerBillingAccountManagementService_1" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerBillingAccountMgmtSvcRequestResponse_v1" xmlns:WL5G3N2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:WL5G3N3="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:WL5G3N4="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerBillingAccountManagementService_1" xmlns:WL5G3N5="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:documentation>
+            This service provides management services for customer billing account related applications
+        </WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xs:schema targetNamespace="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerBillingAccountManagementService_1" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:iface="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerBillingAccountManagementService_1" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:rr="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerBillingAccountMgmtSvcRequestResponse_v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerBillingAccountMgmtSvcRequestResponse_v1" schemaLocation="ConsumerBillingAccountMgmtSvcRequestResponse_v1_1.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" schemaLocation="Exceptions_v1_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="ping_v1.xsd"/>
+    </xs:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="createBillingAccount">
+    <WL5G3N0:part element="WL5G3N1:createBillingAccount" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createBillingAccountResponse">
+    <WL5G3N0:part element="WL5G3N1:createBillingAccountResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBillingAccount">
+    <WL5G3N0:part element="WL5G3N1:getBillingAccount" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBillingAccountResponse">
+    <WL5G3N0:part element="WL5G3N1:getBillingAccountResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBillingAccountListByCustomerId">
+    <WL5G3N0:part element="WL5G3N1:getBillingAccountListByCustomerId" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBillingAccountListByCustomerIdResponse">
+    <WL5G3N0:part element="WL5G3N1:getBillingAccountListByCustomerIdResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="registerBillDeliveryMethod">
+    <WL5G3N0:part element="WL5G3N1:registerBillDeliveryMethod" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="registerBillDeliveryMethodResponse">
+    <WL5G3N0:part element="WL5G3N1:registerBillDeliveryMethodResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="deregisterBillDeliveryMethod">
+    <WL5G3N0:part element="WL5G3N1:deregisterBillDeliveryMethod" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="deregisterBillDeliveryMethodResponse">
+    <WL5G3N0:part element="WL5G3N1:deregisterBillDeliveryMethodResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part element="WL5G3N2:ping" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part element="WL5G3N2:pingResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ServiceException">
+    <WL5G3N0:part element="WL5G3N3:ServiceException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="PolicyException">
+    <WL5G3N0:part element="WL5G3N3:PolicyException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="ConsumerBillingAccountManagementServicePortType">
+    <WL5G3N0:operation name="createBillingAccount">
+      <WL5G3N0:input message="WL5G3N4:createBillingAccount"/>
+      <WL5G3N0:output message="WL5G3N4:createBillingAccountResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBillingAccount">
+      <WL5G3N0:input message="WL5G3N4:getBillingAccount"/>
+      <WL5G3N0:output message="WL5G3N4:getBillingAccountResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBillingAccountListByCustomerId">
+      <WL5G3N0:input message="WL5G3N4:getBillingAccountListByCustomerId"/>
+      <WL5G3N0:output message="WL5G3N4:getBillingAccountListByCustomerIdResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="registerBillDeliveryMethod">
+      <WL5G3N0:input message="WL5G3N4:registerBillDeliveryMethod"/>
+      <WL5G3N0:output message="WL5G3N4:registerBillDeliveryMethodResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="deregisterBillDeliveryMethod">
+      <WL5G3N0:input message="WL5G3N4:deregisterBillDeliveryMethod"/>
+      <WL5G3N0:output message="WL5G3N4:deregisterBillDeliveryMethodResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input message="WL5G3N4:ping"/>
+      <WL5G3N0:output message="WL5G3N4:pingResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="ConsumerBillingAccountManagementServiceSOAP" type="WL5G3N4:ConsumerBillingAccountManagementServicePortType">
+    <WL5G3N5:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="createBillingAccount">
+      <WL5G3N0:documentation>
+            This operation creates a Billing Account.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="createBillingAccount"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBillingAccount">
+      <WL5G3N0:documentation>
+            This operation returns Billing Account, given billing account number and billing system code.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getBillingAccount"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBillingAccountListByCustomerId">
+      <WL5G3N0:documentation>
+            This operation returns a list of all billing accounts, including all wireline and wireless accounts, of a customer regardless of the billing account status.  The service will return a maximum of 500 billing accounts.  If a customer has more than 500 accounts, an exception will be thrown.  It is not expected that a customer will have more than 500 billing accounts.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getBillingAccountListByCustomerId"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="registerBillDeliveryMethod">
+      <WL5G3N0:documentation>
+            This operation register the bill delivery method for a consumer wireline billing account, e.g. paper bill, eBill or ePost.  
+            It takes a billing system Id, billing account number and bill media entity.  
+            It has no returns.
+			Business rules and validations:
+            A customer has one and only one bill delivery method.  So, this operation can be seen as change current bill delivery method
+			Billing system ID equals consumer wireline billing system 
+			If billing system Id and billing account number combination not found in the consumer wireline billing system, exception will be thrown.
+            The bill delivery type will be validated against Ref PDS.
+            If registering for eBill, eBill email is mandatory
+            If registering for ePost, ePost User ID is mandatory            
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="registerBillDeliveryMethod"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="deregisterBillDeliveryMethod">
+      <WL5G3N0:documentation>
+            This operation deregister the bill delivery method for a consumer wireline billing account, e.g. eBill or ePost.  
+            This operation takes billing system Id, billing account number and bill media type to be deregistered.  Logically, it should be the current bill delivery method.  it is expected that client applications retrieves the current bill delivery method.
+            It returns the resulting bill bill media object           
+			Business rules and validations:
+            A customer has one and only one bill delivery method			
+			Billing system ID equals consumer wireline billing system (Enabler)
+			If billing system Id and billing account number combination not found in the consumer wireline billing system, exception will be thrown.            			
+			An exception will be thrown if the media type is not currently registered.			
+			Since paper bill is the default billing method, it cannot be deregistered.  An exception will be thrown if bill media type of paper is pass in.
+            When deregistering ePost, if customer ever has eBill set up, system will fall back eBill; otherwise, fall back to paper bill.
+            If fall back to eBill, there must be a email address associate with billing account
+            When deregistering eBill, system will fall back to paper bill.
+            Paper bill cannot be deregistered.  RegisterBillDelivery method can be used to change paper bill to eBill or ePost.
+        </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="deregisterBillDeliveryMethod"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:documentation>
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+    
+  
+  
+    
+      
+    
+  
+</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="ping"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="ConsumerBillingAccountManagementService_v1_1">
+    <WL5G3N0:port binding="WL5G3N4:ConsumerBillingAccountManagementServiceSOAP" name="ConsumerBillingAccountManagementServicePort">
+      <WL5G3N5:address location="http://cm-custinfomgmt-west-dv01.tsl.telus.com/CMO/InformationMgmt/BillingAccountManagement/ConsumerBillingAccountManagementService_v1_1"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+   <import resource="classpath:fw-base.jdef"/>
+
+   <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>join_drv_cust</value>
+               </property>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_duplicates</value>
+               </property>
+            </bean>
+         </list>
+      </property>
+
+   </bean>
+   <bean id="join_drv_cust" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_join_customer_drive_and_customer_detail.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_CRD_NODUPLICATES_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_CUSTOMER_DETAIL_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+   <bean id="remove_duplicates" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_customer_detail_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_CUSTOMER_DETAIL_${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_ODATE}/CustomerDetails_${L_CRDA_ODATE}.dat </value></property>
+      <property name="output"><value>${report/log1}</value></property>
+   </bean>
+</beans>

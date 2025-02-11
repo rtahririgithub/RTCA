@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="telus-crd-crda-esb/wsdls/TOCP/FindParty_v2_0"/>
+      <con:binding>
+        <con:name>FindPartySOAPBinding</con:name>
+        <con:namespace>http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty</con:namespace>
+      </con:binding>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/telus-crd-crda-esb/proxy/externalPS/FindParty_PS</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="stage1" errorHandler="_onErrorHandler-8561060058215270854-1e7a60cc.168f35ea300.-7f7b">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="bodySaved">
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6951</con2:id>
+            <con1:expr>
+              <con2:xqueryText>$body</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout>
+            <con2:id>_ActionId-6654069824431371335-11d48802.1689115aa15.-7e8a</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/FindParty_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>findParty</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$body</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">body</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response">
+      <con:stage name="Logging_stage11">
+        <con:context xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config"/>
+        <con:actions xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+          <con4:route>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6fc7</con2:id>
+            <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:outboundTransform>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6fc6</con2:id>
+                <con1:location>
+                  <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>&lt;UC_Log>
+&lt;findParty_PS>
+{$bodySaved}
+,
+{$body}
+&lt;/findParty_PS>
+&lt;/UC_Log></con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con4:outboundTransform>
+          </con4:route>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-8561060058215270854-1e7a60cc.168f35ea300.-7f7b">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="TOCPFaultCd">
+            <con2:id>_ActionId-8561060058215270854-1e7a60cc.168f35ea300.-7f4e</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($fault//*[local-name()='faultcode']/text())</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-8561060058215270854-1e7a60cc.168f35ea300.-7f2f</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>contains($TOCPFaultCd, 'TOCP-230')</con2:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con3:log>
+                  <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-68c4</con2:id>
+                  <con3:logLevel>error</con3:logLevel>
+                  <con3:expr>
+                    <con2:xqueryText>&lt;UC_Log>
+&lt;findParty_PS>
+{$bodySaved}
+,
+{$fault}
+&lt;/findParty_PS>
+&lt;/UC_Log></con2:xqueryText>
+                  </con3:expr>
+                </con3:log>
+                <con1:replace varName="body">
+                  <con2:id>_ActionId-8561060058215270854-1e7a60cc.168f35ea300.-7f10</con2:id>
+                  <con1:location>
+                    <con2:xpathText>.</con2:xpathText>
+                  </con1:location>
+                  <con1:expr>
+                    <con2:xqueryText>&lt;SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" xmlns:xsd="http://www.w3.org/1999/XMLSchema">
+	&lt;party:findPartyResponse xmlns:me="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" xmlns:party="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty" xmlns:v30="http://www.ibm.com/telecom/common/schema/mtosi/v3_0"/>
+&lt;/SOAP-ENV:Body></con2:xqueryText>
+                  </con1:expr>
+                </con1:replace>
+                <con2:reply>
+                  <con2:id>_ActionId-8561060058215270854-1e7a60cc.168f35ea300.-7ef7</con2:id>
+                </con2:reply>
+              </con1:actions>
+            </con1:case>
+            <con1:default>
+              <con3:log>
+                <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-694f</con2:id>
+                <con3:logLevel>error</con3:logLevel>
+                <con3:expr>
+                  <con2:xqueryText>&lt;findParty_PS>
+&lt;WLN_WCDAP_ERROR>
+{$bodySaved}
+,
+{$fault}
+&lt;/WLN_WCDAP_ERROR>
+&lt;/findParty_PS></con2:xqueryText>
+                </con3:expr>
+              </con3:log>
+              <con2:reply isError="true">
+                <con2:id>_ActionId-8561060058215270854-1e7a60cc.168f35ea300.-7ee3</con2:id>
+              </con2:reply>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="findParty">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode1">
+                <con:request>PipelinePairNode1_request</con:request>
+                <con:response>PipelinePairNode1_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

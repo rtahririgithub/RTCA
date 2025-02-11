@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process name="findPartyParallelSplitJoin"
+     targetNamespace="http://www.example.com/flow/telus-crd-crda-esb/split/findPartyParallelSplitJoin"
+     xmlns:tns="http://www.example.com/flow/telus-crd-crda-esb/split/findPartyParallelSplitJoin"
+		xmlns:bind="http://telus.com/wsdl/CMO/OrderMgmt/FindPartySplitJoin_1"
+     xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+		xmlns:rescon="http://www.bea.com/alsb/flow/resources/config"
+		xmlns:bea="http://www.bea.com/bpel/ui/extensions"
+		xmlns:ext="http://www.bea.com/bpel/extensions"
+		xmlns:expr="http://www.bea.com/wli/sb/stages/config"
+		xmlns:trf="http://www.bea.com/wli/sb/stages/transform/config"
+		bea:name="findPartyParallelSplitJoin"
+     xmlns:ns1="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty" xmlns:par="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage">
+     <bpel:partnerLinks>
+			<bpel:partnerLink name="findPartyParallelSplitJoin" partnerLinkType="tns:findPartyParallelSplitJoin"
+				myRole="findPartyParallelSplitJoin">
+			</bpel:partnerLink>
+		<bpel:partnerLink name="FindParty_PS"
+		partnerLinkType="tns:FindParty_PS_plnkType"
+		partnerRole="FindParty_PS_PartnerRole">
+		</bpel:partnerLink></bpel:partnerLinks>
+
+		<bpel:variables>
+  		<bpel:variable name="request"
+			 		  messageType="bind:findPartyParallel">
+			</bpel:variable>
+			<bpel:variable name="response"
+			 		  messageType="bind:findPartyParallelResponse">
+			</bpel:variable>
+		<bpel:variable name="findPartyResponse_DL"
+		messageType="ns1:findPartyResponse">
+		</bpel:variable>
+		<bpel:variable name="findPartyResponse_SN"
+			messageType="ns1:findPartyResponse">
+		</bpel:variable>
+		<bpel:variable name="findPartyResponse_DOB"
+			messageType="ns1:findPartyResponse">
+		</bpel:variable></bpel:variables>
+
+     <bpel:sequence>
+     <bpel:receive partnerLink="findPartyParallelSplitJoin" operation="findPartyParallel" variable="request" createInstance="yes">
+			<rescon:receiveInfo>
+        		<rescon:wsdl ref="telus-crd-crda-esb/wsdls/TOCP/FindPartySplitJoin_v1_0" binding="bind:FindPartySplitJoin_v1_0_SOAP"/>
+    		</rescon:receiveInfo>
+     </bpel:receive>
+     <bpel:assign bea:name="response variable Assign">
+     	<bpel:extensionAssignOperation>
+     		<trf:assign varName="response.result">
+     			<trf:expr>
+     				<expr:xqueryText>&lt;tns:findPartyParallelResponse xsi:schemaLocation=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1 FindPartySplitJoinRequestResponse_v1_0.xsd&quot; xmlns:mtosi_xsd=&quot;http://www.ibm.com/telecom/common/schema/mtosi/v3_0&quot; xmlns:telcotype=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:tns=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1&quot;&gt;
+	&lt;findPartyResponse/&gt;
+&lt;/tns:findPartyParallelResponse&gt;</expr:xqueryText></trf:expr></trf:assign>
+     	</bpel:extensionAssignOperation>
+     </bpel:assign>
+     <bpel:flow>
+     	<bpel:scope>
+     		<bpel:variables>
+     			<bpel:variable name="findPartyRequest_DL"
+     				messageType="ns1:findPartyRequest">
+     			</bpel:variable></bpel:variables>
+     		<bpel:sequence>
+     			
+     			<bpel:assign>
+     				<bpel:extensionAssignOperation>
+     					<bpel:documentation></bpel:documentation>
+     					<trf:assign
+     						varName="findPartyResponse_DL.parameters">
+     						<trf:expr>
+     							<expr:xqueryText>&lt;tns:findPartyParallelResponse xsi:schemaLocation=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1 FindPartySplitJoinRequestResponse_v1_0.xsd&quot; xmlns:mtosi_xsd=&quot;http://www.ibm.com/telecom/common/schema/mtosi/v3_0&quot; xmlns:telcotype=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:tns=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1&quot;&gt;
+	&lt;findPartyResponse/&gt;
+&lt;/tns:findPartyParallelResponse&gt;</expr:xqueryText></trf:expr></trf:assign>
+     				</bpel:extensionAssignOperation>
+     			</bpel:assign>
+     			<bpel:if>
+     				<bpel:condition>string-length($request.parameters/DL)!=0</bpel:condition>
+     				<bpel:sequence>
+     					<bpel:empty></bpel:empty>
+     				<bpel:assign>
+		<bpel:extensionAssignOperation>
+			<bpel:documentation></bpel:documentation>
+			<trf:assign varName="findPartyRequest_DL.parameters">
+				<trf:expr>
+					<expr:xqueryText>		&lt;fpart:findParty xmlns:fpart=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty&quot; xmlns:par=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot;&gt;
+			&lt;par:party&gt;
+				&lt;CharacteristicValue&gt;
+					&lt;Characteristic&gt;
+						&lt;Name&gt;lastName&lt;/Name&gt;
+					&lt;/Characteristic&gt;
+					&lt;Value&gt;{$request.parameters/lastname/text()}&lt;/Value&gt;
+				&lt;/CharacteristicValue&gt;
+				&lt;CharacteristicValue&gt;
+					&lt;Characteristic&gt;
+						&lt;Name&gt;postalCd&lt;/Name&gt;
+					&lt;/Characteristic&gt;
+					&lt;Value&gt;{$request.parameters/postalCd/text()}&lt;/Value&gt;
+				&lt;/CharacteristicValue&gt;
+				&lt;CharacteristicValue&gt;
+					&lt;Characteristic&gt;
+						&lt;Name&gt;drivingLicense&lt;/Name&gt;
+					&lt;/Characteristic&gt;
+					&lt;Value&gt;{$request.parameters/DL/text()}&lt;/Value&gt;
+				&lt;/CharacteristicValue&gt;
+				&lt;CharacteristicValue&gt;
+					&lt;Characteristic&gt;
+						&lt;Name&gt;returnObject&lt;/Name&gt;
+					&lt;/Characteristic&gt;
+					&lt;Value&gt;PartyView&lt;/Value&gt;
+				&lt;/CharacteristicValue&gt;
+				&lt;Specification&gt;
+					&lt;Name&gt;Informatica&lt;/Name&gt;
+					&lt;Type&gt;Inventory Lookup&lt;/Type&gt;
+					&lt;Category&gt;Party&lt;/Category&gt;
+				&lt;/Specification&gt;
+			&lt;/par:party&gt;
+		&lt;/fpart:findParty&gt;</expr:xqueryText></trf:expr></trf:assign>
+		</bpel:extensionAssignOperation>
+     				</bpel:assign>
+     				<bpel:invoke partnerLink="FindParty_PS"
+     					inputVariable="findPartyRequest_DL" operation="findParty"
+     					outputVariable="findPartyResponse_DL">
+     					<rescon:invokeInfo>
+     						<rescon:service
+     							ref="telus-crd-crda-esb/proxy/externalPS/FindParty_PS"
+     							isProxy="true"></rescon:service></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+     				<bpel:else>
+     					<bpel:sequence>
+     						<bpel:empty></bpel:empty>
+     					</bpel:sequence>
+     				</bpel:else>
+     			</bpel:if>
+     			
+     			</bpel:sequence>
+     	</bpel:scope>
+     	<bpel:scope>
+     		<bpel:variables>
+     			<bpel:variable name="findPartyRequest_SN"
+     				messageType="ns1:findPartyRequest">
+     			</bpel:variable></bpel:variables>
+     		
+     		<bpel:sequence>
+     			<bpel:assign>
+     				<bpel:extensionAssignOperation>
+     					<bpel:documentation></bpel:documentation>
+     					<trf:assign
+     						varName="findPartyResponse_SN.parameters">
+     						<trf:expr>
+     							<expr:xqueryText>&lt;tns:findPartyParallelResponse xsi:schemaLocation=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1 FindPartySplitJoinRequestResponse_v1_0.xsd&quot; xmlns:mtosi_xsd=&quot;http://www.ibm.com/telecom/common/schema/mtosi/v3_0&quot; xmlns:telcotype=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:tns=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1&quot;&gt;
+	&lt;findPartyResponse/&gt;
+&lt;/tns:findPartyParallelResponse&gt;</expr:xqueryText></trf:expr></trf:assign>
+     				</bpel:extensionAssignOperation>
+     			</bpel:assign>
+     			<bpel:if>
+     				<bpel:condition>string-length($request.parameters/SIN)!=0</bpel:condition>
+     				<bpel:sequence>
+     					<bpel:empty></bpel:empty>
+     				<bpel:assign>
+		<bpel:extensionAssignOperation>
+			<bpel:documentation></bpel:documentation>
+			<trf:assign varName="findPartyRequest_SN.parameters">
+				<trf:expr>
+					<expr:xqueryText>&lt;fpart:findParty xmlns:fpart=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty&quot; xmlns:par=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot;&gt;
+	&lt;par:party&gt;
+		&lt;CharacteristicValue&gt;
+			&lt;Characteristic&gt;
+				&lt;Name&gt;lastName&lt;/Name&gt;
+			&lt;/Characteristic&gt;
+			&lt;Value&gt;{$request.parameters/lastname/text()}&lt;/Value&gt;
+		&lt;/CharacteristicValue&gt;
+		&lt;CharacteristicValue&gt;
+			&lt;Characteristic&gt;
+				&lt;Name&gt;postalCd&lt;/Name&gt;
+			&lt;/Characteristic&gt;
+			&lt;Value&gt;{$request.parameters/postalCd/text()}&lt;/Value&gt;
+		&lt;/CharacteristicValue&gt;
+		
+				&lt;CharacteristicValue&gt;
+					&lt;Characteristic&gt;
+						&lt;Name&gt;sin&lt;/Name&gt;
+					&lt;/Characteristic&gt;
+					&lt;Value&gt;{$request.parameters/SIN/text()}&lt;/Value&gt;
+				&lt;/CharacteristicValue&gt;
+						
+		&lt;CharacteristicValue&gt;
+			&lt;Characteristic&gt;
+				&lt;Name&gt;returnObject&lt;/Name&gt;
+			&lt;/Characteristic&gt;
+			&lt;Value&gt;PartyView&lt;/Value&gt;
+		&lt;/CharacteristicValue&gt;
+		&lt;Specification&gt;
+			&lt;Name&gt;Informatica&lt;/Name&gt;
+			&lt;Type&gt;Inventory Lookup&lt;/Type&gt;
+			&lt;Category&gt;Party&lt;/Category&gt;
+		&lt;/Specification&gt;
+	&lt;/par:party&gt;
+&lt;/fpart:findParty&gt;</expr:xqueryText></trf:expr></trf:assign></bpel:extensionAssignOperation></bpel:assign>
+     				<bpel:invoke partnerLink="FindParty_PS"
+     					inputVariable="findPartyRequest_SN" operation="findParty"
+     					outputVariable="findPartyResponse_SN">
+     					<rescon:invokeInfo>
+     						<rescon:service
+     							ref="telus-crd-crda-esb/proxy/externalPS/FindParty_PS"
+     							isProxy="true"></rescon:service></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+     				<bpel:else>
+     					<bpel:sequence>
+     						<bpel:empty></bpel:empty>
+     					</bpel:sequence>
+     				</bpel:else>
+     			</bpel:if>
+     			
+     			
+     			</bpel:sequence>
+     	</bpel:scope>
+     <bpel:scope>
+		<bpel:variables>
+			<bpel:variable name="findPartyRequest_DOB"
+				messageType="ns1:findPartyRequest">
+			</bpel:variable></bpel:variables>
+	<bpel:sequence>
+			<bpel:assign>
+				<bpel:extensionAssignOperation>
+					<bpel:documentation></bpel:documentation>
+					<trf:assign
+						varName="findPartyResponse_DOB.parameters">
+						<trf:expr>
+							<expr:xqueryText>&lt;tns:findPartyParallelResponse xsi:schemaLocation=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1 FindPartySplitJoinRequestResponse_v1_0.xsd&quot; xmlns:mtosi_xsd=&quot;http://www.ibm.com/telecom/common/schema/mtosi/v3_0&quot; xmlns:telcotype=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:tns=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1&quot;&gt;
+	&lt;findPartyResponse/&gt;
+&lt;/tns:findPartyParallelResponse&gt;</expr:xqueryText></trf:expr></trf:assign>
+				</bpel:extensionAssignOperation>
+			</bpel:assign>
+			<bpel:if>
+				<bpel:condition>string-length($request.parameters/DOB)!=0</bpel:condition>
+				<bpel:sequence>
+					<bpel:empty></bpel:empty>
+				<bpel:assign>
+		<bpel:extensionAssignOperation>
+			<bpel:documentation></bpel:documentation>
+			<trf:assign varName="findPartyRequest_DOB.parameters">
+				<trf:expr>
+					<expr:xqueryText>&lt;fpart:findParty xmlns:fpart=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty&quot; xmlns:par=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot;&gt;
+	&lt;par:party&gt;
+		&lt;CharacteristicValue&gt;
+			&lt;Characteristic&gt;
+				&lt;Name&gt;lastName&lt;/Name&gt;
+			&lt;/Characteristic&gt;
+			&lt;Value&gt;{$request.parameters/lastname/text()}&lt;/Value&gt;
+		&lt;/CharacteristicValue&gt;
+		&lt;CharacteristicValue&gt;
+			&lt;Characteristic&gt;
+				&lt;Name&gt;postalCd&lt;/Name&gt;
+			&lt;/Characteristic&gt;
+			&lt;Value&gt;{$request.parameters/postalCd/text()}&lt;/Value&gt;
+		&lt;/CharacteristicValue&gt;
+		
+				&lt;CharacteristicValue&gt;
+					&lt;Characteristic&gt;
+						&lt;Name&gt;birthDate&lt;/Name&gt;
+					&lt;/Characteristic&gt;
+					&lt;Value&gt;{$request.parameters/DOB/text()}&lt;/Value&gt;
+				&lt;/CharacteristicValue&gt;
+						
+		&lt;CharacteristicValue&gt;
+			&lt;Characteristic&gt;
+				&lt;Name&gt;returnObject&lt;/Name&gt;
+			&lt;/Characteristic&gt;
+			&lt;Value&gt;PartyView&lt;/Value&gt;
+		&lt;/CharacteristicValue&gt;
+		&lt;Specification&gt;
+			&lt;Name&gt;Informatica&lt;/Name&gt;
+			&lt;Type&gt;Inventory Lookup&lt;/Type&gt;
+			&lt;Category&gt;Party&lt;/Category&gt;
+		&lt;/Specification&gt;
+	&lt;/par:party&gt;
+&lt;/fpart:findParty&gt;</expr:xqueryText></trf:expr></trf:assign></bpel:extensionAssignOperation></bpel:assign>
+				<bpel:invoke partnerLink="FindParty_PS"
+					inputVariable="findPartyRequest_DOB" operation="findParty"
+					outputVariable="findPartyResponse_DOB">
+					<rescon:invokeInfo>
+						<rescon:service
+							ref="telus-crd-crda-esb/proxy/externalPS/FindParty_PS"
+							isProxy="true"></rescon:service></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+				<bpel:else>
+					<bpel:sequence>
+						<bpel:empty></bpel:empty>
+					</bpel:sequence>
+				</bpel:else>
+			</bpel:if>
+			
+			</bpel:sequence>
+     </bpel:scope></bpel:flow>
+     <bpel:assign>
+     	<bpel:extensionAssignOperation>
+     		<trf:assign varName="response.result">
+     			<trf:expr>
+     				<expr:xqueryText>&lt;tns:findPartyParallelResponse 
+xsi:schemaLocation=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1 FindPartySplitJoinRequestResponse_v1_0.xsd&quot; xmlns:mtosi_xsd=&quot;http://www.ibm.com/telecom/common/schema/mtosi/v3_0&quot; 
+xmlns:telcotype=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:tns=&quot;http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1&quot;&gt;
+	
+&lt;ns0:findPartyResponse xmlns:ns1=&quot;http://www.ibm.com/telecom/common/schema/mtosi/v3_0&quot;
+ xmlns:ns2=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage&quot;
+ xmlns:ns0=&quot;http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty&quot;&gt;
+ 
+	{$findPartyResponse_DL.parameters/par:party} {$findPartyResponse_SN.parameters/par:party} {$findPartyResponse_DOB.parameters/par:party} 
+	
+	&lt;/ns0:findPartyResponse&gt;
+	
+&lt;/tns:findPartyParallelResponse&gt;
+</expr:xqueryText></trf:expr></trf:assign>
+     	</bpel:extensionAssignOperation>
+     </bpel:assign>
+     <bpel:reply partnerLink="findPartyParallelSplitJoin" operation="findPartyParallel" variable="response"></bpel:reply>
+     </bpel:sequence>
+</bpel:process>

@@ -1,0 +1,24 @@
+
+<gucacdsj:getUCAdditionalCustomerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gucacdsj="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoinRequestResponse">
+	<tns:WlsUnifiedCreditSearchResult xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2">
+		<tns:matchFound>
+			<tns:indicator>true</tns:indicator>
+			<tns:reasonCd>MATCHFOUND_RSN_CD_01</tns:reasonCd>
+		</tns:matchFound>
+		<tns:dataInquiryErrorCodeList/>
+		<tns:lineOfBusiness>wireless</tns:lineOfBusiness>
+		<tns:unifiedCreditDormantInd>false</tns:unifiedCreditDormantInd>
+		<tns:matchedAccount>
+			<tns:accountData>
+				<tns:billingAccountNumber>8</tns:billingAccountNumber>
+				<tns:accountType>I</tns:accountType>
+				<tns:accountSubType>R</tns:accountSubType>
+				<tns:brandId>1</tns:brandId>
+				<tns:accountCreationDate>2001-12-17T09:30:47.0Z</tns:accountCreationDate>
+				<tns:startServiceDate>2001-12-17T09:30:47.0Z</tns:startServiceDate>
+				<tns:accountStatus>O</tns:accountStatus>
+				<tns:accountStatusDate>2001-12-17T09:30:47.0Z</tns:accountStatusDate>
+			</tns:accountData>
+		</tns:matchedAccount>
+	</tns:WlsUnifiedCreditSearchResult>
+</gucacdsj:getUCAdditionalCustomerData>

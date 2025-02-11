@@ -1,0 +1,35 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCollectionManagementServiceRequestResponse_v1" version="1.0" xmlns:col="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:cp="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCollectionManagementServiceRequestResponse_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" schemaLocation="WirelineCollectionManagementTypes_v1_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="CustomerManagementCommonTypes_v4_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" schemaLocation="EnterpriseCommonTypes_v6_0.xsd"/>
+    <xs:element name="getCollectionIndicatorByCustomerId">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cus:CustomerId"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCollectionIndicatorByCustomerIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="activeAccountsCollectionInd" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerCollectionData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cus:CustomerId"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerCollectionDataResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerCollectionData" type="col:CustomerCollectionData"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,27 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2" version="2.0" xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:col="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:gacdsj="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2" xmlns:wcpm="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:wcpmp="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" schemaLocation="WirelineCreditProfileManagementTypes_v2_1.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" schemaLocation="EnterpriseCommonTypes_v7_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" schemaLocation="CreditDepositTypes_v1_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" schemaLocation="WLNCreditProfileManagementProxyServiceRequestResponse_v2_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" schemaLocation="WirelineCollectionManagementTypes_v1_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" schemaLocation="CreditCommon_v1_1.xsd"/>
+    <xs:element name="getAdditionalCustomerData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="assessCreditWorthinessRequest" type="wcpmp:AssessCreditWorthinessRequest"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+                <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAdditionalCustomerDataResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="creditCustomerInfo" type="crdc:CreditCustomerInfo"/>
+                <xs:element minOccurs="0" name="creditProfileData" type="wcpm:ConsumerCreditProfile"/>
+                <xs:element minOccurs="0" name="customerCollectionData" type="col:CustomerCollectionData"/>
+                <xs:element minOccurs="0" name="depositItemList" type="codt:DepositItemList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

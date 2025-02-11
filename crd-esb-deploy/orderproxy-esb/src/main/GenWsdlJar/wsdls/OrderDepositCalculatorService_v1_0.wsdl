@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<wsdl:definitions xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:iface="http://telus.com/wsdl/CMO/OrderMgmt/OrderDepositCalculatorService_1" xmlns:ODC="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1" name="OrderDepositCalculatorService_v1_0.wsdl" targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/OrderDepositCalculatorService_1">
+	<wsdl:documentation>
+		Provides the ability to calculate: 
+		Estimated or Final deposit amount for each requested product in a new order 
+		and 
+		Returns list of max number of service type codes (product)  that a cusotmer is eligible .
+		</wsdl:documentation>
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/OrderDepositCalculatorService_1">
+			<xsd:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1" schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1_0.xsd"/>
+			<xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" schemaLocation="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0.xsd"/>
+			<xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="calculateDeposit">
+		<wsdl:part name="parameters" element="ODC:calculateDeposit"/>
+	</wsdl:message>
+	<wsdl:message name="calculateDepositResponse">
+		<wsdl:part name="result" element="ODC:calculateDepositResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getEquipmentQualificationList">
+		<wsdl:part name="parameters" element="ODC:getEquipmentQualificationList"/>
+	</wsdl:message>
+	<wsdl:message name="getEquipmentQualificationListResponse">
+		<wsdl:part name="result" element="ODC:getEquipmentQualificationListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ping">
+		<wsdl:part name="parameters" element="ping:ping"/>
+	</wsdl:message>
+	<wsdl:message name="pingResponse">
+		<wsdl:part name="result" element="ping:pingResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ServiceException">
+		<wsdl:part name="fault" element="ex:ServiceException"/>
+	</wsdl:message>
+	<wsdl:message name="PolicyException">
+		<wsdl:part name="fault" element="ex:PolicyException"/>
+	</wsdl:message>
+	<wsdl:portType name="OrderDepositCalculatorService_v1_0_PortType">
+		<wsdl:operation name="calculateDeposit">
+			<wsdl:input message="iface:calculateDeposit"/>
+			<wsdl:output message="iface:calculateDepositResponse"/>
+			<wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="iface:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="getEquipmentQualificationList">
+			<wsdl:input message="iface:getEquipmentQualificationList"/>
+			<wsdl:output message="iface:getEquipmentQualificationListResponse"/>
+			<wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="iface:PolicyException"/>
+		</wsdl:operation>
+		<wsdl:operation name="ping">
+			<wsdl:input message="iface:ping"/>
+			<wsdl:output message="iface:pingResponse"/>
+			<wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+			<wsdl:fault name="PolicyException" message="iface:PolicyException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OrderDepositCalculatorService_v1_0_SOAP" type="iface:OrderDepositCalculatorService_v1_0_PortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="calculateDeposit">
+			<wsdl:documentation>calculate deposit for a given order on requested products by customer</wsdl:documentation>
+			<soap:operation soapAction="calculateDeposit"/>
+			<wsdl:input>
+				<soap:body parts="parameters" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="result" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault name="ServiceException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException">
+				<soap:fault name="PolicyException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getEquipmentQualificationList">
+			<wsdl:documentation>Returns list of service type codes (product) and max number  that a cusotmer is eligible .</wsdl:documentation>
+			<soap:operation soapAction="getEquipmentQualificationList"/>
+			<wsdl:input>
+				<soap:body parts="parameters" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="result" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault name="ServiceException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException">
+				<soap:fault name="PolicyException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ping">
+			<wsdl:documentation/>
+			<soap:operation soapAction="ping"/>
+			<wsdl:input>
+				<soap:body parts="parameters" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="result" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceException">
+				<soap:fault name="ServiceException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="PolicyException">
+				<soap:fault name="PolicyException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OrderDepositCalculatorService_v1_0">
+		<wsdl:port name="OrderDepositCalculatorServicePort" binding="iface:OrderDepositCalculatorService_v1_0_SOAP">
+			<soap:address location="http://cm-billingsvc-west-dv01.tsl.telus.com/CMO/OrderMgmt/OrderDepositCalculatorService/OrderDepositCalculatorService_v1_0"/>
+		</wsdl:port>
+	</wsdl:service>
+	<!--	Generated File:
+			This file was generated by the following xslt:
+				http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/xmlToWsdl_v2_8.xslt
+			Based on a ServiceDefinition.xml file that conforms to the following schema:
+				http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd
+			-->
+</wsdl:definitions>

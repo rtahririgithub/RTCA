@@ -1,0 +1,29 @@
+		<wls:updateWlsConsumerCreditProfile>
+			<wls:auditInfo>
+				<!--Optional:-->
+				<ent:userId>pei19</ent:userId>
+				<ent:channelOrganizationId>10140873</ent:channelOrganizationId>
+				<ent:originatorApplicationId>1234</ent:originatorApplicationId>
+				<ent:timestamp>2018-09-12T20:41:29-08:00</ent:timestamp>
+			</wls:auditInfo>
+			<wls:accountNumber>8</wls:accountNumber>
+			<wls:personalCreditInformation>
+				<cus:driversLicense>3798355</cus:driversLicense>
+				<cus:driversLicenseExpiry>2020-09-19</cus:driversLicenseExpiry>
+				<cus:driversLicenseProvince>BC</cus:driversLicenseProvince>
+     
+      		<cus:creditCard>
+	               <cus:token>100000000000004032870</cus:token>
+	               <cus:first6>272000</cus:first6>
+	               <cus:last4>0016</cus:last4>
+	               <cus:expiryMonth>9</cus:expiryMonth>
+	               <cus:expiryYear>2028</cus:expiryYear>
+			</cus:creditCard>  
+
+			</wls:personalCreditInformation>
+			<wls:businessRegistration>
+				<wls:businessRegistrationTypeCd>BIC</wls:businessRegistrationTypeCd>
+				<wls:businessRegistrationNumber>333888333</wls:businessRegistrationNumber>
+			</wls:businessRegistration>
+		</wls:updateWlsConsumerCreditProfile>
+		

@@ -1,0 +1,54 @@
+<xs:schema targetNamespace="http://www.ibm.com/telecom/common/schema/party/v3_0" xmlns:base="http://www.ibm.com/telecom/common/schema/base/v3_0" xmlns:bons0="http://www.ibm.com/telecom/common/schema/party_extensions/v3_0" xmlns:bons1="http://www.ibm.com/telecom/common/schema/urban_property_address/v3_0" xmlns:tns="http://www.ibm.com/telecom/common/schema/party/v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/urban_property_address/v3_0" schemaLocation="ibm_telecom_common_urban_property_address.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/party_extensions/v3_0" schemaLocation="ibm_telecom_common_party_extensions.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/base/v3_0" schemaLocation="ibm_telecom_common_base.xsd"/>
+    <!-- The type: base.Party -->
+    <xs:complexType name="Party">
+        <xs:complexContent>
+            <xs:extension base="base:EntityWithSpecification">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="CreditScore" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="PartyIdentification" type="base:EntityWithSpecification"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ContactMedium" type="base:EntityWithSpecification"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ContactPerson" type="tns:ContactPerson"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ComponentParty" type="tns:Party"/>
+                    <xs:element minOccurs="0" name="PartyExtensions" type="bons0:PartyExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: party.ContactMedium -->
+    <xs:complexType name="ContactMedium">
+        <xs:complexContent>
+            <xs:extension base="base:EntityWithSpecification">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="UrbanPropertyAddress" type="bons1:UrbanPropertyAddress"/>
+                    <xs:element minOccurs="0" name="ContactMediumExtensions" type="bons0:ContactMediumExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: base.PartyRole -->
+    <xs:complexType name="PartyRole">
+        <xs:complexContent>
+            <xs:extension base="base:EntityWithSpecification">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Status" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Party" type="tns:Party"/>
+                    <xs:element minOccurs="0" name="PartyRoleExtensions" type="bons0:PartyRoleExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: customer.ContactPerson -->
+    <xs:complexType name="ContactPerson">
+        <xs:complexContent>
+            <xs:extension base="tns:PartyRole">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Responsibility" type="base:EntityWithSpecification"/>
+                    <xs:element minOccurs="0" name="ContactPersonExtensions" type="bons0:ContactPersonExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

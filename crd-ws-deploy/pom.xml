@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+        <groupId>telus.credit.crdmgmt</groupId>
+        <artifactId>crd</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+    <artifactId>pom-crd-ws-deploy</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>pom-crd-ws-deploy</name>
+
+   <dependencyManagement>
+      <!-- Use this section to define the dependency versions for commons 
+         or shared jars. Whenever there is a change in this pom, make sure you update 
+         the version number of this deploy pom, pom-crd-ws-deploy -->
+        <dependencies>
+        <!--
+            <dependency>
+                <groupId>telus.credit.crdmgmt.crd-common</groupId>
+                <artifactId>crd-util</artifactId>
+                <version>${application.common.version}</version>
+            </dependency>
+        -->
+        <!-- Here it will be for the shared jar from another application 
+            <dependency> 
+                <groupId>telus.otherPlatformName.app1-shared</groupId> 
+                <artifactId>app1-shared</artifactId> 
+                <version>${app1.shared.version}</version> 
+            </dependency>
+        -->
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+    	<module>crda-wsdl</module>
+    	<module>creditgateway-wsdl</module>
+    	<module>custmgt-wsdl</module>
+    	<module>crda-impl</module>
+        <module>crda-webservices</module>
+        
+    </modules>
+
+</project>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="config">
+
+   <group name="mailConfig">
+      <group name="smtp">
+          <prop name="host">${connections/servers/smtpSvr}</prop>
+          <prop name="connectionTimeout">10000</prop>
+          <prop name="timeout">10000</prop>
+      </group>
+   </group>
+</group>

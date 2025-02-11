@@ -1,0 +1,292 @@
+<bpel:process name="GetAdditionalCustomerDataSplitJoin" targetNamespace="http://www.example.com/flow/telus-crd-crda-esb/split/GetAdditionalCustomerDataSplitJoin" bea:name="GetAdditionalCustomerDataSplitJoin" xmlns:tns="http://www.example.com/flow/telus-crd-crda-esb/split/GetAdditionalCustomerDataSplitJoin" xmlns:bind="http://telus.com/wsdl/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoin_2" xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:rescon="http://www.bea.com/alsb/flow/resources/config" xmlns:bea="http://www.bea.com/bpel/ui/extensions" xmlns:ext="http://www.bea.com/bpel/extensions" xmlns:expr="http://www.bea.com/wli/sb/stages/config" xmlns:trf="http://www.bea.com/wli/sb/stages/transform/config" xmlns:ns1="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" xmlns:ns0="http://telus.com/wsdl/CMO/OrderMgmt/WLNCollectionManagementService_1" xmlns:wcpmp="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:get="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2" xmlns:ns2="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementService_2" xmlns:ns3="http://telus.com/wsdl/CMO/OrderMgmt/SearchDepositPaymentByCustomerID_1" xmlns:dep="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+     <bpel:partnerLinks>
+			<bpel:partnerLink name="GetAdditionalCustomerDataSplitJoin" partnerLinkType="tns:GetAdditionalCustomerDataSplitJoin" myRole="GetAdditionalCustomerDataSplitJoin">
+			</bpel:partnerLink>
+		<bpel:partnerLink name="ConsumerCustomerManagementServicePS" partnerLinkType="tns:ConsumerCustomerManagementServicePS_plnkType" partnerRole="ConsumerCustomerManagementServicePS_PartnerRole">
+		</bpel:partnerLink>
+		<bpel:partnerLink name="WLNCollectionManagementServicePS" partnerLinkType="tns:WLNCollectionManagementServicePS_plnkType" partnerRole="WLNCollectionManagementServicePS_PartnerRole">
+		</bpel:partnerLink>
+		<bpel:partnerLink name="WLNCreditProfileManagementServicePS" partnerLinkType="tns:WLNCreditProfileManagementServicePS_plnkType" partnerRole="WLNCreditProfileManagementServicePS_PartnerRole">
+		</bpel:partnerLink>
+		<bpel:partnerLink name="SearchDepositPaymentByCustomerID_PS" partnerLinkType="tns:SearchDepositPaymentByCustomerID_PS_plnkType" partnerRole="SearchDepositPaymentByCustomerID_PS_PartnerRole">
+		</bpel:partnerLink></bpel:partnerLinks>
+
+		<bpel:variables>
+  		<bpel:variable name="getAdditinoalCustomerDataRequest" messageType="bind:getAdditionalCustomerData">
+			</bpel:variable>
+			<bpel:variable name="getAdditionalCustomerDataResponse" messageType="bind:getAdditionalCustomerDataResponse">
+			</bpel:variable>
+		<bpel:variable name="getCustomerWithContactsRequest" messageType="ns1:getCustomerWithContacts">
+		</bpel:variable>
+		<bpel:variable name="getCustomerWithContactsResponse" messageType="ns1:getCustomerWithContactsResponse">
+		</bpel:variable>
+		<bpel:variable name="getCustomerCollectionDataRequest" messageType="ns0:getCustomerCollectionData">
+		</bpel:variable>
+		<bpel:variable name="getCustomerCollectionDataResponse" messageType="ns0:getCustomerCollectionDataResponse">
+		</bpel:variable>
+		<bpel:variable name="getCreditProfileByCustomerIdRequest" messageType="ns2:getCreditProfileByCustomerId">
+		</bpel:variable>
+		<bpel:variable name="getCreditProfileByCustomerIdResponse" messageType="ns2:getCreditProfileByCustomerIdResponse">
+		</bpel:variable>
+		<bpel:variable name="searchDepositPaymentByCustomerIDRequest" messageType="ns3:searchDepositPaymentByCustomerID">
+		</bpel:variable>
+		<bpel:variable name="searchDepositPaymentByCustomerIDResponse" messageType="ns3:searchDepositPaymentByCustomerIDResponse">
+		</bpel:variable>
+		<bpel:variable name="assessmentConfigData" type="xsd:anyType"/>
+		
+		<bpel:variable name="creditAssessmentTypeCd" type="xsd:anyType">
+		</bpel:variable>
+		<bpel:variable name="creditAssessmentSubTypeCd" type="xsd:anyType">
+		</bpel:variable>
+		<bpel:variable name="isCreditProfileDataRequired" type="xsd:boolean">
+		</bpel:variable>
+		<bpel:variable name="isCollectionDataRequired" type="xsd:boolean">
+		</bpel:variable>
+		<bpel:variable name="isDepositDataRequied" type="xsd:boolean"/>
+		<bpel:variable name="isCustomerDataRequired" type="xsd:boolean">
+		</bpel:variable></bpel:variables>
+
+     <bpel:sequence>
+     <bpel:receive partnerLink="GetAdditionalCustomerDataSplitJoin" operation="getAdditionalCustomerData" variable="getAdditinoalCustomerDataRequest" createInstance="yes">
+			<rescon:receiveInfo>
+        		<rescon:wsdl ref="telus-crd-crda-esb/wsdls/GetAdditionalCustomerDataSplitJoin_v2_0" binding="bind:GetAdditionalCustomerDataSplitJoin_v2_0_SOAP"/>
+    		</rescon:receiveInfo>
+     </bpel:receive>
+     <bpel:assign bea:name="Initialise GetAdditionalCustomerDataSplitJoin response variable Assign">
+     	<bpel:extensionAssignOperation bea:name="Initialise GetAdditionalCustomerDataSplitJoin response variable Assign">
+     		<trf:assign varName="getAdditionalCustomerDataResponse.result">
+     			<trf:expr>
+     				<expr:xqueryText><![CDATA[<gacdsj:getAdditionalCustomerDataResponse xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2 GetAdditionalCustomerDataSplitJoinRequestResponse_v2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gacdsj="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalCustomerDataSplitJoinRequestResponse_v2" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:col="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1">
+	<gacdsj:creditCustomerInfo></gacdsj:creditCustomerInfo>
+	<gacdsj:creditProfileData></gacdsj:creditProfileData>
+	<gacdsj:customerCollectionData></gacdsj:customerCollectionData>
+	<gacdsj:depositItemList></gacdsj:depositItemList>
+</gacdsj:getAdditionalCustomerDataResponse>]]></expr:xqueryText></trf:expr></trf:assign>
+     	</bpel:extensionAssignOperation>
+     <bpel:extensionAssignOperation bea:name="Select Required additional data Assign Action">
+		<trf:assign varName="assessmentConfigData">
+			<trf:expr>
+				<expr:xqueryTransform>
+					<expr:resource ref="telus-crd-crda-esb/xquery/config/AssessmentConfig"/></expr:xqueryTransform></trf:expr></trf:assign>
+     </bpel:extensionAssignOperation>
+     <bpel:extensionAssignOperation bea:name="get creditAssessmentTypeCd from input Assign Action">
+     	<trf:assign varName="creditAssessmentTypeCd">
+     		<trf:expr>
+     			<expr:xqueryText>($getAdditinoalCustomerDataRequest.parameters//*[local-name()='assessCreditWorthinessRequest'])[1]//(*[local-name()='creditAssessmentTypeCd'])[1]/text()</expr:xqueryText></trf:expr></trf:assign>
+     </bpel:extensionAssignOperation>
+     <bpel:extensionAssignOperation bea:name="get creditAssessmentSubtype from input Assign Action">
+     	<trf:assign varName="creditAssessmentSubTypeCd">
+     		<trf:expr>
+     			<expr:xqueryText>($getAdditinoalCustomerDataRequest.parameters//*[local-name()='assessCreditWorthinessRequest'])[1]//(*[local-name()='creditAssessmentSubTypeCd'])[1]/text()</expr:xqueryText></trf:expr></trf:assign>
+     </bpel:extensionAssignOperation></bpel:assign>
+     
+     <bpel:flow bea:name="GetAdditionalCustomerDataSplitJoin Parallel">
+     	
+     	
+     
+     
+     <bpel:scope bea:name="searchDepositPaymentByCustomerID Scope">
+     	<bpel:sequence>
+     		
+     		
+     		
+     		
+     		<bpel:assign>
+     			<bpel:extensionAssignOperation bea:name="get value of isXXXRequired">
+     				<bpel:documentation>Added as a workaround to esb splitjoint specific conlict due to using xml attribute in if condition</bpel:documentation>
+     				<trf:assign varName="isDepositDataRequied">
+     					<trf:expr>
+     						<expr:xqueryText>$assessmentConfigData/Type[@typename=$creditAssessmentTypeCd]/SubType[@subtypename=$creditAssessmentSubTypeCd]/@isDepositDataRequied='true'</expr:xqueryText></trf:expr></trf:assign>
+     			</bpel:extensionAssignOperation>
+     		</bpel:assign>
+     		<bpel:if bea:name="isDepositPaymentRequired">
+     			<bpel:condition>$isDepositDataRequied</bpel:condition>
+     			<bpel:sequence>
+     				<bpel:empty/>
+     			<bpel:assign>
+		<bpel:extensionAssignOperation bea:name="Create searchDepositPaymentByCustomerID request">
+			<trf:assign varName="searchDepositPaymentByCustomerIDRequest.parameters">
+				<trf:expr>
+					<expr:xqueryText>&lt;tns:searchDepositPaymentByCustomerID 
+xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/SearchDepositPaymentByCustomerIDRequestResponse_v1 SearchDepositPaymentByCustomerIDRequestResponse_v1_0.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+>
+	&lt;customerID>
+	{($getAdditinoalCustomerDataRequest.parameters//*[local-name()='assessCreditWorthinessRequest'])[1]//(*[local-name()='customerID'])[1]/text()}	
+	&lt;/customerID>
+&lt;/tns:searchDepositPaymentByCustomerID ></expr:xqueryText></trf:expr></trf:assign></bpel:extensionAssignOperation></bpel:assign>
+     			<bpel:invoke operation="searchDepositPaymentByCustomerID" outputVariable="searchDepositPaymentByCustomerIDResponse" bea:name="Invoke searchDepositPaymentByCustomerID_PS" partnerLink="SearchDepositPaymentByCustomerID_PS" inputVariable="searchDepositPaymentByCustomerIDRequest">
+     				<rescon:invokeInfo>
+     					<rescon:service isProxy="true" ref="telus-crd-crda-esb/proxy/internal/SearchDepositPaymentByCustomerID_PS"/></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+     			<bpel:else>
+     				<bpel:sequence>
+     					<bpel:empty/>
+     				<bpel:assign bea:name="Assign empty">
+		<bpel:extensionAssignOperation>
+			<trf:assign varName="searchDepositPaymentByCustomerIDResponse.result">
+				<trf:expr>
+					<expr:xqueryText>&lt;searchDepositPaymentByCustomerIDResponse/></expr:xqueryText></trf:expr></trf:assign>
+		</bpel:extensionAssignOperation>
+     				</bpel:assign></bpel:sequence>
+     			</bpel:else>
+     		</bpel:if>
+     		
+     		</bpel:sequence>
+     </bpel:scope>
+     
+     
+     
+     
+     <bpel:scope bea:name="getCustomerWithContacts Scope">
+     	<bpel:sequence>
+     		
+     	<bpel:assign>
+		<bpel:extensionAssignOperation bea:name="get value of isXXXRequired">
+			<bpel:documentation>Added as a workaround to esb splitjoint specific conlict due to using xml attribute in if condition
+</bpel:documentation>
+			<trf:assign varName="isCustomerDataRequired">
+				<trf:expr>
+					<expr:xqueryText>$assessmentConfigData/Type[@typename=$creditAssessmentTypeCd]/SubType[@subtypename=$creditAssessmentSubTypeCd]/@isCustomerDataRequired='true'</expr:xqueryText></trf:expr></trf:assign>
+		</bpel:extensionAssignOperation>
+     	</bpel:assign>
+	<bpel:if bea:name="isCustomerWithContactRequired">
+		<bpel:condition>$isCustomerDataRequired</bpel:condition>
+		<bpel:sequence>
+			<bpel:empty/>
+		<bpel:assign>
+		<bpel:extensionAssignOperation bea:name="getCustomerWithContactRequest AssignAction">
+			<trf:assign varName="getCustomerWithContactsRequest.parameters">
+				<trf:expr>
+					<expr:xqueryText>&lt;tns:getCustomerWithContacts xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2 ConsumerCustomerMgmtSvcRequestResponse_v2_3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2">
+	&lt;customerId>
+		{($getAdditinoalCustomerDataRequest.parameters//*[local-name()='assessCreditWorthinessRequest'])[1]//(*[local-name()='customerID'])[1]/text()}		
+	&lt;/customerId>
+&lt;/tns:getCustomerWithContacts></expr:xqueryText></trf:expr></trf:assign></bpel:extensionAssignOperation></bpel:assign>
+		<bpel:invoke operation="getCustomerWithContacts" outputVariable="getCustomerWithContactsResponse" bea:name="Invoke getCustomerWithContact" partnerLink="ConsumerCustomerManagementServicePS" inputVariable="getCustomerWithContactsRequest">
+			<rescon:invokeInfo>
+				<rescon:service isProxy="true" ref="telus-crd-crda-esb/proxy/externalPS/ConsumerCustomerManagementServicePS"/></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+		<bpel:else>
+			<bpel:sequence>
+				<bpel:empty/>
+			<bpel:assign bea:name="Assign empty">
+		<bpel:extensionAssignOperation>
+			<bpel:documentation/>
+			<trf:assign varName="getCustomerWithContactsResponse.result">
+				<trf:expr>
+					<expr:xqueryText>&lt;getCustomerWithContactsResponse/></expr:xqueryText></trf:expr></trf:assign>
+		</bpel:extensionAssignOperation>
+			</bpel:assign></bpel:sequence>
+		</bpel:else>
+     	</bpel:if>
+	
+     	</bpel:sequence>
+     </bpel:scope>
+     
+     <bpel:scope bea:name="getCustomerCollectionData Scope">
+     	<bpel:sequence>
+     		
+     	<bpel:assign>
+		<bpel:extensionAssignOperation bea:name="get value of isXXXRequired">
+			<bpel:documentation>Added as a workaround to esb splitjoint specific conlict due to using xml attribute in if condition</bpel:documentation>
+			<trf:assign varName="isCollectionDataRequired">
+				<trf:expr>
+					<expr:xqueryText>$assessmentConfigData/Type[@typename=$creditAssessmentTypeCd]/SubType[@subtypename=$creditAssessmentSubTypeCd]/@isCollectionDataRequired='true'</expr:xqueryText></trf:expr></trf:assign></bpel:extensionAssignOperation></bpel:assign>
+	<bpel:if bea:name="isCollectionDataRequired">
+		<bpel:condition>$isCollectionDataRequired</bpel:condition>
+		<bpel:sequence>
+			<bpel:empty/>
+			<bpel:assign>
+				<bpel:extensionAssignOperation bea:name="getCustomerCollectionDataRequest AssignAction">
+					<trf:assign varName="getCustomerCollectionDataRequest.parameters">
+						<trf:expr>
+							<expr:xqueryText>&lt;wcm:getCustomerCollectionData 
+xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCollectionManagementServiceRequestResponse_v1 WLNCollectionManagementServiceRequestResponse_v1_0.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:wcm="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCollectionManagementServiceRequestResponse_v1">
+	&lt;wcm:customerId>
+		{($getAdditinoalCustomerDataRequest.parameters//*[local-name()='assessCreditWorthinessRequest'])[1]//(*[local-name()='customerID'])[1]/text()}	
+    &lt;/wcm:customerId>
+	{($getAdditinoalCustomerDataRequest.parameters//*[local-name()='auditInfo'])[1]}
+&lt;/wcm:getCustomerCollectionData></expr:xqueryText></trf:expr></trf:assign></bpel:extensionAssignOperation></bpel:assign>
+			<bpel:invoke operation="getCustomerCollectionData" outputVariable="getCustomerCollectionDataResponse" bea:name="Invoke getCustomerCollectionData" partnerLink="WLNCollectionManagementServicePS" inputVariable="getCustomerCollectionDataRequest">
+				<rescon:invokeInfo>
+					<rescon:service isProxy="true" ref="telus-crd-crda-esb/proxy/externalPS/WLNCollectionManagementServicePS"/></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+		<bpel:else>
+			<bpel:sequence>
+				<bpel:empty/>
+				<bpel:assign bea:name="Assign empty">
+					<bpel:extensionAssignOperation>
+						<bpel:documentation/>
+						<trf:assign varName="getCustomerCollectionDataResponse.result">
+							<trf:expr>
+								<expr:xqueryText>&lt;getCustomerCollectionDataRequest/></expr:xqueryText></trf:expr></trf:assign>
+					</bpel:extensionAssignOperation>
+				</bpel:assign></bpel:sequence></bpel:else></bpel:if>
+	
+     	</bpel:sequence>
+     </bpel:scope>
+     <bpel:scope bea:name="getCreditProfileByCustomerId Scope">
+     	<bpel:sequence>
+     		
+     	<bpel:assign>
+		<bpel:extensionAssignOperation bea:name="get value of isXXXRequired">
+			<bpel:documentation>Added as a workaround to esb splitjoint specific conlict due to using xml attribute in if condition</bpel:documentation>
+			<trf:assign varName="isCreditProfileDataRequired">
+				<trf:expr>
+					<expr:xqueryText>$assessmentConfigData/Type[@typename=$creditAssessmentTypeCd]/SubType[@subtypename=$creditAssessmentSubTypeCd]/@isCreditProfileDataRequired='true'</expr:xqueryText></trf:expr></trf:assign></bpel:extensionAssignOperation></bpel:assign>
+	<bpel:if bea:name="isCreditProfileDataRequired">
+		<bpel:condition>$isCreditProfileDataRequired</bpel:condition>
+		<bpel:sequence>
+			<bpel:empty/>
+			<bpel:assign bea:name="Assign">
+				<bpel:extensionAssignOperation bea:name="getCreditProfileByCustomerIDRequest AssignAction">
+					<trf:assign varName="getCreditProfileByCustomerIdRequest.parameters">
+						<trf:expr>
+							<expr:xqueryText>&lt;wcpm:getCreditProfileByCustomerId xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2 WLNCreditProfileManagementServiceRequestResponse_v2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wcpm="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2">
+	&lt;wcpm:customerId>
+		{($getAdditinoalCustomerDataRequest.parameters//*[local-name()='assessCreditWorthinessRequest'])[1]//(*[local-name()='customerID'])[1]/text()}
+    &lt;/wcpm:customerId>
+	{($getAdditinoalCustomerDataRequest.parameters//*[local-name()='auditInfo'])[1]}
+&lt;/wcpm:getCreditProfileByCustomerId></expr:xqueryText></trf:expr></trf:assign></bpel:extensionAssignOperation>
+				</bpel:assign>
+			<bpel:invoke operation="getCreditProfileByCustomerId" outputVariable="getCreditProfileByCustomerIdResponse" bea:name="Invoke getCreditProfileByCustomer" partnerLink="WLNCreditProfileManagementServicePS" inputVariable="getCreditProfileByCustomerIdRequest">
+				<rescon:invokeInfo>
+					<rescon:service isProxy="true" ref="telus-crd-crda-esb/proxy/externalPS/WLNCreditProfileManagementServicePS"/></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+		<bpel:else>
+			<bpel:sequence>
+				<bpel:empty/>
+				<bpel:assign bea:name="Assign empty">
+					<bpel:extensionAssignOperation>
+						<bpel:documentation/>
+						<trf:assign varName="getCreditProfileByCustomerIdResponse.result">
+							<trf:expr>
+								<expr:xqueryText>&lt;getCreditProfileByCustomerIdResponse/></expr:xqueryText></trf:expr></trf:assign>
+					</bpel:extensionAssignOperation>
+				</bpel:assign></bpel:sequence></bpel:else></bpel:if>
+	
+     	</bpel:sequence>
+     </bpel:scope>
+     
+     </bpel:flow>
+     
+     
+     <bpel:assign>
+     	<bpel:extensionAssignOperation>
+     		<trf:assign varName="getAdditionalCustomerDataResponse.result">
+     			<trf:expr>
+     				<expr:xqueryTransform>
+     					<expr:resource ref="telus-crd-crda-esb/xquery/transformation/GetAdditionalCustomerData_MergeResults"/>
+     					
+     					<expr:param name="getCustomerCollectionDataResponse1">
+     						<expr:path>$getCustomerCollectionDataResponse.result</expr:path></expr:param>
+     					<expr:param name="getCreditProfileByCustomerIdResponse1">
+     						<expr:path>$getCreditProfileByCustomerIdResponse.result</expr:path></expr:param>
+     					<expr:param name="searchDepositPaymentByCustomerIDResponse1">
+     						<expr:path>$searchDepositPaymentByCustomerIDResponse.result</expr:path></expr:param>
+     					<expr:param name="getCustomerWithContactsResponse1">
+     						<expr:path>$getCustomerWithContactsResponse.result</expr:path></expr:param></expr:xqueryTransform></trf:expr></trf:assign>
+     	</bpel:extensionAssignOperation>
+     </bpel:assign>
+     <bpel:reply partnerLink="GetAdditionalCustomerDataSplitJoin" operation="getAdditionalCustomerData" variable="getAdditionalCustomerDataResponse"/>
+     </bpel:sequence>
+</bpel:process>

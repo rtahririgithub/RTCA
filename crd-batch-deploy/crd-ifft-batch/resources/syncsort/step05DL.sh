@@ -1,0 +1,23 @@
+#!/usr/bin/ksh
+
+echo "Step 1a: Processing the Customer Profile PDS extract."
+
+syncsort << EOF
+   /INFILE "$1" 65535
+   /FIELDS CREDIT_PRIFOLE_ID 19 character 18
+   /FIELDS IDENTIFICATION_TYP_CD 37 character 3
+   /FIELDS IDENTIFICATION_NUM 40 character 50
+   /KEYS CREDIT_PRIFOLE_ID
+
+   /CONDITION filter (IDENTIFICATION_TYP_CD = "DL ") 
+   /INCLUDE filter
+
+   /OUTFILE "$2" OVERWRITE
+   /REFORMAT CREDIT_PRIFOLE_ID, IDENTIFICATION_TYP_CD, IDENTIFICATION_NUM
+   /COLLATINGSEQUENCE DEFAULT ASCII
+
+   /SILENT
+   /END
+EOF
+
+return $?

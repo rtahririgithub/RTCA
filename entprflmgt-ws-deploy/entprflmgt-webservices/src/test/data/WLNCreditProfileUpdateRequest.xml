@@ -1,0 +1,24 @@
+<tns:updateCreditProfile xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1 WLNCreditProfileDataManagementServiceRequestResponse_v1_3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6">
+	<tns:creditProfile>
+		<crdc:customerID>22190647</crdc:customerID>
+		<crdc:creditIdentification>
+			<crdc:driverLicense>
+				<crdc:driverLicenseNum>e%CN>iD%7Cvs</crdc:driverLicenseNum>
+				<crdc:provinceCd>BC</crdc:provinceCd>
+				<crdc:expiryDate>2016-08-13</crdc:expiryDate>
+			</crdc:driverLicense>
+		</crdc:creditIdentification>
+		<crdc:personalInfo>
+			<crdc:birthDate>1967-08-13</crdc:birthDate>
+		</crdc:personalInfo>
+		<crdc:methodCd>OO</crdc:methodCd>
+		<crdc:commentTxt>Update DL3</crdc:commentTxt>
+	</tns:creditProfile>
+	<tns:auditInfo>
+		<ect:userId>Test User ID</ect:userId>
+		<ect:userTypeCode>String</ect:userTypeCode>
+		<ect:originatorApplicationId>1234</ect:originatorApplicationId>
+		<ect:correlationId>String</ect:correlationId>
+		<ect:timestamp>2013-10-03T09:30:47.0Z</ect:timestamp>
+	</tns:auditInfo>
+</tns:updateCreditProfile>

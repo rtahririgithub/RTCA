@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cus:Customizations xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
+  <cus:customization xsi:type="cus:EnvValueCustomizationType">
+    <cus:description/>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditProfileManagementServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditEligibilityProxyServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditEligibilityProxyServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">/CMO/OrderMgmt/WLNCreditEligibilityProxy/WLNCreditEligibilityProxyService_v1_0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditEligibilityProxyServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">WLNCreditProfileManagmentProxyService_WorkManager</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-toll-pt01.tsl.telus.com:443/CMO/OrderMgmt/OrderDepositCalculatorService/OrderDepositCalculatorService_v1_0_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-toll-pt01.tsl.telus.com:443/CMO/OrderMgmt/OrderDepositCalculatorService/OrderDepositCalculatorService_v1_0_vs0</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">WLNCreditProfileManagmentProxyService_WorkManager</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCollectionManagementServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>UDDI Auto Publish</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/OrderDepositCalculatorServicePS</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">false</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">flow:WLN_CRD_ELIGIBILITY_Project/split/GetAdditionalEligibilityDataSplitJoin</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>flow:WLN_CRD_ELIGIBILITY_Project/split/GetAdditionalEligibilityDataSplitJoin</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">30</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Split-Join Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>FLOW</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/split/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-kidc-is02.tsl.telus.com:443/CMO/OrderMgmt/WLNCollectionManagement/WLNCollectionManagementService_v1_1_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-kidc-is02.tsl.telus.com:443/CMO/OrderMgmt/WLNCollectionManagement/WLNCollectionManagementService_v1_1_vs0</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">WLNCreditProfileManagmentProxyService_WorkManager</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Weight</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI</xt:envValueType>
+      <xt:location>0</xt:location>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">https://soa-mp-toll-pt01.tsl.telus.com:443/CMO/OrderMgmt/WLNCreditProfileManagement/WLNCreditProfileManagementService_v2_0_vs0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service URI Table</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:owner>
+      <xt:value>
+        <tableElement xmlns="http://www.bea.com/wli/sb/transports">
+          <URI>https://soa-mp-toll-pt01.tsl.telus.com:443/CMO/OrderMgmt/WLNCreditProfileManagement/WLNCreditProfileManagementService_v2_0_vs0</URI>
+          <weight>0</weight>
+        </tableElement>
+      </xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Count</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Service Retry Iteration Interval</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">0</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>Work Manager</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">WLNCreditProfileManagmentProxyService_WorkManager</xt:value>
+    </cus:envValueAssignments>
+    <cus:envValueAssignments>
+      <xt:envValueType>SMTP Server URL</xt:envValueType>
+      <xt:location xsi:nil="true"/>
+      <xt:owner>
+        <xt:type>SMTPServer</xt:type>
+        <xt:path>System/SMTP Servers/SMTPServer</xt:path>
+      </xt:owner>
+      <xt:value xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">mailhost</xt:value>
+    </cus:envValueAssignments>
+  </cus:customization>
+  <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
+    <cus:description/>
+    <cus:query>
+      <xt:resourceTypes>ProxyService</xt:resourceTypes>
+      <xt:resourceTypes>SMTPServer</xt:resourceTypes>
+      <xt:resourceTypes>BusinessService</xt:resourceTypes>
+      <xt:resourceTypes>FLOW</xt:resourceTypes>
+      <xt:envValueTypes>SMTP Server URL</xt:envValueTypes>
+      <xt:envValueTypes>Service Retry Iteration Interval</xt:envValueTypes>
+      <xt:envValueTypes>Work Manager</xt:envValueTypes>
+      <xt:envValueTypes>UDDI Auto Publish</xt:envValueTypes>
+      <xt:envValueTypes>Split-Join Work Manager</xt:envValueTypes>
+      <xt:envValueTypes>Service URI Weight</xt:envValueTypes>
+      <xt:envValueTypes>Service Retry Count</xt:envValueTypes>
+      <xt:envValueTypes>Service URI</xt:envValueTypes>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCollectionManagementServicePS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>FLOW</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/split/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditProfileManagementServicePS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/OrderDepositCalculatorServicePS</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>SMTPServer</xt:type>
+        <xt:path>System/SMTP Servers/SMTPServer</xt:path>
+      </xt:refsToSearch>
+      <xt:refsToSearch xsi:type="xt:ResourceRefType">
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditEligibilityProxyServicePS</xt:path>
+      </xt:refsToSearch>
+      <xt:includeOnlyModifiedResources>false</xt:includeOnlyModifiedResources>
+      <xt:searchString>Search String</xt:searchString>
+      <xt:isCompleteMatch>false</xt:isCompleteMatch>
+    </cus:query>
+    <cus:replacement>Replacement String</cus:replacement>
+  </cus:customization>
+  <cus:customization xsi:type="cus:ReferenceCustomizationType">
+    <cus:description/>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCollectionManagementServiceRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/OrderDepositCalculatorServicePS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditProfileManagementServicePS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditEligibilityProxyServicePS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditProfileManagementService_v2_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerSubDomain_v3_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>ProxyService</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCollectionManagementServicePS</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CreditDepositTypes_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/OrderDepositCalculatorServiceRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditProfileManagementServiceRequestResponse_v2_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/Customer_Billing_Sub_Domain_v2_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>FLOW</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/split/GetAdditionalEligibilityDataSplitJoin</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditEligibilityProxyService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditEligibilityProxyServiceRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/GetAdditionalEligibilityDataSplitJoin_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CreditCommon_v1_1</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>BusinessService</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCollectionManagementService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>WSDL</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/OrderDepositCalculatorService_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:refsToBeConsidered xsi:type="xt:ResourceRefType">
+      <xt:type>XMLSchema</xt:type>
+      <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/GetAdditionalEligibilityDataSplitJoinRequestResponse_v1_0</xt:path>
+    </cus:refsToBeConsidered>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerManagementCommonTypes_v3_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerManagementCommonTypes_v4_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>telus-crd-crda-esb/Throttle</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>AlertDestination</xt:type>
+        <xt:path>telus-crd-crda-esb/Throttle</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCollectionManagementServiceRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCollectionManagementServiceRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/ComposeGetEquipmentQualificationRequest</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/ComposeGetEquipmentQualificationRequest</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/EnterpriseCommonTypes_v6_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/EnterpriseCommonTypes_v6_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/OrderDepositCalculatorServicePS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/OrderDepositCalculatorServicePS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditProfileManagementServicePS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCreditProfileManagementServicePS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerCommon_v3_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerCommon_v3_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ServiceAccount</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/security/CreditMgmtSecurity_SA</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ServiceAccount</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/security/CreditMgmtSecurity_SA</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditProfileManagementService_v2_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditProfileManagementService_v2_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerCommon_v4_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerCommon_v4_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/GetEligibilityToGetAdditionalEligibilityData</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/GetEligibilityToGetAdditionalEligibilityData</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/OrderDepositCalculatorService</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/ECA_CommonTypes_2_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/ECA_CommonTypes_2_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerSubDomain_v3_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerSubDomain_v3_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/GetAdditonalEligibilityDataToGetEligibility</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/GetAdditonalEligibilityDataToGetEligibility</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/GetAdditionalEligibilityData_MergeResults</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/GetAdditionalEligibilityData_MergeResults</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCollectionManagementServicePS</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>ProxyService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/proxy/WLNCollectionManagementServicePS</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CreditDepositTypes_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CreditDepositTypes_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/util/constructSoapFault</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/util/constructSoapFault</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WirelineCollectionManagementTypes_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WirelineCollectionManagementTypes_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/OrderDepositCalculatorServiceRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/OrderDepositCalculatorServiceRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditProfileManagementServiceRequestResponse_v2_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditProfileManagementServiceRequestResponse_v2_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/dormant/dormantGetCreditEligibilityResponse</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/dormant/dormantGetCreditEligibilityResponse</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerInformationReferenceTypes_1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/dormant/isDormantWLNCreditEligibility</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>Xquery</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/xquery/dormant/isDormantWLNCreditEligibility</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditEligibilityProxyService_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditEligibilityProxyService_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>FLOW</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/split/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>FLOW</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/split/GetAdditionalEligibilityDataSplitJoin</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/Exceptions_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/Exceptions_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditEligibilityProxyServiceRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCreditEligibilityProxyServiceRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WirelineCreditProfileManagementTypes_v2_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/GetAdditionalEligibilityDataSplitJoin_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/GetAdditionalEligibilityDataSplitJoin_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CreditCommon_v1_1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CreditCommon_v1_1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerCommon_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/CustomerCommon_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/EnterpriseCommonTypes_v7_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/EnterpriseCommonTypes_v7_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCollectionManagementService</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>BusinessService</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/business/WLNCreditProfileManagementService</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCollectionManagementService_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/WLNCollectionManagementService_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/OrderDepositCalculatorService_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>WSDL</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/OrderDepositCalculatorService_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/ping_v1</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/ping_v1</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+    <cus:externalReferenceMap>
+      <xt:oldRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/GetAdditionalEligibilityDataSplitJoinRequestResponse_v1_0</xt:path>
+      </xt:oldRef>
+      <xt:newRef>
+        <xt:type>XMLSchema</xt:type>
+        <xt:path>WLN_CRD_ELIGIBILITY_Project/wsdls/GetAdditionalEligibilityDataSplitJoinRequestResponse_v1_0</xt:path>
+      </xt:newRef>
+    </cus:externalReferenceMap>
+  </cus:customization>
+</cus:Customizations>

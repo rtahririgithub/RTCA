@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-673545189832190734-4134cf36.1440976ac55.-7b4b">
+    <con:pipeline type="request" name="Post_To_Fast_or_Fallout_Queue_PS_PipelinePairNode_request">
+      <con:stage name="Post_To_Fast_or_Fallout_Queue_PS_Stage">
+        <con:context xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con4:varNsDecl prefix="ent1" namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl prefix="for" namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FormLetterServiceTypes_v2" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl prefix="ent" namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseFormLetterManagementServiceRequestResponse_v1" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+          <con4:varNsDecl prefix="ping" namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:con4="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con6:assign varName="QueueTransportHeaders" xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:jms="http://www.bea.com/wli/sb/transports/jms" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:comment>load TransportHeaders configuration file</con1:comment>
+            <con1:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-7504</con1:id>
+            <con6:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="telus-crd-crda-esb/xquery/config/Queue_TransportHeaders_Condig"/>
+              </con1:xqueryTransform>
+            </con6:expr>
+          </con6:assign>
+          <con3:assign varName="queueRequest">
+            <con2:comment>get queueRequest</con2:comment>
+            <con2:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-7423</con2:id>
+            <con3:expr>
+              <con2:xqueryText>$body/Post_To_Fast_or_Fallout_Queue_PS_Request/QueueMessageRequest/*</con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="FaultMsg">
+            <con2:comment>get FaultMsg</con2:comment>
+            <con2:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-73fe</con2:id>
+            <con3:expr>
+              <con2:xqueryText>$body/Post_To_Fast_or_Fallout_Queue_PS_Request/FaultMsg</con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="faultSummaryMsg">
+            <con2:comment>create faultSummaryMsg</con2:comment>
+            <con2:id>_ActionId-2332438085096858535--11714054.143f61ba33e.-7f2a</con2:id>
+            <con3:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/util/createErrorStr"/>
+                <con2:param name="FaultMsg">
+                  <con2:path>$FaultMsg</con2:path>
+                </con2:param>
+                <con2:param name="BodyMsg">
+                  <con2:path>$body</con2:path>
+                </con2:param>
+              </con2:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+          <con5:ifThenElse xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:jms="http://www.bea.com/wli/sb/transports/jms">
+            <con4:comment xmlns:con4="http://www.bea.com/wli/sb/stages/config">for policy exception redirect the msg to fallout queue</con4:comment>
+            <con2:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-7503</con2:id>
+            <con5:case>
+              <con5:condition>
+                <con2:xqueryText>fn:exists(($FaultMsg//*[local-name()='PolicyException'])[1])</con2:xqueryText>
+              </con5:condition>
+              <con5:actions>
+                <con6:wsCallout xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                  <con7:comment xmlns:con7="http://www.bea.com/wli/sb/stages/config">call PostToFallOutQueue BS</con7:comment>
+                  <con2:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-74fe</con2:id>
+                  <con6:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/async/postToQueue/PostToFallOutQueue_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                  <con6:request>
+                    <con6:payload>$queueRequest</con6:payload>
+                  </con6:request>
+                  <con6:response>
+                    <con6:payload>falloutqueueResponse</con6:payload>
+                  </con6:response>
+                  <con6:requestTransform>
+                    <con1:transport-headers copy-all="false" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                      <con2:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-7501</con2:id>
+                      <con1:header-set>outbound-request</con1:header-set>
+                      <con1:header name="WCPPRXY_VERSION_PROPERTY" value="expression">
+                        <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME='COMMON']/@WCPPRXY_VERSION_PROPERTY</con2:xqueryText>
+                      </con1:header>
+                      <con1:header name="ARFM_APPLICATION_ID" value="expression">
+                        <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME='COMMON']/@ARFM_APPLICATION_ID</con2:xqueryText>
+                      </con1:header>
+                      <con1:header name="ARFM_SERVICE_NAME" value="expression">
+                        <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME=$body/Post_To_Fast_or_Fallout_Queue_PS_Request/MessageType/text()]/@ARFM_SERVICE_NAME</con2:xqueryText>
+                      </con1:header>
+                      <con1:header name="ARFM_CUSTOMER_ID" value="expression">
+                        <con2:xqueryText>($body//*[local-name()='customerID'])[1]/text()</con2:xqueryText>
+                      </con1:header>
+                      <con1:header name="ARFM_RESOURCE_ID" value="expression">
+                        <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME='COMMON']/@ARFM_RESOURCE_ID</con2:xqueryText>
+                      </con1:header>
+                      <con1:header name="Q_MSG_TYPE" value="expression">
+                        <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME=$body/Post_To_Fast_or_Fallout_Queue_PS_Request/MessageType/text()]/@Q_MSG_TYPE</con2:xqueryText>
+                      </con1:header>
+                      <con1:header value="expression" name="FAULT_SUMMARY_MSG">
+                        <con2:xqueryText>$faultSummaryMsg</con2:xqueryText>
+                      </con1:header>
+                      <con1:header value="expression" name="originalCreditWorthinessRequest">
+                        <con2:xqueryText>$body/input/originalCreditWorthinessRequest</con2:xqueryText>
+                      </con1:header>
+                    </con1:transport-headers>
+                  </con6:requestTransform>
+                  <con6:responseTransform>
+                    <con7:reply isError="false" xmlns:con7="http://www.bea.com/wli/sb/stages/config">
+                      <con7:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-74ff</con7:id>
+                    </con7:reply>
+                  </con6:responseTransform>
+                </con6:wsCallout>
+              </con5:actions>
+            </con5:case>
+            <con5:default>
+              <con3:wsCallout xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                <con4:comment xmlns:con4="http://www.bea.com/wli/sb/stages/config">call PostToFastQueue BS</con4:comment>
+                <con2:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-74fa</con2:id>
+                <con3:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/async/postToQueue/PostToFastQueue_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con3:request>
+                  <con3:payload>$queueRequest</con3:payload>
+                </con3:request>
+                <con3:response>
+                  <con3:payload>FastQueue_Response</con3:payload>
+                </con3:response>
+                <con3:requestTransform>
+                  <con6:transport-headers copy-all="false" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con2:id>_ActionId-1360295257453828208--30068874.142bfb58d8f.-72af</con2:id>
+                    <con6:header-set>outbound-request</con6:header-set>
+                    <con6:header name="WCPPRXY_VERSION_PROPERTY" value="expression">
+                      <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME='COMMON']/@WCPPRXY_VERSION_PROPERTY</con2:xqueryText>
+                    </con6:header>
+                    <con6:header name="ARFM_APPLICATION_ID" value="expression">
+                      <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME='COMMON']/@ARFM_APPLICATION_ID</con2:xqueryText>
+                    </con6:header>
+                    <con6:header name="ARFM_SERVICE_NAME" value="expression">
+                      <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME=$body/Post_To_Fast_or_Fallout_Queue_PS_Request/MessageType/text()]/@ARFM_SERVICE_NAME</con2:xqueryText>
+                    </con6:header>
+                    <con6:header name="ARFM_CUSTOMER_ID" value="expression">
+                      <con2:xqueryText>($body//*[local-name()='customerID'])[1]/text()</con2:xqueryText>
+                    </con6:header>
+                    <con6:header name="ARFM_RESOURCE_ID" value="expression">
+                      <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME='COMMON']/@ARFM_RESOURCE_ID</con2:xqueryText>
+                    </con6:header>
+                    <con6:header name="Q_MSG_TYPE" value="expression">
+                      <con2:xqueryText>$QueueTransportHeaders/MessageType[@MessageTypeNAME=$body/Post_To_Fast_or_Fallout_Queue_PS_Request/MessageType/text()]/@Q_MSG_TYPE</con2:xqueryText>
+                    </con6:header>
+                    <con6:header value="expression" name="FAULT_SUMMARY_MSG">
+                      <con2:xqueryText>$faultSummaryMsg</con2:xqueryText>
+                    </con6:header>
+                    <con6:header value="expression" name="originalCreditWorthinessRequest">
+                      <con2:xqueryText>$body/input/originalCreditWorthinessRequest</con2:xqueryText>
+                    </con6:header>
+                  </con6:transport-headers>
+                </con3:requestTransform>
+                <con3:responseTransform>
+                  <con2:reply>
+                    <con2:id>_ActionId-1254993740914659236--62936fa7.142f6b07b56.-76d8</con2:id>
+                  </con2:reply>
+                </con3:responseTransform>
+              </con3:wsCallout>
+            </con5:default>
+          </con5:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="Post_To_Fast_or_Fallout_Queue_PS_PipelinePairNode_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-673545189832190734-4134cf36.1440976ac55.-7b4b">
+      <con:stage name="Post_To_Fast_or_Fallout_Queue_PS_ErrorHandler_stage">
+        <con:context xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:jms="http://www.bea.com/wli/sb/transports/jms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        <con:actions xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:jms="http://www.bea.com/wli/sb/transports/jms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con4:log>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6cd7</con2:id>
+            <con4:logLevel>error</con4:logLevel>
+            <con4:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con4:expr>
+          </con4:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="Post_To_Fast_or_Fallout_Queue_PS_PipelinePairNode">
+        <con:comment><![CDATA[input format 
+<Input>
+ <QueueMessageRequest>
+QQQ
+ </QueueMessageRequest>
+<MessageType>
+MMMM
+</MessageType>
+<FaultMsg>
+FFFF
+</FaultMsg>
+</Input>
+examples:
+QueueMessageRequest = updateCreditWorthinessRequest , updateCustomerRequest, Trb msg
+MessageType=TRB, updateCreditWorthiness, updateCustomerODS]]></con:comment>
+        <con:request>Post_To_Fast_or_Fallout_Queue_PS_PipelinePairNode_request</con:request>
+        <con:response>Post_To_Fast_or_Fallout_Queue_PS_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

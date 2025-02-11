@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<!--
+# @version 1.2.0.20.3
+# 1.2.0.20.3 - Add Printshop account and server
+# 1.2.0.20.2 - Add G_NDS_NS_LG_SFTP
+# 1.2.0.20.1 - G_NIV_BATCH_SERVER, G_SFTP_NDS_ACCT
+# 3.0beta6   - May 09,2007: Add SFTX_DATA_HOME_PREFIX
+# 3.0beta4   - Mar 29,2007: Add G_POWERCENTER
+# 3.0beta17  - Dec 12, 2007: Add Nikira, COLAG for Collections
+# 3.0betat19 - Jan 08, 2007 - Add LOOPQUAL for Customer Analytics (CAN) ADSL
+# 3.0.1      - Feb 05, 2008 - Add SFTX_UNIX_GET_FROM_WINDOWS_CHMOD_FIX,
+#                             G_KNOWBILITY_SERVER
+#            - Feb 29, 2008 - Add SKYCREEK
+#            - Mar 05, 2008 - Add G_NIV_SAP_SERVER, G_SFTP_NIV_SAP_ACCT
+#            - Mar 09, 2008 - Add G_RPT1_BATCH_SERVER
+#            - Mar 17, 2008 - Add G_AAIS_BROADBAND_SERVER
+#            - Mar 25, 2008 - Add maxstartups
+#            - Mar 26, 2008 - Add G_BUX_NS_LG_SFTP, G_BUX_SERVER, G_SFTP_BUX_ACCT for BLAST
+#            - Apr 01, 2008 - Add G variables for DSI
+#            - Apr 11, 2008 - Add G variables for PCDR
+#            - May 09, 2008 - Add G_ESD_SERVER and G_ESD_NS_LG_SFTP
+#            - Aug 11, 2008 - Add G_LERG_SERVER, G_PREP2_SERVER
+#            - Aug 26, 2008 - Add G_BIGS_SERVER, G_4TELA_SERVER
+#            - Oct 02, 2008 - Add G_SFTP_NIKIRA_ACCT
+#            - Nov 06, 2008 - Add G_AVALON_SERVER, G_TELUS_QUEBECPMT_ACCT, G_ASMM_ACCT
+#            - Nov 13, 2008 - Add G_USG_ADSL_SERVER, G_SFTP_USG_ADSL_ACCT, G_USG_TTV_SERVER	 
+#                                 G_SFTP_USG_TTV_ACCT
+#            - Jan 05, 2009 - Add CPEDW
+#            - Jan 12, 2009 - Fix G_COMMON_SCRIPT_HOME
+#            - Jan 30, 2009 - change @ variables for G_ADSL_SERVER, G_DIAL_SERVER, G_ROAM_SERVER, G_TTV_SERVER
+#            - Aug 04, 2010 - Change G_NTS_PROD_SERVER to G_NTS_SERVER
+-->
+<group name="irrelevant"> 
+
+    <prop name="jobname">${LEVEL2_SHORTNAME}-${JOB}${JOB_SUBGROUP}</prop>
+    <prop name="logs">${DATA_HOME}/logs</prop>
+    
+    <prop name="G_ENV">dv01</prop>
+
+    <prop name="SFTX_UNIX_GET_FROM_WINDOWS_CHMOD_FIX">660</prop> 
+
+    <prop name="G_COMMON_SCRIPT_HOME">/apps/common/scripts/dv01</prop>
+
+    <prop name="G_DATA_HOME_PREFIX">/work/users/dv01</prop>
+    
+    <prop name="SFTX_DATA_HOME_PREFIX">/work/users/</prop>
+
+    
+    <!-- Server Type -->
+
+    <prop name="SFTX_UNIX_NEW_STACK_SERVER">unixnewstack</prop>
+    <prop name="SFTX_UNIX_OLD_STACK_SERVER">unixoldstack</prop>
+    <prop name="SFTX_MAINFRAME_SERVER">mainframe</prop>
+    <prop name="SFTX_WINDOW_SERVER">window</prop>
+
+
+    <!-- Transfer Type -->
+
+    <prop name="SFTX_TRF_TYPE_SCP_LOCALHOST">scplocalhost</prop>
+    <prop name="SFTX_TRF_TYPE_SCP">scp</prop>
+    <prop name="SFTX_TRF_TYPE_SFTP">sftp</prop>
+
+    
+    <!-- POST ACTION -->
+
+    <prop name="SFTX_POST_ACTION_RENAME">rename</prop>
+    <prop name="SFTX_POST_ACTION_REMOVE">remove</prop>
+        
+
+    
+    <!-- L i s t   o f   B A T C H   S E R V E R s -->
+    <!-- The legacy servers -->
+
+    <prop name="G_AB_MF_SERVER">sys3tcp.tsl.telus.com</prop>
+    <prop name="G_BC_MF_SERVER">bct1tcp.tsl.telus.com</prop> 
+    <prop name="G_PRINTSHOP_MF_SERVER">shr1dsc.tsl.telus.com</prop>
+        
+    <prop name="G_BW_SERVER">edmwcs08.tsl.telus.com</prop>
+    <prop name="G_NETPROVISION_SERVER">207.229.63.177</prop>
+    <prop name="G_TELUS_QUEBEC_SERVER">localfiles.quebec.telus.local</prop>
+    <prop name="G_NTS_PROD_SERVER">abe-ntsp-01.osc.tac.net</prop>
+    <prop name="G_SSC_EDM_SERVER">sscedm.osc.tac.net</prop>
+    <prop name="G_SSC_CAL_SERVER">ssccgy.osc.tac.net</prop>
+
+    <prop name="G_4TELA_SERVER">tsc400a</prop>
+    <prop name="G_4TELB_SERVER">tsc400b</prop>
+    <prop name="G_4TELC_SERVER">tsc400c</prop>
+    
+    <prop name="G_BIGS_SERVER">blanc.tmi.telus.com</prop>
+    <prop name="G_HVCOL_SERVER">lemming</prop>
+    
+    <prop name="G_BUX_SERVER">buxvmm01.bctel.com</prop>
+    <prop name="G_CCB_NT_SERVER">wp41125</prop>
+    <prop name="G_CIRVIS_SERVER">sedm1827ce.ent.agt.ab.ca</prop>
+    <prop name="G_COS_SERVER">192.168.216.10</prop>
+    <prop name="G_AAIS_BROADBAND_SERVER">sedm1206.ent.agt.ab.ca</prop>
+    <prop name="G_CTO_SERVER">sedm3143</prop>
+    <!-- Collections AG -->
+    <prop name="G_COLAG_SERVER">bcgrp107.corp.ads</prop>
+    <prop name="G_DSI_SERVER">bcsftp001.tsl.telus.com</prop>
+    <prop name="G_EBOD_SERVER">an00002.ent.agt.ab.ca</prop>
+    <prop name="G_ECO_SERVER">lore.osc.tac.net</prop>
+    <prop name="G_EDW_SERVER">iedm3308da.ent.agt.ab.ca</prop>
+    <prop name="G_CPEDW_SERVER">iedm3321dc</prop>
+ 
+    <prop name="G_FG_SAP_SERVER">an00002.ent.agt.ab.ca</prop>
+    <prop name="G_NIV_SAP_SERVER">an00002.ent.agt.ab.ca</prop>
+    
+    <prop name="G_FLAME_SERVER">lemming.tmi.telus.com</prop>
+    <prop name="G_IPRS_SERVER">bcdev097</prop>
+    <prop name="G_KNOWBILITY_SERVER">hippo.tmi.telus.com</prop>
+    <prop name="G_LOOPQUAL_SERVER">unimatrix.osc.tac.net</prop>
+    <prop name="G_NETCRACKER_SERVER">ln98485</prop>    
+    <prop name="G_NDS_SERVER">ndsdv-cw305</prop>
+    <!-- Collections Nikira -->
+    <prop name="G_NIKIRA_SERVER">FIXME</prop>
+    <prop name="G_NPNIV_SERVER">172.31.10.223</prop>
+    <prop name="G_SKYCREEK_SERVER">ftpnp.skycreek.com</prop>
+    <prop name="G_VSTAR_SERVER">hedm1044</prop>
+
+    <prop name="G_ADSL_SERVER">ibsit2.tsl.telus.com</prop>
+    <prop name="G_DIAL_SERVER">ibsit2.tsl.telus.com</prop> 
+    <prop name="G_ROAM_SERVER">ibsit2.tsl.telus.com</prop>
+    <prop name="G_TTV_SERVER">ibsit2.tsl.telus.com</prop>
+    <prop name="G_ESD_SERVER">sedm1330</prop>
+
+    <prop name="G_PREP_SERVER">scalidev</prop>
+    <prop name="G_PREP2_SERVER">sn20100.ent.agt.ab.ca</prop>    
+
+    
+    <!-- The window servers --> 
+    <prop name="G_LERG_SERVER">bcgrp107.corp.ads</prop>
+
+        
+    <!-- The servers that have a corresponding CTM NodeID -->
+
+    <prop name="G_ASMM_BATCH_SERVER">sedm1335</prop>
+    <prop name="G_ASMM_SERVER">sedm3248</prop>
+    <prop name="G_AVALON_SERVER">ln98503</prop>
+    <prop name="G_CUS_ENABLER_SERVER">sedm3301dc</prop>
+    <prop name="G_POWERCENTER">iedm3301da</prop>
+    <prop name="G_USG_ENABLER_SERVER">sedm3301dc</prop>
+    <prop name="G_USG_ADSL_SERVER">sedm1242.ent.agt.ab.ca</prop>
+    <prop name="G_USG_TTV_SERVER">FIXME</prop>
+    
+    <prop name="G_ACT_BATCH_SERVER">batch1dv</prop>
+    <prop name="G_BIL_BATCH_SERVER">batch1dv</prop>
+    <prop name="G_BPR_BATCH_SERVER">batch1dv</prop>
+    <prop name="G_CAN_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_CCM_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_CCR_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_CFG_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_COL_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_CRD_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_FIN_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_FUL_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_GCC_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_MAS_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_MBR_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_MED_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_NIV_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_NWT_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_OMG_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_PMT_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_PRM_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_REF_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_RPT1_BATCH_SERVER">sedm3301dc</prop>
+    <prop name="G_TTM_BATCH_SERVER">batch1dv</prop> 
+    <prop name="G_USG_BATCH_SERVER">batch1dv</prop> 
+    
+    <prop name="G_ACT_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_BIL_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_BPR_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_CAN_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_CCM_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_CCR_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_CFG_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_COL_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_CRD_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_FIN_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_FUL_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_GCC_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_MAS_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_MBR_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_MED_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_NIV_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_OMG_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_PMT_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_PRM_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_REF_SUN_BATCH_SVR">sedm3301dc</prop>
+    <prop name="G_TTM_SUN_BATCH_SVR">sedm3301dc</prop> 
+    <prop name="G_USG_SUN_BATCH_SVR">sedm3301dc</prop> 
+
+
+
+
+    <!-- L i s t  o f  SFTP  P R E F I X s  and  S U F F I X s -->
+    <!-- The legacy sftp account -->
+    
+    <prop name="G_SFTP_ADSL_ACCT">pin65</prop>
+    <prop name="G_SFTP_BW_ACCT">sapfi</prop>
+    <prop name="G_SFTP_BUX_ACCT">tv47007</prop>
+    <prop name="G_NETPROVISION_ACCT">ntsload</prop>
+    <prop name="G_TELUS_QUEBEC_ACCT">ccbintert</prop>
+    <prop name="G_SFTP_SSC_ACCT">togw</prop>
+    <prop name="G_SFTP_CCB_NT_ACCT">sfd0003</prop> 
+    <prop name="G_SFTP_CIRVIS_ACCT">npsi</prop>
+    <!-- This is a window directory -->
+    <prop name="G_SFTP_COLAG_ACCT">telus/FTPOpsCredit</prop>
+    <prop name="G_SFTP_COS_ACCT">sud0007</prop>
+    <prop name="G_SFTP_CTO_ACCT">nparead</prop>
+    <prop name="G_SFTP_DIAL_ACCT">dialevents</prop>     
+    <prop name="G_SFTP_DSI_ACCT">svc_dsinpi</prop> 
+    <prop name="G_SFTP_EBOD_ACCT">sapinter</prop>
+    <prop name="G_SFTP_ECO_ACCT">dataif</prop>
+    <prop name="G_SFTP_EDW_ACCT">sfd0024</prop>
+    <prop name="G_SFTP_CPEDW_ACCT">sud0024</prop>    
+    <prop name="G_SFTP_FG_SAP_ACCT">sapinter</prop>
+    <prop name="G_SFTP_NIV_SAP_ACCT">sd1adm</prop>
+        
+    <prop name="G_SFTP_FLAME_ACCT">dhvc</prop>
+    <prop name="G_SFTP_IPRS_ACCT">centra</prop>
+    <prop name="G_SFTP_NDS_ACCT">custprof</prop>
+    <prop name="G_SFTP_NPNIV_ACCT">npaadm</prop>
+    <prop name="G_SFTP_NIKIRA_ACCT">nikira</prop>
+
+    <prop name="G_SFTP_PRINTSHOP_ACCT">sfd0023</prop>
+    <prop name="G_SFTP_ROAM_ACCT">dialinx</prop>
+    <prop name="G_SFTP_SKYCREEK_ACCT">telus</prop>
+    <prop name="G_SFTP_TTV_ACCT">pin65</prop>
+    <prop name="G_SFTP_VSTAR_ACCT">vstarusr</prop>
+    
+    <prop name="G_SFTP_LERG_ACCT">svc_LERG</prop>
+    <prop name="G_SFTP_PREP_ACCT">dcsftp</prop>
+
+    <prop name="G_BCHVC_ACCT">SFD0213</prop> 
+    <prop name="G_BIGS_ACCT">debill</prop>     
+    <prop name="G_HVCOL_ACCT">dhvc</prop>    
+    <prop name="G_SFTP_4TEL_ACCT">data</prop>    
+    
+    <prop name="G_ASMM_ACCT">dvasmm</prop>   
+    <prop name="G_TELUS_QUEBECPMT_ACCT">avalon1</prop> 
+
+    <prop name="G_SFTP_USG_ADSL_ACCT">hpipm1</prop>
+    <prop name="G_SFTP_USG_TTV_ACCT">FIXME</prop>   
+    
+    <!-- Mainframe SFTP Account Prefix -->
+
+    <prop name="G_SFTP_MF_ACCT_PREFIX">sfd</prop>
+    
+    
+    <!-- Non-Mainframe SFTP Account Prefix -->
+
+    <prop name="G_SFTP_UX_ACCT_PREFIX">sud</prop>
+
+    <prop name="G_SFTP_BIL_ACCT_SUFFIX">0001</prop>
+    <prop name="G_SFTP_COL_ACCT_SUFFIX">0002</prop>
+    <prop name="G_SFTP_USG_ACCT_SUFFIX">0003</prop>
+    <prop name="G_SFTP_BPR_ACCT_SUFFIX">0004</prop>
+    <prop name="G_SFTP_FIN_ACCT_SUFFIX">0005</prop>
+    <prop name="G_SFTP_PMT_ACCT_SUFFIX">0006</prop>
+    <prop name="G_SFTP_OMG_ACCT_SUFFIX">0007</prop>
+    <prop name="G_SFTP_PRM_ACCT_SUFFIX">0008</prop>
+    <prop name="G_SFTP_CCM_ACCT_SUFFIX">0010</prop>
+    <prop name="G_SFTP_CCR_ACCT_SUFFIX">0011</prop>
+    <prop name="G_SFTP_FUL_ACCT_SUFFIX">0012</prop>
+    <prop name="G_SFTP_CRD_ACCT_SUFFIX">0013</prop>
+    <prop name="G_SFTP_NIV_ACCT_SUFFIX">0014</prop>
+    <prop name="G_SFTP_ACT_ACCT_SUFFIX">0015</prop>
+    <prop name="G_SFTP_CFG_ACCT_SUFFIX">0016</prop>
+    <prop name="G_SFTP_MED_ACCT_SUFFIX">0018</prop>
+    <prop name="G_SFTP_TTM_ACCT_SUFFIX">0019</prop>
+    <prop name="G_SFTP_MBR_ACCT_SUFFIX">0020</prop>
+    <prop name="G_SFTP_MAS_ACCT_SUFFIX">0021</prop>
+    <prop name="G_SFTP_REF_ACCT_SUFFIX">0022</prop>
+    <prop name="G_SFTP_GCC_ACCT_SUFFIX">0023</prop>
+    <prop name="G_SFTP_CAN_ACCT_SUFFIX">0024</prop>
+    <prop name="G_SFTP_NWT_ACCT_SUFFIX">0027</prop>
+
+    
+    <!-- list of SFTP directories -->
+    
+    <prop name="G_ACT_MF_NS_SFTP">/u/sfd0015</prop>
+    <prop name="G_ACT_NS_MF_SFTP">/work/users/sfd0015</prop>
+    <prop name="G_ACT_NS_UX_SFTP">/work/users/sud0015</prop>
+    <prop name="G_BIL_MF_NS_SFTP">/u/sfd0001</prop>
+    <prop name="G_BIL_MF_NS_SFTP">/u/sfd0001</prop>
+    <prop name="G_BIL_NS_MF_SFTP">/work/users/sfd0001</prop>
+    <prop name="G_BIL_NS_MF_SFTP">/work/users/sfd0001</prop>
+    <prop name="G_BIL_NS_UX_SFTP">/work/users/sud0001</prop>
+    <prop name="G_BPR_MF_NS_SFTP">/u/sfd0004</prop>
+    <prop name="G_BPR_NS_MF_SFTP">/work/users/sfd0004</prop>
+    <prop name="G_BPR_NS_UX_SFTP">/work/users/sud0004</prop>
+    <prop name="G_CAN_MF_NS_SFTP">/u/sfd0024</prop>
+    <prop name="G_CAN_NS_MF_SFTP">/work/users/sfd0024</prop>
+    <prop name="G_CAN_NS_UX_SFTP">/work/users/sud0024</prop>
+    <prop name="G_CCM_MF_NS_SFTP">/u/sfd0010</prop>
+    <prop name="G_CCM_NS_MF_SFTP">/work/users/sfd0010</prop>
+    <prop name="G_CCM_NS_UX_SFTP">/work/users/sud0010</prop>
+    <prop name="G_CCR_MF_NS_SFTP">/u/sfd0011</prop>
+    <prop name="G_CCR_NS_MF_SFTP">/work/users/sfd0011</prop>
+    <prop name="G_CCR_NS_UX_SFTP">/work/users/sud0011</prop>
+    <prop name="G_CFG_MF_NS_SFTP">/u/sfd0016</prop>
+    <prop name="G_CFG_NS_MF_SFTP">/work/users/sfd0016</prop>
+    <prop name="G_CFG_NS_UX_SFTP">/work/users/sud0016</prop>
+    <prop name="G_COL_MF_NS_SFTP">/u/sfd0002</prop>
+    <prop name="G_COL_NS_MF_SFTP">/work/users/sfd0002</prop>
+    <prop name="G_COL_NS_UX_SFTP">/work/users/sud0002</prop>
+    <prop name="G_CRD_MF_NS_SFTP">/u/sfd0013</prop>
+    <prop name="G_CRD_NS_MF_SFTP">/work/users/sfd0013</prop>
+    <prop name="G_CRD_NS_UX_SFTP">/work/users/sud0013</prop>
+    <prop name="G_FIN_MF_NS_SFTP">/u/sfd0005</prop>
+    <prop name="G_FIN_NS_MF_SFTP">/work/users/sfd0005</prop>
+    <prop name="G_FIN_NS_UX_SFTP">/work/users/sud0005</prop>
+    <prop name="G_FUL_MF_NS_SFTP">/u/sfd0012</prop>
+    <prop name="G_FUL_NS_MF_SFTP">/work/users/sfd0012</prop>
+    <prop name="G_FUL_NS_UX_SFTP">/work/users/sud0012</prop>
+    <prop name="G_GCC_MF_NS_SFTP">/u/sfd0023</prop>
+    <prop name="G_GCC_NS_MF_SFTP">/work/users/sfd0023</prop>
+    <prop name="G_GCC_NS_UX_SFTP">/work/users/sud0023</prop>
+    <prop name="G_MAS_MF_NS_SFTP">/u/sfd0021</prop>
+    <prop name="G_MAS_NS_MF_SFTP">/work/users/sfd0021</prop>
+    <prop name="G_MAS_NS_UX_SFTP">/work/users/sud0021</prop>
+    <prop name="G_MBR_MF_NS_SFTP">/u/sfd0020</prop>
+    <prop name="G_MBR_NS_MF_SFTP">/work/users/sfd0020</prop>
+    <prop name="G_MBR_NS_UX_SFTP">/work/users/sud0020</prop>
+    <prop name="G_MED_MF_NS_SFTP">/u/sfd0018</prop>
+    <prop name="G_MED_NS_MF_SFTP">/work/users/sfd0018</prop>
+    <prop name="G_MED_NS_UX_SFTP">/work/users/sud0018</prop>
+    <prop name="G_NDS_NS_LG_SFTP">/cw01/datafeeds</prop>
+    <prop name="G_NIV_MF_NS_SFTP">/u/sfd0014</prop>
+    <prop name="G_NIV_NS_MF_SFTP">/work/users/sfd0014</prop>
+    <prop name="G_NIV_NS_UX_SFTP">/work/users/sud0014</prop>
+    <prop name="G_NWT_MF_NS_SFTP">/u/sfd0027</prop>
+    <prop name="G_NWT_NS_MF_SFTP">/work/users/sfd0027</prop>
+    <prop name="G_NWT_NS_UX_SFTP">/work/users/sud0027</prop>
+    <prop name="G_OMG_MF_NS_SFTP">/u/sfd0007</prop>
+    <prop name="G_OMG_NS_MF_SFTP">/work/users/sfd0007</prop>
+    <prop name="G_OMG_NS_UX_SFTP">/work/users/sud0007</prop>
+    <prop name="G_PMT_MF_NS_SFTP">/u/sfd0006</prop>
+    <prop name="G_PMT_NS_MF_SFTP">/work/users/sfd0006</prop>
+    <prop name="G_PMT_NS_UX_SFTP">/work/users/sud0006</prop>
+    <prop name="G_PRM_MF_NS_SFTP">/u/sfd0008</prop>
+    <prop name="G_PRM_NS_MF_SFTP">/work/users/sfd0008</prop>
+    <prop name="G_PRM_NS_UX_SFTP">/work/users/sud0008</prop>
+    <prop name="G_REF_MF_NS_SFTP">/u/sfd0022</prop>
+    <prop name="G_REF_NS_MF_SFTP">/work/users/sfd0022</prop>
+    <prop name="G_REF_NS_UX_SFTP">/work/users/sud0022</prop>
+    <prop name="G_TTM_MF_NS_SFTP">/u/sfd0019</prop>
+    <prop name="G_TTM_NS_MF_SFTP">/work/users/sfd0019</prop>
+    <prop name="G_TTM_NS_UX_SFTP">/work/users/sud0019</prop>
+    <prop name="G_USG_MF_NS_SFTP">/u/sfd0003</prop>
+    <prop name="G_USG_NS_MF_SFTP">/work/users/sfd0003</prop>
+    <prop name="G_USG_NS_UX_SFTP">/work/users/sud0003</prop>
+
+
+
+    <!-- The Unix Legacy SFTP directory -->
+
+   
+    <prop name="G_AAIS_NS_LG_SFTP">/export/home/asf</prop>
+    <prop name="G_ADSL_NS_LG_SFTP">/export/home/pin65</prop> 
+    <prop name="G_BW_NS_LG_SFTP">/u01/SW1/interface</prop> 
+    <prop name="G_BUX_NS_LG_SFTP">/usr/local/webfocus/fms4tel/backup</prop>
+    <prop name="G_CLR_NS_NX_SFTP">/export/home/genesys/Outbound_CL_Process/data</prop> 
+    <prop name="G_COLAG_NS_LG_SFTP">/HOME/02) Agency/Downloadfile/Purchase of TELUS AR</prop>
+    <prop name="G_COS_NS_LG_SFTP">/export/home/sud0007</prop>    
+    <prop name="G_DIAL_NS_LG_SFTP">/export/home/dialevents</prop>
+    <prop name="G_EBOD_NS_LG_SFTP">FIXME</prop> 
+    <prop name="G_ECO_NS_LG_SFTP">/var/tmp/interface_data/outbound/fp</prop>
+    <prop name="G_EDW_NS_LG_SFTP">/bi/dev/data/stg_oms/incoming/</prop> 
+    <prop name="G_EWIN_NS_LG_SFTP">/dss/app/ewin/qc</prop> 
+    <prop name="G_FLAME_NS_LG_SFTP">FIXME</prop> 
+    <prop name="G_LOOPQUAL_NS_LG_SFTP">/var/tmp/interface_data/outbound/loopqual</prop>
+    <prop name="G_ROAM_NS_LG_SFTP">/export/home/dialinx</prop> 
+    <prop name="G_PREP1_NS_UX_SFTP">/dcs/source_data/msccr</prop>    
+    <prop name="G_SAP_NS_LG_SFTP">/u01/SD1/interface</prop> 
+    <prop name="G_SUPERPAGE_NS_LG_SFTP">/home/DPF/incoming</prop> 
+    <prop name="G_TTV_NS_LG_SFTP">/export/home/pin65</prop> 
+    <prop name="G_VSTAR_NS_LG_SFTP">/u13/iccrdev/module2/data</prop> 
+    <prop name="G_SSC_NS_LG_SFTP"> /spirent/ssc/prequal/output</prop>
+ 
+    <prop name="G_BIGS_NS_LG_SFTP">/work/bods_D/Converge/HVC/inbox</prop>  
+    <prop name="G_HVCOL_NS_LG_SFTP">/work/dev/D01/etl_svr01/work04/powercenter/TgtFiles/HVC2/</prop>       
+    <prop name="G_ESD_NS_LG_SFTP">/opt/ngsm/data</prop>
+    <prop name="G_CPEDW_NS_LG_SFTP">/dss/staging/stg_csh/incoming_large</prop> 
+
+    <!--  Resourcepool Configuration -->
+
+    <group name="sftx-frameworksFileTransfer">
+       <prop name="commonScriptHome">/apps/common/scripts/dv01</prop>
+     
+       <group name="resourcepool">
+            <prop name="maxactive">3</prop>
+            <prop name="maxstartups">20</prop>
+            <!--prop name="whenexhaustedaction"></prop-->
+            <!--prop name="maxwait"></prop-->
+            <!--prop name="maxidle"></prop-->
+            <!--prop name="minidle"></prop-->
+            <!--prop name="testonborrow"></prop-->
+            <!--prop name="testonreturn"></prop-->
+            <!--prop name="timebetweenevictionrunsmillis"></prop-->
+            <!--prop name="numtestsperevictionrun"></prop-->
+            <!--prop name="minevictableidletimemillis"></prop-->
+            <!--prop name="testwhileidle"></prop-->
+        </group>
+        
+        <group name="contextlogging">
+            <prop name="entitykey">entity</prop>
+            <prop name="idkey">id</prop>
+            <prop name="requestidkey">requestid</prop>
+            <prop name="recipientidkey">recipientid</prop>
+            <prop name="fileitemidkey">fileitemid</prop>
+            <prop name="transmissionidkey">transmissionid</prop>
+        </group>
+
+        <group name="messages">
+            <prop name="filename">fw-filetransfer-messages</prop>
+        </group>
+
+    </group>
+    
+</group>
+
+

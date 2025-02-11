@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+<group name="wlndConfig">
+
+  <group name="creditProfileMethodCodes">
+    <prop name="onlineOverride">OO</prop>
+    <prop name="batchProcessing">BP</prop>
+    <prop name="unmerged">UM</prop>
+    <prop name="batchConversion">BC</prop>
+    <prop name="unknown">UN</prop>
+    <prop name="notApplicable">NA</prop>
+  </group>
+  <group name="creditAssessmentSubTypeCodes">
+    <prop name="manualOverride">MANUAL_OVERRIDE</prop>
+    <prop name="unmerged">UNMERGED</prop>
+    <prop name="autoUpgrade">AUTO_UPGRADE</prop>
+    <prop name="bureauConsent">BUREAU_CONSENT</prop>
+  </group>
+
+
+  <group name="creditAssessmentProps">
+    <prop name="overrideCreditAssessmentType">OVRD_ASSESSMENT</prop>
+    <prop name="auditCreditAssessmentType">AUDIT</prop>
+    <prop name="defaultOverrideAssessmentSubType">${creditAssessmentSubTypeCodes/manualOverride}</prop>
+  </group>
+    
+</group>

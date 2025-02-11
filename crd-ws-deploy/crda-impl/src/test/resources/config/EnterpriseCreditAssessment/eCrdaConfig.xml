@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+<group name="eCrdaConfig">
+
+  <group name="FULL_ASSESSMENT_MONTHLY_CVUD">
+         <prop name="cVUDTrialRun">true</prop>
+  </group>
+    
+</group>

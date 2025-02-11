@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v2"
+    version="1.0"
+    xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="ping">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0"
+                    name="operationName" type="xs:string"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="deepPing" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="pingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="pingStats" type="tns:PingStats"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="PingStats">
+        <xs:sequence>
+            <xs:element name="serviceName" type="xs:string"/>
+            <xs:element name="serviceStartTime" type="xs:string"/>
+            <xs:element name="serviceUptime" type="xs:string"/>
+            <xs:element name="serviceStats" type="tns:StatsInfo"/>
+            <xs:element minOccurs="0" name="currentStatsWindow" type="tns:CurrentStatsWindow"/>
+            <xs:element minOccurs="0" name="buildInfo" type="tns:BuildInfo"/>
+            <xs:element minOccurs="0" name="dependencyStatus" type="tns:DependencyStatusList"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0"
+                name="operationStatsList" type="tns:OperationStats"/>
+            <xs:element minOccurs="0" name="statsExtension" type="tns:PingStatsExtension"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OperationStats">
+        <xs:sequence>
+            <xs:element name="statsName" type="xs:string"/>
+            <xs:element minOccurs="0" name="statsInfo" type="tns:StatsInfo"/>
+            <xs:element minOccurs="0" name="currentStatsWindow" type="tns:CurrentStatsWindow"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StatsInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="lastRqstExecTimeMilliSecs" type="xs:long"/>
+            <xs:element minOccurs="0" name="lastRqstSuccessful" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="lastRqstDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="avgSuccessExecTimeMilliSecs" type="xs:long"/>
+            <xs:element minOccurs="0" name="avgErrorExecTimeMilliSecs" type="xs:long"/>
+            <xs:element minOccurs="0" name="minExecTimeMilliSecs" type="xs:long"/>
+            <xs:element minOccurs="0" name="maxExecTimeMilliSecs" type="xs:long"/>
+            <xs:element minOccurs="0" name="ttlSuccessExecTimeMilliSecs" type="xs:long"/>
+            <xs:element minOccurs="0" name="ttlErrorExecTimeMilliSecs" type="xs:long"/>
+            <xs:element minOccurs="0" name="execCount" type="xs:int"/>
+            <xs:element minOccurs="0" name="errCount" type="xs:int"/>
+            <xs:element minOccurs="0" name="currentStatsWindow" type="tns:CurrentStatsWindow"/>
+            <xs:element minOccurs="0" name="statsExtension" type="tns:PingStatsExtension"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CurrentStatsWindow">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="windowSize" type="xs:int"/>
+            <xs:element minOccurs="0" name="minExecTimeMilliSecs" type="xs:double"/>
+            <xs:element minOccurs="0" name="maxExecTimeMilliSecs" type="xs:double"/>
+            <xs:element minOccurs="0" name="mean" type="xs:double"/>
+            <xs:element minOccurs="0" name="stdDev" type="xs:double"/>
+            <xs:element minOccurs="0" name="ninetyPercentile" type="xs:double"/>
+            <xs:element minOccurs="0" name="tenPercentile" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BuildInfo">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0"
+                name="buildProperty" type="tns:NameValuePair"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PingStatsExtension">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0"
+                name="nvPair" type="tns:NameValuePair"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NameValuePair">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="name" type="xs:string"/>
+            <xs:element minOccurs="1" name="value" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DependencyStatusList">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="1"
+                name="dependencyStatusList" type="tns:DependencyStatus"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DependencyStatus">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="statusMsg" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,210 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+
+	<parent>
+		<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+		<artifactId>pom-crd-ws-deploy</artifactId>
+		<version>4.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>crda-impl</artifactId>
+	<name>crda-impl</name>
+	
+	<properties>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm zz</maven.build.timestamp.format>
+	</properties>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/version.txt</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/version.txt</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+    
+	<dependencies>
+<!-- Dozer -->
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.4.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+ <!-- end of Dozer --> 
+ 	
+	<!--  required to call Oracle DB 12 -->
+    <dependency>
+          <groupId>com.oracle.weblogic</groupId>
+          <artifactId>ojdbc6</artifactId>
+          <version>12.1.2-0-0</version>
+          <scope>test</scope>
+    </dependency>
+    <!-- Required for logging -->
+    <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+    </dependency>
+   <dependency>
+        <groupId>xml-apis</groupId>
+        <artifactId>xml-apis</artifactId>
+    </dependency>    
+<!--Test -->
+    <dependency>
+        <groupId>weblogic</groupId>
+        <artifactId>wlfullclient</artifactId>
+        <scope>test</scope>     
+    </dependency>   
+<!--End of Test --> 
+
+<!-- Documentum start -->  
+        <dependency>
+            <groupId>documentum</groupId>
+            <artifactId>dmcmspi</artifactId>
+            <version>4.0</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+        
+                <dependency>
+            <groupId>documentum</groupId>
+            <artifactId>dfc</artifactId>
+            <version>5.3</version>              
+        </dependency>
+        
+        <dependency>
+ 			<groupId>telus.credit.gateway.wlncrdgtwy-shared</groupId>
+ 			<artifactId>credit-repo-dao</artifactId>
+ 			<version>1.4-SNAPSHOT</version>
+		</dependency>
+        
+<!-- Documentum end -->
+        
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-shared</groupId>
+			<artifactId>telus-crd-crda-decisionengine</artifactId>
+			<version>4.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-common</groupId>
+			<artifactId>crd-documentum-api</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-common</groupId>
+			<artifactId>crdprofilemgt-common</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+			<artifactId>crda-wsdl</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+			<artifactId>creditgateway-wsdl</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.wlnprflmgt-ws-deploy</groupId>
+			<artifactId>wlnprflmgtpxy-wsdl</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-error</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-crypto</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-documentum</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-weblogic</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-webservices</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-webservices</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+            <artifactId>frameworks-logging-log4j2</artifactId>            
+        </dependency>
+      
+
+
+ 	<dependency>
+			<groupId>telus.credit.crdmgmt.crd-shared</groupId>
+			<artifactId>crd-framework-test</artifactId>
+			<version>4.0.0</version>
+			<scope>test</scope>
+		</dependency>
+
+	<!--	
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-common</groupId>
+			<artifactId>col-mgt-util</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+ -->		
+	  <dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+				<scope>provided</scope>
+		</dependency>
+		
+	</dependencies>
+</project>

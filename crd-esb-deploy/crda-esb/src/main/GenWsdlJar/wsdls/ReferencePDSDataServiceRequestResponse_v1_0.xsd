@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Oracle JAX-WS 2.1.5. --><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlschema.tmi.telus.com/srv/ERM/RefPds/ReferencePDSDataServiceRequestResponse_v1_0" targetNamespace="http://xmlschema.tmi.telus.com/srv/ERM/RefPds/ReferencePDSDataServiceRequestResponse_v1_0" version="1.0" elementFormDefault="qualified">
+	
+	<xsd:element name="getReferenceData" type="tns:getReferenceData"/>
+	<xsd:element name="getReferenceDataResponse" type="tns:getReferenceDataResponse"/>
+
+	<xsd:element name="getSubscriptions" type="tns:getSubscriptions"/>
+	<xsd:element name="getSubscriptionsResponse" type="tns:getSubscriptionsResponse"/>
+
+	<xsd:element name="getInstances" type="tns:getInstances"/>
+	<xsd:element name="getInstancesResponse" type="tns:getInstancesResponse"/>
+
+	<xsd:element name="getInstance" type="tns:getInstance"/>
+	<xsd:element name="getInstanceResponse" type="tns:getInstanceResponse"/>
+
+	<xsd:complexType name="getReferenceData">
+		<xsd:sequence>
+			<xsd:element name="appId" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="getReferenceDataResponse">
+		<xsd:sequence>
+			<xsd:element name="return" type="tns:RefDataType" nillable="true" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="getSubscriptions">
+		<xsd:sequence>
+			<xsd:element name="appId" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="getSubscriptionsResponse">
+		<xsd:sequence>
+			<xsd:element name="return" type="tns:SubscriptionType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getInstances">
+		<xsd:sequence>
+			<xsd:element name="appId" type="xsd:string"/>
+			<xsd:element name="refEntityId" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="getInstancesResponse">
+		<xsd:sequence>
+			<xsd:element name="return" type="tns:InstanceType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="getInstance">
+		<xsd:sequence>
+			<xsd:element name="appId" type="xsd:string"/>
+			<xsd:element name="refEntityId" type="xsd:string"/>
+			<xsd:element name="code" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="getInstanceResponse">
+		<xsd:sequence>
+			<xsd:element name="return" type="tns:InstanceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+    <xsd:complexType name="LocalizedStringType">
+        <xsd:simpleContent>
+           <xsd:extension base="xsd:string">
+        	<xsd:attribute name="lang" type="xsd:language" use="required"/>
+        	<xsd:attribute name="purposeCode" type="xsd:positiveInteger"/>
+           </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+	<xsd:complexType name="SubscriptionType">
+		<xsd:sequence>
+           <xsd:element name="Name" type="xsd:string"/>
+           <xsd:element name="Type" type="xsd:string"/>
+           <xsd:element name="ConsumptionType" type="xsd:string"/>
+        </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RefDataType">
+		<xsd:sequence>
+			<xsd:element name="RefEntity" type="tns:RefEntityType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RefEntityType">
+		<xsd:sequence>
+			<xsd:element name="MetaData" type="tns:MetaDataType" minOccurs="0"/>
+			<xsd:element name="Instance" type="tns:InstanceType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="name" use="required"/>
+		<xsd:attribute name="baseName" use="optional"/>
+		<xsd:attribute name="type" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="InstanceType">
+		<xsd:sequence/>
+		<xsd:attribute name="StatusCode" type="xsd:string"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MetaDataType"/>
+	
+	<xsd:complexType name="BusinessRuleMetaData">
+        <xsd:complexContent>
+			<xsd:extension base="tns:MetaDataType">
+				<xsd:sequence>
+					<xsd:element name="InputField" type="tns:RuleField" maxOccurs="unbounded"/>
+ 					<xsd:element name="OutputField" type="tns:RuleField" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RuleField">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="code" type="xsd:string" use="required"/>
+		<xsd:attribute name="dataType" type="xsd:string" use="required"/>
+		<xsd:attribute name="refEntityId" type="xsd:string" use="optional"/>
+		<xsd:attribute name="allowMultipleValues" type="xsd:boolean" use="required"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CodeDecodeInstanceType">
+        <xsd:complexContent>
+			<xsd:extension base="tns:InstanceType">
+				<xsd:sequence>
+					<xsd:element name="Code" type="xsd:string"/>
+					<xsd:element name="Sequence" type="xsd:positiveInteger"/>
+					<xsd:element name="Decode" type="tns:LocalizedStringType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="MessageInstanceType">
+    	<xsd:complexContent>
+    		<xsd:extension base="tns:InstanceType">
+    			<xsd:sequence>
+    				<xsd:element name="MessageKey" type="xsd:string"/>
+					<xsd:element name="Type" type="xsd:string"/>
+					<xsd:element name="MessageText" type="tns:LocalizedStringType" maxOccurs="unbounded"/>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="XRefInstanceType">
+    	<xsd:complexContent>
+    		<xsd:extension base="tns:InstanceType">
+    			<xsd:sequence>
+    				<xsd:element name="fromId" type="tns:CodeDecodeFromInstanceType"/>
+    				<xsd:element name="toId" type="tns:CodeDecodeToInstanceType"/>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+     
+    <xsd:complexType name="CodeDecodeToInstanceType">
+		<xsd:sequence>
+			<xsd:element name="Code" type="xsd:string"/>
+			<xsd:element name="Sequence" type="xsd:positiveInteger"/>
+			<xsd:element name="Decode" type="tns:LocalizedStringType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CodeDecodeFromInstanceType">
+		<xsd:sequence>
+			<xsd:element name="Code" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="BusinessRuleInstanceType">
+    	<xsd:complexContent>
+    		<xsd:extension base="tns:InstanceType">
+    			<xsd:sequence>
+ 					<xsd:element name="Input" type="tns:CodeValueType" maxOccurs="unbounded"/>
+					<xsd:element name="Output" type="tns:CodeValueType" maxOccurs="unbounded"/>
+					<xsd:element name="Priority" type="xsd:long"/>
+    			</xsd:sequence>
+    		</xsd:extension>
+    	</xsd:complexContent>
+    </xsd:complexType>
+    
+	<xsd:complexType name="CodeValueType">
+    	<xsd:sequence>
+    		<xsd:element name="value" type="xsd:string" maxOccurs="unbounded"/>
+    	</xsd:sequence>
+    	<xsd:attribute name="code" type="xsd:string" use="required"/> 
+    </xsd:complexType>
+	
+</xsd:schema>

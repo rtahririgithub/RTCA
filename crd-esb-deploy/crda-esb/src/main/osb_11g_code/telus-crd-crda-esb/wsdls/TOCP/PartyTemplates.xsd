@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/party_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/party_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="PartyChoice">
+        <xsd:choice>
+            <xsd:element name="CorporationParty" type="tns:CorporationParty"/>
+            <xsd:element name="DepartmentParty" type="tns:DepartmentParty"/>
+            <xsd:element name="EnterpriseParty" type="tns:EnterpriseParty"/>
+            <xsd:element name="GovernmentAgencyParty" type="tns:GovernmentAgencyParty"/>
+            <xsd:element name="HouseholdParty" type="tns:HouseholdParty"/>
+            <xsd:element name="PersonParty" type="tns:PersonParty"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="CorporationParty">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="KeyCompetitors" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Employees" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegalName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Partners" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DateFormed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ScoreChurn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AnnualRevenue" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Segment" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="DepartmentParty">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="LegalName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Segment" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ScoreChurn" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="EnterpriseParty">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="ScoreChurn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Currency" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Segment" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegalName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Country" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GovernmentAgencyParty">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="LegalName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Segment" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ScoreChurn" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="HouseholdParty">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="LegalName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Segment" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ScoreChurn" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="PersonParty">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="EmployeeHere" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegalName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SocialSecurityNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initial" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ScoreChurn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Segment" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

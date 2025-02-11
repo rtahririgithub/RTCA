@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="config">
+
+   <group name="jdbc">
+      <prop name="url">jdbc:oracle:thin:@${test/db/host}:${test/db/port}:TCM${test/db/env}</prop>
+      <prop name="username">APPGCC_BATCH_${test/env}</prop>
+      <prop name="password">APPGCC_BATCH_${test/env}</prop>
+   </group>
+
+</group>

@@ -1,0 +1,24 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns4:updateCreditProfile xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3" xmlns:ns11="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns2="http://schemas.telus.com/eca/common_types_2_1" xmlns:ns3="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:ns4="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditProfileManagementSvcRequestResponse_v2" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditProfileManagementServiceTypes_v2" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns8="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/Resource/BaseTypes/resource_order_reference_types_1_0">
+            <ns4:consumerCreditProfileInfo>
+                <ns5:identification>
+                    <ns5:billingAccountIdentification>
+                        <ns5:billingAccountNumber>70831524</ns5:billingAccountNumber>
+                        <ns5:billingSystemId>130</ns5:billingSystemId>
+                    </ns5:billingAccountIdentification>
+                </ns5:identification>
+                <ns5:creditIdentification>
+                    <ns6:driverLicense>
+                        <ns6:driverLicenseNum>1231297343</ns6:driverLicenseNum>
+                        <ns6:provinceCd>MB</ns6:provinceCd>
+                        <ns6:expiryDate>2020-07-04-04:00</ns6:expiryDate>
+                    </ns6:driverLicense>
+                </ns5:creditIdentification>
+            </ns4:consumerCreditProfileInfo>
+            <ns4:auditInfo>
+                <ns3:originatorApplicationId>4308</ns3:originatorApplicationId>
+            </ns4:auditInfo>
+        </ns4:updateCreditProfile>
+    </S:Body>
+</S:Envelope>

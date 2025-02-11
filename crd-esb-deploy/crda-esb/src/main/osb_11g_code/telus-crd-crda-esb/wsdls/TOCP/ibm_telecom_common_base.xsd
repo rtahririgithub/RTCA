@@ -1,0 +1,84 @@
+<xs:schema targetNamespace="http://www.ibm.com/telecom/common/schema/base/v3_0" xmlns:bons0="http://www.ibm.com/telecom/common/schema/base_extensions/v3_0" xmlns:tns="http://www.ibm.com/telecom/common/schema/base/v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- The type: base.Object -->
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/base_extensions/v3_0" schemaLocation="ibm_telecom_common_base_extensions.xsd"/>
+    <xs:complexType name="IbmTelecomObject">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="IbmTelecomObjectExtensions" type="bons0:IbmTelecomObjectExtensions"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- The type: base.Characteristic -->
+    <xs:complexType name="Characteristic">
+        <xs:complexContent>
+            <xs:extension base="tns:IbmTelecomObject">
+                <xs:sequence>
+                    <xs:element name="Name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Type" type="xs:string"/>
+                    <xs:element minOccurs="0" name="CharacteristicExtensions" type="bons0:CharacteristicExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: base.CharacteristicValue -->
+    <xs:complexType name="CharacteristicValue">
+        <xs:complexContent>
+            <xs:extension base="tns:IbmTelecomObject">
+                <xs:sequence>
+                    <xs:element name="Characteristic" type="tns:Characteristic"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Value" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fromTimestamp" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="toTimestamp" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="CharacteristicValueExtensions" type="bons0:CharacteristicValueExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: base.Entity -->
+    <xs:complexType abstract="true" name="Entity">
+        <xs:complexContent>
+            <xs:extension base="tns:IbmTelecomObject">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fromTimestamp" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="toTimestamp" type="xs:dateTime"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="CharacteristicValue" type="tns:CharacteristicValue"/>
+                    <xs:element minOccurs="0" name="EntityExtensions" type="bons0:EntityExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: base.EntitySpecification -->
+    <xs:complexType name="EntitySpecification">
+        <xs:complexContent>
+            <xs:extension base="tns:Entity">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Type" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Category" type="xs:string"/>
+                    <xs:element minOccurs="0" name="EntitySpecificationExtensions" type="bons0:EntitySpecificationExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: base.Entity -->
+    <xs:complexType name="EntityWithSpecification">
+        <xs:complexContent>
+            <xs:extension base="tns:Entity">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Specification" type="tns:EntitySpecification"/>
+                    <xs:element minOccurs="0" name="EntityWithSpecificationExtensions" type="bons0:EntityWithSpecificationExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Dependency">
+        <xs:complexContent>
+            <xs:extension base="tns:IbmTelecomObject">
+                <xs:sequence>
+                    <xs:element name="DependentId" type="tns:EntityWithSpecification"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="DependentUponId" type="tns:EntityWithSpecification"/>
+                    <xs:element minOccurs="0" name="DependencyExtensions" type="bons0:DependencyExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

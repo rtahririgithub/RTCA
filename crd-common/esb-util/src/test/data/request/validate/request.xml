@@ -1,0 +1,33 @@
+      <fpart:findParty xmlns:fpart="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty" xmlns:par="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage">
+        <par:party>
+          <CharacteristicValue>
+            <Characteristic>
+              <Name>lastName</Name>
+            </Characteristic>
+            <Value>A MIKE</Value>
+          </CharacteristicValue>
+          <CharacteristicValue>
+            <Characteristic>
+              <Name>postalCd</Name>
+            </Characteristic>
+            <Value>M1H 3J3</Value>
+          </CharacteristicValue>
+          <CharacteristicValue>
+            <Characteristic>
+              <Name>birthDate</Name>
+            </Characteristic>
+            <Value>1990-03-01</Value>
+          </CharacteristicValue>
+          <CharacteristicValue>
+            <Characteristic>
+              <Name>returnObject</Name>
+            </Characteristic>
+            <Value>PartyView</Value>
+          </CharacteristicValue>
+          <Specification>
+            <Name>Informatica</Name>
+            <Type>Inventory Lookup</Type>
+            <Category>Party</Category>
+          </Specification>
+        </par:party>
+      </fpart:findParty>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <!-- =============================================================== -->
+  <bean id="telusSpringConfigurer" lazy-init="true"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+
+  <!-- =============================================================== -->
+  <bean id="crda-rtca-1-sftx" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.RequestConfiguration">
+    <property name="requestNm" value="crda-rtca-1-sftx" />
+    <property name="sourceSftpUserId" value="${G_ENV}crd" /> 
+    <property name="sourceServerName" value="${G_CRD_BATCH_SERVER}" />
+    <property name="sourceServerTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+    <property name="reqTransferTypeCd" value="${SFTX_TRF_TYPE_SFTP}" />
+    <property name="pushOrPullInd" value="push" />
+    <property name="recipients">
+      <list>
+        <bean id="recipient1" lazy-init="true"      
+      class="com.telus.framework.filetransfer.config.RecipientConfiguration">
+          <property name="serverName" value="${G_WINSFTX_SERVER}" /> 
+          <property name="serverTypeCd" value="${SFTX_WINDOW_SERVER}" />
+          <property name="sftpUserId" 
+              value="${G_SFTP_CRDA_WN_ACCT}" /> 
+          <property name="serverPassword" value="${CRDA_WN_PASSWORD}" />
+          <property name="files">
+            <list>
+	            <ref bean="targetfile1" />
+	      	    <ref bean="targetfile2" />
+	      	    <ref bean="targetfile3" />
+	      	    <ref bean="targetfile4" />
+	      	    <ref bean="targetfile5" />
+	      	    <ref bean="targetfile6" />
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+  <bean id="targetfile1" lazy-init="true"
+          class="com.telus.framework.filetransfer.config.FileConfiguration">
+  
+          <property name="overwrite" value="true" />
+          <property name="sourcePath" value="${G_DATA_HOME_PREFIX}crd/crda/data/outbox" />
+          <property name="filePattern" value="RTCA_Credit_Assessment_Report_Fraud.csv" />
+          <property name="recipientPath" value="${G_CRDA_NS_WN_SFTP}/DOWNLOAD" />
+      </bean>
+      
+      <bean id="targetfile2" lazy-init="true"
+          class="com.telus.framework.filetransfer.config.FileConfiguration">
+  
+          <property name="overwrite" value="true" />
+          <property name="sourcePath" value="${G_DATA_HOME_PREFIX}crd/crda/data/outbox" />
+          <property name="filePattern" value="RTCA_Credit_Assessment_Report_Score.csv" />
+          <property name="recipientPath" value="${G_CRDA_NS_WN_SFTP}/DOWNLOAD" />
+    </bean>
+    <bean id="targetfile3" lazy-init="true"
+              class="com.telus.framework.filetransfer.config.FileConfiguration">
+      
+          <property name="overwrite" value="true" />
+          <property name="sourcePath" value="${G_DATA_HOME_PREFIX}crd/crda/data/outbox" />
+          <property name="filePattern" value="RTCA_Credit_Assessment_Report.csv" />
+          <property name="recipientPath" value="${G_CRDA_NS_WN_SFTP}/DOWNLOAD" />
+    </bean>
+          
+    <bean id="targetfile4" lazy-init="true"
+              class="com.telus.framework.filetransfer.config.FileConfiguration">
+      
+          <property name="overwrite" value="true" />
+          <property name="sourcePath" value="${G_DATA_HOME_PREFIX}crd/crda/data/outbox" />
+          <property name="filePattern" value="RTCA_Credit_Assessment_Report_Fraud_20*.csv" />
+          <property name="recipientPath" value="${G_CRDA_NS_WN_SFTP}/ARCHIVE" />
+    </bean>
+    <bean id="targetfile5" lazy-init="true"
+              class="com.telus.framework.filetransfer.config.FileConfiguration">
+      
+          <property name="overwrite" value="true" />
+          <property name="sourcePath" value="${G_DATA_HOME_PREFIX}crd/crda/data/outbox" />
+          <property name="filePattern" value="RTCA_Credit_Assessment_Report_Score_20*.csv" />
+          <property name="recipientPath" value="${G_CRDA_NS_WN_SFTP}/ARCHIVE" />
+    </bean>
+          
+    <bean id="targetfile6" lazy-init="true"
+              class="com.telus.framework.filetransfer.config.FileConfiguration">
+      
+          <property name="overwrite" value="true" />
+          <property name="sourcePath" value="${G_DATA_HOME_PREFIX}crd/crda/data/outbox" />
+          <property name="filePattern" value="RTCA_Credit_Assessment_Report_20*.csv" />
+          <property name="recipientPath" value="${G_CRDA_NS_WN_SFTP}/ARCHIVE" />
+    </bean>
+</beans>

@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Appl.Batch -->
+
+	<parent>
+		<groupId>telus.credit.crdmgmt.crd-batch-deploy</groupId>
+		<artifactId>pom-crd-batch-deploy</artifactId>
+		<version>4.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>crd-crda-batch</artifactId>
+	<name>crd-crda-batch</name>
+
+	<properties>
+
+		<!-- You must exclude all TELUS application jar here plus any unwanted 
+			jars to libList.txt A comma-separated list of artifacts to filter from the 
+			serialized dependency tree, or null not to filter any artifacts from the 
+			dependency tree. The filter syntax is: [groupId]:[artifactId]:[type]:[version] 
+			where each pattern segment is optional and supports full and partial * wildcards. 
+			An empty pattern segment is treated as an implicit wildcard. For example, 
+			org.apache.* will match all artifacts whose group id starts with org.apache., 
+			and :::*-SNAPSHOT will match all snapshot artifacts. <telus-libtree-plugin.excludes>*-shared,*-common,*-deploy</telus-libtree-plugin.excludes> 
+			will exclude all TELUS application jars from the libList.txt provided you 
+			do one of the followings 1. For shared transient dependencies (only those 
+			found in /apps/common/lib), must specify as a direct dependencies in this 
+			pom.xml OR 2. Must exclude those non-shared transient dependencies in <telus-libtree-plugin.excludes> 
+			\- telus.billingmgmt.sample4-common:referencePDS-domain:jar:1.0.0:compile 
+			+- org.jvnet.jaxb2_commons:jaxb2-basics-runtime:jar:0.6.3:compile 
+		-->		
+		<telus-libtree-plugin.excludes>*-shared,*-common,*-deploy,:dfc,:telus-core</telus-libtree-plugin.excludes>
+
+		<!-- "liblist" to generate libList.txt "text" to generate the tree -->
+		<telus-libtree-plugin.outputType>liblist</telus-libtree-plugin.outputType>
+
+		<!-- This is mandatory -->
+		<telus-libtree-plugin.skip>false</telus-libtree-plugin.skip>
+
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+			<artifactId>crda-wsdl</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>telus.credit.crdmgmt.wlnprflmgt-ws-deploy</groupId>
+			<artifactId>wlnprfldmgt-wsdl</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.wlnprflmgt-ws-deploy</groupId>
+			<artifactId>wlnprfldmgt-util</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+			<artifactId>custmgt-wsdl</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-common</groupId>
+			<artifactId>col-mgt-util</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-common</groupId>
+			<artifactId>crdprofilemgt-common</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- 
+        <dependency>
+		  	<groupId>com.fico.blaze</groupId>
+		  	<artifactId>BlazeCreditSvc</artifactId>
+		  	<version>2.0.3</version>
+		  	<scope>provided</scope>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+			<artifactId>BlazeCreditSvc</artifactId>
+			<version>2.0.3</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Leave frameworks6-batch here ! -->
+		
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-logging-log4j1</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-batch</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-crypto</artifactId>
+		</dependency>
+		
+		<!-- Add other framework jars here as needed ! -->
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>telus.compass.credit.frmlttrs</groupId>
+			<artifactId>telus-formletters-batch-common</artifactId>
+			<version>1.0.FB.Build.1.0.51</version>
+			<scope>provided</scope>
+		</dependency>		
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+		</dependency>
+
+		<dependency> 
+			<groupId>javax.mail</groupId> 
+			<artifactId>mail</artifactId> 
+			<scope>compile</scope> 
+		</dependency>
+		
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-common</groupId>
+			<artifactId>crd-framework-test</artifactId>
+			<version>4.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-recordparser2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.TELUS_Reference_PDS</groupId>
+			<artifactId>telus-ref-rpds-ws-client</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.TELUS_Reference_PDS</groupId>
+			<artifactId>telus-ref-rpds-access-client</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+        
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.4.0</version>
+			<exclusions>
+	          <exclusion>
+	             <groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+	          </exclusion>
+        	</exclusions>
+		</dependency>
+		
+		<dependency>
+		  <groupId>thirdparty.weblogic.103</groupId>
+		  <artifactId>wls-api</artifactId>
+		  <version>10.3.0.0</version>
+		</dependency>
+		
+		<dependency>
+		 	<groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+  			<version>1.2.17</version>
+		</dependency>
+		
+		<!-- 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.6.6</version>
+			<scope>provided</scope>
+		</dependency>	
+		-->						
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<configuration>
+							<skip>false</skip>
+
+							<!-- Copy the telus and non-shared jars to the lib folder -->
+							<artifactItems>
+
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+									<artifactId>crda-wsdl</artifactId>
+									<version>4.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+									<artifactId>custmgt-wsdl</artifactId>
+									<version>4.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+									<artifactId>crda-impl</artifactId>
+									<version>4.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.wlnprflmgt-ws-deploy</groupId>
+									<artifactId>wlnprfldmgt-wsdl</artifactId>
+									<version>4.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.wlnprflmgt-ws-deploy</groupId>
+									<artifactId>wlnprfldmgt-util</artifactId>									
+									<version>4.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-common</groupId>
+									<artifactId>col-mgt-util</artifactId>
+									<version>4.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-common</groupId>
+									<artifactId>crd-documentum-api</artifactId>
+									<version>4.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-common</groupId>
+									<artifactId>crdprofilemgt-common</artifactId>
+									<version>4.0.0-SNAPSHOT</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+									<artifactId>BlazeCreditSvc</artifactId>
+									<version>2.0.3</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>com.fico.blaze</groupId>
+									<artifactId>BlazeCreditLicense</artifactId>
+		  							<version>3.0</version>									
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-shared</groupId>
+									<artifactId>telus-crd-crda-decisionengine</artifactId>
+									<version>4.0.0</version>									
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+									<artifactId>creditgateway-wsdl</artifactId>
+									<version>4.0.0-SNAPSHOT</version>									
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>com.fico.blaze</groupId>
+		  							<artifactId>AdvCommon</artifactId>
+		  							<version>7.4</version>									
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>com.fico.blaze</groupId>
+									<artifactId>Advisor</artifactId>
+		  							<version>7.4</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>com.fico.blaze</groupId>
+		  							<artifactId>AdvisorSvr</artifactId>
+		  							<version>7.4</version>									
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>com.fico.blaze</groupId>
+		  							<artifactId>InnovatorRT</artifactId>
+		  							<version>7.4</version>								
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<artifactItem>
+									<groupId>telus.compass.credit.frmlttrs</groupId>
+									<artifactId>telus-formletters-batch-common</artifactId>
+									<version>1.0.FB.Build.1.0.51</version>								
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>
+								
+								<!-- Norman Joe: exclude jcl-over-slf4j-1.6.6.jar from libList.txt and bundle it with your batch application -->
+								
+								<!-- <artifactItem>
+									<groupId>org.slf4j</groupId>
+  									<artifactId>jcl-over-slf4j</artifactId>
+									<version>1.6.6</version>								
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+								</artifactItem>		
+								 -->						
+							</artifactItems>
+
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<id>bundle-tar</id>
+						<configuration>
+							<skipAssembly>false</skipAssembly>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+</project>

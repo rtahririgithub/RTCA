@@ -1,0 +1,53 @@
+<xs:schema targetNamespace="http://xmlschema.tmi.telus.com/xsd/MarketingSales/MarketingCampaign/MarketingCampaignTypes_v1" version="1.0" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/MarketingSales/MarketingCampaign/MarketingCampaignTypes_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" schemaLocation="EnterpriseCommonTypes_v9_1.xsd"/>
+    <xs:complexType name="SalesOpportunity">
+        <xs:annotation>
+            <xs:documentation>Sales opportunities for the customer
+                identified by marketing</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="salesOpportunityId" type="xs:int"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="priorityNumber" type="xs:int"/>
+            <xs:element maxOccurs="10" name="descriptionList" type="ect:Description">
+                <xs:annotation>
+                    <xs:documentation>The Description of the sales
+                        opportunity in one or more languages</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="20" minOccurs="0" name="salesChannelList" type="ect:MultilingualCodeDescriptionList">
+                <xs:annotation>
+                    <xs:documentation>The channels that this opportunity
+                        are applicable to. e.g. WEB, TELUS, EXD, POE.
+                        Ref PDS: SALES_CHANNEL</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="advertisementBanner" type="ect:MultilingualCodeDescriptionList">
+                <xs:annotation>
+                    <xs:documentation>Used by web channel to display the
+                        ad banner</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MarketingProfile">
+        <xs:annotation>
+            <xs:documentation>Profiling information about the customer
+                for marketing</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="customerMarketProfileId" type="xs:int"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="questionTxt" type="ect:MultilingualDescriptionList"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="answerTxt" type="ect:MultilingualDescriptionList"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MarketingMessage">
+        <xs:annotation>
+            <xs:documentation>Messages for the customer identified by marketing</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="marketingMessageId" type="xs:int"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="marketingMessageTypeCode" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="message" type="ect:MultilingualDescriptionList"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

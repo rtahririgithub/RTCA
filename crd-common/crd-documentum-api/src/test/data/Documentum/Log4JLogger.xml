@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC
+    "-//TELUS.com//DTD PropertyNode 1.0//EN"
+    "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+
+<group name="config">
+  <group name="logging">
+    <prop name="log4j.rootCategory">${log4j/severity/DEBUG}, CONSOLE</prop>
+    <!--<prop name="log4j.debug">true</prop>-->
+
+    <!--Console appender-->
+    <prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+    <prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+    <prop name="log4j.appender.CONSOLE.layout.ConversionPattern">[%d{DATE} %c %-5p] - %m%n</prop>
+
+    <!--  File appender for Credit Assessment services -->
+    <prop name="log4j.appender.CRDA_DEC">org.apache.log4j.DailyRollingFileAppender</prop>
+    <prop name="log4j.appender.CRDA_DEC.Append">true</prop>
+    <prop name="log4j.appender.CRDA_DEC.layout">org.apache.log4j.PatternLayout</prop>
+    <prop name="log4j.appender.CRDA_DEC.layout.ConversionPattern">%d{yyyy-MM-dd/HH:mm:ss.SSS/zzz} %-5p %c{2} - %m%n</prop>
+    <prop name="log4j.appender.CRDA_DEC.file">${dirs/log4j/entCrdPrflDataMgtService}/documentum.log</prop>
+
+
+    <!-- ================== -->
+    <!-- Loggers -->
+
+    <!-- Enterprise Credit Profile Data Management Service -->
+    <prop name="log4j.logger.com.telus.credit.entprflmgt">${log4j/severity/DEBUG}, CRDA_DEC</prop>
+    <prop name="log4j.additivity.com.fico.telus.rtca.blaze">false</prop>
+
+    <!-- END Of Loggers -->
+    <!-- ================== -->
+  </group>
+</group>
+
+

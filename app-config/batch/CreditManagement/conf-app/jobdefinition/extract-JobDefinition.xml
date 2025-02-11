@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <import resource="base-defn.xml"/>
+
+  <!-- ===================================================================== -->	
+  <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+  
+  <!-- ===================================================================== -->	
+  <bean id="job" parent="baseJob">
+
+    <property name="applicationName"><value>CreditMgmt-Batch</value></property>
+    <property name="jobName">        <value>Extract</value></property>
+    <property name="steps">
+      <list>
+        <bean id="STEP01" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-mapSpool</value></property>
+        </bean>
+        <bean id="STEP02" parent="baseStep" >
+          <property name="moduleName"><value>fileSplitter</value></property>
+        </bean>
+        <bean id="STEP03" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-sort</value></property>
+        </bean>
+         <bean id="STEP04" parent="baseStep" >
+          <property name="moduleName"><value>groupExtract</value></property>
+        </bean>
+        <bean id="STEP05" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-merge</value></property>
+        </bean>
+        <bean id="STEP06" parent="baseStep" >
+          <property name="moduleName"><value>fileConverter</value></property>
+        </bean>
+        <bean id="STEP07" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-infoSpool</value></property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+  
+   <bean id="cmdExec-mapSpool" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+
+    <property name="executable">    <value>${cmdExec-mapSpool/exec}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+   <bean id="cmdExec-sort" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${cmdExec-sort/exec}</value></property>
+    <property name="arg">           <value>${cmdExec-sort/arg}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+   <bean id="cmdExec-merge" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${cmdExec-merge/exec}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+   <bean id="cmdExec-infoSpool" lazy-init="true"
+        class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${cmdExec-infoSpool/exec}</value></property>
+    <property name="failOnError">   <value>true</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+      </list>
+    </property>
+   </bean>
+   
+  <bean id="fileSplitter" lazy-init="true"
+        class="com.telus.credit.batch.extract.SplitFileBatch" >
+    <property name="inputFile"><value>${fileSplitter/inputFile}</value></property>
+    <property name="singleCustomerOutputFile"><value>${fileSplitter/singleCustomerOutputFile}</value></property>
+    <property name="multiCustomerOutputFile"><value>${fileSplitter/multiCustomerOutputFile}</value></property>
+  </bean>
+  
+  <bean id="groupExtract" lazy-init="true"
+        class="com.telus.credit.batch.extract.ExtractCustomerGroupBatch" >
+    <property name="inputFileSortByProfileId"><value>${groupExtract/inputFileSortByProfileId}</value></property>
+    <property name="inputFileSortByCustomerId"><value>${groupExtract/inputFileSortByCustomerId}</value></property>
+    <property name="outputFile"><value>${groupExtract/outputFile}</value></property>
+  </bean>
+  
+  <bean id="fileConverter" lazy-init="true"
+        class="com.telus.credit.batch.extract.ConvertFileBatch" >
+    <property name="inputFile"><value>${fileConverter/inputFile}</value></property>
+    <property name="outputFile"><value>${fileConverter/outputFile}</value></property>
+  </bean>
+
+  <!-- ===================================================================== -->
+</beans>

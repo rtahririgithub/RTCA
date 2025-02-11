@@ -1,0 +1,118 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2" version="2.1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2" xmlns:wlsctyp="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelessCreditTypes_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelessCreditTypes_v2" schemaLocation="WirelessCreditTypes_v2_1.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" schemaLocation="EnterpriseCommonTypes_v9_1.xsd"/>
+    <xs:element name="getCreditWorthiness">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billingAccountNumber" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCreditWorthinessResponse">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ent:ResponseMessage">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="creditWorthiness" type="wlsctyp:CreditWorthiness"/>
+                        <xs:element minOccurs="0" name="asessmentMessage" type="ent:MultilingualCodeDescriptionList">
+                            <xs:annotation>
+                                <xs:documentation>Represent the
+                                    assessment message which will be
+                                    returned to up stream apps for
+                                    displaying purposes.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="warningHistoryList" type="wlsctyp:WarningHistoryBase">
+                            <xs:annotation>
+                                <xs:documentation>Represent the list of
+                                    warnings associated to the account</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateConsumerCreditInformation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billingAccountNumber" type="xs:long"/>
+                <xs:element minOccurs="0" name="creditIdentification" type="wlsctyp:CreditIdentification">
+                    <xs:annotation>
+                        <xs:documentation>All IDs in
+                            CreditIdentification are expected to be
+                            clear text. (IDs are encrypted by the
+                            service before storing in DB</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="birthDate" type="xs:date"/>
+                <xs:element name="creditAuditInfo" type="wlsctyp:CreditAuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateConsumerCreditInformationResponse">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ent:ResponseMessage"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCreditProfile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billingAccountNumber" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCreditProfileResponse">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ent:ResponseMessage">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="creditProfile" type="wlsctyp:CreditProfile"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="validateCreditId">
+        <xs:annotation>
+            <xs:documentation>The purpose of this operation is to
+                validate if a credit identification already exist in
+                CRMGTDB or not. Currently it is only implemented to
+                check Business Registration number.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="socialInsuranceNum" type="xs:string"/>
+                <xs:element minOccurs="0" name="driversLicense" type="wlsctyp:DriverLicense"/>
+                <xs:element minOccurs="0" name="creditCardTokenTxt" type="xs:string"/>
+                <xs:element minOccurs="0" name="creditCardFirstSixNum" type="xs:string"/>
+                <xs:element minOccurs="0" name="creditCardLastFourNum" type="xs:string"/>
+                <xs:element minOccurs="0" name="businessRegistration" type="wlsctyp:BusinessRegistration">
+                    <xs:annotation>
+                        <xs:documentation>Will be populated only for
+                            Business Personal.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="incorporationNumber" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Will be populated only for
+                            Business customers apart from Business Personal.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="validateCreditIdResponse">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ent:ResponseMessage">
+                    <xs:sequence>
+                        <xs:element name="resultIndicator" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

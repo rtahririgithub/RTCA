@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service 
+xsi:noNamespaceSchemaLocation="http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServiceDefinition>
+		<Name>EnterpriseCreditAssessmentService</Name>
+		<Documentation>Real Time Credit Assessment. Enterprise Credit Assessment Service  provides operations to perform customer's credit assessment , maintain customer's credit assessment transactions.</Documentation>
+		<TAM_LevelZeroAndOne>CMO/OrderMgmt</TAM_LevelZeroAndOne>
+		<ServiceTaxonomy>/EnterpriseCreditAssessment</ServiceTaxonomy>
+		<MajorVersion>2</MajorVersion>
+		<MinorVersion>0</MinorVersion> 
+		<soapAddress>http://cm-creditmgmt-west-dv01.tsl.telus.com</soapAddress>
+		<SchemaLocation>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2_0.xsd</SchemaLocation>
+		<NameSpace>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2</NameSpace>
+		<nsAbbrev>eCRDA</nsAbbrev>
+		<OutputDir/>
+		<SecurityToken>
+			<Token>Wssp1.2-2007-Saml1.1-SenderVouches-Wss1.0</Token>
+		</SecurityToken>
+	</ServiceDefinition>
+	<Operation>
+		<OperationName>getCreditAssessment</OperationName>
+		<Documentation>Operation to retrieve credit assessment result(output) and associated input attributes for a particular assessment id.</Documentation>
+		<InputType wsp="true">getCreditAssessment</InputType>
+		<OutputType>getCreditAssessmentResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+	<Operation>
+		<OperationName>getCreditBureauDocument</OperationName>
+		<Documentation>Operation to return human readable and xml reports associated to a credit bureau report ID.</Documentation>
+		<InputType wsp="true">getCreditBureauDocument</InputType>
+		<OutputType>getCreditBureauDocumentResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+	<Operation>
+		<OperationName>performCreditAssessment</OperationName>
+		<Documentation>Operation to assess customer's credit worthiness based on Customer Billing/AR ,Collection data, Credit business rules, External agency/bureau credit report ,.. to derive and store the customer's credit check result .</Documentation>
+		<InputType wsp="true">performCreditAssessment</InputType>
+		<OutputType>performCreditAssessmentResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+	<Operation>
+		<OperationName>searchCreditAssessmentList</OperationName>
+		<Documentation>Operation to search Credit Assessments based upon given search criteria.</Documentation>
+		<InputType wsp="true">searchCreditAssessmentList</InputType>
+		<OutputType>searchCreditAssessmentListResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+	<Operation>
+		<OperationName>voidCreditAssessment</OperationName>
+		<Documentation>Operation to void a credit assessment.</Documentation>
+		<InputType wsp="true">voidCreditAssessment</InputType>
+		<OutputType>voidCreditAssessmentResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>		
+</Service>

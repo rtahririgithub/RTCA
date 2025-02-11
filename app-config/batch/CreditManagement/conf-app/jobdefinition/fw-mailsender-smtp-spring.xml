@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- ================================================================== -->
+    <!-- setup a mailServiceProvider for the MailSenderSmtpImpl with a host -->
+    <!--   smtpHost will be define in the mail-config.xml file              -->
+    <bean id="mailTelusSpringConfigurer" 
+        class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+        
+    <!-- ================================================================== -->   
+    <bean id="mailSender" 
+        class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        
+	    <property name="targetClass">
+	        <value>com.telus.framework.mail.MailSender</value>
+	    </property>
+	    <property name="targetMethod">
+	        <value>setMailProvider</value>
+	    </property>
+        <property name="arguments">
+		    <list>
+		        <ref local="MailServiceProvider"/>
+		    </list>
+		</property>
+    </bean>
+    
+    <!-- =========================================================================== -->    
+    <!-- setup the SMTP Host for the MailSender in the mail-config.xml  -->
+
+    <bean id="MailServiceProvider"
+        class="com.telus.framework.mail.providerimpl.MailSenderSmtpProviderImpl">
+        <property name="smtpHost">
+            <value>${mailConfig/smtp/host}</value>
+        </property>
+        <property name="smtpConnectionTimeout">
+            <value>${mailConfig/smtp/connectionTimeout}</value>
+        </property>
+        <property name="smtpTimeout">
+            <value>${mailConfig/smtp/timeout}</value>
+        </property>
+    </bean>
+ 
+</beans>

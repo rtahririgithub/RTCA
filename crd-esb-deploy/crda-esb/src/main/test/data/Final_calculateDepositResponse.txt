@@ -1,0 +1,26 @@
+<tns:calculateDepositResponse xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1 OrderDepositCalculatorServiceRequestResponse_v1_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1" xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1">
+	<codt:customerID>2147483647</codt:customerID>
+	<codt:orderID>11111</codt:orderID>
+	<codt:calculationTypeCd>Final</codt:calculationTypeCd>
+	<codt:totalDepositAmt>1.12</codt:totalDepositAmt>
+	<codt:depositAdjustmentAmt>1.12</codt:depositAdjustmentAmt>
+	<codt:depositOnHandAmt>1.12</codt:depositOnHandAmt>
+	<codt:productDepositResultList>
+		<codt:productDepositResult>
+			<codt:productNameCd>Satellite TV</codt:productNameCd>
+			<codt:serviceTypeCd>TTV</codt:serviceTypeCd>
+			<codt:assignedProductID>String</codt:assignedProductID>
+			<codt:monthlyChargeAmt>1.12</codt:monthlyChargeAmt>
+			<codt:assessedDepositAmt>1.12</codt:assessedDepositAmt>
+		</codt:productDepositResult>
+		<codt:productDepositResult>
+			<codt:productNameCd>Single Line</codt:productNameCd>
+			<codt:serviceTypeCd>SING</codt:serviceTypeCd>
+			<codt:assignedProductID>1111</codt:assignedProductID>
+			<codt:monthlyChargeAmt>1.12</codt:monthlyChargeAmt>
+			<codt:assessedDepositAmt>1.12</codt:assessedDepositAmt>
+		</codt:productDepositResult>
+	</codt:productDepositResultList>
+	<codt:calculationResultMessageCd>SUCCESS</codt:calculationResultMessageCd>
+	<codt:calculationResultReasonCd></codt:calculationResultReasonCd>
+</tns:calculateDepositResponse>

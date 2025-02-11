@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="exec-Step01"/>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName" value="exec-Step02"/>
+            </bean>
+       </list>
+      </property>
+   </bean>
+   <bean id="exec-Step01" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-parms-sbi.sh"/> 
+      <property name="arg" value="${L_LIBMEM-SBI} ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_SBI_PREV_START} ${L_SBI_PREV_END} ${L_CURRENT_DATE} ${L_YESTERDAY} "/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="exec-Step02" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-sbi-init.sh"/> 
+      <property name="arg" value="${processbox}/sbi creditassessment depositcalc "/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+</beans>
+
+
+

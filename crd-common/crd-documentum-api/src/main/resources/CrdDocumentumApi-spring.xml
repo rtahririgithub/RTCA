@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <import resource="classpath:document-encryptor-spring.xml" />
+
+   <bean class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+
+   <bean id="LoginInfoImpl" class="com.telus.framework.content.document.LoginInfo">
+      <property name="repository" value="${configure/creditDocumentum/repository}" />  
+      <property name="user" value="${configure/creditDocumentum/user}" /> 
+      <property name="password" value="${configure/creditDocumentum/password}" /> 
+   </bean>
+
+   <bean id="SerializerImpl" class="com.telus.framework.util.serializer.impl.CastorSerializer">
+      <property name="mappingFiles" value="SampleObjectMapping.xml" /> 
+   </bean>
+
+   <bean id="DocumentMgrImpl" class="com.telus.framework.content.document.dctm.DocumentManagerImpl">
+      <property name="loginInfo" ref="LoginInfoImpl" />
+   </bean>
+
+   <bean id="DocumentumDao" class="com.telus.credit.documentum.DocumentDaoImpl">
+      <constructor-arg ref="DocumentMgrImpl"/>
+      <property name="cabinet" value="${configure/creditDocumentum/cabinet}" />
+      <property name="jceCrypto" ref="jceCryptoImpl" />
+      <property name="enableDocumentEncryption" value="${encryption/enableCrdDocumentEncryption}" />
+   </bean>
+
+</beans>

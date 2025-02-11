@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+        <groupId>telus.credit.crdmgmt.crd-shared</groupId>
+		<artifactId>pom-crd-shared</artifactId>
+		<version>4.0.0-SNAPSHOT</version>
+    </parent>
+   
+    <artifactId>telus-crd-crda-decisionengine</artifactId>
+    <name>crda-decisionengine</name>
+    <version>4.0.1-SNAPSHOT</version>
+	
+    <dependencies>
+        <dependency>
+           <groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+        </dependency>
+        
+        <dependency>
+				<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+				<artifactId>frameworks-core</artifactId>				
+		</dependency>
+			
+		<dependency>
+		  <groupId>com.fico.blaze</groupId>
+		  <artifactId>AdvCommon</artifactId>
+		  <version>7.4</version>		  
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.fico.blaze</groupId>
+		  <artifactId>Advisor</artifactId>
+		  <version>7.4</version>		  
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.fico.blaze</groupId>
+		  <artifactId>AdvisorSvr</artifactId>
+		  <version>7.4</version>		  
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.fico.blaze</groupId>
+		  <artifactId>InnovatorRT</artifactId>
+		  <version>7.4</version>		  
+		</dependency>
+		
+		<dependency>
+		  <groupId>telus.credit.crdmgmt.crd-shared</groupId>
+		  <artifactId>BlazeCreditSvc</artifactId>
+		  <version>2.0.3-SNAPSHOT</version>		  
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.fico.blaze</groupId>
+		  <artifactId>BlazeCreditLicense</artifactId>
+		  <version>3.0</version>		  
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.fico.common</groupId>
+		  <artifactId>dmcom</artifactId>
+		  <version>7.4</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>telus.credit.crdmgmt.crd-shared</groupId>
+			<artifactId>crd-framework-test</artifactId>
+			<version>4.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/xmlunit/xmlunit -->
+       <dependency>
+           <groupId>xmlunit</groupId>
+           <artifactId>xmlunit</artifactId>
+           <version>1.6</version>
+           <scope>test</scope>
+      </dependency>
+
+    </dependencies>
+</project>

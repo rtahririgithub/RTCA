@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+  <alias name="jobDao" alias="tcmDb-jobDao"/>
+
+  <bean id="creditSqlMap" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+    <property name="configLocation" value="classpath:sqlmaps/creditMgt-sqlmap-config.xml" />
+    <property name="dataSource" ref="tcmDb-DS" />
+  </bean>
+
+  <bean id="CreditValueDaoImpl" class="com.telus.credit.dao.CreditValueDaoSqlmap">
+    <property name="sqlMapClient" ref="creditSqlMap" />
+    <property name="creditProfileDao" ref="CreditProfileDaoImpl" />
+  </bean>
+  
+  <bean id="CreditProfileDaoImpl" class="com.telus.credit.dao.CreditProfileDaoSqlmap">
+    <property name="sqlMapClient" ref="creditSqlMap" />
+    <property name="creditIDCardDao" ref="CreditIDCardDaoImpl" />
+    <property name="creditValueDao" ref="CreditValueDaoImpl" />
+    <property name="creditAddressDao" ref="CreditAddressDaoImpl" />
+    <property name="customerGuarantorDao" ref="CustomerGuarantorDaoImpl" />
+  </bean>
+
+  <bean id="CreditAddressDaoImpl" class="com.telus.credit.dao.CreditAddressDaoSqlmap">
+    <property name="sqlMapClient" ref="creditSqlMap" />
+  </bean>
+  
+  <bean id="CustomerGuarantorDaoImpl" class="com.telus.credit.dao.CustomerGuarantorDaoSqlmap">
+    <property name="sqlMapClient" ref="creditSqlMap" />
+  </bean>   
+  
+  <bean id="CreditAttributeDaoImpl" class="com.telus.credit.dao.CreditAttributeDaoSqlmap">
+    <property name="sqlMapClient" ref="creditSqlMap" />
+  </bean>
+
+  <bean id="CreditIDCardDaoImpl" class="com.telus.credit.dao.CreditIDCardDaoSqlmap">
+    <property name="sqlMapClient" ref="creditSqlMap" />
+  </bean>
+  
+</beans>

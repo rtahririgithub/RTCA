@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+"-//TELUS.com//DTD PropertyNode 1.0//EN" 
+"http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="EntPrfMgt">
+    <!-- filename configuration parameters for the batch steps -->
+    <group name="xtrctqlfdcust">
+        <prop name="commitFrequency">100</prop>
+        <prop name="failurePoint">0</prop>        
+        <prop name="sqlFilename">Qualified_Customers_Extract.sql</prop> 
+        <prop name="outputFile1">${processbox}/report/qualified_customers_extract.dat</prop>
+    </group>
+    <group name="xtrctwln">
+        <prop name="commitFrequency">100</prop>
+        <prop name="failurePoint">0</prop>        
+    	
+	<group name="step1">
+		<prop name="scriptFile">${syncsort}/report/extract_wireline_customers.sh</prop>
+		<prop name="inputFile1">${processbox}/report/qualified_customers_extract.dat</prop>
+		<prop name="inputFile2">${processbox}/report/CREDIT_PROFILE.DAT</prop>
+		<prop name="outputFile">${processbox}/report/qc_cprofl_merged.tmp</prop>
+	</group>
+	
+	<group name="step2">
+		<prop name="scriptFile">${syncsort}/report/get_WLN_ID.sh</prop>
+		<prop name="inputFile1">${processbox}/report/CPROFL_IDENTIFICATION.DAT</prop>
+		<prop name="outputFileTmpDL">${processbox}/report/cprofl_dl.tmp</prop>
+		<prop name="outputFileTmpSIN">${processbox}/report/cprofl_sin.tmp</prop>
+		<prop name="outputFile">${processbox}/report/cprofl_id.tmp</prop>
+	</group>
+
+	<group name="step3">
+		<prop name="scriptFile">${syncsort}/report/merge_WLN_ID.sh</prop>
+		<prop name="inputFile1">${xtrctwln/step1/outputFile}</prop>
+		<prop name="inputFile2">${xtrctwln/step2/outputFile}</prop>
+		<prop name="outputFile">${processbox}/report/Extract_Wireline_Customers.dat</prop>
+	</group>
+
+	<group name="cleanup">
+		<prop name="scriptFile">${step}/report/cleanup.sh</prop>
+		<prop name="inputFile1">${xtrctwln/step1/outputFile}</prop>
+		<prop name="inputFile2">${processbox}/report/cprofl_*.tmp</prop>
+	</group>
+    </group>
+
+    <group name="xtrctwls">
+        <prop name="commitFrequency">100</prop>
+        <prop name="failurePoint">0</prop>        
+	 <group name="step1">
+        	<prop name="sqlFilename">Extract_Wireless_Customers.sql</prop> 
+		<prop name="outputFile">${processbox}/report/extract_wireless_customers.tmp</prop>
+	 </group>
+	 <group name="step2">
+        	<prop name="scriptFile">${syncsort}/report/merge_WLS.sh</prop> 
+        	<prop name="inputFile1">${xtrctqlfdcust/outputFile1}</prop>
+        	<prop name="inputFile2">${xtrctwls/step1/outputFile}</prop>
+		<prop name="outputFile">${processbox}/report/extract_wireless_customers2.tmp</prop>
+	 </group>
+	 <group name="step3">
+	       <prop name="inputFilePattern">extract_wireless_customers2.tmp</prop> 
+       	<prop name="inputDirectory">${processbox}/report</prop> 
+        	<prop name="outputFile">${processbox}/report/extract_wireless_customers.encrypt</prop>
+	 </group>
+	<group name="cleanup">
+		<prop name="scriptFile">${step}/report/cleanup.sh</prop>
+		<prop name="inputFile">${processbox}/report/extract_wireless_customers*.tmp</prop>
+	</group>
+    </group>
+
+    <group name="syncCompare">
+	 <group name="step1">
+        	<prop name="scriptFile">${syncsort}/report/compare_flag_syncsort.sh</prop> 
+        	<prop name="inputFile1">${xtrctwln/step3/outputFile}</prop>
+        	<prop name="inputFile2">${xtrctwls/step3/outputFile}</prop>
+		<prop name="outputFile">${outbox}/Customer-Discrepancy-Report.dat</prop>
+		<prop name="outputFile2">${outbox}/Customer-Discrepancy-Report.dat</prop>
+	 </group>
+    </group>
+
+	<group name="cleanup">
+		<prop name="scriptFile">${step}/report/cleanup-tmp.sh</prop>
+		<prop name="scriptFile2">${step}/report/cleanup.sh</prop>
+		<prop name="dir">${processbox}/report</prop>
+	</group>
+
+    <group name="report">
+        <prop name="log">${logs}/${jobname}_step1.log</prop>
+        <prop name="log1">${logs}/${jobname}_step2.log</prop>
+        <prop name="log2">${logs}/${jobname}_step3.log</prop>
+    </group>
+</group>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+	<group name="metadata">
+		<prop name="envId">DV01</prop>
+	</group>
+
+	<group name="dirs">
+		<group name="log4j">
+			<prop name="pods">/work/infra/logs/DV01/pods/logs</prop>
+			<prop name="ebsf">/work/infra/logs/DV01/ebsf/logs</prop>
+			<prop name="opeLogDir">/work/infra/logs/DV01/ope/logs</prop>
+			<prop name="entCrdPrflDataMgtService">/work/infra/logs/DV01/CrdPrflDataMgt/logs</prop>
+			<prop name="creditGatewayService">/work/infra/logs/DV01/CGW/logs</prop>
+			<prop name="entCrdAsmtService">/work/infra/logs/DV01/CrdPrflDataMgt/logs</prop>
+			<prop name="depositCalculatorService">/work/infra/logs/DV01CustMgtBillSvcWest/CrdPrflDataMgt</prop>
+			<prop name="wlnCreditProfileMatchSvc">/work/infra/logs/DV01/CrdPrflDataMgt/logs</prop>
+		</group>
+	</group>
+
+	<group name="log4j">
+		<group name="severity">
+			<prop name="FATAL">FATAL</prop>
+			<prop name="ERROR">ERROR</prop>
+			<prop name="WARN">WARN</prop>
+			<prop name="INFO">INFO</prop>
+			<prop name="DEBUG">DEBUG</prop>
+			<prop name="TRACE">TRACE</prop>
+		</group>
+		<group name="config">
+			<prop name="path">fw_logging</prop>
+			<prop name="maxFiles">100</prop>
+			<prop name="maxSize">10000KB</prop>
+			<prop name="timeInterval">1</prop>
+		</group>
+	</group>
+
+	<group name="connections">
+		<group name="dataSources">
+			<group name="creditMgtPdsDataSource">
+				<prop name="url">${connections/servers/dataSourceSvr}</prop>
+				<prop name="jndiName">creditMgt_pds</prop>
+			</group>
+
+			<group name="tcmPdsDataSource">
+				<prop name="url">${connections/servers/dataSourceSvr}</prop>
+				<prop name="jndiName">tcm_pds</prop>
+			</group>
+		</group>
+
+		<group name="security">
+			<group name="jndiLookup">
+				<group name="telus">
+					<prop name="principal">verification</prop>
+					<prop name="credentials">verification</prop>
+				</group>
+			</group>
+		</group>
+
+		<group name="servers">
+			<prop name="referenceODSSvr">t3://sedm3207.ent.agt.ab.ca:23246</prop>
+			<prop name="dataSourceSvr">t3://ln98424.ent.agt.ab.ca:41120,ln98425.ent.agt.ab.ca:41120</prop>
+			<prop name="ConsumerCustomerManagement">http://cm-custinfomgmt-west-at02.tsl.telus.com</prop>
+			<prop name="WirelineCreditProfileDataManagement">http://cm-creditmgmt-west-at02.tsl.telus.com</prop>
+			<prop name="WirelineCreditProfileManagement">http://cm-creditmgmt-west-at02.tsl.telus.com</prop>
+			<prop name="EnterpriseCreditAssessment">http://cm-creditmgmt-west-at02.tsl.telus.com</prop>
+			<prop name="EnterpriseCreditProfileManagement">http://cm-creditmgmt-west-at02.tsl.telus.com</prop>
+			<prop name="WirelineCreditProfileManagementProxy">http://customermanagementwestesb-at02.tsl.telus.com</prop>
+			<prop name="CreditGateway">http://cm-creditmgmt-west-at02.tsl.telus.com</prop>
+			<!-- performance Logging -->
+			<prop name="performanceAuditSvr">t3://sedm3226.ent.agt.ab.ca:33334,sedm3227.ent.agt.ab.ca:33334</prop>
+			<prop name="readAuditSvr">t3://sedm3226.ent.agt.ab.ca:33334,sedm3227.ent.agt.ab.ca:33334</prop>
+		</group>
+
+		<group name="webServices">
+			<group name="refpds">
+				<prop name="endpointAddress">http://utilmgtsvcwest.tsl.telus.com/telus-ref-rpds-webservices/ReferencePDSDataService</prop>
+			</group>
+		</group>
+
+		<group name="SOA">
+			<group name="serviceURLs">
+				<prop name="creditGatewayServiceUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/OrderMgmt/CreditGateway/CreditGatewayService_v1_2_vs0</prop>
+
+				<prop name="consumerCustMgtServiceBaseUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/InformationMgmt/CustomerManagement/ConsumerCustomerManagementService_v2_6_vs0</prop>
+				<prop name="consumerCustMgtServiceUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/InformationMgmt/CustomerManagement/ConsumerCustomerManagementService_v2_6_vs0</prop>
+
+				<prop name="enterpriseCreditAssessmentServiceUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/OrderMgmt/EnterpriseCreditAssessment/EnterpriseCreditAssessmentService_v2_0_vs0</prop>
+				<prop name="enterpriseCreditProfileMgtServiceUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/OrderMgmt/EnterpriseCreditProfileManagement/EnterpriseCreditProfileManagementService_v1_3_vs0</prop>
+
+				<prop name="wirelineCreditPrflDataMgtServiceBaseUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileDataManagement/WLNCreditProfileDataManagementService_v1_3_vs0</prop>
+				<prop name="wirelineCreditPrflDataMgtServiceUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileDataManagement/WLNCreditProfileDataManagementService_v1_3_vs0</prop>
+
+				<prop name="wirelineCreditPrflMgtServiceBaseUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileManagement/WLNCreditProfileManagementService</prop>
+				<prop name="wirelineCreditPrflMgtServiceUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileManagement/WLNCreditProfileManagementService_v2_0_vs0</prop>
+				<prop name="wirelineCreditPrflMgtProxyServiceBaseUrl">https://soa-mp-toll-at02.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileManagementProxy/WLNCreditProfileManagementProxyService</prop>
+
+				<prop name="wirelessCreditPrflDataMgtServiceUrl">https://soa-mp-laird-pt148.tsl.telus.com/CMO/OrderMgmt/WLSCreditProfileDataManagementService/WLSCreditProfileDataManagementSvc_v2_0_vs0</prop>
+				<prop name="wirelineCreditPrflMatchServiceBaseUrl">https://soa-mp-kidc-it04.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileMatch/WLNCreditProfileMatchSvc_v1_0_vs0</prop>
+			</group>
+
+			<!--APP_CREDITMGMT -->
+			<prop name="soaCreditWsClientUsername">APP_CREDITMGMT</prop>
+			<!--soaorgid -->
+			<prop name="soaCreditWsClientPassword">soaorgid</prop>
+		</group> <!-- end of group name="SOA" -->
+	</group> <!-- end group name="connections" -->
+
+	<group name="enterpriseCreditProfileMgmtServiceJMSConfig">
+		<prop name="crdProfileSyncEnabled">true</prop>
+		<!--JNDI server params -->
+		<prop name="jndiProviderUrl">t3://ln98424.ent.agt.ab.ca:49012</prop>
+		<prop name="jndiPrincipal">verification</prop>
+		<prop name="jndiCredentials">verification</prop>
+
+		<!--JMS Connection and queue params. -->
+		<prop name="jmsConnectionFactory">eai.jms.wl.connection.CREDIT_PERSISTENT_CONN_FACTORY</prop>
+		<prop name="jmsDestination">eai.jms.wl.queue.CREDIT_PROFILE_FQ</prop>
+	</group>
+
+	<!-- security -->
+	<group name="security">
+	</group> <!-- end group name="security" -->
+
+	<group name="emHeader">
+		<!-- This flag turns the framework on or off -->
+		<prop name="disabled">false</prop>
+
+		<!-- The following 2 properties are the defaults to be used -->
+		<prop name="url">http://cm-custinfomgmt-west-at02.tsl.telus.com:80</prop>
+		<prop name="envString">${metadata/envId}</prop>
+
+		<!-- This is used to provide some info on the node where the web service 
+			consumer is making the call -->
+		<prop name="wlNode">ln98424</prop>
+	</group>
+
+	<group name="ficoConfig">
+	    <!-- 
+		<prop name="ficoCrdaAsmtConfigDir">/work/users/custmgtdv01/wls/domains/DV01CustMgtEntSvcWest/servers/EntColMgtSvc/data/CrdDecisioningService15</prop>
+		<prop name="ficoDepCalConfigDir">/work/users/custmgtdv01/wls/domains/DV01CustMgtEntSvcWest/servers/EntColMgtSvc/data/CrdDecisioningService15</prop>
+        -->
+        <prop name="ficoCrdaAsmtConfigDir">/users/t829939/git/credit-crdmgt/crd-shared/crda-decisionengine/src/test/resources/config</prop>
+		  <prop name="ficoDepCalConfigDir">/users/t829939/git/credit-crdmgt/crd-shared/crda-decisionengine/src/test/resources/config</prop>
+	</group>
+
+	<group name="configure">
+		<group name="creditDocumentum">
+			<prop name="user">crda</prop>
+			<prop name="password">crda</prop>
+			<prop name="repository">d2archive</prop>
+			<prop name="cabinet">/crda</prop>
+		</group>
+	</group>
+
+	<group name="encryption">
+		<prop name="key1">EbT5a8Fuq</prop>
+		<prop name="key2">aYt2gv6R</prop>
+		<prop name="key3">9bFp3Gz4k</prop>
+		<prop name="cipherProvider">SunJCE</prop>
+		<prop name="cipherTransformation">AES/CBC/PKCS5Padding</prop>
+		<prop name="keystoreType">JCEKS</prop>
+		<prop name="enableCrdDocumentEncryption">true</prop>
+	</group>
+
+	<group name="storage">
+		<prop name="url">file:///apps/infra/EMWest-CommonConfig/DV01/EntColMgtSvc/data/svc/EnterpriseCreditAssessment/rtca.jck</prop>
+		<prop name="bdu"><![CDATA[xV.T]]></prop>
+		<prop name="bdu_entry"><![CDATA[ X.&Efe)]]></prop>
+	</group>
+
+	<group name="CreditGateway">
+		<group name="InterConnect">
+			<prop name="soaServiceEndPoint">https://servicemngr-pt148.tsl.telus.com:443/CMO/OrderMgmt/CreditCheckAdjudicationService_v1_1_vs0</prop>
+			<prop name="userID">APP_CREDITMGMT</prop>
+			<prop name="password">soaorgid</prop>
+		</group>
+
+		<group name="ExceptionHandler">
+			<group name="mail">
+				<prop name="fromAddress">dlBTCreditGatewaySMSAlert@telus.com</prop>
+				<prop name="toAddress">dlBTCreditGatewaySMSAlert@telus.com,dlBTCADSSMSAlert@telus.com</prop>
+			</group>
+		</group>
+	</group>
+
+	<!-- performance Logging -->
+	<group name="fw_props">
+		<group name="audit">
+			<prop name="maxQueueDepth">5000</prop>
+		</group>
+		<group name="performance">
+			<prop name="maxQueueDepth">25000</prop>
+		</group>
+		<group name="error">
+			<prop name="maxQueueDepth">5000</prop>
+			<prop name="errorWorkerCount">5</prop>
+			<!-- errorWorkerPeriod in milliseconds -->
+			<prop name="errorWorkerPeriod">5000</prop>
+		</group>
+	</group>
+	<!-- End of performance Logging -->
+
+	<!-- PubSub Config -->
+	<group name="creditPubSubConnector">
+		<prop name="pubSubURL">https://enterprisemessagewebk-is02.tsl.telus.com/publisher/publish/</prop>
+		<prop name="pubSubTopic">Party.Customer.CreditInfo</prop>
+		<prop name="username">9343</prop>
+		<prop name="password">LvQX&amp;98B</prop>
+		<prop name="envId">PT05</prop>
+	</group>
+	<!-- End of PubSub config -->
+
+</group>

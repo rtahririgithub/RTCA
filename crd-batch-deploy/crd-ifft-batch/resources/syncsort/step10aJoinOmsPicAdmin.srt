@@ -1,0 +1,20 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace}
+
+   /JOIN unpaired rightside
+   /INFILE ${processbox}/OMS_FEED_FILE.DAT 
+   /JOINKEYS SORTED recordlayout1.WTN
+   /INFILE ${processbox}/PIC_ADMIN_FEED_FILE.DAT 
+   /JOINKEYS SORTED recordlayout2.WTN
+
+   /OUTFILE ${processbox}/JOIN_OMS_PIC_ADMIN.DAT  OVERWRITE
+   /REFORMAT LEFTSIDE:recordlayout1.WTN, RIGHTSIDE:recordlayout2.WTN, LEFTSIDE:recordlayout1.LSP_NAME, RIGHTSIDE:recordlayout2.PIC_CODE, LEFTSIDE:recordlayout1.NON_PUB_INDICATOR
+   /COLLATINGSEQUENCE DEFAULT ASCII
+
+   /RECORDLAYOUT recordlayout1 { WTN CHARACTER 10, LSP_NAME CHARACTER 10, NON_PUB_INDICATOR CHARACTER 1}
+   /RECORDLAYOUT recordlayout2 { WTN CHARACTER 10, PIC_CODE CHARACTER 5}
+   /padbyte x"20"
+   /SILENT
+   /END
+

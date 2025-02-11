@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/base_types_2_0"
+    xmlns:base_xsd="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/base_types_2_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="PartyRole">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="partyRoleID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="status" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="validFor" type="base_xsd:TimePeriod"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TimePeriod">
+        <xsd:sequence>
+            <xsd:element name="startDateTime" type="xsd:date"/>
+            <xsd:element name="endDateTime" type="xsd:date"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Party">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="partyID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="validFor" type="base_xsd:TimePeriod"/>
+            <xsd:sequence>
+                <xsd:element maxOccurs="10" minOccurs="0"
+                    name="languageAbilities" type="base_xsd:LanguageAbility"/>
+            </xsd:sequence>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="LanguageAbility">
+        <xsd:sequence>
+            <xsd:element name="listeningProficiency" type="xsd:boolean"/>
+            <xsd:element name="Language" type="base_xsd:Language"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Language">
+        <xsd:sequence>
+            <xsd:element name="dialectName" type="base_xsd:DialectType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="DialectType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="en"/>
+            <xsd:enumeration value="fr"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Individual">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:Party">
+                <xsd:sequence>
+                    <xsd:element name="aliveDuring" type="base_xsd:TimePeriod"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Quantity">
+        <xsd:sequence>
+            <xsd:element name="amount" type="xsd:double"/>
+            <xsd:element name="units" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Money">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:Quantity"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Duration">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:Quantity"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Rate">
+        <xsd:sequence/>
+    </xsd:complexType>
+    <xsd:complexType name="CostRate">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:Rate">
+                <xsd:sequence>
+                    <xsd:element name="numerator" type="base_xsd:Money"/>
+                    <xsd:element name="denominator" type="base_xsd:Duration"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="ValueType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="numeric"/>
+            <xsd:enumeration value="string"/>
+            <xsd:enumeration value="boolean"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="BusinessInteraction">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="id" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="interactionDate" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="interactionDateComplete" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="interactionStatus" type="base_xsd:InteractionStatusType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Request">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:BusinessInteraction"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="RootEntity">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="commonName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="objectID" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="BusinessInteractionItem">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:Entity">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="quantity" type="base_xsd:Quantity"/>
+                    <xsd:element minOccurs="0" name="action" type="base_xsd:ActionType"/>
+                    <xsd:element minOccurs="0" name="status" type="base_xsd:InteractionStatusType"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="InteractionStatusType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="open"/>
+            <xsd:enumeration value="complete"/>
+            <xsd:enumeration value="pending"/>
+            <xsd:enumeration value="failed"/>
+            <xsd:enumeration value="NA"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Entity">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:RootEntity">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="version" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Specification">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:RootEntity">
+                <xsd:sequence/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Collection">
+        <xsd:complexContent>
+            <xsd:extension base="base_xsd:RootEntity">
+                <xsd:sequence>
+                    <!--
+				 1: Not Applicable
+				2: Ascending
+				3: Descending
+			-->
+                    <xsd:element minOccurs="0" name="orderMethod" type="xsd:integer"/>
+                    <!--
+				 1: Set
+				2: OrderedSet
+				3: Sequence
+				4: Bag 
+			-->
+                    <xsd:element minOccurs="0" name="type" type="xsd:integer"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="ActionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="add"/>
+            <xsd:enumeration value="change"/>
+            <xsd:enumeration value="remove"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="PriceType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="recurring"/>
+            <xsd:enumeration value="discount"/>
+            <xsd:enumeration value="allowance"/>
+            <xsd:enumeration value="penalty"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Presence">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="required"/>
+            <xsd:enumeration value="optional"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

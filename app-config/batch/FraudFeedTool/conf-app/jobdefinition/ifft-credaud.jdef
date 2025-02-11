@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+      <bean id="job" parent="baseJob">
+	 <property name="steps">
+	   <list>
+		<bean id="CREDAUD" parent="baseStep">
+		    <property name="moduleName" value="cmdExec-credaud"/>
+		</bean>
+	   </list>
+	 </property>
+      </bean>
+
+      <bean id="cmdExec-credaud" class="com.telus.framework.batch.module.ExecModule">
+	 <property name="executable" value="${credaud/scriptFile}"/>
+	 <property name="arg" value="${credaud/inputdatafile} ${credaud/inputaudfile}"/>
+      </bean>
+</beans>

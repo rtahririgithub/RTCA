@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ent:updateCreditProfile 
+xmlns:ent="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditProfileManagementSvcRequestResponse_v2" xmlns:ent1="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditProfileManagementServiceTypes_v2" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ent2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6">
+         <ent:consumerCreditProfileInfo>
+            <ent1:identification>
+               <!--You have a CHOICE of the next 2 items at this level-->
+               
+               
+            <ent1:customerId>8000</ent1:customerId></ent1:identification>
+            <!--Optional:-->
+            <ent1:personalInfo>
+              
+               <cred:birthDate>1976-05-29</cred:birthDate>
+               
+            </ent1:personalInfo>
+            <!--Optional:-->
+            <ent1:creditIdentification>
+               <!--Optional:-->
+               <cred:driverLicense>
+                  <cred:driverLicenseNum>12345888</cred:driverLicenseNum>
+                  <!--Optional:-->
+                  <cred:provinceCd>AB</cred:provinceCd>
+                  <!--Optional:-->
+                  <cred:expiryDate>2016-07-29</cred:expiryDate>
+               </cred:driverLicense>
+               <!--Optional:-->
+               <cred:sin>456129766</cred:sin>
+               
+            </ent1:creditIdentification>
+            
+            <ent1:comment>Update DL</ent1:comment>
+         </ent:consumerCreditProfileInfo>
+         
+         <ent:auditInfo>
+            <!--Optional:-->
+            <ent2:userId>testUserId</ent2:userId>
+            <ent2:originatorApplicationId>1234</ent2:originatorApplicationId>
+         </ent:auditInfo>
+</ent:updateCreditProfile>

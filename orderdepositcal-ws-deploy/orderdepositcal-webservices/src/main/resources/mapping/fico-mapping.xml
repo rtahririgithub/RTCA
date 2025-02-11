@@ -1,0 +1,151 @@
+ <mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd" 
+          >
+  <mapping type="one-way" map-null="false">
+    <class-a>com.telus.credit.orderDepositCalculator.common.domain.OrderDataDetail</class-a>
+    <class-b>com.fico.telus.blaze.depositCalculator.OrderData</class-b>
+       <field>
+             <a>customerID</a>
+             <b>customerID</b> 
+      </field>
+      
+       <field>
+             <a>orderID</a>
+             <b>orderId</b> 
+      </field>
+      
+      <field>
+          <a>currentOrderProductList</a>
+          <b>currentOrderProducts</b>
+      </field>
+      
+      <field>
+          <a>pendingOrderProductList</a>
+          <b>pendingOrderProductList</b>
+      </field>
+      
+      <field>
+          <a>assignedOrderProductList</a>
+          <b>assignedOrderProductList</b>
+      </field> 
+  </mapping> 
+  
+  <mapping type="one-way">
+    <class-a>com.telus.credit.orderDepositCalculator.common.domain.CurrentOrderProductList</class-a>
+    <class-b>com.fico.telus.blaze.depositCalculator.CurrentOrderProducts</class-b> 
+    <field>
+          <a>currentProduct</a>
+          <b>currentProduct</b>
+          <a-hint>com.telus.credit.orderDepositCalculator.common.domain.CurrentProduct</a-hint>
+          <b-hint>com.fico.telus.blaze.depositCalculator.CurrentProduct</b-hint>
+     </field>      
+  </mapping>
+  
+   <mapping type="one-way">
+    <class-a>com.telus.credit.orderDepositCalculator.common.domain.PendingOrderProductList</class-a>
+    <class-b>com.fico.telus.blaze.depositCalculator.PendingOrderProducts</class-b> 
+    <field>
+          <a>pendingProduct</a>
+          <b>pendingProduct</b>
+          <a-hint>com.telus.credit.orderDepositCalculator.common.domain.PendingProduct</a-hint>
+          <b-hint>com.fico.telus.blaze.depositCalculator.PendingProduct</b-hint>
+     </field>      
+  </mapping>
+  
+   <mapping type="one-way">
+    <class-a>com.telus.credit.orderDepositCalculator.common.domain.AssignedOrderProductList</class-a>
+    <class-b>com.fico.telus.blaze.depositCalculator.AssignedOrderProducts</class-b> 
+    <field>
+          <a>assignedProduct</a>
+          <b>assignedProduct</b>
+          <a-hint>com.telus.credit.orderDepositCalculator.common.domain.AssignedProduct</a-hint>
+          <b-hint>com.fico.telus.blaze.depositCalculator.AssignedProduct</b-hint>
+     </field>      
+  </mapping>
+  
+  
+   
+  <mapping type="one-way">
+    <class-a>com.telus.credit.orderDepositCalculator.common.domain.CurrentProduct</class-a>
+    <class-b>com.fico.telus.blaze.depositCalculator.CurrentProduct</class-b>       
+      <field>
+           <a>totalRecurringChargeAmt</a>
+           <b>monthlyRecurringCharge</b> 
+      </field>
+      
+      <field custom-converter="com.telus.credit.orderDepositCalculator.webservice.util.ChargeAmtConverter">
+           <a>estimatedUsageChargeAmt</a>
+           <b>estimatedUsageCharge</b> 
+      </field> 
+          
+      <field custom-converter="com.telus.credit.orderDepositCalculator.webservice.util.ChargeAmtConverter">
+             <a>lossRentalEquipmentChargeAmt</a>
+             <b>lrt</b> 
+      </field>
+   </mapping> 
+   
+    <mapping type="one-way">
+     <class-a>com.telus.credit.orderDepositCalculator.common.domain.PendingProduct</class-a>
+     <class-b>com.fico.telus.blaze.depositCalculator.PendingProduct</class-b>       
+   </mapping> 
+   
+    <mapping type="one-way">
+     <class-a>com.telus.credit.orderDepositCalculator.common.domain.AssignedProduct</class-a>
+     <class-b>com.fico.telus.blaze.depositCalculator.AssignedProduct</class-b>       
+   </mapping> 
+   
+  <mapping type="one-way">
+    <class-a>com.fico.telus.blaze.depositCalculator.DepositCalculationResult</class-a>
+    <class-b>com.telus.credit.orderDepositCalculator.common.domain.DepositCalulationResult</class-b>
+     <field>
+             <a>customerId</a>
+             <b>customerID</b> 
+     </field>
+     <field>
+          <a>productDepositResultList</a>
+          <b>productDepositResultList</b>
+      </field>  
+  </mapping>
+  
+  <mapping type="one-way">
+    <class-a>com.fico.telus.blaze.depositCalculator.ProductDepositResultList</class-a>
+    <class-b>com.telus.credit.orderDepositCalculator.common.domain.ProductDepositResultList</class-b>
+     <field>
+          <a>productDepositResult</a>
+          <b>productDepositResult</b>
+          <a-hint>com.fico.telus.blaze.depositCalculator.ProductDepositResult</a-hint>
+          <b-hint>com.telus.credit.orderDepositCalculator.common.domain.ProductDepositResult</b-hint>
+      </field>  
+  </mapping>
+  
+  
+  <mapping type="one-way">
+    <class-a>com.fico.telus.blaze.depositCalculator.ProductDepositResult</class-a>
+    <class-b>com.telus.credit.orderDepositCalculator.common.domain.ProductDepositResult</class-b>
+      <!--     
+      <field custom-converter="com.telus.credit.orderDepositCalculator.webservice.util.ServiceTypeCdConverter">
+           <a>serviceTypeCd</a>
+           <b>serviceTypeCd</b> 
+      </field>
+      -->
+   </mapping> 
+  
+  <mapping type="one-way">
+    <class-a>com.telus.credit.orderDepositCalculator.common.domain.DepositItem</class-a>
+    <class-b>com.telus.credit.domain.deposit.DepositItem</class-b>
+  </mapping>
+  
+  </mappings>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+         

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef" />
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+			<list>
+				<bean id="STEP01" parent="baseStep">
+					<property name="moduleName" value="cmdExec-Step01" />
+				</bean>
+				<bean id="STEP02" parent="baseStep">
+					<property name="moduleName" value="cmdExec-Step02" />
+				</bean>
+				<bean id="STEP03" parent="baseStep">
+					<property name="moduleName" value="cmdExec-Step03" />
+				</bean>
+				<bean id="STEP04" parent="baseStep">
+					<property name="moduleName" value="cmdExec-Step04" />
+				</bean>
+				<bean id="STEP05" parent="baseStep">
+					<property name="moduleName" value="cmdExec-Step05" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="cmdExec-Step01" parent="baseSyncsortScriptStep">
+		<property name="executable" value="${xtrctwln/step1/scriptFile}" />
+		<property name="arg"
+			value="${xtrctwln/step1/inputFile1} ${xtrctwln/step1/inputFile2} ${xtrctwln/step1/outputFile}" />
+		<property name="output" value="${logs}/${jobname}_step1.log" />
+	</bean>
+	<bean id="cmdExec-Step02" parent="baseSyncsortScriptStep">
+		<property name="executable" value="${xtrctwln/step2/scriptFile}" />
+		<property name="arg"
+			value="${xtrctwln/step2/inputFile1} ${xtrctwln/step2/outputFileTmpDL} ${xtrctwln/step2/outputFileTmpSIN} ${xtrctwln/step2/outputFile}" />
+		<property name="output" value="${logs}/${jobname}_step2.log" />
+	</bean>
+	<bean id="cmdExec-Step03" parent="baseSyncsortScriptStep">
+		<property name="executable" value="${xtrctwln/step3/scriptFile}" />
+		<property name="arg"
+			value="${xtrctwln/step3/inputFile1} ${xtrctwln/step3/inputFile2} ${xtrctwln/step3/outputFile}" />
+		<property name="output" value="${logs}/${jobname}_step3.log" />
+	</bean>
+	<bean id="cmdExec-Step04" parent="baseSyncsortScriptStep">
+		<property name="executable" value="${xtrctwln/cleanup/scriptFile}" />
+		<property name="arg"
+			value="${xtrctwln/cleanup/inputFile1}" />
+		<property name="output" value="${logs}/${jobname}-cleanup1.log" />
+	</bean>
+	<bean id="cmdExec-Step05" parent="baseSyncsortScriptStep">
+		<property name="executable" value="${xtrctwln/cleanup/scriptFile}" />
+		<property name="arg"
+			value="${xtrctwln/cleanup/inputFile2}" />
+		<property name="output" value="${logs}/${jobname}-cleanup2.log" />
+	</bean>
+</beans>

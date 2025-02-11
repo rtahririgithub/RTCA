@@ -1,0 +1,23 @@
+java -jar saxon9.jar EnterpriseCreditProfileManagementSvcDefinition_v2_0.xml http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/xmlToWsdl_v4_0.xslt includeWSP=True
+ 
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+
+

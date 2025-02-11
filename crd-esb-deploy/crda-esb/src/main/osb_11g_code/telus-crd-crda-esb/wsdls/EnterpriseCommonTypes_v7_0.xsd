@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7"
+    version="7.0"
+    xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="indicatorType">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="localeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="codeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="codeDescTextType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="CodeDescText">
+        <xs:annotation>
+            <xs:documentation>Represents an internationalized string.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="locale" type="tns:localeType">
+                <xs:annotation>
+                    <xs:documentation>Ex. EN_CA, FR_CA</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="codeDescText" type="tns:codeDescTextType">
+                <xs:annotation>
+                    <xs:documentation>Message text</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MultilingualCodeDescTextList">
+        <xs:annotation>
+            <xs:documentation>Represents a list of internationalized
+                strings.  One for each language.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="10" name="codeDescText" type="tns:CodeDescText"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MessageType">
+        <xs:annotation>
+            <xs:documentation>This type is created as a workaround for
+                what seems like a bug in the Oracle XML binding classes.
+                There are certain cases when a CodeDescTextList is used
+                as an element type with multiplicity greater than 1 a
+                &quot;Unable to lookup BindingTypeName&quot; error
+                occurs at runtime.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="message" type="tns:MultilingualCodeDescTextList"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Name">
+        <xs:annotation>
+            <xs:documentation>Represents an internationalized string.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="locale" type="tns:localeType">
+                <xs:annotation>
+                    <xs:documentation>Ex. EN_CA, FR_CA</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>name  text</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MultilingualNameList">
+        <xs:annotation>
+            <xs:documentation>Represents a list of internationalized
+                strings.  One for each language.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="10" name="name" type="tns:Name"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Description">
+        <xs:annotation>
+            <xs:documentation>Represents an internationalized string.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="locale" type="tns:localeType">
+                <xs:annotation>
+                    <xs:documentation>Ex. EN_CA, FR_CA</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="descriptionText" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Description  text</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MultilingualDescriptionList">
+        <xs:annotation>
+            <xs:documentation>Represents a list of internationalized
+                strings.  One for each language.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="10" name="description" type="tns:Description"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MultilingualCodeDescriptionList">
+        <xs:annotation>
+            <xs:documentation>Represents Code value plus the list of
+                internationalized strings describing it.  One for each language.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="tns:codeType"/>
+            <xs:element maxOccurs="10" minOccurs="0" name="description" type="tns:Description"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ResponseMessage">
+        <xs:annotation>
+            <xs:documentation>This construct can be used for a standard
+                response structure if error and error context data is
+                required to be returned by a service operation.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dateTimeStamp" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="messageType" type="xs:string"/>
+            <xs:element minOccurs="0" name="transactionId" type="xs:string"/>
+            <xs:element maxOccurs="10" minOccurs="0" name="messageList" type="tns:Message"/>
+            <xs:element minOccurs="0" name="contextData" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Message">
+        <xs:sequence>
+            <xs:element name="locale" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AuditInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="userId" type="xs:string"/>
+            <xs:element minOccurs="0" name="userTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="salesRepresentativeId" type="xs:string"/>
+            <xs:element minOccurs="0" name="channelOrganizationId" type="xs:string"/>
+            <xs:element minOccurs="0" name="outletId" type="xs:string"/>
+            <xs:element minOccurs="0" name="originatorApplicationId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Captures the upstream/downstream
+                        application identity (i.e. not necessarily the
+                        one that is authenticating to use the service as
+                        a client)      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="correlationId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Used to correlate the client side
+                        log event to the request.      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="timestamp" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="masterSourceIdType">
+        <xs:annotation>
+            <xs:documentation>CMDB identifier for the database or system
+                mastering this data</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:complexType name="brandType">
+        <xs:sequence>
+            <xs:element name="brandId" type="tns:brandIdType"/>
+            <xs:element minOccurs="0" name="brandNameDecode" type="tns:CodeDescText"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="brandIdType">
+        <xs:annotation>
+            <xs:documentation>TELUS brand identifier.  List of values in
+                RefPDS: BRAND_NAME</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="currencyCodeType">
+        <xs:annotation>
+            <xs:documentation>Currency codes from ISO 4217.  e.g. CAD, USD</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="languageCodeType">
+        <xs:annotation>
+            <xs:documentation>Canadian and US language codes from ISO
+                639: 2-letter codes.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="unitOfMeasureCodeType">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="unitQuantityType">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+</xs:schema>

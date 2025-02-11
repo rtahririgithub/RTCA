@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:getEquipmentQualificationListResponse xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ns2="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1">
+    <ns2:equipmentCategoryQualificationList>
+        <equipmentCategory>
+            <productCd>HSIC</productCd>
+            <maxCount>99</maxCount>
+        </equipmentCategory>
+        <equipmentCategory>
+            <productCd>TTV</productCd>
+            <maxCount>99</maxCount>
+        </equipmentCategory>
+        <equipmentCategory>
+            <productCd>STV</productCd>
+            <maxCount>99</maxCount>
+        </equipmentCategory>
+    </ns2:equipmentCategoryQualificationList>
+</ns2:getEquipmentQualificationListResponse>
+

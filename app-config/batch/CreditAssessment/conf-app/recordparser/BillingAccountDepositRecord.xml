@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE delimited-record-layout PUBLIC "-//TELUS.com//DTD DelimitedRecordLayout 1.0//EN" "http://www.telus.com/dtd/DelimitedRecordLayout.dtd">
+
+<delimited-record-layout delimiter="|">
+
+   <typehandlers>
+      <typehandler id="DateHandler" class="com.telus.framework.recordparser2.typehandler.DateHandler">
+         <prop name="pattern">yyyy-MM-dd</prop>
+      </typehandler>
+   </typehandlers>
+
+   <structure name="record" type="com.telus.crd.assessment.batch.domain.BillingAccountDepositRecord">
+      <field name="customerId" maxLength="10000" />
+      <field name="billingAccountNum" maxLength="10000" />
+      <field name="requestAmount" maxLength="10000" />
+      <field name="requestDateStr" maxLength="10000" />
+      <field name="depositId" maxLength="10000" />
+      <field name="orderId" maxLength="10000" />
+      <field name="requestReasonCode" maxLength="10000" />
+      <field name="dueDateStr" maxLength="10000" />
+      <field name="paidAmount" maxLength="10000" />
+      <field name="paidDateStr" maxLength="10000" />
+      <field name="interestAmount" maxLength="10000" />
+      <field name="cancelDateStr" maxLength="10000"  />
+      <field name="cancelAmount" maxLength="10000" />
+      <field name="cancelReasonCode" maxLength="10000" />
+      <field name="releaseDateStr" maxLength="10000" />
+      <field name="releaseAmount" maxLength="10000" />
+      <field name="releaseMethodCode" maxLength="10000" />
+      <field name="releaseMethodReason" maxLength="10000" />
+      <field name="recordTime" maxLength="10000" />
+   </structure>
+
+</delimited-record-layout>

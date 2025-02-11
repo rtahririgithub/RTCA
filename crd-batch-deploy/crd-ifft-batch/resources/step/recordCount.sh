@@ -1,0 +1,10 @@
+#!/bin/ksh
+
+INPUTFILENAME=$1
+OUTPUTFILENAME=$2
+RECORD_COUNT=`wc -l ${INPUTFILENAME}`
+for i in $RECORD_COUNT
+do
+echo "$i" >> $OUTPUTFILENAME
+exit 0
+done;

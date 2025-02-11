@@ -1,0 +1,95 @@
+#!/usr/bin/ksh
+
+# Filename: rtca_pre_ar1_deposit_request.sh 
+# Function: pre-process exp_ar1_deposit_request.* file
+#           to retrieve all the active ban details.
+#
+#######################################
+if [ $# -eq 2 ]; then
+    AR1_DEPOSIT_REQUEST=$1
+    AR1_DEPOSIT_REQUEST_OUT=$2
+
+else
+    echo ""
+    echo "usage:rtca_pre_ar1_deposit_request.sh  [input file1] [output file] " 
+
+    exit 1
+fi
+
+
+syncsort << EOF
+    ${sortstatistic}
+    ${sortmemory}
+    ${sortworkspace}
+
+    /INFILE $AR1_DEPOSIT_REQUEST 65535 "|" 
+    /FIELDS DEPOSIT_ID 1: - 1:
+    /FIELDS REQUEST_AMOUNT 10: - 10: en 
+    /FIELDS REQUEST_DATE 11: - 11: 
+    /FIELDS REQUEST_YEAR  11:1 - 11:4
+    /FIELDS REQUEST_MONTH 11:5 - 11:6
+    /FIELDS REQUEST_DAY   11:7 - 11:
+    /FIELDS REQUEST_REASON 12: - 12:  
+    
+    /FIELDS DUE_DATE 13: - 13: 
+    /FIELDS DUE_YEAR  13:1 - 13:4
+    /FIELDS DUE_MONTH 13:5 - 13:6
+    /FIELDS DUE_DAY   13:7 - 13:
+    
+    /FIELDS PAID_DATE 14: - 14: 
+    /FIELDS PAID_YEAR  14:1 - 14:4
+    /FIELDS PAID_MONTH 14:5 - 14:6
+    /FIELDS PAID_DAY   14:7 - 14:
+    /FIELDS RELEASE_AMOUNT 15: - 15: 
+    /FIELDS RELEASE_DATE 16: - 16:
+    /FIELDS RELEASE_YEAR  16:1 - 16:4
+    /FIELDS RELEASE_MONTH 16:5 - 16:6
+    /FIELDS RELEASE_DAY   16:7 - 16:
+    /FIELDS RELEASE_REASON 17: - 17:
+    /FIELDS RELEASE_METHOD 18: - 18:
+    
+    /FIELDS INTEREST_AMT 19: - 19:
+    /FIELDS CANCEL_AMT 20: - 20:
+    /FIELDS CANCEL_DATE 21: - 21: 
+    /FIELDS CANCEL_YEAR  21:1 - 21:4
+    /FIELDS CANCEL_MONTH 21:5 - 21:6
+    /FIELDS CANCEL_DAY   21:7 - 21:
+    /FIELDS CANCEL_REASON 22: - 22:
+    /FIELDS ORDER_ID 23: - 23:
+    /FIELDS BAN 25: - 25: en
+   
+    /CONDITION banNotNull (BAN MT /[0-9]+/ )
+    /CONDITION requestDateNotNull (REQUEST_DATE MT /[0-9]+/ )
+    /CONDITION dueDateNotNull (DUE_DATE MT /[0-9]+/ )
+    /CONDITION paidDateNotNull (PAID_DATE MT /[0-9]+/ )
+    /CONDITION cancelDateNotNull (CANCEL_DATE MT /[0-9]+/ )
+    /CONDITION releaseDateNotNull (RELEASE_DATE MT /[0-9]+/ )
+    
+    /DERIVEDFIELD REQ_DATE REQUEST_YEAR + "-" + REQUEST_MONTH + "-" + REQUEST_DAY
+    /DERIVEDFIELD DUE1_DATE DUE_YEAR + "-" + DUE_MONTH + "-" + DUE_DAY
+    /DERIVEDFIELD PAY_DATE PAID_YEAR + "-" + PAID_MONTH + "-" + PAID_DAY
+    /DERIVEDFIELD CANC_DATE CANCEL_YEAR + "-" + CANCEL_MONTH + "-" + CANCEL_DAY
+    /DERIVEDFIELD REL_DATE RELEASE_YEAR + "-" + RELEASE_MONTH + "-" + RELEASE_DAY    
+    
+    /DERIVEDFIELD REQUEST_DT IF dueDateNotNull THEN REQ_DATE  ELSE REQUEST_DATE
+    /DERIVEDFIELD DUE_DT IF dueDateNotNull THEN DUE1_DATE  ELSE DUE_DATE
+    /DERIVEDFIELD PAY_DT IF paidDateNotNull THEN PAY_DATE  ELSE PAID_DATE
+    /DERIVEDFIELD CANCEL_DT IF cancelDateNotNull THEN CANC_DATE ELSE CANCEL_DATE 
+    /DERIVEDFIELD RELEASE_DT IF releaseDateNotNull THEN REL_DATE ELSE RELEASE_DATE
+    
+    /DERIVEDFIELD DEP_PAID_AMT IF paidDateNotNull THEN REQUEST_AMOUNT ELSE 0
+    
+    /KEYS BAN  
+
+    /INCLUDE banNotNull
+    /OUTFILE $AR1_DEPOSIT_REQUEST_OUT 65535  OVERWRITE
+    /REFORMAT BAN, DEPOSIT_ID, ORDER_ID, REQUEST_AMOUNT, REQUEST_DT, REQUEST_REASON, DUE_DT, DEP_PAID_AMT,  PAY_DT, INTEREST_AMT, CANCEL_DT,  CANCEL_AMT, CANCEL_REASON,  RELEASE_DT, RELEASE_AMOUNT, RELEASE_METHOD, RELEASE_REASON  
+    /COLLATINGSEQUENCE DEFAULT ASCII
+
+    /SILENT
+    /WARNINGS 100
+    /END
+EOF
+
+
+return $?

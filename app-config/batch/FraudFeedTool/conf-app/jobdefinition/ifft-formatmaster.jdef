@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="javaExec-format01"/>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName" value="javaExec-format02"/>
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName" value="cmdExec-format03"/>
+            </bean>
+       </list>
+		</property>
+	</bean>
+   <bean id="javaExec-format01" class="com.telus.credit.fraud.batch.step16.GenerateHeaderFile" lazy-init="true">
+      <property name="outputFilename" value="${generateHeaderFile/outputFilenamenikm}"/>
+      <property name="telcoCode" value="${generateHeaderFile/telcoCode}"/>
+   </bean>
+   <bean id="javaExec-format02" class="com.telus.credit.fraud.batch.step16.GenerateFooterFile" lazy-init="true">
+      <property name="outputFilename" value="${generateFooterFile/outputFilenamenikm}"/>
+      <property name="recordCountFilename" value="${generateFooterFile/recordCountFilenamenikm}"/>
+   </bean>
+   <bean id="cmdExec-format03" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step16formatnik/scriptFile}"/>
+      <property name="arg" value="${step16formatnik/inputFilename1} ${step16formatnik/inputFilename2} ${step16formatnik/inputFilename3} ${step16formatnik/outputFilename}"/>
+   </bean>
+</beans>
+
+

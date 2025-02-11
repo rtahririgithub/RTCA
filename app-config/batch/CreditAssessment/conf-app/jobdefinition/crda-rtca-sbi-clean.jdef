@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <import resource="classpath:fw-base.jdef" />
+
+  	<!-- ===================================================================== -->
+	<!-- STEP01 executes Batch, remove files  -->
+	<!-- ===================================================================== -->
+
+  <bean id="job" parent="baseJob">
+    <property name="steps">
+      <list>
+         <bean id="STEP01" parent="baseStep">
+           <property name="moduleName" value="zip-sbi" />
+         </bean>
+         <bean id="STEP02" parent="baseStep">
+           <property name="moduleName" value="archive-sbi" />
+         </bean>
+         <bean id="STEP03" parent="baseStep">
+           <property name="moduleName" value="clean-temp" />
+         </bean>
+         <bean id="STEP04" parent="baseStep">
+           <property name="moduleName" value="clean-report" />
+         </bean>
+      </list>
+    </property>
+  </bean>
+
+  <!-- ================================================================ -->
+  <bean id="clean-temp" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-sbi-clean.sh"/> 
+      <property name="arg"><value>${processbox}/sbi *.tm</value></property>
+      <property name="output" value="${logs}/${jobname}-step01.log"/>
+  </bean>
+  <bean id="clean-report" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-sbi-clean.sh"/> 
+      <property name="arg"><value>${outbox} CrAssmtRqst*_*</value></property>
+      <property name="output" value="${logs}/${jobname}-step02.log"/>
+  </bean>
+  
+  <!-- ====================================================================  
+         Zip Step
+        ==================================================================== -->
+   <bean id="zip-sbi" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-zip.sh"/>
+      <property name="arg"><value>${outbox}/CrAssmtRqst*_*</value></property>
+      <property name="output" value="${logs}/${jobname}-step03.log"/>
+   </bean>
+
+  <!-- ====================================================================  
+         Archive Step
+        ==================================================================== -->
+   <bean id="archive-sbi" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-archive-sbi.sh"/>
+      <property name="arg"><value>CrAssmtRqst*_*.* ${outbox} ${archive}/sbi ${processbox}/sbi</value></property>
+      <property name="output" value="${logs}/${jobname}-step04.log"/>
+   </bean>
+</beans>
+
+

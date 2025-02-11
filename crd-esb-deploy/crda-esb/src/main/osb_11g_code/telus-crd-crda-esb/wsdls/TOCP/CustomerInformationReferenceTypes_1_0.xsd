@@ -1,0 +1,75 @@
+<xs:schema elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:common="http://schemas.telus.com/eca/common_types_2_1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://schemas.telus.com/eca/common_types_2_1" schemaLocation="ECA_CommonTypes_2_1.xsd"/>
+    <xs:complexType abstract="true" name="Reference">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="description" nillable="true" type="xs:string"/>
+            <xs:element name="descriptionFrench" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccountType">
+        <xs:complexContent>
+            <xs:extension base="Reference">
+                <xs:sequence>
+                    <xs:element name="accountTypeCode" type="xs:string"/>
+                    <xs:element name="accountSubTypeCode" type="xs:string"/>
+                    <xs:element name="defaultDealer" nillable="true" type="common:DealerCode"/>
+                    <xs:element name="defaultSalesRepCode" nillable="true" type="common:SalesRepCode"/>
+                    <xs:element default="false" name="isCreditCheckRequired" type="xs:boolean"/>
+                    <xs:element name="minimumSubscribersForFleet" type="xs:nonNegativeInteger"/>
+                    <xs:element name="billingNameFormat" type="common:NameFormat"/>
+                    <xs:element name="brandId" nillable="true" type="common:BrandId"/>
+                    <xs:element default="false" name="isDuplicateBANCheck" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidConsumer" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidBusinessRegular" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidBusinessPersonal" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidBusinessDealer" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidOfficial" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidBusinessOfficial" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidEmployee" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidCorporatePersonal" type="xs:boolean"/>
+                    <xs:element default="false" name="isAutotel" type="xs:boolean"/>
+                    <xs:element default="false" name="isCorporate" type="xs:boolean"/>
+                    <xs:element default="false" name="isCorporateIDEN" type="xs:boolean"/>
+                    <xs:element default="false" name="isCorporatePCS" type="xs:boolean"/>
+                    <xs:element default="false" name="isCorporatePrivateNetworkPlus" type="xs:boolean"/>
+                    <xs:element default="false" name="isCorporateRegional" type="xs:boolean"/>
+                    <xs:element default="false" name="isCorporateRegular" type="xs:boolean"/>
+                    <xs:element default="false" name="isIDEN" type="xs:boolean"/>
+                    <xs:element default="false" name="isPager" type="xs:boolean"/>
+                    <xs:element default="false" name="isPCS" type="xs:boolean"/>
+                    <xs:element default="false" name="isPCSPostpaidCorporateRegularAccount" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaid" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidBoxedConsumer" type="xs:boolean"/>
+                    <xs:element default="false" name="isPostpaidCorporateRegular" type="xs:boolean"/>
+                    <xs:element default="false" name="isPrepaidConsumer" type="xs:boolean"/>
+                    <xs:element default="false" name="isQuebectelPrepaidConsumer" type="xs:boolean"/>
+                    <xs:element default="false" name="isWesternPrepaidConsumer" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="MemoType">
+        <xs:complexContent>
+            <xs:extension base="Reference">
+                <xs:sequence>
+                    <xs:element name="category" type="common:MemoTypeCategory"/>
+                    <xs:element name="systemText" nillable="true" type="xs:string"/>
+                    <xs:element name="systemTextFrench" nillable="true" type="xs:string"/>
+                    <xs:element name="numberOfParameters" nillable="true" type="xs:int"/>
+                    <xs:element name="manualInd" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Segmentation">
+        <xs:complexContent>
+            <xs:extension base="Reference">
+                <xs:sequence>
+                    <xs:element name="segment" type="xs:string"/>
+                    <xs:element name="subSegment" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

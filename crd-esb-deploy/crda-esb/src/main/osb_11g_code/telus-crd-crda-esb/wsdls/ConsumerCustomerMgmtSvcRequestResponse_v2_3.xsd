@@ -1,0 +1,315 @@
+<xs:schema targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" version="1.0" xmlns:cbm="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" xmlns:cc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v3" xmlns:cms="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerSubDomain_v3" xmlns:cpisd="http://xmlschema.tmi.telus.com/xsd/Product/ProductInstance/Customer_Product_Instance_Sub_Domain_v3" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ecpm="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditProfileManagementServiceTypes_v2" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v4" xmlns:mktc="http://xmlschema.tmi.telus.com/xsd/MarketingSales/MarketingCampaign/MarketingCampaignTypes_v1" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v3" schemaLocation="CustomerCommon_v3_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerSubDomain_v3" schemaLocation="CustomerSubDomain_v3_1.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" schemaLocation="Customer_Billing_Sub_Domain_v2_1.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Product/ProductInstance/Customer_Product_Instance_Sub_Domain_v3" schemaLocation="Customer_Product_Instance_Sub_Domain_v3_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v4" schemaLocation="EnterpriseCommonTypes_v4_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditProfileManagementServiceTypes_v2" schemaLocation="EnterpriseCreditProfileManagementServiceTypes_v2_1.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" schemaLocation="CreditCommon_v1_1.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/MarketingSales/MarketingCampaign/MarketingCampaignTypes_v1" schemaLocation="MarketingCampaignTypes_v1_0.xsd"/>
+    <xs:complexType name="SearchCustomerCriteria">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="address" type="cc:Address"/>
+            <xs:element default="25" name="searchResultMaxLimit">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int">
+                        <xs:minInclusive value="1"/>
+                        <xs:maxInclusive value="50"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="customerId" type="cc:customerIdType"/>
+            <xs:element minOccurs="0" name="firstName" type="cc:firstNameType"/>
+            <xs:element minOccurs="0" name="middleName" type="cc:middleNameType"/>
+            <xs:element minOccurs="0" name="lastName" type="cc:lastNameType"/>
+            <xs:element minOccurs="0" name="emailAddress" type="cc:emailAddressTextType"/>
+            <xs:element minOccurs="0" name="contactTelephoneNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="serviceResourceIdValue" type="xs:string"/>
+            <xs:element minOccurs="0" name="serviceResourceTypeCode" type="xs:string"/>
+            <xs:element default="false" name="includePendingServiceResourceInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+            <xs:element minOccurs="0" name="billingSystemId" type="xs:int"/>
+            <xs:element minOccurs="0" name="resourceEffectiveDate" type="xs:date"/>
+            <xs:element default="false" name="quickSearchInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="brandId" type="xs:string"/>
+            <xs:element minOccurs="0" name="birthDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="driverLicenseNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="sinNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="healthCardNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="passportNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="provincialIdNumber" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SearchCustomerResult">
+        <xs:sequence>
+            <xs:element name="customerId" type="cc:customerIdType"/>
+            <xs:element name="name" type="cc:Name"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="billingAccountSummaryList" type="tns:BillingAccountSummary"/>
+            <xs:element maxOccurs="2500" minOccurs="0" name="productInstanceSummaryList" type="tns:ProductInstanceSummary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BillingAccountSummary">
+        <xs:sequence>
+            <xs:element name="customerId" type="cc:customerIdType"/>
+            <xs:element name="billingAccountId" type="cc:billingAccountIdType"/>
+            <xs:element name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+            <xs:element name="billingMasterSourceId" type="xs:long"/>
+            <xs:element minOccurs="0" name="collectionsInd" type="xs:boolean"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="addressList" type="cc:Address"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductInstanceSummary">
+        <xs:sequence>
+            <xs:element name="customerId" type="cc:customerIdType"/>
+            <xs:element name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+            <xs:element name="billingMasterSourceId" type="xs:long"/>
+            <xs:element name="productInstanceId" type="cpisd:productInstanceIdType"/>
+            <xs:element name="productInstanceMasterSourceId" type="xs:int"/>
+            <xs:element minOccurs="0" name="primaryServiceResourceValue" type="xs:string"/>
+            <xs:element minOccurs="0" name="productInstanceStatusCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="productInstanceTypeCode" type="xs:string"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="productResourceList" type="cpisd:ProductResource"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="QuickSearchCustomerCriteria">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="serviceTelephoneNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="billingMasterSourceIdList" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="QuickSearchCustomerResult">
+        <xs:sequence>
+            <xs:element name="customerId" type="cc:customerIdType"/>
+            <xs:element name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+            <xs:element name="billingAccountStatusCode" type="xs:string"/>
+            <xs:element name="billingMasterSourceId" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ConsolidateCustomerCriteria">
+        <xs:sequence>
+            <xs:element name="customerId1" type="cc:customerIdType"/>
+            <xs:element name="customerId2" type="cc:customerIdType"/>
+            <xs:element name="creditProfile" type="ecpm:ConsumerCreditProfileInfo"/>
+            <xs:element name="customerIdPINOwner" type="cc:customerIdType"/>
+            <xs:element name="customerPIN" type="xs:string"/>
+            <xs:element name="auditInfo" type="ect:AuditInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FullCustomer">
+        <xs:complexContent>
+            <xs:extension base="cms:Customer">
+                <xs:sequence>
+                    <xs:element maxOccurs="100" minOccurs="0" name="billingAccountList" type="cbm:BillingAccount"/>
+                    <xs:element maxOccurs="2500" minOccurs="0" name="productInstanceList" type="cpisd:ProductInstance"/>
+                    <xs:element maxOccurs="100" minOccurs="0" name="agreementList" type="cpisd:Agreement"/>
+                    <xs:element maxOccurs="100" minOccurs="0" name="contactIndividualList" type="cms:ContactIndividual"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CustomerMarketingInformation">
+        <xs:sequence>
+            <xs:element name="customerId" type="cc:customerIdType"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="salesOpportunityList" type="mktc:SalesOpportunity"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="marketingProfileList" type="mktc:MarketingProfile"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="marketingMessageList" type="mktc:MarketingMessage"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="createCustomer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customer" type="cms:Customer"/>
+                <xs:element minOccurs="0" name="creditProfile" type="crdc:CreditProfileData"/>
+                <xs:element maxOccurs="100" minOccurs="0" name="customerContacts" type="cms:ContactIndividual"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="newCustomer" type="cms:Customer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCustomer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customer" type="cms:Customer"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="updatedCustomer" type="cms:Customer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="consolidateCustomer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="consolidateCustomerCriteria" type="tns:ConsolidateCustomerCriteria"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="consolidateCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="consolidatedCustomerId" type="cc:customerIdType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getFullCustomerInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cc:customerIdType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getFullCustomerInfoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="fullCustomer" type="tns:FullCustomer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getFullCustomerInfoByBillingAccountNumber">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:annotation>
+                    <xs:documentation>       Billing system IDs:
+                        129  ADCOM    Advance Communications         103
+                        ARBOR    ARBOR         116  CABSA    Carrier
+                        Access Billing AB         117  CABSB    Carrier
+                        Access Billing BC         108  CADVISN
+                        Cadvision         119  CBSSTQ    TELUS Quebec
+                        CBSS         110  CONCERT   Concert         101
+                        COREA    Core AB         102  COREB    Core BC
+                        127  INFORM    Inform         105  INFRANET
+                        Infranet         107  PSINET    PSINet
+                        104  SAPSD    SAP-SD         164  SAPSD_XD
+                        Mobility Dealers data billed through       130
+                        TM KNOWBILITY  TELUS Mobility - Knowbility
+                        106  TNS/Williams TNS/Williams (TELUS National
+                        Services)       1001 ENABLER   Enabler - FFH       </xs:documentation>
+                </xs:annotation>
+                <xs:element name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+                <xs:element name="billingSystemId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getFullCustomerInfoByBillingAccountNumberResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="fullCustomer" type="tns:FullCustomer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerWithContacts">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cc:customerIdType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerWithContactsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:annotation>
+                    <xs:documentation>       This operation only
+                        populates the Customer and Contact information
+                        in the FullCustomer object.      </xs:documentation>
+                </xs:annotation>
+                <xs:element minOccurs="0" name="fullCustomer" type="tns:FullCustomer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchCustomer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="searchCustomerCriteria" type="tns:SearchCustomerCriteria"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" name="searchCustomerResults" type="tns:SearchCustomerResult"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="quickSearchCustomer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="quickSearchCustomerCriteria" type="tns:QuickSearchCustomerCriteria"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="quickSearchCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" name="quickSearchCustomerResults" type="tns:QuickSearchCustomerResult"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateContactIndividual">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerContact" type="cms:ContactIndividual"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateContactIndividualResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerContactIndividual" type="cms:ContactIndividual"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCustomerOfficialAddress">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cc:customerIdType"/>
+                <xs:element name="officialAddress" type="cc:Address"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCustomerOfficialAddressResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cc:customerIdType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="customer" type="cms:Customer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerMarketingInformation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cc:customerIdType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerMarketingInformationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="customerMarketingInformation" type="tns:CustomerMarketingInformation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

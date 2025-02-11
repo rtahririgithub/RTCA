@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="telus-crd-crda-esb/wsdls/WLNCreditProfileManagementProxyService_v2_0"/>
+      <con:port>
+        <con:name>WLNCreditProfileManagementProxyServicePort</con:name>
+        <con:namespace>http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="OverrideCreditWorthiness_Router_PS_PipelinePairNode_request">
+      <con:stage name="OverrideCreditWorthiness_Router_PS__Init_Stage">
+        <con:context>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="OverrideAssessmentRoutingVar">
+            <con2:comment>Loads the XQuery resource OverrideAssessment Routing Configuration</con2:comment>
+            <con2:id>_ActionId-6468831982523906430-6ee57e4f.141c7fd57b9.-78d8</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/OverrideAssessmentRoutingConfiguration"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="varAssessmentSubType">
+            <con2:comment>stores the value of credit assessment sub type element in the payload in ‘varAssessmentSubType’ variable using the xpath</con2:comment>
+            <con2:id>_ActionId-6468831982523906430-6ee57e4f.141c7fd57b9.-78d7</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='creditAssessmentSubTypeCd'])[1]/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="OverrideCreditWorthiness_Router_PS_PipelinePairNode_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-7470703265720747335-43cc6eda.141af7970f3.-7783">
+      <con:stage name="OverrideCreditWorthiness_Router_PS_Dynamic_Routing_ErrorHandler_stage">
+        <con:context/>
+        <con:actions>
+          <con4:log>
+            <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7764</con2:id>
+            <con4:logLevel>debug</con4:logLevel>
+            <con4:expr>
+              <con2:xqueryText>'OverrideCreditWorthiness_Router_PS_Dynamic_Routing_ErrorHandler customerID=',($body//*[local-name()='customerID'])[1]/text(),'] '
+,
+$fault
+,
+$body</con2:xqueryText>
+            </con4:expr>
+          </con4:log>
+          <con2:reply isError="true">
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-6dd6</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="OverrideCreditWorthiness_Router_PS_PipelinePairNode">
+        <con:request>OverrideCreditWorthiness_Router_PS_PipelinePairNode_request</con:request>
+        <con:response>OverrideCreditWorthiness_Router_PS_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+      <con:route-node name="OverrideCreditWorthiness_Router_PS_Dynamic_Routing" error-handler="_onErrorHandler-7470703265720747335-43cc6eda.141af7970f3.-7783">
+        <con:comment>Routes the request to a override assessment proxy based on CreditAssessmentSubType in payload</con:comment>
+        <con:context>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+        </con:context>
+        <con:actions>
+          <con3:dynamic-route>
+            <con2:id>_ActionId-6229273726574352322-1dfd5691.141191ab5d4.-7ed7</con2:id>
+            <con3:service>
+              <con2:xqueryText><![CDATA[<ctx:route>
+  <ctx:service isProxy="true">{$OverrideAssessmentRoutingVar/CreditAssessmentSubType[@value=$varAssessmentSubType]/Service/text()}</ctx:service>
+  <ctx:operation>overrideCreditWorthiness</ctx:operation>
+</ctx:route>]]></con2:xqueryText>
+            </con3:service>
+            <con3:outboundTransform/>
+            <con3:responseTransform/>
+          </con3:dynamic-route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

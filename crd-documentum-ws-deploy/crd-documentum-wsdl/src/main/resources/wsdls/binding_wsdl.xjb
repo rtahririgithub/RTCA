@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings
+   xmlns="http://java.sun.com/xml/ns/jaxws"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   wsdlLocation="CreditDocumentumSvc_v1_0.wsdl">
+   
+   <enableWrapperStyle>false</enableWrapperStyle>
+   
+   <package name="com.telus.credit.crddctm.ws" />
+   
+   <bindings node="wsdl:definitions/wsdl:service[@name='CreditDocumentumSvc_v1_0']">
+      <class name="CreditDocumentumStub" />
+   </bindings>
+
+   <bindings node="wsdl:definitions/wsdl:portType[@name='CreditDocumentumSvc_v1_0_PortType']">
+      <class name="CreditDocumentumServicePortType" />
+   </bindings>
+
+</bindings>
+

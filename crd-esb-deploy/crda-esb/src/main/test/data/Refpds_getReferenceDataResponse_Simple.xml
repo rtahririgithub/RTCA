@@ -1,0 +1,17 @@
+
+<ns4:getReferenceDataResponse 
+xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" 
+xmlns:ns3="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" 
+xmlns:ns4="http://xmlschema.tmi.telus.com/srv/ERM/RefPds/ReferencePDSDataServiceRequestResponse_v1_0" 
+xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+	<ns4:return>
+		<ns4:RefEntity name="CREDIT_PROGRAM_NAME" type="CodeDecode">
+			<ns4:Instance StatusCode="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+				<ns4:Code>NDP</ns4:Code>
+				<ns4:Sequence>30</ns4:Sequence>
+				<ns4:Decode lang="en" purposeCode="1">BYOD Only</ns4:Decode>
+				<ns4:Decode lang="fr" purposeCode="1">AVPA Seulement</ns4:Decode>
+			</ns4:Instance>
+		</ns4:RefEntity>
+	</ns4:return>
+</ns4:getReferenceDataResponse>

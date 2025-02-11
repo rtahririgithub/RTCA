@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-371154556212900145-1d5699ba.13affcad080.-7a56">
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="EnterpriseCreditAssessment_Ping_Stage1">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con2:wsCallout>
+            <con1:id>_ActionId-984009966368366322-33b7331e.13b0490b158.-7f8f</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/EnterpriseCreditAssessmentService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>ping</con2:operation>
+            <con2:request>
+              <con2:body>$ping</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>pingResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="ping">
+                <con1:comment>create EnterpriseCreditAssessment ping request</con1:comment>
+                <con1:id>_ActionId-984009966368366322-33b7331e.13b0490b158.-7f90</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;ping:ping xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"/></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="WLNCreditProfileDataManagment_Ping_Stage">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con2:wsCallout>
+            <con1:id>_ActionId-984009966368366322-33b7331e.13b0490b158.-7f19</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/WLNCreditProfileDataManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>ping</con2:operation>
+            <con2:request>
+              <con2:body>$ping</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>pingResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="ping">
+                <con1:comment>create EnterpriseCreditAssessment ping request</con1:comment>
+                <con1:id>_ActionId-984009966368366322-33b7331e.13b0490b158.-7f1a</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;ping:ping xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"/></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="WLNCreditProfileManagment_Ping_Stage">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con2:wsCallout>
+            <con1:id>_ActionId-371154556212900145-1d5699ba.13affcad080.-7b7c</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/WLNCreditProfileManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>ping</con2:operation>
+            <con2:request>
+              <con2:body>$ping</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>pingResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="ping">
+                <con1:comment>create EnterpriseCreditAssessment ping request</con1:comment>
+                <con1:id>_ActionId-371154556212900145-1d5699ba.13affcad080.-7b7d</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;ping:ping xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"/></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="WLNCollectionManagementService_Ping_Stage">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con2:wsCallout>
+            <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-77f6</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/WLNCollectionManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>ping</con2:operation>
+            <con2:request>
+              <con2:body>$ping</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>pingResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="ping">
+                <con1:comment>create EnterpriseCreditAssessment ping request</con1:comment>
+                <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-77f7</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;ping:ping xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"/></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsumerCustomerManagment_Ping_Stage">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con2:wsCallout>
+            <con1:id>_ActionId-984009966368366322-33b7331e.13b0490b158.-7e71</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/ConsumerCustomerManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>ping</con2:operation>
+            <con2:request>
+              <con2:body>$ping</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>pingResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="ping">
+                <con1:comment>create EnterpriseCreditAssessment ping request</con1:comment>
+                <con1:id>_ActionId-984009966368366322-33b7331e.13b0490b158.-7e72</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;ping:ping xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"/></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsumerBillingAccountManagementService_Ping_Stage">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con2:wsCallout>
+            <con1:comment>call ConsumerBillingAccountManagementService</con1:comment>
+            <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7f74</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/ConsumerBillingAccountManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>ping</con2:operation>
+            <con2:request>
+              <con2:body>$ping</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>pingResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="ping">
+                <con1:comment>create EnterpriseCreditAssessment ping request</con1:comment>
+                <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7f75</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;ping:ping xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"/></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="DepositManagementService__Ping_Stage">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con2:wsCallout>
+            <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7efe</con1:id>
+            <con2:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/DepositManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:operation>ping</con2:operation>
+            <con2:request>
+              <con2:body>$ping</con2:body>
+            </con2:request>
+            <con2:response>
+              <con2:body>pingResponse</con2:body>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="ping">
+                <con1:comment>create EnterpriseCreditAssessment ping request</con1:comment>
+                <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7eff</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;ping:ping xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v2">
+&lt;/ping:ping></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform/>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-371154556212900145-1d5699ba.13affcad080.-7a56">
+      <con:stage name="backend services ping error handler">
+        <con:context xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con1:userNsDecl namespace="http://www.bea.com/wli/sb/context" prefix="con"/>
+          <con1:userNsDecl namespace="http://www.bea.com/wli/sb/stages/transform/config" prefix="con1"/>
+        </con:context>
+        <con:actions xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con4:log xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+            <con1:id>_ActionId-371154556212900145-1d5699ba.13affcad080.-7a1c</con1:id>
+            <con4:logLevel>error</con4:logLevel>
+            <con4:expr>
+              <con1:xqueryText>$fault</con1:xqueryText>
+            </con4:expr>
+            <con4:message>Backend Services ping operation failed</con4:message>
+          </con4:log>
+          <con2:replace varName="body" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+            <con1:id>_ActionId-371154556212900145-1d5699ba.13affcad080.-7a1b</con1:id>
+            <con2:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con2:location>
+            <con2:expr>
+              <con1:xqueryText><![CDATA[<soap-env:Body> 
+      <soap-env:Fault> 
+         <faultcode xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">soap:Server</faultcode>
+         <faultstring>Backend service(s) ping operation failed.</faultstring>		
+         <detail>
+            <commonfault:serviceException xmlns:commonfault="http://schemas.telus.com/common/v1_0">
+               <commonfault:errorCode>CRDW-SYS-002</commonfault:errorCode>
+               <commonfault:errorMessage>Backend Web Service(s) is not available.
+               [
+               {$fault/ctx:errorCode/text()}:{$fault/ctx:reason/text()}:
+               {$fault/ctx:details/con1:ReceivedFaultDetail/con1:detail/con:fault/con:reason/text()}:
+               
+               {$fault/con:location/con:stage/text()}:
+               {$fault/ctx:details/con1:ReceivedFaultDetail/con1:detail/con:fault/con:location/con:stage/text()}
+               
+               ]
+               
+               </commonfault:errorMessage>
+            </commonfault:serviceException>
+		</detail>
+      </soap-env:Fault>
+</soap-env:Body>]]></con1:xqueryText>
+            </con2:expr>
+          </con2:replace>
+          <con1:reply isError="true" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+            <con1:id>_ActionId-371154556212900145-1d5699ba.13affcad080.-7a1a</con1:id>
+          </con1:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

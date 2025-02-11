@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+         <list>
+            <bean id="validateDataExtracts" parent="baseStep">
+               <property name="moduleName" value="javaExec-validateDataExtracts"/>
+            </bean>
+         </list>
+		</property>
+	</bean>
+   <bean id="javaExec-validateDataExtracts" class="com.telus.credit.fraud.batch.validate.IFFTValidateExtractFiles" lazy-init="true">
+      <property name="billingExtractRecordWidth" value="${validateDataExtracts/billingExtractRecordWidth}"/>
+      <property name="bridgingExtractRecordWidth" value="${validateDataExtracts/bridgingExtractRecordWidth}"/>
+      <property name="creditExtractRecordWidth" value="${validateDataExtracts/creditExtractRecordWidth}"/>
+      <property name="customerExtractRecordWidth" value="${validateDataExtracts/customerExtractRecordWidth}"/>
+      <property name="serviceExtractRecordWidth" value="${validateDataExtracts/serviceExtractRecordWidth}"/>
+   </bean>
+</beans>

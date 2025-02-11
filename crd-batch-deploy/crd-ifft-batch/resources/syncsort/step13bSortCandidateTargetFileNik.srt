@@ -1,0 +1,14 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace}
+
+   /INFILE ${processbox}/CANDIDATE_TARGET_FEED_FILE_NIK.DAT 65535 
+	/FIELDS WTN 2 character 10
+   /KEYS WTN
+
+   /OUTFILE ${processbox}/CANDIDATE_TARGET_FEED_FILE_SORTED_NIK.DAT 65535 OVERWRITE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/CreditGatewayServiceRequestResponse_v1" 
+	xmlns:cgr="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CreditGatewayRequestTypes_v1" 
+	xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v3" 
+	attributeFormDefault="unqualified" elementFormDefault="qualified" 
+	targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/CreditGatewayServiceRequestResponse_v1" 
+	version="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v3_0.xsd" namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v3" />
+  <xs:import schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CreditGatewayRequestTypes_v1_2.xsd" namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CreditGatewayRequestTypes_v1" />
+  <xs:element name="pullBusinessCreditReport" type="tns:PullBusinessCreditReport" />
+  <xs:element name="pullBusinessCreditReportResponse" type="tns:PullBusinessCreditReportResponse" />
+  <xs:element name="pullConsumerCreditReport" type="tns:PullConsumerCreditReport" />
+  <xs:element name="pullConsumerCreditReportResponse" type="tns:PullConsumerCreditReportResponse" />
+  <xs:element name="searchForBusinessSimilars" type="tns:SearchForBusinessSimilars" />
+  <xs:element name="searchForBusinessSimilarsResponse" type="tns:SearchForBusinessSimilarsResponse" />
+  <xs:element name="searchSimpleCorporateRegistryReports" type="tns:SearchSimpleCorporateRegistryReports" />
+  <xs:element name="searchSimpleCorporateRegistryReportsResponse" type="tns:SearchSimpleCorporateRegistryReportsResponse" />
+  <xs:element name="pullFullCorporateRegistryReport" type="tns:PullFullCorporateRegistryReport" />
+  <xs:element name="pullFullCorporateRegistryReportResponse" type="tns:PullFullCorporateRegistryReportResponse" />
+  <xs:complexType name="PullBusinessCreditReport">
+    <xs:sequence>
+      <xs:element name="auditInfo" type="ect:AuditInfo" />
+      <xs:element name="businessCreditReportRequest" type="cgr:BusinessCreditReportRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PullBusinessCreditReportResponse">
+    <xs:sequence>
+      <xs:element name="businessCreditReportResponse" type="cgr:BusinessCreditReportResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PullConsumerCreditReport">
+    <xs:sequence>
+      <xs:element name="auditInfo" type="ect:AuditInfo" />
+      <xs:element name="consumerCreditReportRequest" type="cgr:ConsumerCreditReportRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PullConsumerCreditReportResponse">
+    <xs:sequence>
+      <xs:element name="consumerCreditReportResponse" type="cgr:ConsumerCreditReportResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchForBusinessSimilars">
+    <xs:sequence>
+      <xs:element name="auditInfo" type="ect:AuditInfo" />
+      <xs:element name="businessCreditReportRequest" type="cgr:BusinessCreditReportRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchForBusinessSimilarsResponse">
+    <xs:sequence>
+      <xs:element name="businessSimilarsResponse" type="cgr:BusinessSimilarsResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchSimpleCorporateRegistryReports">
+    <xs:sequence>
+      <xs:element name="auditInfo" type="ect:AuditInfo" />
+      <xs:element name="corporateRegistryReportRequest" type="cgr:CorporateRegistryReportRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchSimpleCorporateRegistryReportsResponse">
+    <xs:sequence>
+      <xs:element name="simpleCorporateRegistryReportsResponse" type="cgr:SimpleCorporateRegistryReportsResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PullFullCorporateRegistryReport">
+    <xs:sequence>
+	<xs:element name="auditInfo" type="ect:AuditInfo" />
+      <xs:element name="corporateRegistryReportRequest" type="cgr:CorporateRegistryReportRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PullFullCorporateRegistryReportResponse">
+    <xs:sequence>
+      <xs:element name="fullCorporateRegistryReportResponse" type="cgr:FullCorporateRegistryReportResponse" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

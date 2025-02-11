@@ -1,0 +1,73 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" version="2.1" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="CustomerManagementCommonTypes_v4_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" schemaLocation="CreditCommon_v1_1.xsd"/>
+    <xs:complexType name="ConsumerCreditProfile">
+        <xs:complexContent>
+            <xs:extension base="crdc:CreditProfileData">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="creditWorthiness" type="tns:CreditWorthiness"/>
+                    <xs:element minOccurs="0" name="reportIndicator" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="creditValueEffectiveDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="firstCreditAssessmentDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="latestCreditAssessmentDate" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CreditProfileSearchResult">
+        <xs:complexContent>
+            <xs:extension base="crdc:CreditProfileData">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="creditValueCd" type="crdc:creditValueCodeType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CreditWorthiness">
+        <xs:sequence>
+            <xs:element name="customerID" type="cus:CustomerId"/>
+            <xs:element minOccurs="0" name="creditAssessmentId" type="xs:long"/>
+            <xs:element minOccurs="0" name="creditValueCd" type="crdc:creditValueCodeType"/>
+            <xs:element minOccurs="0" name="creditRiskLevel" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>RTCA risk level</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="assessmentMessageCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>As provided by Decision-ing
+                        engine. such deposit required,...</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="productCategoryQualification" type="crdc:ProductCategoryQualification"/>
+            <xs:element minOccurs="0" name="fraudIndicatorCd" type="crdc:fraudIndicatorType">
+                <xs:annotation>
+                    <xs:documentation>As determined by Decision-ing
+                        engine  or overriden by agent.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="100" minOccurs="0" name="fraudMessageCdList" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>As determined by Decision-ing
+                        engine rule. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditAssessmentTypeCd" type="crdc:creditAssessmentRequestType">
+                <xs:annotation>
+                    <xs:documentation>credit assessment type </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditAssessmentSubTypeCd" type="crdc:creditAssessmentRequestSubType">
+                <xs:annotation>
+                    <xs:documentation>credit assessment sub type</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditAssessmentCreationDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="decisionCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Telus Decision Code from FICO. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

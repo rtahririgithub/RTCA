@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+ 
+    <bean id="AssessmentFactory" class="com.telus.credit.crda.factory.AssessmentFactory"/>
+
+ 
+    <!-- full asmt desicioning -->
+    <bean id="FULL_ASSESSMENT_AUTO_ASSESSMENT" class="com.telus.credit.crda.asmtclassification.dscn.FullAssessmentAuto" lazy-init="true">
+        <property name="asmtTypeSubType" value="FULL_ASSESSMENT_AUTO_ASSESSMENT"/>
+        <constructor-arg ref="NewCustomerCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpFullAssessment"/>
+        <property name="failOverIndicator" value="true"/> 
+		<property name="creditProfileBr" ref="creditProfileBr"/>  
+		<property name="mapper" ref="EcrdaDozerBeanMapper"/>          
+     </bean>
+     
+     <bean id="FULL_ASSESSMENT_UC_FULL_ASMT_AUTO" class="com.telus.credit.crda.asmtclassification.dscn.UnifiedCreditFullAssessmentAuto" lazy-init="true">
+        <property name="asmtTypeSubType" value="FULL_ASSESSMENT_UC_FULL_ASMT_AUTO"/>
+        <constructor-arg ref="UnifiedCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpFullAssessment"/>
+        <property name="failOverIndicator" value="true"/> 
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/>          
+     </bean>
+     
+    <bean id="FULL_ASSESSMENT_GET_BUREAU_DATA"
+          class="com.telus.credit.crda.asmtclassification.dscn.FullAssessmetGetBureauData" lazy-init="true">
+        <property name="asmtTypeSubType" value="FULL_ASSESSMENT_GET_BUREAU_DATA"/>
+        <constructor-arg ref="ManualInquiryCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpFullAssessment"/>
+        <property name="failOverIndicator" value="false"/>
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+    </bean>
+    <bean id="FULL_ASSESSMENT_MANUAL_ASSESSMENT"
+          class="com.telus.credit.crda.asmtclassification.dscn.FullAssessmentManualAssessment" lazy-init="true">
+        <property name="asmtTypeSubType" value="FULL_ASSESSMENT_MANUAL_ASSESSMENT"/>
+        <constructor-arg ref="ExistingCustomerCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpReAssessment"/>
+        <property name="failOverIndicator" value="true"/>
+        <property name="creditProfileBr" ref="creditProfileBr"/> 
+        <property name="creditAssessmentDataMgmtDao" ref="CreditAssessmentDataMgmtDao" />  
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+    </bean>
+    <bean id="FULL_ASSESSMENT_MONTHLY_CVUD" class="com.telus.credit.crda.asmtclassification.dscn.FullAssessmentMonthlyCvud" lazy-init="true">
+        <property name="asmtTypeSubType" value="FULL_ASSESSMENT_MONTHLY_CVUD"/>
+        <constructor-arg ref="MonthlyUDCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpReAssessment"/>
+        <property name="failOverIndicator" value="true"/>
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+        <property name="creditAssessmentDataMgmtDao" ref="CreditAssessmentDataMgmtDao" />  
+        <property name="cVUDTrialRun" value="${FULL_ASSESSMENT_MONTHLY_CVUD/cVUDTrialRun}" />
+    </bean>
+    <bean id="FULL_ASSESSMENT_NEW_ACC_ASSESSMENT"
+          class="com.telus.credit.crda.asmtclassification.dscn.FullAssessmentNewAcctAssessment" lazy-init="true">
+        <property name="asmtTypeSubType" value="FULL_ASSESSMENT_NEW_ACC_ASSESSMENT"/>
+        <constructor-arg ref="ExistingCustomerCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpReAssessment"/>
+        <property name="failOverIndicator" value="true"/>
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+        <property name="creditAssessmentDataMgmtDao" ref="CreditAssessmentDataMgmtDao" />  
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+    </bean>
+    <bean id="FULL_ASSESSMENT_REOPEN_ASSESSMENT"
+          class="com.telus.credit.crda.asmtclassification.dscn.FullAssessmentReopenAssessment" lazy-init="true">
+        <property name="asmtTypeSubType" value="FULL_ASSESSMENT_REOPEN_ASSESSMENT"/>
+        <constructor-arg ref="ExistingCustomerCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpReAssessment"/>
+        <property name="failOverIndicator" value="true"/>
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+        <property name="creditAssessmentDataMgmtDao" ref="CreditAssessmentDataMgmtDao" /> 
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+    </bean>
+
+    <!-- Override asmt decision-ing-->
+    <bean id="OVRD_ASSESSMENT_MANUAL_OVERRIDE"
+          class="com.telus.credit.crda.asmtclassification.dscn.ManualOverrideAssessmentDecisioning" lazy-init="true">
+        <property name="asmtTypeSubType" value="OVRD_ASSESSMENT_MANUAL_OVERRIDE"/>
+        <constructor-arg ref="OverrideCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpOverrideAssessment"/>
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+    </bean>
+    
+ 
+
+    <bean id="OVRD_ASSESSMENT_UNMERGED" class="com.telus.credit.crda.asmtclassification.dscn.UnmergedOverrideAssessmet" lazy-init="true">
+        <property name="asmtTypeSubType" value="OVRD_ASSESSMENT_UNMERGED"/>
+        <constructor-arg ref="OverrideCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpOverrideAssessment"/>
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+         <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+    </bean>
+    <bean id="OVRD_ASSESSMENT_CANCEL_DEPOSIT_INV"
+          class="com.telus.credit.crda.asmtclassification.dscn.CancelDepositInvOverrideAssessmet" lazy-init="true">
+        <property name="asmtTypeSubType" value="OVRD_ASSESSMENT_CANCEL_DEPOSIT_INV"/>
+        <constructor-arg  ref="CancelDepositCreditAssessmentRequestDecisioningEngineAdapter"/>
+        <constructor-arg ref="DecisiongDaoImpOverrideAssessment"/>
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+         <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+    </bean>
+   
+    <!-- Override asmt non decision-ing-->
+    <bean id="OVRD_ASSESSMENT_DEPOSIT_DOWNGRADE"
+          class="com.telus.credit.crda.asmtclassification.nondcsn.DepositDowngradeOverrideAssessmet" lazy-init="true">
+        <property name="asmtTypeSubType" value="OVRD_ASSESSMENT_DEPOSIT_DOWNGRADE"/>
+        <constructor-arg ref="NonDecisioningTrxDao"/>
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/>  
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+        
+    </bean>       
+    <!-- Audit asmt non decision-ing-->
+    <bean id="AUDIT_BUREAU_CONSENT"
+          class="com.telus.credit.crda.asmtclassification.nondcsn.AuditBureauConsentAssessment" lazy-init="true">
+        <property name="asmtTypeSubType" value="AUDIT_BUREAU_CONSENT"/>
+        <constructor-arg ref="NonDecisioningTrxDao"/>
+        <property name="mapper" ref="EcrdaDozerBeanMapper"/> 
+        <property name="creditProfileBr" ref="creditProfileBr"/>  
+    </bean>
+
+
+    <!-- end of type of assessment  -->
+
+ 
+
+
+</beans>
+
+

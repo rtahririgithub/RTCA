@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<Service xsi:noNamespaceSchemaLocation="http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServiceDefinition>
+		<Name>CreditDocumentumSvc</Name>
+		<Documentation>The service enables saving and retrieving  Bureua Report Document  in the Document Repository.  </Documentation>
+		<TAM_LevelZeroAndOne>CMO/OrderMgmt</TAM_LevelZeroAndOne>
+		<ServiceTaxonomy>/CreditDocumentum</ServiceTaxonomy>
+		<MajorVersion>1</MajorVersion>
+		<MinorVersion>0</MinorVersion>
+		<soapAddress>https://cm-smbsvc-west-dv01.tsl.telus.com</soapAddress>
+		<SchemaLocation>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/CreditDocumentumSvcRequestResponse_v1_0.xsd</SchemaLocation>
+		<NameSpace>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/CreditDocumentumSvcRequestResponse_v1</NameSpace>
+		<nsAbbrev>crddctm</nsAbbrev>
+		<OutputDir/>
+		<SecurityToken>
+			<Token>Wssp1.2-2007-Saml1.1-SenderVouches-Wss1.0</Token>
+		</SecurityToken>
+	</ServiceDefinition>
+
+	<Operation>
+		<OperationName>saveBureuaReportDocument</OperationName>
+		<Documentation>Save a document in document repository</Documentation>
+		<InputType wsp="true">saveBureuaReportDocument</InputType>
+		<OutputType>saveBureuaReportDocumentResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+	
+	<Operation>
+		<OperationName>retrieveBureuaReportDocument</OperationName>
+		<Documentation>Enables getting a credit report</Documentation>
+		<InputType wsp="true">retrieveBureuaReportDocument</InputType>
+		<OutputType>retrieveBureuaReportDocumentResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+</Service>

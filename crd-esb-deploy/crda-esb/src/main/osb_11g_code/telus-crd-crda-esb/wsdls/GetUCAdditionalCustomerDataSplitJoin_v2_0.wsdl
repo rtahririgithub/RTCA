@@ -1,0 +1,70 @@
+<WL5G3N0:definitions targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoin_2" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoinRequestResponse" xmlns:WL5G3N2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:WL5G3N3="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3" xmlns:WL5G3N4="http://telus.com/wsdl/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoin_2" xmlns:WL5G3N5="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoin_2" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3" xmlns:gacd="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoinRequestResponse" xmlns:iface="http://telus.com/wsdl/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoin_2" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:shttp="http://soa.com/wsdl/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoinRequestResponse" schemaLocation="GetUCAdditionalCustomerDataSplitJoinRequestResponse.xsd"/>
+      <xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3" schemaLocation="Exceptions_v3_0.xsd"/>
+      <xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="ping_v1.xsd"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="getUCAdditionalCustomerData">
+    <WL5G3N0:part element="WL5G3N1:getUCAdditionalCustomerData" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getUCAdditionalCustomerDataResponse">
+    <WL5G3N0:part element="WL5G3N1:getUCAdditionalCustomerDataResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part element="WL5G3N2:ping" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part element="WL5G3N2:pingResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ServiceException">
+    <WL5G3N0:part element="WL5G3N3:ServiceException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="GetUCAdditionalCustomerDataSplitJoin_v2_0_PortType">
+    <WL5G3N0:operation name="getUCAdditionalCustomerData">
+      <WL5G3N0:input message="WL5G3N4:getUCAdditionalCustomerData"/>
+      <WL5G3N0:output message="WL5G3N4:getUCAdditionalCustomerDataResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input message="WL5G3N4:ping"/>
+      <WL5G3N0:output message="WL5G3N4:pingResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="GetUCAdditionalCustomerDataSplitJoin_v2_0_SOAP" type="WL5G3N4:GetUCAdditionalCustomerDataSplitJoin_v2_0_PortType">
+    <WL5G3N5:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="getUCAdditionalCustomerData">
+      <WL5G3N0:documentation>Operation to return additional data required for performing an assessment.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="GetUCAdditionalCustomerData"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:documentation>                                                                                          </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="ping"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="GetUCAdditionalCustomerDataSplitJoin_v2_0">
+    <WL5G3N0:port binding="WL5G3N4:GetUCAdditionalCustomerDataSplitJoin_v2_0_SOAP" name="GetUCAdditionalCustomerDataSplitJoinPort">
+      <WL5G3N5:address location="http://customermanagementwestesb-dv01.tsl.telus.com/CMO/OrderMgmt/GetUCAdditionalCustomerDataSplitJoin/GetUCAdditionalCustomerDataSplitJoin_v2_0"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

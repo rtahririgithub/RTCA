@@ -1,0 +1,25 @@
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:cbm="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" 
+xmlns:telcotype="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/FindPartySplitJoinRequestResponse_v1" version="1.0">
+	<xs:import namespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" schemaLocation="http://xmlschema.tmi.telus.com/xsd/vendor/IBMTOCP_v2/ibm_telecom_message_party.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2_1.xsd"/>
+	<xs:element name="findPartyParallelRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="lastname"/>
+				<xs:element name="postalCd"/>
+				<xs:element name="DL" minOccurs="0"/>
+				<xs:element name="SIN" minOccurs="0"/>
+				<xs:element name="DOB" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="findPartyParallelResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="findPartyResponse" type="telcotype:PartyCollectionMessage" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

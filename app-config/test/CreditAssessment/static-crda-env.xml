@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+"-//TELUS.com//DTD PropertyNode 1.0//EN" 
+"http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="CreditAssessment">
+    <!-- filename configuration parameters for the batch steps -->
+    <group name="report_rtca_1">
+        <prop name="sqlFilename">rtca_credit_assessment_report1.sql</prop>
+        <prop name="sqlFilename1">rtca_credit_assessment_report2.sql</prop>
+        <prop name="sqlFilename2">rtca_credit_assessment_report3.sql</prop>
+        <prop name="sqlFilename3">rtca_credit_assessment_report4.sql</prop>
+        <prop name="sqlFilename4">rtca_credit_assessment_report5.sql</prop>
+        <prop name="sqlFilename5">rtca_credit_assessment_report6.sql</prop>
+        <prop name="outputFilename">RTCA_Credit_Assessment_Report</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report_rtca_2">
+        <prop name="sqlFilename">rtca_crd_bureau_activity_report.sql</prop>
+        <prop name="outputFilename">RTCA_Credit_Bureau_Activity_Report_Weekly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report_rtca_3">
+        <prop name="sqlFilename">rtca_error_message_report_detailed_weekly.sql</prop>
+        <prop name="outputFilename">RTCA_Error_Message_Detail_Report_Weekly</prop>
+        <prop name="pattern">RTCA_Error_Message</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+     <group name="report_rtca_4">
+        <prop name="sqlFilename">rtca_error_message_report_summary_weekly.sql</prop>
+        <prop name="outputFilename">RTCA_Error_Message_Summary_Report_Weekly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+     <group name="report_rtca_5">
+        <prop name="sqlFilename">rtca_error_message_report_detailed_monthly.sql</prop>
+        <prop name="outputFilename">RTCA_Error_Message_Detail_Report_Monthly</prop>
+         <prop name="pattern">RTCA_Error_Message</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+     <group name="report_rtca_6">
+        <prop name="sqlFilename">rtca_error_message_report_summary_monthly.sql</prop>
+        <prop name="outputFilename">RTCA_Error_Message_Summary_Report_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sync">
+        <prop name="commitFrequency">100</prop>
+        <!--     failurePoint is used to simulate a failure..
+        '0' - no failure
+        'n' - will cause a failure when processing 'n' records
+        -->
+        <prop name="failurePoint">0</prop>        
+        <prop name="inputFile">update_credit_profile.dat</prop>
+        <prop name="joinedInputCustomerFile">join_rcid_cust_id.dat</prop>
+        <prop name="joinedCreditCustomerPrflData">join_crd_custmr_profile_attrs.csv</prop>
+        <prop name="outputReportFile">update_credit_profile_report.csv</prop>
+        <prop name="consecutiveErrorCount">0</prop>
+    </group>
+    <group name="obpm">
+        <prop name="inputFileName">${inbox}/Users.xls</prop>
+        <prop name="outputFileName">${processbox}/organization.xml</prop>
+        <prop name="commitFrequency">100</prop>
+        <prop name="failurePoint">0</prop>        
+        <!--     failurePoint is used to simulate a failure..
+        '0' - no failure
+        'n' - will cause a failure when processing 'n' records
+        -->
+
+    </group>
+    <group name="report">
+        <prop name="scriptFile">${step}/bizrpt-move.sh</prop> 
+        <prop name="scriptFilezip">${step}/rtca-zip.sh</prop>
+        <prop name="outputdir">${outbox}</prop>
+        <prop name="log">${logs}/${jobname}_step1.log</prop>
+        <prop name="log1">${logs}/${jobname}_step2.log</prop>
+        <prop name="log2">${logs}/${jobname}_step3.log</prop>
+        <prop name="log3">${logs}/${jobname}_step4.log</prop>
+        <prop name="log4">${logs}/${jobname}_step5.log</prop>
+        <prop name="log5">${logs}/${jobname}_step6.log</prop>
+        <prop name="log6">${logs}/${jobname}_step7.log</prop>
+        <prop name="log7">${logs}/${jobname}_step8.log</prop>
+        <prop name="log8">${logs}/${jobname}_step9.log</prop>
+        <prop name="log9">${logs}/${jobname}_step10.log</prop>
+        <prop name="log10">${logs}/${jobname}_step11.log</prop>
+
+    </group>
+    <group name="report01">
+        <prop name="sqlFilename">01_Batch_DS_Report_By_Agency_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/DS_Report_BY_Agency_Monthly</prop>
+        <prop name="outputdir">${outbox}</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+        <prop name="log1">${logs}/${jobname}_step2.log</prop>
+    </group>
+    <group name="report02">
+        <prop name="sqlFilename">02_Batch_DS_Report_By_Report_Type_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/DS_Report_By_Report_Type_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report03">
+        <prop name="sqlFilename">03_Batch_DS_Report_By_Jurisdiction_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/DS_Report_By_Jurisdiction_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report04">
+        <prop name="sqlFilename">04_Batch_Corp_Registry_Summary_Stats_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Corp_Registry_Summary_Stats_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report05">
+        <prop name="sqlFilename">05_Batch_Returned_Stored_Reports_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Returned_Stored_Reports_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report06">
+        <prop name="sqlFilename">06_Batch_Credit_Bureau_Summary_Stat_By_AgencyReportType_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Credit_Bureau_Summary_Stat_By_Agency_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report07_1">
+        <prop name="sqlFilename">07_1_Batch_General_Stat_Monthly_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/General_Stat_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report07_2">
+        <prop name="sqlFilename">07_2_Batch_General_Stat_Monthly_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/General_Stat_Monthly_By_Agent</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report07_3">
+        <prop name="sqlFilename">07_3_Batch_General_Stat_Monthly_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/General_Stat_Monthly_Manual_Evals</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report08_1">
+        <prop name="sqlFilename">08_1_Batch_General_Stat_Weekly_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/General_Stat_Weekly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report08_2">
+        <prop name="sqlFilename">08_2_Batch_General_Stat_Weekly_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/General_Stat_Weekly_By_Agent</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report08_3">
+        <prop name="sqlFilename">08_3_Batch_General_Stat_Weekly_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/General_Stat_Weekly_Manual_Evals</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report11">
+        <prop name="sqlFilename">11_Batch_BR276118_Work_Queue_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/BR276118_Work_Queue_Report_1_Daily</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report12">
+        <prop name="sqlFilename">12_Batch_BR276118_Work_Queue_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/BR276118_Work_Queue_Report_2_Daily</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report13">
+        <prop name="sqlFilename">13_Batch_BR276118_Work_Queue_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/BR276118_Work_Queue_Report_3_Daily</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report14">
+        <prop name="sqlFilename">14_Batch_Summary_of_Assessment_Activities_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Summary_Of_Assessment_Activities_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report15_1">
+        <prop name="sqlFilename">15_1_Credit_Assessment_Report_By_Customer_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Credit_Assessment_By_Customer_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report15_2">
+        <prop name="sqlFilename">15_2_Credit_Assessment_Report_By_Customer_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/RAW_Credit_Assessment_Report_By_Customer_Monthly_Details</prop>
+        <prop name="decryptedReportFilename">${processbox}/Credit_Assessment_By_Customer_Monthly_Details</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report15_3">
+        <prop name="sqlFilename">15_3_Credit_Assessment_Summary_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Credit_Assessment_Summary_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report15_4">
+        <prop name="sqlFilename">15_4_Credit_Reference_Type_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Credit_Reference_Type_Monthly</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report16_1">
+        <prop name="sqlFilename">16_1_Credit_Assessment_Report_By_Customer_todate_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Credit_Assessment_By_Customer_Todate</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report16_2">
+        <prop name="sqlFilename">16_2_Credit_Assessment_Report_By_Customer_todate_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/RAW_Credit_Assessment_Report_By_Customer_Todate_Manu_Details</prop>
+        <prop name="decryptedReportFilename">${processbox}/Credit_Assessment_By_Customer_Todate_Details</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report16_3">
+        <prop name="sqlFilename">16_3_Credit_Assessment_Summary_todate_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Credit_Assessment_Summary_Todate</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="report16_4">
+        <prop name="sqlFilename">16_4_Credit_Reference_Type_todate_CSV.sql</prop>
+        <prop name="outputFilename">${processbox}/Credit_Reference_Type_Todate</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="emailreport">
+        <prop name="outputDir">${outbox}</prop>
+        <prop name="filePatternMon">Monthly</prop>
+        <prop name="filePatternWee">Weekly</prop>
+        <prop name="filePatternDai">Daily</prop>
+        <prop name="filePatternMan">Manu</prop>
+        <prop name="filePatternUpd">Update.txt</prop>
+    </group>
+    <group name="archivefile">
+        <prop name="scriptFileRtca">${step}/rtca-archive.sh</prop>
+        <prop name="scriptFileRtca1">${step}/rtca-archive1.sh</prop>
+        <prop name="scriptFile1">${step}/bizrpt-zip.sh</prop>
+        <prop name="scriptFile">${step}/bizrpt-archive.sh</prop>
+        <prop name="inputfiledir">${outbox}</prop>
+        <prop name="outputfiledir">${archive}</prop>
+        <prop name="inputFile">${outbox}/*.csv</prop>
+        <prop name="inputFilePattern">*.csv.gz</prop>
+        <prop name="inputFileMonthly">${outbox}/*Monthly*.csv</prop>
+        <prop name="inputFileWeekly">${outbox}/*Weekly*.csv</prop>
+        <prop name="inputFileDaily">${outbox}/*Daily*.csv</prop>
+        <prop name="inputFileManu">${outbox}/*Manu*.csv</prop>
+        <prop name="inputFilePatternMonthly">*Monthly*.csv.gz</prop>
+        <prop name="inputFilePatternWeekly">*Weekly*.csv.gz</prop>
+        <prop name="inputFilePatternDaily">*Daily*.csv.gz</prop>
+        <prop name="inputFilePatternManu">*Manu*.csv.gz</prop>
+        <prop name="monthlylog">${logs}/${jobname}.log</prop>
+        <prop name="weeklylog">${logs}/${jobname}.log</prop>
+        <prop name="dailylog">${logs}/${jobname}.log</prop>
+        <prop name="manulog">${logs}/${jobname}_Manu.log</prop>
+    </group>
+    <group name="sbi_extract_init">
+        <prop name="sqlFilename">sbi_create_function.sql</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_extract_1">
+        <prop name="sqlFilename">rtca_sbi_credit_assessment_01.sql</prop>
+        <prop name="outputFilename">${processbox}/base_credit_assessment.csv</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_extract_2">
+        <prop name="sqlFilename">rtca_sbi_credit_assessment_02.sql</prop>
+        <prop name="outputFilename">${processbox}/risk_indicator.tmp</prop>
+        <prop name="outputFilenameTransform">${processbox}/risk_indicator.csv</prop>
+        <prop name="maxFieldCount">24</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_extract_3">
+        <prop name="sqlFilename">rtca_sbi_credit_assessment_03.sql</prop>
+        <prop name="outputFilename">${processbox}/fraud_indicator.tmp</prop>
+        <prop name="outputFilenameTransform">${processbox}/fraud_indicator.csv</prop>
+        <prop name="maxFieldCount">10</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_extract_4">
+        <prop name="sqlFilename">rtca_sbi_credit_assessment_04.sql</prop>
+        <prop name="outputFilename">${processbox}/score_indicator.tmp</prop>
+        <prop name="outputFilenameTransform">${processbox}/score_indicator.csv</prop>
+        <prop name="maxFieldCount">60</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_extract_5">
+        <prop name="sqlFilename">rtca_sbi_credit_assessment_05.sql</prop>
+        <prop name="outputFilename">${processbox}/car_attr_val.csv</prop>
+        <prop name="maxFieldCount">6</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_extract_6">
+        <prop name="sqlFilename">rtca_sbi_credit_assessment_06.sql</prop>
+        <prop name="outputFilename">${processbox}/fraud_code.tmp</prop>
+        <prop name="outputFilenameTransform">${processbox}/fraud_code.csv</prop>
+        <prop name="maxFieldCount">6</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_extract_7">
+        <prop name="sqlFilename">rtca_sbi_credit_assessment_07.sql</prop>
+        <prop name="outputFilename">${processbox}/int_crdt_dcsn_trn.csv</prop>
+        <prop name="maxFieldCount">4</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_extract_8">
+        <prop name="sqlFilename">rtca_sbi_credit_assessment_08.sql</prop>
+        <prop name="outputFilename">${processbox}/product_set.tmp</prop>
+        <prop name="outputFilenameTransform">${processbox}/product_set.csv</prop>
+        <prop name="maxFieldCount">12</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="sbi_merge_1">
+        <prop name="outputFilename1">${processbox}/crdt-merge01.csv</prop>
+        <prop name="outputFilename2">${processbox}/crdt-merge02.csv</prop>
+        <prop name="outputFilename3">${processbox}/crdt-merge03.csv</prop>
+        <prop name="outputFilename4">${processbox}/crdt-merge04.csv</prop>
+        <prop name="outputFilename5">${processbox}/crdt-merge05.csv</prop>
+        <prop name="outputFilename6">${processbox}/crdt-merge06.csv</prop>
+        <prop name="outputFilename7">${outbox}/sbi-credit-assessment.csv</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+
+    <group name="connections">
+        <group name="webServices">
+            <prop name="customerProfileUrl">http://ln98420.ent.agt.ab.ca:41111</prop>
+        </group>
+        <group name="servers">
+            <!--
+            <prop name="creditProfileMgtSvr">t3://sedm3241.ent.agt.ab.ca:28091</prop>
+            !-->
+            <prop name="creditProfileMgtSvr">t3://ln98420.ent.agt.ab.ca:41111</prop>
+        </group>
+        <group name="ejbServices">
+            <prop name="InitialContextFactoryClassName">weblogic.jndi.WLInitialContextFactory</prop>
+
+            <group name="creditProfileMgtSvc">
+                <prop name="url">${connections/servers/creditProfileMgtSvr}</prop>
+                <prop name="jndiName">com.telus.credit.service.BusinessCreditProfileService</prop>
+                <prop name="jaasModule">TLSENABLER_JAAS</prop>
+                <prop name="jaasUrl">${connections/servers/creditProfileMgtSvr}</prop>
+                <prop name="fixedUsername">verification</prop>
+                <prop name="fixedPassword">verification</prop>
+            </group>
+
+            <!-- consumer or compass credit profile mgt service -->
+            <group name="consumerCreditProfileMgmtSvc">
+                <prop name="url">${connections/servers/consumerCreditProfileMgmtSvr}</prop>
+                <prop name="jndiName">com.telus.credit.service.CreditProfileService</prop>
+            </group>
+
+        </group> <!-- end group name="ejbServices" -->
+    </group>
+
+   <!-- =================================================================== -->
+   <group name="wlnCollectionMgmt">
+      <group name="summarization">
+         <prop name="aggregatedSoldExternalAgencyAmount">100</prop>
+         <prop name="externalAgencyAssignmentMonthPeriod">24</prop>
+         <prop name="externalAgencySoldAssignmentMonthPeriod">36</prop>
+	 	 <prop name="involuntaryCancelledMonthPeriod">24</prop>
+	     <prop name="internalAgencyCodes">AR,IC</prop>
+      </group>
+   </group>
+
+   <!-- =================================================================== -->
+   <group name="mupdg-init">
+      <prop name="inputFile">${temp}/${L_CRDA_ODATE}/CustomerDriverFile_${L_CRDA_ODATE}.dat</prop>
+      <prop name="minNumberOfRecordsPerFile">2</prop>
+      <prop name="numberOfFiles">4</prop>
+      <prop name="numberOfJobs">4</prop>
+      <prop name="outputDirectory">${temp}/${L_CRDA_ODATE}/job</prop>
+      <prop name="outputFileFormat">mupdg-(NUM).properties</prop>
+   </group>
+
+   <!-- =================================================================== -->
+   <group name="mupdg">
+      <prop name="inputDirectory">${temp}/${L_CRDA_ODATE}</prop>
+      <prop name="controlFile">${mupdg-init/outputDirectory}/mupdg${JOB_SUBGROUP}.properties</prop>
+      <prop name="errorThreshold">10</prop>
+      <prop name="emailTo">dlRTCAreport@telus.com</prop>
+      <prop name="emailFrom">DoNotReply@telus.com</prop>
+      <prop name="emailSubject">${jobname} summary report in ${metadata/envId} env</prop>
+      <prop name="emailBody"><![CDATA[
+<html>
+<pre><b>Record Details:</b>
+Processed: %{T(org.apache.commons.lang3.StringUtils).leftPad(#processedCount, 10)}
+Error:     %{T(org.apache.commons.lang3.StringUtils).leftPad(#errorCount, 10)}
+----------------------
+Total:     %{T(org.apache.commons.lang3.StringUtils).leftPad(#recordTotal, 10)}
+
+<b>Customer Details:</b>
+First Customer Id: %{T(org.apache.commons.lang3.StringUtils).leftPad(#startCustomerId, 10)}
+Last Customer Id:  %{T(org.apache.commons.lang3.StringUtils).leftPad(#lastCustomerId, 10)}
+
+<b>Execution Details:</b>
+Order Date:    %{#orderDate}
+Restart Count: %{#restartCount}
+Start Time:    %{new java.util.Date(#startTime)}
+End Time:      %{new java.util.Date(#endTime)}
+Run Time:      %{(#runTime / (1000 * 60)) % 60} Mins; %{(#runTime / 1000) % 60} secs
+</pre>
+</html>]]>
+      </prop>
+
+      <group name="readers">
+         <group name="driver">
+            <prop name="inputFilePattern">CustomerDriverFile_${L_CRDA_ODATE}.dat</prop>
+         </group>
+
+         <group name="customer">
+            <prop name="inputFilePattern">CustomerDetails_${L_CRDA_ODATE}.dat</prop>
+            <prop name="layoutConfigFile">recordparser/CustomerRecord.xml</prop>
+         </group>
+
+         <group name="customerCreditBureau">
+            <prop name="inputFilePattern">CustomerCreditBureauDetails_${L_CRDA_ODATE}.dat</prop>
+            <prop name="layoutConfigFile">recordparser/CustomerCreditBureauRecord.xml</prop>
+         </group>
+         <group name="customerCreditBureauDtl">
+            <prop name="inputFilePattern">CustomerCreditBureauDtl_${L_CRDA_ODATE}.dat</prop>
+            <prop name="layoutConfigFile">recordparser/CustomerCreditBureauDtlRecord.xml</prop>
+         </group>
+         <group name="customerCreditProfile">
+            <prop name="inputFilePattern">CustomerCreditProfileDetails_${L_CRDA_ODATE}.dat</prop>
+            <prop name="layoutConfigFile">recordparser/CustomerCreditProfileRecord.xml</prop>
+         </group>
+         
+         <group name="customerCreditProfileFraud">   
+	    <prop name="inputFilePattern">CustomerCreditProfileFraudDetails_${L_CRDA_ODATE}.dat</prop>
+	    <prop name="layoutConfigFile">recordparser/CustomerCreditProfileFraudRecord.xml</prop>	 
+	 </group>
+
+
+         <group name="billingAccount">
+            <prop name="inputFilePattern">CustomerBanDetails_${L_CRDA_ODATE}.dat</prop>
+            <prop name="layoutConfigFile">recordparser/BillingAccountRecord.xml</prop>
+         </group>
+
+         <group name="billingAccountAgency">
+            <prop name="inputFilePattern">AgencyRequestDetails_${L_CRDA_ODATE}.dat</prop>
+            <prop name="layoutConfigFile">recordparser/BillingAccountAgencyRecord.xml</prop>
+         </group>
+
+         <group name="billingAccountCollection">
+            <prop name="inputFilePattern">BillingAccountCollectionDetails_${L_CRDA_ODATE}.dat</prop>
+            <prop name="layoutConfigFile">recordparser/BillingAccountCollectionRecord.xml</prop>
+         </group>
+
+         <group name="billingAccountDeposit">
+            <prop name="inputFilePattern">DepositRequestDetails_${L_CRDA_ODATE}.dat</prop>
+            <prop name="layoutConfigFile">recordparser/BillingAccountDepositRecord.xml</prop>
+         </group>
+      </group>
+   </group>
+</group>

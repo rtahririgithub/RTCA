@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings
+   xmlns="http://java.sun.com/xml/ns/jaxws"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   wsdlLocation="OrderDepositCalculatorProxyService_v1_0.wsdl">
+
+   <bindings node="wsdl:definitions/wsdl:service[@name='OrderDepositCalculatorProxyService_v1_0']">
+      <class name="OrderDepositCalculatorProxyServiceStub" />
+   </bindings>
+
+   <bindings node="wsdl:definitions/wsdl:portType[@name='OrderDepositCalculatorProxyService_v1_0_PortType']">
+      <class name="OrderDepositCalculatorProxyServicePortType" />
+   </bindings>
+
+</bindings>

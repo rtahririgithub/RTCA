@@ -1,0 +1,522 @@
+<xs:schema targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerDiaryServiceRequestResponse_v1" version="1.0" xmlns:cc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v4" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerDiaryServiceRequestResponse_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v4" schemaLocation="CustomerCommon_v4_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" schemaLocation="EnterpriseCommonTypes_v9_1.xsd"/>
+    <xs:element name="createCustomerEvent">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="1" name="customerEvent" type="tns:CustomerEvent"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="externalTypeId" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Event type identification in a remote
+                            system.                             This
+                            field should be supplied by an Interface
+                            adapter or batch
+                            process when creating an event that comes
+                            from another system
+                            that has its own event types. Otherwise it
+                            is not required.                         </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createCustomerEventResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="1" name="customerEventId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCustomerEventList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="100" minOccurs="1" name="customerEventList" type="tns:CustomerEvent"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCustomerEventListResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="findCustomerEventSummaryList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="1" name="searchCriteria" type="tns:EventSummarySearchCriteria"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="findCustomerEventSummaryListResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="100" minOccurs="0" name="customerEventList" type="tns:CustomerEvent"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="findCustomerEventDetailList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="1" name="searchCriteria" type="tns:EventSearchCriteria"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="findCustomerEventDetailListResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="100" minOccurs="0" name="customerEventList" type="tns:CustomerEvent"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="findCustomerEventPaginatedList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="1" name="searchCriteria" type="tns:ExtendedEventSearchCriteria"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="findCustomerEventPaginatedListResponse">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ect:ResponseMessage">
+                    <xs:sequence>
+                        <xs:element maxOccurs="100" minOccurs="0" name="customerEventList" type="tns:CustomerEvent"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="totalEventNum" type="xs:integer">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Used for pagination. returns the
+                                    total number of records that satisfy
+                                    the search criteria.
+                                    the consumer application can use
+                                    this value to calculate the number
+                                    of pages to display.                        </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="CustomerEvent">
+        <xs:annotation>
+            <xs:documentation>                 Customer Event is the
+                main entity class that represents a comment or event
+                of a customer interaction history with TELUS.
+                A customer event provides high-level information about
+                the actual                 customer interaction or the
+                event in the system that took place for
+                the customer.                  For more specific or
+                detailed information, a customer event contains
+                references to the detailed information or where more
+                information can                 be found.
+                The following attributes are required for all service
+                clients and                 should always be set:
+                customerId, dateTime, isHighlighted,
+                isSystemGenerated, sourceId, retentionCode, eventTypeId.
+                The following attributes are optional and should be set
+                when available                 or appropriate:
+                referenceEntityTypeCode, referenceEntityId,
+                referenceEntitySourceId, userId, comment, parameters.
+                The following attributes are read-only or should only be
+                set by the                 internal system:
+                categoryCode, customerEventTypeId, masterEventId,
+                systemMessageId.             </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="eventTypeId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>                         The ID
+                        that uniquely identifies the event type.
+                        Valid event types are found in the Reference PDS
+                        table
+                        CUSTOMER_DIARY_EVENT_TYPES.                      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="systemMessageId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>                         Id that
+                        identifies the system generated message
+                        (when applicable).                         This
+                        is a read only value.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="categoryCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                         Category
+                        this event belongs to (i.e.COLLECTIONS).
+                        The Reference PDS table BI_CM_EVENT_CATEGORY
+                        contains the list of                         all
+                        event categories.                         This
+                        is a read only value.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="20" minOccurs="0" name="parameterList" type="tns:CustomerEventParameter">
+                <xs:annotation>
+                    <xs:documentation>                         used when
+                        a system generated message requires one
+                        or more parameters to be injected into it.
+                        This field is optional.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="customerEventId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>                         Uniquely
+                        identifies the customer event.
+                        This is a read only value.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="customerId" type="cc:customerIdType">
+                <xs:annotation>
+                    <xs:documentation>                         The ID of
+                        the customer that this event refers to.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="referenceEntityTypeCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                         The type
+                        of entity that this event refers to
+                        (i.e. customer, billing account, etc).
+                        Valid entity type codes are found in Reference
+                        PDS table BI_CM_REFERENCE_ENTITY_TYPE.
+                        This is an optional field. However, it should be
+                        set                          to an appropriate
+                        entity if available.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="referenceEntityId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                         The
+                        unique ID or number of the entity referred to
+                        in the referenceEntityTypeCode attribute.
+                        This is an optional field. However, it should be
+                        set whenever the referenceEntityTypeCode is set.                                             </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="referenceEntitySourceId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>                         The ID of
+                        the source application that masters the
+                        reference entity.                         By
+                        knowing which application or system the entity
+                        comes from, the entity can be referenced from
+                        that source to                         obtain
+                        more detailed information.
+                        This is an optional field that should be set
+                        whenever the
+                        referenceEntityTypeCode is set.
+                        For a list of application source ids, refer to
+                        the Reference                          PDS table
+                        BI_CM_DATA_SOURCE_ID.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="masterEventId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                         This is
+                        the unique ID of the event in the remote
+                        master system.                         Used for
+                        events that come from other systems that
+                        maintain their own events (e.g. Enabler memos).
+                        This field is optional                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="retentionCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                         Indicates
+                        how long this event should be retained in the
+                        Diary for, either
+                        permanently or temporarily.
+                        Valid retention codes are found in the Reference
+                        ODS table
+                        BI_CM_RETENTION.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="sourceId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>                         The ID of
+                        the source application or system that
+                        created this event.                         For
+                        a list of application source ids, refer to the
+                        Reference PDS                         table
+                        BI_CM_DATA_SOURCE_ID.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="userId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                         The TID
+                        of the person who initiated the event.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="eventDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>                         The date
+                        and time the event took place.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="highlightedInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>                         Indicates
+                        whether the event is highlighted or
+                        not.                         A highlighted event
+                        represents a priority event that is used to
+                        flag the importance of the event.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="systemGeneratedInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>                         Indicates
+                        whether the event is system-generated
+                        or manually entered.                      </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="commentText" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                         The
+                        event's comment text.  Only needed for manual
+                        diary entries.                     </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CustomerEventParameter">
+        <xs:annotation>
+            <xs:documentation>                 Used for system generated
+                messages that accept parameters.             </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="customerEventParameterId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>                     Automatically
+                        generated number to uniquely identify the
+                        customer event                     parameter.
+                        This is a read only field and should not be set
+                        by the client.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="customerEventId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>                     The ID of the
+                        customer event the parameter belongs to.
+                        This is a read only field and should not be set
+                        by the client.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="customerEventParameterName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     The parameter
+                        name.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="customerEventParameterValue" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     The parameter
+                        value.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EventSummarySearchCriteria">
+        <xs:annotation>
+            <xs:documentation>                 Represents and
+                encapsulates all the available search criteria used to
+                search                 for customer events used in the
+                Diary Summary section of Desktop                 One.             </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="languageCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     The language
+                        of the customer event system text to retrieve
+                        Valid language codes can be found in the
+                        Reference PDS table
+                        BI_CM_LANGUAGE                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="orderByHighlightedInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>                     Indicates
+                        whether to return highlighted/priority events
+                        first.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="referenceEntityTypeCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     Populate this
+                        field with the entity type to only search for
+                        events that                     refer to that
+                        entity.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="referenceEntityId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     Populate this
+                        field with the unique ID or number of the entity
+                        referred to                     in the
+                        referenceEntityTypeCode attribute.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="maximumCallDispositionEventNum" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>                     The maximum
+                        number of call disposition events to return.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="customerId" type="cc:customerIdType">
+                <xs:annotation>
+                    <xs:documentation>                     The ID of the
+                        customer whose events are being searched.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="fromDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>                     The date from
+                        which the search will begin.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="maximumEventNum" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>                     The maximum
+                        number of events other than Call Disposition
+                        events to                     return.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EventSearchCriteria">
+        <xs:annotation>
+            <xs:documentation>                 Represents and
+                encapsulates all the available search criteria used to
+                search for customer comments and events.             </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="100" minOccurs="0" name="eventTypeList" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>                     The list of
+                        event type IDs to search. Valid event types are
+                        found in the Reference PDS table
+                        CUSTOMER_DIARY_EVENT_TYPES                  </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="languageCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     The language
+                        of the customer event system text to retrieve.
+                        Default value is English.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="customerId" type="cc:customerIdType">
+                <xs:annotation>
+                    <xs:documentation>                     The ID of the
+                        customer whose events are being searched.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="100" minOccurs="0" name="eventCategoryList" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     The list of
+                        event categories to search.
+                        Populate this to search for all event types
+                        under each specified category.
+                        The Reference PDS table BI_CM_EVENT_CATEGORY
+                        contains the list of                     all
+                        event categories.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="fromDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>                     The date from
+                        which the search will begin.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="toDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>                     The date when
+                        the search will end.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="userId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     The TID of
+                        the person who initiated the event.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="retentionCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     Indicates to
+                        return either permanent or temporary events.
+                        Valid retention codes are found in the Reference
+                        ODS table                     BI_CM_RETENTION.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="referenceEntityTypeCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     Populate this
+                        field with the entity type to only search for
+                        events that                     refer to that
+                        entity.                     Valid entity type
+                        codes are found in Reference PDS table
+                        BI_CM_REFERENCE_ENTITY_TYPE.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="referenceEntityId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>                     Populate this
+                        field with the unique ID of the entity referred
+                        to in the
+                        referenceEntityTypeCode attribute.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="orderByHighlightedInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>                     Indicates
+                        whether to return highlighted events first.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="maximumEventNum" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>                     The maximum
+                        number of events to return.                 </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="systemGeneratedInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>                     Indicates
+                        whether to return only system-generated or only
+                        manual comment and                     events.                  </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ExtendedEventSearchCriteria">
+        <xs:annotation>
+            <xs:documentation>                 Extends search criteria
+                to include keyword and pagination fields.             </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:EventSearchCriteria">
+                <xs:sequence>
+                    <xs:element maxOccurs="1" minOccurs="0" name="firstRowNum" type="xs:integer">
+                        <xs:annotation>
+                            <xs:documentation>         Used for
+                                pagination. The initial row to return.
+                                Default is 1.                    </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="1" minOccurs="0" name="lastRowNum" type="xs:integer">
+                        <xs:annotation>
+                            <xs:documentation>         Used for
+                                pagination. The last row to return. If
+                                not supplied up to 100 rows will be
+                                returned.                    </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="1" minOccurs="0" name="keywordTxt" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>         If supplied, the
+                                diary entries returned will match the
+                                keyword.                    </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

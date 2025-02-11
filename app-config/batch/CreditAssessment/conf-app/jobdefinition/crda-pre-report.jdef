@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+   <import resource="classpath:fw-base.jdef"/>
+
+    <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+    </bean>
+
+    <bean id="job" parent="baseJob">
+
+       <property name="steps">
+          <list>
+             <bean id="STEP01" parent="baseStep">
+                <property name="moduleName">
+                   <value>join_drv_ban</value>
+                </property>
+             </bean>
+             <bean id="STEP02" parent="baseStep">
+                <property name="moduleName">
+                   <value>join_ban_details</value>
+                </property>
+             </bean>
+             <bean id="STEP03" parent="baseStep">
+                <property name="moduleName">
+                   <value>closed_ban</value>
+                </property>
+             </bean>
+            <bean id="STEP04" parent="baseStep">
+                <property name="moduleName">
+                   <value>other_cv</value>
+                </property>
+             </bean>
+              <bean id="STEP05" parent="baseStep">
+                <property name="moduleName">
+                   <value>join_cv</value>
+                </property>
+             </bean>
+              <bean id="STEP06" parent="baseStep">
+                <property name="moduleName">
+                   <value>join_drv_ban_included</value>
+                </property>
+             </bean>
+             <bean id="STEP07" parent="baseStep">
+                <property name="moduleName">
+                   <value>join_ban_details_included</value>
+                </property>
+             </bean>
+            <!--bean id="STEP08" parent="baseStep">
+                <property name="moduleName">
+                   <value>bill_process</value>
+                </property>
+             </bean>
+            <bean id="STEP09" parent="baseStep">
+                <property name="moduleName">
+                   <value>cycle</value>
+                </property>
+             </bean>
+             <bean id="STEP10" parent="baseStep">
+                <property name="moduleName">
+                   <value>sort</value>
+                </property>
+             </bean-->
+ 
+          </list>
+       </property>
+
+    </bean>
+    <bean id="join_drv_ban" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_pre_ban_not_included.sh</value></property>
+       <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/DriverFile.dat_${L_CRDA_ODATE} ${passbox}/${L_CRDA_ODATE}/CustomerBanDetails_${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log}</value></property>
+    </bean>
+    <bean id="join_ban_details" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_pre_ban_not_included_details.sh</value></property>
+       <property name="arg"> <value>${passbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_${L_CRDA_ODATE}.dat  ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_DETAILS_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log1}</value></property>
+    </bean>
+    <bean id="join_cv" lazy-init="true" parent="baseSyncsortScriptStep">
+    <property name="executable">    <value>${syncsort}/rtca_pre_ban_not_included_details_crd.sh</value></property>
+       <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_ACT_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_CRD_CUSTOMER_${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_DETAILS_CV_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log4}</value></property>
+    </bean>
+    <bean id="closed_ban" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_pre_not_included_closed.sh</value></property>
+       <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_DETAILS_${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_CLOSED_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log2}</value></property>
+    </bean>
+    <bean id="other_cv" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_pre_not_included_cv.sh</value></property>
+       <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_DETAILS_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_ACT_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log3}</value></property>
+    </bean>
+     <bean id="join_drv_ban_included" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_pre_ban_included.sh</value></property>
+       <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/DriverFile.dat_${L_CRDA_ODATE} ${passbox}/${L_CRDA_ODATE}/CustomerBanDetails_${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_INCLUDED_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log5}</value></property>
+    </bean>   
+    <bean id="join_ban_details_included" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_pre_ban_not_included_details.sh</value></property>
+       <property name="arg"> <value>${passbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_INCLUDED_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_${L_CRDA_ODATE}.dat  ${passbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_INCLUDED_DETAILS_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log1}</value></property>
+    </bean> 
+    <bean id="bill_process" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_cods_billing_cycle.sh</value></property>
+      <property name="arg"> <value>${inbox}/CUSTODS_REF_BILLING_ACCOUNT.DAT.20140226222550 ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_cycle_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log6}</value></property>
+   </bean>   
+    <bean id="cycle" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_pre_ban_not_included_cycle.sh</value></property>
+       <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_BAN_NOT_INCLUDED_DETAILS_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_cycle_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_bycle_${L_CRDA_ODATE}.dat </value></property>
+       <property name="output"><value>${report/log7}</value></property>
+    </bean>
+    <bean id="sort" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_drive_active_customer_sort.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_bycle_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_bycle_SORTED_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log8}</value></property>
+   </bean>
+</beans>
+
+

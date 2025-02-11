@@ -1,0 +1,23 @@
+/* ================================================================ */
+/* sortCustomerId.srt                                               */
+/* **************************************************************** */
+/* Sort input file by customerId                                    */
+/*                                                                  */
+/* input  file      - linkedProfiles.dat                           */
+/* Output file      - linkedProfiles2.dat                          */
+/*                                                                  */
+/* 2005-11-10   Lei Fan x089748 init                                */
+/* ================================================================ */ 
+${sortstatistic}
+${sortmemory}
+${sortworkspace}
+/INFILE ${processbox}/merge/linkedProfiles.dat ","
+/FIELDS CREDIT_PROFILE_ID 1: - 1: en
+/FIELDS CUSTOMER_ID 2: - 2: en
+/KEYS CUSTOMER_ID
+
+/OUTFILE ${processbox}/merge/linkedProfiles2.dat OVERWRITE
+/REFORMAT CUSTOMER_ID,CREDIT_PROFILE_ID
+
+/WARNINGS 100
+/END

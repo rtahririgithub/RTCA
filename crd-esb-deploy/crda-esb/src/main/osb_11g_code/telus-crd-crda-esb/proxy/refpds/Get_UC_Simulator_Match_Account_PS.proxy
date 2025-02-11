@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-5885535624269734156-77356c03.16972c84e91.-6bb3">
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="Call_RefPDS_stage" errorHandler="_onErrorHandler-3203460142129454737-116880b7.16896510a72.-7de9" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="constants">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6a21</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/constants"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="inputRequest">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7db3</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='performCreditAssessment'])</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:javaCallout varName="refPdsResponse">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6b8d</con2:id>
+            <con1:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+            <con1:className>com.telus.credit.util.ESBCacheHelper</con1:className>
+            <con1:method>public static org.apache.xmlbeans.XmlObject getXmlObjectFromCache(java.lang.String)</con1:method>
+            <con1:expr>
+              <con2:xqueryText>$constants/constant[@value="UC_REFPDS_APPID_CACHE_KEY"]/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:javaCallout>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6b1d</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>$refPdsResponse</con2:xqueryText>
+              </con1:condition>
+              <con1:actions/>
+            </con1:case>
+            <con1:default>
+              <con1:assign varName="output">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-69e6</con2:id>
+                <con1:expr>
+                  <con2:xqueryText><![CDATA[<tns:WlsUnifiedCreditSearchResult xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2">
+	<tns:matchFound>
+		<tns:indicator>false</tns:indicator>
+		<tns:reasonCd>
+			{$constants/constant[@value="REFPDS_TABLES_NOT_LOADED"]/text()}
+		</tns:reasonCd>
+	</tns:matchFound>
+	<tns:dataInquiryErrorCodeList/>
+	<tns:lineOfBusiness>wireless</tns:lineOfBusiness>
+	<tns:unifiedCreditDormantInd>false</tns:unifiedCreditDormantInd>
+</tns:WlsUnifiedCreditSearchResult>]]></con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6ac5</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>&lt;Get_UC_Simulator_Match_Account_PS_Request>
+{$output}
+&lt;/Get_UC_Simulator_Match_Account_PS_Request></con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+              <con2:reply>
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6b00</con2:id>
+              </con2:reply>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response">
+      <con:stage name="Extract value of flag and send it back stage" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="name">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7d36</con2:id>
+            <con1:expr>
+              <con2:xqueryText>fn:substring(data($inputRequest//*[local-name()='firstName']), 0, 3)</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="name">
+            <con2:id>_ActionId-2899733675110927758--57effa81.16b6cce7dcc.-7e97</con2:id>
+            <con1:expr>
+              <con2:xqueryText>upper-case($name)</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="refPdsMatchedAccountInstance">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7d34</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/transformation/getSimInstance"/>
+                <con2:param name="name">
+                  <con2:path>$name</con2:path>
+                </con2:param>
+                <con2:param name="body">
+                  <con2:path>$refPdsResponse</con2:path>
+                </con2:param>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-2931434669256956019-66394996.1689b5ddffe.-7f88</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>empty($refPdsMatchedAccountInstance)</con2:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con1:assign varName="output">
+                  <con2:id>_ActionId-2931434669256956019-66394996.1689b5ddffe.-7f76</con2:id>
+                  <con1:expr>
+                    <con2:xqueryText><![CDATA[<tns:WlsUnifiedCreditSearchResult xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2">
+	<tns:matchFound>
+		<tns:indicator>false</tns:indicator>
+		<tns:reasonCd>
+			{$constants/constant[@value="MISSING_ENTRY_IN_UC_MATCH_SIMULATLOR_WLS"]/text()}
+		</tns:reasonCd>
+	</tns:matchFound>
+	<tns:dataInquiryErrorCodeList/>
+	<tns:lineOfBusiness>wireless</tns:lineOfBusiness>
+	<tns:unifiedCreditDormantInd>false</tns:unifiedCreditDormantInd>
+</tns:WlsUnifiedCreditSearchResult>]]></con2:xqueryText>
+                  </con1:expr>
+                </con1:assign>
+              </con1:actions>
+            </con1:case>
+            <con1:default>
+              <con1:assign varName="refPdsMatchedAccountWarningInstance">
+                <con2:id>_ActionId-2931434669256956019-66394996.1689b5ddffe.-7e82</con2:id>
+                <con1:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="telus-crd-crda-esb/xquery/transformation/getUCSimWarningInstance"/>
+                    <con2:param name="name">
+                      <con2:path>$name</con2:path>
+                    </con2:param>
+                    <con2:param name="body">
+                      <con2:path>$refPdsResponse</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con1:expr>
+              </con1:assign>
+              <con1:ifThenElse>
+                <con2:id>_ActionId-1840331562921686991-d1e88f6.168e2dcfe73.-7ed6</con2:id>
+                <con1:case>
+                  <con1:condition>
+                    <con2:xqueryText>empty($refPdsMatchedAccountWarningInstance)</con2:xqueryText>
+                  </con1:condition>
+                  <con1:actions>
+                    <con1:assign varName="refPdsMatchedAccountWarningInstance">
+                      <con2:id>_ActionId-1840331562921686991-d1e88f6.168e2dcfe73.-7eb7</con2:id>
+                      <con1:expr>
+                        <con2:xqueryText>&lt;refPdsMatchedAccountWarningInstance>false&lt;/refPdsMatchedAccountWarningInstance></con2:xqueryText>
+                      </con1:expr>
+                    </con1:assign>
+                  </con1:actions>
+                </con1:case>
+                <con1:default/>
+              </con1:ifThenElse>
+              <con1:assign varName="output">
+                <con2:id>_ActionId-2931434669256956019-66394996.1689b5ddffe.-7f86</con2:id>
+                <con1:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="telus-crd-crda-esb/xquery/transformation/Create_WlsUnifiedCreditSearchResult_by_UCSim"/>
+                    <con2:param name="refpdsWarningInstance">
+                      <con2:path>$refPdsMatchedAccountWarningInstance</con2:path>
+                    </con2:param>
+                    <con2:param name="refpdsAccountInstance">
+                      <con2:path>$refPdsMatchedAccountInstance</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con1:expr>
+              </con1:assign>
+            </con1:default>
+          </con1:ifThenElse>
+          <con1:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7d32</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText>&lt;Get_UC_Simulator_Match_Account_PS_Request>
+{$output}
+&lt;/Get_UC_Simulator_Match_Account_PS_Request></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline name="_onErrorHandler-3203460142129454737-116880b7.16896510a72.-7de9" type="error">
+      <con:stage name="stage1" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:context/>
+        <con:actions>
+          <con4:log xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7de8</con2:id>
+            <con4:logLevel>error</con4:logLevel>
+            <con4:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con4:expr>
+          </con4:log>
+          <con2:reply>
+            <con2:id>_ActionId-3203460142129454737-116880b7.16896510a72.-7de6</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-5885535624269734156-77356c03.16972c84e91.-6bb3">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:log>
+            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-6ba0</con2:id>
+            <con1:logLevel>error</con1:logLevel>
+            <con1:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con1:expr>
+          </con1:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="PipelinePairNode11">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

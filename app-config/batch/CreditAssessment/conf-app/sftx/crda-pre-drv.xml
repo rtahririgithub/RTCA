@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <!-- =============================================================== -->
+  <bean id="telusSpringConfigurer" lazy-init="true"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+
+  <!-- =============================================================== -->
+  <bean id="crda-pre-drv" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.RequestConfiguration">
+    <property name="requestNm" value="crda-pre-drv" />
+    <property name="sourceSftpUserId" value="${G_ENV}crd" /> 
+    <property name="sourceServerName" value="${G_CRD_BATCH2_SVR}" />
+    <property name="sourceServerTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+    <property name="reqTransferTypeCd" value="${SFTX_TRF_TYPE_SFTP}" />
+    <property name="pushOrPullInd" value="push" />
+    <property name="recipients">
+      <list>
+        <bean id="recipient1" lazy-init="true"      
+      class="com.telus.framework.filetransfer.config.RecipientConfiguration">
+          <property name="serverName" value="${G_COL_BATCH2_SVR}" />
+          <property name="serverTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+          <property name="sftpUserId" 
+              value="${G_SFTP_UX_ACCT_PREFIX}${G_SFTP_COL_ACCT_SUFFIX}" />
+          <property name="files">
+            <list>
+               <ref bean="targetfile1" />
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+  <bean id="targetfile1" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.FileConfiguration">
+        <property name="overwrite" value="true" />
+        <property name="sourcePath" value="${G_DATA_HOME_PREFIX}crd/crda/data/outbox" />
+        <property name="filePattern" value="CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES_*.dat" />
+        <property name="recipientPath" value="${G_COL_NS_UX_SFTP}/${G_ENV}/inbox/trt" />
+    </bean>
+</beans>
+

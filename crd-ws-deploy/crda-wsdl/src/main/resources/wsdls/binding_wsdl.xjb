@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings
+   xmlns="http://java.sun.com/xml/ns/jaxws"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   wsdlLocation="EnterpriseCreditAssessmentService_v2_1.wsdl">
+
+   
+   <bindings node="wsdl:definitions/wsdl:service[@name='EnterpriseCreditAssessmentService_v2_1']">
+      <class name="EnterpriseCreditAssessmentServiceStub" />
+   </bindings>
+
+   <bindings node="wsdl:definitions/wsdl:portType[@name='EnterpriseCreditAssessmentService_v2_1_PortType']">
+      <class name="EnterpriseCreditAssessmentServicePortType" />
+   </bindings>
+
+</bindings>

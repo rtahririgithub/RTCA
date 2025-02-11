@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE delimited-record-layout PUBLIC "-//TELUS.com//DTD DelimitedRecordLayout 1.0//EN" "http://www.telus.com/dtd/DelimitedRecordLayout.dtd">
+
+<delimited-record-layout delimiter="|">
+
+   <typehandlers>
+      <typehandler id="DateHandler" class="com.telus.framework.recordparser2.typehandler.DateHandler">
+         <prop name="pattern">yyyy-MM-dd</prop>
+      </typehandler>
+   </typehandlers>
+
+   <structure name="record" type="com.telus.crd.assessment.batch.domain.CustomerCreditProfileFraudRecord">
+      <field name="customerId" maxLength="10000" />
+      <field name="creditProfileId" maxLength="10000" />
+      <field name="fraudCd" maxLength="10000" />
+      <field name="recordTime" maxLength="10000" />
+   </structure>
+
+</delimited-record-layout>

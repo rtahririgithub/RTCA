@@ -1,0 +1,18 @@
+    ${sortstatistic}
+    ${sortmemory}
+    ${sortworkspace}
+   
+   /INFILE ${processbox}/JOIN_CUSTOMER_PROFILE_SERVICE_INSTANCE.DAT 
+	/FIELDS BILLING_ACCOUNT_ID 1 character 18 
+	/FIELDS WTN 19 character 12
+   /KEYS WTN
+
+   /CONDITION badrecord (BILLING_ACCOUNT_ID = "")
+   /OMIT badrecord
+
+   /OUTFILE ${processbox}/JOIN_CUSTOMER_PROFILE_SERVICE_INSTANCE_SORTED.DAT  OVERWRITE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+

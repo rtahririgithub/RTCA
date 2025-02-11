@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+
+<!-- Env.xml file for :D3M enviroment is found in /apps/common/env/wk/Common -->
+<!--  notes -->
+<!-- svc is short for service -->
+<!--  svr is short for server -->
+<group name="irrelevant">
+
+    <group name="dirs">
+        <group name="log4j">
+            <prop name="logDir">C:/Temp/Log/Desktop/logs</prop>
+         </group>
+    </group>
+
+    <group name="log4j">
+        <group name="severity">
+            <prop name="threshold">DEBUG</prop>
+            <prop name="level">DEBUG</prop>
+        </group>
+        <group name="config">
+            <prop name="path">fw_logging</prop>
+            <prop name="maxFiles">100</prop>
+            <prop name="maxSize">1KB</prop>
+            <prop name="timeInterval">1</prop>
+        </group>
+    </group>
+
+   <!-- frameworks properties -->
+   <group name="fw_props">
+      <group name="audit">
+         <prop name="maxQueueDepth">5000</prop>
+      </group>
+      <group name="performance">
+         <prop name="maxQueueDepth">5000</prop>
+      </group>
+      <group name="error">
+         <prop name="maxQueueDepth">5000</prop>
+         <prop name="errorWorkerCount">5</prop>
+         <!-- errorWorkerPeriod in milliseconds --> 
+         <prop name="errorWorkerPeriod">5000</prop>
+      </group>
+   </group>
+
+    <group name="connections">
+        <!--  the default will be to use the protocol followed by the fully qualified host name and the port -->
+        <group name="servers">
+            <!-- Error, Performance and Audit frameworks properties -->
+            <prop name="readAuditSvr">t3://sedm3226.ent.agt.ab.ca:33334</prop>
+            <prop name="performanceAuditSvr">t3://sedm3226.ent.agt.ab.ca:33334</prop>
+        </group>
+        <group name="webServices">
+        <group name="refpds">
+        <!-- REFPDS ST environment -->
+            <prop name="endpointAddress">http://utilmgtsvcwest-st01.tsl.telus.com/telus-ref-rpds-webservices/ReferencePDSDataService</prop>
+        </group>
+    </group>
+
+
+        <group name="security">
+            <group name="jndiLookup">
+                <!-- 
+                This is used by fw-refresh-spring.xml of TELUS Error frameworks
+                -->
+                <group name="telus">
+                    <prop name="principal">verification</prop>
+                    <prop name="credentials">verification</prop>
+                </group>
+            </group>
+        </group>
+
+        <group name="ejbServices">
+
+               <group name="readAuditSvc">
+                <prop name="url">${connections/servers/readAuditSvr}</prop>
+                <prop name="jndiName">com.telus.framework.audit.service.db.AuditSvc</prop>
+            </group>
+
+        </group>
+
+  <!--
+        <group name="dataSources">
+            <prop name="InitialContextFactoryClassName">weblogic.jndi.WLInitialContextFactory</prop>
+            
+            <group name="yourAppId">
+                  <prop name="jndiName">@yourAppId.dataSource@</prop>
+            </group>
+
+        </group>
+
+        <group name="webServices">
+           <group name="yourAppId">
+                <prop name="endpointAddress">@yourAppId.webService@</prop>
+        </group>
+        </group>
+  -->
+  </group>
+</group>

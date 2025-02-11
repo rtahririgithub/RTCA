@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+   <context:annotation-config />
+   <import resource="classpath:fw-base.jdef" />
+   <import resource="crda-ds.xml"/>
+
+   <!-- ===================================================================== -->
+   <!-- ===================================================================== -->
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="monthlyUpDownInitModule" />
+            </bean>
+         </list>
+      </property>
+   </bean>
+
+
+   <!-- =================================================================== -->
+   <bean id="monthlyUpDownInitModule" lazy-init="true" class="com.telus.crd.assessment.batch.MonthlyUpDownInitModule">
+      <property name="inputFile" value="${mupdg-init/inputFile}" />
+      <property name="minNumberOfRecordsPerFile" value="${mupdg-init/minNumberOfRecordsPerFile}" />
+      <property name="numberOfFiles" value="${mupdg-init/numberOfFiles}" />
+      <property name="numberOfJobs" value="${mupdg-init/numberOfJobs}" />
+      <property name="outputDirectory" value="${mupdg-init/outputDirectory}" />
+      <property name="outputFileFormat" value="${mupdg-init/outputFileFormat}" />
+   </bean>
+
+</beans>

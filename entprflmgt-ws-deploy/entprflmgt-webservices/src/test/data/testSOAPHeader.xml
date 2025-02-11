@@ -1,0 +1,12 @@
+<emh:emHeader xmlns:emh="http://schemas.tmi.telus.com/Enterprise/BaseTypes/telus_em_header_v1">
+<emh:routingRules>
+<emh:transport>http</emh:transport>
+<emh:host>cm-creditmgmt-west-at01.tsl.telus.com</emh:host>
+<emh:port>80</emh:port>
+<emh:uri/>
+<emh:envString>dv01</emh:envString>
+</emh:routingRules>
+<emh:containerInfo>
+<emh:wlNode/>
+</emh:containerInfo>
+</emh:emHeader>

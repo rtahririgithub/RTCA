@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false" isAutoPublish="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="telus-crd-crda-esb/wsdls/WLNCreditProfileManagementProxyService_v2_0"/>
+      <con:port>
+        <con:name>WLNCreditProfileManagementProxyServicePort</con:name>
+        <con:namespace>http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/CMO/OrderMgmt/WLNCreditProfileManagementProxy/WLNCreditProfileManagementProxyService_v2_0</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+      <http:dispatch-policy>WLNCreditProfileManagmentProxyService_WorkManager</http:dispatch-policy>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="ping_PipelinePairNode_request">
+      <con:stage name="Ping_stage" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+        <con:context/>
+        <con:actions>
+          <con5:assign varName="constants" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6505</con2:id>
+            <con5:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/constants"/>
+              </con2:xqueryTransform>
+            </con5:expr>
+          </con5:assign>
+          <con5:ifThenElse xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:comment>refpds Refresh</con2:comment>
+            <con2:id>_ActionId-4680723409317455123-595efe17.16895dc8ee7.-7f15</con2:id>
+            <con5:case>
+              <con5:condition>
+                <con2:xqueryText>fn:exists($header/refpdsOnDemandRefreshInd) and $header/refpdsOnDemandRefreshInd='true'</con2:xqueryText>
+              </con5:condition>
+              <con5:actions>
+                <con5:javaCallout varName="">
+                  <con2:id>_ActionId-3756173436528207349--6aea6005.16955351184.-7e08</con2:id>
+                  <con5:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                  <con5:className>com.telus.credit.util.ESBCacheHelper</con5:className>
+                  <con5:method>public static void clearCache()</con5:method>
+                </con5:javaCallout>
+                <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                  <con2:id>_ActionId-3756173436528207349--6aea6005.16955351184.-7e0a</con2:id>
+                  <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/LoadCache_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                  <con1:request>
+                    <con1:payload>$tmp</con1:payload>
+                  </con1:request>
+                  <con1:response>
+                    <con1:payload>tmp</con1:payload>
+                  </con1:response>
+                  <con1:requestTransform/>
+                  <con1:responseTransform/>
+                </con1:wsCallout>
+                <con5:assign varName="refreshRefpdsResultMessage">
+                  <con2:id>_ActionId-4680723409317455123-595efe17.16895dc8ee7.-7e97</con2:id>
+                  <con5:expr>
+                    <con2:xqueryText>'Refpds cache is refershed.'</con2:xqueryText>
+                  </con5:expr>
+                </con5:assign>
+              </con5:actions>
+            </con5:case>
+            <con5:default>
+              <con1:javaCallout varName="uc_isCacheLoadedInd" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-67f4</con2:id>
+                <con1:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                <con1:className>com.telus.credit.util.ESBCacheHelper</con1:className>
+                <con1:method>public static java.lang.Object getObjectFromCache(java.lang.String)</con1:method>
+                <con1:expr>
+                  <con2:xqueryText>$constants/constant[@value="UC_ISCACHELOADED_CACHE_KEY"]/text()</con2:xqueryText>
+                </con1:expr>
+              </con1:javaCallout>
+              <con5:ifThenElse>
+                <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6793</con2:id>
+                <con5:case>
+                  <con5:condition>
+                    <con2:xqueryText>fn:not(fn:empty($uc_isCacheLoadedInd))
+and
+fn:boolean($uc_isCacheLoadedInd)</con2:xqueryText>
+                  </con5:condition>
+                  <con5:actions/>
+                </con5:case>
+                <con5:default>
+                  <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                    <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6724</con2:id>
+                    <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/LoadCache_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:request>
+                      <con1:payload>$tmp</con1:payload>
+                    </con1:request>
+                    <con1:response>
+                      <con1:payload>tmp</con1:payload>
+                    </con1:response>
+                    <con1:requestTransform/>
+                    <con1:responseTransform/>
+                  </con1:wsCallout>
+                </con5:default>
+              </con5:ifThenElse>
+            </con5:default>
+          </con5:ifThenElse>
+          <con5:ifThenElse xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-4716937181224509304-3f27fa37.1695ed188dd.-74ea</con2:id>
+            <con5:case>
+              <con5:condition>
+                <con2:xqueryText>fn:exists($header/pingBackEndServicesInd) and $header/pingBackEndServicesInd='true'</con2:xqueryText>
+              </con5:condition>
+              <con5:actions>
+                <con4:wsCallout xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                  <con2:comment>call Ping_BackendServices_PS</con2:comment>
+                  <con2:id>_ActionId-4716937181224509304-3f27fa37.1695ed188dd.-74e8</con2:id>
+                  <con4:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/Ping_BackendServices_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                  <con4:request>
+                    <con4:payload>$body</con4:payload>
+                  </con4:request>
+                  <con4:response>
+                    <con4:payload>pingResponse</con4:payload>
+                  </con4:response>
+                  <con4:requestTransform/>
+                  <con4:responseTransform/>
+                </con4:wsCallout>
+              </con5:actions>
+            </con5:case>
+            <con5:default/>
+          </con5:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ping_PipelinePairNode_response">
+      <con:stage name="ping_response stage" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+        <con:context/>
+        <con:actions>
+          <con1:javaCallout varName="cacheContent" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-70f6</con2:id>
+            <con1:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+            <con1:className>com.telus.credit.util.ESBCacheHelper</con1:className>
+            <con1:method>public static java.lang.String getAllObjectFromCache()</con1:method>
+          </con1:javaCallout>
+          <con6:replace varName="header" contents-only="true" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7a98</con1:id>
+            <con6:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con6:location>
+            <con6:expr>
+              <con1:xqueryText>&lt;AdditionalDetails>
+	{$refreshRefpdsResultMessage}
+	{$cacheContent}
+&lt;/AdditionalDetails></con1:xqueryText>
+            </con6:expr>
+          </con6:replace>
+          <con6:replace varName="body" contents-only="true" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6265</con1:id>
+            <con6:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con6:location>
+            <con6:expr>
+              <con1:xqueryText>&lt;tns:pingResponse xsi:schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1 ping_v1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1">
+	&lt;version>
+	Success. version v2_0 [19-06-2019]
+	&lt;/version>
+&lt;/tns:pingResponse></con1:xqueryText>
+            </con6:expr>
+          </con6:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-3851247124846174626-420ad58c.1427c7cbbd6.-7a97">
+      <con:stage name="SyncWLNCreditProfileManagementService_ErrorHandler_stage1">
+        <con:context xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con1:userNsDecl namespace="http://www.bea.com/wli/sb/stages/transform/config" prefix="con1"/>
+          <con1:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+          <con1:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" prefix="ping"/>
+        </con:context>
+        <con:actions xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config">
+          <con5:log xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+            <con1:id>_ActionId-2507102051252998313--638d0863.14334d459d4.-7fb7</con1:id>
+            <con5:logLevel>error</con5:logLevel>
+            <con5:expr>
+              <con1:xqueryText>&lt;assessCreditWorthinessResponse>
+{$fault}
+,
+{$body}
+assessCreditWorthiness_ended for Customer ID={($body//*[local-name()='customerID'])[1]/text()}
+&lt;/assessCreditWorthinessResponse></con1:xqueryText>
+            </con5:expr>
+            <con5:message/>
+          </con5:log>
+          <con2:assign varName="aFault">
+            <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7a8f</con1:id>
+            <con2:expr>
+              <con1:xqueryText>$fault</con1:xqueryText>
+            </con2:expr>
+          </con2:assign>
+          <con2:wsCallout>
+            <con1:comment>call WLNCreditProfileManagementProxyService_ErrorHanlder_PS
+to handle policy/system exceptions via rethrow/resillency/dormant stgy.
+input : body, fault,innbound data</con1:comment>
+            <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7a8b</con1:id>
+            <con2:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/internal/WLNCreditProfileManagementProxyService_ErrorHanlder_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con2:request>
+              <con2:payload>$errorhandlerRequest</con2:payload>
+            </con2:request>
+            <con2:response>
+              <con2:payload>errorhandlerResponse</con2:payload>
+            </con2:response>
+            <con2:requestTransform>
+              <con2:assign varName="errorhandlerRequest">
+                <con1:comment>&lt;input>
+{$aFault} fault at this point
+{$inbound}: transport metadata 
+{$bodySave}: original body
+{$body} : fault from previouse steps
+&lt;/input></con1:comment>
+                <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7a8e</con1:id>
+                <con2:expr>
+                  <con1:xqueryText>&lt;input>
+{$aFault}
+{$inbound}
+{$bodySave}
+{$body/*}
+&lt;/input></con1:xqueryText>
+                </con2:expr>
+              </con2:assign>
+            </con2:requestTransform>
+            <con2:responseTransform>
+              <con2:assign varName="logConfigData">
+                <con1:id>_ActionId-8365752834824998376-924cce8.143ffbc989a.-7d28</con1:id>
+                <con2:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="telus-crd-crda-esb/xquery/config/logConfig"/>
+                  </con1:xqueryTransform>
+                </con2:expr>
+              </con2:assign>
+              <con2:ifThenElse>
+                <con1:id>_ActionId-8365752834824998376-924cce8.143ffbc989a.-7d4c</con1:id>
+                <con2:case>
+                  <con2:condition>
+                    <con1:xqueryText>$logConfigData/HEADER/prop[@name="return"]/text()="true"</con1:xqueryText>
+                  </con2:condition>
+                  <con2:actions>
+                    <con2:insert varName="header">
+                      <con1:id>_ActionId-8365752834824998376-924cce8.143ffbc989a.-7d4a</con1:id>
+                      <con2:location>
+                        <con1:xpathText>.</con1:xpathText>
+                      </con2:location>
+                      <con2:where>last-child</con2:where>
+                      <con2:expr>
+                        <con1:xqueryText>$aFault
+,
+$body/*</con1:xqueryText>
+                      </con2:expr>
+                    </con2:insert>
+                  </con2:actions>
+                </con2:case>
+                <con2:default/>
+              </con2:ifThenElse>
+              <con2:replace varName="body" contents-only="true">
+                <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7a8d</con1:id>
+                <con2:location>
+                  <con1:xpathText>.</con1:xpathText>
+                </con2:location>
+                <con2:expr>
+                  <con1:xqueryText>$errorhandlerResponse</con1:xqueryText>
+                </con2:expr>
+              </con2:replace>
+              <con1:reply isError="false">
+                <con1:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7a8c</con1:id>
+              </con1:reply>
+            </con2:responseTransform>
+          </con2:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="ping">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="ping_PipelinePairNode">
+                <con:request>ping_PipelinePairNode_request</con:request>
+                <con:response>ping_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow>
+              <con:route-node name="SyncWLNCreditProfileManagmentProxyService_PS_RouteNode" error-handler="_onErrorHandler-3851247124846174626-420ad58c.1427c7cbbd6.-7a97">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:comment>Pass the request as is to Common WLNCreditProfileManagmentProxyService_PS</con2:comment>
+                    <con2:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-7b0a</con2:id>
+                    <con1:service ref="telus-crd-crda-esb/proxy/CommonWLNCreditProfileManagementProxyService_v2_0" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation passThrough="true"/>
+                    <con1:outboundTransform>
+                      <con5:assign varName="constants" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-64af</con2:id>
+                        <con5:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="telus-crd-crda-esb/xquery/config/constants"/>
+                          </con2:xqueryTransform>
+                        </con5:expr>
+                      </con5:assign>
+                      <con5:javaCallout varName="uc_isCacheLoadedInd" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-65f0</con2:id>
+                        <con5:archive ref="telus-crd-crda-esb/javacalloutlib/esb-util-4.0.0-SNAPSHOT-jar-with-dependencies"/>
+                        <con5:className>com.telus.credit.util.ESBCacheHelper</con5:className>
+                        <con5:method>public static java.lang.Object getObjectFromCache(java.lang.String)</con5:method>
+                        <con5:expr>
+                          <con2:xqueryText>$constants/constant[@value="UC_ISCACHELOADED_CACHE_KEY"]/text()</con2:xqueryText>
+                        </con5:expr>
+                      </con5:javaCallout>
+                      <con5:ifThenElse xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-659a</con2:id>
+                        <con5:case>
+                          <con5:condition>
+                            <con2:xqueryText>fn:not(fn:empty($uc_isCacheLoadedInd))
+and
+fn:boolean($uc_isCacheLoadedInd)</con2:xqueryText>
+                          </con5:condition>
+                          <con5:actions/>
+                        </con5:case>
+                        <con5:default>
+                          <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                            <con2:id>_ActionId-8799480445098273986--74f7b369.169ff8b9ba5.-6599</con2:id>
+                            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/LoadCache_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                            <con1:request>
+                              <con1:payload>$tmp</con1:payload>
+                            </con1:request>
+                            <con1:response>
+                              <con1:payload>tmp</con1:payload>
+                            </con1:response>
+                            <con1:requestTransform/>
+                            <con1:responseTransform/>
+                          </con1:wsCallout>
+                        </con5:default>
+                      </con5:ifThenElse>
+                      <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-7926</con2:id>
+                        <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:outboundTransform>
+                          <con5:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-7925</con2:id>
+                            <con5:location>
+                              <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                            </con5:location>
+                            <con5:expr>
+                              <con2:xqueryText>&lt;assessCreditWorthinessRequest>
+assessCreditWorthiness_start for Customer ID={($body//*[local-name()='customerID'])[1]/text()}
+{$body}
+&lt;/assessCreditWorthinessRequest></con2:xqueryText>
+                            </con5:expr>
+                          </con5:replace>
+                        </con4:outboundTransform>
+                      </con4:route>
+                      <con3:assign varName="bodySave">
+                        <con2:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-78a0</con2:id>
+                        <con3:expr>
+                          <con2:xqueryText>$body</con2:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con4:route xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-7ae2</con2:id>
+                        <con4:service ref="telus-crd-crda-esb/proxy/internal/Util/Logger_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con4:outboundTransform>
+                          <con5:replace varName="body" contents-only="true" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                            <con2:id>_ActionId-5885535624269734156-77356c03.16972c84e91.-7ae1</con2:id>
+                            <con5:location>
+                              <con5:xpathText xmlns:con5="http://www.bea.com/wli/sb/stages/config">.</con5:xpathText>
+                            </con5:location>
+                            <con5:expr>
+                              <con2:xqueryText>&lt;assessCreditWorthinessResponse>
+{$body}
+assessCreditWorthiness_ended for Customer ID={($body//*[local-name()='customerID'])[1]/text()}
+&lt;/assessCreditWorthinessResponse></con2:xqueryText>
+                            </con5:expr>
+                          </con5:replace>
+                        </con4:outboundTransform>
+                      </con4:route>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

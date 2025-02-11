@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:updateCreditProfile xmlns:ns2="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" 
+xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v1" 
+xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v3" 
+xmlns:ns3="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v3" 
+xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditProfileManagementServiceTypes_v1">
+<ns2:creditProfile>
+<customerId>123</customerId>
+<creditIdentification xsi:type="ns5:ConsumerCreditIdentification" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<driverLicense>
+<driverLicenseNumber>encryptedValueHere</driverLicenseNumber><provinceCode>BC</provinceCode>
+</driverLicense>
+<sin>encryptedValueHere</sin>
+<ns5:creditCardToken>
+<ns4:token>encryptedValueHere</ns4:token><ns4:expiryMonth>0</ns4:expiryMonth><ns4:expiryYear>0</ns4:expiryYear>
+</ns5:creditCardToken>
+</creditIdentification>
+<creditValue>
+<creditValueCode>E</creditValueCode><comment>credit value comment</comment><method>UN</method></creditValue>
+<creditAddress>
+<creditAddressTypeCode>RESIDENTIAL</creditAddressTypeCode>
+<addressLineOne>220 Yonge st</addressLineOne>
+<cityName>Toronto</cityName>
+<province>ON</province>
+<country>CA</country>
+<postalCode>M5B 2L7</postalCode>
+</creditAddress>
+<personalInfo>
+<employmentStatusCode>IMP</employmentStatusCode>
+<creditCheckConsentCode>Y</creditCheckConsentCode>
+<birthDate>2011-09-12-07:00</birthDate>
+</personalInfo>
+<creditCardCode><primaryCreditCardCode>VISA</primaryCreditCardCode>
+<secondaryCreditCardCode>MASTER CARD</secondaryCreditCardCode></creditCardCode>
+</ns2:creditProfile>
+<ns2:auditInfo><ns3:channelOrganizationId>channelId</ns3:channelOrganizationId></ns2:auditInfo>
+</ns2:updateCreditProfile>

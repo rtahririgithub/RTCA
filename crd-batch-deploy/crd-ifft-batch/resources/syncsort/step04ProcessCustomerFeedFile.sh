@@ -1,0 +1,22 @@
+#!/usr/bin/ksh
+
+echo "Step 4: Processing the Customer extract."
+
+syncsort << EOF
+	/INFILE "$1" 65535
+	/FIELDS CUSTOMER_ID 1 character 9
+	/FIELDS CUST_TYPE_CD 28 character 1
+	/FIELDS FIRST_NM 355 character 60
+	/FIELDS MIDDLE_NM 415 character 60
+	/FIELDS LAST_NM 475 character 60
+	/KEYS CUSTOMER_ID
+	
+	/OUTFILE "$2" OVERWRITE
+	/REFORMAT CUSTOMER_ID, FIRST_NM, MIDDLE_NM, LAST_NM, CUST_TYPE_CD
+	/COLLATINGSEQUENCE DEFAULT ASCII
+
+   /SILENT
+	/END
+EOF
+
+return $?

@@ -1,0 +1,45 @@
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:emh="http://schemas.tmi.telus.com/Enterprise/BaseTypes/telus_em_header_v1" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EMRoutingServiceRequestResponse_v1" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EMRoutingServiceRequestResponse_v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://schemas.tmi.telus.com/Enterprise/BaseTypes/telus_em_header_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/telus_em_header_v1_0.xsd"/>
+	<xs:element name="getEmHeader">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="EmheaderEntryName" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>valid values =                  cm-creditmgmt-west , 
+cm-custinfomgmt-west  , 
+cmbilling-billingacctmgmt  , 
+custmgtbillsvcwest  , 
+customermanagementwestesb .</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getEmHeaderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="emh:emHeader"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAllEmHeader"/>
+	<xs:element name="getAllEmHeaderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="allEnvRoutingConfig" type="tns:AllEnvRoutingConfig"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AllEnvRoutingConfig">
+		<xs:sequence>
+			<xs:element name="emheaderEntry" type="tns:EmheaderEntry" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EmheaderEntry">
+		<xs:sequence>
+			<xs:element ref="emh:emHeader"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+</xs:schema>

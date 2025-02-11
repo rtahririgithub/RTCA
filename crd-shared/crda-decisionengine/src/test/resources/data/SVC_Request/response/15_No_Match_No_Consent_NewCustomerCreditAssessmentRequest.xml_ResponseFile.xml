@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CreditAssessmentResult xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2">
+    <assessmentResultCd>SUCCESS</assessmentResultCd>
+    <assessmentResultReasonCd></assessmentResultReasonCd>
+    <decisionCd>NWDFLT000001</decisionCd>
+    <assessmentMessageCd>DFNOC01</assessmentMessageCd>
+    <creditValueCd>R</creditValueCd>
+    <productCategoryQualification>
+        <productCategoryList>
+            <categoryCd>SLR</categoryCd>
+            <qualified>true</qualified>
+        </productCategoryList>
+        <boltOnInd>false</boltOnInd>
+    </productCategoryQualification>
+    <rulesExecuted>DATE=2019-06-10T17:41:13.782-07:00, VERSION=20190610</rulesExecuted>
+    <rulesExecuted>280_060_New_Assessment_Trigger: TYPE/SUB=FULL_ASSESSMENT/AUTO_ASSESSMENT:  TRIGGER=NEW_ASSESSMENT_TRIGGER</rulesExecuted>
+    <rulesExecuted>100_999_Default_Rule: no validation issues</rulesExecuted>
+    <rulesExecuted>260_030_New_Customer: CUSTOMER TYPE=NEW_CUSTOMER</rulesExecuted>
+    <rulesExecuted>270_020_Inactive_Costomer_No_Assess: CUSTOMER ACTIVITY=INACTIVE</rulesExecuted>
+    <rulesExecuted>250_020_Short_Tenure_New_Customer CHAMPION: TENURE=SHORT_TENURE</rulesExecuted>
+    <rulesExecuted>240_021_Short_Tenure_New_Assessment: ASSESSMENT TYPE=NEW_ASSESSMENT</rulesExecuted>
+    <rulesExecuted>220_010_No_Bureau_Report_Date: BureauExists=false</rulesExecuted>
+    <rulesExecuted>210_020_Exclude_No_Consent: BureauRequired=false</rulesExecuted>
+    <rulesExecuted>R_470_030_ Match_ Not_Found: Unified Credit Indicator=false,Unified Credit Indicator ReasonCode=UCNOMCH1</rulesExecuted>
+    <rulesExecuted>R_435_010_Set_Unified_Credit_Indicator: Unified Credit Indicator=false,Unified Credit Indicator ReasonCode=UCNOMCH1</rulesExecuted>
+    <rulesExecuted>R_435_30_Default: </rulesExecuted>
+    <rulesExecuted>175_020_New_Assessment_No_Action EXECUTED</rulesExecuted>
+    <rulesExecuted>400_130_CS2: Revenue Segment CS2 mapped to revenue band of 1</rulesExecuted>
+    <rulesExecuted>200_010_New_Assessment_No_Consent: riskLevelNumber=9000,assessmentMessageCd=DFNOC01,trueRestricted=true</rulesExecuted>
+    <rulesExecuted>R_201_020_Short_Tenure: decisionCd=NWDFLT000001</rulesExecuted>
+    <rulesExecuted>315_Determine_Eligibility.initializationRule: IS_OVERRIDE=false,UNCLEARED_FRAUD=false</rulesExecuted>
+    <rulesExecuted>R_315_050_Map_CV_R: riskLevelNumber=9000</rulesExecuted>
+    <rulesExecuted>R_315_100_Lookup_Deposit_Eligibility: riskLevelNumber=9000,creditValue=R,decisionMessageCode=REGCA03</rulesExecuted>
+    <rulesExecuted>160_000_MapProduct: Assigned Product Eligibility Set: SLR  Bolt-on=false</rulesExecuted>
+    <rulesExecuted>162_004_True_Restricted: Assessment Message Code=DFNOC01</rulesExecuted>
+    <rulesExecuted>430_998_Default_Rule: RESULT=SUCCESS</rulesExecuted>
+    <creditAssessmentStrategies>
+        <depositLookupStrategy>CHAM</depositLookupStrategy>
+        <cvudStrategy>CHAM</cvudStrategy>
+        <creditValueAssignmentStrategy>CHAM</creditValueAssignmentStrategy>
+        <customerActivityStrategy>CHAM</customerActivityStrategy>
+        <tenureStrategy>CHAM</tenureStrategy>
+    </creditAssessmentStrategies>
+    <creditRiskLevel>9000</creditRiskLevel>
+    <unifiedCreditAssessmentResult>
+        <unifiedCreditAssessmentIndicator>
+            <indicator>false</indicator>
+            <reasonCd>UCNOMCH1</reasonCd>
+        </unifiedCreditAssessmentIndicator>
+    </unifiedCreditAssessmentResult>
+</CreditAssessmentResult>
+

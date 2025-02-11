@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+<group name="config">
+
+    <group name="codestable">
+        <list name="nodelist">
+            <string>ReferenceOds/generic-code-reference-config</string>
+            <string>ReferenceOds/message-reference-config</string>
+            <string>ReferenceOds/xref-reference-config</string>
+        </list>
+    </group>
+    
+    <group name="ReferenceOds">
+
+        <group name="generic-code-reference-config">
+            <group name="initParams">
+                <prop name="codesTableName">GenericCodeReference</prop>
+            </group>
+
+            <prop name="statementId">ReferenceOdsCodesTable.GenericCodeReference</prop>
+
+            <group name="categoryDefinition">
+                <prop name="columnName">VIEW_NAME</prop>
+            </group>
+            <group name="languageDefinition">
+                <prop name="columnName">LANG</prop>
+            </group>
+            <group name="codeDefinition">
+                <list name="columnName">
+                    <string>CODE</string>
+                </list>
+            </group>
+            <group name="decodeDefinition">
+                <list name="columnName">
+                    <string>SHORT_NAME</string>
+                    <string>LONG_NAME</string>
+                    <string>DESCRIPTION</string>
+                    <string>BASE_VIEW</string>
+					<string>EFFECTIVE_START_TS</string>
+					<string>EFFECTIVE_END_TS</string>
+                </list>
+				<list name="beanPropertyName">
+                    <string>decode</string>
+                    <string>longDecode</string>
+                    <string>description</string>
+                    <string>baseView</string>
+					<string>effectiveStartTs</string>
+					<string>effectiveEndTs</string>
+                </list>
+            </group>
+        </group>
+        
+        <group name="message-reference-config">
+            <group name="initParams">
+                <prop name="codesTableName">MessageReference</prop>
+            </group>
+
+            <prop name="statementId">ReferenceOdsCodesTable.MessageReference</prop>
+
+            <group name="categoryDefinition">
+                <prop name="name">MESSAGE_REFERENCE</prop>
+            </group>
+            <group name="languageDefinition">
+                <prop name="columnName">LANG</prop>
+            </group>
+            <group name="codeDefinition">
+                <list name="columnName">
+                    <string>CODE</string>
+                </list>
+            </group>
+            <group name="decodeDefinition">
+                <list name="columnName">
+                    <string>MSG_TEXT</string>
+                    <string>MSG_TYPE</string>
+                </list>
+            </group>
+        </group>
+        
+        <group name="xref-reference-config">
+            <group name="initParams">
+                <prop name="codesTableName">CrossReference</prop>
+            </group>
+
+            <prop name="statementId">ReferenceOdsCodesTable.CrossReference</prop>
+
+            <group name="categoryDefinition">
+                <prop name="columnName">CATEGORY</prop>
+            </group>
+            <group name="codeDefinition">
+                <list name="columnName">
+                    <string>PARENT_CODE</string>
+                </list>
+            </group>
+            <group name="decodeDefinition">
+                <list name="columnName">
+                    <string>CHILD_CODE</string>
+                    <string>CHILD_TABLENAME</string>
+					<string>MASTER_CODE</string>
+					<string>MASTER_TABLENAME</string>
+                </list>
+            </group>
+        </group>
+        
+    </group>
+    
+</group>

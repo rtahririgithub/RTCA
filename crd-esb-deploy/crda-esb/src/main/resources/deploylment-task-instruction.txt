@@ -1,0 +1,21 @@
+<ENV>=dv01
+
+sbconfig jar Deployment 
+---------------
+ESB console -> System Administration -> ->Import Resources->import following filename->
+<BuildPATH>\telus-crd-crda-esb\src\main\resources\telus-crd-crda-esb-2.0_sbconfig.jar
+
+
+Execute Customization File 
+---------------------
+ESB console -> System Administration -> Customization -> Execute Customization File ->import following filename ->execute  <BuildPATH>\telus-crd-crda-esb\src\main\resources\config\telus-crd-crda-esb-Customization-File_<ENV>.xml
+
+
+Activate
+--------------
+->activate->submit
+
+Verification
+----------------
+success deployment
+

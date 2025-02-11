@@ -1,0 +1,23 @@
+<soap:Envelope xmlns:cc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v4" xmlns:ds="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerDiaryServiceRequestResponse_v1" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:exc="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:iface="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerDiaryService_1" xmlns:ns0="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/SelfServeDomainBusinessServices_v1" xmlns:ns1="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" xmlns:ns2="http://federatedgovernance.org/policy/httpsecurity" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:shttp="http://soa.com/wsdl/http" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ums="http://xmlschema.tmi.telus.com/srv/CMO/SelfMgmt/UsageManagementServiceRequestResponse_v1" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soap:Header/>
+	<soap:Body>
+		
+		<ds:createCustomerEvent  xmlns:ds="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerDiaryServiceRequestResponse_v1" >
+			<customerEvent>
+				<eventTypeId>2</eventTypeId>
+				<customerId>95148496</customerId>
+				<referenceEntityTypeCode>BACCT</referenceEntityTypeCode>
+				<referenceEntityId>602995091</referenceEntityId>
+				<retentionCode>PRM</retentionCode>
+				<sourceId>14505</sourceId>
+				<userId>T854257</userId>
+				<eventDate>2018-12-05T16:25:41.161Z</eventDate>
+				<highlightedInd>false</highlightedInd>
+				<systemGeneratedInd>true</systemGeneratedInd>
+				<commentText>This BAN has been unlinked (associationType=OFFERASSOC) with the following BAN(s): [WLS 70820821]</commentText>
+			</customerEvent>
+		</ds:createCustomerEvent>
+		
+		
+	</soap:Body>
+</soap:Envelope>

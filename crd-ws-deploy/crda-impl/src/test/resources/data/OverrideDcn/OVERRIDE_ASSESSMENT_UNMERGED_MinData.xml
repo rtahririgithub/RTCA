@@ -1,0 +1,45 @@
+<tns:performCreditAssessment xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2 Enterprise_Override_CreditAssessmentServiceRequestResponse_v2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:wcpmt="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7">
+	<tns:creditAssessmentRequest xsi:type="tns:OverrideCreditAssessmentRequest">
+		<tns:creditAssessmentTypeCd>OVRD_ASSESSMENT</tns:creditAssessmentTypeCd>
+		<tns:creditAssessmentSubTypeCd>UNMERGED</tns:creditAssessmentSubTypeCd>
+		<tns:customerID>119035483</tns:customerID>
+		<tns:applicationID>123</tns:applicationID>
+		<tns:channelID>123</tns:channelID>
+		<tns:lineOfBusiness>WIRELINE</tns:lineOfBusiness>
+		<tns:commentTxt>123</tns:commentTxt>
+		<tns:creditProfileData>
+			<crdc:creditProfileID>2147483647</crdc:creditProfileID>
+			<crdc:customerID>2147483647</crdc:customerID>
+			<crdc:creditProfileStatusCd>A</crdc:creditProfileStatusCd>
+			<wcpmt:creditWorthiness>
+				<wcpmt:creditValueCd>E</wcpmt:creditValueCd>
+				<wcpmt:fraudIndicatorCd>N</wcpmt:fraudIndicatorCd>
+			</wcpmt:creditWorthiness>
+		</tns:creditProfileData>
+		<tns:creditCustomerInfo>
+			<crdc:customerID>119035483</crdc:customerID>
+			<crdc:personName>
+				<crdc:firstName>123</crdc:firstName>
+				<crdc:lastName>123</crdc:lastName>
+				<crdc:middleName>123</crdc:middleName>
+				<crdc:nameSuffix>123</crdc:nameSuffix>
+				<crdc:title>123</crdc:title>
+			</crdc:personName>
+			<crdc:customerCreationDate>1967-08-13</crdc:customerCreationDate>
+			<crdc:customerMasterSourceID>2147483647</crdc:customerMasterSourceID>
+			<crdc:customerStatusCd>123</crdc:customerStatusCd>
+			<crdc:customerTypeCd>123</crdc:customerTypeCd>
+			<crdc:customerSubTypeCd>123</crdc:customerSubTypeCd>
+		</tns:creditCustomerInfo>
+	</tns:creditAssessmentRequest>
+	<tns:auditInfo>
+		<ent:userId>123</ent:userId>
+		<ent:userTypeCode>usertypecd1</ent:userTypeCode>
+		<ent:salesRepresentativeId>123</ent:salesRepresentativeId>
+		<ent:channelOrganizationId>123</ent:channelOrganizationId>
+		<ent:outletId>123</ent:outletId>
+		<ent:originatorApplicationId>123</ent:originatorApplicationId>
+		<ent:correlationId>123</ent:correlationId>
+		<ent:timestamp>2001-12-17T09:30:47.0Z</ent:timestamp>
+	</tns:auditInfo>
+</tns:performCreditAssessment>

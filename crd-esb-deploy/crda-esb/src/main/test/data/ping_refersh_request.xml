@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1">
+   <soapenv:Header>
+<refpdsOnDemandRefreshInd>true</refpdsOnDemandRefreshInd>    	
+   </soapenv:Header>
+   <soapenv:Body>
+      <ping:ping/>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<!--
+Refresh shall be done for each server within the cluster.
+PT05
+http://ln98438:30671/CMO/OrderMgmt/WLNCreditProfileManagementProxy/WLNCreditProfileManagementProxyService_v2_0
+http://ln98439:30671/CMO/OrderMgmt/WLNCreditProfileManagementProxy/WLNCreditProfileManagementProxyService_v2_0
+UC_MATCH_SIMULATOR_FLAG
+-->

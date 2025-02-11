@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <bean id="telusSpringConfigurer" class="com.telus.framework.config.spring.PlaceholderConfigurer"/>
+
+    <bean id="refOdsCodesTableBootstrap" class="com.telus.framework.codestable.config.DatabaseCodesTableConfigurator" init-method="initialize" lazy-init="false">
+        <property name="nodelistPath">
+            <value>codestable/nodelist</value>
+        </property>
+        <property name="sourceType">
+            <value>service</value>
+        </property>
+        <property name="codesTableSourceSvc">
+            <ref bean="codesTableSourceSvc"/>
+        </property>
+    </bean>
+
+    <bean id="codesTableSourceSvc" class="com.telus.framework.util.spring.ServiceProxy" lazy-init="true">
+        <property name="jndiName">
+            <value>${connections/ejbServices/referenceOdsAccessSvc/jndiName}</value>
+        </property>
+        <property name="businessInterface">
+            <value>com.telus.framework.codestable.service.CodesTableSourceSvc</value>
+        </property>
+        <property name="jndiEnvironment">
+            <props>
+                <prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+                <prop key="java.naming.provider.url">${connections/ejbServices/referenceOdsAccessSvc/url}</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

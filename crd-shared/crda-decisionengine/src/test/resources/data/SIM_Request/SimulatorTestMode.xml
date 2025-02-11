@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:SimulatorCreditBureauRequest 
+xsi:schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICOSimulatorBureauInterfaceTypes_v1 FICOSimulatorBureauInterfaceTypes_v1_1.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2" 
+xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICOSimulatorBureauInterfaceTypes_v1">
+	<tns:environmentCode>TEST</tns:environmentCode>
+	<tns:personName>
+		<crdc:firstName>RVSingh</crdc:firstName>
+		<crdc:lastName>TestLast</crdc:lastName>
+	</tns:personName>
+</tns:SimulatorCreditBureauRequest>

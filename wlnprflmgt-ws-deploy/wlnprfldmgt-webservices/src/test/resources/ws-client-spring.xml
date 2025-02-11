@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+  <!-- Consumer Customer Mgmt Web service  -->
+  <!-- 
+  <bean id="consumerCustMgtService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+ 		<property name="serviceInterface" value="com.telus.wsdl.cmo.informationmgmt.consumercustomermanagementservice_2.ConsumerCustomerManagementServicePortType"/>
+        <property name="wsdlDocumentUrl" value="classpath:wsdls/ConsumerCustomerManagementService_v2_6.wsdl" />
+         -->
+        <!-- Web service URL configured in env.xml file. -->
+        <!-- 
+        <property name="endpointAddress" value="${connections/SOA/serviceURLs/consumerCustMgtServiceBaseUrl}_v2_6_vs0" />
+        <property name="namespaceUri" value="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" />
+        <property name="serviceName" value="ConsumerCustomerManagementService_v2_6" />
+        <property name="portName" value="ConsumerCustomerManagementServicePort" />
+        <property name="lookupServiceOnStartup" value="false"/>
+        <property name="username" value="${connections/SOA/soaCreditWsClientUsername}"/>
+        <property name="password" value="${connections/SOA/soaCreditWsClientPassword}"/>
+	<property name="handlerResolver" ref="handlerResolverConsumerCustMgmt"/>
+    </bean>
+
+    <bean id="handlerResolverConsumerCustMgmt" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver">
+       <property name="handlerList" >
+          <list >
+             <bean class="com.telus.framework.ws.em.soaphandler.JaxWsRoutingHandler" init-method="init">
+                <property name="handlerConfig">
+                   <util:map map-class="java.util.HashMap">
+                      <entry key="physicalEndpoint" value="${connections/servers/ConsumerCustomerManagement}"/>
+                      <entry key="envString" value="${metadata/envId}"/>
+                   </util:map>
+                </property>
+             </bean>
+          </list>
+       </property>
+    </bean>
+ 	-->
+    <!-- Enterprise Credit Assessment Web service -->
+    <!--  
+    <bean id="enterpriseCreditAssessmentService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+ 		<property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.enterprisecreditassessmentservice_2.EnterpriseCreditAssessmentServicePortType"/>
+        <property name="wsdlDocumentUrl" value="classpath:wsdls/EnterpriseCreditAssessmentService_v2_0.wsdl" />
+        -->
+        <!-- Web service URL configured in env.xml file. -->
+        <!-- 
+        <property name="endpointAddress" value="${connections/SOA/serviceURLs/enterpriseCreditAssessmentServiceUrl}" />
+        <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/EnterpriseCreditAssessmentService_2" />
+        <property name="serviceName" value="EnterpriseCreditAssessmentService_v2_0" />
+        <property name="portName" value="EnterpriseCreditAssessmentServicePort" />
+        <property name="lookupServiceOnStartup" value="false"/>
+        <property name="username" value="${connections/SOA/soaCreditWsClientUsername}"/>
+        <property name="password" value="${connections/SOA/soaCreditWsClientPassword}"/>
+	<property name="handlerResolver" ref="handlerResolverEnterpriseCRDA"/>
+    </bean>
+	
+    <bean id="handlerResolverEnterpriseCRDA" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver">
+       <property name="handlerList" >
+          <list >
+             <bean class="com.telus.framework.ws.em.soaphandler.JaxWsRoutingHandler" init-method="init">
+                <property name="handlerConfig">
+                   <util:map map-class="java.util.HashMap">
+                      <entry key="physicalEndpoint" value="${connections/servers/EnterpriseCreditAssessment}"/>
+                      <entry key="envString" value="${metadata/envId}"/>
+                   </util:map>
+                </property>
+             </bean>
+          </list>
+       </property>
+    </bean>
+     -->
+</beans>

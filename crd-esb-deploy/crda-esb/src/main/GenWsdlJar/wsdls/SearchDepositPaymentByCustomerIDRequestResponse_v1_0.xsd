@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dms="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/SearchDepositPaymentByCustomerIDRequestResponse_v1" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/SearchDepositPaymentByCustomerIDRequestResponse_v1" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1_0.xsd"/>
+	<xs:element name="searchDepositPaymentByCustomerID">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerID " type="xs:long"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="searchDepositPaymentByCustomerIDResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="searchDepositResponseList" type="tns:SearchDepositResponseList" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>AR Deposit details for each billingAccountNumber of a customer. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SearchDepositResponseList">
+		<xs:sequence>
+			<xs:element ref="dms:searchDepositResponse" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

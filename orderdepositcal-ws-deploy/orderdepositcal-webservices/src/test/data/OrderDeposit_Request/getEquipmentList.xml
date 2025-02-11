@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1" xmlns:wir="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ord:getEquipmentQualificationList>
+         <ord:customerID>565200</ord:customerID>
+         <!--Optional:-->
+     
+         <ord:auditInfo>
+            <!--Optional:-->
+            <ent:userId>t829939</ent:userId>
+         </ord:auditInfo>
+      </ord:getEquipmentQualificationList>
+   </soapenv:Body>
+</soapenv:Envelope>

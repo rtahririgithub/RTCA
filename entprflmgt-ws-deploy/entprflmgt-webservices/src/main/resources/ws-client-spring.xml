@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <import resource="classpath:crd-entprflmgt-performance-logging-spring.xml" /> 
+
+	<!-- Add performance logging: consumerCustMgtService -->
+	<bean id="consumerCustMgtService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="interceptorNames">
+           <list>
+               <value>pfPerformanceAdvisor</value>
+           </list>
+       	</property> 
+       	<property name="target" ref="consumerCustMgtServiceTgt" />
+  	</bean>
+
+	<bean id="consumerCustMgtServiceTgt" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.telus.wsdl.cmo.informationmgmt.consumercustomermanagementservice_2.ConsumerCustomerManagementServicePortType" />
+	  	<property name="wsdlDocumentUrl" value="classpath:wsdls\ConsumerCustomerManagementService_v2_6.wsdl" />
+	  	<property name="endpointAddress" value="${connections/SOA/serviceURLs/consumerCustMgtServiceUrl}" />
+	  	<property name="namespaceUri" value="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" />
+	  	<property name="serviceName" value="ConsumerCustomerManagementService_v2_6" />
+	  	<property name="portName" value="ConsumerCustomerManagementServicePort" />
+	  	<property name="lookupServiceOnStartup" value="false" />
+	  	<property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+	  	<property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+   	</bean>
+	<!-- End of performance logging -->
+	
+   
+	<!-- Add performance logging: wirelineCreditProfileDataMgtService -->
+	<bean id="wirelineCreditProfileDataMgtService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="interceptorNames">
+		   <list>
+			   <value>pfPerformanceAdvisor</value>
+		   </list>
+		</property> 
+		<property name="target" ref="wirelineCreditProfileDataMgtServiceTgt" />
+  	</bean>
+  	
+	<bean id="wirelineCreditProfileDataMgtServiceTgt" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.wlncreditprofiledatamanagementservice_1.WLNCreditProfileDataManagementServicePortType" />
+	      <property name="wsdlDocumentUrl" value="classpath:wsdls\WLNCreditProfileDataManagementService_v1_3.wsdl" />
+	      
+	      <!-- Web service URL configured in env.xml file. -->
+	      <property name="endpointAddress" value="${connections/SOA/serviceURLs/wirelineCreditPrflDataMgtServiceUrl}" />
+	      <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileDataManagementService_1" />
+	      <property name="serviceName" value="WLNCreditProfileDataManagementService_v1_3" />
+	      <property name="portName" value="WLNCreditProfileDataManagementServicePort" />
+	      <property name="lookupServiceOnStartup" value="false" />
+	      <property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+	      <property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+   	</bean>
+	<!-- End of performance logging -->
+
+   	<!-- Add performance logging: wirelessCreditProfileDataMgtService -->
+   	<bean id="wirelessCreditProfileDataMgtService" class="org.springframework.aop.framework.ProxyFactoryBean">
+   		<property name="interceptorNames">
+   		   <list>
+   			   <value>pfPerformanceAdvisor</value>
+   		   </list>
+   		</property> 
+   		<property name="target" ref="wirelessCreditProfileDataMgtServiceTgt" />
+  	</bean>
+  	
+  	
+   <bean id="wirelessCreditProfileDataMgtServiceTgt" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+      	<property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.wlscreditprofiledatamanagementsvc_2.WLSCreditProfileDataManagementServicePortType" />
+       	<property name="wsdlDocumentUrl" value="classpath:wsdls\WLSCreditProfileDataManagementSvc_v2_0.wsdl" />
+         
+        <!-- Web service URL configured in env.xml file. -->
+        <property name="endpointAddress" value="${connections/SOA/serviceURLs/wirelessCreditPrflDataMgtServiceUrl}" />
+        <property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/WLSCreditProfileDataManagementSvc_2" />
+        <property name="serviceName" value="WLSCreditProfileDataManagementSvc_v2_0" />
+        <property name="portName" value="WLSCreditProfileDataManagementSvcPort" />
+        <property name="lookupServiceOnStartup" value="false" />
+        <property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+        <property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+   </bean>
+   <!-- End of performance logging -->
+	
+   	<!-- Add performance logging: wirelineCreditProfileMgtService -->
+	<bean id="wirelineCreditProfileMgtService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="interceptorNames">
+		   <list>
+			   <value>pfPerformanceAdvisor</value>
+		   </list>
+		</property> 
+		<property name="target" ref="wirelineCreditProfileMgtServiceTgt" />
+  	</bean>
+  	
+  	
+  	<bean id="wirelineCreditProfileMgtServiceTgt" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	  	<property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.wlncreditprofilemanagementservice_2.WLNCreditProfileManagementServicePortType" />
+	  	<property name="wsdlDocumentUrl" value="classpath:wsdls\WLNCreditProfileManagementService_v2_0.wsdl" />
+	  	
+	  	<!-- Web service URL configured in env.xml file. -->
+	  	<property name="endpointAddress" value="${connections/SOA/serviceURLs/wirelineCreditPrflMgtServiceBaseUrl}_v2_0_vs0" />
+	  	<property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementService_2" />
+	  	<property name="serviceName" value="WLNCreditProfileManagementService_v2_0" />
+	  	<property name="portName" value="WLNCreditProfileManagementServicePort" />
+	  	<property name="lookupServiceOnStartup" value="false" />
+	  	<property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+	  	<property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+   	</bean>
+	<!-- End of performance logging -->
+
+   	<!-- Add performance logging: wirelineCreditProfileMgtProxyService -->
+   	<bean id="wirelineCreditProfileMgtProxyService" class="org.springframework.aop.framework.ProxyFactoryBean">
+   		<property name="interceptorNames">
+   		   <list>
+   			   <value>pfPerformanceAdvisor</value>
+   		   </list>
+   		</property> 
+   		<property name="target" ref="wirelineCreditProfileMgtProxyServiceTgt" />
+  	</bean>
+  	
+  	<bean id="wirelineCreditProfileMgtProxyServiceTgt" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	  	<property name="serviceInterface" value="com.telus.wsdl.cmo.ordermgmt.wlncreditprofilemanagementproxyservice_2.WLNCreditProfileManagementProxyServicePortType" />
+	  	<property name="wsdlDocumentUrl" value="classpath:wsdls\WLNCreditProfileManagementProxyService_v2_0.wsdl" />
+	  	
+	  	<!-- Web service URL configured in env.xml file. -->
+	  	<property name="endpointAddress" value="${connections/SOA/serviceURLs/wirelineCreditPrflMgtProxyServiceBaseUrl}_v2_0_vs0" />
+	  	<property name="namespaceUri" value="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2" />
+	  	<property name="serviceName" value="WLNCreditProfileManagementProxyService_v2_0" />
+	  	<property name="portName" value="WLNCreditProfileManagementProxyServicePort" />
+	  	<property name="lookupServiceOnStartup" value="false" />
+	  	<property name="username" value="${connections/SOA/soaCreditWsClientUsername}" />
+	  	<property name="password" value="${connections/SOA/soaCreditWsClientPassword}" />
+   	</bean>
+  	<!-- End of performance logging -->
+
+
+</beans>

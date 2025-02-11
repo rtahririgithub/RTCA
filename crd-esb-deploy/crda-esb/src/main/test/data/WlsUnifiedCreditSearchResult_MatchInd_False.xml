@@ -1,0 +1,9 @@
+<tns:unifiedCreditSearchResult xsi:type="tns:WlsUnifiedCreditSearchResult" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2">
+	<tns:matchFound>
+		<tns:indicator>false</tns:indicator>
+		<tns:reasonCd>XXXX</tns:reasonCd>
+	</tns:matchFound>
+	<tns:dataInquiryErrorCodeList/>
+	<tns:lineOfBusiness>WIRELINE</tns:lineOfBusiness>
+	<tns:unifiedCreditDormantInd>false</tns:unifiedCreditDormantInd>
+</tns:unifiedCreditSearchResult>

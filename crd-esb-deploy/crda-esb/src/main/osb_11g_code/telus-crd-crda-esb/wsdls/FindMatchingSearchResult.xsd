@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:complexType name="IndicatorType">
+		<xs:sequence>
+			<xs:element name="indicator" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="reasonCd" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DriverLicense">
+		<xs:sequence>
+			<xs:element name="driverLicenseNumber" type="xs:string"/>
+			<xs:element name="provinceCd" type="xs:string"/>
+			<xs:element name="expiryDate" type="xs:dateTime" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProvincialIdCard">
+		<xs:sequence>
+			<xs:element name="provincialId" type="xs:string"/>
+			<xs:element name="provinceCd" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Passport">
+		<xs:sequence>
+			<xs:element name="passportNumber" type="xs:string"/>
+			<xs:element name="countryCd" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HealthCard">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="CreditIdentification">
+		<xs:sequence>
+			<xs:element name="driverLicense" type="tns:DriverLicense" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="socialInsuranceNum" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditCardTokenTxt" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditCardFirstSixNum" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditCardLastFourNum" type="xs:string" minOccurs="0"/>
+			<xs:element name="healthCardNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="passport" type="tns:Passport" minOccurs="0"/>
+			<xs:element name="provincialIdCard" type="tns:ProvincialIdCard" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FindMatchingSearchResult">
+		<xs:sequence>
+			<xs:element name="customerData" type="tns:CustomerData" minOccurs="0"/>
+			<xs:element name="accountData" type="tns:AccountData" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="findMatchingSearchResultList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="findMatchingSearchResult" type="tns:FindMatchingSearchResult" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="findMatchingSearchResultIndicator" type="tns:IndicatorType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CustomerData">
+		<xs:sequence>
+			<xs:element name="sourceSystemID" minOccurs="0"/>
+			<xs:element name="customerId" type="xs:long" minOccurs="0"/>
+			<xs:element name="customerCreationDate" type="xs:date"/>
+			<xs:element name="customerStatusCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="customerTypeCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="customerSubTypeCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditIdentification" type="tns:CreditIdentification" minOccurs="0"/>
+			<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastName" type="xs:string" minOccurs="0"/>
+			<xs:element name="middleName" type="xs:string" minOccurs="0"/>
+			<xs:element name="birthDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="customerMatchReasonCd" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountData">
+		<xs:sequence>
+			<xs:element name="billingMasterSourceId" type="xs:long" minOccurs="0"/>
+			<xs:element name="billingAccountNumber" type="xs:long" minOccurs="0"/>
+			<xs:element name="brandId" type="xs:long" minOccurs="0"/>
+			<xs:element name="accountType" type="xs:string" minOccurs="0"/>
+			<xs:element name="accountSubType" type="xs:string" minOccurs="0"/>
+			<xs:element name="accountCreationDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Same as startServiceDate if startServiceDate is not empty otherwise same as accountStatusDate </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startServiceDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Represents the date when account became open (status O) – which is the date when the first subscriber was activated. This date does not change if the subscriber is canceled or more subs are added to the account.    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="statusDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="accountMatchReasonCd" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

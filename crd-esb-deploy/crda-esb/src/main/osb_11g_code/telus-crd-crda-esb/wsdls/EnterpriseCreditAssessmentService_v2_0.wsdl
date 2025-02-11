@@ -1,0 +1,215 @@
+<WL5G3N0:definitions name="EnterpriseCreditAssessmentService_v2_0.wsdl" targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/EnterpriseCreditAssessmentService_2" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" xmlns:WL5G3N2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:WL5G3N3="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:WL5G3N4="http://telus.com/wsdl/CMO/OrderMgmt/EnterpriseCreditAssessmentService_2" xmlns:WL5G3N5="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:documentation>Real Time Credit Assessment. Enterprise Credit Assessment Service  provides operations to perform customer's credit assessment , maintain customer's credit assessment transactions.</WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xs:schema targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/EnterpriseCreditAssessmentService_2" xmlns:eCRDA="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:iface="http://telus.com/wsdl/CMO/OrderMgmt/EnterpriseCreditAssessmentService_2" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" schemaLocation="EnterpriseCreditAssessmentServiceRequestResponse_v2_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" schemaLocation="Exceptions_v1_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="ping_v1.xsd"/>
+    </xs:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="getCreditAssessment">
+    <WL5G3N0:part element="WL5G3N1:getCreditAssessment" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCreditAssessmentResponse">
+    <WL5G3N0:part element="WL5G3N1:getCreditAssessmentResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCreditBureauDocument">
+    <WL5G3N0:part element="WL5G3N1:getCreditBureauDocument" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCreditBureauDocumentResponse">
+    <WL5G3N0:part element="WL5G3N1:getCreditBureauDocumentResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="performCreditAssessment">
+    <WL5G3N0:part element="WL5G3N1:performCreditAssessment" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="performCreditAssessmentResponse">
+    <WL5G3N0:part element="WL5G3N1:performCreditAssessmentResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchCreditAssessmentList">
+    <WL5G3N0:part element="WL5G3N1:searchCreditAssessmentList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchCreditAssessmentListResponse">
+    <WL5G3N0:part element="WL5G3N1:searchCreditAssessmentListResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="voidCreditAssessment">
+    <WL5G3N0:part element="WL5G3N1:voidCreditAssessment" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="voidCreditAssessmentResponse">
+    <WL5G3N0:part element="WL5G3N1:voidCreditAssessmentResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part element="WL5G3N2:ping" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part element="WL5G3N2:pingResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ServiceException">
+    <WL5G3N0:part element="WL5G3N3:ServiceException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="PolicyException">
+    <WL5G3N0:part element="WL5G3N3:PolicyException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="EnterpriseCreditAssessmentService_v2_0_PortType">
+    <WL5G3N0:operation name="getCreditAssessment">
+      <WL5G3N0:input message="WL5G3N4:getCreditAssessment"/>
+      <WL5G3N0:output message="WL5G3N4:getCreditAssessmentResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCreditBureauDocument">
+      <WL5G3N0:input message="WL5G3N4:getCreditBureauDocument"/>
+      <WL5G3N0:output message="WL5G3N4:getCreditBureauDocumentResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="performCreditAssessment">
+      <WL5G3N0:input message="WL5G3N4:performCreditAssessment"/>
+      <WL5G3N0:output message="WL5G3N4:performCreditAssessmentResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchCreditAssessmentList">
+      <WL5G3N0:input message="WL5G3N4:searchCreditAssessmentList"/>
+      <WL5G3N0:output message="WL5G3N4:searchCreditAssessmentListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="voidCreditAssessment">
+      <WL5G3N0:input message="WL5G3N4:voidCreditAssessment"/>
+      <WL5G3N0:output message="WL5G3N4:voidCreditAssessmentResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input message="WL5G3N4:ping"/>
+      <WL5G3N0:output message="WL5G3N4:pingResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="EnterpriseCreditAssessmentService_v2_0_SOAP" type="WL5G3N4:EnterpriseCreditAssessmentService_v2_0_PortType">
+    <WL5G3N5:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="getCreditAssessment">
+      <WL5G3N0:documentation>Operation to retrieve credit assessment result(output) and associated input attributes for a particular assessment id.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCreditAssessment"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCreditBureauDocument">
+      <WL5G3N0:documentation>Operation to return human readable and xml reports associated to a credit bureau report ID.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCreditBureauDocument"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="performCreditAssessment">
+      <WL5G3N0:documentation>Operation to assess customer's credit worthiness based on Customer Billing/AR ,Collection data, Credit business rules, External agency/bureau credit report ,.. to derive and store the customer's credit check result .</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="performCreditAssessment"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchCreditAssessmentList">
+      <WL5G3N0:documentation>Operation to search Credit Assessments based upon given search criteria.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="searchCreditAssessmentList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="voidCreditAssessment">
+      <WL5G3N0:documentation>Operation to void a credit assessment.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="voidCreditAssessment"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:documentation>
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+    
+  
+  
+    
+      
+    
+  
+</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="ping"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="EnterpriseCreditAssessmentService_v2_0">
+    <WL5G3N0:port binding="WL5G3N4:EnterpriseCreditAssessmentService_v2_0_SOAP" name="EnterpriseCreditAssessmentServicePort">
+      <WL5G3N5:address location="http://cm-creditmgmt-west-dv01.tsl.telus.com/CMO/OrderMgmt/EnterpriseCreditAssessment/EnterpriseCreditAssessmentService_v2_0"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

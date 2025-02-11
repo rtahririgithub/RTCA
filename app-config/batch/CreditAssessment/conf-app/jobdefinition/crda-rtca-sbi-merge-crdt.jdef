@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+
+   <bean id="configurationFramework"
+      class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step01</value>
+               </property>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step02</value>
+               </property>
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step03</value>
+               </property>
+            </bean>
+            <bean id="STEP04" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step04</value>
+               </property>
+            </bean>
+            <bean id="STEP05" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step05</value>
+               </property>
+            </bean>
+            <bean id="STEP06" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step06</value>
+               </property>
+            </bean>
+            <bean id="STEP07" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step07</value>
+               </property>
+            </bean>
+            <bean id="STEP08" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step08</value>
+               </property>
+            </bean>
+            <bean id="STEP09" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step09</value>
+               </property>
+            </bean>
+            <bean id="STEP10" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step10</value>
+               </property>
+            </bean>
+            <bean id="STEP11" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step11</value>
+               </property>
+            </bean>
+            <bean id="STEP12" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step12</value>
+               </property>
+            </bean>
+            <bean id="STEP13" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step13</value>
+               </property>
+            </bean>
+            <bean id="STEP14" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step14</value>
+               </property>
+            </bean>
+            <bean id="STEP15" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step15</value>
+               </property>
+            </bean>
+            <bean id="STEP16" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step16</value>
+               </property>
+            </bean>
+            <bean id="STEP17" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step17</value>
+               </property>
+            </bean>
+            <bean id="STEP18" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step18</value>
+               </property>
+            </bean>
+            <bean id="STEP19" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step19</value>
+               </property>
+            </bean>
+            <bean id="STEP20" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step20</value>
+               </property>
+            </bean>
+            <bean id="STEP21" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step21</value>
+               </property>
+            </bean>
+            <bean id="STEP22" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step22</value>
+               </property>
+            </bean>
+            <bean id="STEP23" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step23</value>
+               </property>
+            </bean>
+            <bean id="STEP24" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step24</value>
+               </property>
+            </bean>
+            <bean id="STEP25" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step25</value>
+               </property>
+            </bean>
+            <bean id="STEP26" parent="baseStep">
+               <property name="moduleName">
+                  <value>exec-Step26</value>
+               </property>
+            </bean>
+            <bean id="STEP27" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step27</value>
+               </property>
+            </bean>
+            <bean id="STEP28" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step28</value>
+               </property>
+            </bean>
+            <bean id="STEP29" parent="baseStep">
+               <property name="moduleName">
+                  <value>pre-sbi-warn-hist</value>
+               </property>
+            </bean>
+            <bean id="STEP30" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step29</value>
+               </property>
+            </bean>
+            <bean id="STEP31" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step30</value>
+               </property>
+            </bean>
+            <bean id="STEP32" parent="baseStep">
+               <property name="moduleName">
+                  <value>sync-Step31</value>
+               </property>
+            </bean>
+            <bean id="STEP33" parent="baseStep">
+               <property name="moduleName">
+                  <value>generate-audit</value>
+               </property>
+            </bean>
+         </list>
+       </property>
+    </bean>
+   <bean id="sync-Step01" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_1.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment.tmp ${processbox}/sbi/creditassessment/full_credit_assessment.tmp ${processbox}/sbi/creditassessment/base_credit_assessment_1.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step02" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_risk.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/credit_bureau_tran_dtl.tmp ${processbox}/sbi/creditassessment/risk.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step03" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_fraud.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/credit_bureau_tran_dtl.tmp ${processbox}/sbi/creditassessment/fraud.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step04" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_score.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/credit_bureau_tran_dtl.tmp ${processbox}/sbi/creditassessment/scorecard.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step05" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_bureaureport.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/credit_bureau_tran_dtl.tmp ${processbox}/sbi/creditassessment/bureau_report.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step06" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_bureaurpt_rm_dup.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/bureau_report.tmp ${processbox}/sbi/creditassessment/bureau_report-1.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="exec-Step07"  class="com.telus.crd.assessment.batch.SbiCreditBureauTranDetailProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/risk.tmp" />
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/risk-1.tmp" /> 
+   </bean> 
+   <bean id="exec-Step08"  class="com.telus.crd.assessment.batch.SbiFraudCodeProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/fraud.tmp" />
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/fraud-1.tmp" /> 
+   </bean> 
+   <bean id="exec-Step09"  class="com.telus.crd.assessment.batch.SbiCreditBureauTranDetailProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/scorecard.tmp" />
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/scorecard-1.tmp" /> 
+   </bean> 
+   <bean id="exec-Step10"  class="com.telus.crd.assessment.batch.SbiInternalCreditDecisionTranProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/int_crdt_dcsn_trn_rslt_dtl.tmp" />
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/int_crdt_dcsn_trn_rslt_dtl-1.tmp" /> 
+   </bean> 
+   <bean id="exec-Step11"  class="com.telus.crd.assessment.batch.SbiRiskFileProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/risk-1.tmp"/>
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/risk-2.tmp" /> 
+	<property name="maxRecordCount" value="12"/>
+	<property name="fieldCount" value="2"/>
+	<property name="startFieldIndex" value="1"/>
+   </bean> 
+   <bean id="exec-Step12"  class="com.telus.crd.assessment.batch.SbiFileProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/fraud-1.tmp"/>
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/fraud-2.tmp" /> 
+	<property name="maxRecordCount" value="5"/>
+	<property name="fieldCount" value="3"/>
+	<property name="startFieldIndex" value="1"/>
+   </bean> 
+   <bean id="exec-Step13"  class="com.telus.crd.assessment.batch.SbiFileProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/scorecard-1.tmp"/>
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/scorecard-2.tmp" /> 
+	<property name="maxRecordCount" value="71"/>
+	<property name="fieldCount" value="2"/>
+	<property name="startFieldIndex" value="1"/>
+   </bean> 
+   <bean id="exec-Step14"  class="com.telus.crd.assessment.batch.SbiProductFileProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/int_crdt_dcsn_trn_rslt_dtl-1.tmp"/>
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/int_crdt_dcsn_trn_rslt_dtl-2.tmp" /> 
+	<property name="maxRecordCount" value="5"/>
+	<property name="fieldCount" value="2"/>
+	<property name="startFieldIndex" value="6"/>
+   </bean> 
+   <bean id="sync-Step15" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_2.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment_1.tmp ${processbox}/sbi/creditassessment/risk-2.tmp ${processbox}/sbi/creditassessment/base_credit_assessment_2.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step16" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_3.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment_2.tmp ${processbox}/sbi/creditassessment/fraud-2.tmp ${processbox}/sbi/creditassessment/base_credit_assessment_3.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step17" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_4.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment_3.tmp ${processbox}/sbi/creditassessment/scorecard-2.tmp ${processbox}/sbi/creditassessment/base_credit_assessment_4.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step18" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_5.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment_4.tmp ${processbox}/sbi/creditassessment/bureau_report-1.tmp ${processbox}/sbi/creditassessment/base_credit_assessment_5.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step19" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_6.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment_5.tmp ${processbox}/sbi/creditassessment/car_attribute.tmp ${processbox}/sbi/creditassessment/base_credit_assessment_6.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step20" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_productcat.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/int_crdt_dcsn_trn_rslt_dtl.tmp ${processbox}/sbi/creditassessment/product_cat.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step21" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_telusfraud.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/int_crdt_dcsn_trn_rslt_dtl.tmp ${processbox}/sbi/creditassessment/telusfraud.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step22" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_telusfraud_rm_dup.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/telusfraud.tmp ${processbox}/sbi/creditassessment/telusfraud-1.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="exec-Step23"  class="com.telus.crd.assessment.batch.SbiInternalCreditDecisionTranProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/product_cat.tmp" />
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/product_cat-1.tmp" /> 
+   </bean> 
+   <bean id="exec-Step24"  class="com.telus.crd.assessment.batch.SbiInternalCreditDecisionFraudMsgProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/telusfraud-1.tmp" />
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/telusfraud-2.tmp" /> 
+   </bean> 
+   <bean id="exec-Step25"  class="com.telus.crd.assessment.batch.SbiFileProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/product_cat-1.tmp"/>
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/product_cat-2.tmp" /> 
+	<property name="maxRecordCount" value="6"/>
+	<property name="fieldCount" value="1"/>
+	<property name="startFieldIndex" value="1"/>
+   </bean> 
+   <bean id="exec-Step26"  class="com.telus.crd.assessment.batch.SbiFileProcessor"> 
+      <property name="inputFile" value="${processbox}/sbi/creditassessment/telusfraud-2.tmp"/>
+	<property name="outputFile" value="${processbox}/sbi/creditassessment/telusfraud-3.tmp" /> 
+	<property name="maxRecordCount" value="6"/>
+	<property name="fieldCount" value="1"/>
+	<property name="startFieldIndex" value="1"/>
+   </bean> 
+   <bean id="sync-Step27" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_7.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment_6.tmp ${processbox}/sbi/creditassessment/telusfraud-3.tmp ${processbox}/sbi/creditassessment/base_credit_assessment_7.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step28" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_8.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment_7.tmp ${processbox}/sbi/creditassessment/int_crdt_dcsn_trn_rslt_dtl-2.tmp ${processbox}/sbi/creditassessment/base_credit_assessment_8.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <!-- SBI UC CHANGES -->
+   <bean id="pre-sbi-warn-hist" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-uc-add-blank-col.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/uc_warning_hist.tmp 41 ${processbox}/sbi/creditassessment"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step29" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_9.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/uc_search.tmp ${processbox}/sbi/creditassessment/uc_asmnt_ind.tmp ${processbox}/sbi/creditassessment/uc_sbi_1.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="sync-Step30" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_10.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/uc_sbi_1.tmp ${processbox}/sbi/creditassessment/uc_warning_hist.tmp ${processbox}/sbi/creditassessment/uc_sbi_2.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <!--   -->
+   <bean id="sync-Step31" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_extract_11.sh"/> 
+      <property name="arg" value="${processbox}/sbi/creditassessment/base_credit_assessment_8.tmp ${processbox}/sbi/creditassessment/uc_sbi_2.tmp ${outbox}/CrAssmtRqst_${L_SBI_END_DATE}.dat"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="generate-audit"  class="com.telus.crd.assessment.batch.SbiAuditFileProcessor"> 
+      <property name="inputFile" value="${outbox}/CrAssmtRqst_${L_SBI_END_DATE}.dat"/>
+	<property name="outputFile" value="${outbox}/CrAssmtRqst_${L_SBI_END_DATE}.aud" /> 
+	<property name="reportStart" value="${L_SBI_START_DATE}"/>
+	<property name="reportEnd" value="${L_SBI_END_DATE}"/>
+	<property name="manualMode" value="${L_MANUAL_MODE}" /> 
+	<property name="manualReportStart" value="${L_MANUAL_START_DATE}" /> 
+	<property name="manualReportEnd" value="${L_MANUAL_END_DATE}" /> 
+   </bean> 
+</beans>

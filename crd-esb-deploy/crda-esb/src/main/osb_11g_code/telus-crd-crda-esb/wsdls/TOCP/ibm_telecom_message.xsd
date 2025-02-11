@@ -1,0 +1,72 @@
+<xs:schema targetNamespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" xmlns:base="http://www.ibm.com/telecom/common/schema/base/v3_0" xmlns:mtosi_xsd="http://www.ibm.com/telecom/common/schema/mtosi/v3_0" xmlns:tns="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/base/v3_0" schemaLocation="ibm_telecom_common_base.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/mtosi/v3_0" schemaLocation="mtosi_header.xsd"/>
+    <xs:element name="exceptionMessage" type="tns:ExceptionMessage"/>
+    <xs:element name="activateServiceFault" type="tns:ExceptionMessage"/>
+    <!-- The type: ibm_telecom_message.IbmTelecomMessage -->
+    <xs:complexType abstract="true" name="IbmTelecomMessage">
+        <xs:complexContent>
+            <xs:extension base="base:IbmTelecomObject">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="header" type="mtosi_xsd:Header_T"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: ibm_telecom_message.LookupRequest -->
+    <xs:complexType name="LookupRequestMessage">
+        <xs:complexContent>
+            <xs:extension base="tns:IbmTelecomMessage">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="sourceCriteria" type="base:EntityWithSpecification"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="targetCriteria" type="base:EntityWithSpecification"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: ibm_telecom_message.LookupRequest -->
+    <xs:complexType name="ExceptionMessage">
+        <xs:complexContent>
+            <xs:extension base="tns:IbmTelecomMessage">
+                <xs:sequence>
+                    <xs:element name="originalRequest" type="xs:string"/>
+                    <!-- The Original TOCP Request SOAP Message wrapped in a CDATA -->
+                    <xs:element name="exception" type="tns:Exception"/>
+                    <xs:element maxOccurs="unbounded" name="applicationException" type="tns:TelecomException"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: ibm_telecom_message.Exception -->
+    <xs:complexType name="Exception">
+        <xs:complexContent>
+            <xs:extension base="base:EntityWithSpecification">
+                <xs:sequence>
+                    <xs:element name="timestamp" type="xs:dateTime"/>
+                    <xs:element name="resultingState" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="tag" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TelecomException">
+        <xs:complexContent>
+            <xs:extension base="base:IbmTelecomObject">
+                <xs:sequence>
+                    <xs:element name="request" type="xs:string"/>
+                    <xs:element minOccurs="0" name="response" type="xs:string"/>
+                    <xs:element name="exceptionType">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Application"/>
+                                <xs:enumeration value="Origin"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="timeStamp" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

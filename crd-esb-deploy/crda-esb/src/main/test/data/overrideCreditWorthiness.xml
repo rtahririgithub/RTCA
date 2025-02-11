@@ -1,0 +1,20 @@
+      <wln:overrideCreditWorthiness>
+         <wln:overrideCreditWorthinessRequest>
+            <wln:creditAssessmentTypeCd>AUDIT</wln:creditAssessmentTypeCd>
+            <wln:creditAssessmentSubTypeCd>BUREAU_CONSENT</wln:creditAssessmentSubTypeCd>
+            <wln:customerID>95293187</wln:customerID>
+            <wln:commentTxt>ovrd crd val</wln:commentTxt>
+            <wln:applicationID>123</wln:applicationID>
+            <wln:channelID>123</wln:channelID>
+            <wln:lineOfBusiness>WIRELINE</wln:lineOfBusiness>
+            <!--
+            <wln:newFraudIndictorCd></wln:newFraudIndictorCd>
+            <wln:newCreditValueCd></wln:newCreditValueCd>
+            -->
+            <wln:newCreditCheckConsentCd>Y</wln:newCreditCheckConsentCd>
+            
+         </wln:overrideCreditWorthinessRequest>
+         <wln:auditInfo>
+            <ent:userId>T000001</ent:userId>
+         </wln:auditInfo>
+      </wln:overrideCreditWorthiness>

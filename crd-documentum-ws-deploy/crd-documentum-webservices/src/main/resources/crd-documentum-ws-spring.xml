@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans 
+   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd"
+   >   
+ 
+  	<bean class="com.telus.framework.config.spring.PlaceholderConfigurer"/>
+	<context:annotation-config/>
+	
+	 <import resource="classpath:CrdDocumentumApi-spring.xml" />
+    <bean id="DocumentumSvcAdapter" class="com.telus.credit.crda.adapter.DocumentumSvcAdapter" lazy-init="true">
+      <property name="documentDao" ref="DocumentumDao" />  
+    </bean>   
+   
+    <bean id="CreditDocumentumServiceTarget" class="com.telus.credit.crda.webservice.impl.CreditDocumentumServiceImpl" lazy-init="true"/>
+
+ 	<!-- <import resource="classpath:crd-documentum-impl-spring.xml" /> -->
+ 	
+ 	<import resource="classpath:performance-logging-spring.xml" /> 
+   	<bean id="txManager" class="org.springframework.transaction.jta.WebLogicJtaTransactionManager" />    
+    <bean id="CreditDocumentumService" class="org.springframework.aop.framework.ProxyFactoryBean">
+   		<property name="interceptorNames">
+    		<list>
+    			<value>pfPerformanceAdvisor</value>
+   	        </list>
+      	</property> 
+      	<property name="target" ref="CreditDocumentumServiceDef" />
+   	</bean>
+	<bean id="CreditDocumentumServiceDef" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+      	<property name="transactionManager" ref="txManager" /> 
+      	<property name="target" ref="CreditDocumentumServiceTarget" />
+      	<property name="transactionAttributes">     
+         	<props>
+            	<prop key="saveBureuaReportDocument">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+            	<prop key="retrieveBureuaReportDocument">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+         	</props>
+      	</property>
+   </bean> 
+
+
+</beans>

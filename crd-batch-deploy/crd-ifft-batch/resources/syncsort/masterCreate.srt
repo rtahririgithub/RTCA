@@ -1,0 +1,22 @@
+   ${sortstatistic}
+   
+   ${sortworkspace}
+
+   /MEMORY 16 megabytes
+   
+   /INFILE ${passbox}/NDS_FEED_FILE_MASTER_NIK.DAT 65535 
+   /FIELDS FIELD1 1 character 1
+   /FIELDS FIELD2 2 character 437 
+   /FIELDS FIELD3 452 character 9
+ 
+    /KEYS FIELD3 
+   
+   /OUTFILE ${passbox}/MASTER_NIK.DAT 65535 OVERWRITE
+   /REFORMAT Fielda1, FIELD2, FIELD3, FILLER10 
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /DERIVEDFIELD Fielda1 "A"
+   /DERIVEDFIELD FILLER10 23 ' '
+   /padbyte x"20"
+   /SILENT
+   /END
+

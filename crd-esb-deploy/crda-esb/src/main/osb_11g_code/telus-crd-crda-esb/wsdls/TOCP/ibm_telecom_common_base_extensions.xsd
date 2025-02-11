@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://www.ibm.com/telecom/common/schema/base_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/common/schema/base_extensions/v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- The type: base.Object -->
+    <xs:complexType name="IbmTelecomObjectExtensions"/>
+    <!-- The type: base.Characteristic -->
+    <xs:complexType name="CharacteristicExtensions"/>
+    <!-- The type: base.CharacteristicValue -->
+    <xs:complexType name="CharacteristicValueExtensions"/>
+    <!-- The type: base.Entity -->
+    <xs:complexType name="EntityExtensions"/>
+    <!-- The type: base.EntitySpecification -->
+    <xs:complexType name="EntitySpecificationExtensions"/>
+    <!-- The type: base.Entity -->
+    <xs:complexType name="EntityWithSpecificationExtensions"/>
+    <xs:complexType name="DependencyExtensions"/>
+</xs:schema>

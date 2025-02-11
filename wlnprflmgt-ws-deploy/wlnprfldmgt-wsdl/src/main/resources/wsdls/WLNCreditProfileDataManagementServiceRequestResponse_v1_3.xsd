@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by American Int'l Underwriters (American Int'l Underwriters) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" xmlns:ecrda="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditAssessmentTypes_v2" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:cp="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2_1.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1_1.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditAssessmentTypes_v2" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditAssessmentTypes_v2_0.xsd" />
+	<xs:element name="updateCreditProfile">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="creditProfile" type="crdc:CreditProfileData"/>
+				<xs:element name="removeWLNCreditIdentificationInfo" type="tns:RemoveWLNCreditIdentificationInfo" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+	1. It indicates removal of credit ids ( Driving License, SIN, Health Card, Passport and Provincial Id ). This will expire the indicated credit id in the WLN system.
+	2. If credit id is marked to be removed in this structure then that credit id should not be populated under the CreditProfileData.creditIdentification structure.
+	3. As a result of update or remove of credit ids, WLN system will rebuild the linked customers based upon remaining credit ids.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="creditValueCd" type="crdc:creditValueCodeType" minOccurs="0"/>
+				<xs:element name="fraudIndicatorCd" type="crdc:fraudIndicatorType" minOccurs="0"/>
+				<xs:element name="auditInfo" type="ect:AuditInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateCreditProfileResponse">
+		<xs:complexType>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateCreditWorthiness">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="creditAssessmentTransactionResult" type="ecrda:CreditAssessmentTransaction" />
+				<xs:element name="auditInfo" type="ect:AuditInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateCreditWorthinessResponse">
+		<xs:complexType>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RemoveWLNCreditIdentificationInfo">
+		<xs:sequence>
+			<xs:element name="removeDriverLicenseInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="removeSinInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="removeHealthCardInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="removePassportInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="removeProvincialIdCardInd" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

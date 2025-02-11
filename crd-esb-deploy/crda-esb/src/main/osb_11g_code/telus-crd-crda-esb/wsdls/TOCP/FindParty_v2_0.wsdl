@@ -1,0 +1,65 @@
+<WL5G3N0:definitions name="FindParty" targetNamespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty" xmlns:WL5G3N2="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty" xmlns:WL5G3N3="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema targetNamespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty" xmlns="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" xmlns:bons1="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" xmlns:operationtypes="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:telcotype="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" xmlns:tns="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" schemaLocation="ibm_telecom_message_party.xsd"/>
+      <xsd:element name="findParty" type="telcotype:PartyMessage"/>
+      <xsd:element name="findPartyResponse" type="telcotype:PartyCollectionMessage"/>
+    </xsd:schema>
+    <xsd:schema targetNamespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty" xmlns:bons1="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" xmlns:operationtypes="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:telcotype="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" xmlns:tns="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" schemaLocation="ibm_telecom_message.xsd"/>
+      <xsd:element name="findPartyFault1_findPartyFault" nillable="true" type="bons1:ExceptionMessage"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="findPartyRequest">
+    <WL5G3N0:part element="WL5G3N1:findParty" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="findPartyResponse">
+    <WL5G3N0:part element="WL5G3N1:findPartyResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="findParty_findPartyFaultMsg">
+    <WL5G3N0:part element="WL5G3N2:findPartyFault1_findPartyFault" name="findPartyFault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="FindPartyPT">
+    <WL5G3N0:documentation>
+			* Licensed Materials - Property of IBM
+ * 
+ 
+			* 5724-R31, 5655-S30
+ * 
+ * (C) Copyright IBM Corp.
+			2008 All Rights Reserved.
+ * 
+ * US Government Users 
+			Restricted Rights - Use, duplication or
+ * disclosure 
+			restricted by GSA ADP Schedule Contract with IBM Corp.
+ 
+		</WL5G3N0:documentation>
+    <WL5G3N0:operation name="findParty">
+      <WL5G3N0:input message="WL5G3N2:findPartyRequest"/>
+      <WL5G3N0:output message="WL5G3N2:findPartyResponse"/>
+      <WL5G3N0:fault message="WL5G3N2:findParty_findPartyFaultMsg" name="findPartyFault"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="FindPartySOAPBinding" type="WL5G3N2:FindPartyPT">
+    <WL5G3N3:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="findParty">
+      <WL5G3N0:documentation>FindParty would determine if the customer profile does exist in Telus Credit Profile for a given identification</WL5G3N0:documentation>
+      <WL5G3N3:operation soapAction="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty/findParty"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="findPartyFault">
+        <WL5G3N3:fault name="findPartyFault" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="FindPartyService">
+    <WL5G3N0:port binding="WL5G3N2:FindPartySOAPBinding" name="FindPartySOAPPort">
+      <WL5G3N3:address location="https://207.229.22.173:9446/TelusSAMEBusinessServicesV2_0Web/sca/FindPartyWSExport"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

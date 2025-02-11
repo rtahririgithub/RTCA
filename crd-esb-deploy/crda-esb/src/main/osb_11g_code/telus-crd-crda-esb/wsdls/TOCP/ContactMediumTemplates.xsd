@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/contact_medium_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/contact_medium_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="ContactMediumChoice">
+        <xsd:choice>
+            <xsd:element name="USBillingAddressContactMedium" type="tns:USBillingAddressContactMedium"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="USBillingAddressContactMedium">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="County" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

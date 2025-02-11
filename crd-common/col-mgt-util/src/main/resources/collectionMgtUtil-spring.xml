@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+  <bean id="telusSpringConfigurer"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer"/>
+
+  <bean id="collectionSummarizationService" class="com.telus.collections.treatment.service.impl.CollectionSummarizationServiceImpl" lazy-init="true">
+    <property name="aggregatedSoldExternalAmount"><value>${wlnCollectionMgmt/summarization/aggregatedSoldExternalAgencyAmount}</value></property>
+    <property name="externalAgencyAssignmentMonthPeriod"><value>${wlnCollectionMgmt/summarization/externalAgencyAssignmentMonthPeriod}</value></property>
+    <property name="externalAgencySoldAssignmentMonthPeriod"><value>${wlnCollectionMgmt/summarization/externalAgencySoldAssignmentMonthPeriod}</value></property>
+    <property name="involuntaryCancelledMonthPeriod"><value>${wlnCollectionMgmt/summarization/involuntaryCancelledMonthPeriod}</value></property>
+    <property name="internalAgencyCodes"><value>${wlnCollectionMgmt/summarization/internalAgencyCodes}</value></property>
+  </bean>
+
+</beans>

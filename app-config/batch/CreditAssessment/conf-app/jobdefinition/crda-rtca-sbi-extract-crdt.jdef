@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="sql-base-creditassessment"/>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName" value="sql-full-creditassessment"/>
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName" value="sql-credit-bureautrandetail"/>
+            </bean>
+            <bean id="STEP04" parent="baseStep">
+               <property name="moduleName" value="sql-intcrdt"/>
+            </bean>
+            <bean id="STEP05" parent="baseStep">
+               <property name="moduleName" value="sql-car-attribute"/>
+            </bean>
+            <bean id="STEP06" parent="baseStep">
+               <property name="moduleName" value="sql-uc-asmnt-ind"/>
+            </bean>
+            <bean id="STEP07" parent="baseStep">
+               <property name="moduleName" value="sql-uc-search"/>
+            </bean>
+            <bean id="STEP08" parent="baseStep">
+               <property name="moduleName" value="sql-uc-warning-hist"/>
+            </bean>
+            
+       </list>
+      </property>
+   </bean>
+   <bean id="sql-base-creditassessment" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/1_rtca_sbi_get_base_credit_assessment.sql ${processbox}/sbi/creditassessment/base_credit_assessment.tmp ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_MANUAL_MODE} ${L_CAR_TYP_CD} ${L_MANUAL_START_DATE} ${L_MANUAL_END_DATE}"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="sql-full-creditassessment" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/2_rtca_sbi_get_full_credit_assessment.sql ${processbox}/sbi/creditassessment/full_credit_assessment.tmp ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_MANUAL_MODE} ${L_MANUAL_START_DATE} ${L_MANUAL_END_DATE}"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="sql-credit-bureautrandetail" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/3_rtca_sbi_get_credit_bureau_tran_details.sql ${processbox}/sbi/creditassessment/credit_bureau_tran_dtl.tmp ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_MANUAL_MODE} ${L_MANUAL_START_DATE} ${L_MANUAL_END_DATE}"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="sql-intcrdt" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/4_rtca_sbi_get_int_crdt_dcsn_trn_rslt_dtl.sql ${processbox}/sbi/creditassessment/int_crdt_dcsn_trn_rslt_dtl.tmp ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_MANUAL_MODE} ${L_MANUAL_START_DATE} ${L_MANUAL_END_DATE}"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="sql-car-attribute" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/5_rtca_sbi_get_car_attributes.sql ${processbox}/sbi/creditassessment/car_attribute.tmp ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_MANUAL_MODE} ${L_MANUAL_START_DATE} ${L_MANUAL_END_DATE}"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="sql-uc-asmnt-ind" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/8_rtca_sbi_get_uc_asmnt_ind.sql ${processbox}/sbi/creditassessment/uc_asmnt_ind.tmp ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_MANUAL_MODE} ${L_MANUAL_START_DATE} ${L_MANUAL_END_DATE}"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="sql-uc-search" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/8_rtca_sbi_get_uc_search.sql ${processbox}/sbi/creditassessment/uc_search.tmp ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_MANUAL_MODE} ${L_MANUAL_START_DATE} ${L_MANUAL_END_DATE}"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="sql-uc-warning-hist" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/8_rtca_sbi_get_uc_warning_hist.sql ${processbox}/sbi/creditassessment/uc_warning_hist.tmp ${L_SBI_START_DATE} ${L_SBI_END_DATE} ${L_MANUAL_MODE} ${L_MANUAL_START_DATE} ${L_MANUAL_END_DATE}"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="exec-UpdateParameterFile" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step}/rtca-parms-sbi-update.sh"/> 
+      <property name="arg" value="${L_LIBMEM-SBI} ${L_SBI_START_DATE} ${L_SBI_END_DATE} "/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+</beans>
+
+

@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="FraudFeedToolBatch">
+    <!-- filename configuration parameters for the batch steps -->
+    <group name="step011">
+        <prop name="syncsortFile">${syncsort}/step01aProcessCustomerProfileFeedFile.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step012">
+        <prop name="inputFilename">${processbox}/CUSTODS_REF_BRIDGING.DAT</prop>
+    </group>
+    <group name="step02">
+        <prop name="syncsortFile">${syncsort}/step02ProcessServiceInstanceFeedFile.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step03">
+        <prop name="syncsortFile">${syncsort}/step03ProcessBillingFeedFile.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step03nik">
+       <prop name="syncsortFile">${syncsort}/step03ProcessBillingFeedFileNik.srt</prop>
+       <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step04">
+        <prop name="syncsortFile">${syncsort}/step04ProcessCustomerFeedFile.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>    <group name="step050">        <prop name="syncsortFile">${syncsort}/step05bSortS05.srt</prop>        <prop name="log">${logs}/${jobname}.log</prop>    </group>
+    <group name="step05DL">
+        <prop name="syncsortFile">${syncsort}/step05DL.srt</prop>
+    <prop name="log">${logs}/${jobname}.log</prop>
+    </group> 
+    <group name="step05SIN">
+        <prop name="syncsortFile">${syncsort}/step05SIN.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step05DLSIN">
+        <prop name="syncsortFile">${syncsort}/step05DLSIN.srt</prop> 
+        <prop name="log">${logs}/${jobname}.log</prop> 
+   </group> 
+    <group name="step05CDS">
+        <prop name="syncsortFile">${syncsort}/step05CDS.srt</prop> 
+        <prop name="log">${logs}/${jobname}.log</prop> 
+   </group> 
+    <group name="step05">
+        <prop name="inputFilename">${inbox}/CREDIT_FEED_FILE.DAT</prop>
+        <prop name="outputFilename">${processbox}/CREDIT_FEED_FILE.DAT</prop>
+    </group>
+    <group name="step0601">
+        <prop name="sqlFilename">step06.01ExtractCC.sql</prop>
+        <prop name="outputFilename">${processbox}/OMS_EXTRACT_CLOB_CC.DAT</prop>
+    </group>
+    <group name="step0602">
+        <prop name="inputFilename">${processbox}/OMS_EXTRACT_CLOB_CC.DAT</prop>
+        <prop name="outputFilename">${processbox}/OMS_EXTRACT_CLOB_CC_PARSED.DAT</prop>
+    </group>
+    <group name="step0603">
+        <prop name="sqlFilename">step06.03ExtractSING.sql</prop>
+        <prop name="outputFilename">${processbox}/OMS_EXTRACT_CLOB_SING.DAT</prop>
+    </group>
+    <group name="step0604">
+        <prop name="inputFilename">${processbox}/OMS_EXTRACT_CLOB_SING.DAT</prop>
+        <prop name="outputFilename">${processbox}/OMS_EXTRACT_CLOB_SING_PARSED.DAT</prop>
+    </group>
+    <group name="step0605">
+        <prop name="sqlFilename">step06.05ExtractLD.sql</prop>
+        <prop name="outputFilename">${processbox}/OMS_EXTRACT_CLOB_LD.DAT</prop>
+    </group>
+    <group name="step0606">
+        <prop name="inputFilename">${processbox}/OMS_EXTRACT_CLOB_LD.DAT</prop>
+        <prop name="outputFilename">${processbox}/OMS_EXTRACT_CLOB_LD_PARSED.DAT</prop>
+    </group>
+    <group name="step0607">
+        <prop name="sqlFilename">step06.07ExtractLDDD.sql</prop>
+        <prop name="outputFilename">${processbox}/OMS_LD_DISC_DECODE.DAT</prop>
+    </group>
+    <group name="step0608">
+        <prop name="sqlFilename">step06.08ExtractLDDC.sql</prop>
+        <prop name="outputFilename">${processbox}/OMS_LD_DECODE_CAPTION.DAT</prop>
+    </group>
+    <group name="step0609">
+        <prop name="syncsortFile">${syncsort}/step06.09JoinS67S68.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step0610">
+        <prop name="syncsortFile">${syncsort}/step06.10JoinS66S69.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step0611">
+        <prop name="sqlFilename">step06.11ExtractSR.SQL</prop>
+        <prop name="outputFilename">${processbox}/OMS_EXTRACT_CLOB_SR.DAT</prop>
+    </group>
+    <group name="step0612">
+        <prop name="inputFilename">${processbox}/OMS_EXTRACT_CLOB_SR.DAT</prop>
+        <prop name="outputFilename">${processbox}/OMS_SR_DATA.DAT</prop>
+    </group>
+    <group name="step0613">
+        <prop name="scriptFile">${syncsort}/step06.13ConcatOmsProducts.sh</prop>
+        <prop name="inputFilename1">${processbox}/OMS_LD_DATA.DAT</prop>
+        <prop name="inputFilename2">${processbox}/OMS_SR_DATA.DAT</prop>
+        <prop name="inputFilename3">${processbox}/OMS_EXTRACT_CLOB_SING_PARSED.DAT</prop>
+        <prop name="inputFilename4">${processbox}/OMS_EXTRACT_CLOB_CC_PARSED.DAT</prop>
+        <prop name="outputFilename">${processbox}/OMS_DATA.DAT</prop>
+    </group>
+    <group name="step0614">
+        <prop name="syncsortFile">${syncsort}/step06.14SortOmsProducts.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step0701">
+        <prop name="scriptFile">${syncsort}/step0701ConcatPic.sh</prop>
+        <prop name="syncsortFile">${syncsort}/step0701SortedPic.srt</prop> 
+       <prop name="inputFilename1">${inbox}/PIC_ADMIN_FEED_FILE_AB.DAT</prop>
+        <prop name="inputFilename2">${inbox}/PIC_ADMIN_FEED_FILE_BC.DAT</prop>
+        <prop name="outputFilename">${inbox}/PIC_ADMIN_FEED_FILE.DAT</prop>
+    </group>
+    <group name="step07">
+        <prop name="syncsortFile">${syncsort}/step07ProcessPicAdminFeedFile.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step0801">
+        <prop name="syncsortFile">${syncsort}/step08aJoinCustomerProfileServiceInstance.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step0802">
+        <prop name="syncsortFile">${syncsort}/step08bSortCustomerProfileServiceInstance.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step09">
+        <prop name="syncsortFile">${syncsort}/step09JoinBillingCustomer.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+     <group name="step09nik">
+        <prop name="syncsortFile">${syncsort}/step09JoinBillingCustomerNik.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+     </group>
+    <group name="step1001">
+        <prop name="syncsortFile">${syncsort}/step10aJoinOmsPicAdmin.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1002">
+        <prop name="syncsortFile">${syncsort}/step10bSortS10a.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1101">
+        <prop name="syncsortFile">${syncsort}/step11aJoinS8S10.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1102">
+        <prop name="syncsortFile">${syncsort}/step11bSortS11a.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1201">
+        <prop name="syncsortFile">${syncsort}/step12aJoinS5S9.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1202">
+        <prop name="syncsortFile">${syncsort}/step12bSortS12a.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1201nik">
+        <prop name="syncsortFile">${syncsort}/step12aJoinS5S9Nik.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1202nik">
+        <prop name="syncsortFile">${syncsort}/step12bSortS12aNik.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1301">
+        <prop name="syncsortFile">${syncsort}/step13aGenerateCandidateTargetFile.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step1302">
+        <prop name="syncsortFile">${syncsort}/step13bSortCandidateTargetFile.srt</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+     <group name="step1301nik">
+         <prop name="syncsortFile">${syncsort}/step13aGenerateCandidateTargetFileNik.srt</prop>
+         <prop name="log">${logs}/${jobname}.log</prop>
+     </group>
+     <group name="step1302nik">
+          <prop name="syncsortFile">${syncsort}/step13bSortCandidateTargetFileNik.srt</prop>
+          <prop name="log">${logs}/${jobname}.log</prop>
+      </group>
+    <group name="step14">
+        <prop name="inputFilename">${processbox}/CANDIDATE_TARGET_FEED_FILE_SORTED.DAT</prop>
+        <prop name="outputFilename">${passbox}/NDS_FEED_FILE_TARGET.DAT</prop>
+    </group>
+     <group name="step14nik">
+        <prop name="inputFilename">${processbox}/CANDIDATE_TARGET_FEED_FILE_SORTED_NIK.DAT</prop>
+           <prop name="outputFilename">${passbox}/NDS_FEED_FILE_TARGET_NIK.DAT</prop>
+      </group>
+    <group name="step15">
+        <prop name="scriptFile">${step}/removeduplicates.sh</prop>
+        <prop name="scriptFile1">${syncsort}/step1507ConcatFiles.sh</prop>
+        <prop name="scriptFile2">${step}/recordCount.sh</prop>
+        <prop name="syncsortFile1">${syncsort}/step1503MasterDifference.srt</prop> 
+        <prop name="syncsortFile2">${syncsort}/step1504TargetDifference.srt</prop>
+        <prop name="syncsortFile3">${syncsort}/step1505Intersection.srt</prop>
+        <prop name="inputFilename1">${passbox}/NDS_FEED_FILE_TARGET.DAT</prop>
+        <prop name="inputFilename2">${passbox}/NDS_FEED_FILE_MASTER.DAT</prop> 
+        <prop name="outputFilename1">${passbox}/MASTER_DIFFERENCE.DAT</prop>
+        <prop name="outputFilename2">${passbox}/TARGET_DIFFERENCE.DAT</prop>  
+        <prop name="inputFilename">${passbox}/INTERSECTION.DAT</prop>
+        <prop name="outputFilename">${passbox}/CHANGE_RECORDS.DAT</prop>
+        <prop name="recordCountFilename">${processbox}/RECORD_COUNT.DAT</prop>
+        <prop name="masterbodyFilename">${passbox}/NDS_FEED_FILE_TARGET_MANIFESTED.DAT</prop> 
+    </group>
+    <group name="step1601">
+        <prop name="outputFilename">${passbox}/HEADER_FILE.DAT</prop>
+    </group>
+    <group name="step1602">
+        <prop name="outputFilename">${passbox}/FOOTER_FILE.DAT</prop>
+        <prop name="recordCountFilename">${processbox}/RECORD_COUNT.DAT</prop>
+    </group>
+     <group name="step15nik">
+        <prop name="scriptFile">${step}/removeduplicates.sh</prop>
+        <prop name="scriptFile1">${syncsort}/step1507ConcatFilesNik.sh</prop>
+        <prop name="scriptFile2">${step}/recordCount.sh</prop>
+        <prop name="syncsortFile1">${syncsort}/step1503MasterDifferenceNik.srt</prop>
+        <prop name="syncsortFile2">${syncsort}/step1504TargetDifferenceNik.srt</prop>
+        <prop name="syncsortFile3">${syncsort}/step1505IntersectionNik.srt</prop>
+        <prop name="inputFilename1">${passbox}/NDS_FEED_FILE_TARGET_NIK.DAT</prop>
+        <prop name="inputFilename2">${passbox}/NDS_FEED_FILE_MASTER_NIK.DAT</prop>
+        <prop name="outputFilename1">${passbox}/MASTER_DIFFERENCE_NIK.DAT</prop>
+        <prop name="outputFilename2">${passbox}/TARGET_DIFFERENCE_NIK.DAT</prop>
+
+        <prop name="inputFilename">${passbox}/INTERSECTION_NIK.DAT</prop>
+        <prop name="outputFilename">${passbox}/CHANGE_RECORDS_NIK.DAT</prop>
+        <prop name="recordCountFilename">${processbox}/RECORD_COUNT_NIK.DAT</prop>
+        <prop name="masterbodyFilename">${processbox}/NDS_FEED_FILE_TARGET_MANIFESTED_NIK.DAT</prop>
+        <prop name="log05">${logs}/${jobname}.log</prop>
+      </group>
+     <group name="step15master">
+       <prop name="scriptFile">${step}/recordCount.sh</prop>
+       <prop name="syncsortFile">${syncsort}/masterCreate.srt</prop>  
+       <prop name="recordCountFilename">${processbox}/RECORD_COUNT_MASTER_NIK.DAT</prop>
+       <prop name="inputFilename">${passbox}/NDS_FEED_FILE_MASTER_NIK.DAT</prop>
+       <prop name="outputFilename">${passbox}/MASTER_NIK.DAT</prop>
+       <prop name="log">${logs}/${jobname}.log</prop>
+     </group>
+    <group name="step1603">
+        <prop name="scriptFile">${step}/decorateTargetFile.sh</prop>
+        <prop name="inputFilename1">${passbox}/HEADER_FILE.DAT</prop>
+        <prop name="inputFilename2">${passbox}/NDS_FEED_FILE_TARGET_MANIFESTED.DAT</prop>
+        <prop name="inputFilename3">${passbox}/FOOTER_FILE.DAT</prop>
+        <prop name="outputFilename">${outbox}/IMAGINE_DAILY.dat</prop>
+    </group>
+    <group name="step17">
+        <prop name="scriptFile">${step}/renameTargetFeedFile.sh</prop>
+        <prop name="inputFilename">${passbox}/NDS_FEED_FILE_TARGET.DAT</prop>
+        <prop name="outputFilename">${passbox}/NDS_FEED_FILE_MASTER.DAT</prop>
+        <prop name="inputFilename1">${passbox}/NDS_FEED_FILE_TARGET_NIK.DAT</prop>
+        <prop name="outputFilename1">${passbox}/NDS_FEED_FILE_MASTER_NIK.DAT</prop>
+    </group>
+    <group name="step1601nik">
+        <prop name="outputFilename">${passbox}/HEADER_FILE_NIK.DAT</prop>
+    </group>
+    <group name="step1602nik">
+        <prop name="outputFilename">${passbox}/FOOTER_FILE_NIK.DAT</prop>
+        <prop name="recordCountFilename">${processbox}/RECORD_COUNT_NIK.DAT</prop>
+    </group>
+    <group name="step1603nik">
+        <prop name="scriptFile">${step}/decorateTargetFile.sh</prop>
+        <prop name="syncsortFile">${syncsort}/step16format.srt</prop>
+        <prop name="inputFilename1">${passbox}/HEADER_FILE_NIK.DAT</prop>
+        <prop name="inputFilename2">${passbox}/NDS_FEED_FILE_TARGET_MANIFESTED_NIK.DAT</prop>
+        <prop name="inputFilename3">${passbox}/FOOTER_FILE_NIK.DAT</prop>
+        <prop name="outputFilename">${outbox}/SCODS_FCustomer_DFRAUD_T</prop>
+        <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step16formatnik">
+        <prop name="scriptFile">${step}/decorateTargetFile.sh</prop>
+        <prop name="syncsortFile">${syncsort}/masterFormat.srt</prop>
+        <prop name="inputFilename1">${passbox}/HEADER_FILE_NIK_M.DAT</prop>
+        <prop name="inputFilename2">${passbox}/MASTER_NIK.DAT</prop>
+       <prop name="inputFilename3">${passbox}/FOOTER_FILE_NIK_M.DAT</prop>
+       <prop name="outputFilename">${outbox}/SCODS_FCustomer_DFRAUD_T</prop>
+       <prop name="log">${logs}/${jobname}.log</prop>
+    </group>
+    <group name="step18">
+        <prop name="scriptFile">${step}/cleanTransientFiles.sh</prop>
+        <prop name="dir1">${processbox}</prop>
+        <prop name="dir2">${passbox}</prop>
+    </group>
+    <group name="credaud">
+        <prop name="scriptFile">${step}/checkAudit.sh</prop>
+        <prop name="inputdatafile">${inbox}/CREDIT_PROFILE.DAT</prop>
+        <prop name="inputaudfile">${inbox}/CREDIT_PROFILE.AUD</prop>
+    </group>
+  
+    <group name="cproaud">
+        <prop name="scriptFile">${step}/checkAudit.sh</prop>
+        <prop name="inputdatafile">${inbox}/CPROFL_IDENTIFICATION.DAT</prop>
+        <prop name="inputaudfile">${inbox}/CPROFL_IDENTIFICATION.AUD</prop>
+    </group>
+    <!-- Validate the data extracts -->
+    <group name="validateDataExtracts">
+        <prop name="billingExtractRecordWidth">3214</prop>
+        <prop name="bridgingExtractRecordWidth">651</prop>
+        <prop name="creditExtractRecordWidth">109</prop>
+        <prop name="customerExtractRecordWidth">1389</prop>
+        <prop name="serviceExtractRecordWidth">536</prop>
+    </group>
+
+    <!-- Copying extract files from application outboxes (ODS and Credit Management) to sud0002 outbox. -->
+    <!-- ODS Bridging File extracts -->
+    <group name="copybridgingextract">
+        <prop name="scriptFile">${step}/copyExtract.sh</prop>
+        <prop name="fromDir">${CODEX_DATA_DIR}</prop>
+        <prop name="toDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="bridgingExtract">CUSTODS_REF_BRIDGING.DAT</prop>
+    </group>
+
+    <!-- ODS ServiceInstance File extract -->
+    <group name="copyserviceinstanceextract">
+        <prop name="scriptFile">${step}/copyExtract.sh</prop>
+        <prop name="fromDir">${CODEX_DATA_DIR}</prop>
+        <prop name="toDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="serviceInstanceExtract">CUSTODS_REF_SERVICE_INSTANCE.DAT</prop>
+    </group>
+
+    <!-- ODS Billing File extract -->
+    <group name="copybillingextract">
+        <prop name="scriptFile">${step}/copyExtract.sh</prop>
+        <prop name="fromDir">${CODEX_DATA_DIR}</prop>
+        <prop name="toDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="billingExtract">CUSTODS_REF_BILLING_ACCOUNT.DAT</prop>
+    </group>
+
+    <!-- ODS Customer File extract -->
+    <group name="copycustomerextract">
+        <prop name="scriptFile">${step}/copyExtract.sh</prop>
+        <prop name="fromDir">${CODEX_DATA_DIR}</prop>
+        <prop name="toDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="customerExtract">CUSTODS_REF_CUSTOMER.DAT</prop>
+    </group>
+
+    <!-- Credit Management (CRDM) File extract -->
+    <group name="copycreditextract">
+        <prop name="scriptFile">${step}/copyExtract.sh</prop>
+        <prop name="fromDir">${CREDIT_DATA_DIR}</prop>
+        <prop name="toDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="creditExtract">CREDIT_PROFILE</prop>
+    </group>
+
+    <group name="copycreditextract1">
+        <prop name="scriptFile">${step}/copyExtract.sh</prop>
+        <prop name="fromDir">${CREDIT_DATA_DIR}</prop>
+        <prop name="toDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="creditExtract">CPROFL_IDENTIFICATION</prop>
+    </group>
+    <group name="copyfraudfeedfile">
+        <prop name="scriptFile">${step}/copyFraudFeederFile.sh</prop>
+        <prop name="fromDir">${outbox}</prop>
+        <prop name="archiveDir">${archive}</prop>
+        <prop name="toDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="inputFilename">SCODS_FCustomer_DFRAUD_T</prop>
+    </group>
+    <group name="copymasterfile">
+        <prop name="scriptFile">${step}/copyMasterFile.sh</prop>
+        <prop name="fromDir">${passbox}</prop>
+        <prop name="toDir">${outbox}</prop>
+        <prop name="sftpDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="inputFilename">NDS_FEED_FILE_MASTER_NIK.DAT</prop>
+    </group>
+    <!-- Copy the NDS Master file to sud0002 outbox -->
+    <group name="copyndsmasterfile">
+        <prop name="scriptFile">${step}/copyNDSMasterFile.sh</prop>
+        <prop name="fromDir">${outbox}</prop>
+        <prop name="toDir">${uxsftpoutbox}/${level2shortname}</prop>
+        <prop name="inputFilename">IMAGINE_DAILY.DAT</prop>
+        <prop name="outputFilename">IMAGINE_DAILY.dat</prop>
+    </group>
+
+    <!-- Moving extract files from the sud0002 inbox to the IFFT application inbox. -->
+    <!-- ODS File extracts -->
+
+    <!-- ODS Bridging File extracts -->
+    <group name="movebridgingextract">
+        <prop name="scriptFile">${step}/moveZipExtract.sh</prop>
+        <prop name="fromDir">${uxsftpinbox}/${level2shortname}</prop>
+        <prop name="toDir">${inbox}</prop>
+        <prop name="bridgingExtract">CUSTODS_REF_BRIDGING.DAT</prop>
+    </group>
+
+    <!-- ODS ServiceInstance File extract -->
+    <group name="moveserviceinstanceextract">
+        <prop name="scriptFile">${step}/moveZipExtract.sh</prop>
+        <prop name="fromDir">${uxsftpinbox}/${level2shortname}</prop>
+        <prop name="toDir">${inbox}</prop>
+        <prop name="serviceInstanceExtract">CUSTODS_REF_SERVICE_INSTANCE.DAT</prop>
+    </group>
+
+    <!-- ODS Billing File extract -->
+    <group name="movebillingextract">
+        <prop name="scriptFile">${step}/moveZipExtract.sh</prop>
+        <prop name="fromDir">${uxsftpinbox}/${level2shortname}</prop>
+        <prop name="toDir">${inbox}</prop>
+        <prop name="billingExtract">CUSTODS_REF_BILLING_ACCOUNT.DAT</prop>
+    </group>
+
+    <!-- ODS Customer File extract -->
+    <group name="movecustomerextract">
+        <prop name="scriptFile">${step}/moveZipExtract.sh</prop>
+        <prop name="fromDir">${uxsftpinbox}/${level2shortname}</prop>
+        <prop name="toDir">${inbox}</prop>
+        <prop name="customerExtract">CUSTODS_REF_CUSTOMER.DAT</prop>
+    </group>
+
+    <!-- Credit Management (CRDM) File extract -->
+    <group name="movecreditextract">
+        <prop name="scriptFile">${step}/moveExtract.sh</prop>
+        <prop name="fromDir">${uxsftpinbox}/${level2shortname}</prop>
+        <prop name="toDir">${inbox}</prop>
+        <prop name="creditExtract">CREDIT_PROFILE.DAT</prop>
+    </group>
+
+     <group name="movecreditextract1">
+         <prop name="scriptFile">${step}/moveExtract.sh</prop>
+         <prop name="fromDir">${uxsftpinbox}/${level2shortname}</prop>
+         <prop name="toDir">${inbox}</prop>
+         <prop name="creditExtract">CPROFL_IDENTIFICATION.DAT</prop>
+     </group>    
+ <!-- PIC/Admin File extract -->
+    <group name="movepicadminextract">
+        <prop name="scriptFile">${step}/movePicExtract.sh</prop>
+        <prop name="fromDir">${mfsftpinbox}/${level2shortname}</prop>
+        <prop name="toDir">${inbox}</prop>
+        <prop name="outDir">${outbox}</prop>
+        <prop name="picAdminExtract">PIC_ADMIN_FEED_FILE.DAT</prop>
+        <prop name="picAdminExtract1">PIC_ADMIN_FEED_FILE_AB.DAT</prop>
+        <prop name="picAdminExtractTrg">PIC_ADMIN_FEED.trg</prop>
+    </group>
+    <group name="movebcpicadminextract">
+        <prop name="scriptFile">${step}/moveBCPicExtract.sh</prop>
+        <prop name="fromDir">${mfsftpinbox}/${level2shortname}</prop>
+        <prop name="toDir">${inbox}</prop>
+        <prop name="outDir">${outbox}</prop>
+        <prop name="picAdminExtract">PIC_ADMIN_FEED_FILE_BC.DAT</prop>
+        <prop name="picAdminExtractTrg">PIC_ADMIN_FEED_BC.trg</prop>
+    </group>
+    <!-- Audit files move -->
+    <group name="movecredaud">
+          <prop name="scriptFile">${step}/moveExtract.sh</prop>
+          <prop name="fromDir">${uxsftpinbox}/${level2shortname}</prop>
+          <prop name="toDir">${inbox}</prop>
+          <prop name="credAud">CREDIT_PROFILE.AUD</prop>
+    </group>
+    <group name="movecproaud">
+          <prop name="scriptFile">${step}/moveExtract.sh</prop>
+          <prop name="fromDir">${uxsftpinbox}/${level2shortname}</prop>
+          <prop name="toDir">${inbox}</prop>
+          <prop name="cproAud">CPROFL_IDENTIFICATION.AUD</prop>
+    </group> 
+    <!-- Cleaning the sud0002 Inbox. -->
+    <group name="cleansud0002inbox">
+        <prop name="scriptFile">${step}/cleanDirectory.sh</prop>
+        <prop name="directory">${uxsftpinbox}/${level2shortname}</prop>
+    </group>
+
+    <!-- Cleaning the sfd0002 Inbox. -->
+    <group name="cleansfd0002inbox">
+        <prop name="scriptFile">${step}/cleanDirectory.sh</prop>
+        <prop name="directory">${mfsftpinbox}/${level2shortname}</prop>
+    </group>
+
+    <!-- Cleaning the sud0002 Outbox. -->
+    <group name="cleansud0002outbox">
+        <prop name="scriptFile">${step}/cleanDirectory.sh</prop>
+        <prop name="directory">${uxsftpoutbox}/${level2shortname}</prop>
+    </group>
+
+    <!-- Cleaning the sfd0002 Outbox. -->
+    <group name="cleansfd0002outbox">
+        <prop name="scriptFile">${step}/cleanDirectory.sh</prop>
+        <prop name="directory">${mfsftpoutbox}/${level2shortname}</prop>
+    </group>
+
+    <!-- END OF Copying extract files from application outboxes (ODS and Credit Management) to sud0002 outbox. -->
+
+    <!-- configuration elements for step 1b -->
+    <group name="fileProcessor">
+        <!-- the pathname of the input file -->
+        <prop name="inputFilename">${step012/inputFilename}</prop>
+
+        <!-- the width of each record in the file (in bytes) -->
+        <prop name="lineWidth">56</prop>
+
+        <!-- the width of the key of each record in the file (in bytes) -->
+        <prop name="keyWidth">18</prop>
+
+        <!-- the offset of the WTN field from the beginning of a record (in bytes) -->
+        <prop name="wtnOffset">30</prop>
+    </group>
+
+
+    <!-- configuration elements for step 5.2 (decrypt credit feed file) -->
+    <group name="decryptCreditFeedFile">
+
+        <!-- the path to the input file -->
+        <prop name="inputFilename">${step05/inputFilename}</prop>
+
+        <!-- the path to the output file -->
+        <prop name="outputFilename">${step05/outputFilename}</prop>
+
+        <!-- the start point of the customer id -->
+        <prop name="customerIdStartPoint">0</prop>
+
+        <!-- the end point of the customer id -->
+        <prop name="customerIdEndPoint">9</prop>
+
+        <!-- the start point of the driver's license (DL) -->
+        <prop name="DLStartPoint">9</prop>
+
+        <!-- the end point of the driver's license (DL) -->
+        <prop name="DLEndPoint">59</prop>
+
+        <!-- the start point of the social insurance number (SIN) -->
+        <prop name="SINStartPoint">59</prop>
+
+        <!-- the end point of the social insurance number (SIN) -->
+        <prop name="SINEndPoint">109</prop>
+
+        <!-- dictates the exact size (padded if necessary) of the DL and SIN fields written to the output file (in bytes) -->
+        <prop name="fieldSize">50</prop>
+    </group>
+
+    <!-- configuration elements for step 6.2 (calling card clob parser) -->
+    <group name="callingCardClobParser">
+
+        <!-- specifies which clob parser to use -->
+        <prop name="command">CallingCard</prop>
+
+        <!-- the path to the input file -->
+        <prop name="inputFilename">${step0602/inputFilename}</prop>
+
+        <!-- the path to the output file -->
+        <prop name="outputFilename">${step0602/outputFilename}</prop>
+
+        <!-- specifies one of the keys to be parsed in the OMS clob structure -->
+        <prop name="parameterOne">cardNumber</prop>
+
+        <!-- specifies an additional parameter to pass to the parser -->
+        <prop name="parameterTwo">Telus</prop>
+
+        <!-- dictates the size of the buffered streams (this is used for performance tuning) -->
+        <prop name="bufferSize">1048567</prop>
+
+        <!-- dictates the exact size (padded if necessary) of each field written to the output file (in bytes) -->
+        <prop name="fieldSize">10</prop>
+
+        <!-- specifies how key/value pairs are delimited in the OMS clob structure -->
+        <prop name="clobDelimiter">;</prop>
+
+        <!-- specifies how one key/value pair is delimited in the OMS clob structure -->
+        <prop name="propertyDelimiter">+</prop>
+    </group>
+
+    <!-- configuration elements for step 6.4 (single line clob parser) -->
+    <group name="singleLineClobParser">
+
+        <!-- specifies which clob parser to use -->
+        <prop name="command">SingleLine</prop>
+
+        <!-- the path to the input file -->
+        <prop name="inputFilename">${step0604/inputFilename}</prop>
+
+        <!-- the path to the output file -->
+        <prop name="outputFilename">${step0604/outputFilename}</prop>
+
+        <!-- specifies one of the keys to be parsed in the OMS clob structure -->
+        <prop name="parameterOne">primaryTN</prop>
+
+        <!-- specifies one of the keys to be parsed in the OMS clob structure -->
+        <prop name="parameterTwo">listingType</prop>
+
+        <!-- specifies an additional parameter to pass to the parser -->
+        <prop name="parameterThree">Telus</prop>
+
+        <!-- dictates the size of the buffered streams (this is used for performance tuning) -->
+        <prop name="bufferSize">1048567</prop>
+
+        <!-- dictates the exact size (padded if necessary) of each field written to the output file (in bytes) -->
+        <prop name="fieldSize">10</prop>
+
+        <!-- specifies how key/value pairs are delimited in the OMS clob structure -->
+        <prop name="clobDelimiter">;</prop>
+
+        <!-- specifies how one key/value pair is delimited in the OMS clob structure -->
+        <prop name="propertyDelimiter">+</prop>
+    </group>
+
+    <!-- configuration elements for step 6.6 (long distance clob parser) -->
+    <group name="longDistanceClobParser">
+
+        <!-- specifies which clob parser to use -->
+        <prop name="command">LongDistance</prop>
+
+        <!-- the path to the input file -->
+        <prop name="inputFilename">${step0606/inputFilename}</prop>
+
+        <!-- the path to the output file -->
+        <prop name="outputFilename">${step0606/outputFilename}</prop>
+
+        <!-- specifies one of the keys to be parsed in the OMS clob structure -->
+        <prop name="parameterOne">LocalProvider</prop>
+
+        <!-- specifies one of the keys to be parsed in the OMS clob structure -->
+        <prop name="parameterTwo">externalSn</prop>
+
+        <!-- dictates the size of the buffered streams (this is used for performance tuning) -->
+        <prop name="bufferSize">1048567</prop>
+
+        <!-- dictates the exact size (padded if necessary) of each field written to the output file (in bytes) -->
+        <prop name="fieldSize">10</prop>
+
+        <!-- specifies how key/value pairs are delimited in the OMS clob structure -->
+        <prop name="clobDelimiter">;</prop>
+
+        <!-- specifies how one key/value pair is delimited in the OMS clob structure -->
+        <prop name="propertyDelimiter">+</prop>
+    </group>
+
+    <!-- configuration elements for step 6.12 (long distance clob parser) -->
+    <group name="smartRingClobParser">
+
+        <!-- specifies which clob parser to use -->
+        <prop name="command">SmartRing</prop>
+
+        <!-- the path to the input file -->
+        <prop name="inputFilename">${step0612/inputFilename}</prop>
+
+        <!-- the path to the output file -->
+        <prop name="outputFilename">${step0612/outputFilename}</prop>
+
+        <!-- specifies one of the keys to be parsed in the OMS clob structure -->
+        <prop name="parameterOne">subscriptionNumber</prop>
+
+        <!-- specifies an additional parameter to pass to the parser -->
+        <prop name="parameterTwo">Telus</prop>
+
+        <!-- dictates the size of the buffered streams (this is used for performance tuning) -->
+        <prop name="bufferSize">1048567</prop>
+
+        <!-- dictates the exact size (padded if necessary) of each field written to the output file (in bytes) -->
+        <prop name="fieldSize">10</prop>
+
+        <!-- specifies how key/value pairs are delimited in the OMS clob structure -->
+        <prop name="clobDelimiter">;</prop>
+
+        <!-- specifies how one key/value pair is delimited in the OMS clob structure -->
+        <prop name="propertyDelimiter">+</prop>
+    </group>
+
+    <!-- configuration elements for step 14 (format candidate target file) -->
+    <group name="formatCandidateTargetFile">
+
+        <!-- the path to the input file -->
+        <prop name="inputFilename">${step14/inputFilename}</prop>
+
+        <!-- the path to the output file -->
+        <prop name="outputFilename">${step14/outputFilename}</prop>
+        <prop name="inputFilenamenik">${step14nik/inputFilename}</prop>
+        <prop name="outputFilenamenik">${step14nik/outputFilename}</prop>
+
+        <!-- marks the beginning of the city/province field for the service address from the beginning of each line (in bytes) -->
+        <prop name="serviceStartPoint">106</prop>
+
+        <!-- marks the end of the city/province field for the service address from the beginning of each line (in bytes) -->
+        <prop name="serviceEndPoint">128</prop>
+
+        <!-- marks the beginning of the city/province field for the billing address from the beginning of each line (in bytes) -->
+        <prop name="billingStartPoint">178</prop>
+
+        <!-- marks the end of the city/province field for the billing address from the beginning of each line (in bytes) -->
+        <prop name="billingEndPoint">200</prop>
+
+        <!-- marks the beginning of the city/province field for the billing address in the string buffer -->
+        <prop name="bufferStartPoint">186</prop>
+
+        <!-- marks the end of the city/province field for the billing address in the string buffer -->
+        <prop name="bufferEndPoint">208</prop>
+
+        <!-- dictates the exact size (padded if necessary) of the (city and province) field -->
+        <prop name="fieldSize">30</prop>
+
+        <!-- used for padding in the output file (30 whitespace characters) -->
+        <prop name="padding">                              </prop>
+    </group>
+
+    <!-- configuration elements for step 15 (compare the master file against the target file) -->
+    <group name="fileComparator">
+
+        <!-- holds the path to the master file -->
+        <prop name="inputFilename">${step15/inputFilename}</prop>
+
+        <prop name="masterFilename">${step15/masterFilename}</prop>
+        <!-- holds the path to the target file -->
+        <prop name="targetFilename">${step15/targetFilename}</prop>
+
+        <!-- holds the path to the output file -->
+        <prop name="outputFilename">${step15/outputFilename}</prop>
+
+        <!-- holds the path to the record count file -->
+        <prop name="recordCountFilename">${step15/recordCountFilename}</prop>
+
+        <prop name="inputFilenamenik">${step15nik/inputFilename}</prop>
+
+        <prop name="masterFilenamenik">${step15nik/masterFilename}</prop>
+        <!-- holds the path to the target file -->
+        <prop name="targetFilenamenik">${step15nik/targetFilename}</prop>
+
+        <!-- holds the path to the output file -->
+        <prop name="outputFilenamenik">${step15nik/outputFilename}</prop>
+
+        <!-- holds the path to the record count file -->
+        <prop name="recordCountFilenamenik">${step15nik/recordCountFilename}</prop>
+
+        <!-- defines the width of each record in the file (in bytes) -->
+        <prop name="width">460</prop>
+
+        <!-- defines the width of the key of each record in the file (in bytes) -->
+        <prop name="keyWidth">11</prop>
+    </group>
+
+    <!-- configuration elements for step 16a (generate the header file) -->
+    <group name="generateHeaderFile">
+
+        <!-- holds the path to the output file -->
+        <prop name="outputFilename">${step1601/outputFilename}</prop>
+
+        <prop name="outputFilenamenikm">${step16formatnik/inputFilename1}</prop>
+        <prop name="outputFilenamenik">${step1601nik/outputFilename}</prop> 
+       <!-- defines the telco code for the header -->
+        <prop name="telcoCode"> </prop>
+    </group>
+
+    <!-- configuration elements for step 16b (generate the footer file) -->
+    <group name="generateFooterFile">
+
+        <!-- holds the path to the output file -->
+        <prop name="outputFilename">${step1602/outputFilename}</prop>
+
+        <prop name="outputFilenamenikm">${step16formatnik/inputFilename3}</prop>
+        <prop name="recordCountFilenamenikm">${step15master/recordCountFilename}</prop>
+        <prop name="outputFilenamenik">${step1602nik/outputFilename}</prop>
+        <prop name="recordCountFilenamenik">${step1602nik/recordCountFilename}</prop>
+        <!-- holds the path to the record count file -->
+        <prop name="recordCountFilename">${step1602/recordCountFilename}</prop>
+     </group>
+
+</group>

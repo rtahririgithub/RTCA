@@ -1,0 +1,865 @@
+<WL5G3N0:definitions name="AccountInformationService_v3_5.wsdl" targetNamespace="http://telus.com/wsdl/CMO/InformationMgmt/AccountInformationService_3" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/AccountInformationServiceRequestResponse_v3" xmlns:WL5G3N2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:WL5G3N3="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:WL5G3N4="http://telus.com/wsdl/CMO/InformationMgmt/AccountInformationService_3" xmlns:WL5G3N5="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:documentation>Provides the ability to retrieve and update Account Information Data</WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xs:schema targetNamespace="http://telus.com/wsdl/CMO/InformationMgmt/AccountInformationService_3" xmlns:ais="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/AccountInformationServiceRequestResponse_v3" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:iface="http://telus.com/wsdl/CMO/InformationMgmt/AccountInformationService_3" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/AccountInformationServiceRequestResponse_v3" schemaLocation="AccountInformationServiceRequestResponse_v3_5.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" schemaLocation="Exceptions_v1_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="ping_v1.xsd"/>
+    </xs:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="getAccountByAccountNumber">
+    <WL5G3N0:part element="WL5G3N1:getAccountByAccountNumber" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getAccountByAccountNumberResponse">
+    <WL5G3N0:part element="WL5G3N1:getAccountByAccountNumberResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getAccountByPhoneNumber">
+    <WL5G3N0:part element="WL5G3N1:getAccountByPhoneNumber" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getAccountByPhoneNumberResponse">
+    <WL5G3N0:part element="WL5G3N1:getAccountByPhoneNumberResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getAccountListByAccountNumbers">
+    <WL5G3N0:part element="WL5G3N1:getAccountListByAccountNumbers" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getAccountListByAccountNumbersResponse">
+    <WL5G3N0:part element="WL5G3N1:getAccountListByAccountNumbersResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getAccountListByIMSI">
+    <WL5G3N0:part element="WL5G3N1:getAccountListByIMSI" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getAccountListByIMSIResponse">
+    <WL5G3N0:part element="WL5G3N1:getAccountListByIMSIResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateEmailAddress">
+    <WL5G3N0:part element="WL5G3N1:updateEmailAddress" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateEmailAddressResponse">
+    <WL5G3N0:part element="WL5G3N1:updateEmailAddressResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEmailAddress">
+    <WL5G3N0:part element="WL5G3N1:getEmailAddress" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEmailAddressResponse">
+    <WL5G3N0:part element="WL5G3N1:getEmailAddressResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateInvoicePropertyList">
+    <WL5G3N0:part element="WL5G3N1:updateInvoicePropertyList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateInvoicePropertyListResponse">
+    <WL5G3N0:part element="WL5G3N1:updateInvoicePropertyListResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getInvoicePropertyList">
+    <WL5G3N0:part element="WL5G3N1:getInvoicePropertyList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getInvoicePropertyListResponse">
+    <WL5G3N0:part element="WL5G3N1:getInvoicePropertyListResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBillingInformation">
+    <WL5G3N0:part element="WL5G3N1:getBillingInformation" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBillingInformationResponse">
+    <WL5G3N0:part element="WL5G3N1:getBillingInformationResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateContactInformation">
+    <WL5G3N0:part element="WL5G3N1:updateContactInformation" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateContactInformationResponse">
+    <WL5G3N0:part element="WL5G3N1:updateContactInformationResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getContactInformation">
+    <WL5G3N0:part element="WL5G3N1:getContactInformation" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getContactInformationResponse">
+    <WL5G3N0:part element="WL5G3N1:getContactInformationResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBillCyclePropertyList">
+    <WL5G3N0:part element="WL5G3N1:getBillCyclePropertyList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBillCyclePropertyListResponse">
+    <WL5G3N0:part element="WL5G3N1:getBillCyclePropertyList" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getLastMemo">
+    <WL5G3N0:part element="WL5G3N1:getLastMemo" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getLastMemoResponse">
+    <WL5G3N0:part element="WL5G3N1:getLastMemoResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createMemo">
+    <WL5G3N0:part element="WL5G3N1:createMemo" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createMemoResponse">
+    <WL5G3N0:part element="WL5G3N1:createMemoResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="checkInternationalServiceEligibility">
+    <WL5G3N0:part element="WL5G3N1:checkInternationalServiceEligibility" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="checkInternationalServiceEligibilityResponse">
+    <WL5G3N0:part element="WL5G3N1:checkInternationalServiceEligibilityResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getPersonalCreditInformation">
+    <WL5G3N0:part element="WL5G3N1:getPersonalCreditInformation" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getPersonalCreditInformationResponse">
+    <WL5G3N0:part element="WL5G3N1:getPersonalCreditInformationResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBusinessCreditInformation">
+    <WL5G3N0:part element="WL5G3N1:getBusinessCreditInformation" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getBusinessCreditInformationResponse">
+    <WL5G3N0:part element="WL5G3N1:getBusinessCreditInformationResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updatePaymentMethod">
+    <WL5G3N0:part element="WL5G3N1:updatePaymentMethod" name="parameters"/>
+    <WL5G3N0:part element="WL5G3N1:UserHeader" name="updatePaymentMethodInSoapHdr"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updatePaymentMethodResponse">
+    <WL5G3N0:part element="WL5G3N1:updatePaymentMethodResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="registerTopUpCreditCard">
+    <WL5G3N0:part element="WL5G3N1:registerTopUpCreditCard" name="parameters"/>
+    <WL5G3N0:part element="WL5G3N1:UserHeader" name="registerTopUpCreditCardInSoapHdr"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="registerTopUpCreditCardResponse">
+    <WL5G3N0:part element="WL5G3N1:registerTopUpCreditCardResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="removeTopUpCreditCard">
+    <WL5G3N0:part element="WL5G3N1:removeTopUpCreditCard" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="removeTopUpCreditCardResponse">
+    <WL5G3N0:part element="WL5G3N1:removeTopUpCreditCardResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createFollowUp">
+    <WL5G3N0:part element="WL5G3N1:createFollowUp" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createFollowUpResponse">
+    <WL5G3N0:part element="WL5G3N1:createFollowUpResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getSubscriberEligibilitySupportingInfo">
+    <WL5G3N0:part element="WL5G3N1:getSubscriberEligibilitySupportingInfo" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getSubscriberEligibilitySupportingInfoResponse">
+    <WL5G3N0:part element="WL5G3N1:getSubscriberEligibilitySupportingInfoResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCustomerNotificationPreferenceList">
+    <WL5G3N0:part element="WL5G3N1:getCustomerNotificationPreferenceList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCustomerNotificationPreferenceListResponse">
+    <WL5G3N0:part element="WL5G3N1:getCustomerNotificationPreferenceListResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCustomerNotificationPreferenceList">
+    <WL5G3N0:part element="WL5G3N1:updateCustomerNotificationPreferenceList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateCustomerNotificationPreferenceListResponse">
+    <WL5G3N0:part element="WL5G3N1:updateCustomerNotificationPreferenceListResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getNextSeatGroupId">
+    <WL5G3N0:part element="WL5G3N1:getNextSeatGroupId" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getNextSeatGroupIdResponse">
+    <WL5G3N0:part element="WL5G3N1:getNextSeatGroupIdResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getMaxVoipLineList">
+    <WL5G3N0:part element="WL5G3N1:getMaxVoipLineList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getMaxVoipLineListResponse">
+    <WL5G3N0:part element="WL5G3N1:getMaxVoipLineListResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createMaxVoipLine">
+    <WL5G3N0:part element="WL5G3N1:createMaxVoipLine" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createMaxVoipLineResponse">
+    <WL5G3N0:part element="WL5G3N1:createMaxVoipLineResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateMaxVoipLineList">
+    <WL5G3N0:part element="WL5G3N1:updateMaxVoipLineList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateMaxVoipLineListResponse">
+    <WL5G3N0:part element="WL5G3N1:updateMaxVoipLineListResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part element="WL5G3N2:ping" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part element="WL5G3N2:pingResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ServiceException">
+    <WL5G3N0:part element="WL5G3N3:ServiceException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="PolicyException">
+    <WL5G3N0:part element="WL5G3N3:PolicyException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="AccountInformationService_v3_5_PortType">
+    <WL5G3N0:operation name="getAccountByAccountNumber">
+      <WL5G3N0:input message="WL5G3N4:getAccountByAccountNumber"/>
+      <WL5G3N0:output message="WL5G3N4:getAccountByAccountNumberResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getAccountByPhoneNumber">
+      <WL5G3N0:input message="WL5G3N4:getAccountByPhoneNumber"/>
+      <WL5G3N0:output message="WL5G3N4:getAccountByPhoneNumberResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getAccountListByAccountNumbers">
+      <WL5G3N0:input message="WL5G3N4:getAccountListByAccountNumbers"/>
+      <WL5G3N0:output message="WL5G3N4:getAccountListByAccountNumbersResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getAccountListByIMSI">
+      <WL5G3N0:input message="WL5G3N4:getAccountListByIMSI"/>
+      <WL5G3N0:output message="WL5G3N4:getAccountListByIMSIResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateEmailAddress">
+      <WL5G3N0:input message="WL5G3N4:updateEmailAddress"/>
+      <WL5G3N0:output message="WL5G3N4:updateEmailAddressResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEmailAddress">
+      <WL5G3N0:input message="WL5G3N4:getEmailAddress"/>
+      <WL5G3N0:output message="WL5G3N4:getEmailAddressResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateInvoicePropertyList">
+      <WL5G3N0:input message="WL5G3N4:updateInvoicePropertyList"/>
+      <WL5G3N0:output message="WL5G3N4:updateInvoicePropertyListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getInvoicePropertyList">
+      <WL5G3N0:input message="WL5G3N4:getInvoicePropertyList"/>
+      <WL5G3N0:output message="WL5G3N4:getInvoicePropertyListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBillingInformation">
+      <WL5G3N0:input message="WL5G3N4:getBillingInformation"/>
+      <WL5G3N0:output message="WL5G3N4:getBillingInformationResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateContactInformation">
+      <WL5G3N0:input message="WL5G3N4:updateContactInformation"/>
+      <WL5G3N0:output message="WL5G3N4:updateContactInformationResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getContactInformation">
+      <WL5G3N0:input message="WL5G3N4:getContactInformation"/>
+      <WL5G3N0:output message="WL5G3N4:getContactInformationResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBillCyclePropertyList">
+      <WL5G3N0:input message="WL5G3N4:getBillCyclePropertyList"/>
+      <WL5G3N0:output message="WL5G3N4:getBillCyclePropertyListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getLastMemo">
+      <WL5G3N0:input message="WL5G3N4:getLastMemo"/>
+      <WL5G3N0:output message="WL5G3N4:getLastMemoResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="createMemo">
+      <WL5G3N0:input message="WL5G3N4:createMemo"/>
+      <WL5G3N0:output message="WL5G3N4:createMemoResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="checkInternationalServiceEligibility">
+      <WL5G3N0:input message="WL5G3N4:checkInternationalServiceEligibility"/>
+      <WL5G3N0:output message="WL5G3N4:checkInternationalServiceEligibilityResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getPersonalCreditInformation">
+      <WL5G3N0:input message="WL5G3N4:getPersonalCreditInformation"/>
+      <WL5G3N0:output message="WL5G3N4:getPersonalCreditInformationResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBusinessCreditInformation">
+      <WL5G3N0:input message="WL5G3N4:getBusinessCreditInformation"/>
+      <WL5G3N0:output message="WL5G3N4:getBusinessCreditInformationResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updatePaymentMethod">
+      <WL5G3N0:input message="WL5G3N4:updatePaymentMethod"/>
+      <WL5G3N0:output message="WL5G3N4:updatePaymentMethodResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="registerTopUpCreditCard">
+      <WL5G3N0:input message="WL5G3N4:registerTopUpCreditCard"/>
+      <WL5G3N0:output message="WL5G3N4:registerTopUpCreditCardResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="removeTopUpCreditCard">
+      <WL5G3N0:input message="WL5G3N4:removeTopUpCreditCard"/>
+      <WL5G3N0:output message="WL5G3N4:removeTopUpCreditCardResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="createFollowUp">
+      <WL5G3N0:input message="WL5G3N4:createFollowUp"/>
+      <WL5G3N0:output message="WL5G3N4:createFollowUpResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getSubscriberEligibilitySupportingInfo">
+      <WL5G3N0:input message="WL5G3N4:getSubscriberEligibilitySupportingInfo"/>
+      <WL5G3N0:output message="WL5G3N4:getSubscriberEligibilitySupportingInfoResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCustomerNotificationPreferenceList">
+      <WL5G3N0:input message="WL5G3N4:getCustomerNotificationPreferenceList"/>
+      <WL5G3N0:output message="WL5G3N4:getCustomerNotificationPreferenceListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateCustomerNotificationPreferenceList">
+      <WL5G3N0:input message="WL5G3N4:updateCustomerNotificationPreferenceList"/>
+      <WL5G3N0:output message="WL5G3N4:updateCustomerNotificationPreferenceListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getNextSeatGroupId">
+      <WL5G3N0:input message="WL5G3N4:getNextSeatGroupId"/>
+      <WL5G3N0:output message="WL5G3N4:getNextSeatGroupIdResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getMaxVoipLineList">
+      <WL5G3N0:input message="WL5G3N4:getMaxVoipLineList"/>
+      <WL5G3N0:output message="WL5G3N4:getMaxVoipLineListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="createMaxVoipLine">
+      <WL5G3N0:input message="WL5G3N4:createMaxVoipLine"/>
+      <WL5G3N0:output message="WL5G3N4:createMaxVoipLineResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateMaxVoipLineList">
+      <WL5G3N0:input message="WL5G3N4:updateMaxVoipLineList"/>
+      <WL5G3N0:output message="WL5G3N4:updateMaxVoipLineListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input message="WL5G3N4:ping"/>
+      <WL5G3N0:output message="WL5G3N4:pingResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="AccountInformationService_v3_5_SOAP" type="WL5G3N4:AccountInformationService_v3_5_PortType">
+    <WL5G3N5:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="getAccountByAccountNumber">
+      <WL5G3N0:documentation>Retrieves Account By Account Number.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getAccountByAccountNumber"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getAccountByPhoneNumber">
+      <WL5G3N0:documentation>Retrieves Account By Phone Number.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getAccountByPhoneNumber"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getAccountListByAccountNumbers">
+      <WL5G3N0:documentation>Retrieves Accounts By Account Numbers.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getAccountListByAccountNumbers"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getAccountListByIMSI">
+      <WL5G3N0:documentation>Retrieves an account list for a given IMSI value</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getAccountListByIMSI"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateEmailAddress">
+      <WL5G3N0:documentation>Updates Email Address on the Account</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateEmailAddress"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEmailAddress">
+      <WL5G3N0:documentation>Return Email Address on the Account</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getEmailAddress"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateInvoicePropertyList">
+      <WL5G3N0:documentation>Updates Invoice Properties on Postpaid Account</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateInvoicePropertyList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getInvoicePropertyList">
+      <WL5G3N0:documentation>Return Invoice Properties for Postpaid account</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getInvoicePropertyList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBillingInformation">
+      <WL5G3N0:documentation>Retrieve account billing information</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getBillingInformation"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateContactInformation">
+      <WL5G3N0:documentation>Updates personal contact information</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateContactInformation"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getContactInformation">
+      <WL5G3N0:documentation>Retrieve personal contact information</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getContactInformation"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBillCyclePropertyList">
+      <WL5G3N0:documentation>Retrieve bill cycle propertly list</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getBillCyclePropertyList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getLastMemo">
+      <WL5G3N0:documentation>Return last memo on the Account for given memoType</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getLastMemo"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="createMemo">
+      <WL5G3N0:documentation>Create account level memo</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="createMemo"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="checkInternationalServiceEligibility">
+      <WL5G3N0:documentation>Determines the international dialing and roaming eligibility and the deposit amount needed to fund it</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="checkInternationalServiceEligibility"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getPersonalCreditInformation">
+      <WL5G3N0:documentation>retrieve personal credit profile</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getPersonalCreditInformation"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getBusinessCreditInformation">
+      <WL5G3N0:documentation>retrieve business credit profile</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getBusinessCreditInformation"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updatePaymentMethod">
+      <WL5G3N0:documentation>Updates payment method.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updatePaymentMethod"/>
+      <WL5G3N0:input>
+        <WL5G3N0:documentation>User Header allows input of customer ID and list of consuming application IDs</WL5G3N0:documentation>
+        <WL5G3N5:header message="WL5G3N4:updatePaymentMethod" part="updatePaymentMethodInSoapHdr" use="literal"/>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="registerTopUpCreditCard">
+      <WL5G3N0:documentation>Registers Top Up Credit Card.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="registerTopUpCreditCard"/>
+      <WL5G3N0:input>
+        <WL5G3N0:documentation>User Header allows input of customer ID and list of consuming application IDs</WL5G3N0:documentation>
+        <WL5G3N5:header message="WL5G3N4:registerTopUpCreditCard" part="registerTopUpCreditCardInSoapHdr" use="literal"/>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="removeTopUpCreditCard">
+      <WL5G3N0:documentation>Remove Top Up Credit Card.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="removeTopUpCreditCard"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="createFollowUp">
+      <WL5G3N0:documentation>Create account level follow up, sync or async</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="createFollowUp"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getSubscriberEligibilitySupportingInfo">
+      <WL5G3N0:documentation>This operation provides ability to retrieve supporting data required by add-on subscriber eligibility check. Expected consumer is Risk Management team. Will return the last memo for each given memo type, the sum of actual amounts in customer payment history for given period, the sum of actual Deposit Paid Amount in customer deposit history for given period.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getSubscriberEligibilitySupportingInfo"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCustomerNotificationPreferenceList">
+      <WL5G3N0:documentation>This operation provides ability to retrieve preferred contact type(s) for a given subscriber.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCustomerNotificationPreferenceList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateCustomerNotificationPreferenceList">
+      <WL5G3N0:documentation>This operation provides ability to update preferred contact type(s) for a given subscriber.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateCustomerNotificationPreferenceList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getNextSeatGroupId">
+      <WL5G3N0:documentation>This operation retrieves the next generated seat group id. This is internally to CODS DB to retrieve uniquely generated oracle sequence </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getNextSeatGroupId"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getMaxVoipLineList">
+      <WL5G3N0:documentation>This operation retrieves the max voip line capacity info fcorresponding to the account, and subscription id if any. </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getMaxVoipLineList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="createMaxVoipLine">
+      <WL5G3N0:documentation>This operation creates the max voip line capacity info for the corresponding account and subscription id. </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="createMaxVoipLine"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateMaxVoipLineList">
+      <WL5G3N0:documentation>This operation updates the max voip line capacity info for the corresponding account and subscription id. </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateMaxVoipLineList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:documentation>
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+    
+  
+  
+    
+      
+    
+  
+</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="ping"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="AccountInformationService_v3_5">
+    <WL5G3N0:port binding="WL5G3N4:AccountInformationService_v3_5_SOAP" name="AccountInformationServicePort">
+      <WL5G3N5:address location="http://cmosr-custinfomgmt-dv103.tmi.telus.com/CMO/InformationMgmt/AccountInformation/AccountInformationService_v3_5"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

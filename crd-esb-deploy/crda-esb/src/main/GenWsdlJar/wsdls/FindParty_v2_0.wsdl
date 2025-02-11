@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions name="FindParty" targetNamespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" xmlns:operationtypes="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:telcotype="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" xmlns:tns="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<types>
+		<xsd:schema targetNamespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/types/schema/FindParty" xmlns="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage">
+			<xsd:import namespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" schemaLocation="http://xmlschema.tmi.telus.com/xsd/vendor/IBMTOCP_v2/ibm_telecom_message_party.xsd"/>
+			<xsd:element name="findParty" type="telcotype:PartyMessage"/>
+			<xsd:element name="findPartyResponse" type="telcotype:PartyCollectionMessage"/>
+		</xsd:schema>
+        <xsd:schema targetNamespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty">
+      <xsd:import namespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" schemaLocation="http://xmlschema.tmi.telus.com/xsd/vendor/IBMTOCP_v2/ibm_telecom_message.xsd"/>
+      <xsd:element name="findPartyFault1_findPartyFault" nillable="true" type="bons1:ExceptionMessage"/>
+    </xsd:schema>
+    </types>
+	<message name="findPartyRequest">
+		<part element="operationtypes:findParty" name="parameters"/>
+	</message>
+	<message name="findPartyResponse">
+		<part element="operationtypes:findPartyResponse" name="parameters"/>
+	</message>
+    <message name="findParty_findPartyFaultMsg">
+    <part element="tns:findPartyFault1_findPartyFault" name="findPartyFault"/>
+  </message>
+    <portType name="FindPartyPT">
+		<documentation>
+			* Licensed Materials - Property of IBM&#13; * &#13; 
+			* 5724-R31, 5655-S30&#13; * &#13; * (C) Copyright IBM Corp.
+			2008 All Rights Reserved.&#13; * &#13; * US Government Users 
+			Restricted Rights - Use, duplication or&#13; * disclosure 
+			restricted by GSA ADP Schedule Contract with IBM Corp.&#13; 
+		</documentation>
+		<operation name="findParty">
+			<input message="tns:findPartyRequest"/>
+			<output message="tns:findPartyResponse"/>
+            <fault message="tns:findParty_findPartyFaultMsg" name="findPartyFault"/>
+        </operation>
+	</portType>
+    <binding name="FindPartySOAPBinding" type="tns:FindPartyPT">
+
+    	<soap:binding style="document"
+    		transport="http://schemas.xmlsoap.org/soap/http" />
+    	<operation name="findParty">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">FindParty would determine if the customer profile does exist in Telus Credit Profile for a given identification</wsdl:documentation> 
+    		<soap:operation
+    			soapAction="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/inventory/FindParty/findParty" />
+    		<input>
+
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+
+    			<soap:body use="literal" />
+    		</output>
+    		<fault name="findPartyFault">
+    			<soap:fault use="literal" name="findPartyFault" />
+    		</fault>
+    	</operation>
+    </binding>
+    <service name="FindPartyService">
+	    <port binding="tns:FindPartySOAPBinding" name="FindPartySOAPPort">
+			<soap:address location="https://207.229.22.173:9446/TelusSAMEBusinessServicesV2_0Web/sca/FindPartyWSExport"/>
+		</port>
+	</service>
+</definitions>

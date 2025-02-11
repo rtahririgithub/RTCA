@@ -1,0 +1,37 @@
+
+<wln:overrideCreditWorthiness xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7">
+    <wln:overrideCreditWorthinessRequest>
+        <wln:creditAssessmentTypeCd>OVRD_ASSESSMENT</wln:creditAssessmentTypeCd>
+        <wln:creditAssessmentSubTypeCd>MANUAL_OVERRIDE</wln:creditAssessmentSubTypeCd>
+        <wln:customerID>22190490</wln:customerID>	
+
+        
+        <wln:commentTxt>123</wln:commentTxt>
+        <wln:applicationID>123</wln:applicationID>
+        
+        <wln:channelID>123</wln:channelID>
+        <wln:lineOfBusiness>WIRELINE</wln:lineOfBusiness>
+        
+        <wln:newFraudIndictorCd>Y</wln:newFraudIndictorCd>
+        
+        <wln:newCreditValueCd>E</wln:newCreditValueCd>
+    </wln:overrideCreditWorthinessRequest>
+    <wln:auditInfo>
+        
+        <ent:userId>123</ent:userId>
+        
+        <ent:userTypeCode>123</ent:userTypeCode>
+        
+        <ent:salesRepresentativeId>123</ent:salesRepresentativeId>
+        
+        <ent:channelOrganizationId>123</ent:channelOrganizationId>
+        
+        <ent:outletId>123</ent:outletId>
+        
+        <ent:originatorApplicationId>123</ent:originatorApplicationId>
+        
+        <ent:correlationId>123</ent:correlationId>
+        
+        <ent:timestamp>2008-09-28T18:49:45</ent:timestamp>
+    </wln:auditInfo>
+</wln:overrideCreditWorthiness>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- ================================================================== -->
+    <!-- setup a mailServiceProvider for the MailSenderSmtpImpl with a host -->
+    <!--   smtpHost will be define in the mail-config.xml file              -->
+    <bean id="telusSpringConfigurer" 
+        class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+        
+    <!-- ================================================================== -->   
+    <bean id="mailSender"
+        class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass">
+            <value>com.telus.framework.mail.MailSender</value>
+        </property>
+        <property name="targetMethod">
+            <value>setMailProvider</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <ref local="MailServiceProvider" />
+            </list>
+        </property> 
+    </bean>
+
+    <!-- =========================================================================== -->
+    <!-- Email JMS properties -->
+    <bean id="MailServiceProvider" class="com.telus.framework.mail.providerimpl.MailSenderJmsProviderImpl" lazy-init="true">
+        <property name="jmsTemplate">
+            <bean class="com.telus.framework.messaging.JmsTemplate" lazy-init="true">
+                <property name="connectionFactory">
+                    <bean
+                        class="org.springframework.jndi.JndiObjectFactoryBean">
+                        <property name="jndiName">
+                            <!-- value>frameworkQCF</value -->
+							<value>${mailConfig/queues/mailSenderMdb/jndiConnectionQCF}</value>
+                        </property>
+                        <property name="jndiTemplate">
+                            <ref bean="JndiSettings" />
+                        </property>
+                    </bean>
+                </property>
+                <property name="destinationResolver">
+                    <bean
+                        class="org.springframework.jms.support.destination.JndiDestinationResolver">
+                        <property name="jndiTemplate">
+                            <ref bean="JndiSettings" />
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+  
+        <property name="jndiDestinationQueue">
+            <!-- value>FrameworkMailInputQ</value -->
+		    <value>${mailConfig/queues/mailSenderMdb/jndiMailDestQueue}</value>
+        </property>
+
+    </bean>
+ 
+    <!-- =========================================================================== -->
+
+     <bean id="JndiSettings"
+        class="org.springframework.jndi.JndiTemplate">
+        <property name="environment">
+            <props>
+                <prop key="java.naming.factory.initial">${connections/ejbServers/jndiFactory}</prop>
+                <prop key="java.naming.provider.url">${connections/ejbServers/mailServer}</prop>
+                
+            </props>
+        </property>
+    </bean>  
+</beans>

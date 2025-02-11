@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5"
+   xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+   <display-name>WLNCreditProfileDataManagementService</display-name>
+
+   <context-param>
+              <param-name>contextConfigLocation</param-name>
+              <param-value>/WEB-INF/classes/creditMgt-spring.xml,
+              /WEB-INF/classes/online-creditvalue-validator-spring.xml,
+              /WEB-INF/classes/batch-creditvalue-validator-spring.xml,
+              /WEB-INF/classes/creditMgt-encryption-spring.xml,
+              classpath:fw-refresh-spring.xml,
+	      classpath:refpds-access-client-spring.xml
+              </param-value> 
+   </context-param>
+   <listener>
+      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+   </listener>
+
+   <servlet>
+      <servlet-name>WLNCreditProfileDataManagementServlet</servlet-name>
+      <servlet-class>com.telus.credit.wlnprfldmgt.webservice.service.WLNCreditProfileDataManagementServicePortImpl</servlet-class>
+      <init-param>
+          <param-name>wl-dispatch-policy</param-name>
+          <param-value>WorkManager-Online</param-value>
+      </init-param>
+      <load-on-startup>0</load-on-startup>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>WLNCreditProfileDataManagementServlet</servlet-name>
+      <url-pattern>/*</url-pattern>
+   </servlet-mapping>
+
+</web-app>

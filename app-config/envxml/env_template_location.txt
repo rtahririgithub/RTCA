@@ -1,0 +1,1 @@
+ENVTEMPLATEPATH=/work/staging/envtemplate/envTemplate_src/envTemplate/shaw

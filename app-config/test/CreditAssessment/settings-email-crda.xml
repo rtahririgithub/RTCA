@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="irrelevant">
+    <group name="handler">
+        <prop name="processorBean">mailSenderMdbProcessor</prop>
+    </group>
+    <group name="mail">
+		<prop name="email_From">dennis.torres@telus.com</prop>
+		<prop name="email_subject">Batch Update Summary Report</prop>  
+
+        <list name="emailiRecipients_TO">
+        	<string>dennis.torres@telus.com</string>
+                <string>dennis.torres@telus.com</string>
+                <string>dennis.torres@telus.com</string>
+        </list>
+        <list name="emailiRecipients_CC">
+                <string>dennis.torres@telus.com</string>
+        </list>					
+        <list name="emailiRecipients_BCC">
+        <!-- 	<string>enter valid bcc emails </string> -->     	     	
+        </list>	
+        
+		<prop name="email_Body">The attachment contains: Summary of the processed batch update.</prop>          
+        				
+    </group>    	
+    
+          
+</group>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Module.WS -->
+
+    <parent>
+        <groupId>telus.credit.crdmgmt</groupId>
+        <artifactId>crd</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>telus.credit.crdmgmt.orderdepositcal-ws-deploy</groupId>
+    <artifactId>pom-orderdepositcal-ws-deploy</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>pom-orderdepositcal-ws-deploy</name>
+
+    <properties>
+        <application.common.version>4.0.0-SNAPSHOT</application.common.version>
+    </properties>
+
+    <dependencyManagement>
+      <!-- Use this section to define the dependency versions for commons 
+         or shared jars. Whenever there is a change in this pom, make sure you update 
+         the version number of this deploy pom, pom-entcredit-ws-deploy -->
+    </dependencyManagement>
+
+    <modules>
+    	<module>orderdepositcal-wsdl</module>
+        <module>orderproxy-wsdl</module>
+        <module>orderdepositcal-webservices</module>
+        
+    </modules>
+
+</project>

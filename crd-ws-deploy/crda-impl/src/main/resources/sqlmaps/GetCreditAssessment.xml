@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="get_credit_assessment">
+
+    <resultMap id="baseCreditAssessmentMap" class="java.util.HashMap">
+        <result property="carId" javaType="long" column="CREDIT_ASSESSMENT_REQUEST_ID"/>
+        <result property="carTypCd" column="CAR_TYP_CD"/>
+        <result property="carSubtypeCd" column="car_subtype_cd"/>
+        <result property="customerTypCd" column="customer_typ_cd"/>
+        <result property="lobCd" column="lob_cd"/>
+        <result property="channelOrgCd" column="CHANNEL_ORG_CD"/>
+        <result property="createTs" javaType="date" column="create_ts"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="lastUpdtTs" javaType="date" column="LAST_UPDT_TS"/>
+        <result property="lastUpdtUserId" column="LAST_UPDT_USER_ID"/>
+        <result property="carStatusEffectiveDate" javaType="date" column="eff_start_ts"/>
+        <result property="carStatusTypeCd" column="CAR_STATUS_TYP_CD"/>
+        <result property="customerId" javaType="long" column="customer_id"/>
+        <result property="commentTxt" column="COMMENT_TXT"/>
+        <result property="carActivityReasonCd" column="CAR_ACTIVITY_REASON_CD"/>
+        <result property="dataSourceId" javaType="long" column="DATA_SOURCE_ID"/>
+    </resultMap>
+
+    <resultMap id="fullCreditAssessmentBaseMap" class="java.util.HashMap" >
+        <result property="assessmentRsltCd" column="ASSESSMENT_RSLT_CD"/>
+        <result property="assessmentRsltReasonCd" column="ASSESSMENT_RSLT_REASON_CD"/>
+        <result property="intCrdtDscnTrnRsltId" javaType="long" column="INT_CRDT_DSCN_TRN_RSLT_ID"/>
+        <result property="assessmentMsgCd" column="ASSESSMENT_MSG_CD"/>
+        <result property="creditValueCd" column="CREDIT_VALUE_CD"/>
+        <result property="fraudIndCd" column="FRAUD_IND_CD"/>
+        <result property="productCategoryBoltOn" column="PRODUCT_CATEGORY_BOLT_ON"/>
+        <result property="creditBureauTrnId" javaType="long" column="CREDIT_BUREAU_TRN_ID"/>
+        <result property="reportSourceCd" column="REPORT_SOURCE_CD"/>
+        <result property="reportTypTxt" column="REPORT_TYP_TXT"/>
+        <result property="adjdctnCreditScoreTxt" column="ADJDCTN_CREDIT_SCORE_TXT"/>
+    </resultMap>
+    
+
+    <resultMap id="fullCreditAssessmentMap" class="java.util.HashMap"  extends="fullCreditAssessmentBaseMap">
+    <!--
+        <result property="assessmentRsltCd" column="ASSESSMENT_RSLT_CD"/>
+        <result property="assessmentRsltReasonCd" column="ASSESSMENT_RSLT_REASON_CD"/>
+        -->
+        <result property="stgCreditDscnTrnId" javaType="long" column="STG_CREDIT_DSCN_TRN_ID"/>
+        <result property="customerId" javaType="long" column="CUSTOMER_ID"/>
+        <result property="stgFirstNm" column="STG_FIRST_NM"/>
+        <result property="stgMiddleNm" column="STG_MIDDLE_NM"/>
+        <result property="stgLastNm" column="STG_LAST_NM"/>
+        <result property="customerCreationDt" javaType="date" column="CUSTOMER_CREATION_DT"/>
+        <result property="birthDate" javaType="date" column="BIRTH_DT"/>
+        <result property="customerMasterSrcId" javaType="long" column="CUSTOMER_MASTER_SRC_ID"/>
+        <result property="customerStatusCd" column="CUSTOMER_STATUS_CD"/>
+        <result property="custSubtypCd" column="CUST_SUBTYP_CD"/>
+        <result property="custTypCd" column="CUST_TYP_CD"/>
+        <result property="languageCd" column="LANGUAGE_CD"/>
+        <result property="contactPhoneNum" column="CONTACT_PHONE_NUM"/>
+        <result property="creditProfileId" javaType="long" column="CREDIT_PROFILE_ID"/>
+        <result property="driverLicenseStr" column="DRIVER_LICENSE_STR"/>
+        <result property="driverLicenseProvCd" column="DRIVER_LICENSE_PROV_CD"/>
+        <result property="socialInsuranceNum" column="SOCIAL_INSURANCE_NUM"/>
+        <result property="healthcareNum" column="HEALTHCARE_NUM"/>
+        <result property="healthcareProvCd" column="HEALTHCARE_PROV_CD"/>
+        <result property="passportStr" column="PASSPORT_STR"/>
+        <result property="passportCountryCd" column="PASSPORT_COUNTRY_CD"/>
+        <result property="provincialIdStr" column="PROVINCIAL_ID_STR"/>
+        <result property="provincialIdProvCd" column="PROVINCIAL_ID_PROV_CD"/>
+        <result property="stgCreditValueCd" column="STG_CREDIT_VALUE_CD"/>
+        <result property="addressLine1Txt" column="ADDRESS_LINE1_TXT"/>
+        <result property="addressLine2Txt" column="ADDRESS_LINE2_TXT"/>
+        <result property="addressLine3Txt" column="ADDRESS_LINE3_TXT"/>
+        <result property="addressLine4Txt" column="ADDRESS_LINE4_TXT"/>
+        <result property="addressLine5Txt" column="ADDRESS_LINE5_TXT"/>
+        <result property="cityNm" column="CITY_NM"/>
+        <result property="provinceCd" column="PROVINCE_CD"/>
+        <result property="countryCd" column="COUNTRY_CD"/>
+        <result property="postalZipCd" column="POSTAL_ZIP_CD"/>
+        <result property="creditcardTypCd" column="PRIM_CRED_CARD_TYP_CD"/>
+        <result property="secondaryCreditCardCd" column="SEC_CRED_CARD_ISS_CO_TYP_CD"/>
+        <result property="legalCareCd" column="LEGAL_CARE_CD"/>
+        <result property="residencyCd" column="RESIDENCY_CD"/>
+        <result property="employmentStatusCd" column="EMPLOYMENT_STATUS_CD"/>
+        <result property="creditProfileStatusCd" column="CREDIT_PROFILE_STATUS_CD"/>
+        <result property="creditChkConsentCd" column="CREDIT_CHK_CONSENT_CD"/>
+        <result property="creditProfileMethodCd" column="CREDIT_PROFILE_METHOD_CD"/>
+        <result property="applicationSubProvCd" column="APPLICATION_SUB_PROV_CD"/>
+        <result property="bypassMatchInd" column="BYPASS_MATCH_IND"/>
+        <result property="creditBureauSimFoInd" column="CREDIT_BUREAU_SIM_FO_IND"/>
+        <result property="businessLastUpdtTs" javaType="date" column="BUSINESS_LAST_UPDT_TS"/>
+        <!-- moved to base 
+        <result property="intCrdtDscnTrnRsltId" javaType="long" column="INT_CRDT_DSCN_TRN_RSLT_ID"/>
+        <result property="assessmentMsgCd" column="ASSESSMENT_MSG_CD"/>
+        <result property="creditValueCd" column="CREDIT_VALUE_CD"/>
+        <result property="fraudIndCd" column="FRAUD_IND_CD"/>
+        <result property="productCategoryBoltOn" column="PRODUCT_CATEGORY_BOLT_ON"/>
+        <result property="creditBureauTrnId" javaType="long" column="CREDIT_BUREAU_TRN_ID"/>-->
+        <result property="firstNm" column="FIRST_NM"/>
+        <result property="middleNm" column="MIDDLE_NM"/>
+        <result property="lastNm" column="LAST_NM"/>
+        <result property="trnErrorCd" column="TRN_ERROR_CD"/>
+        <!-- moved to base  <result property="reportSourceCd" column="REPORT_SOURCE_CD"/>
+        <result property="reportTypTxt" column="REPORT_TYP_TXT"/> -->
+        <result property="rsltCreationDt" javaType="date" column="RSLT_CREATION_DT"/>
+        <result property="creditBureauTrnRsltStatCd" column="CREDIT_BUREAU_TRN_RSLT_STAT_CD"/>
+        <result property="crBruTrnRsltStatUpdtDt" javaType="date" column="CR_BRU_TRN_RSLT_STAT_UPDT_DT"/>
+        <!-- <result property="adjdctnCreditScoreTxt" column="ADJDCTN_CREDIT_SCORE_TXT"/>-->
+        <result property="adjdctnCreditScoreTypeCd" column="ADJDCTN_CREDIT_SCORE_TYPE_CD"/>
+        <result property="adjdctnCreditClassCd" column="ADJDCTN_CREDIT_CLASS_CD"/>
+        <result property="adjdctnCreditLimitAmt" javaType="double" column="ADJDCTN_CREDIT_LIMIT_AMT"/>
+        <result property="adjdctnDscnCd" column="ADJDCTN_DSCN_CD"/>
+        <result property="adjdctnDscnMsgTxt" column="ADJDCTN_DSCN_MSG_TXT"/>
+        <result property="adjdctnDepositAmt" javaType="double" column="ADJDCTN_DEPOSIT_AMT"/>
+        
+
+        <result property="provinceOfCurrentResidenceCd"  column="PROVINCE_OF_RESIDENCY_CD"/>
+        <result property="employeeInd"  column="EMPLOYEE_IND"/>
+        <result property="revenueSegmentCd"  column="REVENUE_SEGMENT_CD"/>
+		<result property="involuntaryCancelledAccounts"  javaType="integer" column="INVOLUNTARY_CANCELLED_ACCT_CNT"/>
+		<result property="involuntaryCancelledAccountsBalance" javaType="double" column="BALANCE_OWING_ON_ICA_AMT"/>
+		<result property="latestInvoluntaryCancelledDate" javaType="date" column="LATEST_ICA_DT"/>
+		
+		<result property="numberOfAccountsInAgency"   javaType="integer"  column="ACCOUNTS_IN_AGENCY_CNT"/>
+		<result property="accountsInAgencyBalance" javaType="double" column="BALANCE_OWING_IN_AGENCY_AMT"/>
+		<result property="latestAgencyAssignmentDate" javaType="date" column="LATEST_AGENCY_ASSIGNMENT_DT"/>
+		
+		<result property="collectionScore"   column="COLLECTION_SCORE_TXT"/>
+		<result property="latestCollectionEndDate" javaType="date" column="LAST_COLLECTION_END_DT"/>
+		<result property="latestCollectionStartDate" javaType="date" column="LAST_COLLECTION_START_DT"/>
+		<result property="numberOfNSFCheques"   javaType="integer"  column="NSF_CHEQUES_CNT"/>
+		
+		<result property="collectionInd"   column="COLLECTION_IND"/>
+		
+		<result property="totalArDepositPaidAmt" javaType="double" column="TOTAL_AR_DEPOSIT_PAID_AMT"/>
+	 	<result property="lastArDepositPaidTs" javaType="date" column="LAST_AR_DEPOSIT_PAID_TS"/>
+	 	
+	 	<result property="totalDepositReleasedAmt" javaType="double" column="TOTAL_DEPOSIT_RELEASED_AMT"/>
+	 	<result property="lastArDepositReleasedTs" javaType="date" column="LAST_AR_DEPOSIT_RELEASED_TS"/>
+	 	
+	 	<result property="totalArDepositPendingAmt" javaType="double" column="TOTAL_AR_DEPOSIT_PENDING_AMT"/>
+	 	<result property="lastArDepositPendingTs" javaType="date" column="LAST_AR_DEPOSIT_PENDING_TS"/>
+	 	
+	 	<result property="decisionCd"   column="DECISION_CD"/>
+	 	<result property="stgdecisionCd"   column="STG_DECISION_CD"/>
+	 	
+		<result property="fraudIndicatorCd" column="FRAUD_IND_CD"/>
+		<result property="stgfraudIndicatorCd" column="STG_FRAUD_IND_CD"/>
+		
+		
+		<result property="firstCreditAssessmentDate" javaType="date" column="FIRST_CREDIT_ASSESMENT_DT"/>
+		<result property="latestCreditAssessmentDate" javaType="date" column="LAST_CREDIT_ASSESMENT_DT"/>
+		
+		<result property="creditValueEffectiveDate" javaType="date" column="CREDIT_VALUE_EFFECTIVE_DT"/>
+        
+    </resultMap>
+
+    <resultMap id="creditDecisionTransResultDtlMap" class="java.util.HashMap">
+        <result property="intCrdtDscnTrnRsltId" javaType="long" column="INT_CRDT_DSCN_TRN_RSLT_ID"/>
+        <result property="intCrdtDscnTrnRsltDtlId" javaType="long" column="INT_CRDT_DSCN_TRN_RSLT_DTL_ID"/>
+        <result property="fraudMsgCd" column="FRAUD_MSG_CD"/>
+        <result property="intCrdtDscnTrnRsltDtlCd" column="INT_CRDT_DSCN_TRN_RSLT_DTL_CD"/>
+        <result property="productQualInd" column="PRODUCT_QUAL_IND"/>
+        <result property="depositAmt" javaType="double" column="DEPOSIT_AMT"/>
+        <result property="bureauInfoTypCd" column="BUREAU_INFO_TYP_CD"/>
+        <result property="bureauCd" column="BUREAU_CD"/>
+        <result property="bureauInfoPriorityCd" column="BUREAU_INFO_PRIORITY_CD"/>
+        <result property="creditApprvdProdCatgyCd" column="CREDIT_APPRVD_PROD_CATGY_CD"/>
+    </resultMap>
+
+    <resultMap id="creditBureauTransResultDtlMap" class="java.util.HashMap">
+        <result property="creditBureauTrnDtlId" javaType="long" column="CREDIT_BUREAU_TRN_DTL_ID"/>
+        <result property="creditBureauTrnDtlCd" column="CREDIT_BUREAU_TRN_DTL_CD"/>
+        <result property="scoreNm" column="SCORE_NM"/>
+        <result property="scoreValueTxt" column="SCORE_VALUE_TXT"/>
+        <result property="riskIndTypCd" column="RISK_IND_TYP_CD"/>
+        <result property="riskIndValueTxt" column="RISK_IND_VALUE_TXT"/>
+        <result property="fraudTypCd" column="FRAUD_TYP_CD"/>
+        <result property="fraudCd" column="FRAUD_CD"/>
+        <result property="fraudMsgTxt" column="FRAUD_MSG_TXT"/>
+        <result property="creditBureauDataDocNm" column="CREDIT_BUREAU_DATA_DOC_NM"/>
+        <result property="extSrcSysCd" column="EXT_SRC_SYS_CD"/>
+        <result property="extDocPathStr" column="EXT_DOC_PATH_STR"/>
+        <result property="extDocFormatTyp" column="EXT_DOC_FORMAT_TYP"/>
+    </resultMap>
+
+    <resultMap id="creditBureauTransResultMap" class="java.util.HashMap">
+        <result property="creditBureauTrnId" javaType="long" column="max_CREDIT_BUREAU_TRN_ID"/>
+        <result property="firstNm" column="FIRST_NM"/>
+        <result property="middleNm" column="MIDDLE_NM"/>
+        <result property="lastNm" column="LAST_NM"/>
+        <result property="trnErrorCd" column="TRN_ERROR_CD"/>
+        <result property="reportSourceCd" column="REPORT_SOURCE_CD"/>
+        <result property="reportTypTxt" column="REPORT_TYP_TXT"/>
+        <result property="rsltCreationDt" column="RSLT_CREATION_DT"/>
+		<result property="creditBureauTrnRsltStatCd" column="CREDIT_BUREAU_TRN_RSLT_STAT_CD"/>        
+        <result property="crBruTrnRsltStatUpdtDt" column="CR_BRU_TRN_RSLT_STAT_UPDT_DT"/>
+        <result property="adjdctnCreditScoreTxt" column="ADJDCTN_CREDIT_SCORE_TXT"/>
+        <result property="adjdctnCreditScoreTypeCd" column="ADJDCTN_CREDIT_SCORE_TYPE_CD"/>       
+        <result property="adjdctnCreditClassCd" column="ADJDCTN_CREDIT_CLASS_CD"/>
+        <result property="adjdctnCreditLimitAmt" column="ADJDCTN_CREDIT_LIMIT_AMT"/>
+        <result property="adjdctnDscnCd" column="ADJDCTN_DSCN_CD"/>
+		<result property="adjdctnDscnMsgTxt" column="ADJDCTN_DSCN_MSG_TXT"/>
+		<result property="adjdctnDepositAmt" column="ADJDCTN_DEPOSIT_AMT"/>
+    </resultMap>
+  	
+    <resultMap id="overrideCreditAssessmentMap" class="java.util.HashMap">
+    	<result property="decisionCd"   column="DECISION_CD"/>
+        <result property="assessmentRsltCd" column="ASSESSMENT_RSLT_CD"/>
+        <result property="assessmentRsltReasonCd" column="ASSESSMENT_RSLT_REASON_CD"/>
+        <result property="intCrdtDscnTrnRsltId" javaType="long" column="INT_CRDT_DSCN_TRN_RSLT_ID"/>
+        <result property="assessmentMsgCd" column="ASSESSMENT_MSG_CD"/>
+        <result property="creditValueCd" column="CREDIT_VALUE_CD"/>
+        <result property="fraudIndCd" column="FRAUD_IND_CD"/>
+        <result property="productCategoryBoltOn" column="PRODUCT_CATEGORY_BOLT_ON"/>
+    </resultMap>
+
+    <resultMap id="carAttrValueMap" class="java.util.HashMap">
+        <result property="carAttrValueTxt" column="CAR_ATTR_VALUE_TXT"/>
+        <result property="carAttrTypCd" column="CAR_ATTR_TYP_CD"/>
+    </resultMap>
+
+    <statement id="get_base_credit_assessment" parameterClass="long" resultMap="baseCreditAssessmentMap">
+        SELECT 
+	        car.CREDIT_ASSESSMENT_REQUEST_ID,
+	        car.CAR_TYP_CD,
+	        car.car_subtype_cd,
+	        car.customer_typ_cd,
+	        car.lob_cd,
+	        car.CHANNEL_ORG_CD,
+	        car.create_ts,
+	        car.create_user_id,
+	        car.LAST_UPDT_TS,
+	        car.LAST_UPDT_USER_ID,
+	        car.DATA_SOURCE_ID,
+	        car_status.eff_start_ts,
+	        car_status.CAR_STATUS_TYP_CD,
+	        car_cust.customer_id,
+	        cmnt.COMMENT_TXT,
+	        car_activity.CAR_ACTIVITY_REASON_CD
+	    FROM credit_assessment_request car 
+        INNER JOIN car_status car_status
+	        ON ( car_status.CREDIT_ASSESSMENT_REQUEST_ID = car.CREDIT_ASSESSMENT_REQUEST_ID
+	        AND car_status.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        INNER JOIN CUST_CREDIT_ASSMNT_RQST car_cust
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = car_cust.CREDIT_ASSESSMENT_REQUEST_ID
+	        and car_cust.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        LEFT OUTER JOIN CAR_ACTIVITY car_activity
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = car_activity.CREDIT_ASSESSMENT_REQUEST_ID
+	        AND car_activity.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        LEFT OUTER JOIN CAR_ACTIVITY_TYPE car_activity_type
+	        ON ( car_activity.CAR_ACTIVITY_TYPE_ID = car_activity_type.CAR_ACTIVITY_TYPE_ID
+	        AND car_activity_type.EFF_STOP_TS = TO_DATE('99991231','YYYYMMDD')
+	        AND car_activity_type.ACTIVITY_TYPE_CD = 'VOID' )
+        LEFT OUTER JOIN credit_mgmnt_comment cmnt
+	        ON ( car.CREDIT_ASSESSMENT_REQUEST_ID = cmnt.OBJECT_ID
+	        AND cmnt.OBJECT_TYPE_CD = 'CRD_ASMNT_REQUEST'
+	        AND cmnt.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        WHERE 
+        	car.CREDIT_ASSESSMENT_REQUEST_ID = #carId#
+    </statement>
+
+    <statement id="get_full_credit_assessment" parameterClass="long" resultMap="fullCreditAssessmentMap">
+        SELECT 
+        
+        int_crd_decision_trn.ASSESSMENT_RSLT_CD,
+        int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD,
+        
+        int_crd_decision_trn_result.INT_CRDT_DSCN_TRN_RSLT_ID,
+        int_crd_decision_trn_result.ASSESSMENT_MSG_CD,
+        int_crd_decision_trn_result.CREDIT_VALUE_CD,
+        int_crd_decision_trn_result.FRAUD_IND_CD,
+        int_crd_decision_trn_result.DECISION_CD,
+        int_crd_decision_trn_result.PRODUCT_CATEGORY_BOLT_ON, 
+
+              
+        credit_bureau_trn.CREDIT_BUREAU_TRN_ID,
+        credit_bureau_trn.REPORT_SOURCE_CD,
+        credit_bureau_trn.REPORT_TYP_TXT,       
+        credit_bureau_trn.ADJDCTN_CREDIT_SCORE_TXT,
+
+         
+        stg_decision_trn.STG_CREDIT_DSCN_TRN_ID,
+        stg_decision_trn.CUSTOMER_ID,
+        stg_decision_trn.FIRST_NM STG_FIRST_NM,
+        stg_decision_trn.MIDDLE_NM STG_MIDDLE_NM,
+        stg_decision_trn.LAST_NM STG_LAST_NM,
+        stg_decision_trn.CUSTOMER_CREATION_DT,
+        stg_decision_trn.BIRTH_DT,
+        stg_decision_trn.CUSTOMER_MASTER_SRC_ID,
+        stg_decision_trn.CUSTOMER_STATUS_CD,
+        stg_decision_trn.CUST_SUBTYP_CD,
+        stg_decision_trn.CUST_TYP_CD,
+        stg_decision_trn.LANGUAGE_CD,
+        stg_decision_trn.CONTACT_PHONE_NUM,
+        stg_decision_trn.CREDIT_PROFILE_ID,
+        stg_decision_trn.DRIVER_LICENSE_STR,
+        stg_decision_trn.DRIVER_LICENSE_PROV_CD,
+        stg_decision_trn.SOCIAL_INSURANCE_NUM,
+        stg_decision_trn.HEALTHCARE_NUM,
+        stg_decision_trn.HEALTHCARE_PROV_CD,
+        stg_decision_trn.PASSPORT_STR,
+        stg_decision_trn.PASSPORT_COUNTRY_CD,
+        stg_decision_trn.PROVINCIAL_ID_STR,
+        stg_decision_trn.PROVINCIAL_ID_PROV_CD,
+        stg_decision_trn.CREDIT_VALUE_CD STG_CREDIT_VALUE_CD,
+        stg_decision_trn.ADDRESS_LINE1_TXT,
+        stg_decision_trn.ADDRESS_LINE2_TXT,
+        stg_decision_trn.ADDRESS_LINE3_TXT,
+        stg_decision_trn.ADDRESS_LINE4_TXT,
+        stg_decision_trn.ADDRESS_LINE5_TXT,
+        stg_decision_trn.CITY_NM,
+        stg_decision_trn.PROVINCE_CD,
+        stg_decision_trn.COUNTRY_CD,
+        stg_decision_trn.POSTAL_ZIP_CD,
+        stg_decision_trn.PRIM_CRED_CARD_TYP_CD,
+        stg_decision_trn.SEC_CRED_CARD_ISS_CO_TYP_CD,
+        stg_decision_trn.LEGAL_CARE_CD,
+        stg_decision_trn.RESIDENCY_CD,
+        stg_decision_trn.EMPLOYMENT_STATUS_CD,
+        stg_decision_trn.CREDIT_PROFILE_STATUS_CD,
+        stg_decision_trn.CREDIT_CHK_CONSENT_CD,
+        stg_decision_trn.CREDIT_PROFILE_METHOD_CD,
+        stg_decision_trn.APPLICATION_SUB_PROV_CD,
+        stg_decision_trn.BYPASS_MATCH_IND,
+        stg_decision_trn.CREDIT_BUREAU_SIM_FO_IND,
+        stg_decision_trn.BUSINESS_LAST_UPDT_TS,
+  
+        credit_bureau_trn.FIRST_NM,
+        credit_bureau_trn.MIDDLE_NM,
+        credit_bureau_trn.LAST_NM,
+        credit_bureau_trn.TRN_ERROR_CD,
+        
+       
+        credit_bureau_trn.RSLT_CREATION_DT,
+        credit_bureau_trn.CREDIT_BUREAU_TRN_RSLT_STAT_CD,
+        credit_bureau_trn.CR_BRU_TRN_RSLT_STAT_UPDT_DT,
+        
+        credit_bureau_trn.ADJDCTN_CREDIT_SCORE_TYPE_CD,
+        credit_bureau_trn.ADJDCTN_CREDIT_CLASS_CD,
+        credit_bureau_trn.ADJDCTN_CREDIT_LIMIT_AMT,
+        credit_bureau_trn.ADJDCTN_DSCN_CD,
+        credit_bureau_trn.ADJDCTN_DSCN_MSG_TXT,
+        credit_bureau_trn.ADJDCTN_DEPOSIT_AMT,
+        
+		stg_decision_trn.PROVINCE_OF_RESIDENCY_CD,
+		stg_decision_trn.EMPLOYEE_IND,
+		stg_decision_trn.REVENUE_SEGMENT_CD,
+		stg_decision_trn.INVOLUNTARY_CANCELLED_ACCT_CNT,
+		stg_decision_trn.BALANCE_OWING_ON_ICA_AMT,
+		stg_decision_trn.LATEST_ICA_DT, 
+		
+		stg_decision_trn.ACCOUNTS_IN_AGENCY_CNT,
+		stg_decision_trn.BALANCE_OWING_IN_AGENCY_AMT,
+		stg_decision_trn.LATEST_AGENCY_ASSIGNMENT_DT,
+		
+		stg_decision_trn.COLLECTION_SCORE_TXT,
+		stg_decision_trn.LAST_COLLECTION_END_DT,
+		stg_decision_trn.LAST_COLLECTION_START_DT,
+		stg_decision_trn.NSF_CHEQUES_CNT,
+		
+		stg_decision_trn.COLLECTION_IND,
+		
+		stg_decision_trn.TOTAL_AR_DEPOSIT_PAID_AMT,
+		stg_decision_trn.LAST_AR_DEPOSIT_PAID_TS,
+		
+		stg_decision_trn.TOTAL_DEPOSIT_RELEASED_AMT,
+		stg_decision_trn.LAST_AR_DEPOSIT_RELEASED_TS,
+		
+		stg_decision_trn.TOTAL_AR_DEPOSIT_PENDING_AMT,
+		stg_decision_trn.LAST_AR_DEPOSIT_PENDING_TS,
+		
+		stg_decision_trn.DECISION_CD as STG_DECISION_CD,
+		stg_decision_trn.FRAUD_IND_CD as STG_FRAUD_IND_CD,
+		
+		stg_decision_trn.FIRST_CREDIT_ASSESMENT_DT,
+		stg_decision_trn.LAST_CREDIT_ASSESMENT_DT,
+		
+		stg_decision_trn.CREDIT_VALUE_EFFECTIVE_DT      
+		  
+        FROM
+        INT_CRDT_DCSN_TRN int_crd_decision_trn
+        INNER JOIN INT_CRDT_DCSN_TRN_STAT int_crd_decision_trn_stat
+	        ON ( int_crd_decision_trn.INT_CRDT_DSCN_TRN_ID = int_crd_decision_trn_stat.INT_CRDT_DSCN_TRN_ID
+	        AND int_crd_decision_trn_stat.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+	        AND int_crd_decision_trn_stat.CREDIT_DSCN_TRN_STAT_CD = '2' )
+        LEFT OUTER JOIN STG_CREDIT_DCSN_TRN stg_decision_trn
+	        ON ( int_crd_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID = stg_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID
+	        AND stg_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        LEFT OUTER JOIN INT_CRDT_DCSN_TRN_RSLT int_crd_decision_trn_result
+	        ON ( int_crd_decision_trn.INT_CRDT_DSCN_TRN_ID = int_crd_decision_trn_result.INT_CRDT_DSCN_TRN_ID
+	        AND int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        LEFT OUTER JOIN CREDIT_BUREAU_TRN credit_bureau_trn
+	        ON ( int_crd_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID = credit_bureau_trn.CREDIT_ASSESSMENT_REQUEST_ID
+	        AND credit_bureau_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        WHERE 
+        	int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+	        AND int_crd_decision_trn.ASSESSMENT_RSLT_CD='SUCCESS' 
+	        AND (  int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD IS NULL  OR int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD ='NO_CHANGE' )
+	        AND int_crd_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID = #carId#
+    </statement>
+
+    <statement id="get_int_crdt_dcsn_trn_rslt_by_parent_id" parameterClass="long"
+               resultMap="creditDecisionTransResultDtlMap">
+        SELECT INT_CRDT_DSCN_TRN_RSLT_ID,
+        INT_CRDT_DSCN_TRN_RSLT_DTL_ID,
+        FRAUD_MSG_CD,
+        INT_CRDT_DSCN_TRN_RSLT_DTL_CD,
+        PRODUCT_QUAL_IND,
+        DEPOSIT_AMT,
+        BUREAU_INFO_TYP_CD,
+        BUREAU_CD,
+        BUREAU_INFO_PRIORITY_CD,
+        CREDIT_APPRVD_PROD_CATGY_CD
+        FROM INT_CRDT_DCSN_TRN_RSLT_DTL
+        WHERE INT_CRDT_DSCN_TRN_RSLT_ID = #intCrdtDscnTrnRsltId#
+    </statement>
+
+    <statement id="get_credit_bureau_trn_dtl_by_parent_id" parameterClass="long"
+               resultMap="creditBureauTransResultDtlMap">
+        SELECT CREDIT_BUREAU_TRN_DTL_ID,
+        CREDIT_BUREAU_TRN_DTL_CD,
+        SCORE_NM,
+        SCORE_VALUE_TXT,
+        RISK_IND_TYP_CD,
+        RISK_IND_VALUE_TXT,
+        FRAUD_TYP_CD,
+        FRAUD_CD,
+        FRAUD_MSG_TXT,
+        CREDIT_BUREAU_DATA_DOC_NM,
+        EXT_SRC_SYS_CD,
+        EXT_DOC_PATH_STR,
+        EXT_DOC_FORMAT_TYP
+        FROM CREDIT_BUREAU_TRN_DTL
+        WHERE CREDIT_BUREAU_TRN_ID = #creditBureauTrnId#
+    </statement>
+
+    <statement id="get_override_credit_assessment" parameterClass="long" resultMap="overrideCreditAssessmentMap">
+        SELECT 
+        int_crd_decision_trn_result.DECISION_CD,
+        int_crd_decision_trn.ASSESSMENT_RSLT_CD,
+        int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD,
+        int_crd_decision_trn_result.INT_CRDT_DSCN_TRN_RSLT_ID,
+        int_crd_decision_trn_result.ASSESSMENT_MSG_CD,
+        int_crd_decision_trn_result.CREDIT_VALUE_CD,
+        int_crd_decision_trn_result.FRAUD_IND_CD,
+        int_crd_decision_trn_result.PRODUCT_CATEGORY_BOLT_ON
+        FROM INT_CRDT_DCSN_TRN int_crd_decision_trn
+        INNER JOIN INT_CRDT_DCSN_TRN_STAT int_crd_decision_trn_stat
+        ON ( int_crd_decision_trn.INT_CRDT_DSCN_TRN_ID = int_crd_decision_trn_stat.INT_CRDT_DSCN_TRN_ID
+        AND int_crd_decision_trn_stat.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+        AND int_crd_decision_trn_stat.CREDIT_DSCN_TRN_STAT_CD = '2' )
+        LEFT OUTER JOIN INT_CRDT_DCSN_TRN_RSLT int_crd_decision_trn_result
+        ON ( int_crd_decision_trn.INT_CRDT_DSCN_TRN_ID = int_crd_decision_trn_result.INT_CRDT_DSCN_TRN_ID
+        AND int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') )
+        WHERE int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+        AND int_crd_decision_trn.ASSESSMENT_RSLT_CD='SUCCESS' 
+        AND (  int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD IS NULL  OR int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD ='NO_CHANGE' )
+        AND int_crd_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID = #carId#
+    </statement>
+
+    <statement id="get_car_attr_values_car_id" parameterClass="long" resultMap="carAttrValueMap">
+        SELECT CAR_ATTR_VALUE_TXT,
+        CAR_ATTR_TYP_CD
+        FROM CAR_ATTR_VALUE
+        WHERE EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+        AND CREDIT_ASSESSMENT_REQUEST_ID = #carId#
+    </statement>
+
+    <statement id="get_car_reason_by_activity_code" parameterClass="java.util.Map" resultClass="java.lang.String">
+        SELECT CAR_ACTIVITY_REASON_CD
+        FROM CAR_ACTIVITY car_activity
+        INNER JOIN CAR_ACTIVITY_TYPE car_activity_type
+        ON ( car_activity.CAR_ACTIVITY_TYPE_ID = car_activity_type.CAR_ACTIVITY_TYPE_ID
+        AND car_activity_type.EFF_STOP_TS = TO_DATE('99991231','YYYYMMDD') )
+        WHERE car_activity.CREDIT_ASSESSMENT_REQUEST_ID = #carId#
+        AND car_activity.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+        AND car_activity_type.ACTIVITY_TYPE_CD = #activityTypeCd#
+    </statement>
+    
+   <statement id="get_credit_bureau_trn" parameterClass="long" resultMap="creditBureauTransResultMap">
+
+		  select 
+		      	max_credit_bureau_trn.max_CREDIT_BUREAU_TRN_ID,
+		        credit_bureau_trn.FIRST_NM,
+		        credit_bureau_trn.MIDDLE_NM,
+		        credit_bureau_trn.LAST_NM,
+		        credit_bureau_trn.TRN_ERROR_CD,
+		        credit_bureau_trn.REPORT_SOURCE_CD,
+		        credit_bureau_trn.REPORT_TYP_TXT,
+		        credit_bureau_trn.RSLT_CREATION_DT,
+		        credit_bureau_trn.CREDIT_BUREAU_TRN_RSLT_STAT_CD,
+		        credit_bureau_trn.CR_BRU_TRN_RSLT_STAT_UPDT_DT,
+		        credit_bureau_trn.ADJDCTN_CREDIT_SCORE_TXT,
+		        credit_bureau_trn.ADJDCTN_CREDIT_SCORE_TYPE_CD,                
+		        credit_bureau_trn.ADJDCTN_CREDIT_CLASS_CD,
+		        credit_bureau_trn.ADJDCTN_CREDIT_LIMIT_AMT,
+		        credit_bureau_trn.ADJDCTN_DSCN_CD,
+		        credit_bureau_trn.ADJDCTN_DSCN_MSG_TXT ,
+		       credit_bureau_trn.ADJDCTN_DEPOSIT_AMT
+		 FROM CREDIT_BUREAU_TRN  credit_bureau_trn
+			INNER JOIN 
+				(  
+				  SELECT  
+					max(credit_bureau_trn_inner.CREDIT_BUREAU_TRN_ID) max_CREDIT_BUREAU_TRN_ID
+					FROM    CUST_CREDIT_ASSMNT_RQST car_cust
+							INNER JOIN CREDIT_BUREAU_TRN credit_bureau_trn_inner
+								ON ( credit_bureau_trn_inner.CREDIT_ASSESSMENT_REQUEST_ID = car_cust.CREDIT_ASSESSMENT_REQUEST_ID
+										and credit_bureau_trn_inner.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') 
+										and credit_bureau_trn_inner.CREDIT_BUREAU_TRN_RSLT_STAT_CD  <![CDATA[ <> ]]> '2' )
+			 
+						   INNER JOIN INT_CRDT_DCSN_TRN int_crd_decision_trn 
+								ON (
+									 int_crd_decision_trn.CREDIT_ASSESSMENT_REQUEST_ID = car_cust.CREDIT_ASSESSMENT_REQUEST_ID
+									AND   int_crd_decision_trn.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+								   AND int_crd_decision_trn.ASSESSMENT_RSLT_CD = 'SUCCESS'  
+								   AND (
+											int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD is null   
+											OR  int_crd_decision_trn.ASSESSMENT_RSLT_REASON_CD = 'NO_CHANGE'   
+											)  
+									)
+					WHERE 
+						car_cust.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD') and 
+						car_cust.customer_id = #customerId#
+				)
+				max_credit_bureau_trn          
+			ON 
+				(max_credit_bureau_trn.max_CREDIT_BUREAU_TRN_ID = credit_bureau_trn.CREDIT_BUREAU_TRN_ID )
+      </statement>
+</sqlMap>

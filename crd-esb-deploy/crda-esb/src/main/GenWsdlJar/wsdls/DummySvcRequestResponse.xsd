@@ -1,0 +1,34 @@
+<xs:schema 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:fmsr="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult"
+xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/DummySvcRequestResponse"
+targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/DummySvcRequestResponse" version="1.0">
+
+	<xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult" schemaLocation="FindMatchingSearchResult.xsd"/>
+	<xs:element name="DummySvc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="lastname"/>
+				<xs:element name="postalCd"/>
+				<xs:element name="DL" minOccurs="0"/>
+				<xs:element name="SIN" minOccurs="0"/>
+				<xs:element name="DOB" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	
+	<xs:element name="DummySvcResponse">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="findMatchingSearchResult" type="fmsr:FindMatchingSearchResult" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="findMatchingSearchResultIndicator" type="fmsr:IndicatorType"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+
+
+	
+</xs:schema>

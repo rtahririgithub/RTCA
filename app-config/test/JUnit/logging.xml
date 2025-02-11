@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="config">
+
+   <group name="logging">
+      <prop name="log4j.debug">true</prop>
+      <prop name="log4j.rootLogger">DEBUG, CONSOLE</prop>
+
+      <prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+      <prop name="log4j.appender.CONSOLE.Threshold">DEBUG</prop>
+      <prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+      <prop name="log4j.appender.CONSOLE.layout.ConversionPattern">%d %-5p [%c] %m%n</prop>
+
+      <prop name="log4j.logger.java.sql">WARN</prop> 
+      <prop name="log4j.logger.org.springframework">WARN</prop> 
+      <prop name="log4j.logger.com.telus.framework">WARN</prop> 
+      
+
+    <prop name="log4j.category.org.dozer.MappingProcessor">DEBUG</prop>    
+	<prop name="log4j.logger.java.sql.PreparedStatement">DEBUG</prop>
+ 	<prop name="log4j.logger.java.sql.Connection">DEBUG</prop>       
+   </group>
+
+</group>

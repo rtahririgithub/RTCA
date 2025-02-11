@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="credit_profile">
+
+	<typeAlias alias="CreditProfile" type="com.telus.credit.domain.CreditProfile" />
+	<typeAlias alias="CreditProfileDto" type="com.telus.credit.service.dto.CreditProfileDto" />
+	
+	<resultMap id="select-creditprofile-result" class="CreditProfile">
+
+		<result property="_id" column="CREDIT_PROFILE_ID"/>
+		<result property="format" column="CPROFL_FORMAT_CD"/>
+		<result property="status" column="CPROFL_STATUS_CD"/>
+		<result property="method" column="POPULATE_METHOD_CD"/>
+		<result property="birthdate" column="BIRTH_DT" />
+		<result property="creditCheckConsentCode" column="CRED_CHECK_CONSENT_CD" />
+		<result property="employmentStatusCode" column="EMPLOYMENT_STATUS_CD" />
+		<result property="residencyCode" column="RESIDENCY_CD" />
+		<result property="primaryCreditCardCode" column="PRIM_CRED_CARD_TYP_CD" />
+		<result property="secondaryCreditCardCode" column="SEC_CRED_CARD_ISS_CO_TYP_CD" />
+		<result property="underLegalCareCode" column="LEGAL_CARE_CD" />
+		<result property="businessLastUpdateTimestamp" column="BUS_LAST_UPDT_TS"/>
+		<result property="creditValue" column="CREDIT_PROFILE_ID" select="credit_value.get_credit_value_by_credit_profile_id"/>
+		<result property="creditAddress" column="CREDIT_PROFILE_ID" select="credit_address.get_credit_address_by_credit_profile_id"/>
+		<result property="creditIDCards" column="CREDIT_PROFILE_ID" select="credit_id_card.get_credit_id_cards_by_credit_profile_id"/>
+	</resultMap>
+	
+	<resultMap id="select-effective_primary_credit_profile_by_customer_id-result" class="java.lang.Long" >
+		<result property="value" column="CREDIT_PROFILE_ID"/>
+	</resultMap>
+
+	<resultMap id="search_credit_management_by_customer_id_result" class="java.lang.Integer">
+		<result property="value" column="CUSTOMER_ID"/>
+	</resultMap>
+	
+	<resultMap id="select-business_last_update_timestamp_by_credit_profile_id-result" class="java.sql.Timestamp">
+		<result property="value" column="BUS_LAST_UPDT_TS"/>
+	</resultMap>
+	
+	<resultMap id="resultCreditProfile" class="java.util.HashMap">
+		<result property="customerId" column="CUSTOMER_ID"  javaType="java.lang.Integer"/>
+		<result property="creditProfileId" column="CREDIT_PROFILE_ID"  javaType="java.lang.Long"/>
+	</resultMap>
+
+	<resultMap id="select-dto-result" class="CreditProfileDto">
+		<result property="customerId" column="CUSTOMER_ID"  javaType="java.lang.Integer"/>
+		<result property="creditProfile._id" column="CREDIT_PROFILE_ID"/>
+		<result property="creditProfile.format" column="CPROFL_FORMAT_CD"/>
+		<result property="creditProfile.status" column="CPROFL_STATUS_CD"/>
+		<result property="creditProfile.method" column="POPULATE_METHOD_CD"/>
+		<result property="creditProfile.birthdate" column="BIRTH_DT" />
+		<result property="creditProfile.creditCheckConsentCode" column="CRED_CHECK_CONSENT_CD" />
+		<result property="creditProfile.employmentStatusCode" column="EMPLOYMENT_STATUS_CD" />
+		<result property="creditProfile.residencyCode" column="RESIDENCY_CD" />
+		<result property="creditProfile.primaryCreditCardCode" column="PRIM_CRED_CARD_TYP_CD" />
+		<result property="creditProfile.secondaryCreditCardCode" column="SEC_CRED_CARD_ISS_CO_TYP_CD" />
+		<result property="creditProfile.underLegalCareCode" column="LEGAL_CARE_CD" />
+		<result property="creditProfile.businessLastUpdateTimestamp" column="BUS_LAST_UPDT_TS"/>
+		<result property="creditProfile.creditValue" column="CREDIT_PROFILE_ID" select="credit_value.get_credit_value_by_credit_profile_id"/>
+		<result property="creditProfile.creditAddress" column="CREDIT_PROFILE_ID" select="credit_address.get_credit_address_by_credit_profile_id"/>
+		<result property="creditProfile.creditIDCards" column="CREDIT_PROFILE_ID" select="credit_id_card.get_credit_id_cards_by_credit_profile_id"/>
+	</resultMap>
+
+	<!-- NOT USED 
+	<statement id="get_customer_id_by_matching_credit_fields" resultMap="resultCreditProfile" parameterClass="java.util.Map">
+	  	select distinct CUSTOMER_ID, CREDIT_PROFILE_ID 
+	  		from CPROFL_CUSTOMER_MAP
+	  	WHERE EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	  		and CPROFL_CUST_MAP_TYP_CD='PRI' 
+	  		and CREDIT_PROFILE_ID in 
+	  	(SELECT DISTINCT CREDIT_PROFILE_ID 
+	  	FROM CPROFL_IDENTIFICATION 
+	  	WHERE EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	  		AND ((IDENTIFICATION_TYP_CD='SIN' AND IDENTIFICATION_NUM = #SIN:VARCHAR#)
+	  		OR (IDENTIFICATION_TYP_CD='DL' and IDENTIFICATION_NUM = #DL:VARCHAR# AND  
+	  			<isNotNull property="DL_province"> PROVINCE_CD = #DL_province:VARCHAR# </isNotNull>
+	  			<isNull property="DL_province"> PROVINCE_CD is null </isNull> )
+	  		OR (IDENTIFICATION_TYP_CD='HC' and IDENTIFICATION_NUM = #HC:VARCHAR#)
+	  		OR (IDENTIFICATION_TYP_CD='PSP' and IDENTIFICATION_NUM = #PSP:VARCHAR# AND 
+	  			<isNotNull property="PSP_country"> COUNTRY_CD = #PSP_country:VARCHAR# </isNotNull>
+	  			<isNull property="PSP_country"> COUNTRY_CD is null </isNull> )
+	  		OR (IDENTIFICATION_TYP_CD='PRV' and IDENTIFICATION_NUM = #PRV:VARCHAR# AND 
+	  			<isNotNull property="PRV_province"> PROVINCE_CD = #PRV_province:VARCHAR# </isNotNull>
+	  			<isNull property="PRV_province"> PROVINCE_CD is null </isNull> )
+	  	))	  
+	  	ORDER BY CUSTOMER_ID
+	</statement> 	    
+	
+	-->
+	
+	<statement id="get_primary_credit_profile_id_by_customer_id" 
+				parameterClass="integer" 
+				resultMap="select-effective_primary_credit_profile_by_customer_id-result">
+		select  
+			map.CREDIT_PROFILE_ID 
+		from 
+			CPROFL_CUSTOMER_MAP map, CREDIT_PROFILE cp
+		where 
+		        map.CREDIT_PROFILE_ID = cp.CREDIT_PROFILE_ID
+			and map.CPROFL_CUST_MAP_TYP_CD='PRI'
+			and map.CUSTOMER_ID=#value# 
+			and map.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+			and cp.CPROFL_STATUS_CD='A'
+			and cp.CPROFL_FORMAT_CD='P'
+	</statement>
+	
+	<statement id="get_customer_id_by_primary_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="search_credit_management_by_customer_id_result">
+		select  
+			CUSTOMER_ID 
+		from 
+			CPROFL_CUSTOMER_MAP
+		where 
+			CPROFL_CUST_MAP_TYP_CD='PRI'
+			and CREDIT_PROFILE_ID=#value# 
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD') 
+	</statement>
+
+
+	<statement id="get_dto_by_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="select-dto-result">
+		select  
+			map.CUSTOMER_ID,
+			cp.CREDIT_PROFILE_ID, 
+			cp.CPROFL_STATUS_CD,
+			cp.CPROFL_FORMAT_CD,
+			cp.POPULATE_METHOD_CD,
+			cp.BUS_LAST_UPDT_TS, 
+			cci.BIRTH_DT,
+			cci.CRED_CHECK_CONSENT_CD,
+			cci.EMPLOYMENT_STATUS_CD,
+			cci.RESIDENCY_CD,
+			cci.PRIM_CRED_CARD_TYP_CD,
+			cci.SEC_CRED_CARD_ISS_CO_TYP_CD,
+			cci.LEGAL_CARE_CD,
+			cci.LAST_UPDT_TS 
+		from 
+			CPROFL_CUSTOMER_MAP map, CREDIT_PROFILE cp, CPROFL_CHARSTC_INDVDL cci
+		where 
+			map.CPROFL_CUST_MAP_TYP_CD='PRI'
+			and map.CREDIT_PROFILE_ID=#value# 
+			and map.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+			and map.CREDIT_PROFILE_ID = cp.CREDIT_PROFILE_ID
+			and cp.CREDIT_PROFILE_ID=cci.CREDIT_PROFILE_ID
+			and cp.CPROFL_STATUS_CD='A'
+			and cci.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</statement>
+
+
+
+     <statement id="get_credit_profile_by_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="select-creditprofile-result">
+		select  
+			cp.CREDIT_PROFILE_ID, 
+			cp.CPROFL_STATUS_CD,
+			cp.CPROFL_FORMAT_CD,
+			cp.POPULATE_METHOD_CD,
+			cp.BUS_LAST_UPDT_TS,
+			cci.BIRTH_DT,
+			cci.CRED_CHECK_CONSENT_CD,
+			cci.EMPLOYMENT_STATUS_CD,
+			cci.RESIDENCY_CD,
+			cci.PRIM_CRED_CARD_TYP_CD,
+			cci.SEC_CRED_CARD_ISS_CO_TYP_CD,
+			cci.LEGAL_CARE_CD,
+			cci.LAST_UPDT_TS
+		from 
+			CREDIT_PROFILE cp, CPROFL_CHARSTC_INDVDL cci
+		where 
+			cp.CREDIT_PROFILE_ID=cci.CREDIT_PROFILE_ID
+			and cp.CPROFL_STATUS_CD='A'
+			and cci.CREDIT_PROFILE_ID=#value#
+			and cci.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD') 
+	</statement>
+
+
+	<select id="get_matching_customer_ids" 
+			resultMap="search_credit_management_by_customer_id_result">
+		<![CDATA[
+			select distinct
+				 map2.CUSTOMER_ID 
+			from 
+				CPROFL_CUSTOMER_MAP map1, CPROFL_CUSTOMER_MAP map2
+			where
+				map1.CREDIT_PROFILE_ID=map2.CREDIT_PROFILE_ID 
+				and map1.CUSTOMER_ID<>map2.CUSTOMER_ID 
+				and map1.CPROFL_CUST_MAP_TYP_CD IN ( 'PRI', 'SEC' )
+				and map1.CUSTOMER_ID=#value#
+				and map1.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+				and map2.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+			
+		]]>
+	</select>
+	
+	
+	<insert id="insert_credit_profile" parameterClass="java.util.Map">
+	
+  		<selectKey resultClass="java.lang.Long" keyProperty="credit_profile._id">
+			select CREDIT_PROFILE_ID_SEQ.NEXTVAL from dual 
+  		</selectKey>
+  		
+  		insert into CREDIT_PROFILE
+  			(	
+  			CREDIT_PROFILE_ID, 
+			POPULATE_METHOD_CD, 
+			CPROFL_FORMAT_CD, 
+			CPROFL_STATUS_CD, 
+			LAST_UPDT_TS,
+			LAST_UPDT_USER_ID,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			BUS_LAST_UPDT_TS, 
+			BUS_LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values 
+    		(
+			#credit_profile._id#,  
+			#credit_profile.method:VARCHAR#,
+			#credit_profile.format:VARCHAR#, 
+			#credit_profile.status:VARCHAR#,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#
+			)
+	</insert>
+
+	<insert id="insert_credit_profile_charstc_indvdl" parameterClass="java.util.Map">
+  		insert into CPROFL_CHARSTC_INDVDL
+  			(	
+  			CPROFL_CHARSTC_INDVDL_ID, 
+			CREDIT_PROFILE_ID, 
+			BIRTH_DT, 
+			PRIM_CRED_CARD_TYP_CD, 
+			EMPLOYMENT_STATUS_CD,
+			RESIDENCY_CD,
+			LEGAL_CARE_CD,
+			CRED_CHECK_CONSENT_CD,
+			SEC_CRED_CARD_ISS_CO_TYP_CD,
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values 
+    		(
+			CPROFL_CHARSTC_INDVDL_ID_SEQ.NEXTVAL,
+			#credit_profile._id#,
+			#credit_profile.birthdate:DATE#, 
+			NVL2(#credit_profile.primaryCreditCardCode:VARCHAR#, #credit_profile.primaryCreditCardCode:VARCHAR#, 'NA'),
+			NVL2(#credit_profile.employmentStatusCode:VARCHAR#, #credit_profile.employmentStatusCode:VARCHAR#, 'NA'),
+			NVL2(#credit_profile.residencyCode:VARCHAR#, #credit_profile.residencyCode:VARCHAR#, 'NA'),
+			NVL2(#credit_profile.underLegalCareCode:VARCHAR#, #credit_profile.underLegalCareCode:VARCHAR#, 'NA'),
+			NVL2(#credit_profile.creditCheckConsentCode:VARCHAR#, #credit_profile.creditCheckConsentCode:VARCHAR#, 'NA'),
+			NVL2(#credit_profile.secondaryCreditCardCode:VARCHAR#, #credit_profile.secondaryCreditCardCode:VARCHAR#, 'NA'),
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#
+    		)
+	</insert>
+	
+	<insert id="insert_credit_profile_status" parameterClass="java.util.Map">
+  		insert into CPROFL_STATUS
+  			(	
+  			CPROFL_STATUS_ID, 
+			CREDIT_PROFILE_ID, 
+			CPROFL_STATUS_CD, 			
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID,
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values 
+    		(
+			CPROFL_STATUS_ID_SEQ.NEXTVAL,
+			#credit_profile._id#,
+			#credit_profile.status:VARCHAR#, 
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#
+    		)
+	</insert>
+
+	
+	<insert id="insert_link_into_customer_credit_profile_mapping_table" parameterClass="java.util.Map">
+
+  		insert into CPROFL_CUSTOMER_MAP
+  			(	
+  			CPROFL_CUSTOMER_MAP_ID, 
+			CREDIT_PROFILE_ID, 
+			CUSTOMER_ID,
+			EFF_START_DTM,
+			POPULATE_METHOD_CD,
+			CPROFL_CUST_MAP_TYP_CD,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values 
+    		(
+			CPROFL_CUSTOMER_MAP_ID_SEQ.NEXTVAL,
+			#credit_profile_id#,
+			#customer_id#, 
+			SYSTIMESTAMP,
+			'OO',
+			#mapping_type#,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#
+    		)
+	</insert>
+
+	
+	<statement id="get_business_last_update_timestamp_by_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="select-business_last_update_timestamp_by_credit_profile_id-result">
+		select  
+			BUS_LAST_UPDT_TS		
+		from 
+			CREDIT_PROFILE
+		where 
+			CREDIT_PROFILE_ID=#value# 
+			and CPROFL_STATUS_CD='A'
+	</statement>
+
+	<update id="update_credit_profile" parameterClass="java.util.Map">
+  		update 
+  			CREDIT_PROFILE
+  		set 
+			BUS_LAST_UPDT_TS = SYSTIMESTAMP, 
+			BUS_LAST_UPDT_USER_ID = #userId#,
+			DATA_SOURCE_ID = #sourceId#
+  		where 
+			CREDIT_PROFILE_ID = #credit_profile._id#
+			AND BUS_LAST_UPDT_TS = #credit_profile.businessLastUpdateTimestamp#
+	</update>
+	
+	<update id="delete_charstc_indvdl" parameterClass="java.util.Map">
+  		update 
+  			CPROFL_CHARSTC_INDVDL
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP,
+			DATA_SOURCE_ID = #sourceId#
+  		where 
+			CREDIT_PROFILE_ID = #credit_profile._id# 
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</update>
+
+	<update id="delete_secondary_links" parameterClass="java.util.Map">
+  		update 
+			CPROFL_CUSTOMER_MAP
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP,
+			DATA_SOURCE_ID = #sourceId#
+  		where 
+			(CREDIT_PROFILE_ID = #credit_profile_id#
+			 or CUSTOMER_ID = #customer_id#)
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+			and CPROFL_CUST_MAP_TYP_CD='SEC'
+	</update>	
+	
+	<update id="unlink_all_credit_profiles" parameterClass="java.util.Map">
+	  	update 
+	  		CPROFL_CUSTOMER_MAP
+		set 
+			EFF_STOP_DTM = SYSTIMESTAMP,
+		  	LAST_UPDT_TS = SYSTIMESTAMP,
+		  	LAST_UPDT_USER_ID = #userId#,
+		  	DATA_SOURCE_ID = #sourceId#
+		where 
+			CUSTOMER_ID = #customerId#
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	</update>
+
+
+	<insert id="insert_unmerge_mapping" parameterClass="java.util.Map">
+		insert into CPROFL_MAPPING 
+	  	(
+  			CPROFL_MAPPING_ID,
+  			CPROFL_TO_ID,
+  			CPROFL_FROM_ID,
+		  	EFF_START_DTM,
+  			CPROFL_MAPPING_TYP_CD,
+		  	CREATE_TS,
+		  	CREATE_USER_ID,
+		  	LAST_UPDT_TS,
+		  	LAST_UPDT_USER_ID,
+		  	DATA_SOURCE_ID
+	  	)
+		values 
+	    (
+			CPROFL_MAPPING_ID_SEQ.NEXTVAL, 
+			#newCreditProfileId#,
+			#creditProfileId#, 
+		  	SYSTIMESTAMP,
+		  	'UM',
+		  	SYSTIMESTAMP,
+		  	#userId#,
+		  	SYSTIMESTAMP,
+		  	#userId#,
+		  	#sourceId#
+		)
+	</insert>
+
+	
+</sqlMap>
+	

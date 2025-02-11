@@ -1,0 +1,165 @@
+<project default="generate-from-wsdl">
+  <!-- set global properties for this build -->
+  <property name="compiledWsdl-dir" value="Wsdljars" />
+  <property name="impl-dir" value="impl" />
+
+    <property name="weblogic.lib.dir" value="C:\Oracle\Middleware\Oracle_Home121300\wlserver\server\lib\" /> 
+
+
+
+  	<!-- classpath for group build-->		
+	<path id="weblogic.classpath">
+		<fileset dir="${weblogic.lib.dir}" includes="*.jar" />
+		<fileset dir="${weblogic.lib.dir}">
+				<include name="weblogic.jar" />
+		</fileset>		
+	</path>
+    <!-- taskdef-->
+  <taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask" classpathref="weblogic.classpath" />
+  
+  
+      <!-- target-->
+  <target name="generate-from-wsdl">
+     <echo message="GetWlsCreditWorthiness_v2_0" /> 
+  	<wsdlc
+        srcWsdl="wsdls/GetWlsCreditWorthiness_v2_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+		
+     <echo message="GetWlsAccount_v2_0" /> 
+  	<wsdlc
+        srcWsdl="wsdls/GetWlsAccount_v2_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+		
+    <echo message="UnitTest_v1_0" /> 
+  	<wsdlc
+        srcWsdl="wsdls/UnitTest_v1_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+		
+    <echo message="FindPartySplitJoin_v1_0.wsdl" /> 
+  	<wsdlc
+        srcWsdl="wsdls/FindPartySplitJoin_v1_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+		
+     <echo message="ReferencePDSDataService.wsdl" /> 
+  	<wsdlc
+        srcWsdl="wsdls/ReferencePDSDataService.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+		
+    <echo message="FindParty_v2_0.wsdl" /> 
+  	<wsdlc
+        srcWsdl="wsdls/FindParty_v2_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+		
+		
+  <echo message="AccountInformationService_v3_5.wsdl" /> 
+  	<wsdlc
+        srcWsdl="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/AccountInformationService_v3_5.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+		
+  	<echo message="GetUCAdditionalCustomerDataSplitJoin_v2_0.wsdl" /> 
+    <wsdlc
+        srcWsdl="wsdls/GetUCAdditionalCustomerDataSplitJoin_v2_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+		
+	<echo message="WLNCreditProfileManagementProxyService_v2_0.wsdl" /> 
+    <wsdlc
+        srcWsdl="wsdls/WLNCreditProfileManagementProxyService_v2_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+	<echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+    <wsdlc
+        srcWsdl="wsdls/ConsumerBillingAccountManagementService_v1_1.wsdl" 
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />		
+	<echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+    <wsdlc
+        srcWsdl="wsdls/ConsumerCustomerManagementService_v2_3.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+
+	<echo message="ConsumerBillingAccountDataManagementService_v2_3.wsdl" /> 
+    <wsdlc
+        srcWsdl="wsdls/ConsumerBillingAccountDataManagementService_v2_3.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />		
+		
+    <echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/WLNCreditProfileManagementService_v2_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+    <echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/WLNCreditProfileDataManagementService_v1_3.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+    <echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/WLNCollectionManagementService_v1_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+    <echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/DepositManagementService_v1_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+    <echo message="EnterpriseCreditAssessmentService_v2_1.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/EnterpriseCreditAssessmentService_v2_1.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />	
+   <echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+   <wsdlc
+        srcWsdl="wsdls/GetAdditionalCustomerDataSplitJoin_v2_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />		
+
+    <echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/SearchDepositPaymentByCustomerID_v1_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+
+    <echo message="ConsumerBillingAccountManagementService_v1_1.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/GetDepositPaymentListByAccountListSplitJoin_v1_0.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+
+		<echo message="ConsumerDiaryService_v1_1.wsdl" /> 	
+	<wsdlc
+        srcWsdl="wsdls/ConsumerDiaryService_v1_1.wsdl"
+        destJwsDir="Wsdljars"
+        destImplDir="impl"
+        packageName="dummy" />
+
+ </target>
+</project>

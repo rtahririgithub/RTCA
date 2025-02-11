@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="irrelevant">
+    <!-- group name="handler">
+        <prop name="processorBean">mailSenderMdbProcessor</prop>
+    </group-->
+    <group name="mail">
+		<prop name="email_From">CreditMgmt-AutoMerge-BatchProcess@telus.com</prop>  
+		<prop name="email_subject">Discrepancy Reports in ${ENV}-</prop>  
+
+        <list name="emailiRecipients_TO">
+        	<string>@CRD_CRDB_EMAILRECIPIENTSTO@</string>
+        </list>
+        <list name="emailiRecipients_CC">
+        <!-- 	<string>enter valid cc emails </string> -->     	
+        </list>					
+        <list name="emailiRecipients_BCC">
+        <!-- 	<string>enter valid bcc emails </string> -->     	     	
+        </list>	
+        
+		<prop name="email_Body">Please do NOT attempt to reply this mail</prop>    				
+    </group> 
+    
+    <group name="reviewMail">
+		<prop name="email_From">CreditMgmt-CreditValueReview-BatchProcess@telus.com</prop>  
+		<prop name="email_subject">Credit Value Review Error Report in ${ENV}-</prop>  
+
+        <list name="emailiRecipients_TO">
+        	<string>@CRD_CRDB_EMAILRECIPIENTSTO@</string>
+        </list>
+        <list name="emailiRecipients_CC">
+        <!-- 	<string>enter valid cc emails </string> -->     	
+        </list>					
+        <list name="emailiRecipients_BCC">
+        <!-- 	<string>enter valid bcc emails </string> -->     	     	
+        </list>	
+        
+		<prop name="email_Body">Please do NOT attempt to reply this mail</prop>    				
+    </group>    	   	
+    
+    
+	<!-- group name="mailConfig">
+		<group name="smtp">
+		    <prop name="host">${connections/servers/smtpSvr}</prop> 
+		    <prop name="connectionTimeout">10000</prop> 
+		    <prop name="timeout">10000</prop> 
+		</group>
+	    
+	   <group name="exceptionHandler">
+			<prop name="exceptionFolder">/apps/infra/weblogic/8.1/WK/INT4/user_projects/domains/telusrv/batch_exception/${ENV}${LEVEL1_SHORTNAME}</prop>
+			<prop name="retryMaxCount">4</prop>
+			<prop name="retryDelay">5</prop>
+			<prop name="maxDeliveryCount">1</prop>
+		</group>
+	</group-->
+
+    <group name="mailDiscrepancy">
+		<prop name="email_From">CreditMgmt-DiscrepancyReport-BatchProcess@telus.com</prop>  
+		<prop name="email_subject">Discrepancy Reports in ${ENV}-</prop>  
+
+        <list name="emailiRecipients_TO">
+        	<string>@CRD_CRDB_EMAILRECIPIENTSTO@</string>
+        </list>
+        <list name="emailiRecipients_CC">
+        <!-- 	<string>enter valid cc emails </string> -->     	
+        </list>					
+        <list name="emailiRecipients_BCC">
+        <!-- 	<string>enter valid bcc emails </string> -->     	     	
+        </list>	
+        
+		<prop name="email_Body">Please do NOT attempt to reply this mail</prop>    				
+    </group> 
+</group>

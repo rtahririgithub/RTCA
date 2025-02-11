@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<import resource="classpath:fw-abstract-performance-spring.xml" />
+
+	<!-- This is needed to invoke configurationFramework so you can make use 
+		of Placeholders ${...} -->
+	<bean id="configurationFramework" class="com.telus.framework.config.spring.PlaceholderConfigurer">
+	</bean>
+
+	<bean id="testSvc.target"
+		class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.telus.ws.service.TestSvc" />
+		<!-- for the WSDL recommended to use the local reference rather than a 
+			URL -->
+		<property name="wsdlDocumentUrl" value="classpath:TestSvcService_V1_0.wsdl" />
+
+		<!-- For those using SOA, details at http://go/urlrouter2 If you are using 
+			a version number on the endpointAddress, make sure you append the version 
+			number as shown below: <property name="endpointAddress" value="${webService/MarketOfferWebService/MarketOfferWebServiceEndPointAddress}_v1_1_vs0" 
+			/> -->
+		<property name="endpointAddress"
+			value="http://localhost:7001/telus-crd-webservices/TestSvc" />
+		<property name="namespaceUri" value="http://service.ws.telus.com/" />
+		<property name="serviceName" value="TestSvcService" />
+		<property name="portName" value="TestSvcPort" />
+		<property name="lookupServiceOnStartup" value="false" />
+	</bean>
+
+	<!-- <bean id="testSvc.stub" class="test.ws.impl.TestSvcPojo" /> -->
+	<!-- Example 2 how you can invoke Performance Framework using AOP -->
+	<bean id="testSvc.aop" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.telus.ws.service.TestSvc</value>
+		</property>
+		<property name="target">
+			<!-- if the web services is ready , you can call <ref local="testSvc.stub" 
+				/> -->
+			<ref local="testSvc.target" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>myPerformAdvisor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="myPerformAdvisor" parent="fwAbstractPerformAdvisor">
+		<property name="mappedNames">
+			<list>
+				<value>get*</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

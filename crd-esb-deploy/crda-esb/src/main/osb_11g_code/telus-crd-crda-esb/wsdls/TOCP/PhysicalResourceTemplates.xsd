@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="PhysicalResourceChoice">
+        <xsd:choice>
+            <xsd:element name="Physical3GResource" type="tns:Physical3GResource"/>
+            <xsd:element name="BasicPhysicalResource" type="tns:BasicPhysicalResource"/>
+            <xsd:element
+                name="ManufacturerModel1EthernetSwitchPhysicalResource" type="tns:ManufacturerModel1EthernetSwitchPhysicalResource"/>
+            <xsd:element name="BasicPortPhysicalResource" type="tns:BasicPortPhysicalResource"/>
+            <xsd:element name="IMAPortPhysicalResource" type="tns:IMAPortPhysicalResource"/>
+            <xsd:element name="DropPortPhysicalResource" type="tns:DropPortPhysicalResource"/>
+            <xsd:element
+                name="ManufacturerModel1EthernetSwitchGbEPortPhysicalResource" type="tns:ManufacturerModel1EthernetSwitchGbEPortPhysicalResource"/>
+            <xsd:element name="GbEPortPhysicalResource" type="tns:GbEPortPhysicalResource"/>
+            <xsd:element
+                name="ManufacturerModel1EthernetSwitch10GbEPortPhysicalResource" type="tns:ManufacturerModel1EthernetSwitch10GbEPortPhysicalResource"/>
+            <xsd:element name="SIMCardPhysicalResource" type="tns:SIMCardPhysicalResource"/>
+            <xsd:element name="UICCCardPhysicalResource" type="tns:UICCCardPhysicalResource"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="Physical3GResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="IMEI" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="BasicPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Shelf" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ManufacturerModel1EthernetSwitchPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Shelf" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="BasicPortPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NodeName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Rack" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Shelf" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Port" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="IMAPortPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NodeName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Rack" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Shelf" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Port" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="DropPortPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NodeName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Rack" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Shelf" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Port" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ManufacturerModel1EthernetSwitchGbEPortPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NodeName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Rack" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Shelf" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Port" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GbEPortPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NodeName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Rack" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Shelf" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Port" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ManufacturerModel1EthernetSwitch10GbEPortPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NodeName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Slot" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Rack" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Shelf" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Port" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="SIMCardPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Brand" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MNC" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MCC" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Operator" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="UICCCardPhysicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Brand" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MNC" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MCC" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Operator" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

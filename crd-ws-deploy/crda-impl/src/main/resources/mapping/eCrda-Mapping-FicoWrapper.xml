@@ -1,0 +1,111 @@
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd" 
+          >
+          
+          
+    <mapping map-null="false">
+        <class-a>com.telus.credit.domain.crda.FullCreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.CreditAssessmentResult</class-b>
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.assessmentMessageCd</a>
+            <b is-accessible="true">assessmentMessageCd</b>
+        </field> 
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.decisionCd</a>
+            <b is-accessible="true">decisionCd</b>
+        </field>         
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.creditValueCd</a>
+            <b is-accessible="true">creditValueCd</b>
+        </field>  
+        <field>
+            <a>creditProfileData.creditWorthiness.productCategoryQualification</a>
+            <b>productCategoryQualification</b>
+        </field>
+        <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.productCategoryQualification.productCategoryList</a>
+            <b is-accessible="true">productCategoryQualification.productCategoryList</b>
+        </field>        
+           <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.fraudIndicatorCd</a>
+            <b is-accessible="true">fraudIndicatorCd</b>
+        </field>           
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.fraudMessageCdList</a>
+            <b is-accessible="true">fraudMessageCdList</b>
+        </field>
+    </mapping>
+          
+	<mapping map-null="false">
+        <class-a>com.telus.credit.domain.crda.ExistingCustomerCreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.CreditAssessmentResult</class-b>
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.assessmentMessageCd</a>
+            <b is-accessible="true">assessmentMessageCd</b>
+        </field> 
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.decisionCd</a>
+            <b is-accessible="true">decisionCd</b>
+        </field>         
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.creditValueCd</a>
+            <b is-accessible="true">creditValueCd</b>
+        </field>  
+        <field>
+            <a>creditProfileData.creditWorthiness.productCategoryQualification</a>
+            <b>productCategoryQualification</b>
+        </field>
+        <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.productCategoryQualification.productCategoryList</a>
+            <b is-accessible="true">productCategoryQualification.productCategoryList</b>
+        </field>        
+           <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.fraudIndicatorCd</a>
+            <b is-accessible="true">fraudIndicatorCd</b>
+        </field>           
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.fraudMessageCdList</a>
+            <b is-accessible="true">fraudMessageCdList</b>
+        </field>
+    </mapping>
+    
+    <mapping map-null="false">
+        <class-a>com.telus.credit.domain.crda.OverrideCreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.CreditAssessmentResult</class-b>
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.assessmentMessageCd</a>
+            <b is-accessible="true">assessmentMessageCd</b>
+        </field> 
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.decisionCd</a>
+            <b is-accessible="true">decisionCd</b>
+        </field>         
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.creditValueCd</a>
+            <b is-accessible="true">creditValueCd</b>
+        </field>  
+        <field>
+            <a>creditProfileData.creditWorthiness.productCategoryQualification</a>
+            <b>productCategoryQualification</b>
+        </field>
+        <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.productCategoryQualification.productCategoryList</a>
+            <b is-accessible="true">productCategoryQualification.productCategoryList</b>
+        </field>        
+           <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.fraudIndicatorCd</a>
+            <b is-accessible="true">fraudIndicatorCd</b>
+        </field>           
+         <field>
+            <a is-accessible="true">creditProfileData.creditWorthiness.fraudMessageCdList</a>
+            <b is-accessible="true">fraudMessageCdList</b>
+        </field>
+    </mapping>
+    
+    
+    
+         
+    
+</mappings>

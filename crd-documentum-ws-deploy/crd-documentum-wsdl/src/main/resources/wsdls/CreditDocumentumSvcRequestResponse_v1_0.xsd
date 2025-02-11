@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/CreditDocumentumSvcRequestResponse_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/CreditDocumentumSvcRequestResponse_v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9_1.xsd"/>
+	<xs:complexType name="CreditBureauDocument">
+		<xs:sequence>
+			<xs:element name="documentId" type="xs:string" minOccurs="0"/>
+			<xs:element name="documentPathTxt" type="xs:string" minOccurs="0"/>
+			<xs:element name="documentTypeCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="documentContentBinary" type="xs:base64Binary" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="saveBureuaReportDocument">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerId" type="xs:long"/>
+				<xs:element name="creditAssessmentId" type="xs:long" minOccurs="0"/>
+				<xs:element name="documentContentBinary" type="xs:base64Binary" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="saveBureuaReportDocumentResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="ent:ResponseMessage">
+					<xs:sequence>
+						<xs:element name="documentPathTxt" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="retrieveBureuaReportDocument">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="documentPathTxt" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="retrieveBureuaReportDocumentResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="ent:ResponseMessage">
+					<xs:sequence>
+						<xs:element name="creditBureauDocument" type="tns:CreditBureauDocument" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

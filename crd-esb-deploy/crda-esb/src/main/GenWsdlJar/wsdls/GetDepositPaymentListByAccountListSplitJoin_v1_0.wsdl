@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"
+                  xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:iface="http://telus.com/wsdl/CMO/OrderMgmt/GetDepositPaymentListByAccountListSplitJoin_1"
+                  xmlns:gdpbal="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/getDepositPaymentListByAccountListSplitJoinRequestResponse_v1"
+                  name="GetDepositPaymentListByAccountListSplitJoin_v1_0.wsdl"
+                  targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/GetDepositPaymentListByAccountListSplitJoin_1">
+                  
+                  <wsdl:documentation>GetDepositPaymentListByAccountListSplitJoin.Internal ESB service to return deposit payment for a list of accounts.</wsdl:documentation>
+   <wsdl:types>
+      <xsd:schema targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/GetDepositPaymentListByAccountListSplitJoin_1">
+         <xsd:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/getDepositPaymentListByAccountListSplitJoinRequestResponse_v1"
+                     schemaLocation="GetDepositPaymentListByAccountListSplitJoinRequestResponse_v1_0.xsd"/>
+         <xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0"
+                     schemaLocation="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0.xsd"/>
+         <xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1"
+                     schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1.xsd"/>
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="getDepositPaymentListByAccountList">
+      <wsdl:part name="parameters" element="gdpbal:getDepositPaymentListByAccountList"/>
+   </wsdl:message>
+   <wsdl:message name="getDepositPaymentListByAccountListResponse">
+      <wsdl:part name="result" element="gdpbal:getDepositPaymentListByAccountListResponse"/>
+   </wsdl:message>
+   <wsdl:message name="ping">
+      <wsdl:part name="parameters" element="ping:ping"/>
+   </wsdl:message>
+   <wsdl:message name="pingResponse">
+      <wsdl:part name="result" element="ping:pingResponse"/>
+   </wsdl:message>
+   <wsdl:message name="ServiceException">
+      <wsdl:part name="fault" element="ex:ServiceException"/>
+   </wsdl:message>
+   <wsdl:message name="PolicyException">
+      <wsdl:part name="fault" element="ex:PolicyException"/>
+   </wsdl:message>
+   <wsdl:portType name="GetDepositPaymentListByAccountListSplitJoin_v1_0_PortType">
+      <wsdl:operation name="getDepositPaymentListByAccountList">
+         <wsdl:input message="iface:getDepositPaymentListByAccountList"/>
+         <wsdl:output message="iface:getDepositPaymentListByAccountListResponse"/>
+         <wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="iface:PolicyException"/>
+      </wsdl:operation>
+      <wsdl:operation name="ping">
+         <wsdl:input message="iface:ping"/>
+         <wsdl:output message="iface:pingResponse"/>
+         <wsdl:fault name="ServiceException" message="iface:ServiceException"/>
+         <wsdl:fault name="PolicyException" message="iface:PolicyException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="GetDepositPaymentListByAccountListSplitJoin_v1_0_SOAP"
+                 type="iface:GetDepositPaymentListByAccountListSplitJoin_v1_0_PortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="getDepositPaymentListByAccountList">
+         <wsdl:documentation>Operation to return deposit payment for a list of accounts. .</wsdl:documentation>
+         <soap:operation soapAction="getDepositPaymentListByAccountList"/>
+         <wsdl:input>
+            <soap:body use="literal" parts="parameters"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal" parts="result"/>
+         </wsdl:output>
+         <wsdl:fault name="ServiceException">
+            <soap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="PolicyException">
+            <soap:fault name="PolicyException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="ping">
+         <wsdl:documentation/>
+         <soap:operation soapAction="ping"/>
+         <wsdl:input>
+            <soap:body parts="parameters" use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body parts="result" use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="ServiceException">
+            <soap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="PolicyException">
+            <soap:fault name="PolicyException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="GetDepositPaymentListByAccountListSplitJoin_v1_0">
+      <wsdl:port name="GetDepositPaymentListByAccountListSplitJoinPort"
+                 binding="iface:GetDepositPaymentListByAccountListSplitJoin_v1_0_SOAP">
+         <soap:address location="http://customermanagementwestesb-dv01.tsl.telus.com/CMO/OrderMgmt/GetDepositPaymentListByAccountListSplitJoin/GetDepositPaymentListByAccountListSplitJoin_v1_0"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

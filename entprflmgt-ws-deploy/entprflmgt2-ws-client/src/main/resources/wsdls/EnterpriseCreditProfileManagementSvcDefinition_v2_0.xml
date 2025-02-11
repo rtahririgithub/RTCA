@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service xsi:noNamespaceSchemaLocation="http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/ServiceDefinition_v3_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServiceDefinition>
+		<Name>EnterpriseCreditProfileManagementSvc</Name>
+        <Documentation>Provides operation(s) to update Wireline and/or Wireless credit profiles for given customerId or BAN.</Documentation>
+		<TAM_LevelZeroAndOne>CMO/OrderMgmt</TAM_LevelZeroAndOne>
+        <ServiceTaxonomy>/EnterpriseCreditProfileManagement</ServiceTaxonomy>
+		<MajorVersion>2</MajorVersion>
+		<MinorVersion>0</MinorVersion>
+		<soapAddress>https://cm-creditmgmt-west-dv01.tsl.telus.com</soapAddress>
+		<SchemaLocation>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditProfileManagementSvcRequestResponse_v2_0.xsd</SchemaLocation>
+		<NameSpace>http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditProfileManagementSvcRequestResponse_v2</NameSpace>
+        <nsAbbrev>ecp</nsAbbrev>
+		<OutputDir/>
+		<SecurityToken>
+			<Token>Wssp1.2-2007-Saml1.1-SenderVouches-Wss1.0</Token>
+		</SecurityToken>
+	</ServiceDefinition>
+	<Operation>
+        <OperationName>updateCreditProfile</OperationName>
+		<Documentation>Updates credit profiles in both Wireless and Wireline systems based on the information provided by the client. Credit profile to be updated can be searched by customerId or BAN provided. Only identification element is required to identify the customer or BAN. For the remaining elements, please pass only the element that needs to be updated. As an example, if SIN needs to be updated then populate creditIdentification with SIN details only. Only In case of creditValue and creditAddress, whole object needs to be passed even if there is a change in single element within these objects. Non-present field will be treated as remove.
+		RTCA Program changes: 
+		   FR573186: Remove logic to validate Credit Value during Credit Profile Update
+		   FR582163: Add Guarantor information in Credit Profile
+		   Upgrade Ref ODS to Ref PDS for all operations.
+		   Update credit value and fraud indicator, Any change in these attributes triggers a new credit assessment.
+		IO Phase 2 (CR581482):
+		   Add optional RemoveCreditIdentificationInfo complex type to indicate removal of credit ids ( Driving License, SIN, Health Card, Passport and Provincial Id ). This will expire the indicated credit id in the WLN system and set the credit id to empty value in WLS system.
+		   Service will no longer accept empty value or zero( or zeros ) for credit ids. It will throw policy exception with the appropriate error code.
+		   As a result of update or remove of credit ids, WLN system will rebuild the linked customers based upon remaining credit ids.
+		RTCA 1.5:
+		   Add optional attribute "Province of Current Residence" part of credit profile
+		</Documentation>
+		<InputType wsp="true">updateCreditProfile</InputType>
+		<OutputType>updateCreditProfileResponse</OutputType>
+		<MessageExchangePattern>request-response</MessageExchangePattern>
+	</Operation>
+</Service>

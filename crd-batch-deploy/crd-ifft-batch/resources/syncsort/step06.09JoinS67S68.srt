@@ -1,0 +1,21 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace} 
+                                
+   /INFILE ${processbox}/OMS_LD_DISC_DECODE.DAT  
+   /JOINKEYS LeftHandFile_RecordLayout.DECODE_ID
+   /INFILE ${processbox}/OMS_LD_DECODE_CAPTION.DAT 
+   /JOINKEYS RightHandFile_RecordLayout.DECODE_ID
+
+   /OUTFILE ${processbox}/JOIN_OMS_LD_DISC_DECODE_CAPTION.DAT OVERWRITE
+   /REFORMAT LEFTSIDE:__Field_1, RIGHTSIDE:__Field_2
+   /COLLATINGSEQUENCE DEFAULT ASCII
+
+   /RECORDLAYOUT LeftHandFile_RecordLayout { DISCRETE_CODE CHARACTER 10, DECODE_ID CHARACTER 32}
+   /RECORDLAYOUT RightHandFile_RecordLayout { DECODE_ID CHARACTER 32, CAPTION CHARACTER 10}
+   /DERIVEDFIELD __Field_1 LeftHandFile_RecordLayout.DISCRETE_CODE CHARACTER 10
+   /DERIVEDFIELD __Field_2 RightHandFile_RecordLayout.CAPTION CHARACTER 10
+   /padbyte x"20"
+   /SILENT
+   /END
+

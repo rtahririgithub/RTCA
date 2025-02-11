@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <import resource="classpath:ws-client-spring.xml"/>
+   <import resource="classpath:crd-wlnprfldmgt-performance-logging-spring.xml" /> 
+    
+   <bean class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+   <bean id="txManager" class="org.springframework.transaction.jta.WebLogicJtaTransactionManager" />
+    
+    <!-- Original code, before performance logging 
+   	<bean id="CreditProfileMgtSvcTxProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+      	<property name="transactionManager" ref="txManager" />
+      	<property name="target" ref="CreditProfileMgtSvcImpl" />
+      	<property name="proxyTargetClass" value="true" />
+      	<property name="transactionAttributes">
+         	<props>
+            	<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+         	</props>
+      	</property>
+   	</bean>
+   	-->
+   
+   <!-- Add performance logging -->
+   	<bean id="CreditProfileMgtSvcTxProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+   		<property name="interceptorNames">
+   			<list>
+   				<value>pfPerformanceAdvisor</value>
+   			</list>
+   		</property>    
+   		<property name="target" ref="creditProfileMgtSvcTxTgt" />
+   	</bean>
+   
+   	<bean id="creditProfileMgtSvcTxTgt" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+   		<property name="transactionManager" ref="txManager" />
+	  	<property name="target" ref="CreditProfileMgtSvcImpl" />
+	  	<property name="proxyTargetClass" value="false" />
+	  	<property name="transactionAttributes">
+		 	<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+		 	</props>
+      	</property>
+   	</bean>   	
+ 	<!-- End of performance logging -->
+
+   <!-- service implementation -->
+   <bean id="CreditIDCardDaoImpl" class="com.telus.credit.dao.CreditIDCardDaoSqlmap">
+      <property name="sqlMapClient" ref="creditSqlMap" />
+   </bean>
+
+   <bean id="CreditValueDaoImpl" class="com.telus.credit.dao.CreditValueDaoSqlmap">
+      <property name="sqlMapClient" ref="creditSqlMap" />
+      <property name="creditProfileDao" ref="CreditProfileDaoImpl" />
+   </bean>
+
+   <bean id="CreditAddressDaoImpl" class="com.telus.credit.dao.CreditAddressDaoSqlmap">
+      <property name="sqlMapClient" ref="creditSqlMap" />
+   </bean>
+
+   <bean id="CustomerGuarantorDaoImpl" class="com.telus.credit.dao.CustomerGuarantorDaoSqlmap">
+      <property name="sqlMapClient" ref="creditSqlMap" />
+   </bean>   
+   
+   <bean id="CreditAttributeDaoImpl" class="com.telus.credit.dao.CreditAttributeDaoSqlmap">
+      <property name="sqlMapClient" ref="creditSqlMap" />
+   </bean>
+   
+   <bean id="CreditProfileDaoImpl" class="com.telus.credit.dao.CreditProfileDaoSqlmap">
+      <property name="sqlMapClient" ref="creditSqlMap" />
+      <property name="creditIDCardDao" ref="CreditIDCardDaoImpl" />
+      <property name="creditValueDao" ref="CreditValueDaoImpl" />
+      <property name="creditAddressDao" ref="CreditAddressDaoImpl" />
+      <property name="customerGuarantorDao" ref="CustomerGuarantorDaoImpl" />
+   </bean>
+
+   <!-- 
+   <bean id="customerManagementServiceMediator" class="com.telus.credit.wlnprfldmgt.client.CustomerManagementServiceIntermediator">
+      <constructor-arg ref="consumerCustMgtService" />
+   </bean>
+   -->
+   <!-- 
+   <bean id="enterpriseCrdAsmtSvcIntermediator" class="com.telus.credit.wlnprfldmgt.client.EnterpriseCreditAssessmentServiceIntermediator">
+      <constructor-arg ref="enterpriseCreditAssessmentService" />
+      <property name="methodCodeToCrdaSubTypeCodeMap">
+         <map>
+            <entry key="${creditProfileMethodCodes/onlineOverride}" value="${creditAssessmentSubTypeCodes/manualOverride}" />
+            <entry key="${creditProfileMethodCodes/batchProcessing}" value="${creditAssessmentSubTypeCodes/autoUpgrade}" />
+            <entry key="${creditProfileMethodCodes/unmerged}" value="${creditAssessmentSubTypeCodes/unmerged}" />
+            <entry key="${creditProfileMethodCodes/batchConversion}" value="${creditAssessmentSubTypeCodes/autoUpgrade}" />
+            <entry key="${creditProfileMethodCodes/unknown}" value="${creditAssessmentSubTypeCodes/manualOverride}" />
+            <entry key="${creditProfileMethodCodes/notApplicable}" value="${creditAssessmentSubTypeCodes/manualOverride}" />
+         </map>
+      </property>
+      <property name="defaultOverrideAssessmentSubType" value="${creditAssessmentProps/defaultOverrideAssessmentSubType}" />
+      <property name="overrideCreditAssessmentType" value="${creditAssessmentProps/overrideCreditAssessmentType}" />
+      <property name="auditCreditAssessmentType" value="${creditAssessmentProps/auditCreditAssessmentType}" />
+      <property name="bureauConsentSubType" value="${creditAssessmentSubTypeCodes/bureauConsent}" />
+   </bean>
+   -->   
+	<bean id="creditProfileMgmtProxySvcIntermediator" class="com.telus.credit.wlnprfldmgt.client.WLNCreditProfileMgmtProxyServiceIntermediator">
+		<constructor-arg ref="wlnCreditProfileMgmtProxyService" />
+		<property name="methodCodeToCrdaSubTypeCodeMap">
+	         <map>
+	            <entry key="${creditProfileMethodCodes/onlineOverride}" value="${creditAssessmentSubTypeCodes/manualOverride}" />
+	            <entry key="${creditProfileMethodCodes/batchProcessing}" value="${creditAssessmentSubTypeCodes/autoUpgrade}" />
+	            <entry key="${creditProfileMethodCodes/unmerged}" value="${creditAssessmentSubTypeCodes/unmerged}" />
+	            <entry key="${creditProfileMethodCodes/batchConversion}" value="${creditAssessmentSubTypeCodes/autoUpgrade}" />
+	            <entry key="${creditProfileMethodCodes/unknown}" value="${creditAssessmentSubTypeCodes/manualOverride}" />
+	            <entry key="${creditProfileMethodCodes/notApplicable}" value="${creditAssessmentSubTypeCodes/manualOverride}" />
+	         </map>
+	      </property>
+	    <property name="defaultOverrideAssessmentSubType" value="${creditAssessmentProps/defaultOverrideAssessmentSubType}" />
+	    <property name="overrideCreditAssessmentType" value="${creditAssessmentProps/overrideCreditAssessmentType}" />
+	    <property name="auditCreditAssessmentType" value="${creditAssessmentProps/auditCreditAssessmentType}" />
+	    <property name="bureauConsentSubType" value="${creditAssessmentSubTypeCodes/bureauConsent}" />
+	    <property name="manualOverrideSubType" value="${creditAssessmentSubTypeCodes/manualOverride}" />
+	</bean>
+
+   <bean id="CreditProfileMgtSvcImpl" class="com.telus.credit.wlnprfldmgt.webservice.impl.WLNCreditProfileDataManagementServiceImpl">
+      <property name="creditProfileDao" ref="CreditProfileDaoImpl" />
+      <property name="creditIDCardDao" ref="CreditIDCardDaoImpl" />
+      <property name="creditAddressDao" ref="CreditAddressDaoImpl" />
+      <property name="creditAttributeDao" ref="CreditAttributeDaoImpl" />
+      <property name="creditProfileBr" ref="CreditProfileBr" />
+      <property name="creditProfileMgmtProxySvcIntermediator" ref="creditProfileMgmtProxySvcIntermediator" />
+      <property name="updateCreditWorthinessImpl" ref="updateCreditWorthinessImpl" />
+	  <property name="creditPubSubConnector" ref="creditPubSubConnector" />
+   </bean>
+
+   <bean id="updateCreditWorthinessImpl" class="com.telus.credit.wlnprfldmgt.webservice.util.UpdateCreditWorthinessImpl">
+     <property name="creditProfileDao" ref="CreditProfileDaoImpl" />
+     <property name="creditValueDao" ref="CreditValueDaoImpl" />
+     <property name="creditAttributeDao" ref="CreditAttributeDaoImpl" />
+   </bean>
+   
+   <bean id="CreditProfileBr" class="com.telus.credit.domain.CreditProfileBr">
+      <property name="creditIDCardBr" ref="CreditIDCardBr" />
+   </bean>
+   
+   <bean id="CreditIDCardBr" class="com.telus.credit.domain.CreditIDCardBr">
+      <property name="isServiceLayer" value="true" />
+   </bean>
+
+   <bean id="handlerResolverConsumerCustMgmt" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver">
+      <property name="handlerList">
+         <list>
+            <bean class="com.telus.framework.ws.em.soaphandler.JaxWsRoutingHandler" init-method="init">
+               <property name="handlerConfig">
+                  <map>
+                     <entry key="physicalEndpoint" value="${connections/servers/ConsumerCustomerManagement}" />
+                     <entry key="envString" value="${metadata/envId}" />
+                  </map>
+               </property>
+            </bean>
+         </list>
+      </property>
+   </bean>
+
+   <bean id="creditSqlMap" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+      <property name="configLocation" value="classpath:sqlmaps/creditMgt-sqlmap-config.xml" />
+      <property name="dataSource" ref="dataSource" />
+   </bean>
+ 
+   <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+      <property name="jndiName" value="${connections/dataSources/creditMgtPdsDataSource/jndiName}" />
+   </bean>
+   
+   <bean id="creditPubSubConnector" class="com.telus.credit.util.CreditPubSubConnector" lazy-init="true">
+         <property name="pubSubURL" value="${creditPubSubConnector/pubSubURL}" />
+         <property name="pubSubTopic" value="${creditPubSubConnector/pubSubTopic}" />
+         <property name="username" value="${creditPubSubConnector/username}" />
+         <property name="password" value="${creditPubSubConnector/password}" />
+         <property name="envId" value="${creditPubSubConnector/envId}" />
+   </bean>
+ 
+</beans>

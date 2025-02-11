@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="credit_decision">
+
+
+    <insert id="save_stg_credit_dcsn_trn" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_STG_CREDIT_DCSN_TRN.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO STG_CREDIT_DCSN_TRN
+	        ( STG_CREDIT_DSCN_TRN_ID,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS,
+	        CREDIT_ASSESSMENT_REQUEST_ID,
+	        CUSTOMER_ID,
+	        FIRST_NM,
+	        MIDDLE_NM,
+	        LAST_NM,
+	        CUSTOMER_CREATION_DT,
+	        CUSTOMER_MASTER_SRC_ID,
+	        CUSTOMER_STATUS_CD,
+	        CUST_SUBTYP_CD,
+	        CUST_TYP_CD,
+	        LANGUAGE_CD,
+	        CONTACT_PHONE_NUM,
+	        CREDIT_PROFILE_ID,
+	        DRIVER_LICENSE_STR,
+	        DRIVER_LICENSE_PROV_CD,
+	        SOCIAL_INSURANCE_NUM,
+	        HEALTHCARE_NUM,
+	        HEALTHCARE_PROV_CD,
+	        PASSPORT_STR,
+	        PASSPORT_COUNTRY_CD,
+	        PROVINCIAL_ID_STR,
+	        PROVINCIAL_ID_PROV_CD,
+	        CREDIT_VALUE_CD,
+	        ADDRESS_LINE1_TXT,
+	        ADDRESS_LINE2_TXT,
+	        ADDRESS_LINE3_TXT,
+	        ADDRESS_LINE4_TXT,
+	        ADDRESS_LINE5_TXT,
+	        CITY_NM,
+	        PROVINCE_CD,
+	        COUNTRY_CD,
+	        POSTAL_ZIP_CD,
+	        PRIM_CRED_CARD_TYP_CD,
+	        SEC_CRED_CARD_ISS_CO_TYP_CD,
+	        LEGAL_CARE_CD,
+	        BIRTH_DT,
+	        RESIDENCY_CD,
+	        EMPLOYMENT_STATUS_CD,
+	        CREDIT_PROFILE_STATUS_CD,
+	        CREDIT_CHK_CONSENT_CD,
+	        CREDIT_PROFILE_METHOD_CD,
+	        APPLICATION_SUB_PROV_CD,
+	        BYPASS_MATCH_IND,
+	        CREDIT_BUREAU_SIM_FO_IND,
+	        BUSINESS_LAST_UPDT_TS,
+	        
+	        PROVINCE_OF_RESIDENCY_CD,
+	        EMPLOYEE_IND,
+	        REVENUE_SEGMENT_CD,
+			INVOLUNTARY_CANCELLED_ACCT_CNT,
+			BALANCE_OWING_ON_ICA_AMT,
+			LATEST_ICA_DT, 
+			
+			ACCOUNTS_IN_AGENCY_CNT,
+			BALANCE_OWING_IN_AGENCY_AMT,
+			LATEST_AGENCY_ASSIGNMENT_DT,
+			
+			COLLECTION_SCORE_TXT,
+			LAST_COLLECTION_END_DT,
+			LAST_COLLECTION_START_DT,
+			NSF_CHEQUES_CNT,
+			
+			COLLECTION_IND,
+			
+			TOTAL_AR_DEPOSIT_PAID_AMT,
+		 	LAST_AR_DEPOSIT_PAID_TS,
+		 	
+		 	TOTAL_DEPOSIT_RELEASED_AMT,
+		 	LAST_AR_DEPOSIT_RELEASED_TS,
+		 	
+		 	TOTAL_AR_DEPOSIT_PENDING_AMT,
+		 	LAST_AR_DEPOSIT_PENDING_TS,
+		 	
+		 	DECISION_CD,
+			FRAUD_IND_CD,
+			
+			FIRST_CREDIT_ASSESMENT_DT,
+			LAST_CREDIT_ASSESMENT_DT,
+			
+			CREDIT_VALUE_EFFECTIVE_DT,
+			
+			COLLECTION_SEGMENT,
+			SCORECARD_ID,
+			CYCLES_DELINQUENT,
+			RISK_LEVEL_NUM
+				
+			)
+        VALUES 
+	        ( #pk#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        #carId#,
+	        #customerId#,
+	        #firstName#,
+	        #middleName#,
+	        #lastName#,
+	        #customerCreationDate#,
+	        #customerMasterSrcId#,
+	        #customerStatusCd#,
+	        #customerSubTypeCd#,
+	        #customerTypeCd#,
+	        #languageCd#,
+	        #contactPhoneNum#,
+	        #creditProfileId#,
+	        #drivingLicenseNum#,
+	        #drivingLicenseProvinceCd#,
+	        #socialInsuranceNum#,
+	        #healthCareNum#,
+	        #healthCareProvinceCd#,
+	        #passportNum#,
+	        #passportCountryCd#,
+	        #provincialId#,
+	        #provincialIdProvinceCd#,
+	        #creditValueCd#,
+	        #addressLine1#,
+	        #addressLine2#,
+	        #addressLine3#,
+	        #addressLine4#,
+	        #addressLine5#,
+	        #cityName#,
+	        #provinceCd#,
+	        #countryCd#,
+	        #postalCd#,
+	        #creditCardTypeCd#,
+	        #secondaryCreditCardCd#,
+	        #legalCareCd#,
+	        #birthDate#,
+	        #residencyCd#,
+	        #employmentStatusCd#,
+	        #creditProfileStatusCd#,
+	        #creditCheckConsentCd#,
+	        #creditProfileMethodCd#,
+	        #applicationProvinceCd#,
+	        #bypassMatchInd#,
+	        #failoverIndicator#,
+	        #creditProfileBusinessLastUpdateTS#,
+	        
+	        #provinceOfCurrentResidenceCd#,
+	        #employeeInd#,
+	        #revenueSegmentCd#,
+	        #involuntaryCancelledAccounts#,
+	        #involuntaryCancelledAccountsBalance#,
+	        #latestInvoluntaryCancelledDate#, 
+	                
+	        #numberOfAccountsInAgency#,
+	        #accountsInAgencyBalance#,
+	        #latestAgencyAssignmentDate#,
+	        
+	        #collectionScore#,                
+	        #latestCollectionEndDate#,
+	        #latestCollectionStartDate#,
+	               
+	        #numberOfNSFCheques#,
+	        #collectionInd#,
+	        
+	        #totalArDepositPaidAmt#,
+	        #lastArDepositPaidTs#,
+	        
+	        #totalDepositReleasedAmt#,
+	        #lastArDepositReleasedTs#,
+	        
+	        #totalArDepositPendingAmt#,
+	        #lastArDepositPendingTs#,               
+	        
+	
+	        
+	        
+	        #decisionCd#,
+	        #fraudIndicatorCd#,
+	        #firstCreditAssessmentDate#,
+	        #latestCreditAssessmentDate#,
+	        #creditValueEffectiveDate#,
+	        #collectionSegment#,
+	        #scorecardID#,
+	        #delinquencyCycle#,
+	        #creditRiskLevel#
+	        
+	        )  
+  
+</insert>
+
+
+    <insert id="save_int_crdt_dcsn_trn" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_INT_CRDT_DCSN_TRN.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO INT_CRDT_DCSN_TRN
+	        ( INT_CRDT_DSCN_TRN_ID,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS,
+	        CREDIT_ASSESSMENT_REQUEST_ID,
+	        ASSESSMENT_RSLT_CD,
+	        ASSESSMENT_RSLT_REASON_CD )
+	    VALUES 
+		    ( #pk#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        #carId#,
+	        #assessmentResultCd#,
+	        #assessmentResultReasonCd# )
+    </insert>
+
+    <insert id="save_int_crdt_dcsn_trn_stat" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_INT_CRDT_DCSN_TRN_STAT.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO INT_CRDT_DCSN_TRN_STAT
+	        ( INT_CRDT_DSCN_TRN_STAT_ID,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS,
+	        INT_CRDT_DSCN_TRN_ID,
+	        CREDIT_DSCN_TRN_STAT_CD)
+        VALUES ( 
+        	#pk#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        #intCrdDscnTranId#,
+	        #creditDecisionStatusCd# )
+    </insert>
+
+    <insert id="save_int_crdt_dcsn_trn_rslt" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_INT_CRDT_DCSN_TRN_STAT.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO INT_CRDT_DCSN_TRN_RSLT
+	        ( 
+	        INT_CRDT_DSCN_TRN_RSLT_ID,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS,
+	        STG_CREDIT_DSCN_TRN_ID,
+	        INT_CRDT_DSCN_TRN_ID,
+	        CREDIT_BUREAU_TRN_ID,
+	        ASSESSMENT_MSG_CD,
+	        CREDIT_VALUE_CD,
+	        FRAUD_IND_CD,
+	        PRODUCT_CATEGORY_BOLT_ON,
+	        DECISION_CD,
+	        DEPOSIT_LOOKUP_STGY_CD,
+			CUSTOMER_ACTY_STGY_CD,
+			CREDIT_VAL_ASGMT_STGY_CD,
+			TENURE_STGY_CD,
+			CVUD_STGY_CD,
+			RISK_LEVEL_NUM
+	        )
+	    VALUES 
+		    ( #pk#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        #stgCreditDscnTrnId#,
+	        #intCrdDscnTranId#,
+	        #creditBureauTrnId#,
+	        #assessmentMsgCd#,
+	        #creditValueCd#,
+	        #fraudIndCd#,
+	        #productCategoryBoltOn#,
+	        #decisionCd#,
+	        #depositLookupStgyCd#,
+			#customerActyStgyCd#,
+			#creditValAsgmtStgyCd#,
+			#tenureStgyCd#,
+			#cvudStgyCd#,
+			#riskLevelNum#
+	        )
+    </insert>
+
+
+    <insert id="save_int_crdt_dcsn_trn_rslt_dtl" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_INT_CRDT_DCSN_TRN_RSLT_DTL.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO INT_CRDT_DCSN_TRN_RSLT_DTL
+	        ( 
+	        INT_CRDT_DSCN_TRN_RSLT_DTL_ID,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS,
+	        INT_CRDT_DSCN_TRN_RSLT_ID,
+	        FRAUD_MSG_CD,
+	        INT_CRDT_DSCN_TRN_RSLT_DTL_CD,
+	        PRODUCT_QUAL_IND,
+	        DEPOSIT_AMT,
+	        BUREAU_INFO_TYP_CD,
+	        BUREAU_CD,
+	        BUREAU_INFO_PRIORITY_CD,
+	        CREDIT_APPRVD_PROD_CATGY_CD )
+        VALUES 
+	        ( #pk#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP,
+	        #intCrdtDscnTrnRsltId#,
+	        #fraudMessageCd#,
+	        #intCrdtDscnTrnRsltDtlCd#,
+	        #productQualInd#,
+	        #depositAmt#,
+	        #bureauInfoTypeCd#,
+	        #bureauCd#,
+	        #bureauInfoPriorityCd#,
+	        #creditApprvdProdCatgyCd# )
+    </insert>
+
+    <update id="update_int_crdt_dcsn_trn" parameterClass="java.util.HashMap">
+        update INT_CRDT_DCSN_TRN
+        set
+	        LAST_UPDT_USER_ID = #userId#,
+	        LAST_UPDT_TS = SYSTIMESTAMP,
+	        ASSESSMENT_RSLT_CD = #assessmentResultCd#,
+	        ASSESSMENT_RSLT_REASON_CD = #assessmentResultReasonCd#,
+            UC_ASSESSMENT_IND = #ucAssessmentResult#,
+            UC_ASSESSMENT_IND_RSN_CD = #ucAssessmentResultReasonCd#,
+	        DSCN_TRN_DT = SYSDATE
+	     where 
+	     	INT_CRDT_DSCN_TRN_ID = #intCrdDscnTranId#
+    </update>
+
+    <update id="update_int_crdt_dcsn_trn_stat" parameterClass="java.util.HashMap">
+        update INT_CRDT_DCSN_TRN_STAT
+        set
+	        LAST_UPDT_USER_ID = #userId#,
+	        LAST_UPDT_TS = SYSTIMESTAMP,
+	        CREDIT_DSCN_TRN_STAT_CD = #creditDecisionStatusCd#
+        where 
+        	INT_CRDT_DSCN_TRN_STAT_ID = #intCrdDscnTranStatId#
+    </update>
+
+    <insert id="save_car_attr_value" parameterClass="java.util.HashMap">
+        INSERT INTO CAR_ATTR_VALUE
+	        ( CAR_ATTR_VALUE_ID,
+	        CREDIT_ASSESSMENT_REQUEST_ID,
+	        CAR_ATTR_VALUE_TXT,
+	        CAR_ATTR_TYP_CD,
+	        EFF_START_TS,
+	        EFF_STOP_TS,
+	        CREATE_TS,
+	        CREATE_USER_ID,
+	        LAST_UPDT_USER_ID,
+	        LAST_UPDT_TS)
+        VALUES 
+	        ( CAR_ATTR_VALUE_ID_SEQ.NEXTVAL,
+	        #carId#,
+	        #attrVallue#,
+	        #attrName#,
+	        SYSTIMESTAMP,
+	        TO_DATE('44441231','YYYYMMDD'),
+	        SYSTIMESTAMP,
+	        #userId#,
+	        #userId#,
+	        SYSTIMESTAMP )
+    </insert>
+    <!-- Unified Credit Inserts starts here -->
+    <insert id="save_uc_search_result" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select UC_SEARCH_RESULT_ID_SEQ.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO UC_SEARCH_RESULT
+            ( 
+            UC_SEARCH_RESULT_ID,
+            CREATE_TS,
+            CREATE_USER_ID,
+            LAST_UPDT_USER_ID,
+            LAST_UPDT_TS,
+			STG_CREDIT_DSCN_TRN_ID,
+			MATCH_FOUND_IND,
+			MATCH_FOUND_REASON_CD,
+			LINE_OF_BUSINESS,
+			UC_DORMANT_IND,
+			BRAND_ID,
+			BUREAU_REPORT_SOURCE_CD,
+			BUREAU_ERROR_CD,
+			BUREAU_DECISION_CD,
+			BUREAU_CREATION_DT
+            )
+        VALUES 
+            ( #pk#,
+            SYSTIMESTAMP,
+            #userId#,
+            #userId#,
+            SYSTIMESTAMP,
+            #STG_CREDIT_DSCN_TRN_ID#,
+            #MATCH_FOUND_IND#,
+            #MATCH_FOUND_REASON_CD#,
+            #LINE_OF_BUSINESS#,
+            #UC_DORMANT_IND#,
+            #BRAND_ID#,
+            #BUREAU_REPORT_SOURCE_CD#,
+            #BUREAU_ERROR_CD#,
+            #BUREAU_DECISION_CD#,
+            #BUREAU_CREATION_DT#
+            )
+    </insert>
+    
+    <insert id="save_uc_data_inquiry_error" parameterClass="java.util.HashMap">
+        INSERT INTO UC_DATA_INQUIRY_ERROR
+            ( 
+            UC_DATA_INQUIRY_ERROR_ID,
+            CREATE_TS,
+            CREATE_USER_ID,
+            LAST_UPDT_USER_ID,
+            LAST_UPDT_TS,
+			UC_SEARCH_RESULT_ID,
+			DATA_INQUIRY_ERROR_CD
+            )
+        VALUES 
+            ( UC_DATA_INQUIRY_ERROR_ID_SEQ.NEXTVAL,
+            SYSTIMESTAMP,
+            #userId#,
+            #userId#,
+            SYSTIMESTAMP,
+            #UC_SEARCH_RESULT_ID#,
+            #DATA_INQUIRY_ERROR_CD#
+            )
+    </insert>
+    
+   <insert id="save_uc_wls_match_account" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select UC_WLS_MATCH_ACCOUNT_ID_SEQ.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO UC_WLS_MATCH_ACCOUNT
+            ( 
+            UC_WLS_MATCH_ACCOUNT_ID,
+            CREATE_TS,
+            CREATE_USER_ID,
+            LAST_UPDT_USER_ID,
+            LAST_UPDT_TS,
+            UC_SEARCH_RESULT_ID,
+            ACCOUNT_ID,
+            ACCOUNT_TYPE,
+            ACCOUNT_SUB_TYP,
+            ACCOUNT_CREATION_DT,
+            START_SERVICE_DT,
+            ACCOUNT_STATUS,
+            ACCOUNT_STATUS_DT,
+            STATUS_ACTV_CD,
+            STATUS_ACTV_RSN_CD,
+            RISK_LEVEL_NUM,
+            RISK_LEVEL_DECISION_CD,
+            CREDIT_CLASS_CD,
+            DELINQUENT_IND,
+            TOTAL_ACTIVE_SUB,
+            TOTAL_RESERVED_SUB,
+            TOTAL_SUSPEND_SUB
+            )
+        VALUES 
+            ( #pk#,
+            SYSTIMESTAMP,
+            #userId#,
+            #userId#,
+            SYSTIMESTAMP,
+            #UC_SEARCH_RESULT_ID#,
+            #ACCOUNT_ID#,
+            #ACCOUNT_TYPE#,
+            #ACCOUNT_SUB_TYP#,
+            #ACCOUNT_CREATION_DT#,
+            #START_SERVICE_DT#,
+            #ACCOUNT_STATUS#,
+            #ACCOUNT_STATUS_DT#,
+            #STATUS_ACTV_CD#,
+            #STATUS_ACTV_RSN_CD#,
+            #RISK_LEVEL_NUM#,
+            #RISK_LEVEL_DECISION_CD#,
+            #CREDIT_CLASS_CD#,
+            #DELINQUENT_IND#,
+            #TOTAL_ACTIVE_SUB#,
+            #TOTAL_RESERVED_SUB#,
+            #TOTAL_SUSPEND_SUB#
+            )
+    </insert>
+    
+   <insert id="save_uc_warning_hist" parameterClass="java.util.HashMap">
+        INSERT INTO UC_WARNING_HIST
+            ( 
+            UC_WARNING_HIST_ID,
+            CREATE_TS,
+            CREATE_USER_ID,
+            LAST_UPDT_USER_ID,
+            LAST_UPDT_TS,
+            UC_WLS_MATCH_ACCOUNT_ID,
+            WARNING_CATEGORY_CD,
+            WARNING_CD,
+            WARNING_TYPE_CD,
+            WARNING_STATUS_CD
+            )
+        VALUES 
+            ( UC_WARNING_HIST_ID_SEQ.NEXTVAL,
+            SYSTIMESTAMP,
+            #userId#,
+            #userId#,
+            SYSTIMESTAMP,
+            #UC_WLS_MATCH_ACCOUNT_ID#,
+            #WARNING_CATEGORY_CD#,
+            #WARNING_CD#,
+            #WARNING_TYPE_CD#,
+            #WARNING_STATUS_CD#
+            )
+    </insert>
+    
+</sqlMap>

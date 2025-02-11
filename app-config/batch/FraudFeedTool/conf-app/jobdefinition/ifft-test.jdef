@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+		<list>
+			<bean id="STEP01a" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step1a</value></property>
+			</bean>
+			<bean id="STEP01b" parent="baseStep" >
+				<property name="moduleName"><value>javaExec-Step1b</value></property>
+			</bean>
+			<bean id="STEP02" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step2</value></property>
+			</bean>
+			<bean id="STEP03" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step3</value></property>
+			</bean>
+			<bean id="STEP04" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step4</value></property>
+			</bean>
+         <bean id="STEP05" parent="baseStep" >
+            <property name="moduleName"><value>javaExec-Step5</value></property>
+         </bean>
+         <bean id="STEP061" parent="baseStep" >
+				<property name="moduleName"><value>sqlPlusExtract-Step61</value></property>
+			</bean>
+			<bean id="STEP062" parent="baseStep" >
+				<property name="moduleName"><value>javaExec-Step62</value></property>
+			</bean>
+			<bean id="STEP063" parent="baseStep" >
+				<property name="moduleName"><value>sqlPlusExtract-Step63</value></property>
+			</bean>
+         <bean id="STEP064" parent="baseStep" >
+            <property name="moduleName"><value>javaExec-Step64</value></property>
+         </bean>
+			<bean id="STEP065" parent="baseStep" >
+				<property name="moduleName"><value>sqlPlusExtract-Step65</value></property>
+			</bean>
+         <bean id="STEP066" parent="baseStep" >
+            <property name="moduleName"><value>javaExec-Step66</value></property>
+         </bean>
+			<bean id="STEP067" parent="baseStep" >
+				<property name="moduleName"><value>sqlPlusExtract-Step67</value></property>
+			</bean>
+			<bean id="STEP068" parent="baseStep" >
+				<property name="moduleName"><value>sqlPlusExtract-Step68</value></property>
+			</bean>
+         <bean id="STEP069" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step69</value></property>
+			</bean>
+         <bean id="STEP0610" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step610</value></property>
+			</bean>
+         <bean id="STEP0611" parent="baseStep" >
+            <property name="moduleName"><value>sqlPlusExtract-Step611</value></property>
+         </bean>
+         <bean id="STEP0612" parent="baseStep" >
+            <property name="moduleName"><value>javaExec-Step612</value></property>
+         </bean>
+         <bean id="STEP0613" parent="baseStep" >
+            <property name="moduleName"><value>cmdExec-Step613</value></property>
+         </bean>
+         <bean id="STEP0614" parent="baseStep" >
+            <property name="moduleName"><value>cmdExec-Step614</value></property>
+         </bean>
+         <bean id="STEP07" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step7</value></property>
+			</bean>
+         <bean id="STEP08a" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step8a</value></property>
+			</bean>
+			<bean id="STEP08b" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step8b</value></property>
+			</bean>
+			<bean id="STEP09" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step9</value></property>
+			</bean>
+			<bean id="STEP010a" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step10a</value></property>
+			</bean>
+			<bean id="STEP010b" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step10b</value></property>
+			</bean>
+         <bean id="STEP011a" parent="baseStep" >
+            <property name="moduleName"><value>cmdExec-Step11a</value></property>
+         </bean>
+         <bean id="STEP011b" parent="baseStep" >
+            <property name="moduleName"><value>cmdExec-Step11b</value></property>
+         </bean>
+			<bean id="STEP12a" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step12a</value></property>
+			</bean>
+			<bean id="STEP12b" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step12b</value></property>
+			</bean>
+			<bean id="STEP13a" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step13a</value></property>
+			</bean>
+			<bean id="STEP13b" parent="baseStep" >
+				<property name="moduleName"><value>cmdExec-Step13b</value></property>
+			</bean>
+         <bean id="STEP14" parent="baseStep" >
+            <property name="moduleName"><value>javaExec-Step14</value></property>
+         </bean>
+         <bean id="STEP15" parent="baseStep" >
+            <property name="moduleName"><value>javaExec-Step15</value></property>
+         </bean>
+         <bean id="STEP16a" parent="baseStep" >
+            <property name="moduleName"><value>javaExec-Step16a</value></property>
+         </bean>
+         <bean id="STEP16b" parent="baseStep" >
+            <property name="moduleName"><value>javaExec-Step16b</value></property>
+         </bean>
+         <bean id="decorateTargetFile" parent="baseStep" >
+            <property name="moduleName"><value>cmdExec-decorateTargetFile</value></property>
+         </bean>
+         <bean id="renameTargetFeedFile" parent="baseStep" >
+            <property name="moduleName"><value>cmdExec-renameTargetFeedFile</value></property>
+         </bean>
+		</list>
+		</property>
+	</bean>
+
+
+	<bean id="cmdExec-Step1a" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step01aProcessCustomerProfileFeedFile.ksh" />
+	</bean>
+
+   <bean id="javaExec-Step1b" lazy-init="true" class="com.telus.credit.fraud.batch.step01.FileProcessor" >
+      <property name="fileName" value="${fileProcessor/fileName}" />
+      <property name="lineWidth" value="${fileProcessor/lineWidth}" />
+      <property name="keyWidth" value="${fileProcessor/keyWidth}" />
+      <property name="wtnOffset" value="${fileProcessor/wtnOffset}" />
+   </bean>
+	<bean id="cmdExec-Step2" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step02ProcessServiceInstanceFeedFile.ksh" />
+	</bean>
+	<bean id="cmdExec-Step3" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step03ProcessBillingFeedFile.ksh" />
+	</bean>
+	<bean id="cmdExec-Step4" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step04ProcessCustomerFeedFile.ksh" />
+	</bean>
+
+   <bean id="javaExec-Step5" lazy-init="true" class="com.telus.credit.fraud.batch.step05.FileProcessor" >
+      <property name="inputFilename" value="${decryptCreditFeedFile/inputFilename}" />
+      <property name="outputFilename" value="${decryptCreditFeedFile/outputFilename}" />
+      <property name="customerIdStartPoint" value="${decryptCreditFeedFile/customerIdStartPoint}" />
+      <property name="customerIdEndPoint" value="${decryptCreditFeedFile/customerIdEndPoint}" />
+      <property name="DLStartPoint" value="${decryptCreditFeedFile/DLStartPoint}" />
+      <property name="DLEndPoint" value="${decryptCreditFeedFile/DLEndPoint}" />
+      <property name="SINStartPoint" value="${decryptCreditFeedFile/SINStartPoint}" />
+      <property name="SINEndPoint" value="${decryptCreditFeedFile/SINEndPoint}" />
+      <property name="fieldSize" value="${decryptCreditFeedFile/fieldSize}" />
+   </bean>
+   
+   <bean id="sqlPlusExtract-Step61" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/step06.01ExtractCC.sql ${processbox}/OMS_EXTRACT_CLOB_CC.DAT" />
+   </bean>
+   <bean id="javaExec-Step62" lazy-init="true" class="com.telus.credit.fraud.batch.step06.ClobParserModule" >
+      <property name="command" value="${callingCardClobParser/command}" />
+      <property name="inputFilename" value="${callingCardClobParser/inputFilename}" />
+      <property name="outputFilename" value="${callingCardClobParser/outputFilename}" />
+      <property name="parameterOne" value="${callingCardClobParser/parameterOne}" />
+      <property name="bufferSize" value="${callingCardClobParser/bufferSize}" />
+      <property name="fieldSize" value="${callingCardClobParser/fieldSize}" />
+      <property name="clobDelimiter" value="${callingCardClobParser/clobDelimiter}" />
+      <property name="propertyDelimiter" value="${callingCardClobParser/propertyDelimiter}" />
+   </bean>
+   <bean id="sqlPlusExtract-Step63" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/step06.03ExtractSING.sql ${processbox}/OMS_EXTRACT_CLOB_SING.DAT" />
+   </bean>
+   <bean id="javaExec-Step64" lazy-init="true" class="com.telus.credit.fraud.batch.step06.ClobParserModule" >
+      <property name="command" value="${singleLineClobParser/command}" />
+      <property name="inputFilename" value="${singleLineClobParser/inputFilename}" />
+      <property name="outputFilename" value="${singleLineClobParser/outputFilename}" />
+      <property name="parameterOne" value="${singleLineClobParser/parameterOne}" />
+      <property name="parameterTwo" value="${singleLineClobParser/parameterTwo}" />
+      <property name="bufferSize" value="${singleLineClobParser/bufferSize}" />
+      <property name="fieldSize" value="${singleLineClobParser/fieldSize}" />
+      <property name="clobDelimiter" value="${singleLineClobParser/clobDelimiter}" />
+      <property name="propertyDelimiter" value="${singleLineClobParser/propertyDelimiter}" />
+   </bean>
+   <bean id="sqlPlusExtract-Step65" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/step06.05ExtractLD.sql ${processbox}/OMS_EXTRACT_CLOB_LD.DAT" />
+   </bean>
+   <bean id="javaExec-Step66" lazy-init="true" class="com.telus.credit.fraud.batch.step06.ClobParserModule" >
+      <property name="command" value="${longDistanceClobParser/command}" />
+      <property name="inputFilename" value="${longDistanceClobParser/inputFilename}" />
+      <property name="outputFilename" value="${longDistanceClobParser/outputFilename}" />
+      <property name="parameterOne" value="${longDistanceClobParser/parameterOne}" />
+      <property name="parameterTwo" value="${longDistanceClobParser/parameterTwo}" />
+      <property name="bufferSize" value="${longDistanceClobParser/bufferSize}" />
+      <property name="fieldSize" value="${longDistanceClobParser/fieldSize}" />
+      <property name="clobDelimiter" value="${longDistanceClobParser/clobDelimiter}" />
+      <property name="propertyDelimiter" value="${longDistanceClobParser/propertyDelimiter}" />
+   </bean>
+   <bean id="sqlPlusExtract-Step67" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/step06.07ExtractLDDD.sql ${processbox}/OMS_LD_DISC_DECODE.DAT" />
+   </bean>
+   <bean id="sqlPlusExtract-Step68" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/step06.08ExtractLDDC.sql ${processbox}/OMS_LD_DECODE_CAPTION.DAT" />
+   </bean>
+   <bean id="cmdExec-Step69" parent="baseSyncsortScriptStep">
+    <property name="executable" value="${syncsort}/step06.09JoinS67S68.ksh" />
+   </bean>
+   <bean id="cmdExec-Step610" parent="baseSyncsortScriptStep">
+    <property name="executable" value="${syncsort}/step06.10JoinS66S69.ksh" />
+   </bean>
+   <bean id="sqlPlusExtract-Step611" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/step06.11ExtractSR.SQL ${processbox}/OMS_EXTRACT_CLOB_SR.DAT" />
+   </bean>
+   <bean id="javaExec-Step612" lazy-init="true" class="com.telus.credit.fraud.batch.step06.ClobParserModule" >
+      <property name="command" value="${smartRingClobParser/command}" />
+      <property name="inputFilename" value="${smartRingClobParser/inputFilename}" />
+      <property name="outputFilename" value="${smartRingClobParser/outputFilename}" />
+      <property name="parameterOne" value="${smartRingClobParser/parameterOne}" />
+      <property name="bufferSize" value="${smartRingClobParser/bufferSize}" />
+      <property name="fieldSize" value="${smartRingClobParser/fieldSize}" />
+      <property name="clobDelimiter" value="${smartRingClobParser/clobDelimiter}" />
+      <property name="propertyDelimiter" value="${smartRingClobParser/propertyDelimiter}" />
+   </bean>
+	<bean id="cmdExec-Step613" class="com.telus.framework.batch.module.ExecModule" >
+		<property name="executable" value="${syncsort}/step06.13ConcatOmsProducts.ksh" />
+		<property name="dir" value="." />
+		<property name="failOnError" value="false" />
+		<property name="newEnvironment" value="true" />
+		<property name="env">
+			<list>
+				<ref bean="path"/>
+				<bean class="com.telus.framework.batch.module.support.EnvVariable">
+					<property name="key" value="PROCESSBOX" />
+					<property name="value" value="${processbox}" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+   <bean id="cmdExec-Step614" parent="baseSyncsortScriptStep">
+    <property name="executable" value="${syncsort}/step06.14SortOmsProducts.ksh" />
+   </bean>
+   <bean id="cmdExec-Step7" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step07ProcessPicAdminFeedFile.ksh" />
+	</bean>
+   <bean id="cmdExec-Step8a" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step08aJoinCustomerProfileServiceInstance.ksh" />
+	</bean>
+	<bean id="cmdExec-Step8b" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step08bSortCustomerProfileServiceInstance.ksh" />
+	</bean>
+	<bean id="cmdExec-Step9" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step09JoinBillingCustomer.ksh" />
+	</bean>
+	<bean id="cmdExec-Step10a" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step10aJoinOmsPicAdmin.ksh" />
+	</bean>
+	<bean id="cmdExec-Step10b" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step10bSortS10a.ksh" />
+	</bean>
+   <bean id="cmdExec-Step11a" parent="baseSyncsortScriptStep">
+    <property name="executable" value="${syncsort}/step11aJoinS8S10.ksh" />
+   </bean>
+   <bean id="cmdExec-Step11b" parent="baseSyncsortScriptStep">
+    <property name="executable" value="${syncsort}/step11bSortS11a.ksh" />
+   </bean>
+	<bean id="cmdExec-Step12a" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step12aJoinS5S9.ksh" />
+	</bean>
+	<bean id="cmdExec-Step12b" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step12bSortS12a.ksh" />
+	</bean>
+	<bean id="cmdExec-Step13a" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step13aGenerateCandidateTargetFile.ksh" />
+	</bean>
+	<bean id="cmdExec-Step13b" parent="baseSyncsortScriptStep">
+	 <property name="executable" value="${syncsort}/step13bSortCandidateTargetFile.ksh" />
+	</bean>
+   <bean id="javaExec-Step14" lazy-init="true" class="com.telus.credit.fraud.batch.step14.FormatCandidateTargetFile" >
+      <property name="inputFilename" value="${formatCandidateTargetFile/inputFilename}" />
+      <property name="outputFilename" value="${formatCandidateTargetFile/outputFilename}" />
+      <property name="serviceStartPoint" value="${formatCandidateTargetFile/serviceStartPoint}" />
+      <property name="serviceEndPoint" value="${formatCandidateTargetFile/serviceEndPoint}" />
+      <property name="billingStartPoint" value="${formatCandidateTargetFile/billingStartPoint}" />
+      <property name="billingEndPoint" value="${formatCandidateTargetFile/billingEndPoint}" />
+      <property name="bufferStartPoint" value="${formatCandidateTargetFile/bufferStartPoint}" />
+      <property name="bufferEndPoint" value="${formatCandidateTargetFile/bufferEndPoint}" />
+      <property name="fieldSize" value="${formatCandidateTargetFile/fieldSize}" />
+      <property name="padding" value="${formatCandidateTargetFile/padding}" />
+   </bean>
+   <bean id="javaExec-Step15" lazy-init="true" class="com.telus.credit.fraud.batch.step15.FileComparator" >
+      <property name="masterFilename" value="${fileComparator/masterFilename}" />
+      <property name="targetFilename" value="${fileComparator/targetFilename}" />
+      <property name="outputFilename" value="${fileComparator/outputFilename}" />
+      <property name="recordCountFilename" value="${fileComparator/recordCountFilename}" />
+      <property name="lineWidth" value="${fileComparator/lineWidth}" />
+      <property name="keyWidth" value="${fileComparator/keyWidth}" />
+   </bean>
+   <bean id="javaExec-Step16a" lazy-init="true" class="com.telus.credit.fraud.batch.step16.GenerateHeaderFile" >
+      <property name="outputFilename" value="${generateHeaderFile/outputFilename}" />
+      <property name="telcoCode" value="${generateHeaderFile/telcoCode}" />
+   </bean>
+   <bean id="javaExec-Step16b" lazy-init="true" class="com.telus.credit.fraud.batch.step16.GenerateFooterFile" >
+      <property name="outputFilename" value="${generateFooterFile/outputFilename}" />
+      <property name="recordCountFilename" value="${generateFooterFile/recordCountFilename}" />
+   </bean>
+   <bean id="cmdExec-decorateTargetFile" class="com.telus.framework.batch.module.ExecModule" >
+      <property name="executable" value="${step}/decorateTargetFile.ksh" />
+      <property name="dir" value="." />
+      <property name="failOnError" value="false" />
+      <property name="newEnvironment" value="true" />
+      <property name="env">
+         <list>
+            <ref bean="path"/>
+            <bean class="com.telus.framework.batch.module.support.EnvVariable">
+               <property name="key" value="PASSBOX" />
+               <property name="value" value="${passbox}" />
+            </bean>
+            <bean class="com.telus.framework.batch.module.support.EnvVariable">
+               <property name="key" value="OUTBOX" />
+               <property name="value" value="${outbox}" />
+            </bean>
+         </list>
+      </property>
+   </bean>
+   <bean id="cmdExec-renameTargetFeedFile" class="com.telus.framework.batch.module.ExecModule" >
+      <property name="executable" value="${step}/renameTargetFeedFile.ksh" />
+      <property name="dir" value="." />
+      <property name="failOnError" value="false" />
+      <property name="newEnvironment" value="true" />
+      <property name="env">
+         <list>
+            <ref bean="path"/>
+            <bean class="com.telus.framework.batch.module.support.EnvVariable">
+               <property name="key" value="PASSBOX" />
+               <property name="value" value="${passbox}" />
+            </bean>
+         </list>
+      </property>
+   </bean>
+
+   <!--  Encryptoin setting Start for Pilot -->
+   <bean id="encryptUtil" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+      <property name="staticMethod">
+         <value>com.telus.framework.crypto.EncryptionUtil.setCrypto</value>
+      </property>
+      <property name="arguments">
+         <list>
+            <ref bean="cryptoImpl" />
+         </list>
+      </property>
+   </bean>
+
+   <bean id="cryptoImpl"  class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl" init-method="init">
+      <property name="key1"><value>EbT5a8Fuq</value></property>
+      <property name="key2"><value>aYt2gv6R</value></property>
+      <property name="key3"><value>9bFp3Gz4k</value></property>
+      <!--
+      uncomment when these properties are defined in an env.xml and loaded by file which will be loaded by the configuration framework
+      <property name="key1"><value>${encryption/key1}</value></property>
+      <property name="key2"><value>${encryption/key2}</value></property>
+      <property name="key3"><value>${encryption/key3}</value></property>
+      -->
+   </bean>
+ <!--	Encryptoin setting End -->
+
+</beans>
+
+

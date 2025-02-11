@@ -1,0 +1,16 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace}
+
+   /INFILE ${processbox}/OMS_DATA.DAT 
+   /FIELDS WTN 1 CHARACTER 10
+   /KEYS WTN
+
+   /OUTFILE ${processbox}/OMS_FEED_FILE.DAT  OVERWRITE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+EOF
+
+return $?

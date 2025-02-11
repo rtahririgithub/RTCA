@@ -1,0 +1,681 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelessCreditTypes_v2" version="2.1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelessCreditTypes_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" schemaLocation="EnterpriseCommonTypes_v9_1.xsd"/>
+    <!--*************************************** Common ****************************************************-->
+    <xs:complexType name="CreditAuditInfo">
+        <xs:sequence>
+            <xs:element name="originatorApplicationId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represent the CMDB id of the
+                        origin front end application .</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="channelOrganizationId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represent the channel organization
+                        id that the originator Application ID belongs to ..</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="userId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represent the front end agent/user
+                        ID </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="moneyType">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="PersonName">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element minOccurs="0" name="middleInitialTxt" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element minOccurs="0" name="fullName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DriverLicense">
+        <xs:sequence>
+            <xs:element name="driverLicenseNumber" type="xs:string"/>
+            <xs:element name="provinceCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="expiryDate" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProvincialIdCard">
+        <xs:sequence>
+            <xs:element name="provincialId" type="xs:string"/>
+            <xs:element name="provinceCd" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Passport">
+        <xs:sequence>
+            <xs:element name="passportNumber" type="xs:string"/>
+            <xs:element name="countryCd" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="HealthCard">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="BusinessRegistration">
+        <xs:sequence>
+            <xs:element name="businessRegistrationTypeCd" type="xs:string"/>
+            <xs:element name="businessRegistrationNumber" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditIdentification">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="driverLicense" type="tns:DriverLicense"/>
+            <xs:element minOccurs="0" name="socialInsuranceNum" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditCardTokenTxt" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditCardFirstSixNum" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditCardLastFourNum" type="xs:string"/>
+            <xs:element minOccurs="0" name="healthCardNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="passport" type="tns:Passport"/>
+            <xs:element minOccurs="0" name="provincialIdCard" type="tns:ProvincialIdCard"/>
+            <xs:element minOccurs="0" name="businessRegistration" type="tns:BusinessRegistration"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Qualified">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="eligibilityInd" type="xs:boolean"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="reasonCodeList" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditAddress">
+        <xs:sequence>
+            <xs:element name="addressLineOneText" type="xs:string"/>
+            <xs:element minOccurs="0" name="addressLineTwoText" type="xs:string"/>
+            <xs:element minOccurs="0" name="addressLineThreeText" type="xs:string"/>
+            <xs:element minOccurs="0" name="addressLineFourText" type="xs:string"/>
+            <xs:element minOccurs="0" name="addressLineFiveText" type="xs:string"/>
+            <xs:element name="cityName" type="xs:string"/>
+            <xs:element name="provinceCd" type="xs:string"/>
+            <xs:element name="postalCd" type="xs:string"/>
+            <xs:element name="countryCd" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TelephoneContact">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="telephoneContactTypeCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="telephoneContactSubTypeCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="telephoneNum" type="xs:string"/>
+            <xs:element minOccurs="0" name="telephoneExtensionNum" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditAccountInfo">
+        <xs:sequence>
+            <xs:element name="billingAccountNumber" type="xs:long"/>
+            <xs:element name="accountTypeCd" type="xs:string"/>
+            <xs:element name="accountSubTypeCd" type="xs:string"/>
+            <xs:element name="brandId" type="xs:string"/>
+            <xs:element name="accountCreationDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Same as startServiceDate if
+                        startServiceDate is not empty otherwise same as
+                        accountStatusDate </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="startServiceDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Represents the date when account
+                        became open (status O) – which is the date when
+                        the first subscriber was activated. This date
+                        does not change if the subscriber is canceled or
+                        more subs are added to the account.    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="accountStatusCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="accountStatusDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>status_last_date</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="personName" type="tns:PersonName">
+                <xs:annotation>
+                    <xs:documentation>not mandatory for business regular account</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="100" minOccurs="0" name="telephoneContactList" type="tns:TelephoneContact"/>
+            <xs:element minOccurs="0" name="languageTxt" type="xs:string"/>
+            <xs:element minOccurs="0" name="revenueBandCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>A derived category of revenue
+                        amount associated with the BAN. High , Medium,
+                        Low. Source : BA/TCMNG</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <!--****************************************END OF Common ****************************************************-->
+    <!-- ********Cgw Bureua ****************-->
+    <xs:complexType name="BaseReportType">
+        <xs:sequence>
+            <xs:element name="customerRequestId" type="xs:string"/>
+            <xs:element minOccurs="0" name="matchingCreditHitCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="reportDocument">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="bureauReportDocument" type="tns:CreditBureauDocument"/>
+                        <xs:element name="printImageDocument" type="tns:CreditBureauDocument"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditBureauDocumentBase">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="documentId" type="xs:string"/>
+            <xs:element minOccurs="0" name="documentPathTxt" type="xs:string"/>
+            <xs:element minOccurs="0" name="documentTypeCd" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditBureauDocument">
+        <xs:complexContent>
+            <xs:extension base="tns:CreditBureauDocumentBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="documentContentBinary" type="xs:base64Binary"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CreditBureauDocumentList">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="bureauReportDocument" type="tns:CreditBureauDocument"/>
+            <xs:element minOccurs="0" name="printImageDocument" type="tns:CreditBureauDocument"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FraudWarning">
+        <xs:annotation>
+            <xs:documentation>Fraud/credit ings received from bureau</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="fraudTypeCd" type="xs:string"/>
+            <xs:element name="fraudCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="fraudMessageTxt" type="xs:string"/>
+            <xs:element minOccurs="0" name="contactPhoneNum" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RiskIndicator">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="writeOffCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="noHitThinFileInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="trueThinFileInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="highRiskThinFileInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="bankcrupcyInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="temporarySinInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>It is the temporary Social
+                        Insurance Number Indicator (tempSINInd) related
+                        to Equifax field: bTmpSin2Cnd</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="underAgeInd" type="xs:boolean"/>
+            <xs:element name="primaryRiskCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="secondaryRiskCd" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductDeposit">
+        <xs:annotation>
+            <xs:documentation>Product code (e.g. C, P...) and related
+                deposit amount received from bureau</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="productCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="depositAmt" type="tns:moneyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ScoreCardAttribute">
+        <xs:annotation>
+            <xs:documentation>ScoreCardAttribute, name/value pair</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="scoreName" type="xs:string"/>
+            <xs:element name="valueTxt" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>scoreValue, e.g. for
+                        EFX_Telco_WO_Trade_Num, it is 99998.0</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditScore">
+        <xs:annotation>
+            <xs:documentation>Contains primary credit score (Beacon
+                Score) and ECBS score, and so on ... The Primary credit
+                score is the creditScoreCd when creditScoreTypeCd =
+                'DEFAULT' </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="creditScoreCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represents the credit score value
+                        (e.g. 500, 600, ...) for the score type from the
+                        credit bureau</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditScoreTypeCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represents the type of scores from
+                        the credit bureau which can be one of DEFAULT,
+                        ECBS, CIP, ...</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditDecision">
+        <xs:annotation>
+            <xs:documentation>Bureau Credit decision as defined in
+                external Credit bureau for TELUS.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="creditDecisionCd" type="xs:string"/>
+            <xs:element name="creditDecisionMessageTxt" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AdjudicationResult">
+        <xs:sequence>
+            <xs:element maxOccurs="100" name="creditScoreList" type="tns:CreditScore"/>
+            <xs:element name="creditClassCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditLimitAmt" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="creditDecision" type="tns:CreditDecision"/>
+            <xs:element minOccurs="0" name="depositAmt" type="tns:moneyType"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="scoreCardAttributeList" type="tns:ScoreCardAttribute"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="productDepositList" type="tns:ProductDeposit"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditBureauResult">
+        <xs:annotation>
+            <xs:documentation>Credit Gateway or Credit Decision-ing
+                Simulator result</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="creditBureauResultId" type="xs:long"/>
+            <xs:element name="baseReportType" type="tns:BaseReportType"/>
+            <xs:element minOccurs="0" name="personName" type="tns:PersonName"/>
+            <xs:element minOccurs="0" name="errorCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Error code returned from Vendor</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="reportSourceCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Vendor name, e.g. EQUIFAX,
+                        TRANSUNION, SIMULATOR,...</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="reportTypeCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Credit report type code: consumer
+                        (CONS_CRD_RPT), commercial (BUS_CRD_SMLR_RPT or
+                        BUS_CRD_FULL_RPT), corporate registry
+                        (CORP_SMPL_REGISTRY or CORP_FULL_REGISTRY), etc </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="printImageReportTxt" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Print image report (PI or readable
+                        format) from credit bureau</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="rawReportTxt" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Raw report (FFF format) from
+                        credit bureau</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="adjudicationResult" type="tns:AdjudicationResult"/>
+            <xs:element minOccurs="0" name="riskIndicator" type="tns:RiskIndicator"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="fraudWarningList" type="tns:FraudWarning"/>
+            <xs:element minOccurs="0" name="creationDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Credit check timestamp</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="bureauReportStatusCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Correspond to credit asmt status
+                        with values Active, Void</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="bureauReportStatusDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Same as credit asmt status date.
+                        Date the status was changed.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- **********CreditProfile*****************-->
+    <xs:complexType name="CreditProfile">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="creditProfileId" type="xs:long"/>
+            <xs:element minOccurs="0" name="birthDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="creditIdentification" type="tns:CreditIdentification"/>
+            <xs:element name="creditAddress" type="tns:CreditAddress"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- **********DevicePaymentPlan*****************-->
+    <xs:complexType abstract="true" name="BaseDevicePaymentPlanAbstract">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="devicePaymentPlanEligibilityIndicator" type="tns:Qualified"/>
+            <xs:element name="devicePaymentPlanCd" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="FinancingDevicePaymentPlan">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseDevicePaymentPlanAbstract">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="downpaymentAmount" type="tns:moneyType"/>
+                    <xs:element minOccurs="0" name="securityDepositAmount" type="tns:moneyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="TabDevicePaymentPlan">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseDevicePaymentPlanAbstract">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="tabAmount" type="tns:moneyType"/>
+                    <xs:element minOccurs="0" name="securityDepositAmount" type="tns:moneyType">
+                        <xs:annotation>
+                            <xs:documentation>TODO: check Fico if Koodo
+                                account TAB can be required a security
+                                deposit amt</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="SubsidyDevicePaymentPlan">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseDevicePaymentPlanAbstract">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="securityDepositAmount" type="tns:moneyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="ByodDevicePaymentPlan">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseDevicePaymentPlanAbstract">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="securityDepositAmount" type="tns:moneyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DevicePaymentPlanThresholdList">
+        <xs:annotation>
+            <xs:documentation>represents the max number of subscriber
+                allowed for each device payment plan (SUBSIDY,BYOD,FINANCING,..)</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="devicePaymentPlanCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>SUBSIDY,BYOD,FINANCING,LEASING,TAB,,..</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="noSecurityDepositRequiredMaxNumber" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>max number of subscribers that do
+                        not require a security deposit</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="noDownPaymentRequiredMaxNumber" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- ***************SubscriberEligibilityResult ***************-->
+    <!-- ***************Warning***************-->
+    <xs:complexType name="WarningHistoryBase">
+        <xs:annotation>
+            <xs:documentation>Represent the list of  warnings associated
+                to the account's creditworthiness</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="warningCategoryCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represent the category of warnings
+                        ( internal value) : INTERNAL_DB_WARNING(any
+                        warning stored in fraud db) ,
+                        BUREUA_DECISION_CODE_WARNING, ORDER_WARNING </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="warningCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represent the warning.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="warningTypeCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represent the type of warning such
+                        as SafescanIdWarning, CreditFileWarning, Hawk</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="warningItemTypeCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>type of IDs that resulted a warning.(CC,SIN,DL)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="warningDetectionDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Date the warning was detected by
+                        decisioning rule engine</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="warningStatusCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>populated by credit decisioning,
+                        stored in cda DB </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="resolvedPermanentlyInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>Indicates the warning is resolved
+                        permanently. Such as Bil152</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="associatedApproval" type="tns:AssociatedWarningApproval"/>
+            <xs:element minOccurs="0" name="memoTypeCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>memo to be created in KB . ( value
+                        of memoTypeCd is populated by Fico) </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="warningHistoryId" type="xs:long"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="warningAdditionalInfoList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="additionalInfoTypeCd" type="xs:string"/>
+                        <xs:element minOccurs="0" name="additionalInfoTxt" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WarningApproval">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="approvalExistInd" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>Indicates whether an approval for
+                        the warning (approval memo ) exisit</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="approvalExternalId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Represent the Unique ID of the
+                        approval in External system ( memo ID in KB)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="approvalDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>time agent issued the approval (
+                        Approval memo)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AssociatedWarningApproval">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="approvalDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>Reporesent the Date of Agent's
+                        approval (Approval memo creation date) which
+                        resulted to resolve the warning. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="approvaExternalId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>Reporesent the external ID of the
+                        Agent's approval (Approval memo) (Memo ID in KB) </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="creditAssessmentId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>The creditDecisioningTransaction
+                        at the time the approval memo result to resolve
+                        the warning</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SubscriberEligibilityResult">
+        <xs:sequence>
+            <xs:element name="subscriberOrdinalNum" type="xs:int"/>
+            <xs:element minOccurs="0" name="subscriberId" type="xs:string"/>
+            <xs:element minOccurs="0" name="subscriptionId" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="devicePaymentPlanEligibilityResultList" type="tns:BaseDevicePaymentPlanAbstract">
+                <xs:annotation>
+                    <xs:documentation>List of eligible device payment
+                        plans for this subscriber.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- ***************CreditWorthiness ***************-->
+    <xs:complexType name="CreditWorthinessBase">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="creditWorthinessId" type="xs:long"/>
+            <xs:element minOccurs="0" name="creditProfileId" type="xs:long"/>
+            <xs:element minOccurs="0" name="creditAssessmentId" type="xs:long"/>
+            <xs:element minOccurs="0" name="primaryCreditScoreCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represent the CreditScore code
+                        identified by Fico as the primary among
+                        creditScoreList  returned from external bureau (
+                        CreditBureauResult.cablztyp:adjudicationResult.cablztyp:creditScoreList).
+                        CreditScore code and type shall be stored as
+                        part of account’s creditworthiness</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="primaryCreditScoreTypeCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Represent the CreditScore type
+                        identified by Fico as the primary among
+                        creditScoreList  returned from external bureau (
+                        CreditBureauResult.cablztyp:adjudicationResult.cablztyp:creditScoreList).
+                        CreditScore code and type shall be stored as
+                        part of account’s creditworthiness</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="bureauDecisionCode" type="ent:MultilingualCodeDescriptionList">
+                <xs:annotation>
+                    <xs:documentation>Represents the bureau decision
+                        code received from external bureau. IT IS NOT
+                        FOR DISPLAY PURPOSE It is to be stored in KB as
+                        part of CREDIT_CHECK and MANUAL ASSESSMENT because</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="CreditWorthiness">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:CreditWorthinessBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="creditProgram" type="tns:BaseCreditProgram"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CreditWorthinessChange">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="creditProgramName" type="xs:string"/>
+            <xs:element minOccurs="0" name="creditClassCd" type="xs:string"/>
+            <xs:element minOccurs="0" name="clpCreditLimitAmount" type="tns:moneyType"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="securityDepositList" type="tns:ProductDeposit"/>
+            <xs:element minOccurs="0" name="riskLevelNumber" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- ***************CreditProgram **************-->
+    <xs:complexType abstract="true" name="BaseCreditProgram">
+        <xs:annotation>
+            <xs:documentation>abstract type with concrete types
+                representing CLP,DEPSOT,etc.. creditprogram.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="creditProgramName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation/>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="creditClassCd" type="xs:string"/>
+            <xs:element name="creditClassDate" type="xs:dateTime"/>
+            <xs:element name="creditDecisionCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>It uniquely identifies a decision
+                        made which determines Account eligibility
+                        result, taking into consideration bureau credit
+                        data and/or TELUS internal data for the account.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="creditDecisionDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="riskLevelNumber" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>A numeric value representing the
+                        risk level assessed for an account .( the higher
+                        the number the higher the risk)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="riskLevelDecisionCd" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>It uniquely identifies a decision
+                        made which determines the Risk Level, for
+                        reporting and analytic purpose only.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="riskLevelDt" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="ClpCreditProgram">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseCreditProgram">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="clpContractTermNum" type="xs:int"/>
+                    <xs:element minOccurs="0" name="clpRatePlanAmount" type="tns:moneyType"/>
+                    <xs:element minOccurs="0" name="clpCreditLimitAmount" type="tns:moneyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="DepositCreditProgram">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseCreditProgram">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="averageSecurityDepositList" type="tns:ProductDeposit"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="DeclinedCreditProgram">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:DepositCreditProgram"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType mixed="false" name="NoDeviceCreditProgram">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:DepositCreditProgram"/>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

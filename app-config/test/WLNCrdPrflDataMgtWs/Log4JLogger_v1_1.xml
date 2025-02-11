@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+    <group name="logging">
+        <prop name="log4j.rootCategory">${log4j/severity/INFO}, CONSOLE</prop>
+        <!--<prop name="log4j.debug">true</prop>-->
+    
+        <!--Console appender-->
+        <prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+        <prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+        <prop name="log4j.appender.CONSOLE.layout.ConversionPattern">[%d{DATE} %c %-5p] - %m%n</prop>
+    
+        <!--  File appender for Credit Assessment services -->
+        <prop name="log4j.appender.WLN_CRD_D_PRFL">org.apache.log4j.DailyRollingFileAppender</prop>
+        <prop name="log4j.appender.WLN_CRD_D_PRFL.Append">true</prop>
+        <prop name="log4j.appender.WLN_CRD_D_PRFL.layout">org.apache.log4j.PatternLayout</prop>
+        <prop name="log4j.appender.WLN_CRD_D_PRFL.layout.ConversionPattern">%d{yyyy-MM-dd/HH:mm:ss.SSS/zzz} %-5p %c{2} - %m%n</prop>
+        <prop name="log4j.appender.WLN_CRD_D_PRFL.file">${dirs/log4j/entCrdPrflDataMgtService}/WLNCrdPrflDataMgtService_v1_1.log</prop>
+    
+    
+        <!-- ================== -->
+        <!-- Loggers -->
+    
+        <!-- Enterprise Credit Profile Data Management Service -->
+        <prop name="log4j.logger.com.telus.credit.wlnprfldmgt">${log4j/severity/DEBUG}, WLN_CRD_D_PRFL</prop>
+        <prop name="log4j.logger.com.telus.framework">${log4j/severity/ERROR}, WLN_CRD_D_PRFL</prop> 
+	<prop name="log4j.logger.java.sql.PreparedStatement">${log4j/severity/DEBUG}, WLN_CRD_D_PRFL</prop>
+ 	<prop name="log4j.logger.java.sql.Connection">${log4j/severity/DEBUG}, WLN_CRD_D_PRFL</prop> 
+ 	<prop name="log4j.logger.org.springframework">${log4j/severity/DEBUG}, WLN_CRD_D_PRFL</prop> 
+        
+        <prop name="log4j.additivity.com.telus.credit.entprflmgt">false</prop>
+    
+        <!-- END Of Loggers -->
+        <!-- ================== -->
+  </group>
+</group>

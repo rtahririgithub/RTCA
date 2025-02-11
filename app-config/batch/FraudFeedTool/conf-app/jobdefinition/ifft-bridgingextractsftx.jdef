@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <import resource="classpath:fw-base.jdef" />
+    <import resource="classpath:sftx/ifft-bridgingextractsftx.xml" />
+ 
+    <bean id="telusSpringConfigurer" class="com.telus.framework.config.spring.PlaceholderConfigurer" lazy-init="true">
+    </bean>
+
+    <bean id="job" parent="baseJob">
+        <property name="steps">
+            <list>
+                <bean id="STEP01" parent="baseStep">
+                    <property name="moduleName" value="ifft-bridgingextractsftx-step" />
+                </bean>
+            </list>
+        </property> 
+    </bean>
+
+    <!-- ====================================================================  
+         SFTP Step
+         ====================================================================
+    -->
+    <bean id="ifft-bridgingextractsftx-step"  class="com.telus.framework.filetransfer.FileTransferController" lazy-init="true"> 
+             <property name="request" ref="ifft-bridgingextractsftx" />
+    </bean> 
+</beans>
+

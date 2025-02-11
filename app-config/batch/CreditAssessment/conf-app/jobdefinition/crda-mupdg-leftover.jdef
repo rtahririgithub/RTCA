@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+   
+   <import resource="classpath:fw-base.jdef"/>
+<!--    <import resource="base-defn.xml" /> --> 
+
+   <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>mug_merge</value>
+               </property>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName">
+                  <value>mug_sort</value>
+               </property>
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName">
+                  <value>mug_rm_dup</value>
+               </property>
+            </bean>
+            <bean id="STEP04" parent="baseStep">
+               <property name="moduleName">
+                  <value>mug_leftover</value>
+               </property>
+            </bean>
+            <bean id="STEP05" parent="baseStep">
+               <property name="moduleName">
+                  <value>cv_merge</value>
+               </property>
+            </bean>
+            <bean id="STEP06" parent="baseStep">
+               <property name="moduleName">
+                  <value>cv_sort</value>
+               </property>
+            </bean>
+            <bean id="STEP07" parent="baseStep">
+               <property name="moduleName">
+                  <value>cv_rm_dup</value>
+               </property>
+            </bean>
+
+            <bean id="STEP08" parent="baseStep">
+               <property name="moduleName">
+                  <value>cv_left_over</value>
+               </property>
+            </bean>
+            <!--bean id="STEP07" parent="baseStep">
+               <property name="moduleName">
+                  <value>archive</value>
+               </property>
+            </bean-->
+
+         </list>
+      </property>
+
+   </bean>
+   <bean id="mug_merge" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable">  <value>${step}/rtca-mug-leftover.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE} mupdg-cv-*-input-${L_CRDA_ODATE}.dat  mupdg-successed-${L_CRDA_ODATE}.dat mupdg-successed-*</value></property>
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+   <bean id="mug_sort" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_mug_sort.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-successed-${L_CRDA_ODATE}.dat  ${temp}/${L_CRDA_ODATE}/mupdg-successed-sorted-${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log1}</value></property>
+   </bean>
+   <bean id="mug_rm_dup" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_customer_drive_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-successed-sorted-${L_CRDA_ODATE}.dat  ${temp}/${L_CRDA_ODATE}/mupdg-successed-sorted-no-dup-${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log2}</value></property>
+   </bean>
+   <bean id="mug_leftover" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_mug_leftover.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/CustomerDriverFile_${L_CRDA_ODATE}.dat  ${temp}/${L_CRDA_ODATE}/mupdg-successed-sorted-no-dup-${L_CRDA_ODATE}.dat  ${inbox}/leftover/CustomerDriver_Leftover_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log3}</value></property>
+   </bean>
+   <bean id="cv_merge" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable">    <value>${step}/rtca-cv-leftover.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE} mupdg-cv-updated-*-${L_CRDA_ODATE}.dat  mupdg-cv-update-successed-${L_CRDA_ODATE}.dat mupdg-cv-update-successed*</value></property>
+      <property name="output"><value>${report/log4}</value></property>
+  </bean>
+   <bean id="cv_sort" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_mug_sort.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-update-successed-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-update-successed-sorted-${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log5}</value></property>
+  </bean>
+  <bean id="cv_rm_dup" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_customer_drive_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-cv-update-successed-sorted-${L_CRDA_ODATE}.dat ${temp}/${L_CRDA_ODATE}/mupdg-cv-update-successed-sorted-no-dup-${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log6}</value></property>
+  </bean>
+  <bean id="cv_left_over" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_mug_leftover.sh</value></property>
+      <property name="arg"> <value>${temp}/${L_CRDA_ODATE}/mupdg-successed-sorted-no-dup-${L_CRDA_ODATE}.dat  ${temp}/${L_CRDA_ODATE}/mupdg-cv-update-successed-sorted-no-dup-${L_CRDA_ODATE}.dat ${inbox}/leftover/customer-mgt-cv-update-leftover-${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log7}</value></property>
+  </bean>
+  <!--bean id="archive" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable">  <value>${step}/rtca-mupdg-complete.sh</value></property>
+      <property name="arg"> <value>${archive} ${temp} ${passbox} ${L_CRDA_PREV} ${L_CRDA_ODATE} ${outbox} CreditReAssessmentDailyReport_</value></property>
+      <property name="output"><value>${report/log8}</value></property>
+   </bean-->
+</beans>

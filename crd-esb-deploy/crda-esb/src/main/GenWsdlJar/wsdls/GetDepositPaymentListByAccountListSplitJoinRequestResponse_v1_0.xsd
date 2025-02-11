@@ -1,0 +1,33 @@
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cbm="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" xmlns:dms="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1"
+
+ xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/getDepositPaymentListByAccountListSplitJoinRequestResponse_v1" 
+                   
+ 
+ targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/getDepositPaymentListByAccountListSplitJoinRequestResponse_v1" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1" schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/BillingAccountMgmt/DepositManagementServiceRequestResponse_v1_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/CustomerBill/Customer_Billing_Sub_Domain_v2_1.xsd"/>
+	<xs:element name="getDepositPaymentListByAccountList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="billingAccountList" type="cbm:BillingAccount" minOccurs="0" maxOccurs="500"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getDepositPaymentListByAccountListResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DepositPaymentList" type="tns:DepositPaymentList" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>List of AR Deposit detail for each billingAccountNumber of a customer. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DepositPaymentList">
+		<xs:sequence>
+			<xs:element ref="dms:searchDepositResponse" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

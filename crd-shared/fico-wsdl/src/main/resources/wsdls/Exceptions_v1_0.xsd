@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0"
+    xmlns:exc="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0"
+    xmlns:ns1="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="ServiceException" type="exc:ServiceException">
+        <xsd:annotation>
+            <xsd:documentation>Service exception fault when downstream
+                services are not available.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="ServiceException">
+        <xsd:sequence>
+            <xsd:element name="messageId" type="xsd:string"/>
+            <xsd:element name="errorCode" type="xsd:string"/>
+            <xsd:element name="errorMessage" type="xsd:string"/>
+            <xsd:element maxOccurs="100" minOccurs="0" name="variables" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="PolicyException" type="exc:PolicyException">
+        <xsd:annotation>
+            <xsd:documentation>Policy Exception fault raised for
+                business exceptions.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="PolicyException">
+        <xsd:sequence>
+            <xsd:element name="messageId" type="xsd:string"/>
+            <xsd:element name="errorCode" type="xsd:string"/>
+            <xsd:element name="errorMessage" type="xsd:string"/>
+            <xsd:element maxOccurs="100" minOccurs="0" name="variables" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

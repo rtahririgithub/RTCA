@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5">
+	<display-name>OrderDepositCalculatorService</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:orderDepositCalculatorService-spring.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<servlet>
+      <servlet-name>OrderDepositCalculatorServlet</servlet-name>
+      <servlet-class>com.telus.credit.orderDepositCalculator.webservice.service.OrderDepositCalculatorServicePortImpl</servlet-class>
+	  <!--
+      <init-param>
+          <param-name>wl-dispatch-policy</param-name>
+          <param-value>WorkManager-Online</param-value>
+      </init-param>
+	  -->
+      <load-on-startup>0</load-on-startup>
+   </servlet>
+ 
+   <servlet-mapping>
+      <servlet-name>OrderDepositCalculatorServlet</servlet-name>
+      <url-pattern>/*</url-pattern>
+   </servlet-mapping>
+</web-app>

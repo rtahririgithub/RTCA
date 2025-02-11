@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+   <import resource="classpath:fw-base.jdef"/>
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="sqlPlusExtract-Step01"/>
+            </bean>
+          </list>
+      </property>
+   </bean>
+   <bean id="sqlPlusExtract-Step01" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/Extract_CREDIT_BUREAU_DATA.sql ${passbox}/${L_CRDA_ODATE}/CustomerCreditBureauDetails_${L_CRDA_ODATE}.dat "/>
+      <property name="output" value="${report/log}"/>
+   </bean>
+</beans>
+
+

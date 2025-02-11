@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+
+   <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>join_drv_cl9_agency</value>
+               </property>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_duplicates</value>
+               </property>
+            </bean>
+
+          </list>
+      </property>
+
+   </bean>
+   <bean id="join_drv_cl9_agency" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_join_ban_details_and_agency_request.sh</value></property>
+      <property name="arg"> <value>${outbox}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_AGENCY_REQUEST_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ACTIVE_AGENCY_REQUEST_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+   <bean id="remove_duplicates" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_agency_request_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ACTIVE_AGENCY_REQUEST_${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_ODATE}/AgencyRequestDetails_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log}</value></property>
+   </bean>
+</beans>

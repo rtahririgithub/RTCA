@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings version="2.0"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+   xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector">
+
+   <jxb:globalBindings generateElementProperty="false">
+      <xjc:javaType name="java.util.Date" xmlType="xs:date" adapter="com.telus.framework.xml.bind.DateAdapter" />
+      <xjc:javaType name="java.util.Date" xmlType="xs:dateTime" adapter="com.telus.framework.xml.bind.DateTimeAdapter" />
+      <xjc:javaType name="java.lang.Long" xmlType="xs:integer"  adapter="com.telus.framework.xml.bind.LongAdapter" />
+   </jxb:globalBindings>
+
+   
+   
+   <jxb:bindings schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2_1.xsd" node="/xs:schema">
+      <jxb:schemaBindings> 
+         <jxb:package name="com.telus.credit.domain.crda" />
+      </jxb:schemaBindings>
+   </jxb:bindings>
+   
+   
+
+   <jxb:bindings schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditAssessmentTypes_v2_0.xsd" node="/xs:schema">
+      <jxb:schemaBindings>
+         <jxb:package name="com.telus.credit.domain.crda" />
+      </jxb:schemaBindings>
+   </jxb:bindings>
+
+
+   <jxb:bindings schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1_1.xsd" node="/xs:schema">
+      <jxb:schemaBindings>
+         <jxb:package name="com.telus.credit.domain.common" />
+      </jxb:schemaBindings>
+   </jxb:bindings>
+
+    <jxb:bindings schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1_0.xsd" node="/xs:schema">
+      <jxb:schemaBindings>
+         <jxb:package name="com.telus.credit.domain.collection" />
+      </jxb:schemaBindings>
+   </jxb:bindings>  
+   
+      <jxb:bindings schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2_1.xsd" node="/xs:schema">
+      <jxb:schemaBindings>
+         <jxb:package name="com.telus.credit.domain.creditprofile" />
+      </jxb:schemaBindings>
+   </jxb:bindings>   
+   
+   <jxb:bindings schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4_0.xsd" node="/xs:schema">
+      <jxb:schemaBindings>
+         <jxb:package name="com.telus.credit.domain.customer" />
+      </jxb:schemaBindings>
+   </jxb:bindings>
+
+   <jxb:bindings schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1_0.xsd" node="/xs:schema">
+      <jxb:schemaBindings>
+         <jxb:package name="com.telus.credit.domain.deposit" />
+      </jxb:schemaBindings>
+   </jxb:bindings>
+
+   
+   
+   <jxb:bindings schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7_0.xsd" node="/xs:schema">
+      <jxb:schemaBindings>
+         <jxb:package name="com.telus.credit.domain.ent" />
+      </jxb:schemaBindings>
+   </jxb:bindings>
+
+</jxb:bindings>

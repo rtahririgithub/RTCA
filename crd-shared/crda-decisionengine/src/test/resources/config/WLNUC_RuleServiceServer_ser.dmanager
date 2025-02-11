@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<DeploymentManagerConfig>
+	<CompilationSerializationMode> 0 </CompilationSerializationMode>
+
+	<DeploymentManagerAsynExceptionMulticasterFactory>
+		<JavaName> com.blazesoft.system.NdAsyncExceptionMulticaster </JavaName>
+	</DeploymentManagerAsynExceptionMulticasterFactory>
+
+
+	<DeploymentManagerEventMulticasterFactory>
+		<JavaName> com.blazesoft.server.deploy.manager.NdDeploymentManagerAsyncEventMulticaster </JavaName>
+	</DeploymentManagerEventMulticasterFactory>
+
+
+	<DeploymentManagerFactory>
+		<JavaName> com.blazesoft.server.deploy.manager.NdDeploymentManager </JavaName>
+	</DeploymentManagerFactory>
+
+
+	<DeploymentManagerMonitorFactory>
+		<JavaName> com.blazesoft.server.deploy.manager.NdDeploymentManagerOutputStreamAudit </JavaName>
+	</DeploymentManagerMonitorFactory>
+
+
+	<DeploymentManagerServerManagerFactory>
+		<JavaName> com.blazesoft.server.deploy.manager.java.NdDeploymentManagerJavaServerManager </JavaName>
+		<ServerManagerName> WLNUC_RuleServiceServerManager0 </ServerManagerName>
+	</DeploymentManagerServerManagerFactory>
+
+
+	<DeploymentManagerServiceResetExecutorFactory>
+		<JavaName> com.blazesoft.server.base.NdAsyncExecutor </JavaName>
+	</DeploymentManagerServiceResetExecutorFactory>
+
+
+	<DeploymentManagerSupportFactory>
+		<JavaMethodArg> 21600000 </JavaMethodArg>
+		<JavaName> com.blazesoft.server.deploy.manager.NdDeploymentManagerChangeMonitor </JavaName>
+	</DeploymentManagerSupportFactory>
+
+	<MemoryProjectCacheEnabled> false </MemoryProjectCacheEnabled>
+	<Name> RTCA_RuleServiceDManager </Name>
+
+	<SerializedRulesProjectLoaderFactory>
+		<Id> RTCA_RuleService1 </Id>
+		<JavaName> com.blazesoft.server.rules.NdSerializedRulesProjectFileLoader </JavaName>
+		<Project> WLNUC_RuleServiceServer_service_0.adb </Project>
+		<SerializationMode> 1 </SerializationMode>
+		<UseStream> false </UseStream>
+	</SerializedRulesProjectLoaderFactory>
+
+	<UseDeploymentClassLoadingContext> true </UseDeploymentClassLoadingContext>
+</DeploymentManagerConfig>

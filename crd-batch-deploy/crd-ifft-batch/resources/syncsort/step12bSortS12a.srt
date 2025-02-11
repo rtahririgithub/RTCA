@@ -1,0 +1,14 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace}
+
+   /INFILE ${processbox}/JOIN_BILLING_CUSTOMER_CREDIT.DAT 65535 
+	/FIELDS BILLING_ACCOUNT_ID 1 character 18
+   /KEYS BILLING_ACCOUNT_ID
+
+   /OUTFILE ${processbox}/JOIN_BILLING_CUSTOMER_CREDIT_SORTED.DAT  OVERWRITE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+

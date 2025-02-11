@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+  wsdlLocation="OrderDepositCalculatorService_v1_0.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws">
+  
+    <enableWrapperStyle>false</enableWrapperStyle>
+	
+	<package name="com.telus.credit.orderDepositCalculator.webservice" />
+
+    <bindings node="wsdl:definitions/wsdl:service[@name='OrderDepositCalculatorService_v1_0']">
+        <class name="OrderDepositCalculatorServiceStub"/>
+    </bindings>
+
+</bindings>

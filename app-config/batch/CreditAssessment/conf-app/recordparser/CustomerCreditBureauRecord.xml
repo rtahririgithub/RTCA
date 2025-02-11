@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE delimited-record-layout PUBLIC "-//TELUS.com//DTD DelimitedRecordLayout 1.0//EN" "http://www.telus.com/dtd/DelimitedRecordLayout.dtd">
+
+<delimited-record-layout delimiter="|">
+   <typehandlers>
+      <typehandler id="DateHandler" class="com.telus.framework.recordparser2.typehandler.DateHandler">
+         <prop name="pattern">yyyy-MM-dd</prop>
+      </typehandler>
+   </typehandlers>
+   <structure name="record" type="com.telus.crd.assessment.batch.domain.CustomerCreditBureauRecord">
+      <field name="customerId" maxLength="10000" />
+      <field name="bureauTranId" maxLength="10000" />
+      <field name="firstName" maxLength="10000" />
+      <field name="middleName" maxLength="10000" />
+      <field name="lastName" maxLength="10000" />
+      <field name="errorCode" maxLength="10000" />
+      <field name="reportSourceCode" maxLength="10000" />
+      <field name="reportType" maxLength="10000" />
+      <field name="createDate" maxLength="10000" typehandler="DateHandler" />
+      <field name="bureauReportStatusCd" maxLength="10000" />
+      <field name="bureauReportStatusDate" maxLength="10000" typehandler="DateHandler" />
+      <field name="adjudicationScoreTxt" maxLength="10000" />
+      <field name="adjudicationScoreType" maxLength="10000" />
+      <field name="adjudicationClass" maxLength="10000" />
+      <field name="adjudicationLimitAmount" maxLength="10000" />
+      <field name="adjudicationDecisionCd" maxLength="10000" />
+      <field name="adjudicationDecisionMsg" maxLength="10000" />
+      <field name="adjudicationDepositAmt" maxLength="10000" />
+      <field name="recordTime" maxLength="10000" />
+   </structure>
+
+</delimited-record-layout>

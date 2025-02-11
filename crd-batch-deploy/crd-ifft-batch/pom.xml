@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+   <modelVersion>4.0.0</modelVersion>
+   <!-- telus.archetype.version:20160823.Appl.Batch -->
+
+   <parent>
+      <groupId>telus.credit.crdmgmt.crd-batch-deploy</groupId>
+      <artifactId>pom-crd-batch-deploy</artifactId>
+      <version>4.0.0-SNAPSHOT</version>
+   </parent>
+
+	<artifactId>crd-ifft-batch</artifactId>
+	<name>crd-ifft-batch</name>
+
+   <properties>
+
+
+      <!--
+      You must exclude all TELUS application jar here plus any unwanted jars to libList.txt
+
+      A comma-separated list of artifacts to filter from the serialized dependency tree,
+      or null not to filter any artifacts from the dependency tree. The filter syntax is:
+        [groupId]:[artifactId]:[type]:[version]
+      where each pattern segment is optional and supports full and partial * wildcards.
+      An empty pattern segment is treated as an implicit wildcard.
+      For example, org.apache.* will match all artifacts whose group id starts with
+      org.apache., and :::*-SNAPSHOT will match all snapshot artifacts.
+
+      <telus-libtree-plugin.excludes>*-shared,*-common,*-deploy</telus-libtree-plugin.excludes> will exclude
+      all TELUS application jars from the libList.txt provided you do one of the followings
+       1. For shared transient dependencies (only those found in /apps/common/lib), must specify
+          as a direct dependencies in this pom.xml OR
+       2. Must exclude those non-shared transient dependencies in <telus-libtree-plugin.excludes>
+
+      \- telus.billingmgmt.sample4-common:referencePDS-domain:jar:1.0.0:compile
+         +- org.jvnet.jaxb2_commons:jaxb2-basics-runtime:jar:0.6.3:compile
+
+
+      -->
+      <telus-libtree-plugin.excludes>*-shared,*-common,*-deploy,:dfc,:telus-core</telus-libtree-plugin.excludes>
+
+      <!-- "liblist" to generate libList.txt "text" to generate the tree -->
+      <telus-libtree-plugin.outputType>liblist</telus-libtree-plugin.outputType>
+
+      <!-- This is mandatory -->
+      <telus-libtree-plugin.skip>false</telus-libtree-plugin.skip>
+
+   </properties>
+   <dependencies>
+
+      <!-- Leave frameworks6-batch here ! -->
+      <dependency>
+         <groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+         <artifactId>frameworks-batch</artifactId>
+      </dependency>
+
+      <!-- Add other framework jars here as needed ! -->
+
+
+      <!-- Specify TELUS application specified here -->
+      <!-- Specify TELUS application specified here -->
+      <!--
+      <dependency>
+         <groupId>telus.billingmgmt.sample-common</groupId>
+         <artifactId>sample-domain</artifactId>
+      </dependency>
+      -->
+
+
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis-spring</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.jvnet.jaxb2_commons</groupId>
+         <artifactId>jaxb2-basics-runtime</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>javax.mail</groupId>
+         <artifactId>mail</artifactId>
+         <scope>compile</scope>
+      </dependency>
+   </dependencies>
+   
+   <build>
+
+      <plugins>
+
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+
+            <executions>
+               <execution>
+                  <id>copy-dependencies</id>
+                  <configuration>
+                     <skip>false</skip>
+
+                     <!-- Copy the telus and non-shared jars to the lib folder -->
+                     <artifactItems>
+
+                        <artifactItem>
+                           <groupId>${project.groupId}</groupId>
+                           <artifactId>${project.artifactId}</artifactId>
+                           <version>${project.version}</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+
+                        <!-- Sample on how to add other TELUS application jars -->
+                        <!--
+                        <artifactItem>
+                           <groupId>telus.billingmgmt.sample-common</groupId>
+                           <artifactId>sample-domain</artifactId>
+                           <version>${application.common.version}</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+                        -->
+                     </artifactItems>
+
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+
+            <executions>
+               <execution>
+                  <id>bundle-tar</id>
+                  <configuration>
+                     <skipAssembly>false</skipAssembly>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+
+   </build>
+
+</project>

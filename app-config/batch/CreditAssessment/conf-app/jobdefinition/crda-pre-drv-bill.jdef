@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+   <import resource="classpath:fw-base.jdef"/>
+
+   <bean id="configurationFramework"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName">
+                  <value>join_drv_act</value>
+               </property>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName">
+                  <value>active_customer_sort</value>
+               </property>
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName">
+                  <value>active_customer_sort1</value>
+               </property>
+            </bean>
+            <bean id="STEP04" parent="baseStep">
+               <property name="moduleName">
+                  <value>join_drv_act_crd</value>
+               </property>
+            </bean>
+            <bean id="STEP05" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_duplicates</value>
+               </property>
+            </bean>
+            <bean id="STEP06" parent="baseStep">
+               <property name="moduleName">
+                  <value>join_drv_ban</value>
+               </property>
+            </bean>
+            <bean id="STEP07" parent="baseStep">
+               <property name="moduleName">
+                  <value>remove_duplicates_ban</value>
+               </property>
+            </bean>
+            <bean id="STEP08" parent="baseStep">
+               <property name="moduleName">
+                  <value>total_amount</value>
+               </property>
+            </bean>
+            <bean id="STEP09" parent="baseStep">
+               <property name="moduleName">
+                  <value>final_sort</value>
+               </property>
+            </bean>
+
+            <bean id="STEP10" parent="baseStep">
+               <property name="moduleName">
+                  <value>generate_results</value>
+               </property>
+            </bean>
+            <bean id="STEP11" parent="baseStep">
+               <property name="moduleName">
+                  <value>truncate_stage_customer</value>
+               </property>
+            </bean>
+            <bean id="STEP12" parent="baseStep">
+               <property name="moduleName">
+                  <value>load_customers</value>
+               </property>
+            </bean>
+          
+            <bean id="STEP14" parent="baseStep">
+               <property name="moduleName">
+                  <value>load_bans</value>
+               </property>
+            </bean>
+
+            <bean id="STEP15" parent="baseStep">
+               <property name="moduleName">
+                  <value>add_start_service_dt</value>
+               </property>
+            </bean>
+ 
+          </list>
+       </property>
+
+   </bean>
+   <bean id="join_drv_act" lazy-init="true" parent="baseSyncsortScriptStep">
+       <property name="executable">    <value>${syncsort}/rtca_pre_join_tcm_drive_and_active_customer.sh</value></property>
+       <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/DriverFile.dat_${L_CRDA_ODATE} ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_ACTIVE_BAN_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_OR_NO_CUSTOMER_${L_CRDA_ODATE}.dat</value></property>
+       <property name="output"><value>${report/log}</value></property>
+   </bean>
+   <bean id="active_customer_sort" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_drive_active_customer_sort.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_OR_NO_CUSTOMER_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_OR_NO_CUSTOMER_SORTED_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log1}</value></property>
+   </bean>
+   <bean id="active_customer_sort1" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_customer_drive_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_OR_NO_CUSTOMER_SORTED_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_SORTED_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log2}</value></property>
+   </bean>
+
+   <bean id="join_drv_act_crd" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">    <value>${syncsort}/rtca_pre_join_active_customer_and_crd.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_SORTED_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_CRD_CUSTOMER_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_CRD_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log3}</value></property>
+   </bean>
+   <bean id="remove_duplicates" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_customer_drive_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_CRD_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_CRD_NODUPLICATES_${L_CRDA_ODATE}.dat </value></property>
+      <property name="output"><value>${report/log4}</value></property>
+   </bean>
+   <bean id="join_drv_ban" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_join_active_customer_and_processed_billing.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_CRD_NODUPLICATES_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_ODS_CUSTOMER_BILLING_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log5}</value></property>
+   </bean>
+   <bean id="remove_duplicates_ban" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_ban_details_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES1_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log6}</value></property>
+   </bean>
+    <bean id="total_amount" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_ban_total_amt.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES1_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/DriverFile.dat_${L_CRDA_ODATE} ${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES2_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log7}</value></property>
+   </bean>
+   <bean id="final_sort" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_ban_details_rm_duplicates.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES2_${L_CRDA_ODATE}.dat ${outbox}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log8}</value></property>
+   </bean>
+   <bean id="generate_results" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_name_drvs.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_CRD_NODUPLICATES_${L_CRDA_ODATE}.dat ${outbox}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES_${L_CRDA_ODATE}.dat  ${passbox}/${L_CRDA_ODATE}/CustomerDriverFile_${L_CRDA_ODATE}.dat  ${processbox}/${L_CRDA_ODATE}/CustomerBanDetails1_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log9}</value></property>
+   </bean>
+
+   <bean id="add_start_service_dt" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable">  <value>${syncsort}/rtca_pre_add_start_service_dt.sh</value></property>
+      <property name="arg"> <value>${processbox}/${L_CRDA_ODATE}/CustomerBanDetails1_${L_CRDA_ODATE}.dat ${processbox}/${L_CRDA_ODATE}/CRDA_SERVICEDT_${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_ODATE}/CustomerBanDetails_${L_CRDA_ODATE}.dat</value></property>
+      <property name="output"><value>${report/log15}</value></property>
+   </bean> 
+
+   <bean id="truncate_stage_customer" lazy-init="true" parent="baseSqlplusStep">
+      <property name="arg"><value>${sqlplus/connection/dbconnectionvalue} @${sql}/rtca_pre_truncate_customer.sql</value></property>
+      <property name="output"><value>${logs}/${jobname}_truncate_customer_stage_table</value></property>
+   </bean>
+   <bean id="load_customers" lazy-init="true" parent="baseSqlloaderStep">
+      <property name="arg"><value>userid=${sqlplus/connection/dbconnectionvalue} control=${sql}/rtca_pre_load_customer.ctl data=${processbox}/${L_CRDA_ODATE}/CRDA_PRE_DRIVE_ACTIVE_CUSTOMER_CRD_NODUPLICATES_${L_CRDA_ODATE}.dat log=${logs}/${jobname}-load_customer.log bad=${error}/crda_pre_load_customer.bad errors=10000</value></property>
+      <property name="output"><value>${logs}/${jobname}_load_customers_stdout.log</value></property>
+   </bean>
+   <bean id="truncate_stage_ban" lazy-init="true" parent="baseSqlplusStep">
+      <property name="arg"><value>${sqlplus/connection/dbconnectionvalue} @${sql}/rtca_pre_truncate_customer_ban.sql</value></property>
+      <property name="output"><value>${logs}/${jobname}_truncate_ban_stage_table</value></property>
+   </bean>
+   <bean id="load_bans" lazy-init="true" parent="baseSqlloaderStep">
+      <property name="arg"><value>userid=${sqlplus/connection/dbconnectionvalue} control=${sql}/rtca_pre_load_customer_ban.ctl data=${outbox}/CRDA_PRE_DRIVE_ACTIVE_CRD_BAN_NODUPLICATES_${L_CRDA_ODATE}.dat log=${logs}/${jobname}-load_custoner_ban.log bad=${error}/crda_pre_load_customer_ban.bad errors=10000</value></property>
+      <property name="output"><value>${logs}/${jobname}_load_customer_ban_stdout.log</value></property>
+   </bean>
+</beans>
+
+
+

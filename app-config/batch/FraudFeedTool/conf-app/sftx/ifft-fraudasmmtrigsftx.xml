@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <!-- =============================================================== -->
+  <bean id="telusSpringConfigurer" lazy-init="true"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+
+  <!-- =============================================================== -->
+  <bean id="ifft-fraudasmmtrigsftx" lazy-init="true"
+        class="com.telus.framework.filetransfer.config.RequestConfiguration">
+    <property name="requestNm" value="ifft-fraudasmmtrigsftx" />
+    <property name="sourceSftpUserId" value="${G_ENV}crd" /> 
+    <property name="sourceServerName" value="${G_CRD_BATCH1_SVR}" />
+    <property name="sourceServerTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+    <property name="pushOrPullInd" value="push" />
+    <property name="recipients">
+      <list>
+        <bean id="recipient1" lazy-init="true"      
+      class="com.telus.framework.filetransfer.config.RecipientConfiguration">
+          <property name="serverName" value="${G_ASMM_BATCH_SERVER}" /> 
+          <property name="serverTypeCd" value="${SFTX_UNIX_NEW_STACK_SERVER}" />
+          <property name="sftpUserId" 
+              value="${G_SFTP_UX_ACCT_PREFIX}${G_SFTP_MED_ACCT_SUFFIX}" />
+          <property name="files">
+            <list>
+              <bean id="file1" lazy-init="true"
+           class="com.telus.framework.filetransfer.config.FileConfiguration">
+                <property name="sourcePath"                                 
+                  value="${G_DATA_HOME_PREFIX}crd/ifft/data/outbox" />
+<property name="overwrite" value="true" />
+                <property name="recipientPath" 
+                  value="${G_MED_NS_UX_SFTP}/${G_ENV}/inbox/ifft" />
+                <property name="filePattern" value="SCODS_FCustomer_DFRAUD_T*.done" />              
+              </bean>
+            </list>
+          </property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+</beans>

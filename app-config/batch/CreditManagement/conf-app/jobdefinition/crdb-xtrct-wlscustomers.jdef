@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef" />
+	<import resource="record-encryptor-spring.xml" />
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+			<list>
+				<bean id="STEP01" parent="baseStep">
+					<property name="moduleName" value="sqlPlusExtract-Step01" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="sqlPlusExtract-Step01" parent="baseSqlplusStep">
+		<property name="arg"
+			value="${sqlplus/connection/wls/dbconnectionvalue} @${sql}/${xtrctwls/step1/sqlFilename} ${xtrctwls/step1/outputFile}" />
+		<property name="output" value="${logs}/${jobname}-sqlplus.log" />
+	</bean>
+</beans>

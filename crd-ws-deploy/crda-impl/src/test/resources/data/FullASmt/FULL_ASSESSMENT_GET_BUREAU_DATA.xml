@@ -1,0 +1,67 @@
+ 
+<ns4:performCreditAssessment xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:ns4="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" 
+xmlns:ns3="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1">
+	<ns4:creditAssessmentRequest xsi:type="ns4:FullCreditAssessmentRequest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<ns4:creditAssessmentTypeCd>FULL_ASSESSMENT</ns4:creditAssessmentTypeCd>
+		<ns4:creditAssessmentSubTypeCd>GET_BUREAU_DATA</ns4:creditAssessmentSubTypeCd>
+		<ns4:customerID>119036502</ns4:customerID>
+		<ns4:applicationID>6102</ns4:applicationID>
+		<ns4:channelID>DESKTOP</ns4:channelID>
+		<ns4:lineOfBusiness>WIRELINE</ns4:lineOfBusiness>
+		<ns4:commentTxt>dsfdsfdsf</ns4:commentTxt>
+		<ns4:creditCustomerInfo>
+			<ns3:customerID>119036502</ns3:customerID>
+			<ns3:personName>
+				<ns3:firstName>testing</ns3:firstName>
+				<ns3:lastName>ten</ns3:lastName>
+			</ns3:personName>
+			<ns3:customerCreationDate>2014-01-19Z</ns3:customerCreationDate>
+			<ns3:customerMasterSourceID>1012</ns3:customerMasterSourceID>
+			<ns3:customerStatusCd>AC</ns3:customerStatusCd>
+			<ns3:customerTypeCd>R</ns3:customerTypeCd>
+			<ns3:customerSubTypeCd>I</ns3:customerSubTypeCd>
+		<ns3:telecomContactList>
+				<ns3:telecomContactId>2147483647</ns3:telecomContactId>
+				<ns3:telecomContactTypeCode>String</ns3:telecomContactTypeCode>
+				<ns3:telecomContactSubTypeCode>String</ns3:telecomContactSubTypeCode>
+				<ns3:telephoneNumber>String</ns3:telephoneNumber>
+				<ns3:telephoneExtensionNumber>String</ns3:telephoneExtensionNumber>
+				<ns3:lastUpdate>1967-08-13</ns3:lastUpdate>
+			</ns3:telecomContactList>
+			<ns3:telecomContactList>
+				<ns3:telecomContactId>2147483647</ns3:telecomContactId>
+				<ns3:telecomContactTypeCode>String</ns3:telecomContactTypeCode>
+				<ns3:telecomContactSubTypeCode>String</ns3:telecomContactSubTypeCode>
+				<ns3:telephoneNumber>String</ns3:telephoneNumber>
+				<ns3:telephoneExtensionNumber>String</ns3:telephoneExtensionNumber>
+				<ns3:lastUpdate>1967-08-13</ns3:lastUpdate>
+			</ns3:telecomContactList>		</ns4:creditCustomerInfo>
+		<ns4:creditProfileData>
+			<ns3:creditProfileID>8619451130</ns3:creditProfileID>
+			<ns3:customerID>119036502</ns3:customerID>
+			<ns3:creditIdentification/>
+			<ns3:creditAddress>
+				<ns3:creditAddressTypeCd>CB</ns3:creditAddressTypeCd>
+				<ns3:addressTypeCd>C</ns3:addressTypeCd>
+				<ns3:addressLineOne>7-7371 Moffatt Rd</ns3:addressLineOne>
+				<ns3:cityName>Richmond</ns3:cityName>
+				<ns3:provinceCd>BC</ns3:provinceCd>
+				<ns3:countryCd>CAN</ns3:countryCd>
+				<ns3:postalCd>V6Y1X9</ns3:postalCd>
+			</ns3:creditAddress>
+			<ns3:applicationProvinceCd>BC</ns3:applicationProvinceCd>
+			<ns3:personalInfo>
+				<ns3:creditCheckConsentCd>Y</ns3:creditCheckConsentCd>
+				<ns3:birthDate>1965-01-13Z</ns3:birthDate>
+			</ns3:personalInfo>
+			<ns3:creditProfileStatusCd>A</ns3:creditProfileStatusCd>
+			<ns3:businessLastUpdateTimestamp>2014-01-20T22:33:18.880Z</ns3:businessLastUpdateTimestamp>
+			<ns3:bypassMatchIndicator>false</ns3:bypassMatchIndicator>
+			<ns3:commentTxt>dsfdsfdsf</ns3:commentTxt>
+		</ns4:creditProfileData>
+	</ns4:creditAssessmentRequest>
+	<ns4:auditInfo>
+		<ns2:userId>T000003</ns2:userId>
+		<ns2:originatorApplicationId>6102</ns2:originatorApplicationId>
+	</ns4:auditInfo>
+</ns4:performCreditAssessment>

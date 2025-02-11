@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+"-//TELUS.com//DTD PropertyNode 1.0//EN" 
+"http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="connections">
+    <!-- =============================================================== -->
+    <!-- The beantype can be overridden  with "jta" or "stub" in the     -->
+    <!-- application configuration framework file                        -->
+    <!-- =============================================================== -->
+    <!--prop name="beantype">tcmDb</prop--> 
+
+
+    <!-- =============================================================== -->
+    <!-- The batchDS can be overridden  with application's datasource    -->
+    <!-- =============================================================== -->
+    <!--prop name="batchDS">${beantype}-DS</prop-->
+    <!--prop name="tcmDataSource">${beantype}-DS</prop--> 
+
+    <group name="sqlplus">
+        <group name="connection">
+            <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+            <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+            <prop name="oraclesid">@SID_CREDIT_MANAGEMENT@</prop>
+            <prop name="dbconnectionvalue">${sqlplus/connection/username}/${sqlplus/connection/password}@${sqlplus/connection/oraclesid}</prop>
+            <prop name="archiveDbConnection">${sqlplus/connection/username}/${sqlplus/connection/password}@ATCMPR</prop>
+        </group>
+        <group name="CgwConnection">
+	    <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+	    <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+	    <prop name="oraclesid">@SID_CREDIT_MANAGEMENT@</prop>
+	    <prop name="dbconnectionvalue">${sqlplus/connection/username}/${sqlplus/connection/password}@${sqlplus/connection/oraclesid}</prop>
+        </group>
+        <group name="CusProfileConnection">           
+            <prop name="username">@ORA_CCR2_USER@</prop>
+            <prop name="password">@ORA_CCR2_PASSWORD@</prop>
+            <prop name="oraclesid">@SID_CUSTOMER@</prop>
+            <prop name="dbconnectionvalue">${sqlplus/CusProfileConnection/username}/${sqlplus/CusProfileConnection/password}@${sqlplus/CusProfileConnection/oraclesid}</prop>
+        </group>
+    </group>
+    <group name="sftx">
+        <prop name="url">@JDBC_CREDIT_MANAGEMENT@</prop>
+        <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+        <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+    </group>
+
+    <group name="jdbc">
+        <prop name="url">@JDBC_CREDIT_MANAGEMENT@</prop>
+        <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+        <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+    </group>
+    <group name="obpmSetup">
+        <prop name="home">@OBPM_HOME@</prop>
+    </group>
+    
+    
+    <!-- Global Vars -->
+    <prop name="CRDA_WN_PASSWORD">@CRDA_WN_PASSWORD@</prop>
+    <prop name="G_SFTP_CRDA_WN_ACCT">@G_SFTP_CRDA_WN_ACCT@</prop>
+    <prop name="G_CRDA_NS_WN_SFTP">@G_CRDA_NS_WN_SFTP@</prop>
+    <prop name="G_WINSFTX_SERVER">@G_WINSFTX_SERVER@</prop>
+    <!-- RTCA 1.5 Global Vars -->
+    <prop name="G_PWRCTR_CAN_LAIRD">@G_PWRCTR_CAN_LAIRD@</prop>
+    
+</group>

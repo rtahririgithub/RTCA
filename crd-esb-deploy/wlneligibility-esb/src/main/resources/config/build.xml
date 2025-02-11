@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="build-ESB-Config-files" default="all">
+	<property name="wl.home" value="C:/bea1033B/wlserver_10.3"/>
+	<taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="clientgen" classname="weblogic.wsee.tools.anttasks.ClientGenTask" classpath="${wl.home}/server/lib/weblogic.jar"/>
+	<taskdef name="xmlbean" classname="com.bea.xbean.tool.XMLBean" classpath="${wl.home}/server/lib/xbean.jar"/>
+	<property name="src" value="${basedir}/../src"/>
+
+	<target name="all">
+
+
+		<!-- Generate the pt61 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/> 
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PT61.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pt05.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-it03.tsl.telus.com"/>
+		</antcall>
+		<!-- Generate the pt41 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/> 
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PT41.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pt03.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is04.tsl.telus.com"/>
+		</antcall>	
+		
+		<!-- Generate the AT01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/> 
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_AT01.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-at01.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-it01.tsl.telus.com"/>
+		</antcall>	
+			
+		<!-- Generate the AT02 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/> 
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_AT02.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-at02.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-it02.tsl.telus.com"/>
+		</antcall>
+		
+		<!-- Generate the AT03 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/> 
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_AT03.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-is07.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-at03.tsl.telus.com"/>
+		</antcall>		
+ 
+		<!-- Generate the AT04 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/> 
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_AT04.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-at04.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is08.tsl.telus.com"/>
+		</antcall>
+ 
+		<!-- Generate the PT01 customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PT01.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pt01.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is02.tsl.telus.com"/>
+		</antcall>
+		
+		<!-- Generate the PT02 customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PT02.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pt02.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is03.tsl.telus.com"/>
+		</antcall>		
+
+		<!-- Generate the PT03 customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PT03.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pt03.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is04.tsl.telus.com"/>
+		</antcall>		
+		
+		<!-- Generate the PT04 customization file  --> 
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PT04.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pt04.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is05.tsl.telus.com"/>
+		</antcall>				
+		
+		<!-- Generate the PT05 customization file  --> 
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PT05.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pt05.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-it03.tsl.telus.com"/>
+		</antcall>			
+		
+		<!-- Generate the PT06 customization file  --> 
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PT06.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pt06.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is06.tsl.telus.com"/>
+		</antcall>
+		
+		<!-- Generate the st01 customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_ST01.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-st01.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-it04.tsl.telus.com"/>
+		</antcall>	
+		<!-- Generate the st02 customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_ST02.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-st02.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is01.tsl.telus.com"/>
+		</antcall>			
+
+		<!-- Generate the PS customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PS.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-ps.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is09.tsl.telus.com"/>
+		</antcall>			
+
+		<!-- Generate the TR01 customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_TR01.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-tr01.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is10.tsl.telus.com"/>
+		</antcall>	
+		
+		
+		<!-- Generate the TR02 customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_TR02.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-tr02.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is11.tsl.telus.com"/>
+		</antcall>	
+		
+		<!-- Generate the PR customization file  -->
+		<antcall target="generateCustomizationFile">
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/>
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_PR.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-pr.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-pr.tsl.telus.com"/>
+		</antcall>		
+
+		<!-- Generate the CV customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-wlneligibility-esb-CustomizationFile_DV03.xml"/> 
+			<param name="destfile" value="telus-crd-wlneligibility-esb-Customization-File_CV.xml"/>
+			<param name="toll8wsaddress" value="soa-mp-toll-cv01.tsl.telus.com"/>
+			<param name="kidcwsaddress" value="soa-mp-kidc-is12.tsl.telus.com"/>
+		</antcall>	
+
+
+		
+	</target>
+	
+	<!-- target to generate a platform specific customization file -->
+	<target name="generateCustomizationFile">
+		<delete file="${destfile}"/>		
+		<copy file="${sourcefile}" tofile="${destfile}"/>
+		<replaceregexp file="${destfile}/"
+			match="soa-mp-toll-dv.tsl.telus.com:443/CMO/OrderMgmt/WLNCollectionManagement"
+			replace="${kidcwsaddress}:443/CMO/OrderMgmt/WLNCollectionManagement"
+			byline="true"/>
+		
+		<replaceregexp file="${destfile}/"
+			match="soa-mp-toll-dv.tsl.telus.com:443/CMO/OrderMgmt/WLNCreditProfileManagement"
+			replace="${toll8wsaddress}:443/CMO/OrderMgmt/WLNCreditProfileManagement"
+			byline="true"/>
+
+		<replaceregexp file="${destfile}/"
+			match="soa-mp-toll-dv.tsl.telus.com:443/CMO/OrderMgmt/OrderDepositCalculatorService"
+			replace="${toll8wsaddress}:443/CMO/OrderMgmt/OrderDepositCalculatorService"
+			byline="true"/>
+
+		
+		<!--
+		<replaceregexp file="${destfile}/"
+			match="soa-mp-toll-dv.tsl.telus.com"
+			replace="${wsaddress}"
+			byline="true"/>
+		-->
+	</target>
+</project>

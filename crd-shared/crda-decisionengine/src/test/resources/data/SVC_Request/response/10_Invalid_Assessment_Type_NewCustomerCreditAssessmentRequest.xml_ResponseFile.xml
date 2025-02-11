@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CreditAssessmentResult xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2">
+    <assessmentResultCd>ERROR</assessmentResultCd>
+    <assessmentResultReasonCd>INVALID_REQUEST_TYPE</assessmentResultReasonCd>
+    <decisionCd></decisionCd>
+    <assessmentMessageCd></assessmentMessageCd>
+    <creditValueCd></creditValueCd>
+    <productCategoryQualification>
+        <boltOnInd>false</boltOnInd>
+    </productCategoryQualification>
+    <rulesExecuted>DATE=2019-06-10T17:41:12.458-07:00, VERSION=20190610</rulesExecuted>
+    <rulesExecuted>280_999_Default: TriggerEnum.ERROR</rulesExecuted>
+    <rulesExecuted>100_025_Invalid_Request_Type</rulesExecuted>
+    <rulesExecuted>result code=ERROR  reason code=INVALID_REQUEST_TYPE</rulesExecuted>
+    <rulesExecuted>430_999_Default_Rule: EXECUTED</rulesExecuted>
+    <creditAssessmentStrategies>
+        <depositLookupStrategy>CHAM</depositLookupStrategy>
+        <cvudStrategy>CHAM</cvudStrategy>
+        <creditValueAssignmentStrategy>CHAM</creditValueAssignmentStrategy>
+        <customerActivityStrategy>CHAM</customerActivityStrategy>
+        <tenureStrategy>CHAM</tenureStrategy>
+    </creditAssessmentStrategies>
+</CreditAssessmentResult>
+

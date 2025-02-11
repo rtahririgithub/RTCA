@@ -1,0 +1,106 @@
+		<tns:depositItemList  
+		
+		 xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1"
+		 xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" >
+		
+			<codt:depositItem>
+				<codt:depositID>1</codt:depositID>
+				<codt:dueDate>2001-12-17T09:30:47.0Z</codt:dueDate>
+				<codt:depositDesignationID>String</codt:depositDesignationID>
+				<codt:requestAmount>100</codt:requestAmount>
+				<codt:requestDate>2001-12-17T09:30:47.0Z</codt:requestDate>
+				<codt:requestReasonCd>pendingdepositReasonCd</codt:requestReasonCd>
+				<codt:requestReasonTxt>String</codt:requestReasonTxt>
+		
+				<codt:accountID>2147483647</codt:accountID>
+			</codt:depositItem>
+
+			<codt:depositItem>
+				<codt:depositID>2</codt:depositID>
+				<codt:dueDate>2001-12-17T09:30:47.0Z</codt:dueDate>
+				<codt:depositDesignationID>String</codt:depositDesignationID>
+				<codt:requestAmount>100</codt:requestAmount>
+				<codt:requestDate>2001-12-17T09:30:47.0Z</codt:requestDate>
+				<codt:requestReasonCd>InvalidpendingdepositReasonCd</codt:requestReasonCd>
+				<codt:requestReasonTxt>String</codt:requestReasonTxt>
+				<codt:cancelledAmount>990.0</codt:cancelledAmount>
+				<codt:cancelDate>2001-12-17T09:30:47.0Z</codt:cancelDate>				
+				<codt:accountID>2147483647</codt:accountID>
+			</codt:depositItem>
+			
+			
+			<codt:depositItem>
+				<codt:depositID>3</codt:depositID>
+				<codt:dueDate>2001-12-17T09:30:47.0Z</codt:dueDate>
+				<codt:depositDesignationID>String</codt:depositDesignationID>
+				<codt:requestAmount>200</codt:requestAmount>
+				<codt:requestDate>2001-12-17T09:30:47.0Z</codt:requestDate>
+				<codt:requestReasonCd>paiddepositReasonCd</codt:requestReasonCd>
+				<codt:requestReasonTxt>String</codt:requestReasonTxt>
+				<codt:paidAmount>200</codt:paidAmount>
+				<codt:paidDate>2001-12-17T09:30:47.0Z</codt:paidDate>
+				<codt:interestAmount>3.14159265358979E0</codt:interestAmount>
+				<codt:accountID>2147483647</codt:accountID>
+			</codt:depositItem>
+			
+			<codt:depositItem>
+				<codt:depositID>4</codt:depositID>
+				<codt:dueDate>2001-12-17T09:30:47.0Z</codt:dueDate>
+				<codt:depositDesignationID>String</codt:depositDesignationID>
+				<codt:requestAmount>200</codt:requestAmount>
+				<codt:requestDate>2001-12-17T09:30:47.0Z</codt:requestDate>
+				<codt:requestReasonCd>InvalidpaiddepositReasonCd</codt:requestReasonCd>
+				<codt:requestReasonTxt>String</codt:requestReasonTxt>
+				<codt:paidAmount>200</codt:paidAmount>
+				<codt:paidDate>2001-12-17T09:30:47.0Z</codt:paidDate>
+				
+				<codt:cancelledAmount>990.0</codt:cancelledAmount>
+				<codt:cancelDate>2001-12-17T09:30:47.0Z</codt:cancelDate>					
+				
+				<codt:interestAmount>3.14159265358979E0</codt:interestAmount>
+				<codt:accountID>2147483647</codt:accountID>
+			</codt:depositItem>
+						
+			<codt:depositItem>
+				<codt:depositID>5</codt:depositID>
+				<codt:dueDate>2001-12-17T09:30:47.0Z</codt:dueDate>
+				<codt:depositDesignationID>String</codt:depositDesignationID>
+				<codt:requestAmount>300</codt:requestAmount>
+				<codt:requestDate>2001-12-17T09:30:47.0Z</codt:requestDate>
+				<codt:requestReasonCd>releasdeDepositReasonCd</codt:requestReasonCd>
+				<codt:requestReasonTxt>String</codt:requestReasonTxt>
+				<codt:paidAmount>300</codt:paidAmount>
+				<codt:paidDate>2001-12-17T09:30:47.0Z</codt:paidDate>
+				<codt:releasedAmount>300</codt:releasedAmount>
+				<codt:releaseDate>2001-12-17T09:30:47.0Z</codt:releaseDate>
+				<codt:releaseReasonCd>String</codt:releaseReasonCd>
+				<codt:releaseReasonTxt>String</codt:releaseReasonTxt>
+				<codt:releaseMethodCd>String</codt:releaseMethodCd>
+				<codt:releaseMethodTxt>String</codt:releaseMethodTxt>
+				<codt:interestAmount>3.14159265358979E0</codt:interestAmount>
+				<codt:accountID>2147483647</codt:accountID>
+			</codt:depositItem>
+			
+			<codt:depositItem>
+				<codt:depositID>6</codt:depositID>
+				<codt:dueDate>2001-12-17T09:30:47.0Z</codt:dueDate>
+				<codt:depositDesignationID>String</codt:depositDesignationID>
+				<codt:requestAmount>300</codt:requestAmount>
+				<codt:requestDate>2001-12-17T09:30:47.0Z</codt:requestDate>
+				<codt:requestReasonCd>InvalidreleasdeDepositReasonCd</codt:requestReasonCd>
+				<codt:requestReasonTxt>String</codt:requestReasonTxt>
+				<codt:paidAmount>300</codt:paidAmount>
+				<codt:paidDate>2001-12-17T09:30:47.0Z</codt:paidDate>
+				<codt:releasedAmount>300</codt:releasedAmount>
+				<codt:releaseDate>2001-12-17T09:30:47.0Z</codt:releaseDate>
+				<codt:releaseReasonCd>String</codt:releaseReasonCd>
+				<codt:releaseReasonTxt>String</codt:releaseReasonTxt>
+				<codt:releaseMethodCd>String</codt:releaseMethodCd>
+				<codt:releaseMethodTxt>String</codt:releaseMethodTxt>
+				<codt:cancelledAmount>990.0</codt:cancelledAmount>
+				<codt:cancelDate>2001-12-17T09:30:47.0Z</codt:cancelDate>					
+				<codt:interestAmount>3.14159265358979E0</codt:interestAmount>
+				<codt:accountID>2147483647</codt:accountID>
+			</codt:depositItem>			
+		</tns:depositItemList>
+		

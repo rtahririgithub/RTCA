@@ -1,0 +1,41 @@
+<!--  No Match -->
+
+<fmsr:findMatchingSearchResultList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmsr="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+		<fmsr:findMatchingSearchResult>
+			<fmsr:customerData>
+				<fmsr:sourceSystemID>CODS</fmsr:sourceSystemID>
+				<fmsr:customerId>1</fmsr:customerId>
+				<fmsr:customerCreationDate>1967-08-13</fmsr:customerCreationDate>
+				<fmsr:customerStatusCd>A</fmsr:customerStatusCd>
+				<fmsr:customerTypeCd>R</fmsr:customerTypeCd>
+				<fmsr:customerSubTypeCd>NA</fmsr:customerSubTypeCd>
+				<fmsr:firstName>fnameTest</fmsr:firstName>
+				<fmsr:lastName>lnameTest</fmsr:lastName>
+				<fmsr:middleName/>
+				<fmsr:birthDate>1952-05-12</fmsr:birthDate>
+				<fmsr:creditIdentification>
+					<fmsr:driverLicense>
+						<fmsr:driverLicenseNumber>DL1</fmsr:driverLicenseNumber>
+						<fmsr:provinceCd>BC</fmsr:provinceCd>
+						<fmsr:expiryDate>2001-12-17T09:30:47.0Z</fmsr:expiryDate>
+					</fmsr:driverLicense>
+					<fmsr:socialInsuranceNum>1</fmsr:socialInsuranceNum>
+					<fmsr:creditCardTokenTxt>1000000000000</fmsr:creditCardTokenTxt>
+					<fmsr:creditCardFirstSixNum>123456</fmsr:creditCardFirstSixNum>
+					<fmsr:creditCardLastFourNum>7890</fmsr:creditCardLastFourNum>
+					<fmsr:healthCardNumber>HC123</fmsr:healthCardNumber>
+					<fmsr:passport>
+						<fmsr:passportNumber>P1234</fmsr:passportNumber>
+						<fmsr:countryCd>CA</fmsr:countryCd>
+					</fmsr:passport>
+					<fmsr:provincialIdCard>
+						<fmsr:provincialId>PId123</fmsr:provincialId>
+						<fmsr:provinceCd>BC</fmsr:provinceCd>
+					</fmsr:provincialIdCard>
+				</fmsr:creditIdentification>
+			</fmsr:customerData>
+			
+		</fmsr:findMatchingSearchResult>
+		
+		
+	</fmsr:findMatchingSearchResultList>

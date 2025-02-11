@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="credit_bureau">
+
+	<resultMap id="creditBureauTransactionMap" class="java.util.HashMap">
+        <result property="carId" javaType="long" column="CREDIT_ASSESSMENT_REQUEST_ID"/>
+        <result property="createTs" javaType="date" column="CREATE_TS"/>
+        <result property="docType" column="EXT_DOC_FORMAT_TYP"/>
+    </resultMap>
+
+
+    <insert id="save_credit_bureau_trn" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_CREDIT_BUREAU_TRN.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO CREDIT_BUREAU_TRN( CREDIT_BUREAU_TRN_ID,
+        EFF_START_TS,
+        EFF_STOP_TS,
+        CREATE_TS,
+        CREATE_USER_ID,
+        LAST_UPDT_USER_ID,
+        LAST_UPDT_TS,
+        CREDIT_ASSESSMENT_REQUEST_ID,
+        FIRST_NM,
+        MIDDLE_NM,
+        LAST_NM,
+        TRN_ERROR_CD,
+        REPORT_SOURCE_CD,
+        REPORT_TYP_TXT,
+        RSLT_CREATION_DT,
+        CREDIT_BUREAU_TRN_RSLT_STAT_CD,
+        CR_BRU_TRN_RSLT_STAT_UPDT_DT,
+        ADJDCTN_CREDIT_SCORE_TXT,
+        ADJDCTN_CREDIT_CLASS_CD,
+        ADJDCTN_CREDIT_LIMIT_AMT,
+        ADJDCTN_DSCN_CD,
+        ADJDCTN_DSCN_MSG_TXT,
+        ADJDCTN_DEPOSIT_AMT,
+        ADJDCTN_CREDIT_SCORE_TYPE_CD 
+        ) 
+        
+        VALUES
+        ( #pk#,
+        SYSTIMESTAMP,
+        TO_DATE('44441231','YYYYMMDD'),
+        SYSTIMESTAMP,
+        #userId#,
+        #userId#,
+        SYSTIMESTAMP,
+        #carId#,
+        #firstName#,
+        #middleName#,
+        #lastName#,
+        #errorCode#,
+        #reportSourceCode#,
+        #reportTypeCode#,
+        SYSDATE,
+        '1',
+        SYSDATE,
+        #creditScore#,
+        #creditClassCode#,
+        #creditLimit#,
+        #decisionCode#,
+        #decisionMessage#,
+        #depositAmount#,
+        #creditScoreTypeCd#
+        
+        )
+    </insert>
+
+    <insert id="save_credit_bureau_trn_dtl_doc_type" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_CREDIT_BUREAU_TRN_DTL.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO CREDIT_BUREAU_TRN_DTL( CREDIT_BUREAU_TRN_DTL_ID,
+        EFF_START_TS,
+        EFF_STOP_TS,
+        CREATE_TS,
+        CREATE_USER_ID,
+        LAST_UPDT_USER_ID,
+        LAST_UPDT_TS,
+        CREDIT_BUREAU_TRN_ID,
+        CREDIT_BUREAU_TRN_DTL_CD,
+        CREDIT_BUREAU_DATA_DOC_NM,
+        EXT_DOC_PATH_STR,
+        EXT_DOC_FORMAT_TYP ) VALUES
+        ( #pk#,
+        SYSTIMESTAMP,
+        TO_DATE('44441231','YYYYMMDD'),
+        SYSTIMESTAMP,
+        #userId#,
+        #userId#,
+        SYSTIMESTAMP,
+        #creditBureauTrnId#,
+        '4',
+        #documentName#,
+        #documentPath#,
+        #documentFormatType# )
+    </insert>
+
+    <insert id="save_credit_bureau_trn_dtl_fraud_type" parameterClass="java.util.HashMap">
+        INSERT INTO CREDIT_BUREAU_TRN_DTL( CREDIT_BUREAU_TRN_DTL_ID,
+        EFF_START_TS,
+        EFF_STOP_TS,
+        CREATE_TS,
+        CREATE_USER_ID,
+        LAST_UPDT_USER_ID,
+        LAST_UPDT_TS,
+        CREDIT_BUREAU_TRN_ID,
+        CREDIT_BUREAU_TRN_DTL_CD,
+        FRAUD_TYP_CD,
+        FRAUD_CD,
+        FRAUD_MSG_TXT ) VALUES
+        ( SEQ_CREDIT_BUREAU_TRN_DTL.NEXTVAL,
+        SYSTIMESTAMP,
+        TO_DATE('44441231','YYYYMMDD'),
+        SYSTIMESTAMP,
+        #userId#,
+        #userId#,
+        SYSTIMESTAMP,
+        #creditBureauTrnId#,
+        '3',
+        #fraudTypeCode#,
+        #fraudCode#,
+        #fraudMessage# )
+    </insert>
+
+    <insert id="save_credit_bureau_trn_dtl_risk" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_CREDIT_BUREAU_TRN_DTL.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO CREDIT_BUREAU_TRN_DTL( CREDIT_BUREAU_TRN_DTL_ID,
+        EFF_START_TS,
+        EFF_STOP_TS,
+        CREATE_TS,
+        CREATE_USER_ID,
+        LAST_UPDT_USER_ID,
+        LAST_UPDT_TS,
+        CREDIT_BUREAU_TRN_ID,
+        CREDIT_BUREAU_TRN_DTL_CD,
+        RISK_IND_TYP_CD,
+        RISK_IND_VALUE_TXT ) VALUES
+        ( #pk#,
+        SYSTIMESTAMP,
+        TO_DATE('44441231','YYYYMMDD'),
+        SYSTIMESTAMP,
+        #userId#,
+        #userId#,
+        SYSTIMESTAMP,
+        #creditBureauTrnId#,
+        '2',
+        #riskIndicatorCode#,
+        #riskIndicatorValue# )
+    </insert>
+
+    <insert id="save_credit_bureau_trn_dtl_score" parameterClass="java.util.HashMap">
+        <selectKey resultClass="java.lang.Long" keyProperty="pk">
+            select SEQ_CREDIT_BUREAU_TRN_DTL.NEXTVAL AS pk FROM DUAL
+        </selectKey>
+        INSERT INTO CREDIT_BUREAU_TRN_DTL( CREDIT_BUREAU_TRN_DTL_ID,
+        EFF_START_TS,
+        EFF_STOP_TS,
+        CREATE_TS,
+        CREATE_USER_ID,
+        LAST_UPDT_USER_ID,
+        LAST_UPDT_TS,
+        CREDIT_BUREAU_TRN_ID,
+        CREDIT_BUREAU_TRN_DTL_CD,
+        SCORE_NM,
+        SCORE_VALUE_TXT ) VALUES
+        ( #pk#,
+        SYSTIMESTAMP,
+        TO_DATE('44441231','YYYYMMDD'),
+        SYSTIMESTAMP,
+        #userId#,
+        #userId#,
+        SYSTIMESTAMP,
+        #creditBureauTrnId#,
+        '1',
+        #scoreName#,
+        #scoreValue# )
+    </insert>
+
+    <statement id="get_credit_bureau_trn_dtl_doc_path" parameterClass="long" resultClass="java.lang.String">
+        select EXT_DOC_PATH_STR
+        from CREDIT_BUREAU_TRN_DTL creditBureauTrnDtl
+        where CREDIT_BUREAU_TRN_DTL_ID = #creditBureauTrnDtlId#
+        and CREDIT_BUREAU_TRN_DTL_CD = '4'
+        and EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+    </statement>
+    
+    <statement id="get_credit_bureau_trn_map" parameterClass="long" resultMap="creditBureauTransactionMap">
+        select cbt.CREDIT_ASSESSMENT_REQUEST_ID,
+        cbt.CREATE_TS,
+        cbtd.EXT_DOC_FORMAT_TYP
+        from CREDIT_BUREAU_TRN_DTL cbtd,
+        CREDIT_BUREAU_TRN cbt
+        where cbtd.CREDIT_BUREAU_TRN_DTL_ID = #creditBureauTrnDtlId#
+        and cbtd.CREDIT_BUREAU_TRN_ID = cbt.CREDIT_BUREAU_TRN_ID
+        and cbtd.CREDIT_BUREAU_TRN_DTL_CD = '4'
+        and cbtd.EFF_STOP_TS = TO_DATE('44441231','YYYYMMDD')
+    </statement>
+</sqlMap>

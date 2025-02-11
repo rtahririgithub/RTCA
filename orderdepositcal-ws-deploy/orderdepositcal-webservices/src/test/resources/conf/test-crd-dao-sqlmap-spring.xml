@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="telusSpringConfigurer" class="com.telus.framework.config.spring.PlaceholderConfigurer" />
+
+	<!-- ========================================================================= -->
+	<!-- SqlMap Definition -->
+	<!-- ========================================================================= -->
+	<bean id="sqlMap" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:sqlmaps/orderDepositCal-sqlmap-config.xml</value>
+		</property>
+		<property name="dataSource">
+			<ref bean="crdDataSource" />
+		</property>
+	</bean>
+
+	<!-- ========================================================================= -->
+	<!-- Bean definition for all DAO SqlMap Implementation -->
+	<!-- ========================================================================= -->
+	<bean id="depositCalculationTransactionDao"
+		class="com.telus.credit.orderDepositCalculator.dao.DepositCalculationTransactionDaoSqlmap">
+		<property name="sqlMapClient">
+			<ref bean="sqlMap" />
+		</property>
+	</bean>
+
+
+	<!-- ********************************** Testing Client ***************************************************** -->
+	<bean id="depositCalculationTrxDaoTest"
+		class="com.telus.credit.orderDepositCalculator.dao.DepositCalculationTrxDaoTest">
+		<property name="depositCalculationTransactionDao">
+			<ref local="depositCalculationTransactionDao" />
+		</property>
+	</bean>
+
+
+	<!-- ========================================================================= -->
+	<!-- Define DataSource -->
+	<!-- ========================================================================= -->
+
+	<bean id="crdDataSource" lazy-init="true"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(
+HOST=an05103)(PORT=41521))(CONNECT_DATA=(SERVICE_NAME=TCMDV)))" />
+		<property name="username" value="APPTCM_U1_WK05" />
+		<property name="password" value="APPTCM_U1_WK05" />
+		<property name="suppressClose">
+			<value>true</value>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings 
+          xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+          xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+          xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+		  version="2.0">   
+
+       
+<!-- With  generateElementProperty="false",  JAXB will generate String and not JAXBElement<String>  -->
+    <jxb:globalBindings generateElementProperty="false"> 
+        <!-- This is how to override the default XmlgregorianCalendar with  java.util.Date   and integer with Long, -->
+		<xjc:javaType name="java.util.Date" xmlType="xs:date" adapter="com.telus.framework.xml.bind.DateAdapter" />
+		<xjc:javaType name="java.util.Date" xmlType="xs:dateTime" adapter="com.telus.framework.xml.bind.DateTimeAdapter" />       
+        <xjc:javaType name="java.lang.Long" xmlType="xs:integer" adapter="com.telus.framework.xml.bind.LongAdapter"	/>        
+        <jxb:javaType name="java.lang.Long" xmlType="xs:long" />
+        <jxb:javaType name="java.lang.Integer" xmlType="xs:int" />
+        <jxb:javaType name="java.lang.Integer" xmlType="xs:short" />
+        <jxb:javaType name="java.lang.Float" xmlType="xs:float" />
+        <jxb:javaType name="java.lang.Float" xmlType="xs:double" />
+		<jxb:javaType name="java.lang.Boolean" xmlType="xs:boolean" />
+		
+		<!--<xjc:javaType name="java.lang.String" xmlType="xs:string" adapter="com.telus.credit.wlscrda.util.jxb.StringAdapter"	/>  -->
+				
+        <xjc:serializable uid="1" />
+    </jxb:globalBindings>
+	<jxb:bindings schemaLocation="CreditDocumentumSvcRequestResponse_v1_0.xsd" node="/xs:schema">
+      <jxb:schemaBindings> 
+         <jxb:package name="com.telus.credit.domain.crddctm.reqresp" />
+      </jxb:schemaBindings>
+   </jxb:bindings>
+
+
+	
+</jxb:bindings>
+
+
+
+
+
+

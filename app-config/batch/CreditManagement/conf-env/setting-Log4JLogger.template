@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+
+<group name="config">
+
+  <group name="logging">
+
+    <prop name="log4j.rootCategory">ERROR, CONSOLE</prop>
+
+
+    <prop name="log4j.debug">true</prop>
+
+    <prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+    <prop name="log4j.appender.CONSOLE.Threshold">@CreditDebugLevel@</prop>
+    <prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+    <prop name="log4j.appender.CONSOLE.layout.ConversionPattern">[%d{DATE} %c %-5p]- %m%n</prop>
+
+    <prop name="log4j.appender.FILE">org.apache.log4j.DailyRollingFileAppender</prop>
+    <prop name="log4j.appender.FILE.Append">true</prop>
+    <prop name="log4j.appender.FILE.Threshold">@CreditDebugLevel@</prop>
+    <prop name="log4j.appender.FILE.layout">org.apache.log4j.PatternLayout</prop>
+    <prop name="log4j.appender.FILE.layout.ConversionPattern">%-25d %-5p [%-10t] %c{3} - %m%n</prop>
+    <prop name="log4j.appender.FILE.file">${logs}/${jobname}-BEC.log</prop>
+
+    <prop name="log4j.logger.com.telus.framework.batch">@CreditDebugLevel@, FILE</prop>
+    <prop name="log4j.logger.com.telus.framework.samplebatch">@CreditDebugLevel@, FILE</prop>
+
+
+    <!--  SqlMap logging configuration... --> 
+    <prop name="log4j.logger.java.sql.PreparedStatement">@CreditDebugLevel@, FILE</prop>
+    <prop name="log4j.logger.com.ibatis">@CreditDebugLevel@, FILE</prop>
+    <prop name="log4j.logger.com.ibatis.common.jdbc.SimpleDataSource">@CreditDebugLevel@, FILE</prop>
+    <prop name="log4j.logger.com.ibatis.common.jdbc.ScriptRunner">@CreditDebugLevel@, FILE</prop>
+    <prop name="log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate">@CreditDebugLevel@, FILE</prop>
+
+    <prop name="log4j.logger.java.sql.Connection">@CreditDebugLevel@, FILE</prop> 
+    <prop name="log4j.logger.java.sql.Statement">@CreditDebugLevel@, FILE</prop> 
+    <prop name="log4j.logger.java.sql.PreparedStatement">@CreditDebugLevel@, FILE</prop> 
+    <prop name="log4j.logger.java.sql.ResultSet">@CreditDebugLevel@, FILE</prop>
+ 
+    <prop name="log4j.appender.SFTX.file">${logs}/${jobname}-BEC.log</prop>
+    <prop name="log4j.appender.SFTX">org.apache.log4j.DailyRollingFileAppender</prop>
+    <prop name="log4j.appender.SFTX.Append">true</prop>
+    <prop name="log4j.appender.SFTX.Threshold">@CreditDebugLevel@</prop>
+    <prop name="log4j.appender.SFTX.layout">org.apache.log4j.PatternLayout</prop>
+    <prop name="log4j.appender.SFTX.layout.ConversionPattern">%-16.16X{entity}=%-9.9X{id}:%-6.6X{requestid},%-6.6X{recipientid},%-6.6X{fileitemid},%-6.6X{transmissionid};%-25d %-5p %c{3} - %m%n</prop>    
+	<prop name="log4j.logger.com.telus.collections">@CreditDebugLevel@, FILE</prop>	
+    <prop name="log4j.logger.com.telus.framework">@CreditDebugLevel@, FILE</prop>
+    
+    <prop name="log4j.additivity.SFTX">false</prop>
+    <prop name="log4j.additivity.sftx-operator">false</prop>
+    <prop name="log4j.additivity.com.telus.framework.filetransfer">false</prop>  
+    <prop name="log4j.logger.com.telus.framework.filetransfer">@CreditDebugLevel@, SFTX</prop>
+ 
+  </group>
+
+</group>
+
+
+
+

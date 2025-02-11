@@ -1,0 +1,2 @@
+IFFT_UX_SFT=$1
+touch $IFFT_UX_SFT

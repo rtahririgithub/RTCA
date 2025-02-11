@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef" />
+	<import resource="record-encryptor-spring.xml" />
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+			<list>
+				<bean id="STEP01" parent="baseStep">
+					<property name="moduleName" value="cmdExec-Step01" />
+				</bean>
+				<bean id="STEP02" parent="baseStep">
+					<property name="moduleName" value="javaExec-Step01" />
+				</bean>
+				<bean id="STEP03" parent="baseStep">
+					<property name="moduleName" value="cmdExec-Step02" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="cmdExec-Step01" parent="baseSyncsortScriptStep">
+		<property name="executable" value="${xtrctwls/step2/scriptFile}" />
+		<property name="arg"
+			value="${xtrctwls/step2/inputFile1} ${xtrctwls/step2/inputFile2} ${xtrctwls/step2/outputFile}" />
+		<property name="output" value="${logs}/${jobname}-step2.log" />
+	</bean>
+	<bean id="javaExec-Step01" class="com.telus.credit.batch.report.EncryptionModule"
+		lazy-init="true">
+		<property name="inputFilePattern" value="${xtrctwls/step3/inputFilePattern}" />
+		<property name="inputDirectory" value="${xtrctwls/step3/inputDirectory}" />
+		<property name="outputFileName" value="${xtrctwls/step3/outputFile}" />
+		<property name="singleFileMode" value="true" />
+		<property name="encryptor">
+			<ref bean="WLSEncryptor" />
+		</property>
+	</bean>
+	<bean id="cmdExec-Step02" parent="baseSyncsortScriptStep">
+		<property name="executable" value="${xtrctwls/cleanup/scriptFile}" />
+		<property name="arg"
+			value="${xtrctwls/cleanup/inputFile}" />
+		<property name="output" value="${logs}/${jobname}-cleanup.log" />
+	</bean>
+</beans>

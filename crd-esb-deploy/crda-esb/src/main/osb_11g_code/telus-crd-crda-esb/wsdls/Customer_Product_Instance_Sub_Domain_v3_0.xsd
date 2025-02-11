@@ -1,0 +1,156 @@
+<xs:schema targetNamespace="http://xmlschema.tmi.telus.com/xsd/Product/ProductInstance/Customer_Product_Instance_Sub_Domain_v3" version="2.0" xmlns:bt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/common_domain_types_3" xmlns:cc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v3" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Product/ProductInstance/Customer_Product_Instance_Sub_Domain_v3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v3" schemaLocation="CustomerCommon_v3_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/common_domain_types_3" schemaLocation="common_domain_types_3_0.xsd"/>
+    <xs:simpleType name="productInstanceIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="productParameterIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="productResourceIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="serviceAndEquipmentIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:complexType name="ServiceAndEquipment">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="serviceAndEquipmentId" type="tns:serviceAndEquipmentIdType"/>
+            <xs:element minOccurs="0" name="entityTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="entityId" type="tns:productResourceIdType"/>
+            <xs:element minOccurs="0" name="serviceAndEquipmentCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="serviceAndEquipmentCommentTxt" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductInstance">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="productInstanceId" type="tns:productInstanceIdType"/>
+            <xs:element minOccurs="0" name="customerId" type="cc:customerIdType"/>
+            <xs:element minOccurs="0" name="masterSourceId" type="xs:int"/>
+            <xs:element minOccurs="0" name="keyId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The unique key in the source system.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="subscriberNumber" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The subscriber number in the
+                        source                         system.  For
+                        example, subscriber_no in KB</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="sourceVersion" type="xs:int"/>
+            <xs:element minOccurs="0" name="componentTypeCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>offer or product or component or
+                        price plan</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="productTypeCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>type of produce such as single
+                        line, ADSL, TTV .. etc</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="statusCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="statusUpdateDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="dueDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>The date of the service requested
+                        by customer</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="installationDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>The actual date when the service
+                        is provisioned</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="endDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>The date when a service is terminated</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="primaryInterchangeCarrierStatusCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Can be TELUS, non-TELUS, or rebiller</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="customerHierarchyNodeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="defaultRecurringChargePayChannelId" type="xs:long"/>
+            <xs:element minOccurs="0" name="defaultOnetimeChargePayChannelId" type="xs:long"/>
+            <xs:element minOccurs="0" name="billingSystemKeyId" type="xs:string"/>
+            <xs:element minOccurs="0" name="unitQuantity" type="xs:int"/>
+            <xs:element minOccurs="0" name="unitOfMeasure" type="xs:string"/>
+            <xs:element minOccurs="0" name="productCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="productCodeSourceSystemId" type="xs:long"/>
+            <xs:element minOccurs="0" name="productCatalogId" type="xs:long"/>
+            <xs:element minOccurs="0" name="productCatalogSystemId" type="xs:string"/>
+            <xs:element minOccurs="0" name="brandId" type="bt:BrandID"/>
+            <xs:element minOccurs="0" name="primaryServiceResourceTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="primaryServiceResourceValue" type="xs:string"/>
+            <xs:element minOccurs="0" name="ancestorText" type="xs:string"/>
+            <xs:element minOccurs="0" name="parentProductInstanceId" type="tns:productInstanceIdType"/>
+            <xs:element minOccurs="0" name="address" type="cc:Address"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="productResourceList" type="tns:ProductResource"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="productParameterList" type="tns:ProductParameter"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="serviceAndEquipment" type="tns:ServiceAndEquipment"/>
+            <xs:element maxOccurs="500" minOccurs="0" name="componentList" type="tns:ProductInstance"/>
+            <xs:element minOccurs="0" name="productName" type="xs:string"/>
+            <xs:element minOccurs="0" name="billingAccountNumber" type="cc:billingAccountNumberType"/>
+            <xs:element minOccurs="0" name="billingMasterSourceId" type="xs:long"/>
+            <xs:element minOccurs="0" name="activationDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="statusDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="picStatusCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="partialSuspendIndicatorCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="agreementId" type="xs:long"/>
+            <xs:element minOccurs="0" name="orderMasterSourceId" type="xs:long"/>
+            <xs:element minOccurs="0" name="orderActionReferenceNum" type="xs:string"/>
+            <xs:element minOccurs="0" name="effectiveStartDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="effectiveEndDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="pricePlanSubscriptionKeyId" type="xs:string"/>
+            <xs:element minOccurs="0" name="componentSubscriptionKeyId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The subscription key Id in the
+                        source system. For example, APID in OMS</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductParameter">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="productParameterId" type="tns:productParameterIdType"/>
+            <xs:element minOccurs="0" name="productInstanceId" type="tns:productInstanceIdType"/>
+            <xs:element minOccurs="0" name="parameterName" type="xs:string"/>
+            <xs:element minOccurs="0" name="parameterValue" type="xs:string"/>
+            <xs:element minOccurs="0" name="agreementId" type="xs:long"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="masterSourceId" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductResource">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="productResourceId" type="tns:productResourceIdType"/>
+            <xs:element minOccurs="0" name="productInstanceId" type="tns:productInstanceIdType"/>
+            <xs:element minOccurs="0" name="resourceTypeCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="resourceValueId" type="xs:string"/>
+            <xs:element minOccurs="0" name="productResourceName" type="xs:string"/>
+            <xs:element minOccurs="0" name="effectiveStartDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="effectiveEndDate" type="xs:date"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="masterSourceId" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Agreement">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="customerId" type="cc:customerIdType"/>
+            <xs:element minOccurs="0" name="agreementId" type="xs:long"/>
+            <xs:element minOccurs="0" name="agreementKeyId" type="xs:long"/>
+            <xs:element minOccurs="0" name="customerHierarchyNodeId" type="xs:long"/>
+            <xs:element minOccurs="0" name="agreementDescription" type="xs:string"/>
+            <xs:element minOccurs="0" name="effectiveStartDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="effectiveEndDate" type="xs:date"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="productInstanceList" type="tns:ProductInstance"/>
+            <xs:element maxOccurs="100" minOccurs="0" name="productParameterList" type="tns:ProductParameter"/>
+            <xs:element minOccurs="0" name="masterSourceId" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,177 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Module.WS -->
+
+    <parent>
+        <groupId>telus.credit.crdmgmt.orderdepositcal-ws-deploy</groupId>
+        <artifactId>pom-orderdepositcal-ws-deploy</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>orderproxy-wsdl</artifactId>
+    <name>orderproxy-wsdl</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+    </dependencies>
+
+
+
+    <!-- Please change the xmlToWsdl*.xslt version, and point to your service definition, wsdl, xsd files etc. -->
+    <properties>
+
+        <genwsdl.service.definition>OrderDepositCalculatorProxyService_v1_0.xml</genwsdl.service.definition>
+        <genwsdl.local.wsdl.file>OrderDepositCalculatorProxyService_v1_0.wsdl</genwsdl.local.wsdl.file>
+
+        <!-- By default, genwsdl.include.userpassword.for.basic.auth=True and user and password is required for basic auth
+            If you run mvn with -PEclipse, user and password is NOT required for basic auth
+        -->
+        <!--
+        <genwsdl.include.userpassword.for.basic.auth>True</genwsdl.include.userpassword.for.basic.auth>
+        -->
+
+        <!--
+            genwsdl.generate-rest-style and genwsdl.generate.major.version.wsdl are default to false and
+            only available to stylesheet version 4_0 and up
+        -->
+        <!--
+        <genwsdl.xmlToWsdl.xslt>http://xmlschema.tmi.telus.com/xsd/common/utils/xmlToWsdl/xmlToWsdl_v4_0.xslt</genwsdl.xmlToWsdl.xslt>
+        -->
+
+        <!--
+            genwsdl.generate-rest-style of true will generate a REST style url if teams want that style
+            of url (such as what we always have now with the v3.2 transform).
+            This flag is ignored IF the service definition file contains the REST
+            binding configuration and will always generate a REST style url for a REST style service
+        -->
+        <!--
+        <genwsdl.generate-rest-style>true<a/genwsdl.generate.rest.style>
+        -->
+
+        <!--
+            genwsdl.generate.major.version.wsdl of true will generate the master (major) version wsdls
+            if teams want to pilot the new versioning strategy for a minor version.
+        -->
+        <!--
+        <genwsdl.generate.major.version.wsdl>true</genwsdl.generate.major.version.wsdl>
+        -->
+    </properties>
+
+
+    <build>
+        <plugins>
+
+            <!-- This following plugins will generate cleanup existing WSDLs and generate new WSDLs base on the service definition.
+                  The properties above properties are used by the GenWsdl
+
+                This plugin will
+                  - Delete the defined wsdl, ${genwsdl.local.wsdl.file} and the *SOA_LM_Bindings.wsdl
+                  - Generate the wsdl, ${genwsdl.local.wsdl.file} from the service definition file, ${genwsdl.service.definition}
+            -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <verbose>${clean.verbose}</verbose>
+                    <failOnError>false</failOnError>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}/src/main/generated-sources</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${basedir}/src/main/impl</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${basedir}/src/main/resources/wsdls</directory>
+                            <includes>
+                                <include>${genwsdl.local.wsdl.file}</include>
+                                <include>*SOA_LM_Bindings.wsdl</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>GenWsdl</id>
+                    </execution>
+                </executions>
+             </plugin>
+
+
+            <!-- http://geertschuring.wordpress.com/2009/06/26/how-to-create-a-webservice-client-with-maven-and-jax-ws/
+                    How to create a webservice client with Maven and JAX-WS -->
+
+            <plugin>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>GenService</id>
+
+                        <!-- JAX-WS Maven plugin parameters: http://jax-ws-commons.java.net/jaxws-maven-plugin/wsimport-mojo.html -->
+                        <configuration>
+                            <!-- The generated impl class will be located in src/main/impl -->
+                            <target>2.1</target>
+
+                            <!-- List of files to use for bindings. If not specified, all .xml
+                                    files in the bindingDirectory will be used. -->
+                            <bindingFiles>
+                                <bindingFile>binding_wsdl.xjb</bindingFile>
+                                <bindingFile>binding_schema.xjb</bindingFile>
+                            </bindingFiles>
+
+                            <wsdlFiles>
+                                <wsdlFile>${genwsdl.local.wsdl.file}</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>/wsdls/${genwsdl.local.wsdl.file}</wsdlLocation>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+        	<plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>
+        									org.codehaus.mojo
+        								</groupId>
+        								<artifactId>
+        									exec-maven-plugin
+        								</artifactId>
+        								<versionRange>
+        									[1.2.1,)
+        								</versionRange>
+        								<goals>
+        									<goal>exec</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
+    </build>
+
+</project>

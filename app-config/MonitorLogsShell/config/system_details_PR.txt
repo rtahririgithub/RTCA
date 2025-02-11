@@ -1,0 +1,6 @@
+System:CDA WebServices
+Environment:PR
+MonitorInterval:15
+MonitoringOS:Linux
+EMailFrom:reza.tahriri@telus.com
+Mode:Production

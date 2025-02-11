@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="config">
+
+  <!-- =============================================================== -->
+  <!-- The beantype can be overridden  with "tcmJta" or "tcmDb" in the     -->
+  <!-- application configuration framework file                        -->
+  <!-- =============================================================== -->
+  <!--  beantype=tcmJta online or tcmDb for batch, local testing -->
+  <prop name="beantype">tcmDb</prop>
+
+  <prop name="tcmDataSource">${beantype}-DS</prop>
+  <!-- DV   -->
+  <group name="jdbc">
+    <prop name="url">jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=an05103)(PORT=41521))(CONNECT_DATA=(SERVICE_NAME=TCMDV)))</prop>
+    <prop name="username">APPTCM_U1_WK05</prop>
+    <prop name="password">APPTCM_U1_WK05</prop>
+  </group>
+
+<!-- PT05/ITN03 AT/PT db 
+  <group name="jdbc">
+    <prop name="url">jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=an05108)(PORT=41521))(CONNECT_DATA=(SERVICE_NAME=TCMPTSV1)))</prop>
+    <prop name="username">appcrd_batch_PT61</prop>
+    <prop name="password">appcrd_batch_PT61</prop>
+  </group>
+-->
+
+  <!-- AT01
+  <group name="jdbc">
+    <prop name="url">jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=an05109)(PORT=41521))(CONNECT_DATA=(SERVICE_NAME=TCMAT)))</prop>
+    <prop name="username">APPTCM_U1_AT01</prop>
+    <prop name="password">APPTCM_U1_AT01</prop>
+  </group>
+    --> 
+  <!-- AT06 
+  <group name="jdbc">
+    <prop name="url">jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=IEDM3301DB)(PORT=41521))(CONNECT_DATA=(SERVICE_NAME=TCMAT)))</prop>
+    <prop name="username">APPTCM_U1_AT06</prop>
+    <prop name="password">APPTCM_U1_AT06</prop>
+  </group>
+  -->
+  <!-- New AT06 
+  <group name="jdbc">
+    <prop name="url">jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=an05109)(PORT=41521)))(CONNECT_DATA=(SERVICE_NAME=TCMATSV1)))</prop>
+    <prop name="username">APPTCM_U1_AT06</prop>
+    <prop name="password">APPTCM_U1_AT06</prop>
+  </group>
+  -->
+  <!-- WK05
+  <group name="jdbc">
+    <prop name="url">jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = IEDM3301DA)(PORT = 41521)))(CONNECT_DATA=(SERVICE_NAME=TCMDV)))</prop>
+    <prop name="username">APPTCM_U1_WK05</prop>
+    <prop name="password">APPTCM_U1_WK05</prop>
+  </group>
+  -->
+  <!--
+  <group name="jdbc">
+    <prop name="url">jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=TCMPR-vip1)(PORT=41521))(ADDRESS=(PROTOCOL=TCP)(HOST=TCMPR-vip2)(PORT=41521))(FAILOVER=yes)(LOAD_BALANCE=no)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=PDSTCPRsvb1)))</prop>
+    <prop name="username">APPTCM_R1_PR</prop>
+    <prop name="password">APPTCM_R1_PR</prop>
+  </group>
+  -->
+
+
+</group>

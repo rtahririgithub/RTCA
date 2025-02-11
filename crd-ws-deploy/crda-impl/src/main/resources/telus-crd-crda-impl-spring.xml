@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+  <import resource="classpath:telus-crd-crda-common-spring.xml"/>
+  <!--  Documentum  -->
+  <import resource="classpath:CrdDocumentumApi-spring.xml" />     
+  
+  <bean id="DocumentumSvcAdapter" class="com.telus.credit.crda.adapter.DocumentumSvcAdapter" lazy-init="true">
+    <property name="documentDao" ref="DocumentumDao" />  
+  </bean>
+
+   <bean id="txManager" class="org.springframework.transaction.jta.WebLogicJtaTransactionManager"/>
+  <bean id="enterpriseCreditAssessmentService"
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="txManager"/>
+        <property name="target" ref="enterpriseCreditAssessmentServiceTarget"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="getCreditAssessment">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+                <prop key="getCreditBureauDocument">PROPAGATION_NOT_SUPPORTED,-Exception</prop>
+                <prop key="performCreditAssessment">PROPAGATION_REQUIRED,-Exception</prop>
+                <prop key="searchCreditAssessments">PROPAGATION_REQUIRED,-Exception</prop>
+                <prop key="voidCreditAssessment">PROPAGATION_REQUIRED,-Exception</prop>
+            </props>
+        </property>
+    </bean>
+    
+</beans>
+
+ 

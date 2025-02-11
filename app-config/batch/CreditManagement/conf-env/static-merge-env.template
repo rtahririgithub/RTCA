@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="mergeBatch">
+ 
+  <group name="merge-fileSplitter">
+    <prop name="inputFile">${processbox}/merge/creditProfileCustomerMappingData.dat</prop>
+    <prop name="singleCustomerOutputFile">${processbox}/merge/singleProfile.dat</prop>
+    <prop name="multiCustomerOutputFile">${processbox}/merge/linkedProfiles.dat</prop>
+  </group>
+    
+  <group name="profileGroupExtract">
+    <prop name="inputFileSortByProfileId">${processbox}/merge/linkedProfiles.dat</prop>
+    <prop name="inputFileSortByCustomerId">${processbox}/merge/linkedProfiles2.dat</prop>
+    <prop name="outputFile">${processbox}/merge/groupProfile.dat</prop>
+  </group>
+  
+  <group name="merge">
+    <prop name="inputFile">${processbox}/merge/groupProfile.dat</prop>
+    <prop name="outputFile">${processbox}/merge/unMergeList.dat</prop>
+    <prop name="unMergedCidListOutputFile">${processbox}/merge/unMergeCustomerList.dat</prop>
+    <prop name="outputWSFile">${processbox}/merge/mergedCreditID</prop>
+    <prop name="notupdatedCreditIdReport">${processbox}/merge/mergedCreditIDReport</prop>
+    <prop name="outputWSFilePattern">mergedCreditID</prop>
+    <prop name="outputWSReportFilePattern">mergedCreditIDReport</prop>
+ </group>
+  
+   <group name="report">
+    <prop name="inputFile">${processbox}/merge/unMergeList.dat</prop>
+    <prop name="customerBillingAccountMappingFile">${processbox}/merge/customerIDBanMapping.dat</prop>
+    <prop name="outputFile">${processbox}/merge/discrepancyReport.csv</prop>
+    <prop name="commitFrequency">1000</prop>
+  </group>
+  
+   <group name="sendReport">
+    <prop name="inputFile">${processbox}/merge/discrepancyReport.csv</prop>
+  </group>
+  
+  <group name="appBeanName" >
+    <prop name="appDbDS">jdbc-appDbDS</prop>
+<!--
+    <prop name="appDbDS">jndi-appDbDS</prop>
+-->
+  </group>
+</group>

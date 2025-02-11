@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="credit_id_card">
+	
+	<typeAlias alias="CreditIDCard" type="com.telus.credit.domain.CreditIDCard" />
+	
+	<resultMap id="get_customer_id_by_matching_credit_id_card_result" class="java.lang.Integer">
+		<result property="value" column="CUSTOMER_ID"/>
+	</resultMap>
+	
+	<resultMap id="select-credit_id_card-result" class="CreditIDCard">
+		<result property="_id" column="CPROFL_IDENTIFICATION_ID"/>
+		<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+		<result property="idTypeCode" column="IDENTIFICATION_TYP_CD"/>
+		<result property="provinceCode" column="PROVINCE_CD"/>
+		<result property="countryCode" column="COUNTRY_CD"/>
+		<result property="provinceCode" column="PROVINCE_CD"/>
+		<result property="idNumber" column="IDENTIFICATION_NUM"/>
+		<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+	</resultMap>
+		
+	<insert id="insert_credit_id_card" parameterClass="java.util.Map">
+  		<selectKey resultClass="java.lang.Long" keyProperty="credit_id_card._id">
+			select CPROFL_IDENTIFICATION_ID_SEQ.NEXTVAL from dual
+  		</selectKey>
+  		insert into CPROFL_IDENTIFICATION
+  			(	
+  			CPROFL_IDENTIFICATION_ID, 
+			CREDIT_PROFILE_ID, 
+			IDENTIFICATION_TYP_CD,
+			IDENTIFICATION_NUM,
+			PROVINCE_CD,
+			COUNTRY_CD,
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values 
+    		(
+			#credit_id_card._id#,
+			#credit_id_card.creditProfileId#, 
+			#credit_id_card.idTypeCode#,
+			#credit_id_card.idNumber#,
+			#credit_id_card.provinceCode:VARCHAR#, 
+			#credit_id_card.countryCode:VARCHAR#, 
+			SYSTIMESTAMP,    
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#sourceId#
+    		)
+	</insert>
+	
+	<statement id="get_credit_id_cards_by_credit_profile_id" 
+				parameterClass="long" 
+				resultMap="select-credit_id_card-result">
+		select 
+			CPROFL_IDENTIFICATION_ID,
+			CREDIT_PROFILE_ID,
+			IDENTIFICATION_TYP_CD,
+			PROVINCE_CD,
+			COUNTRY_CD,
+			IDENTIFICATION_NUM,
+			LAST_UPDT_TS
+		from
+			CPROFL_IDENTIFICATION
+		where
+			CREDIT_PROFILE_ID=#value#
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+		
+	</statement>
+	
+	<update id="delete_id_card" parameterClass="java.util.Map">
+  		update 
+  			CPROFL_IDENTIFICATION
+  		set 
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP,
+			DATA_SOURCE_ID = #sourceId# 
+  		where 
+			CREDIT_PROFILE_ID = #credit_id_card.creditProfileId#
+			and EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+			and IDENTIFICATION_TYP_CD = #credit_id_card.idTypeCode#
+	</update>
+	
+	
+    <statement id="get_consumer_customer_id_by_matching_credit_id_card" 
+    	resultMap="get_customer_id_by_matching_credit_id_card_result" 
+    	parameterClass="CreditIDCard">
+	  	select 
+	  		map.CUSTOMER_ID 
+	  	from
+	  		CPROFL_CUSTOMER_MAP map, CPROFL_IDENTIFICATION id, CREDIT_PROFILE cp
+	  	where
+	  		id.IDENTIFICATION_TYP_CD=#idTypeCode# 
+	  		and id.IDENTIFICATION_NUM=#idNumber#
+	  		<isEqual prepend="AND" property="idTypeCode" compareValue="DL">
+	  			id.PROVINCE_CD=#provinceCode#
+	  		</isEqual>
+	  		<isEqual prepend="AND" property="idTypeCode" compareValue="PRV">
+	  			id.PROVINCE_CD=#provinceCode#
+	  		</isEqual>
+	  		<isEqual prepend="AND" property="idTypeCode" compareValue="PSP">
+	  			id.COUNTRY_CD=#countryCode#
+	  		</isEqual>
+	  		and id.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	  		and id.CREDIT_PROFILE_ID=cp.CREDIT_PROFILE_ID 
+	  		and cp.CPROFL_STATUS_CD='A'
+			and cp.CPROFL_FORMAT_CD='P'
+	  		and cp.CREDIT_PROFILE_ID=map.CREDIT_PROFILE_ID 
+	  		and map.EFF_STOP_DTM = TO_DATE('44441231','YYYYMMDD')
+	  		and map.CPROFL_CUST_MAP_TYP_CD='PRI'
+	</statement> 
+	
+</sqlMap>

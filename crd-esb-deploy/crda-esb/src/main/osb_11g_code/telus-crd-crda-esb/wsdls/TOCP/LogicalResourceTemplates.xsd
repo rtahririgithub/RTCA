@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="LogicalResourceChoice">
+        <xsd:choice>
+            <xsd:element name="DiskSpaceLogicalResource" type="tns:DiskSpaceLogicalResource"/>
+            <xsd:element name="ContentFileLogicalResource" type="tns:ContentFileLogicalResource"/>
+            <xsd:element name="ContentObjectLogicalResource" type="tns:ContentObjectLogicalResource"/>
+            <xsd:element name="ChannelTypeListingLogicalResource" type="tns:ChannelTypeListingLogicalResource"/>
+            <xsd:element name="ThemePackLogicalResource" type="tns:ThemePackLogicalResource"/>
+            <xsd:element name="HDTVChannelLogicalResource" type="tns:HDTVChannelLogicalResource"/>
+            <xsd:element name="SDTVChannelLogicalResource" type="tns:SDTVChannelLogicalResource"/>
+            <xsd:element name="MasterCatalogLogicalResource" type="tns:MasterCatalogLogicalResource"/>
+            <xsd:element name="TVChannelCatalogLogicalResource" type="tns:TVChannelCatalogLogicalResource"/>
+            <xsd:element name="TVProgrammingCatalogLogicalResource" type="tns:TVProgrammingCatalogLogicalResource"/>
+            <xsd:element name="ChannelListingLogicalResource" type="tns:ChannelListingLogicalResource"/>
+            <xsd:element name="MovieCategoryCatalogLogicalResource" type="tns:MovieCategoryCatalogLogicalResource"/>
+            <xsd:element name="MovieGenreCatalogLogicalResource" type="tns:MovieGenreCatalogLogicalResource"/>
+            <xsd:element name="MusicGenreCatalogLogicalResource" type="tns:MusicGenreCatalogLogicalResource"/>
+            <xsd:element name="PhoneNumberLogicalResource" type="tns:PhoneNumberLogicalResource"/>
+            <xsd:element name="BandwidthProfileLogicalResource" type="tns:BandwidthProfileLogicalResource"/>
+            <xsd:element name="VoiceProfileLogicalResource" type="tns:VoiceProfileLogicalResource"/>
+            <xsd:element name="ChannelPackageProfileLogicalResource" type="tns:ChannelPackageProfileLogicalResource"/>
+            <xsd:element name="TVChannelProfileLogicalResource" type="tns:TVChannelProfileLogicalResource"/>
+            <xsd:element name="EgressProfileLogicalResource" type="tns:EgressProfileLogicalResource"/>
+            <xsd:element name="IngressProfileLogicalResource" type="tns:IngressProfileLogicalResource"/>
+            <xsd:element name="WANProfileLogicalResource" type="tns:WANProfileLogicalResource"/>
+            <xsd:element name="EthernetVLANSubinterfaceLogicalResource" type="tns:EthernetVLANSubinterfaceLogicalResource"/>
+            <xsd:element name="NetworkToNetworkInterfaceLogicalResource" type="tns:NetworkToNetworkInterfaceLogicalResource"/>
+            <xsd:element name="DSLAMPortLogicalResource" type="tns:DSLAMPortLogicalResource"/>
+            <xsd:element name="GSM2GNetworkLogicalResource" type="tns:GSM2GNetworkLogicalResource"/>
+            <xsd:element name="GSM3GNetworkLogicalResource" type="tns:GSM3GNetworkLogicalResource"/>
+            <xsd:element name="HDIPTVReceiverLogicalResource" type="tns:HDIPTVReceiverLogicalResource"/>
+            <xsd:element name="StandardIPTVReceiverLogicalResource" type="tns:StandardIPTVReceiverLogicalResource"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="DiskSpaceLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Size" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ExtraSpace" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ContentFileLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Size" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CheckSum" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MIMEType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ContentEncoding" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Ref" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ContentObjectLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Encoding" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Size" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CheckSum" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MIMEType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ContentEncoding" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ChannelTypeListingLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="ChannelType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ExpirationDateTime" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SuggestedPrice" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="EffectiveDateTime" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ThemePackLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="ExpirationDateTime" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SuggestedPrice" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="EffectiveDateTime" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="HDTVChannelLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Copyright" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssetID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ProviderID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="SDTVChannelLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Copyright" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssetID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ProviderID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MasterCatalogLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="TVChannelCatalogLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="TVProgrammingCatalogLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ChannelListingLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MovieCategoryCatalogLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MovieCategory" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MovieGenreCatalogLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MovieGenre" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MusicGenreCatalogLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MusicGenre" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Description" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="PhoneNumberLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NumberType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NewNumber" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="BandwidthProfileLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="UpstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DownstreamSpeed" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="VoiceProfileLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NumberofLines" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ChannelPackageProfileLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="ResourceNames" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="TVChannelProfileLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="ResourceNames" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="EgressProfileLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MaxBitRate" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DTTStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IPTVSDStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IPTVHDStreams" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="IngressProfileLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MaxBitRate" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DTTStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IPTVSDStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IPTVHDStreams" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="WANProfileLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MaxBitRate" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DTTStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IPTVSDStreams" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IPTVHDStreams" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="EthernetVLANSubinterfaceLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="SVLANID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="VLANID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="NetworkToNetworkInterfaceLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="SVLANID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="DSLAMPortLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="DSLAMID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PortID" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GSM2GNetworkLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Bands" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MCC" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MNC" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Brand" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Operator" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NetworkStatus" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ReferencesAndNotes" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="GSM3GNetworkLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Bands" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MCC" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MNC" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Brand" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Operator" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NetworkStatus" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ReferencesAndNotes" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="HDIPTVReceiverLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NumberOfDVRs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NumberOfTuners" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="StandardIPTVReceiverLogicalResource">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NumberOfDVRs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NumberOfTuners" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

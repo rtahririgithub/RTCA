@@ -1,0 +1,58 @@
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" xmlns:message="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" xmlns:party="http://www.ibm.com/telecom/common/schema/party/v3_0" xmlns:tns="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/PartyMessage" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.ibm.com/xmlns/prod/websphere/fabric/2009/12/telecom/operations/common/schema/Message" schemaLocation="ibm_telecom_message.xsd"/>
+    <xsd:import namespace="http://www.ibm.com/telecom/common/schema/party/v3_0" schemaLocation="ibm_telecom_common_party.xsd"/>
+    <xsd:complexType name="PartyMessage">
+        <xsd:complexContent>
+            <xsd:extension base="message:IbmTelecomMessage">
+                <xsd:sequence>
+                    <xsd:element name="party" type="party:Party"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PartyCollectionMessage">
+        <xsd:complexContent>
+            <xsd:extension base="message:IbmTelecomMessage">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="party" type="party:Party"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ContactPersonMessage">
+        <xsd:complexContent>
+            <xsd:extension base="message:IbmTelecomMessage">
+                <xsd:sequence>
+                    <xsd:element name="contactPerson" type="party:ContactPerson"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ContactPersonCollectionMessage">
+        <xsd:complexContent>
+            <xsd:extension base="message:IbmTelecomMessage">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="contactPerson" type="party:ContactPerson"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PartyRoleMessage">
+        <xsd:complexContent>
+            <xsd:extension base="message:IbmTelecomMessage">
+                <xsd:sequence>
+                    <xsd:element name="partyRole" type="party:PartyRole"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PartyRoleCollectionMessage">
+        <xsd:complexContent>
+            <xsd:extension base="message:IbmTelecomMessage">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="partyRole" type="party:PartyRole"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+</xsd:schema>

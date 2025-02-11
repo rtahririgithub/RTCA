@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- Web Service Defintions -->
+	<bean id="refPdsWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.telus.erm.refpds.ws.client.ReferencePDSDataServicePortType" />
+		<!-- for the WSDL recommended to use the local reference rather than a URL -->
+		<property name="wsdlDocumentUrl" value="classpath:ReferencePDSDataService_v1_0.wsdl" />
+		<property name="endpointAddress"><value>${connections/webServices/refpds/endpointAddress}</value></property>
+		<property name="namespaceUri" value="http://telus.com/wsdl/ERM/RefPds/ReferencePDSDataService_1" />
+		<property name="serviceName" value="ReferencePDSDataService" />
+		<property name="portName" value="ReferencePDSDataServicePort" />
+		<property name="lookupServiceOnStartup" value="false" />
+	</bean>
+	
+	<bean id="refPdsAccessBootstrap" class="com.telus.erm.refpds.access.client.ReferencePdsAccess" init-method="initializeCache">
+		<property name="service" ref="refPdsWebService"/>
+	</bean>
+	
+	<!-- Mbeans Definiions -->
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean"/>
+	
+	<bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+		<property name="beans">
+	      <map>
+	        <entry key="referencepds" value-ref="mbean"/>
+	      </map>
+	    </property>
+	    <property name="namingStrategy" ref="namingStrategy" />
+	    <property name="registrationBehaviorName" value="REGISTRATION_REPLACE_EXISTING"/>
+	</bean>
+	
+	<bean id="mbean" class="com.telus.erm.refpds.access.client.ReferencePdsAccessMBean"/>
+	<bean id="namingStrategy" class="com.telus.erm.refpds.access.client.ReferencePdsAccessObjectNamingStrategy"/>
+</beans>

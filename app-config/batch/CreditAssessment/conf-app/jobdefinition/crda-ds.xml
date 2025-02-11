@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+  <alias name="jobDao" alias="tcmDb-jobDao"/>
+
+  <bean id="tcmDb-DS" lazy-init="true" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+    <property name="url" value="${jdbc/url}" />
+    <property name="username" value="${jdbc/username}" />
+    <property name="password" value="${jdbc/password}" />
+    <property name="suppressClose"><value>true</value></property>
+  </bean>
+
+  <!-- Please note that tcmDb-DS is defined in telus-crd-crda-webservices/conf/conf-app/datasource-env-spring.xml , please do not defined it here -->
+  <bean id="tcmDb-txMgr" lazy-init="true"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource"><ref bean="tcmDb-DS"/></property>
+    <property name="nestedTransactionAllowed"><value>true</value></property>
+  </bean>
+
+</beans>

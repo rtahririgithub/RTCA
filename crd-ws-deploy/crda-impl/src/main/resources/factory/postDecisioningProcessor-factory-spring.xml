@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+    <bean id="PostDecisioningProcesserFactory" 					class="com.telus.credit.crda.factory.PostDecisioningProcesserFactory" lazy-init="true" ></bean>
+    
+    <bean id="BureauDataRequiredPostDecisioningProcessor" 							class="com.telus.credit.crda.stgy.dcsn.impl.BureauDataRequiredPostDecisioningProcessor" 			lazy-init="true"/>
+    <bean id="FailedPostDecisioningProcessor" 										class="com.telus.credit.crda.stgy.dcsn.impl.FailedPostDecisioningProcessor" 						lazy-init="true"/>
+    <bean id="NotSupportedPostDecisioningProcessor" 								class="com.telus.credit.crda.stgy.dcsn.impl.NotSupportedPostDecisioningProcessor" 					lazy-init="true"/>
+    <bean id="SuccessNoChangeDisregardPostDecisioningProcesser" 					class="com.telus.credit.crda.stgy.dcsn.impl.SuccessNoChangeDisregardPostDecisioningProcesser" 		lazy-init="true"/>
+    <bean id="SuccessNoChangePostDecisioningProcessor" 								class="com.telus.credit.crda.stgy.dcsn.impl.SuccessNoChangePostDecisioningProcessor" 				lazy-init="true"/>
+    <bean id="SuccessWithNewBureaDataPostDecisioningProcessor" 						class="com.telus.credit.crda.stgy.dcsn.impl.SuccessWithNewBureaDataPostDecisioningProcessor" 		lazy-init="true"/>
+    <bean id="SuccessPostDecisioningProcessor" 										class="com.telus.credit.crda.stgy.dcsn.impl.SuccessPostDecisioningProcessor" 						lazy-init="true"/>
+    <bean id="NotSupportedWithNewBureaDataPostDecisioningProcessor" 				class="com.telus.credit.crda.stgy.dcsn.impl.NotSupportedWithNewBureaDataPostDecisioningProcessor" 	lazy-init="true"/>
+    <bean id="SuccessWithNewBureaDataNoChangeDisregardPostDecisioningProcesser" 	class="com.telus.credit.crda.stgy.dcsn.impl.SuccessWithNewBureaDataNoChangeDisregardPostDecisioningProcesser" 	lazy-init="true"/> 
+    <bean id="SuccessWithNewBureaDataNoChangePostDecisioningProcesser" 				class="com.telus.credit.crda.stgy.dcsn.impl.SuccessWithNewBureaDataNoChangePostDecisioningProcesser" 				lazy-init="true"/>
+    
+    <bean id="UnifiedCreditSuccessPostDecisioningProcessor"                         class="com.telus.credit.crda.stgy.dcsn.impl.UnifiedCreditSuccessPostDecisioningProcessor"           lazy-init="true">
+        <property name="documentumSvcAdapter" ref="DocumentumSvcAdapter" />
+        <property name="creditRepo" ref="creditRepoDao" />
+    </bean>
+ 
+</beans>

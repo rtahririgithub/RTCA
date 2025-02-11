@@ -1,0 +1,357 @@
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd" 
+          >
+    <!--  map parent class -->
+ 	<mapping map-null="false"  >
+        <class-a >com.telus.credit.domain.crda.CreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditAsessment.CreditAssessmentRequest</class-b>
+   </mapping> 
+   
+   <!--  map concerte class -->
+ 	<mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.crda.FullCreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditAsessment.BaseCreditAssessmentRequest</class-b>
+        <field>
+            <a>creditCustomerInfo</a>
+            <b>customerData</b>
+        </field>
+    </mapping> 
+
+    <mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.crda.FullCreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditAsessment.NewCustomerCreditAssessmentRequest</class-b>
+        <field>
+            <a>creditCustomerInfo</a>
+            <b>customerData</b>
+        </field>
+    </mapping> 
+
+  	<mapping map-null="false" >
+        <class-a>com.telus.credit.domain.crda.WlsUnifiedCreditSearchResult</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.WlsUnifiedCreditSearchResult</class-b>
+        <field>
+            <a is-accessible="true">matchFound.indicator</a>
+            <b is-accessible="true">matchFound.indicator</b>
+        </field>
+        <field>
+            <a is-accessible="true">matchFound.reasonCd</a>
+            <b is-accessible="true">matchFound.reasonCd</b>
+        </field>
+        <field>
+            <a is-accessible="true">dataInquiryErrorCodeList</a>
+            <b is-accessible="true">dataInquiryErrorCodeList</b>
+        </field>
+        <field>
+            <a is-accessible="true">lineOfBusiness</a>
+            <b is-accessible="true">lineOfBusiness</b>
+        </field>
+        <field>
+            <a>unifiedCreditDormantInd</a>
+            <b>unifiedCreditDormantInd</b>
+        </field>
+    </mapping>
+    
+    <mapping>
+    <class-a>com.telus.credit.domain.crda.WlsAccountFinancialHistory</class-a>
+    <class-b>com.fico.telus.blaze.creditCommon.WlsAccountFinancialHistory</class-b>
+    <field>
+    <a is-accessible="true">delinquentInd</a>
+    <b is-accessible="true">delinquentInd</b>
+    </field>
+    </mapping>  
+      
+    <mapping>
+    <class-a>com.telus.credit.domain.crda.WlsMatchedAccount</class-a>
+    <class-b>com.fico.telus.blaze.creditCommon.WlsMatchedAccount</class-b>
+    <field>
+    <a is-accessible="true">warningHistoryList</a>
+    <b is-accessible="true">warningHistoryList</b>
+    </field>
+    </mapping>      
+    
+    <mapping>
+    <class-a>com.telus.credit.domain.crda.WlsWarningHistory</class-a>
+    <class-b>com.fico.telus.blaze.creditCommon.WlsWarningHistory</class-b>
+    <field>
+    <a is-accessible="true">warningCategoryCd</a>
+    <b is-accessible="true">warningCategoryCd</b>
+    </field>
+        <field>
+    <a is-accessible="true">warningCd</a>
+    <b is-accessible="true">warningCd</b>
+    </field>
+        <field>
+    <a is-accessible="true">warningTypeCd</a>
+    <b is-accessible="true">warningTypeCd</b>
+    </field>
+        <field>
+    <a is-accessible="true">warningStatusCd</a>
+    <b is-accessible="true">warningStatusCd</b>
+    </field>
+    </mapping>    
+    
+  
+    
+	<mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.crda.ExistingCustomerCreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditAsessment.ExistingBaseCustomerCreditAssessmentRequest</class-b>
+ 		<field>
+            <a>bureauResultData</a>
+            <b>bureauResultData</b> 
+        </field>
+		<field>
+            <a>customerCollectionData</a>
+            <b>collectionData</b>
+        </field>
+		<field>
+		    <a>depositItemList</a>
+		    <b>depositData</b>
+	  </field>
+    </mapping>
+
+	<mapping map-null="false"  >
+       <class-a>com.telus.credit.crdgw.domain.ConsumerCreditReportResponse</class-a>
+       <class-b>com.fico.telus.blaze.creditAsessment.NewCustomerCreditAssessmentRequest</class-b>
+		<field>
+            <a>creditBureauResult</a>
+            <b>bureauResultData</b> 
+        </field>
+
+        <field custom-converter="com.telus.credit.crda.util.mapping.Date_To_XMLGregorianCalendar_Converter">
+            <a>creditBureauResult.creationDate</a>
+            <b>bureauResultData.creationDate</b> 
+        </field>         
+ 	</mapping> 
+
+	<mapping map-null="false"  >
+       <class-a>com.telus.credit.crdgw.domain.ConsumerCreditReportResponse</class-a>
+       <class-b>com.fico.telus.blaze.creditAsessment.BaseCreditAssessmentRequest</class-b>
+		<field>
+            <a>creditBureauResult</a>
+            <b>bureauResultData</b> 
+        </field>
+
+        <field custom-converter="com.telus.credit.crda.util.mapping.Date_To_XMLGregorianCalendar_Converter">
+            <a>creditBureauResult.creationDate</a>
+            <b>bureauResultData.creationDate</b> 
+        </field>         
+ 	</mapping> 
+        
+	<mapping map-null="false" bean-factory="">
+        <class-a>com.telus.credit.domain.crda.OverrideCreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditAsessment.OverrideCreditAssessmentRequest</class-b>
+        <field>
+            <a>creditProfileData.creditWorthiness</a>
+            <b>creditWorthinessData</b>
+        </field>
+		<field>
+            <a>creditCustomerInfo</a>
+            <b>customerData</b>
+        </field>
+		<field>
+            <a>newFraudIndicatorCd</a>
+            <b>newFraudIndicatorCd</b>
+        </field>        
+	</mapping>
+	
+
+
+ 	<mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.crda.OverrideCreditAssessmentRequest</class-a>
+        <class-b>com.fico.telus.blaze.creditAsessment.CancelDepositCreditAssessmentRequest</class-b>
+        
+        <field>
+            <a>creditProfileData.creditWorthiness</a>
+            <b>creditWorthinessData</b>
+        </field> 
+	  <field>
+		    <a>depositItemList</a>
+		    <b>depositData</b>
+	  </field>	
+	</mapping> 
+ 
+ 	<mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.creditprofile.CreditWorthiness</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.CreditWorthinessData</class-b>  
+		<field>
+		  <a is-accessible="true">fraudMessageCdList</a> 
+		  <b is-accessible="true">fraudMessageCdList</b> 
+		</field>                               
+	</mapping> 
+	
+ 	<mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.common.CreditCustomerInfo</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.CreditCustomerInfo</class-b> 
+       <field>
+            <a is-accessible="true">employeeInd</a>
+            <b is-accessible="true">employeeInd</b> 
+        </field>                              
+	</mapping> 	
+	
+	<mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.collection.CustomerCollectionData</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.CollectionData</class-b> 
+ 
+        <field>
+            <a is-accessible="true">activeAccountsCollectionInd</a>
+            <b is-accessible="true">collectionInd</b>
+        </field> 
+        <field>
+            <a>latestCollectionStartDate</a>
+            <b>lastCollectionStartDate</b>
+        </field> 
+        <field>
+            <a>latestCollectionEndDate</a>
+            <b>lastCollectionEndDate</b>
+        </field>  
+       <field>
+            <a>collectionScore</a>
+            <b>baScore</b>
+        </field>    
+       <field>
+            <a>numberOfAccountsInAgency</a>
+            <b>noOfAccountsInAgency</b>
+        </field> 
+       <field>
+            <a>accountsInAgencyBalance</a>
+            <b>balanceOwingOnAccountsInAgency</b>
+        </field> 
+       <field>
+            <a>latestAgencyAssignmentDate</a>
+            <b>latestAccountsInAgencyDate</b>
+        </field>
+		<field>
+            <a>involuntaryCancelledAccountsBalance</a>
+            <b>balanceOwingOnICA</b>
+        </field>
+		<field>
+            <a>numberOfNSFCheques</a>
+            <b>noOfNSFCheques</b>
+        </field>	
+	</mapping> 
+
+	<mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.creditprofile.ConsumerCreditProfile</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.CreditProfileData</class-b> 
+        <field>
+            <a>personalInfo.employmentStatusCd</a>
+            <b>employmentStatusCd</b>
+        </field>
+        <field>
+            <a>personalInfo.residencyCd</a>
+            <b>residencyCd</b>
+        </field>        
+      <field>
+            <a>personalInfo.creditCheckConsentCd</a>
+            <b>creditCheckConsentCd</b>
+        </field>   
+      <field>
+            <a>personalInfo.birthDate</a>
+            <b>birthDate</b>
+        </field>   
+       <field>
+            <a>personalInfo.underLegalCareCd</a>
+            <b>underLegalCareCd</b>
+        </field>
+        <field>
+            <a>personalInfo.provinceOfCurrentResidenceCd</a>
+            <b>provinceOfCurrentResidence</b>
+        </field>
+      <field>
+            <a>personalInfo.provinceOfCurrentResidenceCd</a>
+            <b>provinceOfCurrentResidence</b>
+        </field>
+        <field>
+		  <a is-accessible="true">bypassMatchIndicator</a>
+		  <b is-accessible="true">bypassMatchIndicator</b>
+		</field>        
+        <field>
+            <a>creditAddress.countryCd</a>
+            <b>countryCd</b>
+        </field>        
+
+        <field>
+            <a>creditWorthiness</a>
+            <b>creditWorthinessData</b>
+        </field> 	
+	</mapping>     
+	<mapping map-null="false"  >
+        <class-a>com.telus.credit.domain.common.CreditBureauResult</class-a>
+        <class-b>com.fico.telus.blaze.creditCommon.CreditBureauResult</class-b>
+        
+        <field custom-converter="com.telus.credit.crda.util.mapping.Date_To_XMLGregorianCalendar_Converter">
+            <a>creationDate</a>
+            <b>creationDate</b> 
+        </field>        
+        <field>
+            <a>adjudicationResult.creditScoreCd</a>
+            <b>adjudicationResult.creditScore</b>
+        </field>     
+        <field>
+            <a>adjudicationResult.creditScoreTypeCd</a>
+            <b>adjudicationResult.creditScoreType</b>
+        </field>         
+		<field>
+		  <a is-accessible="true">adjudicationResult.scoreCardAttributeList</a> 
+		  <b is-accessible="true">adjudicationResult.scoreCardAttributeList</b> 
+		</field>
+        <field>
+            <a>riskIndicator</a>
+            <b>riskIndicator</b>
+        </field>		
+        <field>
+            <a is-accessible="true">riskIndicator.writeOffInd</a>
+            <b is-accessible="true">riskIndicator.writeOffInd</b>
+        </field>
+        <field>
+            <a is-accessible="true">riskIndicator.noHitThinFileInd</a>
+            <b is-accessible="true">riskIndicator.noHitThinFileInd</b>
+        </field>
+        <field>
+            <a is-accessible="true">riskIndicator.trueThinFileInd</a>
+            <b is-accessible="true">riskIndicator.trueThinFileInd</b>
+        </field>
+        <field>
+            <a is-accessible="true">riskIndicator.highRiskThinFileInd</a>
+            <b is-accessible="true">riskIndicator.highRiskThinFileInd</b>
+        </field>                                                              
+        <field>
+            <a is-accessible="true">riskIndicator.bankcrupcyInd</a>
+            <b is-accessible="true">riskIndicator.bankcrupcyInd</b>
+        </field>        
+        <field>
+            <a is-accessible="true">riskIndicator.tempSINInd</a>
+            <b is-accessible="true">riskIndicator.tempSINInd</b>
+        </field>
+        <field>
+            <a is-accessible="true">riskIndicator.underAgeInd</a>
+            <b is-accessible="true">riskIndicator.underAgeInd</b>
+        </field>        
+        <field>
+            <a is-accessible="true">riskIndicator.primaryRiskInd</a>
+            <b is-accessible="true">riskIndicator.primaryRiskInd</b>
+        </field>        
+        <field>
+            <a is-accessible="true">riskIndicator.secondaryRiskInd</a>
+            <b is-accessible="true">riskIndicator.secondaryRiskInd</b>
+        </field>        
+        <field>
+		  <a is-accessible="true">fraudWarningList</a> 
+		  <b is-accessible="true">fraudWarningList</b> 
+		</field>
+ 	</mapping> 
+
+     
+   <mapping map-null="false"  >
+       <class-a>com.fico.telus.blaze.creditCommon.ProductCategory</class-a>
+       <class-b>com.telus.credit.domain.common.ProductCategory</class-b>   
+        <field>
+		  <a is-accessible="true">qualified</a> 
+		  <b is-accessible="true">qualified</b> 
+		</field>         
+     </mapping>
+    
+
+</mappings>

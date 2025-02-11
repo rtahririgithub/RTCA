@@ -1,0 +1,357 @@
+<WL5G3N0:definitions name="WLNCreditProfileManagementService_v2_0.wsdl" targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementService_2" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:WL5G3N2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:WL5G3N3="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:WL5G3N4="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementService_2" xmlns:WL5G3N5="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:documentation>Provides operations to manage Wireline Credit Profile.</WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xs:schema targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementService_2" xmlns:cp="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:iface="http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementService_2" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" schemaLocation="WLNCreditProfileManagementServiceRequestResponse_v2_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" schemaLocation="Exceptions_v1_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="ping_v1.xsd"/>
+    </xs:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="getCreditProfileByCustomerId">
+    <WL5G3N0:part element="WL5G3N1:getCreditProfileByCustomerId" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCreditProfileByCustomerIdResponse">
+    <WL5G3N0:part element="WL5G3N1:getCreditProfileByCustomerIdResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchCreditProfileByCreditId">
+    <WL5G3N0:part element="WL5G3N1:searchCreditProfileByCreditId" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchCreditProfileByCreditIdResponse">
+    <WL5G3N0:part element="WL5G3N1:searchCreditProfileByCreditIdResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="expireCreditProfileByCustomerId">
+    <WL5G3N0:part element="WL5G3N1:expireCreditProfileByCustomerId" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="expireCreditProfileByCustomerIdResponse">
+    <WL5G3N0:part element="WL5G3N1:expireCreditProfileByCustomerIdResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchCreditProfileByCreditAndCustomerData">
+    <WL5G3N0:part element="WL5G3N1:searchCreditProfileByCreditAndCustomerData" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchCreditProfileByCreditAndCustomerDataResponse">
+    <WL5G3N0:part element="WL5G3N1:searchCreditProfileByCreditAndCustomerDataResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createCreditProfile">
+    <WL5G3N0:part element="WL5G3N1:createCreditProfile" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="createCreditProfileResponse">
+    <WL5G3N0:part element="WL5G3N1:createCreditProfileResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="unmergeCreditProfile">
+    <WL5G3N0:part element="WL5G3N1:unmergeCreditProfile" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="unmergeCreditProfileResponse">
+    <WL5G3N0:part element="WL5G3N1:unmergeCreditProfileResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchLinkedCreditProfileList">
+    <WL5G3N0:part element="WL5G3N1:searchLinkedCreditProfileList" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="searchLinkedCreditProfileListResponse">
+    <WL5G3N0:part element="WL5G3N1:searchLinkedCreditProfileListResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part element="WL5G3N2:ping" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part element="WL5G3N2:pingResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ServiceException">
+    <WL5G3N0:part element="WL5G3N3:ServiceException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="PolicyException">
+    <WL5G3N0:part element="WL5G3N3:PolicyException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="WLNCreditProfileManagementService_v2_0_PortType">
+    <WL5G3N0:operation name="getCreditProfileByCustomerId">
+      <WL5G3N0:input message="WL5G3N4:getCreditProfileByCustomerId"/>
+      <WL5G3N0:output message="WL5G3N4:getCreditProfileByCustomerIdResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchCreditProfileByCreditId">
+      <WL5G3N0:input message="WL5G3N4:searchCreditProfileByCreditId"/>
+      <WL5G3N0:output message="WL5G3N4:searchCreditProfileByCreditIdResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="expireCreditProfileByCustomerId">
+      <WL5G3N0:input message="WL5G3N4:expireCreditProfileByCustomerId"/>
+      <WL5G3N0:output message="WL5G3N4:expireCreditProfileByCustomerIdResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchCreditProfileByCreditAndCustomerData">
+      <WL5G3N0:input message="WL5G3N4:searchCreditProfileByCreditAndCustomerData"/>
+      <WL5G3N0:output message="WL5G3N4:searchCreditProfileByCreditAndCustomerDataResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="createCreditProfile">
+      <WL5G3N0:input message="WL5G3N4:createCreditProfile"/>
+      <WL5G3N0:output message="WL5G3N4:createCreditProfileResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="unmergeCreditProfile">
+      <WL5G3N0:input message="WL5G3N4:unmergeCreditProfile"/>
+      <WL5G3N0:output message="WL5G3N4:unmergeCreditProfileResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchLinkedCreditProfileList">
+      <WL5G3N0:input message="WL5G3N4:searchLinkedCreditProfileList"/>
+      <WL5G3N0:output message="WL5G3N4:searchLinkedCreditProfileListResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input message="WL5G3N4:ping"/>
+      <WL5G3N0:output message="WL5G3N4:pingResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+      <WL5G3N0:fault message="WL5G3N4:PolicyException" name="PolicyException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="WLNCreditProfileManagementService_v2_0_SOAP" type="WL5G3N4:WLNCreditProfileManagementService_v2_0_PortType">
+    <WL5G3N5:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="getCreditProfileByCustomerId">
+      <WL5G3N0:documentation>This service operation retrieves primary credit profile for the customer from Credit Management PDS. All secondary credit profiles will be ignored. Resulting Credit Profile will contain the credit identification fields in clear text.
+		RTCA Changes:
+		Modify interface to Return Channel that created customer
+		Modify interface to add "ByPass Match Indicator"
+		RTCA 1.5 Changes:
+		   Return "Province of Current Residence" attribute as part of RTCA 1.5
+		   Return additional data as part of credit worthiness:
+             Last assessment date
+			 First assessment date
+			 Credit Value Effective Date
+			 Credit Report Indicator
+		</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCreditProfileByCustomerId"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchCreditProfileByCreditId">
+      <WL5G3N0:documentation>This service operation retrieves primary credit profiles of the customers that matches on any of five identification fields (SIN, Driver License, Passport Number, Provincial ID, and Healthcare Number) either directly or indirectly with the input credit identification provided by the caller. Inputs and outputs for credit identification fields will be in clear text.
+		RTCA Changes:
+		Modify interface to Return Channel that created customer
+		Modify interface to add "ByPass Match Indicator"</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="searchCreditProfileByCreditId"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="expireCreditProfileByCustomerId">
+      <WL5G3N0:documentation>Expire primary and secondary Credit Profile relationships for given customer.
+		RTCA Changes:
+		Upgrade Ref ODS to Ref PDS for all operations.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="expireCreditProfileByCustomerId"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchCreditProfileByCreditAndCustomerData">
+      <WL5G3N0:documentation>FR566558: Credit Management service shall provide one new search operation to support the customer search by credit profile data:
+
+Input to the operation shall be a list of customer IDs, birth date, credit IDs (SIN, driver license, passport number, provincial ID, health care number)
+Output to the operation shall be a list of credit profile entries from the search result, The list shall include customer ID, birth date, driver license, passport number, provincial ID, health care number
+
+Rules:
+If credit IDs are specified, the search shall retrieve a list of credit profiles whose credit IDs match one or more of the credit IDs entered.
+If a list of customer IDs are specified, the search shall perform credit profile search for the list of customer IDs only.
+
+Note:
+The current recursive search operation which returns a list of "linked" customers matching any of the above five credit IDs cannot be used for this requirement. Special behavior of this recursive search operation: If a Driver License is specified, the service will retrieve a list of customers with matching Driver License. If these customers also have other IDs such as SIN, all customers with matching SIN of these customers will also be retrieved, even though SIN is not entered as the original search criteria.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="searchCreditProfileByCreditAndCustomerData"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="createCreditProfile">
+      <WL5G3N0:documentation> It allows clients to create credit profile for a given customer with the given credit profile data details.
+		It takes credit ids in clear text and will encrypt the credit ids before storing to database.
+		FR573526: createCreditProfile will also take additional data like customer first name, type for credit assessment trigger
+		FR566590: Mandatory check in the Create Credit Profile operation
+		FR566828: Add Bypass Match Indicator
+		FR573547: Add Guarantor information in Credit Profile
+		Assign default credit worthiness
+		RTCA 1.5 Changes:
+		    Accept "Province of Current Residence" attribute as part of RTCA 1.5
+		</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="createCreditProfile"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="unmergeCreditProfile">
+      <WL5G3N0:documentation>In a situation when two or more customers share a same primary Credit Profile (CreditProfile1), this service unlink the input customer (Customer1) from CreditProfile1.
+
+	  CreditProfile1 is active.
+	  CreditProfile1 has been linked with more than one customer as their primary credit profile; Customer1 is one of those customers.
+
+	  High Level Flow:
+	  
+	  Check if this customer has primary CreditProfile. Throw
+	  ObjectNotFoundException if primary CreditProfile is can not be found.
+	  
+	  Check if the primary CreditProfile of this customer is "Merged"
+	  CreditProfile. Throw CreditProfileMgtSvcException if it's not the case.
+	  
+	  Disconnect Customer1 and CreditProfile1
+	  
+	  
+	  Expire all primary and secondary links associated with Customer1, by
+	  calling {@link CreditProfileDao#unlinkAllCreditProfiles}
+	  
+	  Create new primary credit profile for Customer1.
+	  
+	  Create a new "blank" credit profile (CreditProfile2), with credit
+	  value "N". Persist by calling CreditProfileDao.insertCreditProfile
+	  Link CreditProfile2 as primary credit profile of Customer1 by
+	  calling CreditProfileDao.addCreditProfileToCustomer
+	  
+	  
+	  Consolidate guarantor information.
+	  
+	  If Customer1 was guarantor customer, transfer (expire and create new
+	  one) those guarantor records to CreditProfile2. ie. create a
+	  CUSTOMER_GUARANTOR record with all data fields same except
+	  CREDIT_PROFILE_ID. This is achieved by calling
+	  CustomerGuarantorDao#transferUnmergedGuarantor.
+	  
+	  
+	  Maintain credit profile mapping information.
+	  
+	  Create record in credit profile mapping table to indicate that
+	  CreditProfile2 is "unmerged" from CreditProfile1 , by calling
+	  CreditProfileDao#insertUnmergeMapping
+	  
+	  
+	  Synchronize credit value of CreditProfile2 into Enabler CM by
+	  calling
+	  om.telus.credit.adapter.EnablerCmServiceAdapter#updateCreditValue(int, String)}=.
+	  (This has to be done last because it cannot be rolled back.)
+	  
+	  All key fields of CreditProfile2 are blank. i.e. CreditProfile2 has no
+	  link to any CreditIdCard record.
+	 </WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="unmergeCreditProfile"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="searchLinkedCreditProfileList">
+      <WL5G3N0:documentation>This service operation searches for customers which are fully and partially linked to the given customer id and returns their credit profiles. It retuns the basic credit profile data and does not include credit worthiness data.
+		</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="searchLinkedCreditProfileList"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:documentation>
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+    
+  
+  
+    
+      
+    
+  
+</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="ping"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="PolicyException">
+        <WL5G3N5:fault name="PolicyException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="WLNCreditProfileManagementService_v2_0">
+    <WL5G3N0:port binding="WL5G3N4:WLNCreditProfileManagementService_v2_0_SOAP" name="WLNCreditProfileManagementServicePort">
+      <WL5G3N5:address location="http://cm-creditmgmt-west-dv01.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileManagement/WLNCreditProfileManagementService_v2_0"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

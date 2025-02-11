@@ -1,0 +1,16 @@
+<xs:schema xmlns:gwlsa="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetWlsAccountRequestResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetWlsAccountRequestResponse" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:element name="getWlsAccount">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="billingAccountNumber" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getWlsAccountResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

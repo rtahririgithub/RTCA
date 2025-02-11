@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="connections">
+  
+  <!-- =============================================================== -->
+  <!--                SQLPLUS settings                                 -->
+  <!-- =============================================================== -->
+    <group name="sqlplus">
+        <group name="connection">
+            <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+            <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+            <prop name="oraclesid">@SID_CREDIT_MANAGEMENT@</prop>
+            <prop name="dbconnectionvalue">${sqlplus/connection/username}/${sqlplus/connection/password}@${sqlplus/connection/oraclesid}</prop>
+		<group name="cods">
+           		<prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+           		<prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+           		<prop name="oraclesid">@SID_CUSTOMER@</prop>
+           		<prop name="dbconnectionvalue">${sqlplus/connection/cods/username}/${sqlplus/connection/cods/password}@${sqlplus/connection/cods/oraclesid}</prop>
+		</group>
+        </group>
+    </group>
+    
+  <!-- =============================================================== -->
+  <!--            Application DB Credit PDS                           -->
+  <!-- =============================================================== -->
+    
+     <group name="jdbc">
+        <prop name="url">@JDBC_CREDIT_MANAGEMENT@</prop>
+        <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+        <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+    </group>
+
+     <group name="sftx">
+        <prop name="url">@JDBC_CREDIT_MANAGEMENT@</prop>
+        <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+        <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+    </group>
+     <prop name="G_PWRCTR_CAN_LAIRD2">@G_PWRCTR_CAN_LAIRD2@</prop>
+</group>

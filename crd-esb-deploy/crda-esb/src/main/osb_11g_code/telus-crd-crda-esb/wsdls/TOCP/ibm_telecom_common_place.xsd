@@ -1,0 +1,54 @@
+<xs:schema targetNamespace="http://www.ibm.com/telecom/common/schema/place/v3_0" xmlns:base="http://www.ibm.com/telecom/common/schema/base/v3_0" xmlns:bons0="http://www.ibm.com/telecom/common/schema/place_extensions/v3_0" xmlns:bons1="http://www.ibm.com/telecom/common/schema/business_interaction_extensions/v3_0" xmlns:tns="http://www.ibm.com/telecom/common/schema/place/v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/business_interaction_extensions/v3_0" schemaLocation="ibm_telecom_common_business_interaction_extensions.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/place_extensions/v3_0" schemaLocation="ibm_telecom_common_place_extensions.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/common/schema/base/v3_0" schemaLocation="ibm_telecom_common_base.xsd"/>
+    <!-- The type: base.Place -->
+    <xs:complexType abstract="true" name="Place">
+        <xs:complexContent>
+            <xs:extension base="base:EntityWithSpecification">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: base.GeographicPlace -->
+    <xs:complexType abstract="true" name="GeographicPlace">
+        <xs:complexContent>
+            <xs:extension base="tns:Place">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType abstract="true" name="AbstractGeographicAddress">
+        <xs:complexContent>
+            <xs:extension base="tns:GeographicPlace">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: base.GeographicAddress -->
+    <xs:complexType name="GeographicAddress">
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractGeographicAddress">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Country" type="xs:string"/>
+                    <xs:element minOccurs="0" name="StateOrProvince" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Locality" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Postcode" type="xs:string"/>
+                    <xs:element minOccurs="0" name="GeographicAddressExtensions" type="bons0:GeographicAddressExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- The type: customer.com.tsSID61.tsSID61.Product -->
+    <xs:complexType name="Site">
+        <xs:complexContent>
+            <xs:extension base="tns:GeographicPlace">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Address" type="tns:GeographicAddress"/>
+                    <xs:element minOccurs="0" name="SiteExtensions" type="bons1:SiteExtensions"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

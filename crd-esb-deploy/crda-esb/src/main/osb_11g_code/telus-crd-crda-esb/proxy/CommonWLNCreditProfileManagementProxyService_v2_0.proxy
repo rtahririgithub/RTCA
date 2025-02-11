@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
+      <con4:wsdl ref="telus-crd-crda-esb/wsdls/WLNCreditProfileManagementProxyService_v2_0"/>
+      <con4:port>
+        <con4:name>WLNCreditProfileManagementProxyServicePort</con4:name>
+        <con4:namespace>http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementProxyService_2</con4:namespace>
+      </con4:port>
+      <con4:selector type="SOAP body"/>
+      <con4:WSI-compliant>false</con4:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-3851247124846174626-420ad58c.1427c7cbbd6.-7735">
+    <con:pipeline type="request" name="assessCreditWorthiness_PipelinePairNode_request">
+      <con:stage name="Validation_Stage" errorHandler="_onErrorHandler-6444467027900665385--3e605d6a.141db8801e9.-6b3d">
+        <con:context xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v1" prefix="wln"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln1"/>
+        </con:context>
+        <con:actions xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+          <con1:validate>
+            <con2:comment>Schema validation of assessCreditWorthiness in input message.</con2:comment>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-69d0</con2:id>
+            <con1:schema ref="telus-crd-crda-esb/wsdls/WLNCreditProfileManagementProxyServiceRequestResponse_v2_0"/>
+            <con1:schemaElement xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v1" xmlns:wln1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">wln1:assessCreditWorthiness</con1:schemaElement>
+            <con1:varName>body</con1:varName>
+            <con1:location>
+              <con2:xpathText>./wln1:assessCreditWorthiness</con2:xpathText>
+            </con1:location>
+          </con1:validate>
+          <con1:assign varName="FullAssessmentRoutingVar" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:comment>Loads the XQuery resource FullaAssessmentRoutingConfiguration in variable FullAssessmentRoutingVar</con2:comment>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-69d2</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/FullAssessmentRoutingConfiguration"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="varAssessmentSubType" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:comment>stores the value of credit assessment sub type element in the payload in ‘varAssessmentSubType’ variable using the xpath</con2:comment>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-69d7</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='creditAssessmentSubTypeCd'])[1]/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:ifThenElse>
+            <con2:comment>validate asmt type/subtype</con2:comment>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-69b8</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:exists($FullAssessmentRoutingVar/CreditAssessmentSubType[@value=($body//*[local-name()='creditAssessmentSubTypeCd'])[1]/text()])</con2:xqueryText>
+              </con1:condition>
+              <con1:actions/>
+            </con1:case>
+            <con1:default>
+              <con1:Error>
+                <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-69a0</con2:id>
+                <con1:errCode>CRDW-DATA-001</con1:errCode>
+                <con1:message>CommonWLNCreditProfileManagementProxyService_PS
+Input request valiation error. Invalid credit assessment type/subtype.</con1:message>
+              </con1:Error>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Dormant_AssessCreditWorthiness_stage">
+        <con:context>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" prefix="wir"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" prefix="ent"/>
+        </con:context>
+        <con:actions>
+          <con6:assign varName="isDormantCreditWorthinessResource" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:comment>Load the dormantAssessCreditWorthinessResponse resource</con1:comment>
+            <con1:id>_ActionId-5858587097272047181-257ad898.141a2ebe4d8.-70e5</con1:id>
+            <con6:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="telus-crd-crda-esb/xquery/dormant/isDormantCreditWorthiness"/>
+              </con1:xqueryTransform>
+            </con6:expr>
+          </con6:assign>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-5858587097272047181-257ad898.141a2ebe4d8.-70e7</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:lower-case($isDormantCreditWorthinessResource/row[key/text()='dormantStrategy']/value/text()) ='on'</con2:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con1:assign varName="dormantAssessCreditWorthinessResponse">
+                  <con2:comment>populate some of the values in dormantAssessCreditWorthinessResponse with input xmlload</con2:comment>
+                  <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7f62</con2:id>
+                  <con1:expr>
+                    <con2:xqueryTransform>
+                      <con2:resource ref="telus-crd-crda-esb/xquery/dormant/dormantAssessCreditWorthinessResponse"/>
+                      <con2:param name="assessCreditWorthiness1">
+                        <con2:path>$body/wln:assessCreditWorthiness</con2:path>
+                      </con2:param>
+                    </con2:xqueryTransform>
+                  </con1:expr>
+                </con1:assign>
+                <con1:replace varName="body" contents-only="true">
+                  <con2:comment>replace operation response body with dormantAssessCreditWorthinessResponse</con2:comment>
+                  <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7daf</con2:id>
+                  <con1:location>
+                    <con2:xpathText>.</con2:xpathText>
+                  </con1:location>
+                  <con1:expr>
+                    <con2:xqueryText>$dormantAssessCreditWorthinessResponse</con2:xqueryText>
+                  </con1:expr>
+                </con1:replace>
+                <con2:reply>
+                  <con2:comment>reply/return dormantAssessCreditWorthinessResponse</con2:comment>
+                  <con2:id>_ActionId-5858587097272047181-257ad898.141a2ebe4d8.-6eba</con2:id>
+                </con2:reply>
+              </con1:actions>
+            </con1:case>
+            <con1:default/>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="assessCreditWorthiness_stage">
+        <con:context>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" prefix="ent"/>
+        </con:context>
+        <con:actions>
+          <con1:wsCallout>
+            <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7be3</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/router/AssessCreditWorthiness_Router_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>assessCreditWorthiness</con1:operation>
+            <con1:request>
+              <con1:body>$assessCreditWorthinessRequest</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>assessCreditWorthinessResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:ifThenElse>
+                <con2:comment>if auditinfo originatorApplicationId is missing, use applicationID</con2:comment>
+                <con2:id>_ActionId-7918834557395811344--7ac96034.14377f78719.-7763</con2:id>
+                <con1:case>
+                  <con1:condition>
+                    <con2:xqueryText>fn:empty($body/wln:assessCreditWorthiness/wln:auditInfo/ent:originatorApplicationId/text())</con2:xqueryText>
+                  </con1:condition>
+                  <con1:actions>
+                    <con6:insert varName="body" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                      <con1:id>_ActionId-7918834557395811344--7ac96034.14377f78719.-76d1</con1:id>
+                      <con6:location>
+                        <con1:xpathText>(//*[local-name()='auditInfo'])[1]</con1:xpathText>
+                      </con6:location>
+                      <con6:where>last-child</con6:where>
+                      <con6:expr>
+                        <con1:xqueryText>&lt;ent:originatorApplicationId>
+{$body/wln:assessCreditWorthiness/wln:assessCreditWorthinessRequest/wln:applicationID/text()}
+&lt;/ent:originatorApplicationId></con1:xqueryText>
+                      </con6:expr>
+                    </con6:insert>
+                  </con1:actions>
+                </con1:case>
+                <con1:default/>
+              </con1:ifThenElse>
+              <con1:assign varName="assessCreditWorthinessRequest">
+                <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7bad</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>$body/wln:assessCreditWorthiness</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-79be</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>$assessCreditWorthinessResponse</con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con1:responseTransform>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="assessCreditWorthiness_PipelinePairNode_response"/>
+    <con:pipeline type="request" name="overrideCreditWorthiness_PipelinePairNode_request">
+      <con:stage name="Validation_Stage" errorHandler="_onErrorHandler-6444467027900665385--3e605d6a.141db8801e9.-6a87">
+        <con:context xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v1" prefix="wln"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln1"/>
+        </con:context>
+        <con:actions xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+          <con1:validate>
+            <con2:comment>Schema validation of assessCreditWorthiness in input message.</con2:comment>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-68ba</con2:id>
+            <con1:schema ref="telus-crd-crda-esb/wsdls/WLNCreditProfileManagementProxyServiceRequestResponse_v2_0"/>
+            <con1:schemaElement xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v1" xmlns:wln1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2">wln1:overrideCreditWorthiness</con1:schemaElement>
+            <con1:varName>body</con1:varName>
+            <con1:location>
+              <con2:xpathText>./wln1:overrideCreditWorthiness</con2:xpathText>
+            </con1:location>
+          </con1:validate>
+          <con1:assign varName="OverrideAssessmentRoutingVar" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:comment>Loads the XQuery resource FullaAssessmentRoutingConfiguration in variable FullAssessmentRoutingVar</con2:comment>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-68b8</con2:id>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/OverrideAssessmentRoutingConfiguration"/>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="varAssessmentSubType" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:comment>stores the value of credit assessment sub type element in the payload in ‘varAssessmentSubType’ variable using the xpath</con2:comment>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-68be</con2:id>
+            <con1:expr>
+              <con2:xqueryText>($body//*[local-name()='creditAssessmentSubTypeCd'])[1]/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-68bd</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:exists($OverrideAssessmentRoutingVar/CreditAssessmentSubType[@value=($body//*[local-name()='creditAssessmentSubTypeCd'])[1]/text()])</con2:xqueryText>
+              </con1:condition>
+              <con1:actions/>
+            </con1:case>
+            <con1:default>
+              <con1:Error>
+                <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-68bc</con2:id>
+                <con1:errCode>CRDW-DATA-001</con1:errCode>
+                <con1:message>Input request valiation error. Invalid credit assessment type/subtype.</con1:message>
+              </con1:Error>
+            </con1:default>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="isDormant_overrideCreditWorthiness_stage">
+        <con:context>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" prefix="wir"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" prefix="ent"/>
+        </con:context>
+        <con:actions>
+          <con6:assign varName="isDormantCreditWorthinessResource" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:comment>Load the dormantAssessCreditWorthinessResponse resource</con1:comment>
+            <con1:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7c04</con1:id>
+            <con6:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="telus-crd-crda-esb/xquery/dormant/isDormantCreditWorthiness"/>
+              </con1:xqueryTransform>
+            </con6:expr>
+          </con6:assign>
+          <con1:ifThenElse>
+            <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7c03</con2:id>
+            <con1:case>
+              <con1:condition>
+                <con2:xqueryText>fn:lower-case($isDormantCreditWorthinessResource/row[key/text()='dormantStrategy']/value/text()) ='on'</con2:xqueryText>
+              </con1:condition>
+              <con1:actions>
+                <con1:assign varName="dormantAssessCreditWorthinessResponse">
+                  <con2:comment>populate some of the values in dormantAssessCreditWorthinessResponse with input xmlload</con2:comment>
+                  <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7c02</con2:id>
+                  <con1:expr>
+                    <con2:xqueryTransform>
+                      <con2:resource ref="telus-crd-crda-esb/xquery/dormant/dormantOverrideCreditWorthinessResponse"/>
+                      <con2:param name="overrideCreditWorthiness1">
+                        <con2:path>$body/wln:overrideCreditWorthiness</con2:path>
+                      </con2:param>
+                    </con2:xqueryTransform>
+                  </con1:expr>
+                </con1:assign>
+                <con1:replace varName="body" contents-only="true">
+                  <con2:comment>replace operation response body with dormantAssessCreditWorthinessResponse</con2:comment>
+                  <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7c01</con2:id>
+                  <con1:location>
+                    <con2:xpathText>.</con2:xpathText>
+                  </con1:location>
+                  <con1:expr>
+                    <con2:xqueryText>$dormantAssessCreditWorthinessResponse</con2:xqueryText>
+                  </con1:expr>
+                </con1:replace>
+                <con2:reply>
+                  <con2:comment>reply/return dormantAssessCreditWorthinessResponse</con2:comment>
+                  <con2:id>_ActionId-7470703265720747335-43cc6eda.141af7970f3.-7c00</con2:id>
+                </con2:reply>
+              </con1:actions>
+            </con1:case>
+            <con1:default/>
+          </con1:ifThenElse>
+        </con:actions>
+      </con:stage>
+      <con:stage name="overrideCreditWorthiness_stage">
+        <con:context>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" prefix="wln"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" prefix="ent"/>
+        </con:context>
+        <con:actions>
+          <con1:wsCallout>
+            <con2:id>_ActionId-6468831982523906430-6ee57e4f.141c7fd57b9.-7c50</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/router/OverrideCreditWorthiness_Router_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>overrideCreditWorthiness</con1:operation>
+            <con1:request>
+              <con1:body>$overrideCreditWorthinessRequest</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body>overrideCreditWorthinessResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:ifThenElse>
+                <con2:id>_ActionId-8340905928707145776-3e4eea32.1437da47a65.-7f90</con2:id>
+                <con1:case>
+                  <con1:condition>
+                    <con2:xqueryText>fn:empty($body/wln:overrideCreditWorthiness/wln:auditInfo/ent:originatorApplicationId/text())</con2:xqueryText>
+                  </con1:condition>
+                  <con1:actions>
+                    <con6:insert varName="body" xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+                      <con1:id>_ActionId-8340905928707145776-3e4eea32.1437da47a65.-7f8f</con1:id>
+                      <con6:location>
+                        <con1:xpathText>(//*[local-name()='auditInfo'])[1]</con1:xpathText>
+                      </con6:location>
+                      <con6:where>last-child</con6:where>
+                      <con6:expr>
+                        <con1:xqueryText>&lt;ent:originatorApplicationId>
+{$body/wln:overrideCreditWorthiness/wln:overrideCreditWorthinessRequest/wln:applicationID/text()}
+&lt;/ent:originatorApplicationId></con1:xqueryText>
+                      </con6:expr>
+                    </con6:insert>
+                  </con1:actions>
+                </con1:case>
+                <con1:default/>
+              </con1:ifThenElse>
+              <con1:assign varName="overrideCreditWorthinessRequest">
+                <con2:id>_ActionId-6468831982523906430-6ee57e4f.141c7fd57b9.-7c52</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>$body/wln:overrideCreditWorthiness</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform>
+              <con1:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-6468831982523906430-6ee57e4f.141c7fd57b9.-7c51</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>$overrideCreditWorthinessResponse</con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con1:responseTransform>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="overrideCreditWorthiness_PipelinePairNode_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-6444467027900665385--3e605d6a.141db8801e9.-6b3d">
+      <con:stage name="Valiadtion_ErrorHandler_Stage1">
+        <con:comment>validation of assessCreditWorthiness in input message.</con:comment>
+        <con:context xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config"/>
+        <con:actions xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+          <con4:log>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-6b03</con2:id>
+            <con4:logLevel>error</con4:logLevel>
+            <con4:expr>
+              <con2:xqueryText>'CommonWLNCreditProfileManagementProxyService_ErrorHandler_AssessCreditWorthiness_Schema_Validation customerID=',($body//*[local-name()='customerID'])[1]/text()
+,
+$fault 
+,
+$assessCreditWorthinessRequest
+,
+$assessCreditWorthinessResponse</con2:xqueryText>
+            </con4:expr>
+            <con4:message/>
+          </con4:log>
+          <con1:replace varName="body">
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-6b02</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText><![CDATA[<soap-env:Body xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+       <soap-env:Fault>
+           <faultcode>soap-env:Client</faultcode>
+           <faultstring>assessCreditWorthiness input request valiation error.</faultstring>
+           <detail>
+               <exc:PolicyException xmlns:exc="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xsi:schemaLocation="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0 Exceptions_v1_0.xsd" >
+				<exc:errorCode>CRDW-DATA-001</exc:errorCode>
+				<exc:errorMessage>{$fault/ctx:reason/text()}  {$fault/ctx:details/*}</exc:errorMessage>
+               </exc:PolicyException>
+           </detail>
+       </soap-env:Fault>
+   </soap-env:Body>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+          <con2:reply isError="true">
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-6b01</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-6444467027900665385--3e605d6a.141db8801e9.-6a87">
+      <con:stage name="Valiadtion_ErrorHandler_Stage11">
+        <con:comment>validation of assessCreditWorthiness in input message.</con:comment>
+        <con:context xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config"/>
+        <con:actions xmlns:con5="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config">
+          <con4:log>
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-6a14</con2:id>
+            <con4:logLevel>error</con4:logLevel>
+            <con4:expr>
+              <con2:xqueryText>'CommonWLNCreditProfileManagementProxyService_ErrorHandler_OverrideCreditWorthiness_Schema_Validation customerID=',($body//*[local-name()='customerID'])[1]/text()
+,
+$fault 
+,
+$overrideCreditWorthinessRequest
+,
+$overrideCreditWorthinessResponse</con2:xqueryText>
+            </con4:expr>
+            <con4:message/>
+          </con4:log>
+          <con1:replace varName="body">
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-6a13</con2:id>
+            <con1:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryText><![CDATA[<soap-env:Body xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+       <soap-env:Fault>
+           <faultcode>soap-env:Client</faultcode>
+           <faultstring>overrideCreditWorthiness input request valiation error.</faultstring>
+           <detail>
+               <exc:PolicyException xmlns:exc="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xsi:schemaLocation="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0 Exceptions_v1_0.xsd" >
+				<exc:errorCode>CRDW-DATA-001</exc:errorCode>
+				<exc:errorMessage>{$fault/ctx:reason/text()}  {$fault/ctx:details/*}</exc:errorMessage>
+               </exc:PolicyException>
+           </detail>
+       </soap-env:Fault>
+   </soap-env:Body>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:replace>
+          <con2:reply isError="true">
+            <con2:id>_ActionId-6444467027900665385--3e605d6a.141db8801e9.-6a12</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-3851247124846174626-420ad58c.1427c7cbbd6.-7735">
+      <con:stage name="CommonWLNCreditProfileManagementProxyService_ErrorHandler_stage1">
+        <con:context/>
+        <con:actions>
+          <con3:log>
+            <con2:id>_ActionId-3851247124846174626-420ad58c.1427c7cbbd6.-771c</con2:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>'CommonWLNCreditProfileManagementProxyService_ErrorHandler_FaultContent'
+,
+'[customerID=',
+($body//*[local-name()='customerID'])[1]/text()
+,'] '
+,
+$fault</con2:xqueryText>
+            </con3:expr>
+            <con3:message>CommonWLNCreditProfileManagementProxyService_ErrorHandler</con3:message>
+          </con3:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="CommonWLNCreditProfileManagementProxyService_BranchNode">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="assessCreditWorthiness">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="assessCreditWorthiness_PipelinePairNode">
+                <con:request>assessCreditWorthiness_PipelinePairNode_request</con:request>
+                <con:response>assessCreditWorthiness_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="overrideCreditWorthiness">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="overrideCreditWorthiness_PipelinePairNode">
+                <con:request>overrideCreditWorthiness_PipelinePairNode_request</con:request>
+                <con:response>overrideCreditWorthiness_PipelinePairNode_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

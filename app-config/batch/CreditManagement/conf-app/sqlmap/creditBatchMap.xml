@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap 
+          PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+          "http://www.ibatis.com/dtd/sql-map-2.dtd"  >
+
+<sqlMap namespace="CreditBatch">
+
+  <typeAlias alias="CreditProfile" type="com.telus.credit.domain.CreditProfile" />
+  <typeAlias alias="CreditValue" type="com.telus.credit.domain.CreditValue" />
+  <typeAlias alias="CreditAddress" type="com.telus.credit.domain.CreditAddress" />
+  <typeAlias alias="CreditIDCard" type="com.telus.credit.domain.CreditIDCard" />
+  <typeAlias alias="CreditProfileCustomerMap" type="com.telus.credit.batch.util.CreditProfileCustomerMap" />
+  <typeAlias alias="CustomerGuarantor" type="com.telus.credit.domain.CustomerGuarantor" />
+  <typeAlias alias="CreditProfileMap" type="com.telus.credit.batch.util.CreditProfileMap" />
+  
+  
+  <resultMap id="select-creditprofile-result" class="CreditProfile">
+	<result property="_id" column="CREDIT_PROFILE_ID"/>
+	<result property="creditCheckConsentCode" column="CRED_CHECK_CONSENT_CD" />
+	<result property="employmentStatusCode" column="EMPLOYMENT_STATUS_CD" />
+	<result property="residencyCode" column="RESIDENCY_CD" />
+	<result property="primaryCreditCardCode" column="PRIM_CRED_CARD_TYP_CD" />
+	<result property="secondaryCreditCardCode" column="SEC_CRED_CARD_ISS_CO_TYP_CD" />
+	<result property="underLegalCareCode" column="LEGAL_CARE_CD" />
+	<result property="businessLastUpdateTimestamp" column="BUS_LAST_UPDT_TS"/>
+	<result property="birthdate" column="BIRTH_DT"/>
+	<!-- result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/-->
+	<result property="creditValue" column="CREDIT_PROFILE_ID" select="get_credit_value_by_credit_profile_id"/>
+	<result property="creditAddress" column="CREDIT_PROFILE_ID" select="get_credit_address_by_credit_profile_id"/>
+	<result property="creditIDCards" column="CREDIT_PROFILE_ID" select="get_credit_id_card_by_credit_profile_id"/>
+  </resultMap>
+
+  <resultMap id="select-creditvalue-result" class="CreditValue">
+	<result property="_id" column="CREDIT_VALUE_ID"/>
+	<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+	<result property="creditValueCode" column="CREDIT_VALUE_CD"/>
+	<result property="comment" column="COMMENT_TXT"/>
+	<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+  </resultMap>
+
+  <resultMap id="select-creditaddress-result" class="CreditAddress">
+	<result property="_id" column="CPROFL_ADDRESS_ID"/>
+	<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+	<result property="addressTypeCode" column="CPROFL_ADDRESS_TYP_CD"/>
+	<result property="addressLineOne" column="RENDERED_ADDR_LN_1_TXT"/>
+	<result property="addressLineTwo" column="RENDERED_ADDR_LN_2_TXT"/>
+	<result property="addressLineThree" column="RENDERED_ADDR_LN_3_TXT"/>
+	<result property="addressLineFour" column="RENDERED_ADDR_LN_4_TXT"/>
+	<result property="addressLineFive" column="RENDERED_ADDR_LN_5_TXT"/>
+	<result property="city" column="MUNIC_NM"/>
+	<result property="postalCode" column="POSTAL_ZIP_CD_TXT"/>
+	<result property="provinceCode" column="PROVINCE_CD"/>
+	<result property="countryCode" column="COUNTRY_CD"/>
+	<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+  </resultMap>
+	
+  <resultMap id="select-credit_id_card-result" class="CreditIDCard">
+	<result property="_id" column="CPROFL_IDENTIFICATION_ID"/>
+	<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+	<result property="idTypeCode" column="IDENTIFICATION_TYP_CD"/>
+	<result property="provinceCode" column="PROVINCE_CD"/>
+	<result property="countryCode" column="COUNTRY_CD"/>
+	<result property="provinceCode" column="PROVINCE_CD"/>
+	<result property="idNumber" column="IDENTIFICATION_NUM"/>
+	<result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+  </resultMap>
+  
+   <resultMap id="select-creditProfileCustomerMap" class="CreditProfileCustomerMap">
+	<result property="creditProfileId" column="CREDIT_PROFILE_ID"/>
+	<result property="customerId" column="CUSTOMER_ID" />
+	<result property="profileCustomerMapTypeCode" column="CPROFL_CUST_MAP_TYP_CD" />
+  </resultMap>
+  
+   <resultMap id="select-customerGuarantor" class="CustomerGuarantor">
+	 <result property="_id" column="CUSTOMER_GUARANTOR_ID"/>
+	 <result property="guarantorCreditProfileId" column="CREDIT_PROFILE_ID" />
+	 <result property="comment" column="REMARKS_TXT" />
+	 <result property="expiryDate" column="C90_EXPIRY_DT" />
+	 <result property="guaranteedAmount" column="GUARANTEED_AMT" />
+	 <result property="guaranteedCustomerId" column="GUARANTEED_CUSTOMER_ID" />
+	 <result property="guarantorCustomerId" column="GUARANTOR_CUSTOMER_ID" />
+	 <result property="guarantorFullName" column="C90_FULL_NM" />
+	 <result property="guarantorPhoneNumber" column="GUARANTOR_PHONE_NUM" />
+	 <result property="referenceNumber" column="C90_REFERENCE_NUM" />
+	 <result property="lastUpdateTimestamp" column="LAST_UPDT_TS"/>
+  </resultMap>
+  
+  <resultMap id="select-creditProfileMap" class="CreditProfileMap">
+	<result property="creditProfileFromId" column="CPROFL_FROM_ID"/>
+	<result property="creditProfileToId" column="CPROFL_TO_ID" />
+	<result property="profileMapTypeCode" column="CPROFL_MAPPING_TYP_CD" />
+  </resultMap>
+
+ <select id="getCreditProfileByProfileId" parameterClass="java.lang.String" resultMap="select-creditprofile-result">
+	select  
+		cp.CREDIT_PROFILE_ID, 
+		cp.BUS_LAST_UPDT_TS, 
+		cci.CRED_CHECK_CONSENT_CD,
+		cci.EMPLOYMENT_STATUS_CD,
+		cci.RESIDENCY_CD,
+		cci.PRIM_CRED_CARD_TYP_CD,
+		cci.SEC_CRED_CARD_ISS_CO_TYP_CD,
+		cci.LEGAL_CARE_CD,
+		cci.BIRTH_DT
+	from 
+		CREDIT_PROFILE cp, CPROFL_CHARSTC_INDVDL cci
+	where 
+		cp.CREDIT_PROFILE_ID=cci.CREDIT_PROFILE_ID
+		and cp.CPROFL_STATUS_CD='A' 
+		and cp.CPROFL_FORMAT_CD='P' 
+		and cci.CREDIT_PROFILE_ID= #value# 
+		and cci.EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')
+	</select>
+
+	<select id="get_credit_value_by_credit_profile_id" parameterClass="java.lang.String" resultMap="select-creditvalue-result">
+	select  
+		CREDIT_VALUE_ID, 
+		CREDIT_PROFILE_ID,
+		LAST_UPDT_TS,
+		CREDIT_VALUE_CD, 
+		COMMENT_TXT 
+	from 
+		CREDIT_VALUE 
+	where 
+		EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')
+		and CREDIT_PROFILE_ID= #value#
+	</select>
+
+	<select id="get_credit_address_by_credit_profile_id" parameterClass="java.lang.String" resultMap="select-creditaddress-result">
+	select
+		CPROFL_ADDRESS_ID,
+		CREDIT_PROFILE_ID,
+		CPROFL_ADDRESS_TYP_CD,
+		RENDERED_ADDR_LN_1_TXT,
+		RENDERED_ADDR_LN_2_TXT,
+		RENDERED_ADDR_LN_3_TXT,
+		RENDERED_ADDR_LN_4_TXT,
+		RENDERED_ADDR_LN_5_TXT,
+		MUNIC_NM,
+		POSTAL_ZIP_CD_TXT,
+		PROVINCE_CD,
+		COUNTRY_CD,
+		LAST_UPDT_TS
+	from 
+		CPROFL_ADDRESS
+	where
+		CREDIT_PROFILE_ID= #value#
+		and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')
+	</select>
+	
+	<select id="get_credit_id_card_by_credit_profile_id" parameterClass="java.lang.String" resultMap="select-credit_id_card-result">
+	select 
+		CPROFL_IDENTIFICATION_ID,
+		CREDIT_PROFILE_ID,
+		IDENTIFICATION_TYP_CD,
+		PROVINCE_CD,
+		COUNTRY_CD,
+		IDENTIFICATION_NUM,
+		LAST_UPDT_TS
+	from
+		CPROFL_IDENTIFICATION
+	where
+		CREDIT_PROFILE_ID= #value#
+		and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')	
+	</select>
+	
+	<update id="expireCreditProfile" parameterClass="java.util.HashMap">
+	update CPROFL_CHARSTC_INDVDL
+    set   EFF_STOP_DTM = SYSTIMESTAMP,
+          LAST_UPDT_TS = SYSTIMESTAMP,
+		  LAST_UPDT_USER_ID = #userId#  
+    where CREDIT_PROFILE_ID = #creditProfile._id# 	
+    and   EFF_STOP_DTM = TO_TIMESTAMP('44441231','YYYYMMDD')
+	</update>
+	
+	<insert id="insertCreditProfile" parameterClass="java.util.HashMap">
+	insert into CPROFL_CHARSTC_INDVDL 
+  			( 	
+  			CPROFL_CHARSTC_INDVDL_ID, 
+			CREDIT_PROFILE_ID, 
+			BIRTH_DT, 
+			PRIM_CRED_CARD_TYP_CD, 
+			EMPLOYMENT_STATUS_CD,
+			RESIDENCY_CD,
+			LEGAL_CARE_CD,
+			CRED_CHECK_CONSENT_CD,
+			SEC_CRED_CARD_ISS_CO_TYP_CD,
+			EFF_START_DTM, 
+			CREATE_TS, 
+			CREATE_USER_ID,  
+			LAST_UPDT_TS,  
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID
+ 			) 
+  		values  
+    		( 
+			CPROFL_CHARSTC_INDVDL_ID_SEQ.NEXTVAL,
+			#creditProfile._id#,
+			#creditProfile.birthdate#, 
+			NVL(#creditProfile.primaryCreditCardCode#, 'NA'),
+			NVL(#creditProfile.employmentStatusCode#, 'NA'),
+			NVL(#creditProfile.residencyCode#, 'NA'),
+			NVL(#creditProfile.underLegalCareCode#, 'NA'),
+			NVL(#creditProfile.creditCheckConsentCode#, 'NA'),
+			NVL(#creditProfile.secondaryCreditCardCode#, 'NA'),
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#dataSrcId#   
+    		)		
+	</insert>
+	
+	<update id="updateCreditProfileTimeStamp" parameterClass="java.util.HashMap">
+  		update  
+  			CREDIT_PROFILE 
+  		set  
+			BUS_LAST_UPDT_TS = SYSTIMESTAMP,  
+			BUS_LAST_UPDT_USER_ID = #userId#  
+  		where  
+			CREDIT_PROFILE_ID = #creditProfileId#
+	</update>
+	
+	<insert id="insertCreditAddress" parameterClass="java.util.HashMap">
+	insert into CPROFL_ADDRESS 
+  			( 	
+  			CPROFL_ADDRESS_ID,  
+			CREDIT_PROFILE_ID,  
+			MUNIC_NM,  
+			POSTAL_ZIP_CD_TXT,  
+			RENDERED_ADDR_LN_1_TXT, 
+			RENDERED_ADDR_LN_2_TXT, 
+			RENDERED_ADDR_LN_3_TXT, 
+			RENDERED_ADDR_LN_4_TXT, 
+			RENDERED_ADDR_LN_5_TXT, 
+			CPROFL_ADDRESS_TYP_CD, 
+			PROVINCE_CD, 
+			COUNTRY_CD, 
+			EFF_START_DTM, 
+			CREATE_TS, 
+			CREATE_USER_ID,  
+			LAST_UPDT_TS,  
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID 
+ 			) 
+  		values 
+    		( 
+			CPROFL_ADDRESS_ID_SEQ.NEXTVAL, 
+			#creditAddress.creditProfileId#,  
+			#creditAddress.city#,  
+			#creditAddress.postalCode#, 
+			#creditAddress.addressLineOne#, 
+			#creditAddress.addressLineTwo#, 
+			#creditAddress.addressLineThree#, 
+			#creditAddress.addressLineFour#, 	
+			#creditAddress.addressLineFive#, 
+			#creditAddress.addressTypeCode#,
+			#creditAddress.provinceCode#,  
+			#creditAddress.countryCode#,  
+			SYSTIMESTAMP, 
+			SYSTIMESTAMP, 
+			#userId#, 
+			SYSTIMESTAMP, 
+			#userId#,
+			#dataSrcId#  
+    		)
+	</insert>
+    
+    <insert id="insertCreditIDCard" parameterClass="java.util.HashMap">
+    insert into CPROFL_IDENTIFICATION 
+  			( 	
+  			CPROFL_IDENTIFICATION_ID,  
+			CREDIT_PROFILE_ID,  
+			IDENTIFICATION_TYP_CD, 
+			IDENTIFICATION_NUM, 
+			PROVINCE_CD, 
+			COUNTRY_CD, 
+			EFF_START_DTM, 
+			CREATE_TS, 
+			CREATE_USER_ID,  
+			LAST_UPDT_TS,  
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID 
+ 			) 
+  		values  
+    		( 
+			CPROFL_IDENTIFICATION_ID_SEQ.NEXTVAL, 
+			#creditIDCard.creditProfileId#,  
+			#creditIDCard.idTypeCode#, 
+			#creditIDCard.idNumber#, 
+			#creditIDCard.provinceCode#,  
+			#creditIDCard.countryCode#,  
+			SYSTIMESTAMP,     
+			SYSTIMESTAMP, 
+			#userId#, 
+			SYSTIMESTAMP, 
+			#userId#,
+			#dataSrcId# 
+    		)
+    </insert>
+    
+    <!--********************CPROFL_CUSTOMER_MAP************************************ -->
+    <select id="getCustomerListByProfileId" parameterClass="java.util.HashMap" resultMap="select-creditProfileCustomerMap">
+	select  
+		CREDIT_PROFILE_ID, 
+		CUSTOMER_ID, 
+		CPROFL_CUST_MAP_TYP_CD 
+	from 
+		CPROFL_CUSTOMER_MAP 
+	where 
+		CREDIT_PROFILE_ID= #profileId# 
+		and CPROFL_CUST_MAP_TYP_CD=#mapType# 
+		and TO_CHAR(EFF_STOP_DTM, 'YYYYMMDD')='44441231'  
+	order by CREDIT_PROFILE_ID 		
+	</select>
+	
+	<update id="expireCreditProfileCustomerMap" parameterClass="CreditProfileCustomerMap">
+  		update  
+  			CPROFL_CUSTOMER_MAP 
+  		set  
+  		    EFF_STOP_DTM = SYSTIMESTAMP, 
+			LAST_UPDT_TS = SYSTIMESTAMP,  
+			LAST_UPDT_USER_ID = #userId#  
+  		where  
+			CREDIT_PROFILE_ID = #creditProfileId#  
+		and	CUSTOMER_ID = #customerId# 
+		and	CPROFL_CUST_MAP_TYP_CD= #profileCustomerMapTypeCode# 
+		and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')
+	</update>
+	
+	<select id="getAllLinksByProfileId" parameterClass="java.lang.String" resultMap="select-creditProfileCustomerMap">
+	select 
+		CREDIT_PROFILE_ID,
+		CUSTOMER_ID,
+		CPROFL_CUST_MAP_TYP_CD 
+	from 
+		CPROFL_CUSTOMER_MAP 
+	where
+		CREDIT_PROFILE_ID= #value#  
+		and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')
+	</select>
+	
+	<insert id="insertCreditProfileCustomerMap" parameterClass="CreditProfileCustomerMap">
+  	 insert into CPROFL_CUSTOMER_MAP 
+  			( 	
+  			CPROFL_CUSTOMER_MAP_ID, 
+			CREDIT_PROFILE_ID, 
+			CUSTOMER_ID,
+			EFF_START_DTM,
+			POPULATE_METHOD_CD,
+			CPROFL_CUST_MAP_TYP_CD,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID  
+ 			) 
+  		values  
+    		(
+			CPROFL_CUSTOMER_MAP_ID_SEQ.NEXTVAL,
+			#creditProfileId#,
+			#customerId#, 
+			SYSTIMESTAMP,
+			'BP',
+			#profileCustomerMapTypeCode#,
+			SYSTIMESTAMP,
+			#userId#, 
+			SYSTIMESTAMP,
+			#userId#,
+			#dataSrcId# 
+    		)
+	</insert>
+	
+	<select id="getProfileListByCustomerId" parameterClass="java.util.HashMap" resultMap="select-creditProfileCustomerMap">
+	select  
+		CREDIT_PROFILE_ID, 
+		CUSTOMER_ID, 
+		CPROFL_CUST_MAP_TYP_CD 
+	from 
+		CPROFL_CUSTOMER_MAP 
+	where 
+		CUSTOMER_ID= #customerId# 
+		and CPROFL_CUST_MAP_TYP_CD=#mapType# 
+		and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')  
+	order by CUSTOMER_ID 		
+	</select>
+	
+	<select id="checkCreditProfileCustomerMap" parameterClass="CreditProfileCustomerMap" resultClass="java.lang.Integer">
+	select  
+		COUNT(CPROFL_CUSTOMER_MAP_ID)
+	from 
+		CPROFL_CUSTOMER_MAP 
+	where 
+		CREDIT_PROFILE_ID= #creditProfileId#  
+		and CUSTOMER_ID= #customerId# 
+		and CPROFL_CUST_MAP_TYP_CD=#profileCustomerMapTypeCode# 
+		and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY') 		
+	</select>
+	
+ <!--********************CUSTOMER_GUARANTOR************************************ -->	
+	<select id="getGuarantorList" parameterClass="java.lang.String" resultMap="select-customerGuarantor">
+	select   
+		CUSTOMER_GUARANTOR_ID,
+		CREDIT_PROFILE_ID,
+		REMARKS_TXT,
+		C90_EXPIRY_DT,
+		GUARANTEED_AMT,
+		GUARANTEED_CUSTOMER_ID,
+		GUARANTOR_CUSTOMER_ID,
+		C90_FULL_NM,
+		GUARANTOR_PHONE_NUM,
+		C90_REFERENCE_NUM,
+		LAST_UPDT_TS 
+	from  
+		CUSTOMER_GUARANTOR
+	where  
+		CREDIT_PROFILE_ID=#value#  
+	and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY') 
+	</select>
+	
+	<update id="expireCustomerGuarantor" parameterClass="java.util.HashMap">
+  		update  
+  			CUSTOMER_GUARANTOR
+  		set  
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP  
+  		where  
+			CUSTOMER_GUARANTOR_ID = #customerGuarantor._id#  
+			and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY') 
+	</update>
+	
+	<insert id="insertCustomerGuarantor" parameterClass="java.util.HashMap">
+  		insert into CUSTOMER_GUARANTOR
+  			(	
+  			CUSTOMER_GUARANTOR_ID, 
+			CREDIT_PROFILE_ID, 
+			GUARANTEED_CUSTOMER_ID,
+			C90_REFERENCE_NUM,
+			C90_FULL_NM,		
+			C90_EXPIRY_DT,
+			GUARANTEED_AMT,
+			GUARANTOR_CUSTOMER_ID,
+			GUARANTOR_PHONE_NUM,
+			REMARKS_TXT,
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID,
+			LAST_UPDT_TS,
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID  
+ 			) 
+  		values 
+    		(
+			CUSTOMER_GUARANTOR_ID_SEQ.NEXTVAL,
+			#customerGuarantor.guarantorCreditProfileId#,	
+			#customerGuarantor.guaranteedCustomerId#,		 
+			#customerGuarantor.referenceNumber#,
+			#customerGuarantor.guarantorFullName#,
+			#customerGuarantor.expiryDate#,			
+			#customerGuarantor.guaranteedAmount#,
+			#customerGuarantor.guarantorCustomerId#,
+			#customerGuarantor.guarantorPhoneNumber#,
+			#customerGuarantor.comment#,
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#userId#,
+			SYSTIMESTAMP,
+			#userId#,
+			#dataSrcId#  
+    		)
+	</insert>	
+	
+	<update id="updateCreditProfileByGuarantor" parameterClass="java.util.HashMap">
+  		update  
+  			CREDIT_PROFILE 
+  		set  
+			BUS_LAST_UPDT_TS = SYSTIMESTAMP,  
+			BUS_LAST_UPDT_USER_ID = #userId# 
+  		where  
+			CREDIT_PROFILE_ID = ( select CP.CREDIT_PROFILE_ID  
+					from CREDIT_PROFILE CP, CPROFL_CUSTOMER_MAP MAP, CUSTOMER_GUARANTOR G 
+					where G.GUARANTEED_CUSTOMER_ID= #guaranteedCustomerId#
+					and   G.GUARANTEED_CUSTOMER_ID=MAP.CUSTOMER_ID    
+					and   MAP.CREDIT_PROFILE_ID=CP.CREDIT_PROFILE_ID  
+					and   MAP.CPROFL_CUST_MAP_TYP_CD='PRI' 
+					and   MAP.EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY') 
+					and   G.EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')
+					and   CP.CPROFL_STATUS_CD='A')
+	</update>
+
+<!--********************CPROFL_MAPPING************************************ -->		
+	<insert id="insertCreditProfileMap" parameterClass="CreditProfileMap">
+  	 insert into CPROFL_MAPPING 
+  			( 	
+  			CPROFL_MAPPING_ID, 
+  			CPROFL_FROM_ID, 
+			CPROFL_TO_ID, 
+			CPROFL_MAPPING_TYP_CD, 
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID 
+ 			) 
+  		values  
+    		(
+			CPROFL_MAPPING_ID_SEQ.NEXTVAL,
+			#creditProfileFromId#,
+			#creditProfileToId#,
+			#profileMapTypeCode#, 
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#userId#, 
+			SYSTIMESTAMP,
+			#userId#,
+			#dataSrcId# 
+    		)
+	</insert>
+
+	<update id="updateCreditProfileMap" parameterClass="CreditProfileMap">
+       update  
+               CPROFL_MAPPING 
+       set  
+               LAST_UPDT_TS = SYSTIMESTAMP,
+               LAST_UPDT_USER_ID = #userId#,
+               EFF_STOP_DTM = SYSTIMESTAMP  
+       where  
+               EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')  
+      and   CPROFL_MAPPING_TYP_CD='CO'  
+      and   CPROFL_FROM_ID=#creditProfileFromId#  
+	</update>
+	
+	<select id="getCreditProfileMapList" parameterClass="java.lang.String" resultMap="select-creditProfileMap">
+     select 
+             CPMAP.CPROFL_FROM_ID,
+             CPMAP.CPROFL_TO_ID,
+             CPMAP.CPROFL_MAPPING_TYP_CD   
+     from CPROFL_MAPPING CPMAP
+     where CPMAP.EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY')
+     and   CPMAP.CPROFL_MAPPING_TYP_CD='CO'
+     and   CPMAP.CPROFL_FROM_ID=#value# 
+	</select>
+	
+<!--********************CPROFL_STATUS************************************ -->			
+	<update id="updateCreditStatus" parameterClass="java.util.HashMap">
+  		update  
+  			CPROFL_STATUS
+  		set   
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId#,
+			EFF_STOP_DTM = SYSTIMESTAMP  
+  		where  
+			CREDIT_PROFILE_ID = #creditProfile._id#  
+			and EFF_STOP_DTM =TO_DATE('31-12-4444','DD-MM-YYYY') 
+	</update>
+	
+	<insert id="insertCreditStatus" parameterClass="java.util.HashMap">
+  	 insert into CPROFL_STATUS 
+  			( 	
+  			CPROFL_STATUS_ID, 
+  			CREDIT_PROFILE_ID, 
+			CPROFL_STATUS_CD, 
+			EFF_START_DTM,
+			CREATE_TS,
+			CREATE_USER_ID, 
+			LAST_UPDT_TS, 
+			LAST_UPDT_USER_ID,
+			DATA_SOURCE_ID 
+ 			) 
+  		values  
+    		(
+			CPROFL_STATUS_ID_SEQ.NEXTVAL,
+			#creditProfile._id#,
+			#creditProfile.status#, 
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#userId#, 
+			SYSTIMESTAMP,
+			#userId#,
+			#dataSrcId#  
+    		)
+	</insert>
+	
+	<update id="updateCreditProfileByStatus" parameterClass="java.util.HashMap">
+  		update  
+  			CREDIT_PROFILE
+  		set   
+			CPROFL_STATUS_CD=#creditProfile.status#,
+			BUS_LAST_UPDT_TS = SYSTIMESTAMP,  
+			BUS_LAST_UPDT_USER_ID =#userId#,
+			LAST_UPDT_TS = SYSTIMESTAMP,
+			LAST_UPDT_USER_ID = #userId# 
+  		where  
+			CREDIT_PROFILE_ID = #creditProfile._id# 
+	</update>
+	
+</sqlMap>

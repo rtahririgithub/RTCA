@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+         <list>
+            <bean id="STEP0801" parent="baseStep">
+               <property name="moduleName" value="cmdExec-Step0801"/>
+            </bean>
+            <bean id="STEP0802" parent="baseStep">
+               <property name="moduleName" value="cmdExec-Step0802"/>
+            </bean>
+         </list>
+		</property>
+	</bean>
+   <bean id="cmdExec-Step0801" parent="baseSyncsortCmdStep">
+      <property name="controlFile" value="${step0801/syncsortFile}"/>
+      <property name="output" value="${step0801/log}"/>
+	</bean>
+	<bean id="cmdExec-Step0802" parent="baseSyncsortCmdStep">
+      <property name="controlFile" value="${step0802/syncsortFile}"/>
+      <property name="output" value="${step0802/log}"/>
+	</bean>
+</beans>
+
+

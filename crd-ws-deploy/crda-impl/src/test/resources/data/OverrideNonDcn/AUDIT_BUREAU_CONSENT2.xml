@@ -1,0 +1,24 @@
+  
+
+<tns:performCreditAssessment xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2 Enterprise_Override_CreditAssessmentServiceRequestResponse_v2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:wcpmt="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7">
+	<tns:creditAssessmentRequest xsi:type="tns:OverrideCreditAssessmentRequest">
+		<tns:creditAssessmentTypeCd>AUDIT</tns:creditAssessmentTypeCd>
+		<tns:creditAssessmentSubTypeCd>BUREAU_CONSENT</tns:creditAssessmentSubTypeCd>
+		<tns:customerID>119035483</tns:customerID>
+		<tns:applicationID>123</tns:applicationID>
+		<tns:channelID></tns:channelID>
+		<tns:lineOfBusiness>WIRELINE</tns:lineOfBusiness>
+		<tns:commentTxt>Override CreditCheckConsentCd</tns:commentTxt>
+		<tns:newCreditCheckConsentCd>Y</tns:newCreditCheckConsentCd>
+	</tns:creditAssessmentRequest>
+	<tns:auditInfo>
+		<ent:userId>123</ent:userId>
+		<ent:userTypeCode>usertypecd1</ent:userTypeCode>
+		<ent:salesRepresentativeId></ent:salesRepresentativeId>
+		<ent:channelOrganizationId></ent:channelOrganizationId>
+		<ent:outletId></ent:outletId>
+		<ent:originatorApplicationId></ent:originatorApplicationId>
+		<ent:correlationId>123</ent:correlationId>
+		<ent:timestamp>2001-12-17T09:30:47.0Z</ent:timestamp>
+	</tns:auditInfo>
+</tns:performCreditAssessment>

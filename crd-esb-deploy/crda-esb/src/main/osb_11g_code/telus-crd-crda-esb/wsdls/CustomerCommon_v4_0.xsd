@@ -1,0 +1,1351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v4"
+    version="4.0"
+    xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v4" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- Simple Common Element Types -->
+    <xs:simpleType name="entityIdType">
+        <xs:annotation>
+            <xs:documentation>Id for an Entiry Type.  Examples:
+                CUSTOMER, SRVC_INST, etc.  RefODS- BI_CM_ENTITY_TYPE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerIdType">
+        <xs:annotation>
+            <xs:documentation>Unique meaningless identifier for a
+                customer.  Id from Customer ODS and Customer Profile</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountIdType">
+        <xs:annotation>
+            <xs:documentation>Unique meaningless identifier for a
+                billing account.  Id is from Customer ODS and Customer Profile.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountNumberType">
+        <xs:annotation>
+            <xs:documentation>Business Key ID for looking up a Billing
+                Account (this is the number that is on a cusotmers
+                bill).  Requires a source mastering system (master
+                source id) to uniquely identify a billing account</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="payChannelIdType">
+        <xs:annotation>
+            <xs:documentation>Unique meaingless identifier for a pay
+                channel.  Id is from Customer ODS and Customer Profile</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+    <xs:simpleType name="payChannelNumberType">
+        <xs:annotation>
+            <xs:documentation>Business pay channel number.  Business
+                identifier for the pay channel and is related to a
+                source billin system.  It must be used in conjunction
+                with a billing system id to be unique</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billMediaIdType">
+        <xs:annotation>
+            <xs:documentation>Unique meaningless identifier for bill media.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressIdType">
+        <xs:annotation>
+            <xs:documentation>Unique meaningless identifier for address</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Type of Address.  Examples: C- Civic, G-
+                General Delivery, etc. RefPDS: BI_CM_ADDRESS_TYPE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameIdType">
+        <xs:annotation>
+            <xs:documentation>Unique Identifier for name.  </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Type of party that the name is for.
+                Examples: P- Person, O- Orgaization, U- Unknown</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="civicNumberType">
+        <xs:annotation>
+            <xs:documentation>The official number assigned to an address
+                by the municipality.  EXAMPLES: 2514</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="civicNumberSuffixType">
+        <xs:annotation>
+            <xs:documentation>Typically an alpha or fractional suffix to
+                a civic number e.g. &quot;A&quot; or &quot;1/2&quot;
+                appended after the civic number.EXAMPLES:B, 2 (for 1/2), etc.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ruralRouteNumberType">
+        <xs:annotation>
+            <xs:documentation>The number used to identify a rural route.
+                Must be combined with the rural route code to create a
+                valid address element. EXAMPLES: &quot;8&quot;</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ruralRouteTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>A code used to represent a Rural Route
+                designator. EXAMPLES: RR - Rural Route, SS - Suburban
+                Service, MR - Mobile Route, GD - General Delivery.
+                RefPDS; RURAL_ROUTE_TYP_CUSTPF</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="stationAreaNameType">
+        <xs:annotation>
+            <xs:documentation>The name of the village, town, city, or
+                metropolitan area which forms part of the Canada Post
+                station name. EXAMPLES: MISSION, MEDICINE HAT, SURREY,
+                WINNIPEG.  COMMENTS: Must be combined with the station
+                type code to create a valid address element.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="stationQualifierType">
+        <xs:annotation>
+            <xs:documentation>The name used to identify a Canada Post
+                Station Qualifier.  Must be used in conjuction with a
+                Station Area Name. EXAMPLES: A, MAIN</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="stationTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>The abbreviation used to identify a type
+                of Canada Post Station. EXAMPLES: STN - Station, RPO -
+                Retail Postal Outlet.  RefPDS- STATION_TYPE_CA_POST</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="additionalAddressInformationType">
+        <xs:annotation>
+            <xs:documentation>Optional data that a mailer wishes to
+                include or Non-fielded address information. Typically
+                used for USA or International Address. Types that are
+                not validated more specifically than State and Country
+                respectively.  EXAMPLES: SITE/ COMPARTMENT 3,
+                LOT/CONCESSION 45.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="renderedAddressType">
+        <xs:annotation>
+            <xs:documentation>The first line of the rendered address.
+                EXAMPLES: 201 - 2514B Acacia Dr</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addrAssgnmtIdType">
+        <xs:annotation>
+            <xs:documentation>Automatically generated number to uniquely
+                identify the Address Assignment.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressAssignmentSubTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Identifies the type of the entity to
+                address relationship denoting the use of the given
+                address (As specified by the addr_id
+                attribute).EXAMPLES: M: Mailing Billing Address (Billing
+                Account) T: Billing Tax Address (Billing Account) E:
+                Billing Email Address (Billing Account) N - Primary
+                Contact Address (Contact Indivdual) C - Customer
+                Official Address (Customer) S - Service Address (Service
+                Instance) D - Default Billing Address (Customer) : Used
+                for populating a default addresses to the user interface
+                for CSRs ease of use. This could be changed by CSRs.
+                Introduced as part of SDSE. RefPDS: ADDR_ASGNMT_TYPE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressAssignmentTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Further classification of the address
+                assignment type, e.g. original, standardized. EXAMPLES:
+                O - original (default) C - cleansed  (output from
+                Trillium) P - parsed (output from Trillium)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressMatchingStatusCodeType">
+        <xs:annotation>
+            <xs:documentation>Description: A code signifying an address
+                validation status.  Example: V; I; C; N.  V- Verifiable,
+                C- Correctable, N- Not correctable</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="addressSearchTextType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="canadaPostBuildNameType">
+        <xs:annotation>
+            <xs:documentation>Name of building as obtained from canada
+                post directories. TD Tower, Telus building  etc..</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="canadaPostLocnNameType">
+        <xs:annotation>
+            <xs:documentation>The name of the organization at the
+                address. TELUS Communications ( for 3777 kingsway) .
+                This value is taken from Canada post directories and
+                filled with the trillium output for business customers.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="canadaPostRecordTypeType">
+        <xs:annotation>
+            <xs:documentation>The record type(classification)
+                information as given by trillium based on canada post
+                directory. Note : This has no direct relation or meaning
+                as the 'address type'. This field may be useful in
+                determining the type of the record in telus.  This field
+                is available from the Canada Post Directories and define
+                the address type for a given address or addresses.  For
+                example, for 3777 Kingsway, the address type is ¿B¿ for
+                Large Volume Receiver.  </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="careOfType">
+        <xs:annotation>
+            <xs:documentation>Optional data that a mailer wishes to
+                include indicating the identity of a party able to take
+                temporary custody of the mail in order to pass it on to
+                the addressee.  EXAMPLE: c/o John Smith; c/o Best
+                Western Hotel</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="countryCodeType">
+        <xs:annotation>
+            <xs:documentation>A code used to represent a country
+                following the ISO 3166 (Alpha3) standard.  EXAMPLES:
+                CAN, USA.  RefPDS- COUNTRY_OVERSEAS</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="emailAddressTextType">
+        <xs:annotation>
+            <xs:documentation>Contains the email address or the website URL.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="externalAddressIdType">
+        <xs:annotation>
+            <xs:documentation>Identifier for an address that is unique
+                in the source system.  Must be used in conjunction with
+                Address Source System identifier to be unique.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="externalAddressSourceIdType">
+        <xs:annotation>
+            <xs:documentation>Source System Identifier for the external address</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="externalServiceAddressIdType">
+        <xs:annotation>
+            <xs:documentation>Source System Identifier for the external
+                service address (e.g. FMS address id)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="fleetMailOfficeNameType">
+        <xs:annotation>
+            <xs:documentation>The city in which the fleet mail office
+                for the ship in question resides (currently either
+                Halifax or Victoria) EXAMPLES: Halifax</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="hmcsNameType">
+        <xs:annotation>
+            <xs:documentation>The name of the relevant Canadian forces
+                ship  to be used within a military address. EXAMPLES: Chicoutimi</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="mailingTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>A code to represent mailability. EXAMPLES:
+                M, E  RefPDS- MAILG_TYP</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="municipalityNameType">
+        <xs:annotation>
+            <xs:documentation>The official municipality name, as
+                provided to Canada Post.  Should not be translated.
+                (E.G.: TROIS-RIVI¿ES is not THREE RIVERS.) EXAMPLES: Burnaby</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="postOfficeBoxNumberType">
+        <xs:annotation>
+            <xs:documentation>The assigned number of the post office
+                box. The # symbol must not be used, nor the French
+                equivalent no. Punctuation should not be used.
+                EXAMPLES: 97</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="postalZipCodeType">
+        <xs:annotation>
+            <xs:documentation>The code assigned by the Canadian or US
+                Postal Service to the postal district. For Canadian
+                Postal Codes may be 6 characters. For US Zip codes  - It
+                may be either five or nine digits. If the nine-digit
+                format is used, a hyphen will be used to separate the
+                fifth and sixth digits. (This hyphen is not stored in
+                the database) EXAMPLES: V2H 7T4</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="provinceStateCodeType">
+        <xs:annotation>
+            <xs:documentation>The accepted ISO 3166-2, two character
+                code of a state, territory or possession of Canada or
+                the USA. RefPDS- PROVINCE_STATE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="relateAddressAssignmentIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="streetDirectionCodeType">
+        <xs:annotation>
+            <xs:documentation>The code used to represent one of the
+                eight principle compass directions.  EXAMPLES: E- East,
+                N- North, NE- Northeast, NW- Northwest (English), NO-
+                Northwest (French), S- South, SE- Southeast, SW-
+                Southwest (English), SO- Southwest (French), W- West
+                (English), O- West (French).  RefPDS- STREET_DIR_CA_POST</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="streetNameType">
+        <xs:annotation>
+            <xs:documentation>The official name recognized by each
+                municipality. This name should not be translated. (E.G.:
+                &quot;Main&quot; is not translatable to &quot;Principale&quot;.)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="streetTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>A code to represent a Street Type.
+                EXAMPLES: ST, RD, BLVD, CRES.  RefPDS- STREET_TYP_CA_POST</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="unitNumberType">
+        <xs:annotation>
+            <xs:documentation>Typically a suite or apartment within the
+                main building identified by the rest of the address.
+                EXAMPLES: 201</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="unitTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>The type of unit number as defined by
+                canada post.  EXAMPLES: Unit, Suite</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="unitTypeDwellingType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="validateAddressIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Indicates whether the address should
+                undergo validation EXAMPLES: (&quot;Y&quot;) or not (&quot;N&quot;)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="firstNameType">
+        <xs:annotation>
+            <xs:documentation>First/Given name of an individual</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="fullNameType">
+        <xs:annotation>
+            <xs:documentation>This is the full name of an individual or
+                organization.  It is made up of  a base and an optional
+                supplementary components. The base name is either a
+                &quot;person name&quot; or an &quot;organization
+                name&quot;.  The supplementary portion is made up of a
+                &quot;supplementary name formatting keyword code&quot;
+                and &quot;supplementary name&quot;.  A &quot;person
+                name&quot; is made up of first name, middle name and
+                last name.  EXAMPLES: Residential: MARTIN WIENS,
+                Residential: DENNIS K Y TONG, Residential: SUSANA
+                LEO-YIM, Business: MALCA TRADING INC O/A BANANA LEAF ON
+                DENMAN, Business: DIANA BECK D/B FAIRYLAND GIFTS,
+                Business: GREATER VAN RENT CHEK SRVCS INC D/B 738
+                DIRECTORY, Business: INTERNATIONAL FLIGHT CENTRE INC,
+                Business: DR Y VICTOR YOSHIDA</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="lastNameType">
+        <xs:annotation>
+            <xs:documentation>Last/Family name of an individual</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="middleNameType">
+        <xs:annotation>
+            <xs:documentation>Middle name of an individual</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameAssignmentSubTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>C- Cleansed, P- Parsed, O- Original</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameAssignmentTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>L- Legal, A- Alias, P- Preferred, I-
+                Additional Info</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameRelTextType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameSearchTxtType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="nameSuffixCodeType">
+        <xs:annotation>
+            <xs:documentation>A code representing the suffix of a name.
+                EXAMPLES: Jr for Junior, Esq for Esquire, Sr for Senior.
+                RefPDS: NAME_SUFFIX</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="organizationNameType">
+        <xs:annotation>
+            <xs:documentation>Organization Name</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="relateNameAssignmentIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="salutationCodeType">
+        <xs:annotation>
+            <xs:documentation>A code representing a salutation which is
+                a formal appellation optionally attached to the name of
+                a person or family by virtue of office, rank, hereditary
+                privilege, noble birth, or attainment or used as a mark
+                of respect.  EXAMPLES: Dr. Miss Mr. Mrs. Ms. Colonel
+                RefPDS- BI_CM_SALUTATION_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="supplementaryNameType">
+        <xs:annotation>
+            <xs:documentation>The extended customer name such as trade
+                name for the sole proprietorship business customer. It
+                is the trade/firm name that followed the operating type
+                such as Operating As (O/A), Doing Business as (D/B).
+                EXAMPLES: The full name &quot;MALCA TRADING INC O/A
+                BANANA LEAF ON DENMAN&quot; is composed of an
+                organization name &quot;MALCA TRADING INC&quot;,
+                supplementary name formatting key word of
+                &quot;O/A&quot; and supplementary name of &quot;BANANA
+                LEAF ON DENMAN&quot;</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="supplementaryNameOperatingCodeType">
+        <xs:annotation>
+            <xs:documentation>A code representing the formatting key
+                word for the supplementary name. EXAMPLES: O/A for
+                Operating As D/B for Doing Business as  COMMENTS: The
+                full name &quot;MALCA TRADING INC O/A  BANANA LEAF ON
+                DENMAN&quot; is composed of an organization name
+                &quot;MALCA TRADING INC&quot;, supplementary name
+                formatting key word of &quot;O/A&quot; and supplementary
+                name of &quot;BANANA LEAF ON DENMAN&quot;.   RefPDS- BI_CM_SUPPLEMENTARY_NAME_OPERATING_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerMarketSegmentId">
+        <xs:annotation>
+            <xs:documentation>An automatically generated unique
+                identifier for customer market segment</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerMarketSegmentCodeType">
+        <xs:annotation>
+            <xs:documentation>The market segment code associated to the
+                Customer for the specified market segment type.  RefPDS- MKT_SEG_A</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerMarketSegmentTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>A code indicating the type of scheme of
+                categorization used for Customer Market Segmentation.
+                EXAMPLES: CBU- CBU Code, SS1- CBU segment A, SS2- CBU
+                segment B, VALS- Customer Value segment.  RefPDS- MKT_SEG_TYPE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountNumberCheckDigitNumberType">
+        <xs:annotation>
+            <xs:documentation>Derived based on the billing account number.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountOpenDateType">
+        <xs:annotation>
+            <xs:documentation>Creation date of the Billing Account.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountStatusCodeType">
+        <xs:annotation>
+            <xs:documentation>A code indicating the status of the
+                account. When a new billing account is created, the
+                status is Tentative. When charges are distributed to the
+                billing account, the status is Open. When no effective
+                charges are distributed to the billing account, the
+                status is Cancelled. EXAMPLES: O- Open, C- Cancelled.
+                RefODS- BI_PAY_BILLING_ACCOUNT_STATUS</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountStatusDateType">
+        <xs:annotation>
+            <xs:documentation>date of the latest billing account status change</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="defaultBillCycleCodeType">
+        <xs:annotation>
+            <xs:documentation>The default bill-cycle associated with the
+                customer.  New billing accounts should use this cycle
+                code unless another is requested.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="defaultNewBillCycleCodeType">
+        <xs:annotation>
+            <xs:documentation>The default new bill-cycle associated with
+                the customer.  This is set during a change of bill cycle
+                that is the new default.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billCycleCodeType">
+        <xs:annotation>
+            <xs:documentation>A code representing the date of billing
+                for a billing account</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="newBillCycleCodeType">
+        <xs:annotation>
+            <xs:documentation>A code representing the date of billing
+                for a billing account.  Used for changes in billing
+                cycle date</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billCycleFrequencyCodeType">
+        <xs:annotation>
+            <xs:documentation>The bill cycle frequency. EXAMPLES: W -
+                Week, M - Month.  RefODS- BILL_CYCLE_FREQUENCY_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountCurrentBalanceAmountType">
+        <xs:annotation>
+            <xs:documentation>The billing account balance is calculated
+                based on the last bill due amount and the AR
+                transactions (payments and credit adjustments) post last bill.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:double"/>
+    </xs:simpleType>
+    <xs:simpleType name="billInsertSuppressionIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Indicates whether a bill insert will be
+                included with the Bill.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billRedirectAddressTextType">
+        <xs:annotation>
+            <xs:documentation>The address the bill document will be
+                redirected to. </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billReturnEnvelopeCodeType">
+        <xs:annotation>
+            <xs:documentation>It will have one of four possible values:
+                N - never send an envelope, A - always send envelope, S
+                - send envelope, H - hold sending envelope.  RefPDS: BI_CM_BILL_RETURN_ENVELOPE_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billRedirectEffectiveStartDateType">
+        <xs:annotation>
+            <xs:documentation>The date at which the bill redirect
+                becomes effective.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="billRedirectEffectiveEndDateType">
+        <xs:annotation>
+            <xs:documentation>The date at which the bill redirect expires.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="billRedirectOperatorIdType">
+        <xs:annotation>
+            <xs:documentation>The id of the operator the bill document
+                will be redirected to.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billRedirectOperatorNameType">
+        <xs:annotation>
+            <xs:documentation>The name of the operator the bill document
+                will be redirected to.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billRedirectReasonCodeType">
+        <xs:annotation>
+            <xs:documentation>Reason for bill redirect. EXAMPLES:
+                MANUAL_HOLDOUT- Manual Hold-out.  RefPDS: BI_CM_BILL_REDIRECT_REASON_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="lastPaymentReturnAmountType">
+        <xs:annotation>
+            <xs:documentation>Amount of the most recent returned NSF
+                payment since last statement</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:double"/>
+    </xs:simpleType>
+    <xs:simpleType name="lastPaymentReturnDateType">
+        <xs:annotation>
+            <xs:documentation>Date of the most recent returned NSF payment</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="lastBillTotalDueAmountType">
+        <xs:annotation>
+            <xs:documentation>Total amount due from the most recent bill.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:double"/>
+    </xs:simpleType>
+    <xs:simpleType name="lastPaymentAmountType">
+        <xs:annotation>
+            <xs:documentation>Payment amount recorded on the most recent bill.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:double"/>
+    </xs:simpleType>
+    <xs:simpleType name="paymentDueDateType">
+        <xs:annotation>
+            <xs:documentation>Payment due date from the most recent bill</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="paymentAmountSinceLastStatementType">
+        <xs:annotation>
+            <xs:documentation>Amount a customer has payed since the most
+                recent bill was generated.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:double"/>
+    </xs:simpleType>
+    <xs:simpleType name="collectionStartDateType">
+        <xs:annotation>
+            <xs:documentation>States the start of the collection
+                treatment, if account is not in collection treatment -
+                value would be NULL. This field is reset to NULL when an
+                account is pulled out of collection treatment.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="collectionEndDateType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="collectionIndicatorType">
+        <xs:annotation>
+            <xs:documentation>States if an account was in collection
+                treatment at any point of time in the past. Defaults to
+                N and is set to Y whenever the accounts starts
+                collection treatment for the first time. (never goes
+                back to N)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="riskIndicatorCodeType">
+        <xs:annotation>
+            <xs:documentation>A indication of the likelyhood for a
+                customer to pay his/her/its bills based on TELUS
+                internal past experience of the customer paying bills.
+                EXAMPLES: H1 - High Risk level 1, H2 - High Risk level
+                2, H3 - High Risk level 3, M4 - Medium Risk level 4, M5
+                - Medium Risk level 5, M6 - Medium Risk level 6, L7 -
+                Low Risk level 7, L8 - Low Risk level 8, L9 - Low Risk
+                level 9, NS - No Score No score  BUSINESS RELATED
+                INFORMATION: 1. Assigned to a customer based on credit
+                score and other criteria.  2. Once Risk Indicator has
+                been assigned to a Billing account (customer, or credit
+                profile), a change in Bahavioral Score to range mapping
+                will NOT result in a re-evaluation of the Risk Indicator
+                assignments.  3. A code reflecting Behavioral Score
+                ranges.  COMMENTS: Mastered in Credit Management.
+                RefPDS: TCM_RISK_INDICATOR</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="collectionFollowUpDateType">
+        <xs:annotation>
+            <xs:documentation>The date until all of the collection
+                treatments are stopped (either automatic or manual).</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="collectionAgencyReferralType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="writeOffDateType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="returnDueDateType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="autoTreatmentSuppressionStartDateType">
+        <xs:annotation>
+            <xs:documentation>The date when suppression of autotreatment starts.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="autoTreatmentSuppressionEndDateType">
+        <xs:annotation>
+            <xs:documentation>The date when suppression of autotreatment ends.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionActiveIndicatorType">
+        <xs:annotation>
+            <xs:documentation>A flag to indicate whether this Billing
+                Account is active in the source system.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionAssignmentStatusCodeType">
+        <xs:annotation>
+            <xs:documentation>A code indicating the status of this
+                Billing Account, with respect to its assignment to a
+                Customer. Automatically set by the Customer Hierarchy
+                system. This field may no longer be required.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionClassCodeType">
+        <xs:annotation>
+            <xs:documentation>A code indicating whether the billing
+                account is business or residential. This field will no
+                longer be required</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionNodeTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>A code set by the Customer Hierarchy
+                system to indicate the type of the Billing Account when
+                considered as node in the hierarchy. This provides a
+                perspective for assigning the Billing Account and/or its
+                children to a Customer node. This field may be no longer required.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionRefIdType">
+        <xs:annotation>
+            <xs:documentation>Billing Account Reference Identification
+                is the account identifier used in ECH ( Enterprise
+                Customer Hierarchy).</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionDirectAssignableIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Denotes whether an account (from any
+                system) can be directly assigned to a customer.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionPrimaryServiceResourceTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Account sub type code from the source
+                billing system. EXAMPLES: R - Business - Regular, Q -
+                Corporate - PCS Enterprise, 1 - Consumer -- Mike
+                Regular. RefPDS- BILLING_ACCOUNT_EXT_SUB_TYP</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionPrimaryServiceResourceValueIdType">
+        <xs:annotation>
+            <xs:documentation>The primary resource is the field that is
+                used for customer identification. It is a normal
+                resource field that is usually used for guiding, but has
+                a special use for customer identification.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionReferenceTelephoneNumberType">
+        <xs:annotation>
+            <xs:documentation>Some services, such as High Speed, are
+                provisioned upon an existing local telephone service.
+                Where that is the case, this field provides the
+                telephone number of the local service upon which this
+                account is provisioned.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionSubscriberCountType">
+        <xs:annotation>
+            <xs:documentation>Indicates number of subscribers. Used only
+                for Wireless.  Interim. May no longer be required.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionSourceAccountTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Account Type Code from the source billing
+                system.  EXAMPLES: B - Business, C - Corporate, I -
+                Individual.  RefPDS- BILLING_ACCOUNT_EXT_TYP</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingAccountExtensionSourceAccountSubTypeCodeType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingRelationshipTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Business purpose for associating two
+                Billing Accounts.  EXAMPLES: PARENT, PAYABLE, PILOT,
+                SIBLING, BILLCVRGENCE Bill Convergence, ACCOUNTLINK-
+                Account Consolidation, ONEBILLCONSENT- One Bill Consent,
+                3- Clearnet Association, BUNDLE- Bundle Link Accounts
+                linked for the purpose of bundling  RefPDS: BILLING_ACCT_ASSN_PURPS_TYP</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingRelationshipEffectiveStartDateType">
+        <xs:annotation>
+            <xs:documentation>Date the relationship becomes effective</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="billingRelationshipEffectiveEndDateType">
+        <xs:annotation>
+            <xs:documentation>Date the relationship is no longer effective</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="payChannelCategoryCodeType">
+        <xs:annotation>
+            <xs:documentation>Identifies whether the pay channel is a
+                prepaid or postpaid channel.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="paymentMethodCodeType">
+        <xs:annotation>
+            <xs:documentation>This describes the choice of payment such
+                as preauthorized, Credit Card and Direct Debit or
+                Invoice, Check, etc.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="payChannelOpenDateType">
+        <xs:annotation>
+            <xs:documentation>Date on which the pay channel was opened.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="payChannelStatusCodeType">
+        <xs:annotation>
+            <xs:documentation>Status of Pay channel: C - CANCELLED, N -
+                NOT_APPLICATIVE, O - OPENED, T - TENTATIVE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="payChannelStatusDateType">
+        <xs:annotation>
+            <xs:documentation>The date at which the current status has changed.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="preAuthorizedPaymentSystemMaxDeductionAmountType">
+        <xs:annotation>
+            <xs:documentation>Maximum amount deducted for Payment Method
+                (Direct Debit/Credit Card). If the balance amount is
+                greater than the maximum the remaining amount will be
+                invoiced. All amounts are invoiced but the bill includes
+                indication as to the total amount due.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:float"/>
+    </xs:simpleType>
+    <xs:simpleType name="preAuthorizedPaymentSystemSuspensionIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Indicates whether the pre-authorized
+                payment is suspended. (due to multiple rejected requests)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="creditCardTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>The type of credit card used: e.g. VI-
+                Visa, MC- MasterCard, AM- American Express</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="creditCardExpiryDateType">
+        <xs:annotation>
+            <xs:documentation>Credit card expiry date</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="creditCardLastNDigitNumberType">
+        <xs:annotation>
+            <xs:documentation>Last 4 digits of the credit card number.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="creditCardSecurityNumberType">
+        <xs:annotation>
+            <xs:documentation>Credit Card Security Number</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billMediaTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Bill media type code as defined in the
+                codes table</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billInvoiceCopyCountType">
+        <xs:annotation>
+            <xs:documentation>Number of copies delivered to the owner of
+                the billing account for this bill media type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+    <xs:simpleType name="billInvoiceFormatCodeType">
+        <xs:annotation>
+            <xs:documentation>The format code for the invoice.  RefPDS- BILL_FMT</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="billInvoiceDetailLevelCodeType">
+        <xs:annotation>
+            <xs:documentation>level of detail for the invoice.
+                EXAMPLES: AS- Account Summary Only, AD- Summary and
+                Account Detail, EC- Account + Detail Continuous, EN-
+                Account + Detail Page Break. RefPDS- BI_CM_BILL_DETAIL_LEVEL_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="bankCodeType">
+        <xs:annotation>
+            <xs:documentation>number identifying the bank. i.e. 003 -
+                Royal bank</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="bankBranchNumType">
+        <xs:annotation>
+            <xs:documentation>Number identifying the bank branch /
+                transit number.  i.e. 12345 - bank branch at location xyz</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerCreationDateType">
+        <xs:annotation>
+            <xs:documentation>date the customer was created</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="contactIdType">
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <xs:simpleType name="currentCustomerStatusCodeType">
+        <xs:annotation>
+            <xs:documentation>The current status associated with the customer</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerCommentTextType">
+        <xs:annotation>
+            <xs:documentation>Free text comments about the customer</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>B- Business, R- Residential</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerSubtypeCodeType">
+        <xs:annotation>
+            <xs:documentation>I- Individual, O- Organization, U- Unknown</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="creditValueCodeType">
+        <xs:annotation>
+            <xs:documentation>N- No Credit Information, R- Restricted,
+                D- Deposit, U- Unestablished, E- Established, V- VIP
+                (TELUS exec).  Possible values in refPDS: CREDIT_VALUE_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerPINType">
+        <xs:annotation>
+            <xs:documentation>a code the customer uses to authenticate
+                themselves with TELUS</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="genderCodeType">
+        <xs:annotation>
+            <xs:documentation>M-  Male, F- Female</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="teamMemberConcessionCodeType">
+        <xs:annotation>
+            <xs:documentation>1- Standard TSD, 2- Non-eBill TSD as &gt;
+                25 yrs service, etc.  RefPDS: BI_CM_TEAM_MEMBER_CONCESSION_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="teamMemberIdType">
+        <xs:annotation>
+            <xs:documentation>TELUS team member id</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="contactDepartmentNameType">
+        <xs:annotation>
+            <xs:documentation>the department in their company that a
+                contact belongs to</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="contactPositionNameType">
+        <xs:annotation>
+            <xs:documentation>the position in their company that a
+                contact belongs to</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="contactCommentType">
+        <xs:annotation>
+            <xs:documentation>Additional comments about a contact</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="feedbackSurveyIndicatorType">
+        <xs:annotation>
+            <xs:documentation>An internal telus defined and decided
+                indicator on whether telus want to contact the customer
+                for feedback surveys.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="verificationTextType">
+        <xs:annotation>
+            <xs:documentation>Indicates that the Contact information,
+                including contact role for a Service Address and/or
+                RCID, has been verified.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="contactVerifiedTsType">
+        <xs:annotation>
+            <xs:documentation>date that the Contact information,
+                including contact role for a Service Address and/or
+                RCID, has been verified.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:simpleType name="customerIndividualIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Indicates that this individual playing the
+                role of a contact also plays the role of a customer</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="contactAssignmentRoleTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Role the contact plays in relation to the
+                customer. Billing Contact, Interconnector, ONSITE -
+                On-site Contact, Requesting Customer, Single Point of
+                Contact, Technical Contact, TELUS Approved Dealer, N -
+                No agent ( Consumer), R -  Roommate ( Consumer), S  -
+                Spouse ( Consumer).  List of possible values in RefDPS: BI_CM_CONTACT_RELATIONSHIP_TO_CUSTOMER_CODE</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="preferredContactLevelCodeType">
+        <xs:annotation>
+            <xs:documentation>No Contact, Call Ahead Only, Full Contact (default)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="preferredContactLevelCommentType">
+        <xs:annotation>
+            <xs:documentation>Specific comments about restrictions on
+                customer contact.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="preferredContactMethodCodeType">
+        <xs:annotation>
+            <xs:documentation>e.g. Work Phone, Cell Phone, Home Phone,
+                Regular Mail, No Contact Desired, Restricted Contact,
+                SMS : Notification via SMS, Web :  Portal Web Portal,
+                Face-to-face :  meeting Face-to-face meeting, EMAIL  :
+                Notification via email, Restricted contact.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="preferredContactMethodCommentType">
+        <xs:annotation>
+            <xs:documentation>Specifies the comments/specific requests
+                of user about contact method restrictions freeform text entry.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="preferredLanguageCodeType">
+        <xs:annotation>
+            <xs:documentation>e.g. FR, EN</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="preferredContactTimePeriodCodeType">
+        <xs:annotation>
+            <xs:documentation>e.g. MORNING, NOON, AFTERNOON, EVENING, DAY</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="consentLevelCodeType">
+        <xs:annotation>
+            <xs:documentation>e.g. 0- No Restrictions, 1- TELUS and
+                Partners, 2-TELUS Only, 3- No Sharing, 99- Unresolved.
+                Allowable values in refPDS: CUSTOMER_CONSENT_LEVEL</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="consentTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Codes are phrased in the negative  (so, if
+                the corresonding value for SMS is '1' (checked) then do
+                not contact via SMS.  Examples: SMS- No SMS, EM- No
+                Email, ML- No Mail, TM- No Telemarketing, MR- No Market
+                Research.  Allowable values in refPDS: CUSTOMER_CONSENT_TYP</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="consentValueCodeType">
+        <xs:annotation>
+            <xs:documentation>The boolean type in XML accepts
+                0,1,true,false.  1=Checked, 0=Unchecked.   </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="cbucidType">
+        <xs:annotation>
+            <xs:documentation>Customer Business Unit Customer ID</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="rcidType">
+        <xs:annotation>
+            <xs:documentation>Regional Customer ID</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="hearingImpairedIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Indicator for hearing impaired individuals</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="visuallyImpairedIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Indicator for visually impaired individuals</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="contactAssignmentIdType">
+        <xs:annotation>
+            <xs:documentation>automatically generated unique identifier
+                for a contact assignment</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+    <!-- Move this to Enterprise Common Types XSD -->
+    <!--
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element name="addressId" type="tns:addressIdType"
+				minOccurs="0" />
+			<xs:element name="addressTypeCode"
+				type="tns:addressTypeCodeType" minOccurs="0" />
+			<xs:element name="additionalAddressInformation"
+				type="tns:additionalAddressInformationType" nillable="true"
+				minOccurs="0" maxOccurs="10" />
+			<xs:element name="renderedAddress"
+				type="tns:renderedAddressType" nillable="true" minOccurs="0"
+				maxOccurs="10" />
+			<xs:element name="addrAssgnmtId"
+				type="tns:addrAssgnmtIdType" minOccurs="0" />
+			<xs:element name="addressAssignmentSubTypeCode"
+				type="tns:addressAssignmentSubTypeCodeType" minOccurs="0" />
+			<xs:element name="addressAssignmentTypeCode"
+				type="tns:addressAssignmentTypeCodeType" minOccurs="0" />
+			<xs:element name="addressMatchingStatusCode"
+				type="tns:addressMatchingStatusCodeType" minOccurs="0" />
+			<xs:element name="addressSearchText"
+				type="tns:addressSearchTextType" minOccurs="0" />
+			<xs:element name="canadaPostBuildName"
+				type="tns:canadaPostBuildNameType" minOccurs="0" />
+			<xs:element name="canadaPostLocnName"
+				type="tns:canadaPostLocnNameType" minOccurs="0" />
+			<xs:element name="canadaPostRecordType"
+				type="tns:canadaPostRecordTypeType" minOccurs="0" />
+			<xs:element name="careOf" type="tns:careOfType"
+				minOccurs="0" />
+			<xs:element name="countryCode" type="tns:countryCodeType"
+				minOccurs="0" />
+			<xs:element name="emailAddressText"
+				type="tns:emailAddressTextType" minOccurs="0" />
+			<xs:element name="externalAddressId"
+				type="tns:externalAddressIdType" minOccurs="0" />
+			<xs:element name="externalAddressSourceId"
+				type="tns:externalAddressSourceIdType" minOccurs="0" />
+			<xs:element name="externalServiceAddressId"
+				type="tns:externalServiceAddressIdType" minOccurs="0" />
+			<xs:element name="mailingTypeCode"
+				type="tns:mailingTypeCodeType" minOccurs="0" />
+			<xs:element name="municipalityName"
+				type="tns:municipalityNameType" minOccurs="0" />
+			<xs:element name="postOfficeBoxNumber"
+				type="tns:postOfficeBoxNumberType" minOccurs="0" />
+			<xs:element name="postalZipCode"
+				type="tns:postalZipCodeType" minOccurs="0" />
+			<xs:element name="provinceStateCode"
+				type="tns:provinceStateCodeType" minOccurs="0" />
+			<xs:element name="relateAddressAssignmentId"
+				type="tns:relateAddressAssignmentIdType" minOccurs="0" />
+			<xs:element name="streetDirectionCode"
+				type="tns:streetDirectionCodeType" minOccurs="0" />
+			<xs:element name="streetName" type="tns:streetNameType"
+				minOccurs="0" />
+			<xs:element name="streetTypeCode"
+				type="tns:streetTypeCodeType" minOccurs="0" />
+			<xs:element name="unitNumber" type="tns:unitNumberType"
+				minOccurs="0" />
+			<xs:element name="validateAddressIndicator"
+				type="tns:validateAddressIndicatorType" minOccurs="0" />
+			<xs:element name="unitTypeCode" type="tns:unitTypeCodeType"
+				minOccurs="0" />
+			<xs:element name="civicNumber" type="tns:civicNumberType"
+				minOccurs="0" />
+			<xs:element name="civicNumberSuffix"
+				type="tns:civicNumberSuffixType" minOccurs="0" />
+			<xs:element name="ruralRouteNumber"
+				type="tns:ruralRouteNumberType" minOccurs="0" />
+			<xs:element name="ruralRouteTypeCode"
+				type="tns:ruralRouteTypeCodeType" minOccurs="0" />
+			<xs:element name="stationName" type="tns:stationNameType"
+				minOccurs="0" />
+			<xs:element name="stationQualifier"
+				type="tns:stationQualifierType" minOccurs="0" />
+			<xs:element name="stationTypeCode"
+				type="tns:stationTypeCodeType" minOccurs="0" />
+			<xs:element name="fleetMailOfficeName"
+				type="tns:fleetMailOfficeNameType" minOccurs="0" />
+			<xs:element name="hmcsName" type="tns:hmcsNameType"
+				minOccurs="0" />
+			<xs:element name="masterSourceId" type="xs:long"/>
+			<xs:element name="lastUpdateTimeStamp" type="xs:dateTime" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	-->
+    <!-- Move this to Enterprise Common Types XSD -->
+    <!--
+	<xs:complexType name="Name">
+		<xs:sequence>
+			<xs:element name="nameId" type="tns:nameIdType" minOccurs="0"/>
+			<xs:element name="nameTypeCode" type="tns:nameTypeCodeType" minOccurs="0"/>
+			<xs:element name="firstName" type="tns:firstNameType" minOccurs="0"/>
+			<xs:element name="fullName" type="tns:fullNameType" minOccurs="0"/>
+			<xs:element name="language" type="tns:languageType" minOccurs="0"/>
+			<xs:element name="lastName" type="tns:lastNameType" minOccurs="0"/>
+			<xs:element name="middleName" type="tns:middleNameType" minOccurs="0"/>
+			<xs:element name="nameAssignmentSubTypeCode" type="tns:nameAssignmentSubTypeCodeType" minOccurs="0"/>
+			<xs:element name="nameAssignmentTypeCode" type="tns:nameAssignmentTypeCodeType" minOccurs="0"/>
+			<xs:element name="nameLine1Text" type="tns:nameLineTextType" minOccurs="0"/>
+			<xs:element name="nameLine2Text" type="tns:nameLineTextType" minOccurs="0"/>
+			<xs:element name="nameRelText" type="tns:nameRelTextType" minOccurs="0"/>
+			<xs:element name="nameSearchTxt" type="tns:nameSearchTxtType" minOccurs="0"/>
+			<xs:element name="nameSuffix2Code" type="tns:nameSuffixCodeType" minOccurs="0"/>
+			<xs:element name="nameSuffixCode" type="tns:nameSuffixCodeType" minOccurs="0"/>
+			<xs:element name="organizationName" type="tns:organizationNameType" minOccurs="0"/>
+			<xs:element name="relateNameAssignmentId" type="tns:relateNameAssignmentIdType" minOccurs="0"/>
+			<xs:element name="salutationCode" type="tns:salutationCodeType" minOccurs="0"/>
+			<xs:element name="supplementaryName" type="tns:supplementaryNameType" minOccurs="0"/>
+			<xs:element name="supplementaryNameOperatingCode" type="tns:supplementaryNameOperatingCodeType" minOccurs="0"/>
+			<xs:element name="lastUpdateTimeStamp" type="xs:dateTime" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	-->
+</xs:schema>

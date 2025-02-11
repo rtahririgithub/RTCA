@@ -1,0 +1,138 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorServiceRequestResponse_v1" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7">
+               <soapenv:Header/>
+               <soapenv:Body>
+                              <ord:calculateDeposit>
+                                             <ord:calculationTypeCd>FINAL</ord:calculationTypeCd>
+                                             <ord:orderData>
+                                                            <cred:customerID>565200</cred:customerID>
+                                                            <cred:orderID>1111</cred:orderID>
+                                                            <cred:orderIdSourceSystemCd>111</cred:orderIdSourceSystemCd>
+                                                            <cred:currentOrderProductList>
+                                                                           <cred:currentProduct>
+                                                                                          <cred:payChannelNumberList>
+                                                                                                         <cred:payChannelNum>230841629</cred:payChannelNum>
+                                                                                          </cred:payChannelNumberList>
+                                                                                          <cred:offerNameCd/>
+                                                                                          <cred:productName>High Speed Internet</cred:productName>
+                                                                                          <cred:serviceTypeCd>HSIC</cred:serviceTypeCd>
+                                                                                          <cred:assignedProductID>111111</cred:assignedProductID>
+                                                                                          <cred:assignedProductIDSourceSystemCd>1</cred:assignedProductIDSourceSystemCd>
+                                                                                          <cred:rentedEquipmentCnt>200</cred:rentedEquipmentCnt>
+                                                                                          <cred:purchasedEquipmentCnt>1</cred:purchasedEquipmentCnt>
+                                                                                          <cred:previouslyAssessedDepositAmt>0</cred:previouslyAssessedDepositAmt>
+                                                                                          <cred:productOrderCanceledInd>false</cred:productOrderCanceledInd>
+                                                                                          <cred:totalRecurringChargeAmt>500</cred:totalRecurringChargeAmt>
+                                                                                          <cred:estimatedUsageChargeAmt>400</cred:estimatedUsageChargeAmt>
+                                                                                          <cred:forborneInd>N</cred:forborneInd>
+                                                                                          <cred:lossRentalEquipmentChargeAmt>0</cred:lossRentalEquipmentChargeAmt>
+                                                                           </cred:currentProduct>
+                                                                            <cred:currentProduct>
+                                                                                          <cred:payChannelNumberList>
+                                                                                                         <cred:payChannelNum>230841629</cred:payChannelNum>
+                                                                                          </cred:payChannelNumberList>
+                                                                                          <cred:offerNameCd/>
+                                                                                          <cred:productName>TELUS TV</cred:productName>
+                                                                                          <cred:serviceTypeCd>TTV</cred:serviceTypeCd>
+                                                                                          <cred:assignedProductID>111112</cred:assignedProductID>
+                                                                                          <cred:assignedProductIDSourceSystemCd>1</cred:assignedProductIDSourceSystemCd>
+                                                                                          <cred:rentedEquipmentCnt>1000</cred:rentedEquipmentCnt>
+                                                                                          <cred:purchasedEquipmentCnt>1</cred:purchasedEquipmentCnt>
+                                                                                          <cred:previouslyAssessedDepositAmt>0</cred:previouslyAssessedDepositAmt>
+                                                                                          <cred:productOrderCanceledInd>false</cred:productOrderCanceledInd>
+                                                                                          <cred:totalRecurringChargeAmt>1000</cred:totalRecurringChargeAmt>
+                                                                                          <cred:estimatedUsageChargeAmt>50</cred:estimatedUsageChargeAmt>
+                                                                                          <cred:forborneInd>N</cred:forborneInd>
+                                                                                          <cred:lossRentalEquipmentChargeAmt>0</cred:lossRentalEquipmentChargeAmt>
+                                                                           </cred:currentProduct>
+                                                                            <cred:currentProduct>
+                                                                                          <cred:payChannelNumberList>
+                                                                                                         <cred:payChannelNum>230841629</cred:payChannelNum>
+                                                                                          </cred:payChannelNumberList>
+                                                                                          <cred:offerNameCd/>
+                                                                                          <cred:productName>TELUS TV</cred:productName>
+                                                                                          <cred:serviceTypeCd>TTV</cred:serviceTypeCd>
+                                                                                          <cred:assignedProductID>111113</cred:assignedProductID>
+                                                                                          <cred:assignedProductIDSourceSystemCd>1</cred:assignedProductIDSourceSystemCd>
+                                                                                          <cred:rentedEquipmentCnt>0</cred:rentedEquipmentCnt>
+                                                                                          <cred:purchasedEquipmentCnt>1</cred:purchasedEquipmentCnt>
+                                                                                          <cred:previouslyAssessedDepositAmt>0</cred:previouslyAssessedDepositAmt>
+                                                                                          <cred:productOrderCanceledInd>false</cred:productOrderCanceledInd>
+                                                                                          <cred:totalRecurringChargeAmt>100</cred:totalRecurringChargeAmt>
+                                                                                          <cred:estimatedUsageChargeAmt>50</cred:estimatedUsageChargeAmt>
+                                                                                          <cred:forborneInd>N</cred:forborneInd>
+                                                                                          <cred:lossRentalEquipmentChargeAmt>0</cred:lossRentalEquipmentChargeAmt>
+                                                                           </cred:currentProduct>
+                                                                            <cred:currentProduct>
+                                                                                          <cred:payChannelNumberList>
+                                                                                                         <cred:payChannelNum>230841629</cred:payChannelNum>
+                                                                                          </cred:payChannelNumberList>
+                                                                                          <cred:offerNameCd/>
+                                                                                          <cred:productName>TELUS TV</cred:productName>
+                                                                                          <cred:serviceTypeCd>TTV</cred:serviceTypeCd>
+                                                                                          <cred:assignedProductID>111114</cred:assignedProductID>
+                                                                                          <cred:assignedProductIDSourceSystemCd>1</cred:assignedProductIDSourceSystemCd>
+                                                                                          <cred:rentedEquipmentCnt>0</cred:rentedEquipmentCnt>
+                                                                                          <cred:purchasedEquipmentCnt>1</cred:purchasedEquipmentCnt>
+                                                                                          <cred:previouslyAssessedDepositAmt>0</cred:previouslyAssessedDepositAmt>
+                                                                                          <cred:productOrderCanceledInd>false</cred:productOrderCanceledInd>
+                                                                                          <cred:totalRecurringChargeAmt>100</cred:totalRecurringChargeAmt>
+                                                                                          <cred:estimatedUsageChargeAmt>50</cred:estimatedUsageChargeAmt>
+                                                                                          <cred:forborneInd>N</cred:forborneInd>
+                                                                                          <cred:lossRentalEquipmentChargeAmt>0</cred:lossRentalEquipmentChargeAmt>
+                                                                           </cred:currentProduct>
+                                                                            <cred:currentProduct>
+                                                                                          <cred:payChannelNumberList>
+                                                                                                         <cred:payChannelNum>230841629</cred:payChannelNum>
+                                                                                          </cred:payChannelNumberList>
+                                                                                          <cred:offerNameCd/>
+                                                                                          <cred:productName>TELUS TV</cred:productName>
+                                                                                          <cred:serviceTypeCd>TTV</cred:serviceTypeCd>
+                                                                                          <cred:assignedProductID>111115</cred:assignedProductID>
+                                                                                          <cred:assignedProductIDSourceSystemCd>1</cred:assignedProductIDSourceSystemCd>
+                                                                                          <cred:rentedEquipmentCnt>0</cred:rentedEquipmentCnt>
+                                                                                          <cred:purchasedEquipmentCnt>1</cred:purchasedEquipmentCnt>
+                                                                                          <cred:previouslyAssessedDepositAmt>0</cred:previouslyAssessedDepositAmt>
+                                                                                          <cred:productOrderCanceledInd>false</cred:productOrderCanceledInd>
+                                                                                          <cred:totalRecurringChargeAmt>100</cred:totalRecurringChargeAmt>
+                                                                                          <cred:estimatedUsageChargeAmt>50</cred:estimatedUsageChargeAmt>
+                                                                                          <cred:forborneInd>N</cred:forborneInd>
+                                                                                          <cred:lossRentalEquipmentChargeAmt>0</cred:lossRentalEquipmentChargeAmt>
+                                                                           </cred:currentProduct>
+                                                                            <cred:currentProduct>
+                                                                                          <cred:payChannelNumberList>
+                                                                                                         <cred:payChannelNum>230841629</cred:payChannelNum>
+                                                                                          </cred:payChannelNumberList>
+                                                                                          <cred:offerNameCd/>
+                                                                                          <cred:productName>TELUS TV</cred:productName>
+                                                                                          <cred:serviceTypeCd>TTV</cred:serviceTypeCd>
+                                                                                          <cred:assignedProductID>111116</cred:assignedProductID>
+                                                                                          <cred:assignedProductIDSourceSystemCd>1</cred:assignedProductIDSourceSystemCd>
+                                                                                          <cred:rentedEquipmentCnt>0</cred:rentedEquipmentCnt>
+                                                                                          <cred:purchasedEquipmentCnt>1</cred:purchasedEquipmentCnt>
+                                                                                          <cred:previouslyAssessedDepositAmt>0</cred:previouslyAssessedDepositAmt>
+                                                                                          <cred:productOrderCanceledInd>false</cred:productOrderCanceledInd>
+                                                                                          <cred:totalRecurringChargeAmt>100</cred:totalRecurringChargeAmt>
+                                                                                          <cred:estimatedUsageChargeAmt>50</cred:estimatedUsageChargeAmt>
+                                                                                          <cred:forborneInd>N</cred:forborneInd>
+                                                                                          <cred:lossRentalEquipmentChargeAmt>0</cred:lossRentalEquipmentChargeAmt>
+                                                                           </cred:currentProduct>
+                                                            </cred:currentOrderProductList>
+                                             </ord:orderData>
+                                             <ord:applicationID>1064</ord:applicationID>
+                                             <ord:channelID>123</ord:channelID>
+                                             <ord:customerActivePayChannelNumberList>
+                                                            <cred:payChannelNum>230841629</cred:payChannelNum>
+                                             </ord:customerActivePayChannelNumberList>
+                                             <ord:auditInfo>
+                                                            <ent:userId xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ent:userId>
+                                                            <ent:userTypeCode xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ent:userTypeCode>
+                                                            <ent:salesRepresentativeId xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ent:salesRepresentativeId>
+                                                            <ent:channelOrganizationId xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ent:channelOrganizationId>
+                                                            <ent:outletId xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ent:outletId>
+                                                            <ent:originatorApplicationId xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ent:originatorApplicationId>
+                                                            <ent:correlationId xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">123</ent:correlationId>
+                                                            <ent:timestamp xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">2001-12-17T09:30:47.0Z</ent:timestamp>
+                                             </ord:auditInfo>
+                              </ord:calculateDeposit>
+               </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="false">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con1:SoapBindingType" xmlns:con1="http://www.bea.com/wli/sb/services/bindings/config">
+      <con1:wsdl ref="telus-crd-crda-esb/wsdls/WLNCreditProfileManagementService_v2_0"/>
+      <con1:port>
+        <con1:name>WLNCreditProfileManagementServicePort</con1:name>
+        <con1:namespace>http://telus.com/wsdl/CMO/OrderMgmt/WLNCreditProfileManagementService_2</con1:namespace>
+      </con1:port>
+      <con1:selector type="SOAP body"/>
+      <con1:WSI-compliant>false</con1:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-3550949470056089221--15c61a5c.1410de0c3eb.-77db">
+    <con:pipeline type="request" name="getCreditProfileByCustomerIdPipelinePairNode1_request">
+      <con:stage name="WLNCreditProfileDataManagementServicePS_getCreditProfileByCustomerId_Stage">
+        <con:context xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con2:userNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="ns9"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="con"/>
+          <con2:varNsDecl namespace="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/Proxy_ConsumerCustomerMgmtSvcRequestResponse_v2" prefix="prox"/>
+        </con:context>
+        <con:actions xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con1:wsCallout>
+            <con2:id>_ActionId-3550949470056089221--15c61a5c.1410de0c3eb.-77dc</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="telus-crd-crda-esb/business/WLNCreditProfileManagementService_BS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>getCreditProfileByCustomerId</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$getCreditProfileByCustomerIdRequest</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">getCreditProfileByCustomerIdResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="getCreditProfileByCustomerIdRequest">
+                <con2:comment>create getBillingAccountListByCustomerIdRequest</con2:comment>
+                <con2:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-7ba0</con2:id>
+                <con1:expr>
+                  <con2:xqueryText>$body</con2:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform>
+              <con1:replace varName="body">
+                <con2:id>_ActionId-2054387661957449158-254ee32b.141838a9a9a.-7b9d</con2:id>
+                <con1:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con1:location>
+                <con1:expr>
+                  <con2:xqueryText>$getCreditProfileByCustomerIdResponse</con2:xqueryText>
+                </con1:expr>
+              </con1:replace>
+            </con1:responseTransform>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="getCreditProfileByCustomerIdPipelinePairNode1_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-3550949470056089221--15c61a5c.1410de0c3eb.-77db">
+      <con:stage name="getCreditProfileByCustomerId_ErrorHandling_stage">
+        <con:context xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config"/>
+        <con:actions xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+          <con3:log>
+            <con2:id>_ActionId-8311879119488029698-29d9d91f.14358e6f7da.-7a1f</con2:id>
+            <con3:logLevel>debug</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>&lt;WLN_WCDAP_ERROR>
+{$fault}
+,
+{$body}
+&lt;/WLN_WCDAP_ERROR></con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="getCreditProfileByCustomerId_Stage">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="getCreditProfileByCustomerId">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="getCreditProfileByCustomerIdPipelinePairNode1">
+                <con:request>getCreditProfileByCustomerIdPipelinePairNode1_request</con:request>
+                <con:response>getCreditProfileByCustomerIdPipelinePairNode1_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="filter-reqrent"/>
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName" value="filter-reqowned"/>
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName" value="filter-owned"/>
+            </bean>
+            <bean id="STEP04" parent="baseStep">
+               <property name="moduleName" value="filter-rent"/>
+            </bean>
+            <bean id="STEP05" parent="baseStep">
+               <property name="moduleName" value="filter-ordertotal"/>
+            </bean>
+            <bean id="STEP06" parent="baseStep">
+               <property name="moduleName" value="pre-base-order"/>
+            </bean>
+            <bean id="STEP07" parent="baseStep">
+               <property name="moduleName" value="pre-base-order-rm-dup"/>
+            </bean>
+            <bean id="STEP08" parent="baseStep">
+               <property name="moduleName" value="join-order-0"/>
+            </bean>
+            <bean id="STEP09" parent="baseStep">
+               <property name="moduleName" value="join-order-1"/>
+            </bean>
+            <bean id="STEP10" parent="baseStep">
+               <property name="moduleName" value="join-order-2"/>
+            </bean>
+            <bean id="STEP11" parent="baseStep">
+               <property name="moduleName" value="join-order-3"/>
+            </bean>
+            <bean id="STEP12" parent="baseStep">
+               <property name="moduleName" value="join-order-4"/>
+            </bean>
+            <bean id="STEP13" parent="baseStep">
+               <property name="moduleName" value="join-order-5"/>
+            </bean>
+            <bean id="STEP14" parent="baseStep">
+               <property name="moduleName" value="join-order-6"/>
+            </bean>
+            <bean id="STEP15" parent="baseStep">
+               <property name="moduleName" value="join-order-7"/>
+            </bean>
+            <bean id="STEP16" parent="baseStep">
+               <property name="moduleName" value="join-order-8"/>
+            </bean>
+            <bean id="STEP17" parent="baseStep">
+               <property name="moduleName" value="join-order-9"/>
+            </bean>
+            <bean id="STEP18" parent="baseStep">
+               <property name="moduleName" value="join-order-10"/>
+            </bean>
+            <bean id="STEP19" parent="baseStep">
+               <property name="moduleName" value="join-order-11"/>
+            </bean>
+            <bean id="STEP20" parent="baseStep">
+               <property name="moduleName" value="join-order-12"/>
+            </bean>
+            <bean id="STEP21" parent="baseStep">
+               <property name="moduleName" value="join-order-13"/>
+            </bean>
+            <bean id="STEP22" parent="baseStep">
+               <property name="moduleName" value="join-order-14"/>
+            </bean>
+            <bean id="STEP23" parent="baseStep">
+               <property name="moduleName" value="transform-depcal"/>
+            </bean>
+            <bean id="STEP24" parent="baseStep">
+               <property name="moduleName" value="generate-audit"/>
+            </bean>
+       </list>
+      </property>
+   </bean>
+   <bean id="filter-reqrent" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_order_req_rent.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_deposit.tmp ${processbox}/sbi/depositcalc/order_reqrent.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="filter-reqowned" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_order_req_purchase.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_deposit.tmp ${processbox}/sbi/depositcalc/order_reqowned.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="filter-owned" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_order_owned.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_deposit.tmp ${processbox}/sbi/depositcalc/order_owned.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="filter-rent" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_order_rent.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_deposit.tmp ${processbox}/sbi/depositcalc/order_rent.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="filter-ordertotal" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_extract_order_total.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_deposit.tmp ${processbox}/sbi/depositcalc/order_total.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="pre-base-order" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_pre.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/base_deposit_calc.tmp ${processbox}/sbi/depositcalc/order_deposit.tmp ${processbox}/sbi/depositcalc/order_merge_1_pre.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="pre-base-order-rm-dup" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_pre_rm_duplicate.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_1_pre.tmp ${processbox}/sbi/depositcalc/order_merge_1.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-0" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_1.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_1.tmp ${processbox}/sbi/depositcalc/order_reqrent.tmp ${processbox}/sbi/depositcalc/order_merge_2.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-1" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_2.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_2.tmp ${processbox}/sbi/depositcalc/order_reqowned.tmp ${processbox}/sbi/depositcalc/order_merge_3.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-2" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_3.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_3.tmp ${processbox}/sbi/depositcalc/order_owned.tmp ${processbox}/sbi/depositcalc/order_merge_4.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-3" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_4.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_4.tmp ${processbox}/sbi/depositcalc/order_rent.tmp ${processbox}/sbi/depositcalc/order_merge_5.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-4" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_filter_stv.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_5.tmp ${processbox}/sbi/depositcalc/stv.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean>
+   <bean id="join-order-5" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_filter_dsl.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_5.tmp ${processbox}/sbi/depositcalc/dsl.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-6" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_filter_iptv.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_5.tmp ${processbox}/sbi/depositcalc/iptv.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-7" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_filter_sl.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_merge_5.tmp ${processbox}/sbi/depositcalc/sl.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-8" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_sbi_filter_slforborne.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/order_deposit.tmp ${processbox}/sbi/depositcalc/forborne.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-9" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_5.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/base_deposit_calc.tmp ${processbox}/sbi/depositcalc/stv.tmp ${processbox}/sbi/depositcalc/deposit_calc_01.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-10" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_6.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/deposit_calc_01.tmp ${processbox}/sbi/depositcalc/dsl.tmp ${processbox}/sbi/depositcalc/deposit_calc_02.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-11" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_7.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/deposit_calc_02.tmp ${processbox}/sbi/depositcalc/iptv.tmp ${processbox}/sbi/depositcalc/deposit_calc_03.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-12" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_8.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/deposit_calc_03.tmp ${processbox}/sbi/depositcalc/sl.tmp ${processbox}/sbi/depositcalc/deposit_calc_04.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-13" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_9.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/deposit_calc_04.tmp ${processbox}/sbi/depositcalc/forborne.tmp ${processbox}/sbi/depositcalc/deposit_calc_05.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="join-order-14" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_10.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/deposit_calc_05.tmp ${processbox}/sbi/depositcalc/order_total.tmp ${processbox}/sbi/depositcalc/deposit_calc_06.tmp"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="transform-depcal" lazy-init="true" parent="baseSyncsortScriptStep">
+      <property name="executable" value="${syncsort}/rtca_join_sbi_depositcalc_11.sh"/> 
+      <property name="arg" value="${processbox}/sbi/depositcalc/deposit_calc_06.tmp ${outbox}/CrAssmtRqstDpst_${L_SBI_END_DATE}.dat"/>
+      <property name="output" value="${logs}/${jobname}.log"/>
+   </bean> 
+   <bean id="generate-audit"  class="com.telus.crd.assessment.batch.SbiAuditFileProcessor"> 
+      <property name="inputFile" value="${outbox}/CrAssmtRqstDpst_${L_SBI_END_DATE}.dat"/>
+	<property name="outputFile" value="${outbox}/CrAssmtRqstDpst_${L_SBI_END_DATE}.aud" /> 
+	<property name="reportStart" value="${L_SBI_START_DATE}"/>
+	<property name="reportEnd" value="${L_SBI_END_DATE}"/>
+   </bean> 
+</beans>

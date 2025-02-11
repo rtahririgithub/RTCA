@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="CustomerFacingServiceChoice">
+        <xsd:choice>
+            <xsd:element name="SiteInternetServiceCustomerFacingService" type="tns:SiteInternetServiceCustomerFacingService"/>
+            <xsd:element name="VirtualCashCustomerFacingService" type="tns:VirtualCashCustomerFacingService"/>
+            <xsd:element
+                name="DomainNameRegistrationCustomerFacingService" type="tns:DomainNameRegistrationCustomerFacingService"/>
+            <xsd:element name="WebsiteCustomerFacingService" type="tns:WebsiteCustomerFacingService"/>
+            <xsd:element name="TVCustomerFacingService" type="tns:TVCustomerFacingService"/>
+            <xsd:element name="BasicVoIPCustomerFacingService" type="tns:BasicVoIPCustomerFacingService"/>
+            <xsd:element name="MobileInternetCustomerFacingService" type="tns:MobileInternetCustomerFacingService"/>
+            <xsd:element name="TextMessagingCustomerFacingService" type="tns:TextMessagingCustomerFacingService"/>
+            <xsd:element name="MobileVoiceCustomerFacingService" type="tns:MobileVoiceCustomerFacingService"/>
+            <xsd:element name="DomainNameMailboxCustomerFacingService" type="tns:DomainNameMailboxCustomerFacingService"/>
+            <xsd:element name="eMailMailboxCustomerFacingService" type="tns:eMailMailboxCustomerFacingService"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="SiteInternetServiceCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NbrIPAddresses" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ModemSelection" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SelfInstallationOption" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DownstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UpstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="VirtualCashCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="Pin" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="VirtualPaymentMethod" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AccountNumber" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="DomainNameRegistrationCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="DomainType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DomainName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="HostName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="WebsiteCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="WebsiteType" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="TVCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="GeoRange" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NumberOfTVs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TimeZone" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MarketSegment" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Language" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="BasicVoIPCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="NumberOfLines" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IDD" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NetworkTechnology" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MobileInternetCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="DownstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PaymentMethod" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UpstreamSpeed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Datalimit" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="TextMessagingCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="PaymentMethod" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MobileVoiceCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="InternationalRoaming" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PaymentMethod" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IDD" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="DomainNameMailboxCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MaxNumberOfeMailBoxes" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MaxNumberOfeMailIDs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MailboxSize" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MailboxType" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="eMailMailboxCustomerFacingService">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="MaxNumberOfeMailBoxes" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MaxNumberOfeMailIDs" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MailboxSize" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MailboxType" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

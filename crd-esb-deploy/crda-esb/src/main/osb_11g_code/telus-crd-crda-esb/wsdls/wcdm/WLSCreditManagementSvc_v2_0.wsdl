@@ -1,0 +1,160 @@
+<WL5G3N0:definitions targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/WLSCreditManagementSvc_2" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2" xmlns:WL5G3N2="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:WL5G3N3="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3" xmlns:WL5G3N4="http://telus.com/wsdl/CMO/OrderMgmt/WLSCreditManagementSvc_2" xmlns:WL5G3N5="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xs:schema targetNamespace="http://telus.com/wsdl/CMO/OrderMgmt/WLSCreditManagementSvc_2" xmlns:ex="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3" xmlns:iface="http://telus.com/wsdl/CMO/OrderMgmt/WLSCreditManagementSvc_2" xmlns:ping="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:shttp="http://soa.com/wsdl/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wlscrdm="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditManagementSvcRequestResponse_v2" schemaLocation="WLSCreditManagementSvcRequestResponse_v2_1.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/Exceptions_v3" schemaLocation="Exceptions_v3_0.xsd"/>
+      <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" schemaLocation="ping_v1.xsd"/>
+    </xs:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="getCreditWorthiness">
+    <WL5G3N0:part element="WL5G3N1:getCreditWorthiness" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCreditWorthinessResponse">
+    <WL5G3N0:part element="WL5G3N1:getCreditWorthinessResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCreditProfile">
+    <WL5G3N0:part element="WL5G3N1:getCreditProfile" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getCreditProfileResponse">
+    <WL5G3N0:part element="WL5G3N1:getCreditProfileResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateConsumerCreditInformation">
+    <WL5G3N0:part element="WL5G3N1:updateConsumerCreditInformation" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="updateConsumerCreditInformationResponse">
+    <WL5G3N0:part element="WL5G3N1:updateConsumerCreditInformationResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="validateCreditId">
+    <WL5G3N0:part element="WL5G3N1:validateCreditId" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="validateCreditIdResponse">
+    <WL5G3N0:part element="WL5G3N1:validateCreditIdResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ping">
+    <WL5G3N0:part element="WL5G3N2:ping" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pingResponse">
+    <WL5G3N0:part element="WL5G3N2:pingResponse" name="result"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ServiceException">
+    <WL5G3N0:part element="WL5G3N3:ServiceException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="WLSCreditManagementSvc_v2_0_PortType">
+    <WL5G3N0:operation name="getCreditWorthiness">
+      <WL5G3N0:input message="WL5G3N4:getCreditWorthiness"/>
+      <WL5G3N0:output message="WL5G3N4:getCreditWorthinessResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCreditProfile">
+      <WL5G3N0:input message="WL5G3N4:getCreditProfile"/>
+      <WL5G3N0:output message="WL5G3N4:getCreditProfileResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateConsumerCreditInformation">
+      <WL5G3N0:input message="WL5G3N4:updateConsumerCreditInformation"/>
+      <WL5G3N0:output message="WL5G3N4:updateConsumerCreditInformationResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="validateCreditId">
+      <WL5G3N0:input message="WL5G3N4:validateCreditId"/>
+      <WL5G3N0:output message="WL5G3N4:validateCreditIdResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:input message="WL5G3N4:ping"/>
+      <WL5G3N0:output message="WL5G3N4:pingResponse"/>
+      <WL5G3N0:fault message="WL5G3N4:ServiceException" name="ServiceException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="WLSCreditManagementSvc_v2_0_SOAP" type="WL5G3N4:WLSCreditManagementSvc_v2_0_PortType">
+    <WL5G3N5:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="getCreditWorthiness">
+      <WL5G3N0:documentation> The Operation enables retrieval of a wireless credit worthiness from wls credit mgmt database</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCreditWorthiness"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getCreditProfile">
+      <WL5G3N0:documentation> The Operation enables retrieval of a wireless credit profile from wls credit mgmt database</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="getCreditProfile"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="updateConsumerCreditInformation">
+      <WL5G3N0:documentation>The Operation enables updating Credit Information in wls credit mgmt database.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="updateConsumerCreditInformation"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="validateCreditId">
+      <WL5G3N0:documentation>The Operation checks for duplicate credit IDs in wls credit mgmt database and return true or false based on match.</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="validateCreditId"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ping">
+      <WL5G3N0:documentation>
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+    
+  
+  
+    
+      
+    
+  
+</WL5G3N0:documentation>
+      <WL5G3N5:operation soapAction="ping"/>
+      <WL5G3N0:input>
+        <WL5G3N5:body parts="parameters" use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N5:body parts="result" use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="ServiceException">
+        <WL5G3N5:fault name="ServiceException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="WLSCreditManagementSvc_v2_0">
+    <WL5G3N0:port binding="WL5G3N4:WLSCreditManagementSvc_v2_0_SOAP" name="WLSCreditManagementSvcPort">
+      <WL5G3N5:address location="https://cmbilling-collectionmgmt-wls-dv103.tsl.telus.com/CMO/OrderMgmt/WLSCreditManagement/WLSCreditManagementSvc_v2_0"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

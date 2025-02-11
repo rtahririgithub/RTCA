@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+    <settings
+            useStatementNamespaces="true"
+            cacheModelsEnabled="false"
+            lazyLoadingEnabled="false"
+            />
+    <typeHandler javaType="com.telus.framework.math.Money"
+                 callback="com.telus.framework.util.ibatis.MoneyTypeHandler"/>
+    <typeHandler javaType="javax.xml.datatype.XMLGregorianCalendar"
+                 callback="com.telus.framework.util.ibatis.XMLGregorianCalendarTypeHandler"/>
+
+    <sqlMap resource="sqlmaps/CreditAssessment.xml"/>
+    <sqlMap resource="sqlmaps/CreditBureau.xml"/>
+    <sqlMap resource="sqlmaps/CreditDecision.xml"/>
+    <sqlMap resource="sqlmaps/GetCreditAssessment.xml"/>
+    <sqlMap resource="sqlmaps/SearchCreditAssessment.xml"/>
+</sqlMapConfig>

@@ -1,0 +1,33 @@
+<xs:schema elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Resource/BaseTypes/resource_order_reference_types_1_0" xmlns="http://xmlschema.tmi.telus.com/xsd/Resource/BaseTypes/resource_order_reference_types_1_0" xmlns:common="http://schemas.telus.com/eca/common_types_2_1" xmlns:typ="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://schemas.telus.com/eca/common_types_2_1" schemaLocation="ECA_CommonTypes_2_1.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" schemaLocation="CustomerInformationReferenceTypes_1_0.xsd"/>
+    <xs:complexType name="NumberGroup">
+        <xs:complexContent>
+            <xs:extension base="typ:Reference">
+                <xs:sequence>
+                    <xs:element name="provinceCode" type="common:ProvinceCode"/>
+                    <xs:element maxOccurs="1000" name="npaNXX" nillable="true" type="common:NpaNXX"/>
+                    <xs:element name="networkId" nillable="true" type="common:NetworkID"/>
+                    <xs:element name="numberLocation" type="common:NumberLocation"/>
+                    <xs:element name="defaultDealerCode" nillable="true" type="common:DealerCode"/>
+                    <xs:element name="defaultSalesRepCode" nillable="true" type="common:SalesRepCode"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="AccountTypeCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="B"/>
+            <!-- Business -->
+            <xs:enumeration value="I"/>
+            <!-- Consumer -->
+            <xs:enumeration value="C"/>
+            <!-- Corporate -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AccountSubTypeCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\p{Lu}|\d{1})"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

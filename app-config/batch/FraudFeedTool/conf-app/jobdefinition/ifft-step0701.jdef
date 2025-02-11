@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<import resource="classpath:fw-base.jdef"/>
+	<bean id="job" parent="baseJob">
+		<property name="steps">
+         <list>
+            <bean id="STEP0701" parent="baseStep">
+               <property name="moduleName" value="cmdExec-Step0701"/>
+            </bean>
+            <bean id="STEP0702" parent="baseStep">
+               <property name="moduleName" value="cmdExec-Step0702"/>
+            </bean>
+         </list>
+		</property>
+	</bean>
+	<bean id="cmdExec-Step0701" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${step0701/scriptFile}"/>
+      <property name="arg" value="${step0701/inputFilename1} ${step0701/inputFilename2}  ${step0701/outputFilename}"/>
+      </bean>
+      <bean id="cmdExec-Step0702" parent="baseSyncsortCmdStep">
+
+      <property name="controlFile" value="${step0701/syncsortFile}"/>
+
+
+   </bean>
+</beans>
+
+

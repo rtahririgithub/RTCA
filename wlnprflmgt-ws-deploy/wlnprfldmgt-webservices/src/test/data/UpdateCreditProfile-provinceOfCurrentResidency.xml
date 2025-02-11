@@ -1,0 +1,43 @@
+<wln:updateCreditProfile xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6">
+
+   <wln:creditProfile>
+           
+            <cred:customerID>39751780</cred:customerID>
+           
+            <!-- <cred:applicationProvinceCd>BC</cred:applicationProvinceCd> -->
+            
+            <!--Optional:-->
+            <cred:businessLastUpdateTimestamp>2013-09-19T10:33:28.768Z</cred:businessLastUpdateTimestamp>
+           
+            <!--Optional:-->
+            <cred:methodCd>OO</cred:methodCd>
+            <!--Optional:-->
+            <cred:creditAddress>
+               <!--Optional:-->
+               <cred:creditAddressTypeCd>CB</cred:creditAddressTypeCd>
+               <cred:provinceCd>BC</cred:provinceCd>
+               
+            </cred:creditAddress>
+            
+            <!--Optional:-->
+            <cred:personalInfo>
+               
+               <!--Optional:-->
+               <cred:provinceOfCurrentResidenceCd>AB</cred:provinceOfCurrentResidenceCd>
+            </cred:personalInfo>
+            
+            <!--Optional:-->
+            <cred:commentTxt>DV Testing</cred:commentTxt>
+         </wln:creditProfile>
+         <!--Optional:-->
+         <wln:creditValueCd>R</wln:creditValueCd>
+         <!--Optional:-->
+         <!-- <wln:fraudIndicatorCd>?</wln:fraudIndicatorCd> -->
+         <wln:auditInfo>
+            <!--Optional:-->
+            <ent:userId>122365</ent:userId>
+            
+            <ent:originatorApplicationId>1234</ent:originatorApplicationId>
+            <ent:timestamp>2013-09-19T10:33:28.768Z</ent:timestamp>
+         </wln:auditInfo>
+ </wln:updateCreditProfile>

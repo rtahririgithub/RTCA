@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<!--
+# @version 1.2.0.20.0
+#
+# Change Log:
+#  1.2.0.18.0  - Feb 17,2006: Add syncsortdebuglevel
+#  1.2.0.20.0  - Mar 28,2006: Change ncode version to 8.5
+#  2.1.0beta2  - June 6,2006: Add pmhome, sort cards
+#              - June 26,2006: Remove PowerCentre settings
+#  2.2.0beta2  - Nov 03,2006: Added the fdxhome (Tumbleweed SecureTransport variable used by Payment Gateway/CIBC)
+#  2.2.1       - May 28,2006: Add G_COMMON_SCRIPT_HOME
+#  3.0beta9.3  - Aug 31 2007: Add ${JAVA_HOME}/bin</prop> commonpath so SFTP.sh can use java to launch the script. 
+#  3.0beta12   - Sep 26 2007: Add "maxLength" to control the length for VARCHAR2(3500) coulumns
+#  fw5-1.0     - May 13 2008: Add ckfs
+-->
+
+<!-- =================================================================== -->
+<!--  contains all configurable attributes at the Enterprise level       -->
+<!-- =================================================================== -->
+
+
+<group name="commonConfig">
+
+    <!-- =============================================================== -->
+    <!-- The beantype can be overridden  with "jta" or "stub" in the     -->
+    <!-- application configuration framework file                        -->
+    <!-- =============================================================== -->
+    <prop name="beantype">jdbc</prop>
+ 
+    <!-- =============================================================== -->
+    <!-- The batchDS can be overridden  with application's datasource    -->
+    <!-- =============================================================== -->   
+    <prop name="batchDS">${beantype}-jobDS</prop> 
+
+    <!-- =============================================================== -->  
+    <!-- The user and password for the JDBC setup must be overridden.    -->
+    <!-- Example through connections-bec.xml.                            -->
+    <!-- =============================================================== -->
+
+    <group name="jdbc">
+        <prop name="url">*** JDBC/url is not defined ***</prop>
+        <prop name="username">framework</prop>
+        <prop name="password">framework</prop>
+    </group>
+    
+    <group name="jndi">
+        <prop name="jndiName">*** Must Define Your own JNDI ***</prop>
+    </group> 
+    
+    <group name="jta">
+        <prop name="url">*** JTA/url is not defined ***</prop>
+    </group>
+
+    <!-- =============================================================== -->
+    <!--   Common batch attributes                                       -->
+    <!-- =============================================================== -->
+    <prop name="apphome">${APP_HOME}</prop>
+    <prop name="datahome">${DATA_HOME}</prop>
+    <prop name="level1shortname">${LEVEL1_SHORTNAME}</prop>
+    <prop name="level2shortname">${LEVEL2_SHORTNAME}</prop>
+    <prop name="uxsftphome">${UX_SFTP_HOME}</prop> 
+    <prop name="mfsftphome">${MF_SFTP_HOME}</prop> 
+    
+    <!-- =============================================================== -->
+    <!--   The appname and jobname cannot be over 20 characters.         -->
+    <!-- =============================================================== -->
+    <prop name="appname">${level1shortname}-${level2shortname}</prop>
+    <prop name="jobname">${level2shortname}-${JOB}${JOB_SUBGROUP}</prop>
+     
+                  
+    <prop name="resources">${apphome}/resources</prop>
+    <prop name="resourcesenv">${apphome}/resources/env</prop>
+    <prop name="confapp">${apphome}/conf/conf-app</prop>
+    <prop name="confenv">/apps/common/env/${ENV}/${APPID}</prop>
+    <prop name="lib">${apphome}/resources/lib</prop>
+    <prop name="sql">${apphome}/resources/sql</prop>
+    <prop name="step">${apphome}/resources/step</prop>
+    <prop name="syncsort">${apphome}/resources/syncsort</prop> 
+
+
+    <prop name="data">${datahome}/data</prop>  
+    <prop name="inbox">${datahome}/data/inbox</prop>
+    <prop name="outbox">${datahome}/data/outbox</prop>
+    <prop name="passbox">${datahome}/data/passbox</prop>
+    <prop name="processbox">${datahome}/data/processbox</prop>
+    <prop name="temp">${datahome}/data/temp</prop>
+    <prop name="logs">${datahome}/logs</prop>
+    <prop name="archive">${datahome}/data/archive</prop>
+    <prop name="error">${datahome}/data/error</prop>
+
+    <prop name="uxsftpinbox">${uxsftphome}/inbox</prop>
+    <prop name="uxsftpoutbox">${uxsftphome}/outbox</prop>
+    <prop name="mfsftpinbox">${mfsftphome}/inbox</prop>
+    <prop name="mfsftpoutbox">${mfsftphome}/outbox</prop>
+    
+    <prop name="sortstatistic">/STATISTIC</prop>
+    <prop name="sortmemory">/MEMORY 2 MEGABYTES</prop>
+    <prop name="sortworkspace">/WORKSPACE /work/tmpdir/${ENV}${level1shortname}</prop>
+    
+    <!-- =============================================================== -->
+    <!--                common environment attributes                    -->
+    <!-- =============================================================== -->
+    <!-- To override on Sun plateform synsortHome=${syncsorthomeSun} -->
+    
+    <!-- set the {EC} environment code here.. /apps/infra/ncode/8.5/{EC}/INT1 -->
+    <!-- 2012-02 Change /apps/infra/ncode/8.5/DV01/INT1 to /apps/infra/symlinks/ncodehome -->
+    <prop name="ncodehome">/apps/infra/symlinks/ncodehome</prop>
+
+    <!--  fdxhome is used by Tumbleweed SecureTransport File Transfers -->
+    <prop name="fdxhome">/apps/infra/symlinks/fdxhome</prop>
+
+    <!-- SynsortHome is default to DMS Express SynsortHome by IBM -->
+    <prop name="syncsorthome">/apps/infra/symlinks/syncsorthome</prop>
+    <prop name="oraclehome">/apps/infra/symlinks/oraclehome</prop>
+    <prop name="commonpath">${oraclehome}/bin:.:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/etc:${syncsorthome}/bin:${JAVA_HOME}/bin</prop>
+
+    <prop name="syncsortlib">${syncsorthome}/lib</prop>
+
+    <!-- The syncsortdebuglevel should be set to 300 in non-production environment and 50 in production environment -->
+    <prop name="syncsortdebuglevel">300</prop>
+
+    <prop name="G_COMMON_SCRIPT_HOME">/apps/common/scripts/dv01</prop>
+   
+    <prop name="maxLength">3500</prop> 
+    
+    <prop name="cksf">/apps/common/gen/dv01</prop>
+    
+</group>
+
+
+
+    
+
+

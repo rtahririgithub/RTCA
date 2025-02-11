@@ -1,0 +1,16 @@
+<ns2:updateWLSConsumerCreditProfile xmlns:ns2="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLSCreditProfileDataManagementServiceRequestResponse_v1" xmlns="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v3" xmlns:ns3="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4">
+         <ns2:auditInfo>
+            <userId>bob148dsa</userId>
+            <originatorApplicationId>9922</originatorApplicationId>
+            <timestamp>2012-11-28T22:56:01.625Z</timestamp>
+         </ns2:auditInfo>
+         <ns2:accountNumber>70650600</ns2:accountNumber>
+         <ns2:personalCreditInformation>
+            <ns3:creditCard xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <ns3:birthDate>1967-03-26</ns3:birthDate>
+            <ns3:sin xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <ns3:driversLicense>g&amp;ohf;xD</ns3:driversLicense>
+            <ns3:driversLicenseExpiry>2013-10-10</ns3:driversLicenseExpiry>
+            <ns3:driversLicenseProvince>AB</ns3:driversLicenseProvince>
+         <cus:creditCard xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/customer_management_common_types_1"><cus:token/><cus:first6/><cus:last4/><cus:expiryMonth/><cus:expiryYear/><cus:holderName/><cus:authorizationCode/></cus:creditCard></ns2:personalCreditInformation>
+</ns2:updateWLSConsumerCreditProfile>

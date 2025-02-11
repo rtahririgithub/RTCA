@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false" isAutoPublish="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>local</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-1360295257453828208--30068874.142bfb58d8f.-7859">
+    <con:pipeline type="request" name="Update_Custtomer_ODS_PS_PipelinePairNode_request">
+      <con:stage name="getCustomer_stage">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="bodySaved">
+            <con1:id>_ActionId-8630507784815679676-4e68cf49.14403fef45f.-73c5</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:comment xmlns:con2="http://www.bea.com/wli/sb/stages/config">call ConsumerCustomerManagementServicePS to getCustomer</con2:comment>
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5547059187238404398-48c21b89.142531d9400.-7dce</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/ConsumerCustomerManagementServicePS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>getCustomer</con1:operation>
+            <con1:request>
+              <con1:body wrapped="false">$getCustomerRequest</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="false">getCustomerResponse</con1:body>
+            </con1:response>
+            <con1:requestTransform>
+              <con1:assign varName="getCustomerRequest">
+                <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5547059187238404398-48c21b89.142531d9400.-7db6</con2:id>
+                <con1:expr>
+                  <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">&lt;tns:getCustomer 
+xsi:schemaLocation="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2 ConsumerCustomerMgmtSvcRequestResponse_v2_3.xsd" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/InformationMgmt/ConsumerCustomerMgmtSvcRequestResponse_v2">
+ 
+ &lt;customerId>
+   {$body/input/customerID/text()}
+ &lt;/customerId>
+
+&lt;/tns:getCustomer></con4:xqueryText>
+                </con1:expr>
+              </con1:assign>
+            </con1:requestTransform>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="updateCustomer_stage">
+        <con:context/>
+        <con:actions>
+          <con3:ifThenElse>
+            <con1:id>_ActionId-5829790679383896415-53f6fcda.1438d370c46.-7fbc</con1:id>
+            <con3:case>
+              <con3:condition>
+                <con1:xqueryText>fn:upper-case($getCustomerResponse/customer/creditValueCode/text())
+!=
+fn:upper-case($body/input/creditValueCd/text())</con1:xqueryText>
+              </con3:condition>
+              <con3:actions>
+                <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+                  <con2:comment xmlns:con2="http://www.bea.com/wli/sb/stages/config">call ConsumerCustomerManagementServicePS to updateCustomer</con2:comment>
+                  <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-5829790679383896415-53f6fcda.1438d370c46.-7fb7</con4:id>
+                  <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/externalPS/ConsumerCustomerManagementServicePS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                  <con1:operation>updateCustomer</con1:operation>
+                  <con1:request>
+                    <con1:body>$updateCustomerRequest</con1:body>
+                  </con1:request>
+                  <con1:response>
+                    <con1:body>updateCustomerResponse</con1:body>
+                  </con1:response>
+                  <con1:requestTransform>
+                    <con1:assign varName="updateCustomerRequest">
+                      <con3:comment xmlns:con3="http://www.bea.com/wli/sb/stages/config">Create UpdateCustomerRequest</con3:comment>
+                      <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-5829790679383896415-53f6fcda.1438d370c46.-7fb8</con4:id>
+                      <con1:expr>
+                        <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                          <con4:resource ref="telus-crd-crda-esb/xquery/transformation/external/create_UpdateCustomer_Request"/>
+                          <con4:param name="auditInfo1">
+                            <con4:path>($body//*[local-name()='auditInfo'])[1]</con4:path>
+                          </con4:param>
+                          <con4:param name="creditValueCode1">
+                            <con4:path>$body/input/creditValueCd/text()</con4:path>
+                          </con4:param>
+                          <con4:param name="getCustomerResponse1">
+                            <con4:path>$getCustomerResponse</con4:path>
+                          </con4:param>
+                        </con4:xqueryTransform>
+                      </con1:expr>
+                    </con1:assign>
+                  </con1:requestTransform>
+                  <con1:responseTransform/>
+                </con1:wsCallout>
+              </con3:actions>
+            </con3:case>
+            <con3:default>
+              <con3:assign varName="logConfigData">
+                <con1:id>_ActionId-7395525883474096836--62ea7d34.1440d8cc505.-7e7c</con1:id>
+                <con3:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="telus-crd-crda-esb/xquery/config/logConfig"/>
+                  </con1:xqueryTransform>
+                </con3:expr>
+              </con3:assign>
+              <con4:ifThenElse xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                <con1:id>_ActionId-7395525883474096836--62ea7d34.1440d8cc505.-7e26</con1:id>
+                <con4:case>
+                  <con4:condition>
+                    <con1:xqueryText>$logConfigData/PS[@name="Update_Custtomer_ODS_PS"]/prop[@name="log.info"]/text()="true"</con1:xqueryText>
+                  </con4:condition>
+                  <con4:actions>
+                    <con5:log xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/logging/config">
+                      <con1:id>_ActionId-7395525883474096836--62ea7d34.1440d8cc505.-7de0</con1:id>
+                      <con5:logLevel>debug</con5:logLevel>
+                      <con5:expr>
+                        <con1:xqueryText>let $creditDecisioningResultTmp := ($body//*[local-name()='creditDecisioningResult'])[1]
+let $creditValueCdTmp := ($creditDecisioningResultTmp//*[local-name()='creditValueCd'])[1]/text()
+let $assessmentMessageCdTmp := ($creditDecisioningResultTmp//*[local-name()='assessmentMessageCd'])[1]/text()
+
+return 
+&lt;info>
+'Update_Custtomer_ODS_PS',
+'CODS_creditValueCode='{$getCustomerResponse/customer/creditValueCode/text()} ,
+'new_creditValueCd='{$body/input/creditValueCd/text()} 
+&lt;/info></con1:xqueryText>
+                      </con5:expr>
+                      <con5:message>Bypassed Update creditvalue in  CustomerODS</con5:message>
+                    </con5:log>
+                    <con2:log>
+                      <con1:id>_ActionId-7395525883474096836--62ea7d34.1440d8cc505.-7e25</con1:id>
+                      <con2:logLevel>debug</con2:logLevel>
+                      <con2:expr>
+                        <con1:xqueryText>'Update_Custtomer_ODS_PS customerID='
+,($bodySaved//*[local-name()='customerID'])[1]/text() 
+,
+$bodySaved</con1:xqueryText>
+                      </con2:expr>
+                    </con2:log>
+                  </con4:actions>
+                </con4:case>
+                <con4:default/>
+              </con4:ifThenElse>
+              <con1:reply>
+                <con1:id>_ActionId-5829790679383896415-53f6fcda.1438d370c46.-7fbb</con1:id>
+              </con1:reply>
+            </con3:default>
+          </con3:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="Update_Custtomer_ODS_PS_PipelinePairNode_response">
+      <con:stage name="Logging_Stage1">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="logConfigData">
+            <con1:id>_ActionId-8630507784815679676-4e68cf49.14403fef45f.-7352</con1:id>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="telus-crd-crda-esb/xquery/config/logConfig"/>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+          <con4:ifThenElse xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+            <con1:id>_ActionId-8630507784815679676-4e68cf49.14403fef45f.-7351</con1:id>
+            <con4:case>
+              <con4:condition>
+                <con1:xqueryText>$logConfigData/PS[@name="Update_Custtomer_ODS_PS"]/prop[@name="log.info"]/text()="true"</con1:xqueryText>
+              </con4:condition>
+              <con4:actions>
+                <con2:log>
+                  <con1:id>_ActionId-8630507784815679676-4e68cf49.14403fef45f.-7350</con1:id>
+                  <con2:logLevel>debug</con2:logLevel>
+                  <con2:expr>
+                    <con1:xqueryText>'Update_Custtomer_ODS_PS customerID='
+,($bodySaved//*[local-name()='customerID'])[1]/text() 
+,
+$bodySaved
+,
+$body</con1:xqueryText>
+                  </con2:expr>
+                </con2:log>
+              </con4:actions>
+            </con4:case>
+            <con4:default/>
+          </con4:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-1360295257453828208--30068874.142bfb58d8f.-7859">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con2:log>
+            <con1:id>_ActionId-8989870761278204269--6716ece0.142e3d00978.-7e84</con1:id>
+            <con2:logLevel>debug</con2:logLevel>
+            <con2:expr>
+              <con1:xqueryText>'Update_Custtomer_ODS_PS_ERRORHANDLER_BodyContent customerID='
+,($bodySaved//*[local-name()='customerID'])[1]/text() 
+,
+$fault
+,
+$body</con1:xqueryText>
+            </con2:expr>
+            <con2:message>Update_Customer_ODS_PS failed</con2:message>
+          </con2:log>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-1254993740914659236--62936fa7.142f6b07b56.-7be5</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryText>$fault</con1:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con1:reply isError="true">
+            <con1:id>_ActionId-1254993740914659236--62936fa7.142f6b07b56.-7e6d</con1:id>
+          </con1:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="Update_Custtomer_ODS_PS_PipelinePairNode">
+        <con:comment>&lt;input>
+customerID
+creditValue
+auditInfo
+&lt;/input></con:comment>
+        <con:request>Update_Custtomer_ODS_PS_PipelinePairNode_request</con:request>
+        <con:response>Update_Custtomer_ODS_PS_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

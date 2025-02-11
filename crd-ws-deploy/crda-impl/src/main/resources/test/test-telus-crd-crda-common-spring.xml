@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+  <!--  decisioningEngineAdapter  
+ 	 	<import resource="classpath:factory/decisioningEngineAdapter-spring.xml"/>-->
+ 	 	
+  <!--  CGW --> 	
+	 <import resource="classpath:test/ws-cgw-client-tst-spring.xml"/> 
+	<!--<import resource="classpath:ws-client-spring.xml"/> -->
+
+<!--  dao env and impl -->
+	<import resource="classpath:test/datasource-env-test-spring.xml"/>
+	<import resource="classpath:dao-Impl-spring.xml"/> 
+
+<!--  factory --> 
+    <import resource="classpath:factory/amst-factory-spring.xml"/>
+    <import resource="classpath:factory/postDecisioningProcessor-factory-spring.xml"/>
+    <import resource="classpath:factory/assessmentEvaluationProcessor-factory-spring.xml"/>
+ 
+ <!--  mapping -->   
+    <import resource="classpath:mapping/mappings-spring.xml"/>
+
+ <!--  Fico -->   
+    <!-- <import resource="classpath:test/crda-decisionengine-test-spring.xml" /> -->
+    <!-- <import resource="classpath:crda-decisionengine-spring.xml" /> -->
+  
+      
+ <!--  Ref PDS --> 	
+	   <import resource="classpath:refpds-access-client-spring.xml" />   
+ 
+
+	
+
+    
+    <bean id="telusSpringConfigurer" class="com.telus.framework.config.spring.PlaceholderConfigurer">
+        <property name="nullValue" value="null"/>
+    </bean>
+
+
+
+    <!--Internal implementation of Enterprise credit profile management web-service interface.-->
+    <bean id="enterpriseCreditAssessmentServiceTarget"
+          class="com.telus.credit.crda.webservice.impl.EnterpriseCreditAssessmentServiceImpl" lazy-init="true">
+                 <property name="creditAssessmentDataMgmtDao" ref="CreditAssessmentDataMgmtDao" />
+    		     <property name="documentumSvcAdapter" ref="DocumentumSvcAdapter" />  
+    		               
+    </bean>
+    <bean id="serviceHandlerResolver" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver" lazy-init="true">
+		<property name="handlerList">
+		    <list>
+				<bean class="com.telus.credit.crda.webservice.handler.CrdaServerSoapHandler" lazy-init="true"></bean>
+		    </list>
+		</property>
+    </bean>
+
+    <bean id="creditProfileBr"
+		class="com.telus.credit.domain.CreditProfileBr" lazy-init="true">
+		<property name="creditIDCardBr">
+			<ref local="creditIDCardBr"/>
+		</property>
+	</bean>
+
+	<bean id="creditIDCardBr"
+		class="com.telus.credit.domain.CreditIDCardBr" lazy-init="true">
+		<property name="isServiceLayer">
+				<value>false</value>
+		</property>
+	</bean>
+	
+	
+	<bean id="encryptUtil" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" lazy-init="true">
+        <property name="staticMethod">
+            <value>com.telus.framework.crypto.EncryptionUtil.setCrypto</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <ref bean="cryptoImpl" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="cryptoImpl" class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl" init-method="init" lazy-init="true">
+        <property name="key1"><value>${encryption/key1}</value></property>
+        <property name="key2"><value>${encryption/key2}</value></property>
+        <property name="key3"><value>${encryption/key3}</value></property>
+    </bean>
+  
+
+    
+</beans>
+
+ 

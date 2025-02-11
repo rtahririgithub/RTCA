@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jms="http://www.bea.com/wli/sb/transports/jms" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" isTracingEnabled="true">
+    <ser:description/>
+    <ser:binding type="Mixed" xsi:type="con3:MixedBindingType" xmlns:con3="http://www.bea.com/wli/sb/services/bindings/config">
+      <con3:request type="XML"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="true">
+      <ser:aggregationInterval>3</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Action</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:throttling enabled="false">
+      <ser:capacity>0</ser:capacity>
+      <ser:maxQueueLength>0</ser:maxQueueLength>
+      <ser:timeToLive>0</ser:timeToLive>
+    </ser:throttling>
+    <ser:messageTracing enabled="true">
+      <ser:detailsLevel>Full</ser:detailsLevel>
+      <ser:maxSize>8192</ser:maxSize>
+    </ser:messageTracing>
+    <ser:transactions sameTxForResponse="false" isRequired="false"/>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>jms</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>jms://ln98945.corp.ads:21671,ln98946.corp.ads:21671/eai.jms.wl.connection.CREDIT_PERSISTENT_CONN_FACTORY/eai.jms.wl.queue.WCPMPXY_SLOW_QUEUE</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+    <tran:provider-specific>
+      <jms:is-queue>true</jms:is-queue>
+      <jms:is-secure>false</jms:is-secure>
+      <jms:inbound-properties>
+        <jms:message-selector>Q_MSG_TYPE='UPDATE_CUSTOMER_ODS_REQUEST_V2.0'</jms:message-selector>
+        <jms:response-required>false</jms:response-required>
+        <jms:XA-required>true</jms:XA-required>
+      </jms:inbound-properties>
+      <jms:dispatch-policy>WLNCreditProfileManagmentProxyService_WorkManager</jms:dispatch-policy>
+      <jms:request-encoding>UTF-8</jms:request-encoding>
+      <jms:jndi-timeout>0</jms:jndi-timeout>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-7350597931879019201--24c9e542.1441739b928.-7bdf">
+    <con:pipeline name="SlowQueue_UpdateCustomerCrdValueMessage_Consumer_PS_PipelinePairNode_request" type="request">
+      <con:stage name="SlowQueue_UpdateCustomerCrdValueMessage_Consumer_PS_Publish_stage">
+        <con:comment/>
+        <con:context/>
+        <con:actions>
+          <con4:log xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-8311879119488029698-29d9d91f.14358e6f7da.-7d47</con2:id>
+            <con4:logLevel>error</con4:logLevel>
+            <con4:expr>
+              <con2:xqueryText>'SlowQueue_UpdateCustomerCrdValueMessage_Consumer_PS_MessageContent'
+,
+'[customerID=',($body//*[local-name()='customerID'])[1]/text(),'] '
+,
+$body</con2:xqueryText>
+            </con4:expr>
+            <con4:message/>
+          </con4:log>
+          <con1:route>
+            <con2:comment>Publish the msg from the queue ( untouched) to ASyncWLNCreditProfileManagmentProxyService_PS.</con2:comment>
+            <con2:id>_ActionId-7943180376965684405-4bf008a.1328809f37e.-7eb4</con2:id>
+            <con1:service ref="telus-crd-crda-esb/proxy/internal/Update/Update_Custtomer_ODS_PS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:outboundTransform>
+              <con3:routing-options xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:comment>Exactly-Once – When QoS is exactly-once, the publish action waits (blocking call) until the response from the target service is available, although the response itself is discarded. When the target is a business service, the publish action waits until the business service response is available. When the target is a proxy service, the publish action waits until the proxy service's response pipeline completes.
+
+Best-Effort – When QoS is best-effort and the target service is a one-way proxy service or a one-way business service with retry count > 0, the publish action waits until the target service returns. With a one-way target service there is no response, but the publish action waits until the request is delivered.
+
+If the target proxy or business service is request-response or a one-way business service with retry count = 0, the publish action does not wait for the response (non-blocking call).</con2:comment>
+                <con2:id>_ActionId-1518818206891572755-623ff49b.13288cd7724.-7fcd</con2:id>
+                <con3:mode>request</con3:mode>
+                <con3:qualityOfService>exactly-once</con3:qualityOfService>
+              </con3:routing-options>
+              <con3:transport-headers copy-all="true" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-1518818206891572755-623ff49b.13288cd7724.-7fb3</con2:id>
+                <con3:header-set>outbound-request</con3:header-set>
+              </con3:transport-headers>
+              <con5:assign varName="logConfigData">
+                <con2:id>_ActionId-673545189832190734-4134cf36.1440976ac55.-7d4b</con2:id>
+                <con5:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="telus-crd-crda-esb/xquery/config/logConfig"/>
+                  </con2:xqueryTransform>
+                </con5:expr>
+              </con5:assign>
+              <con4:ifThenElse xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-673545189832190734-4134cf36.1440976ac55.-7d4a</con2:id>
+                <con4:case>
+                  <con4:condition>
+                    <con2:xqueryText>$logConfigData/PS[@name="SlowQueue_UpdateCustODS_Message_Consumer_PS"]/prop[@name="log.info"]/text()="true"</con2:xqueryText>
+                  </con4:condition>
+                  <con4:actions>
+                    <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
+                      <con2:id>_ActionId-673545189832190734-4134cf36.1440976ac55.-7d49</con2:id>
+                      <con6:logLevel>error</con6:logLevel>
+                      <con6:expr>
+                        <con2:xqueryText>'SlowQueue_UpdateCustODS_Message_Consumer_PS customerID='
+,($body//*[local-name()='customerID'])[1]/text() 
+,
+$body
+,
+$outbound/ctx:transport</con2:xqueryText>
+                      </con6:expr>
+                    </con6:log>
+                  </con4:actions>
+                </con4:case>
+                <con4:default/>
+              </con4:ifThenElse>
+            </con1:outboundTransform>
+          </con1:route>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline name="SlowQueue_UpdateCustomerCrdValueMessage_Consumer_PS_PipelinePairNode_response" type="response"/>
+    <con:pipeline type="error" name="_onErrorHandler-7350597931879019201--24c9e542.1441739b928.-7bdf">
+      <con:stage name="SlowQueue_UpdateCustomerCrdValueMessage_Consumer_PS_stage">
+        <con:context/>
+        <con:actions>
+          <con5:assign varName="logConfigData">
+            <con2:id>_ActionId-7350597931879019201--24c9e542.1441739b928.-7ba2</con2:id>
+            <con5:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="telus-crd-crda-esb/xquery/config/logConfig"/>
+              </con2:xqueryTransform>
+            </con5:expr>
+          </con5:assign>
+          <con4:ifThenElse xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-7350597931879019201--24c9e542.1441739b928.-7ba1</con2:id>
+            <con4:case>
+              <con4:condition>
+                <con2:xqueryText>$logConfigData/PS[@name="SlowQueue_UpdateCustODS_Message_Consumer_PS_ERROR"]/prop[@name="log.info"]/text()="true"</con2:xqueryText>
+              </con4:condition>
+              <con4:actions>
+                <con6:log xmlns:con6="http://www.bea.com/wli/sb/stages/logging/config">
+                  <con2:id>_ActionId-7350597931879019201--24c9e542.1441739b928.-7ba0</con2:id>
+                  <con6:logLevel>error</con6:logLevel>
+                  <con6:expr>
+                    <con2:xqueryText>'SlowQueue_UpdateCustODS_Message_Consumer_PS_ERROR customerID='
+,($body//*[local-name()='customerID'])[1]/text() 
+,
+$fault
+,
+$body
+,
+$outbound/ctx:transport</con2:xqueryText>
+                  </con6:expr>
+                </con6:log>
+              </con4:actions>
+            </con4:case>
+            <con4:default/>
+          </con4:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="SlowQueue_UpdateCustomerCrdValueMessage_Consumer_PS_PipelinePairNode">
+        <con:comment/>
+        <con:request>SlowQueue_UpdateCustomerCrdValueMessage_Consumer_PS_PipelinePairNode_request</con:request>
+        <con:response>SlowQueue_UpdateCustomerCrdValueMessage_Consumer_PS_PipelinePairNode_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

@@ -1,0 +1,33 @@
+      <wln:updateCreditWorthiness xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wln="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileDataManagementServiceRequestResponse_v1" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditAssessmentTypes_v2" xmlns:cred="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ent1="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6">
+         <wln:creditAssessmentTransactionResult>
+            <ent:creditAssessmentID>1083</ent:creditAssessmentID>
+            <ent:customerID>96572655</ent:customerID>
+            <!--Optional:-->
+            <ent:creditAssessmentDate>2018-11-17T10:33:28.768Z</ent:creditAssessmentDate>
+            <!--Optional:-->
+            <ent:creditDecisioningResult>
+               
+               <cred:decisionCd>testCd</cred:decisionCd>
+               <cred:creditValueCd>E</cred:creditValueCd>
+               <cred:creditRiskLevel>1001</cred:creditRiskLevel>
+               
+               
+               
+            </ent:creditDecisioningResult>
+            
+            
+            <!--Optional:-->
+            <ent:commentTxt>DV01 testing</ent:commentTxt>
+         </wln:creditAssessmentTransactionResult>
+         <wln:auditInfo>
+            <!--Optional:-->
+            <ent1:userId>122365</ent1:userId>
+            
+            <!--Optional:-->
+            <ent1:originatorApplicationId>1212</ent1:originatorApplicationId>
+            
+            <!--Optional:-->
+            <ent1:timestamp>2013-10-17T00:00:00.000Z</ent1:timestamp>
+         </wln:auditInfo>
+      </wln:updateCreditWorthiness>
+   

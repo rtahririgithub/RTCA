@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:wcpmt="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1_1.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2_1.xsd"/>
+	<xs:element name="assessCreditWorthiness">
+		<xs:annotation>
+			<xs:documentation>Operation to assess customer's credit worthiness for wln customer</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="assessCreditWorthinessRequest" type="tns:BaseCreditWorthinessRequest">
+					<xs:annotation>
+						<xs:documentation>Abstract type. See the concrete subtypes .</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="auditInfo" type="ect:AuditInfo">
+					<xs:annotation>
+						<xs:documentation>userId: is required with AgentID as value. Required for tracking info.
+orignatorApplicationId : is required . It is the same as ApplicationID  with caller application id CMDB ID as value</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="assessCreditWorthinessResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="assessedCreditWorthiness">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="wcpmt:CreditWorthiness">
+								<xs:sequence>
+									<xs:element name="updateCreditWorthinessErrorCd" type="xs:string" minOccurs="0"/>
+									<xs:element name="creditBureauReportInd" type="xs:boolean" minOccurs="0"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="BaseCreditWorthinessRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Abstract parent  type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="creditAssessmentTypeCd" type="crdc:creditAssessmentRequestType">
+				<xs:annotation>
+					<xs:documentation>credit assessment type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditAssessmentSubTypeCd" type="crdc:creditAssessmentRequestSubType">
+				<xs:annotation>
+					<xs:documentation>credit assessment sub type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerID" type="xs:long"/>
+			<xs:element name="commentTxt" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>mandatory for type subtype FULL_ASSESSMENT 	
+-GET_BUREAU_DATA
+-MANUAL_ASSESSMENT
+
+
+OVRD_ASSESSMENT	
+-MANUAL_OVERRIDE
+-AUDIT	BUREAU_CONSENT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="applicationID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>CMDB ID as value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="channelID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>channel type cd, kios,dealer id,..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineOfBusiness" type="crdc:lineOfBusinessType">
+				<xs:annotation>
+					<xs:documentation>WIRELINE or WIRELESS .  values are defined in Ref .Pds</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssessCreditWorthinessRequest" mixed="false">
+		<xs:annotation>
+			<xs:documentation>
+
+Concrete type of  BaseCreditWorthinessRequest abstract type. It covers : 
+type 
+FULL_ASSESSMENT 
+and 
+subtypes 
+AUTO_ASSESSMENT/ NEW_ACC_ASSESSMENT/ REOPEN_ASSESSMENT / MANUAL_ASSESSMENT
+			
+		</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseCreditWorthinessRequest"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBureuaReportCreditWorthinessRequest" mixed="false">
+		<xs:annotation>
+			<xs:documentation>
+Concrete type of  AssessCreditWorthinessRequestType abstract type. It covers :  
+subtype  GET_BUREAU_DATA 
+		</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseCreditWorthinessRequest">
+				<xs:sequence>
+					<xs:element name="creditCustomerInfo" type="crdc:CreditCustomerInfo"/>
+					<xs:element name="creditProfileData" type="wcpmt:ConsumerCreditProfile"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="overrideCreditWorthiness">
+		<xs:annotation>
+			<xs:documentation>Operation to override customer's credit worthiness for wln customer.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="overrideCreditWorthinessRequest" type="tns:OverrideCreditWorthinessRequest">
+					<xs:annotation>
+						<xs:documentation>see 
+documentation in OverrideCreitWorthinessRequest type</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="auditInfo" type="ect:AuditInfo">
+					<xs:annotation>
+						<xs:documentation>userId: is required with AgentID as value. Required for tracking info.
+orignatorApplicationId : is required . It is the same as ApplicationID  with caller application id CMDB ID as value</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="overrideCreditWorthinessResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="overridenCreditWorthiness">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="wcpmt:CreditWorthiness">
+								<xs:sequence>
+									<xs:element name="updateCreditWorthinessErrorCd" type="xs:string" minOccurs="0"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="OverrideCreditWorthinessRequest" mixed="false">
+		<xs:annotation>
+			<xs:documentation>
+Covers 
+type  OVRD_ASSESSMENT 
+and 
+subtypes 
+MANUAL_OVERRIDE / BUREAU_CONSENT / UNMERGED / CANCEL_DEPOSIT_INV / DEPOSIT_DOWNGRADE
+type AUDIT 
+and 
+subtype BUREAU_CONSENT
+		</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseCreditWorthinessRequest">
+				<xs:sequence>
+					<xs:element name="newFraudIndictorCd" type="crdc:fraudIndicatorType" minOccurs="0"/>
+					<xs:element name="newCreditValueCd" type="crdc:creditValueCodeType" minOccurs="0"/>
+					<xs:element name="newCreditCheckConsentCd" type="crdc:creditCheckConsentCodeType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

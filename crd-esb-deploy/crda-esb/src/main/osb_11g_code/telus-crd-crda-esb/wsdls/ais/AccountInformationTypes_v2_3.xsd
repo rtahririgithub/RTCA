@@ -1,0 +1,234 @@
+<xs:schema elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/AccountInformationTypes_v2" xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/AccountInformationTypes_v2" xmlns:common="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v3" xmlns:typ="http://xmlschema.tmi.telus.com/xsd/Resource/BaseTypes/resource_order_reference_types_1_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v3" schemaLocation="CustomerManagementCommonTypes_v3_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Resource/BaseTypes/resource_order_reference_types_1_0" schemaLocation="ResourceOrderReferenceTypes_1_0.xsd"/>
+    <xs:simpleType name="AccountStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="O"/>
+            <xs:enumeration value="C"/>
+            <xs:enumeration value="N"/>
+            <xs:enumeration value="S"/>
+            <xs:enumeration value="T"/>
+            <!-- Open -->
+            <!-- Closed -->
+            <!-- Cancelled -->
+            <!-- Suspended -->
+            <!-- Tentative -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BanCategory">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="N"/>
+            <xs:enumeration value="R"/>
+            <!-- National -->
+            <!-- Regional -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BanSegment">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{0,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BanSubSegment">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{0,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IxcCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{0,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="InvoicePropertyListType">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="holdRedirectFromDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="holdRedirectToDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="holdRedirectDestinationCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="invoiceSuppressionLevel" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PrepaidAccountInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="balance" type="xs:double"/>
+            <xs:element minOccurs="0" name="balanceExpiryDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="minimumBalanceDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="billingType" type="xs:int"/>
+            <xs:element minOccurs="0" name="airtimeRate" type="xs:double"/>
+            <xs:element minOccurs="0" name="longDistanceRate" type="xs:double"/>
+            <xs:element minOccurs="0" name="autoTopUp" type="AutoTopUp"/>
+            <xs:element minOccurs="0" name="outstandingCharge" type="xs:double"/>
+            <xs:element minOccurs="0" name="maximumBalanceCap" type="xs:double"/>
+            <xs:element minOccurs="0" name="topUpCreditCard" type="common:CreditCard"/>
+            <xs:element minOccurs="0" name="balanceCapOrThresholdCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="swipedAmount" type="xs:double"/>
+            <xs:element minOccurs="0" name="inTrustBalanceExpiryDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="usLongDistanceRate" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AutoTopUp">
+        <xs:sequence>
+            <xs:element name="chargeAmount" type="xs:double"/>
+            <xs:element name="nextChargeDate" type="xs:date"/>
+            <xs:element name="hasThresholdRecharge" type="xs:boolean"/>
+            <xs:element name="thresholdAmount" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductSubscriberList">
+        <xs:sequence>
+            <xs:element name="productType" type="common:ProductType"/>
+            <xs:element maxOccurs="1000" minOccurs="0" name="activeSubscriber" type="common:SubscriberNumber"/>
+            <xs:element maxOccurs="1000" minOccurs="0" name="cancelledSubscriber" type="common:SubscriberNumber"/>
+            <xs:element maxOccurs="1000" minOccurs="0" name="reservedSubscriber" type="common:SubscriberNumber"/>
+            <xs:element maxOccurs="1000" minOccurs="0" name="suspendedSubscriber" type="common:SubscriberNumber"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BillingPropertyListType">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="legalBusinessName" type="xs:string"/>
+            <xs:element minOccurs="0" name="tradeNameAttention" type="xs:string"/>
+            <xs:element minOccurs="0" name="name" type="common:ConsumerName"/>
+            <xs:element minOccurs="0" name="address" type="common:Address"/>
+            <xs:element minOccurs="0" name="verifiedDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContactPropertyListType">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="contactName" type="common:ConsumerName"/>
+            <xs:element minOccurs="0" name="homePhone" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="businessPhone" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="businessPhoneExtension" type="common:PhoneNumberExtension"/>
+            <xs:element minOccurs="0" name="contactPhone" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="contactExtension" type="xs:string"/>
+            <xs:element minOccurs="0" name="contactFax" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="otherPhoneType" type="common:OtherPhoneType"/>
+            <xs:element minOccurs="0" name="otherPhone" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="otherPhoneExtension" type="common:PhoneNumberExtension"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BillCyclePropertyListType">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="billCycle" type="common:BillCycle"/>
+            <xs:element minOccurs="0" name="billCycleCloseDay" type="common:MonthDay"/>
+            <xs:element minOccurs="0" name="nextBillCycle" type="common:BillCycle"/>
+            <xs:element minOccurs="0" name="nextBillCycleCloseDay" type="common:MonthDay"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Account">
+        <xs:sequence>
+            <xs:element name="billingAccountNumber" type="common:AccountNumber"/>
+            <xs:element name="accountType" type="typ:AccountTypeCode"/>
+            <xs:element name="accountSubType" type="typ:AccountSubTypeCode"/>
+            <xs:element minOccurs="0" name="accountCategory" type="BanCategory"/>
+            <xs:element minOccurs="0" name="customerId" type="common:CustomerId"/>
+            <xs:element name="brandId" type="common:BrandId"/>
+            <xs:element minOccurs="0" name="banSegment" type="BanSegment"/>
+            <xs:element minOccurs="0" name="banSubSegment" type="BanSubSegment"/>
+            <xs:element minOccurs="0" name="status" type="AccountStatus"/>
+            <xs:element minOccurs="0" name="statusDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="statusActivityCode" type="common:ActivityCode"/>
+            <xs:element minOccurs="0" name="statusActivityReasonCode" type="common:ReasonCode"/>
+            <xs:element minOccurs="0" name="createDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="startServiceDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="billCycle" type="common:BillCycle"/>
+            <xs:element minOccurs="0" name="billCycleCloseDay" type="common:MonthDay"/>
+            <xs:element minOccurs="0" name="nextBillCycle" type="common:BillCycle"/>
+            <xs:element minOccurs="0" name="nextBillCycleCloseDay" type="common:MonthDay"/>
+            <xs:element minOccurs="0" name="ixcCode" type="IxcCode"/>
+            <xs:element name="address" type="common:Address"/>
+            <xs:element minOccurs="0" name="alternateCreditCheckAddress" type="common:Address"/>
+            <xs:element name="homeProvince" type="common:ProvinceCode"/>
+            <xs:element minOccurs="0" name="otherPhoneType" type="common:OtherPhoneType"/>
+            <xs:element minOccurs="0" name="otherPhone" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="otherPhoneExtension" type="common:PhoneNumberExtension"/>
+            <xs:element minOccurs="0" name="homePhone" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="businessPhone" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="businessPhoneExtension" type="common:PhoneNumberExtension"/>
+            <xs:element minOccurs="0" name="pin" type="xs:string"/>
+            <xs:element minOccurs="0" name="email" type="xs:string"/>
+            <xs:element name="language" type="common:Language"/>
+            <xs:element minOccurs="0" name="verifiedDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="birthDate" type="xs:date"/>
+            <xs:element name="dealerCode" type="common:DealerCode"/>
+            <xs:element name="salesRepCode" type="common:SalesRepCode"/>
+            <xs:element minOccurs="0" name="corporateId" type="common:CorporateId"/>
+            <xs:element minOccurs="0" name="corporateAccountRepCode" type="common:SalesRepCode"/>
+            <xs:element minOccurs="0" name="invoicePropertyList" type="InvoicePropertyListType"/>
+            <xs:element maxOccurs="1000" minOccurs="0" name="clientConsentIndicatorCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>For TELUS consumer accounts,
+                        clientConsentIndicatorCode will not return a
+                        correct value due to CMP project change in Oct
+                        2016. To retrieve correct preference setting
+                        please call ECPMS service with a valid UUID for
+                        all TELUS consumer accounts.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element default="false" minOccurs="0" name="gstExemptInd" type="xs:boolean"/>
+            <xs:element default="false" minOccurs="0" name="pstExemptInd" type="xs:boolean"/>
+            <xs:element default="false" minOccurs="0" name="hstExemptInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="gstExemptEffDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="pstExemptEffDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="hstExemptEffDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="gstExemptExpDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="pstExemptExpDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="hstExemptExpDate" type="xs:date"/>
+            <xs:element minOccurs="0" name="gstExemptCertNo" type="common:TaxExemptCertNumber"/>
+            <xs:element minOccurs="0" name="pstExemptCertNo" type="common:TaxExemptCertNumber"/>
+            <xs:element minOccurs="0" name="hstExemptCertNo" type="common:TaxExemptCertNumber"/>
+            <xs:element name="name" type="common:ConsumerName"/>
+            <xs:element name="fullName" type="xs:string"/>
+            <xs:element maxOccurs="1000" minOccurs="0" name="fullAddress" type="xs:string"/>
+            <xs:element minOccurs="0" name="legalBusinessName" type="xs:string"/>
+            <xs:element minOccurs="0" name="tradeNameAttention" type="xs:string"/>
+            <xs:element minOccurs="0" name="contactName" type="common:ConsumerName"/>
+            <xs:element minOccurs="0" name="contactPhone" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="contactExtension" type="xs:string"/>
+            <xs:element minOccurs="0" name="contactFax" type="common:PhoneNumber"/>
+            <xs:element minOccurs="0" name="personalCreditInformation" type="common:PersonalCreditInformation"/>
+            <xs:element minOccurs="0" name="businessCreditInformation" type="common:BusinessCreditInformation"/>
+            <xs:element minOccurs="0" name="creditCheckResult" type="common:CreditCheckResult"/>
+            <xs:element minOccurs="0" name="paymentMethod" type="common:PaymentMethod"/>
+            <xs:element minOccurs="0" name="businessBillingName" type="xs:string"/>
+            <xs:element minOccurs="0" name="consumerBillingName" type="common:ConsumerName"/>
+            <xs:element minOccurs="0" name="financialHistory" type="common:FinancialHistory"/>
+            <xs:element minOccurs="0" name="hotlinedInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IDENInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="PCSInd" type="xs:boolean"/>
+            <xs:element maxOccurs="1000" minOccurs="0" name="productSubscriberList" type="ProductSubscriberList"/>
+            <xs:element minOccurs="0" name="billingNameFormat" type="common:NameFormat"/>
+            <xs:element minOccurs="0" name="prepaidAccountInfo" type="PrepaidAccountInfo"/>
+            <xs:element minOccurs="0" name="handledBySubscriberOnlyInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="pagerInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="postpaidConsumerInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="postpaidBusinessRegularInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="postpaidBusinessPersonalInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="postpaidBusinessDealerInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="postpaidOfficialInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="postpaidBusinessOfficialInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="postpaidEmployeeInd" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="postpaidCorporatePersonalInd" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccountMemo">
+        <xs:complexContent>
+            <xs:extension base="common:Memo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="asyncInd" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Asynchronous Indicator.
+                                TRUE - createMemo will be invoked
+                                asynchronously.  FALSE or not included -
+                                createMemo will be invoked synchronously.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="InternationalServiceEligibilityCheckResult">
+        <xs:sequence>
+            <xs:element name="depositAmount" type="xs:double"/>
+            <xs:element name="eligibleForInternationalDialingInd" type="xs:boolean"/>
+            <xs:element name="eligibleForInternationalRoamingInd" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

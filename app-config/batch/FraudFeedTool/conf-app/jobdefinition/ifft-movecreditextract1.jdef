@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+   <import resource="classpath:fw-base.jdef"/>
+      <bean id="job" parent="baseJob">
+	 <property name="steps">
+	   <list>
+		<bean id="MOVECREDITEXTRACT1" parent="baseStep">
+		    <property name="moduleName" value="cmdExec-movecreditextract1"/>
+		</bean>
+	   </list>
+	 </property>
+      </bean>
+
+      <bean id="cmdExec-movecreditextract1" class="com.telus.framework.batch.module.ExecModule">
+	 <property name="executable" value="${movecreditextract1/scriptFile}"/>
+	 <property name="arg" value="${movecreditextract1/fromDir} ${movecreditextract1/toDir} ${movecreditextract1/creditExtract}"/>
+      </bean>
+</beans>

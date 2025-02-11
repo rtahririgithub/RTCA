@@ -1,0 +1,78 @@
+<ns4:Instance xsi:type="ns4:BusinessRuleInstanceType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns4="http://xmlschema.tmi.telus.com/srv/ERM/RefPds/ReferencePDSDataServiceRequestResponse_v1_0" xmlns:ns3="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+	<ns4:Input code="SIMULATOR_KEY">
+		<ns4:value>EC</ns4:value>
+	</ns4:Input>
+	<ns4:Output code="MATCH_FOUND_IND">
+		<ns4:value>Y</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="MATCH_REASON_CD">
+		<ns4:value/>
+	</ns4:Output>
+	<ns4:Output code="LINE_OF_BUSINESS">
+		<ns4:value>WIRELESS</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="BRAND_ID">
+		<ns4:value>3</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="BAN">
+		<ns4:value>12345706</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="ACCOUNT_TYPE">
+		<ns4:value>I</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="ACCOUNT_SUBTYPE">
+		<ns4:value>R</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="ACCOUNT_CREATION_DT">
+		<ns4:value>2019-01-01</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="START_SERVICE_DT">
+		<ns4:value/>
+	</ns4:Output>
+	<ns4:Output code="ACCOUNT_STATUS_CD">
+		<ns4:value>T</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="ACCOUNT_STATUS_DT">
+		<ns4:value>2019-01-01</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="STATUS_ACTIVITY_CD">
+		<ns4:value>TEN</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="STATUS_ACTIVITY_RSN_CD">
+		<ns4:value>TG</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="CREDIT_CLASS_CODE">
+		<ns4:value>B</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="RISK_LEVEL_NUM">
+		<ns4:value>100</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="RISK_LEVEL_DECISION_CD">
+		<ns4:value>KNSBCWOCM004</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="DELINQUENT_IND">
+		<ns4:value>N</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="TOTAL_ACTIVE_SUBS">
+		<ns4:value>0</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="TOTAL_RESERVED_SUBS">
+		<ns4:value>0</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="TOTAL_SUSPENDED_SUBS">
+		<ns4:value>0</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="BUREAU_SOURCE_CD">
+		<ns4:value>EQUIFAX</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="BUREAU_ERROR_CD">
+		<ns4:value/>
+	</ns4:Output>
+	<ns4:Output code="BUREAU_DECISION_CD">
+		<ns4:value>P64</ns4:value>
+	</ns4:Output>
+	<ns4:Output code="BUREAU_DECISION_DT">
+		<ns4:value>2019-01-01</ns4:value>
+	</ns4:Output>
+	<ns4:Priority>0</ns4:Priority>
+</ns4:Instance>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CreditAssessmentResult xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2">
+    <assessmentResultCd>SUCCESS</assessmentResultCd>
+    <assessmentResultReasonCd></assessmentResultReasonCd>
+    <decisionCd>NWDFLT000001</decisionCd>
+    <assessmentMessageCd>REGCA03</assessmentMessageCd>
+    <creditValueCd>R</creditValueCd>
+    <productCategoryQualification>
+        <productCategoryList>
+            <categoryCd>SLR</categoryCd>
+            <qualified>true</qualified>
+        </productCategoryList>
+        <boltOnInd>false</boltOnInd>
+    </productCategoryQualification>
+    <rulesExecuted>DATE=2019-01-09T16:18:24.704-08:00, VERSION=20190107V2</rulesExecuted>
+    <rulesExecuted>280_060_New_Assessment_Trigger: TYPE/SUB=FULL_ASSESSMENT/AUTO_ASSESSMENT:  TRIGGER=NEW_ASSESSMENT_TRIGGER</rulesExecuted>
+    <rulesExecuted>100_999_Default_Rule: no validation issues</rulesExecuted>
+    <rulesExecuted>260_030_New_Customer: CUSTOMER TYPE=NEW_CUSTOMER</rulesExecuted>
+    <rulesExecuted>270_020_Inactive_Costomer_No_Assess: CUSTOMER ACTIVITY=INACTIVE</rulesExecuted>
+    <rulesExecuted>250_020_Short_Tenure_New_Customer CHAMPION: TENURE=SHORT_TENURE</rulesExecuted>
+    <rulesExecuted>240_021_Short_Tenure_New_Assessment: ASSESSMENT TYPE=NEW_ASSESSMENT</rulesExecuted>
+    <rulesExecuted>230_030_Bureau_Report_Not_Expired: BureauExpired=false</rulesExecuted>
+    <rulesExecuted>220_060_Bureau_Report_Date_Exists: BureauExists=true</rulesExecuted>
+    <rulesExecuted>210_055_New_Cusomer_Has_Bureau_Report: BureauRequired=false</rulesExecuted>
+    <rulesExecuted>355_999_Default_Required: Mapping Required is true</rulesExecuted>
+    <rulesExecuted>370_999_Default_Rule: Thin File is false</rulesExecuted>
+    <rulesExecuted>380_100_Regular_File: Risk Indicator = REGULAR</rulesExecuted>
+    <rulesExecuted>400_130_CS2: Revenue Segment CS2 mapped to revenue band of 1</rulesExecuted>
+    <rulesExecuted>200_060_New_Assessment_Credit_Class_K: riskLevelNumber=9000,assessmentMessageCd=REGCA03,trueRestricted=true</rulesExecuted>
+    <rulesExecuted>R_201_020_Short_Tenure: decisionCd=NWDFLT000001</rulesExecuted>
+    <rulesExecuted>315_Determine_Eligibility.initializationRule: IS_OVERRIDE=false,UNCLEARED_FRAUD=false</rulesExecuted>
+    <rulesExecuted>R_315_050_Map_CV_R: riskLevelNumber=9000</rulesExecuted>
+    <rulesExecuted>R_315_100_Lookup_Deposit_Eligibility: riskLevelNumber=9000,creditValue=R,decisionMessageCode=REGCA03</rulesExecuted>
+    <rulesExecuted>160_000_MapProduct: Assigned Product Eligibility Set: SLR  Bolt-on=false</rulesExecuted>
+    <rulesExecuted>162_004_True_Restricted: Assessment Message Code=REGCA03</rulesExecuted>
+    <rulesExecuted>430_998_Default_Rule: RESULT=SUCCESS</rulesExecuted>
+    <creditAssessmentStrategies>
+        <depositLookupStrategy>CHAM</depositLookupStrategy>
+        <cvudStrategy>CHAM</cvudStrategy>
+        <creditValueAssignmentStrategy>CHAM</creditValueAssignmentStrategy>
+        <customerActivityStrategy>CHAM</customerActivityStrategy>
+        <tenureStrategy>CHAM</tenureStrategy>
+    </creditAssessmentStrategies>
+    <creditRiskLevel>9000</creditRiskLevel>
+</CreditAssessmentResult>
+

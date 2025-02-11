@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/UnitTestRequestResponse_v1"
+    version="1.0"
+    xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/UnitTestRequestResponse_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="performUnitTestRequest" type="xs:anyType"/>
+    <xs:element name="performUnitTestResponse" type="xs:anyType"/>
+</xs:schema>

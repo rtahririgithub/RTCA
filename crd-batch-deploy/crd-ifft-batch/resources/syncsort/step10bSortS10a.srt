@@ -1,0 +1,14 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace}
+
+   /INFILE ${processbox}/JOIN_OMS_PIC_ADMIN.DAT 
+	/FIELDS WTN 1 character 10
+   /KEYS WTN
+
+   /OUTFILE ${processbox}/JOIN_OMS_PIC_ADMIN_SORTED.DAT  OVERWRITE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+

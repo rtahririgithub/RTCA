@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorProxyServiceRequestResponse_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:codt="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/OrderDepositCalculatorProxyServiceRequestResponse_v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1_0.xsd"/>
+	<xs:element name="calculateDeposit">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="calculationTypeCd" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>deposit calculation type : ESTIMATE. FINAL.Defined in Ref PDS</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="orderData" type="codt:OrderData" minOccurs="0"/>
+				<xs:element name="applicationID" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>CMDB ID</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="channelID" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>channel type cd, kios,dealer id,..</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="auditInfo" type="ent:AuditInfo">
+					<xs:annotation>
+						<xs:documentation>userId: is required with AgentID as value. Required for tracking info.
+				orignatorApplicationId : is required . It is the same as ApplicationID  with caller application id CMDB ID as value</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="calculateDepositResponse" type="codt:DepositCalulationResult"/>
+</xs:schema>

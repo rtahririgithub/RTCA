@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- This is needed to invoke configurationFramework so you can make use 
+		of Placeholders ${...} -->
+	<bean id="configurationFramework" class="com.telus.framework.config.spring.PlaceholderConfigurer">
+	</bean>
+
+	<bean id="testSvc.target"
+		class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="com.telus.ws.service.TestSvc" />
+		<!-- for the WSDL recommended to use the local reference rather than a 
+			URL -->
+		<property name="wsdlDocumentUrl" value="classpath:TestSvcService_V1_0.wsdl" />
+		<property name="endpointAddress"
+			value="http://localhost:7001/telus-crd-webservices/TestSvc" />
+		<property name="namespaceUri" value="http://service.ws.telus.com/" />
+		<property name="serviceName" value="TestSvcService" />
+		<property name="portName" value="TestSvcPort" />
+		<property name="lookupServiceOnStartup" value="false" />
+		<property name="handlerResolver" ref="defaultHandlerResolver" />
+
+	</bean>
+	<bean id="defaultHandlerResolver" class="com.telus.framework.ws.jaxws.DefaultHandlerResolver">
+		<property name="handlerList">
+			<list>
+				<bean class="com.telus.jaxws.client.MySoapHandler1">
+					<property name="username" value="verification" />
+					<property name="password" value="verification" />
+				</bean>
+
+			</list>
+
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <bean id="OnlineCreditValueValidatorImpl" class="com.telus.credit.wlnprfldmgt.webservice.impl.creditvaluevalidator.CreditValueValidatorImpl">
+      <property name="creditValueCodes">
+         <map>
+            <entry key="D" value-ref="depositCreditValueCode" />
+            <entry key="E" value-ref="establishedCreditValueCode" />
+            <entry key="G" value-ref="guaranteedCreditValueCode" />
+            <entry key="N" value-ref="noCreditInformationCreditValueCode" />             
+            <entry key="R" value-ref="restrictedCreditValueCode" />
+            <entry key="U" value-ref="unestablishedCreditValueCode" />
+            <entry key="V" value-ref="vipCreditValueCode" />
+         </map>
+      </property>
+   </bean>
+
+   <bean id="depositCreditValueCode" class="com.telus.credit.wlnprfldmgt.webservice.impl.creditvaluevalidator.CreditValueCode">
+      <property name="acceptableCreditValueCodes">
+         <set>
+            <value>R</value>
+            <value>N</value>
+            <value>D</value>
+            <value>E</value>
+         </set>
+      </property>
+   </bean>
+
+   <bean id="establishedCreditValueCode" class="com.telus.credit.wlnprfldmgt.webservice.impl.creditvaluevalidator.CreditValueCode">
+      <property name="acceptableCreditValueCodes">
+         <set>
+            <value>R</value>
+            <value>N</value>
+            <value>D</value>
+            <value>V</value>
+            <value>E</value>
+            <value>U</value>
+         </set>
+      </property>
+   </bean>
+
+   <bean id="guaranteedCreditValueCode" class="com.telus.credit.wlnprfldmgt.webservice.impl.creditvaluevalidator.CreditValueCode">
+      <property name="acceptableCreditValueCodes">
+         <set>
+            <value>N</value>
+            <value>D</value>
+            <value>U</value>
+            <value>R</value>
+            <value>E</value>
+            <value>G</value>
+         </set>
+      </property>
+   </bean>
+
+   <bean id="noCreditInformationCreditValueCode" class="com.telus.credit.wlnprfldmgt.webservice.impl.creditvaluevalidator.CreditValueCode">
+      <property name="acceptableCreditValueCodes">
+         <set>
+            <value>N</value>
+            <value>D</value>
+            <value>U</value>
+            <value>R</value>
+            <value>E</value>
+         </set>
+      </property>
+   </bean>
+
+   <bean id="restrictedCreditValueCode" class="com.telus.credit.wlnprfldmgt.webservice.impl.creditvaluevalidator.CreditValueCode">
+      <property name="acceptableCreditValueCodes">
+         <set>
+            <value>R</value>
+            <value>N</value>
+            <value>D</value>
+            <value>U</value>
+            <value>E</value>
+         </set>
+      </property>
+   </bean>
+
+   <bean id="unestablishedCreditValueCode" class="com.telus.credit.wlnprfldmgt.webservice.impl.creditvaluevalidator.CreditValueCode">
+      <property name="acceptableCreditValueCodes">
+         <set>
+            <value>R</value>
+            <value>N</value>
+            <value>U</value>
+            <value>D</value>
+            <value>G</value>
+            <value>E</value>
+         </set>
+      </property>
+   </bean>
+
+   <bean id="vipCreditValueCode" class="com.telus.credit.wlnprfldmgt.webservice.impl.creditvaluevalidator.CreditValueCode">
+      <property name="acceptableCreditValueCodes">
+         <set>
+            <value>E</value>
+            <value>N</value>
+            <value>D</value>
+            <value>V</value>
+            <value>R</value>
+         </set>
+      </property>
+   </bean>
+
+</beans>

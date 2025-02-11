@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalEligibilityDataSplitJoinRequestResponse_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:crdd="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ent="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/GetAdditionalEligibilityDataSplitJoinRequestResponse_v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7_0.xsd"/>
+	<xs:element name="getAdditionalEligibilityData">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerId" type="cus:CustomerId"/>
+				<xs:element name="auditInfo" type="ent:AuditInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAdditionalEligibilityDataResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="equipmentQualificationList" type="crdd:EquipmentCategoryQualificationList"/>
+				<xs:element name="collectionInd" type="xs:boolean"/>
+				<xs:element name="fraudIndCd" type="xs:string"  minOccurs="0"/>
+				<xs:element name="eligibilityWarningMessageCd" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

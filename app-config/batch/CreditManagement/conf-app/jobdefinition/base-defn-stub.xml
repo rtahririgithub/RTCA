@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <bean id="baseJob" class="com.telus.framework.batch.JobDefinition" abstract="true">
+        <property name="transactionManager"><ref bean="txMgr"/></property>
+        <property name="jobDao"><ref bean="jobDao"/></property>
+    </bean>
+
+	<bean id="baseStep" class="com.telus.framework.batch.StepDefinition" abstract="true">
+        <property name="commitFrequency"><value>0</value></property>
+        <property name="autoRestartable"><value>true</value></property>
+        <property name="logCommits"><value>true</value></property>	
+	</bean>
+    
+    <bean id="jobDao" class="com.telus.framework.batch.stub.JobDaoStub">
+    </bean>
+
+    <bean id="txMgr" class="com.telus.framework.batch.stub.TransactionManagerStub">
+	</bean>
+   
+</beans>

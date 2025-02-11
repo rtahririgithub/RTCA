@@ -1,0 +1,25 @@
+     ${sortstatistic}
+   
+   ${sortworkspace}
+   
+   /MEMORY 16 megabytes
+
+   /INFILE ${inbox}/CUSTODS_REF_BRIDGING.DAT 65535 
+   /FIELDS SERVICE_INSTANCE_ID 1 character 18
+   /FIELDS CUSTOMER_ID 84 character 9
+   /FIELDS SERVICE_RESRC_ALIAS_TYPE_CD 93 character 4
+   /FIELDS WTN 113 character 12
+   /FIELDS EFF_END_DATE 632 character 19
+   /FIELDS ALIAS_STATUS_CODE 651 character 1
+   /KEYS SERVICE_INSTANCE_ID
+
+   /CONDITION filter ((SERVICE_RESRC_ALIAS_TYPE_CD = "TN  ") or (SERVICE_RESRC_ALIAS_TYPE_CD = "SRTN")) and ((EFF_END_DATE = "                   ") and (ALIAS_STATUS_CODE = "A") or (EFF_END_DATE = "                   ") and (ALIAS_STATUS_CODE = "S") )
+   /INCLUDE filter
+
+   /OUTFILE ${processbox}/CUSTODS_REF_BRIDGING.DAT 65535  OVERWRITE
+   /REFORMAT SERVICE_INSTANCE_ID, WTN, WTN, CUSTOMER_ID, SERVICE_RESRC_ALIAS_TYPE_CD, ALIAS_STATUS_CODE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+

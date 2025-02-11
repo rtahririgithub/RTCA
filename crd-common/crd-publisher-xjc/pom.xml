@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+        <groupId>telus.credit.crdmgmt.crd-common</groupId>
+        <artifactId>pom-crd-common</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>crd-publisher-xjc</artifactId>
+	<name>crd-publisher-xjc</name>
+	
+    <dependencies>
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics</artifactId>
+            <version>0.6.3</version>
+        </dependency>        
+    </dependencies>
+    
+    <!-- uncomment this section if needed to re-generate the JAXB classes from XSD -->
+   <properties>
+      <jaxb.schemaInclude>PubSubQueueObject_v1_0.xsd</jaxb.schemaInclude>
+      <jaxb.bindingInclude>binding_genericObject.xjb</jaxb.bindingInclude>
+       <jaxb.strict>false</jaxb.strict>
+       <maven.xjc2.extension>true</maven.xjc2.extension>
+   </properties>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.jvnet.jaxb2.maven2</groupId>
+            <artifactId>maven-jaxb2-plugin</artifactId>
+            <configuration>
+            	<verbose>true</verbose>
+                <forceRegenerate>true</forceRegenerate>  
+                <removeOldOutput>false</removeOldOutput>
+                <vmArgs> <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg> </vmArgs> 
+                 <args>
+                    <arg>-enableIntrospection</arg>
+                    <arg>-XtoString</arg>
+                </args>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>   
+     
+</project>

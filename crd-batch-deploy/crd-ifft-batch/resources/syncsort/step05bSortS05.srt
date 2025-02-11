@@ -1,0 +1,14 @@
+   ${sortstatistic}
+   ${sortmemory}
+   ${sortworkspace}
+
+   /INFILE ${processbox}/CREDIT_FEED_FILE.DAT 619 
+	/FIELDS CUSTOMER_ID 1 character 9
+   /KEYS CUSTOMER_ID
+
+   /OUTFILE ${processbox}/CREDIT_FEED_FILE_SORTED.DAT  OVERWRITE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+

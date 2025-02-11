@@ -1,0 +1,116 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" version="2.0" xmlns:cp="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:cus="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementServiceRequestResponse_v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" schemaLocation="WirelineCreditProfileManagementTypes_v2_1.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="CustomerManagementCommonTypes_v4_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v6" schemaLocation="EnterpriseCommonTypes_v6_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" schemaLocation="CreditCommon_v1_1.xsd"/>
+    <xs:element name="getCreditProfileByCustomerId">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cus:CustomerId"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCreditProfileByCustomerIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="creditProfile" type="cp:ConsumerCreditProfile"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchCreditProfileByCreditId">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="creditIdentification" type="crdc:CreditIdentification"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchCreditProfileByCreditIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="100" minOccurs="0" name="creditProfileSearchResultList" type="cp:CreditProfileSearchResult"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="expireCreditProfileByCustomerId">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cus:CustomerId"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="expireCreditProfileByCustomerIdResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchCreditProfileByCreditAndCustomerData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="2000" minOccurs="0" name="customerId" type="cus:CustomerId"/>
+                <xs:element minOccurs="0" name="birthDate" type="xs:date"/>
+                <xs:element minOccurs="0" name="creditIdentification" type="crdc:CreditIdentification"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchCreditProfileByCreditAndCustomerDataResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="200" minOccurs="0" name="creditProfileSearchResultList" type="cp:CreditProfileSearchResult">
+                    <xs:annotation>
+                        <xs:documentation>As per requirements FR566558,
+                            system will populate customer id, credit
+                            profile id, date of birth, credit ids
+                            attributes of ConsumerCreditProfile.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createCreditProfile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="creditProfileData" type="crdc:CreditProfileData"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createCreditProfileResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="creditProfile" type="cp:ConsumerCreditProfile"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="unmergeCreditProfile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cus:CustomerId"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="unmergeCreditProfileResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchLinkedCreditProfileList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="cus:CustomerId"/>
+                <xs:element name="auditInfo" type="ect:AuditInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="searchLinkedCreditProfileListResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="100" minOccurs="0" name="creditProfileSearchResultList" type="cp:CreditProfileSearchResult"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

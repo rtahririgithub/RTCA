@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con3="http://www.bea.com/wli/sb/stages/logging/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false" isAutoPublish="false">
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/telus-crd-crda-esb/test/test_Update_CreditWorthiness_CustomerODS_PS</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="stage2">
+        <con:context/>
+        <con:actions>
+          <con3:log>
+            <con2:id>_ActionId-5549796089546856861--2a8520dd.1435db4e60f.-7f71</con2:id>
+            <con3:logLevel>debug</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>"DebugLog"</con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+          <con3:log>
+            <con2:id>_ActionId-5549796089546856861--2a8520dd.1435db4e60f.-7f6f</con2:id>
+            <con3:logLevel>info</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>"InfoLog"</con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+          <con3:log>
+            <con2:id>_ActionId-5549796089546856861--2a8520dd.1435db4e60f.-7f6d</con2:id>
+            <con3:logLevel>error</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>"ErrorLog"</con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+          <con2:reply>
+            <con2:id>_ActionId-5549796089546856861--2a8520dd.1435db4e60f.-7f56</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+      <con:stage name="stage1" errorHandler="_onErrorHandler-8989870761278204269--6716ece0.142e3d00978.-7356">
+        <con:context/>
+        <con:actions>
+          <con1:wsCallout>
+            <con2:id>_ActionId-8989870761278204269--6716ece0.142e3d00978.-7357</con2:id>
+            <con1:service xsi:type="ref:ProxyRef" ref="telus-crd-crda-esb/proxy/internal/Update/Common_Update_CreditWorthiness_CustomerODS_PS" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:request>
+              <con1:payload>$Update_CreditWorthiness_CustomerODS_Request</con1:payload>
+            </con1:request>
+            <con1:response>
+              <con1:payload>Update_CreditWorthiness_CustomerODS_Response</con1:payload>
+            </con1:response>
+            <con1:requestTransform>
+              <con4:assign varName="Update_CreditWorthiness_CustomerODS_Request" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+                <con1:id>_ActionId-8989870761278204269--6716ece0.142e3d00978.-72c9</con1:id>
+                <con4:expr>
+                  <con1:xqueryText><![CDATA[<input>
+		<ns3:creditAssessmentTransactionResult xmlns:ns9="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" xmlns:ns12="http://xmlschema.tmi.telus.com/xsd/common/exceptions/Exceptions_v1_0" xmlns:ns5="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCollectionManagementTypes_v1" xmlns:ns13="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/types/ping_v1" xmlns:ns6="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditDepositTypes_v1" xmlns:ns10="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/customer_information_reference_types_1_0" xmlns:ns7="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/EnterpriseCreditAssessmentTypes_v2" xmlns:ns11="http://schemas.telus.com/eca/common_types_2_1" xmlns:ns8="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:ns2="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v1" xmlns:ns4="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/WirelineCreditProfileManagementTypes_v2" xmlns:ns3="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/EnterpriseCreditAssessmentServiceRequestResponse_v2" xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+			<ns7:creditAssessmentID>3205</ns7:creditAssessmentID>
+			<ns7:customerID>22190494</ns7:customerID>
+			<ns7:creditAssessmentDate>2013-12-05T00:08:05.701Z</ns7:creditAssessmentDate>
+			<ns7:creditAssessmentTypeCd>FULL_ASSESSMENT</ns7:creditAssessmentTypeCd>
+			<ns7:creditAssessmentSubTypeCd>NEW_ACC_ASSESSMENT</ns7:creditAssessmentSubTypeCd>
+			<ns7:creditAssessmentStatus>COMPLETED</ns7:creditAssessmentStatus>
+			<ns7:creditAssessmentStatusReasonCd/>
+			<ns7:creditAssessmentStatusDate>2013-12-05T00:08:05.490Z</ns7:creditAssessmentStatusDate>
+			<ns7:creditDecisioningResult>
+				<ns2:assessmentResultCd>SUCCESS</ns2:assessmentResultCd>
+				<ns2:assessmentResultReasonCd/>
+				<ns2:assessmentMessageCd>REGCA01</ns2:assessmentMessageCd>
+				<ns2:decisionCd>STTFCMDFLT01</ns2:decisionCd>
+				<ns2:creditValueCd>E</ns2:creditValueCd>
+				<ns2:productCategoryQualification>
+					<ns2:productCategoryList>
+						<ns2:categoryCd>SING</ns2:categoryCd>
+						<ns2:qualified>true</ns2:qualified>
+					</ns2:productCategoryList>
+					<ns2:productCategoryList>
+						<ns2:categoryCd>HSIC</ns2:categoryCd>
+						<ns2:qualified>true</ns2:qualified>
+					</ns2:productCategoryList>
+					<ns2:productCategoryList>
+						<ns2:categoryCd>TTV</ns2:categoryCd>
+						<ns2:qualified>true</ns2:qualified>
+					</ns2:productCategoryList>
+					<ns2:boltOnInd>true</ns2:boltOnInd>
+				</ns2:productCategoryQualification>
+			</ns7:creditDecisioningResult>
+			<ns7:creditAssessmentDataSourceCd>FICO</ns7:creditAssessmentDataSourceCd>
+			<ns7:userID>123</ns7:userID>
+			<ns7:channelID>123</ns7:channelID>
+			<ns7:commentTxt>Automated Credit Assessment Completed</ns7:commentTxt>
+		</ns3:creditAssessmentTransactionResult>
+		<wlnpxcy:auditInfo xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v7" xmlns:wlnpxcy="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WLNCreditProfileManagementProxyServiceRequestResponse_v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<ect:userId>123</ect:userId>
+			<ect:userTypeCode>123</ect:userTypeCode>
+			<ect:salesRepresentativeId>123</ect:salesRepresentativeId>
+			<ect:channelOrganizationId>123</ect:channelOrganizationId>
+			<ect:outletId>123</ect:outletId>
+			<ect:originatorApplicationId>123</ect:originatorApplicationId>
+			<ect:correlationId>123</ect:correlationId>
+			<ect:timestamp>2001-12-17T09:30:47.0Z</ect:timestamp>
+		</wlnpxcy:auditInfo>
+	</input>]]></con1:xqueryText>
+                </con4:expr>
+              </con4:assign>
+            </con1:requestTransform>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="customerID">
+            <con2:id>_ActionId-8311879119488029698-29d9d91f.14358e6f7da.-7a0a</con2:id>
+            <con1:expr>
+              <con2:xqueryText>$body//*[local-name()='customerID'][1]</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-8989870761278204269--6716ece0.142e3d00978.-7356">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="ErrorResponseDetailTmp">
+            <con2:id>_ActionId-8989870761278204269--6716ece0.142e3d00978.-6db3</con2:id>
+            <con1:expr>
+              <con2:xqueryText>$fault//*[local-name()='ErrorResponseDetail']</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="ErrorResponseDetailCDATA_Removed">
+            <con2:id>_ActionId-8989870761278204269--6716ece0.142e3d00978.-6da1</con2:id>
+            <con1:expr>
+              <con2:xqueryText>fn-bea:inlinedXML($ErrorResponseDetailTmp)</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con3:log>
+            <con2:id>_ActionId-8989870761278204269--6716ece0.142e3d00978.-7338</con2:id>
+            <con3:logLevel>debug</con3:logLevel>
+            <con3:expr>
+              <con2:xqueryText>$fault</con2:xqueryText>
+            </con3:expr>
+          </con3:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

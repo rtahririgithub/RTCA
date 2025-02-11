@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CreditAssessmentResult xmlns="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2">
+    <assessmentResultCd>SUCCESS</assessmentResultCd>
+    <assessmentResultReasonCd></assessmentResultReasonCd>
+    <decisionCd>UCLTBCND00001</decisionCd>
+    <assessmentMessageCd>REGCA01</assessmentMessageCd>
+    <creditValueCd>E</creditValueCd>
+    <productCategoryQualification>
+        <productCategoryList>
+            <categoryCd>SING</categoryCd>
+            <qualified>true</qualified>
+        </productCategoryList>
+        <productCategoryList>
+            <categoryCd>HSIC</categoryCd>
+            <qualified>true</qualified>
+        </productCategoryList>
+        <productCategoryList>
+            <categoryCd>TTV</categoryCd>
+            <qualified>true</qualified>
+        </productCategoryList>
+        <boltOnInd>true</boltOnInd>
+    </productCategoryQualification>
+    <rulesExecuted>DATE=2019-06-10T17:41:09.720-07:00, VERSION=20190610</rulesExecuted>
+    <rulesExecuted>280_060_New_Assessment_Trigger: TYPE/SUB=FULL_ASSESSMENT/AUTO_ASSESSMENT:  TRIGGER=NEW_ASSESSMENT_TRIGGER</rulesExecuted>
+    <rulesExecuted>100_999_Default_Rule: no validation issues</rulesExecuted>
+    <rulesExecuted>260_040_Existing_Customer_Not_Assessed: CUSTOMER TYPE=EXISTING_CUSTOMER</rulesExecuted>
+    <rulesExecuted>270_020_Inactive_Costomer_No_Assess: CUSTOMER ACTIVITY=INACTIVE</rulesExecuted>
+    <rulesExecuted>250_060_Long_Tenure_Customer CHAMPION: TENURE=LONG_TENURE</rulesExecuted>
+    <rulesExecuted>220_010_No_Bureau_Report_Date: BureauExists=false</rulesExecuted>
+    <rulesExecuted>210_100_Inactive_No_Bureau_Exists: BureauRequired=true</rulesExecuted>
+    <rulesExecuted>R_470_070_UC_Search_Performed: Unified Credit Indicator=true,Unified Credit Indicator ReasonCode=UCMTCH1</rulesExecuted>
+    <rulesExecuted>R_490_030_UC_Long_Tenure: Matched Account Tenure=LONG</rulesExecuted>
+    <rulesExecuted>R_540_060_BC_WLS_Matched_LT: </rulesExecuted>
+    <rulesExecuted>315_Determine_Eligibility.initializationRule: IS_OVERRIDE=false,UNCLEARED_FRAUD=false</rulesExecuted>
+    <rulesExecuted>R_315_100_Lookup_Deposit_Eligibility: riskLevelNumber=100,creditValue=E,decisionMessageCode=REGCA01</rulesExecuted>
+    <rulesExecuted>R_435_010_Set_Unified_Credit_Indicator: Unified Credit Indicator=true,Unified Credit Indicator ReasonCode=UCMTCH1</rulesExecuted>
+    <rulesExecuted>R_435_020_Set_Unified_Credit_Bureau_Report: Unified Credit Indicator=true,Unified Credit Indicator ReasonCode=UCMTCH1</rulesExecuted>
+    <rulesExecuted>R_435_30_Default: </rulesExecuted>
+    <rulesExecuted>160_000_MapProduct: Assigned Product Eligibility Set: Everything  Bolt-on=true</rulesExecuted>
+    <rulesExecuted>430_998_Default_Rule: RESULT=SUCCESS</rulesExecuted>
+    <creditAssessmentStrategies>
+        <depositLookupStrategy>CHAM</depositLookupStrategy>
+        <cvudStrategy>CHAM</cvudStrategy>
+        <creditValueAssignmentStrategy>CHAM</creditValueAssignmentStrategy>
+        <customerActivityStrategy>CHAM</customerActivityStrategy>
+        <tenureStrategy>CHAM</tenureStrategy>
+    </creditAssessmentStrategies>
+    <creditRiskLevel>100</creditRiskLevel>
+    <unifiedCreditAssessmentResult>
+        <unifiedCreditAssessmentIndicator>
+            <indicator>true</indicator>
+            <reasonCd>UCMTCH1</reasonCd>
+        </unifiedCreditAssessmentIndicator>
+        <unifiedCreditSimulatedBureauResultData>
+            <personName>
+                <firstName>AA</firstName>
+                <lastName>testLast</lastName>
+            </personName>
+            <reportSourceCd>UNIFIEDCREDIT</reportSourceCd>
+            <reportType>CONS_CRD_RPT</reportType>
+            <printImageReportTxt>No Credit file pull is required.  Unified Credit decision based on existing client information.</printImageReportTxt>
+            <adjudicationResult>
+                <creditScoreType>UC</creditScoreType>
+                <creditScore>0</creditScore>
+                <creditClass>D</creditClass>
+                <creditDecision>
+                    <creditDecisionCd>UNIFCRED</creditDecisionCd>
+                </creditDecision>
+            </adjudicationResult>
+            <riskIndicator>
+                <writeOffInd>None</writeOffInd>
+                <noHitThinFileInd>false</noHitThinFileInd>
+                <trueThinFileInd>false</trueThinFileInd>
+                <highRiskThinFileInd>false</highRiskThinFileInd>
+                <bankcrupcyInd>false</bankcrupcyInd>
+                <tempSINInd>false</tempSINInd>
+                <underAgeInd>false</underAgeInd>
+                <primaryRiskInd>DEFAULT</primaryRiskInd>
+                <secondaryRiskInd>NON-FRAUD</secondaryRiskInd>
+            </riskIndicator>
+            <creationDate>2019-06-10-07:00</creationDate>
+        </unifiedCreditSimulatedBureauResultData>
+    </unifiedCreditAssessmentResult>
+</CreditAssessmentResult>
+

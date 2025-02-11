@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Module.WS -->
+
+    <parent>
+        <groupId>telus.credit.crdmgmt.crd-ws-deploy</groupId>
+        <artifactId>pom-crd-ws-deploy</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>creditgateway-wsdl</artifactId>
+    <name>wlncredit-wsdl</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+    </dependencies>
+
+<build>
+        <plugins>
+            <!-- http://geertschuring.wordpress.com/2009/06/26/how-to-create-a-webservice-client-with-maven-and-jax-ws/
+                How to create a webservice client with Maven and JAX-WS -->
+
+            <plugin>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>GenService</id>
+                        <!-- JAX-WS Maven plugin parameters: http://jax-ws-commons.java.net/jaxws-maven-plugin/wsimport-mojo.html -->
+                        <configuration>
+                            <!-- Do not generate the impl class -->
+                            <genJWS>false</genJWS>
+                            <target>2.1</target>
+							<keep>true</keep>
+                            <!-- List of files to use for bindings. If not specified, all .xml
+                                files in the bindingDirectory will be used. -->
+                            <bindingFiles>
+                                <bindingFile>binding_schema.xjb</bindingFile>
+                                <bindingFile>binding_wsdl.xjb</bindingFile>
+                            </bindingFiles>
+
+                            <wsdlFiles>
+                                <wsdlFile>CreditGatewayService_v1_2.wsdl</wsdlFile>
+                            </wsdlFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>   
+
+</project>

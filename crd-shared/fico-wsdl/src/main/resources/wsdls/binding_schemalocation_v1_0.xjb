@@ -1,0 +1,34 @@
+<!-- binding file used to generated the Blaze web service interface and implementation stub -->
+<jxb:bindings 
+          xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+          xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+          xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"		
+		  version="2.0">   
+	 
+   
+    <jxb:bindings schemaLocation="FICOCreditAssessmentInterfaceTypes_v2_1.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+             <jxb:package name="com.fico.telus.blaze.creditAsessment" />
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
+	
+    <jxb:bindings schemaLocation="FICODepositCalculatorInterfaceTypes_v1_1.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+             <jxb:package name="com.fico.telus.blaze.depositCalculator" />
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="FICOSimulatorBureauInterfaceTypes_v1_1.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+             <jxb:package name="com.fico.telus.blaze.creditSimulator" />
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="CreditCommon_v2_1.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+             <jxb:package name="com.fico.telus.blaze.creditCommon" />
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
+	
+</jxb:bindings>

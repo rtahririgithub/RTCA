@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!-- crypto-spring.xml -->
+<beans>
+	<bean id="telusSpringConfigurer"
+        class="com.telus.framework.config.spring.PlaceholderConfigurer"/>  
+             
+        <bean id="encryptUtil"
+	        class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	
+	        <property name="staticMethod">
+	            <value>com.telus.framework.crypto.EncryptionUtil.setCrypto</value>
+	        </property>
+	
+	        <property name="arguments">
+	            <list>
+	                <ref bean="cryptoImpl" />
+	            </list>
+	        </property>
+	 </bean>
+	
+	<bean id="cryptoImpl"
+	                 class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl"
+	                 init-method="init">
+		<property name="key1"><value>${encryption/key1}</value></property>
+	      <property name="key2"><value>${encryption/key2}</value></property>
+	      <property name="key3"><value>${encryption/key3}</value></property>
+	</bean>
+
+    <bean id="WLSEncryptor" init-method="init"
+                class="com.telus.credit.batch.report.Encryptor">
+            <property name="cryptoImpl">
+            	<ref local="cryptoImpl"/>
+            </property>
+            <property name="encryptionFieldIndexes"><value>3,5</value></property>
+    </bean>
+    
+</beans>
+

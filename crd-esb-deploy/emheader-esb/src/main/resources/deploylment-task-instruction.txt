@@ -1,0 +1,26 @@
+<ENV>=dv01
+
+sbconfig jar Deployment 
+---------------
+ESB console -> System Administration -> ->Import Resources->import following filename->
+<BuildPATH>\telus-crd-emheader-esb\src\main\resources\telus-crd-emheader-esb_sbconfig.jar
+
+
+Execute Customization File 
+---------------------
+ESB console -> System Administration -> Customization -> Execute Customization File ->import following filename ->execute  <BuildPATH>\telus-crd-emheader-esb\src\main\resources\config\telus-crd-crda-esb-Customization-File_<ENV>.xml
+
+
+Verification
+----------------
+ESB console -> System Administration ->Project Explorer->EmRoutingProject->EMHeaderPS->Edit Message Flow -> getEmHeader -> open getEMHeader_In_Stage -> 
+verify XQuery Resource is  EmRoutingProject/emheader/dv03emheader
+
+ESB console -> System Administration ->Project Explorer->EmRoutingProject->EMHeaderBS-> Endpoint URI  is
+http://customermanagementwestesb-<ENV>.tsl.telus.com/EmRoutingProject/EMHeaderPS
+
+
+Activate
+--------------
+->activate->submit
+

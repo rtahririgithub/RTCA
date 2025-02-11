@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+	<!-- LogLevel Config -->
+	<group name="creditService">
+        	<prop name="logLevel">INFO</prop>
+	</group>
+	<!-- End of LogLevel config -->
+
+
+</group>

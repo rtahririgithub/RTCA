@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://www.ibm.com/telecom/common/schema/place_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/common/schema/place_extensions/v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- The type: base.GeographicAddress -->
+    <xs:complexType name="GeographicAddressExtensions">
+        <xs:all>
+            <xs:element minOccurs="0" name="Address1" type="xs:string"/>
+            <xs:element minOccurs="0" name="Address2" type="xs:string"/>
+        </xs:all>
+    </xs:complexType>
+    <!-- The type: urbanPropertyAddress.UrbanPropertyAddress -->
+    <xs:complexType name="UrbanPropertyAddressExtensions"/>
+</xs:schema>

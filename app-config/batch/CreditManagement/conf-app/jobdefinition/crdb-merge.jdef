@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <import resource="classpath:fw-base.jdef" />
+  <import resource="classpath:fw-mailsender-smtp-spring.xml"/>
+  <!--  <import resource="fw-mailsender-jms-spring.xml"/>  -->  
+  
+  <!-- ===================================================================== -->	
+  <bean id="job" parent="baseJob">
+    <property name="steps">
+      <list>
+        <bean id="STEP01" parent="baseStep" >
+          <property name="moduleName"><value>merge-mapSpool</value></property>
+        </bean>
+        <bean id="STEP02" parent="baseStep" >
+          <property name="moduleName"><value>merge-fileSplitter</value></property>
+        </bean>
+        <bean id="STEP03" parent="baseStep" >
+          <property name="moduleName"><value>merge-sort</value></property>
+        </bean>
+        <bean id="STEP04" parent="baseStep" >
+          <property name="moduleName"><value>profileGroupExtract</value></property>
+        </bean>
+        <bean id="STEP05" parent="baseStep" >
+          <property name="moduleName"><value>merge</value></property>
+        </bean>
+        <bean id="STEP06" parent="baseStep" >
+          <property name="moduleName"><value>getBAN</value></property>
+        </bean>
+       <bean id="STEP07" parent="baseStep" >
+          <property name="moduleName"><value>report</value></property>
+          <property name="commitFrequency"><value>${report/commitFrequency}</value></property>
+        </bean>
+        <bean id="STEP08" parent="baseStep" >
+          <property name="moduleName"><value>sendReport</value></property>
+        </bean>
+     </list>
+    </property>
+  </bean>
+  
+  <bean id="merge-mapSpool"  parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/CreditProfileCustomerMapping.sql ${processbox}/merge/creditProfileCustomerMappingData.dat" />
+  </bean> 
+  
+  <bean id="merge-fileSplitter" class="com.telus.credit.batch.extract.SplitFileBatch" >
+    <property name="inputFile"><value>${merge-fileSplitter/inputFile}</value></property>
+    <property name="singleCustomerOutputFile"><value>${merge-fileSplitter/singleCustomerOutputFile}</value></property>
+    <property name="multiCustomerOutputFile"><value>${merge-fileSplitter/multiCustomerOutputFile}</value></property>
+  </bean>
+   
+   <!--bean id="merge-sort" parent="baseSyncsortScriptStep">
+    <property name="executable" value="${step}/merge/sortCustomerId.sh" />
+    <property name="arg" value="${processbox}/merge/linkedProfiles.dat" />
+   </bean-->
+   
+   <bean id="merge-sort" parent="baseSyncsortCmdStep">
+    <property name="controlFile" value="${syncsort}/merge/sortCustomerId.srt" />
+    <property name="output" value="${logs}/${jobname}-sortCustomerId.log" />
+   </bean>
+  
+  <bean id="profileGroupExtract" class="com.telus.credit.batch.merge.ExtractProfileGroupBatch" >
+    <property name="inputFileSortByProfileId"><value>${profileGroupExtract/inputFileSortByProfileId}</value></property>
+    <property name="inputFileSortByCustomerId"><value>${profileGroupExtract/inputFileSortByCustomerId}</value></property>
+    <property name="outputFile"><value>${profileGroupExtract/outputFile}</value></property>
+  </bean>
+  
+  <bean id="merge" class="com.telus.credit.batch.merge.MergeCreditProfileBatch" >
+    <property name="creditProfileDao"><ref bean="creditProfileExtDao"/></property> 
+    <property name="creditProfileMapDao"><ref bean="creditProfileMapDao"/></property>
+    <property name="profileCustomerMapDao"><ref bean="profileCustomerMapDao"/></property>
+    <property name="guarantorDao"><ref bean="guarantorDao"/></property> 
+    <property name="creditIDCardDao"><ref bean="creditIDCardDao"/></property> 
+    <property name="creditAddressDao"><ref bean="creditAddressDao"/></property> 
+    <property name="creditStatusDao"><ref bean="creditStatusDao"/></property>       
+    <property name="inputFile"><value>${merge/inputFile}</value></property>
+    <property name="outputFile"><value>${merge/outputFile}</value></property>
+    <property name="outputWSFile"><value>${merge/outputWSFile}${L_CRDB_ODATE}.dat</value></property>
+    <property name="unMergedCidListOutputFile"><value>${merge/unMergedCidListOutputFile}</value></property>  
+  </bean>
+  
+  <bean id="getBAN" parent="baseSyncsortScriptStep">
+    <property name="executable"><value>${syncsort}/merge/getBANFromCustomerODS.sh</value></property>
+    <property name="arg"><value>${L_CUST_ODS_BILLING_DIR}/${L_CUST_ODS_BILLING} ${processbox}/merge/unMergeCustomerList.dat ${processbox}/merge/customerIDBanMapping.dat </value></property>
+    <property name="output"><value>${logs}/${jobname}-getBANFromCustomerODS.log</value></property>
+  </bean>
+  
+  <bean id="report" class="com.telus.credit.batch.merge.GenerateDiscrepancyReportBatch" >
+    <property name="creditProfileDao"><ref bean="creditProfileDao"/></property>  
+    <property name="inputFile"><value>${report/inputFile}</value></property>
+    <property name="customerBillingAccountMappingFile"><value>${report/customerBillingAccountMappingFile}</value></property>
+    <property name="outputFile"><value>${report/outputFile}</value></property>
+    <!--property name="billingAccountMgtSvc"><ref bean="billingAccountMgtSvc"/></property-->
+  </bean>
+  
+  <bean id="sendReport" class="com.telus.credit.batch.merge.SendReportBatch" >  
+    <property name="inputFile"><value>${sendReport/inputFile}</value></property>
+  </bean>
+
+  <!-- ===================================================================== -->
+  <bean id="creditProfileDao" lazy-init="true"
+        class="com.telus.credit.batch.dao.CreditProfileDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileSqlMapClient"/></property>
+  </bean>
+  <bean id="creditProfileExtDao" lazy-init="true"
+          class="com.telus.credit.batch.dao.CreditProfileExtDaoSqlmap">
+      <property name="sqlMapClient"><ref bean="creditProfileExtSqlMapClient"/></property>
+       <property name="creditValueDao"><ref bean="creditValueExtDao"/></property>
+  </bean>
+   <bean id="creditValueExtDao" lazy-init="true"
+          class="com.telus.credit.batch.dao.CreditValueExtDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileExtSqlMapClient"/></property>
+  </bean>
+  <bean id="creditProfileMapDao" lazy-init="true"
+        class="com.telus.credit.batch.dao.CreditProfileMapDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileSqlMapClient"/></property>
+  </bean>
+  
+  <bean id="profileCustomerMapDao" lazy-init="true"
+        class="com.telus.credit.batch.dao.CreditProfileCustomerMapDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileSqlMapClient"/></property>
+  </bean>
+  
+  <bean id="guarantorDao" lazy-init="true"
+        class="com.telus.credit.batch.dao.CustomerGuarantorDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileSqlMapClient"/></property>
+  </bean>
+  
+  <bean id="creditIDCardDao" lazy-init="true"
+        class="com.telus.credit.batch.dao.CreditIDCardDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileSqlMapClient"/></property>
+  </bean>
+  
+  <bean id="creditAddressDao" lazy-init="true"
+        class="com.telus.credit.batch.dao.CreditAddressDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileSqlMapClient"/></property>
+  </bean>
+  
+  <bean id="creditStatusDao" lazy-init="true"
+        class="com.telus.credit.batch.dao.CreditStatusDaoSqlmap">
+    <property name="sqlMapClient"><ref bean="creditProfileSqlMapClient"/></property>
+  </bean>
+  
+ <!-- ===================================================================== -->
+ 
+  <bean id="creditProfileSqlMapClient" lazy-init="true"
+        class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+    <property name="configLocation">
+      <value>sqlmap/creditBatch-sqlmap-config.xml</value>
+      </property>
+    <property name="dataSource"><ref bean="${appBeanName/appDbDS}"/></property>
+  </bean>
+  <bean id="creditProfileExtSqlMapClient" lazy-init="true"
+          class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+      <property name="configLocation">
+        <value>sqlmap/creditMgt-sqlmap-config.xml</value>
+        </property>
+      <property name="dataSource"><ref bean="${appBeanName/appDbDS}"/></property>
+  </bean>
+  
+  <bean id="jdbc-appDbDS" lazy-init="true"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName">
+        <value>oracle.jdbc.driver.OracleDriver</value>
+        </property>
+    <property name="url"><value>${jdbc/url}</value></property>
+    <property name="username"><value>${jdbc/username}</value></property>
+    <property name="password"><value>${jdbc/password}</value></property>
+  </bean>
+  <!-- ===================================================================== -->
+
+   <!--bean id="billingAccountMgtSvc" lazy-init="true" class="com.telus.framework.util.spring.ServiceProxy">
+    <property name="lookupHomeOnStartup"><value>true</value></property> 
+    <property name="serviceType"><value>remote</value></property>   	
+    <property name="jndiName"><value>${connections/ejbServices/billingAccountMgtSvc/jndiName}</value></property>
+    <property name="jndiEnvironment"> 
+        <props>
+          <prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+          <prop key="java.naming.provider.url">${connections/ejbServices/billingAccountMgtSvc/url}</prop>
+          <prop key="java.naming.security.principal">${connections/security/jndiLookup/telus/principal}</prop>
+          <prop key="java.naming.security.credentials">${connections/security/jndiLookup/telus/credentials}</prop>
+        </props>
+     </property>
+    <property name="businessInterface"><value>com.telus.customermgt.service.BillingAccountMgtSvc</value></property>
+   </bean-->
+   
+   <!--  Encryptoin setting Start for Pilot -->
+    <bean id="encryptUtil"
+     class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod">
+            <value>com.telus.framework.crypto.EncryptionUtil.setCrypto</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <ref bean="cryptoImpl" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="cryptoImpl" class="com.telus.framework.crypto.impl.pilot.PilotCryptoImpl" init-method="init">
+        <property name="key1"><value>${encryption/key1}</value></property>
+        <property name="key2"><value>${encryption/key2}</value></property>
+        <property name="key3"><value>${encryption/key3}</value></property>
+    </bean>
+  <!--	Encryptoin setting End -->
+
+</beans>

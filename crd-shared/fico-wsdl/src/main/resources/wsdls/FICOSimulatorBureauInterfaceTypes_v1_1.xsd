@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:crdc="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2" xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICOSimulatorBureauInterfaceTypes_v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/FICOSimulatorBureauInterfaceTypes_v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CreditCommon_v2" schemaLocation="CreditCommon_v2_1.xsd"/>
+	<!-- Simulator Credit Bureau Request -->
+	<xs:element name="SimulatorCreditBureauRequest">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Simulator Credit Bureau Request</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="environmentCode" type="xs:string"/>
+				<xs:element name="personName" type="crdc:PersonName"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SimulatorCreditBureauResponse">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Simulator Credit Bureau Request</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="simulatedCreditBureauResult" type="crdc:CreditBureauResult"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,40 @@
+<xs:schema targetNamespace="http://www.ibm.com/telecom/common/schema/business_interaction_extensions/v3_0" xmlns:bons0="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" xmlns:tns="http://www.ibm.com/telecom/common/schema/business_interaction_extensions/v3_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" schemaLocation="SupplierPartnerProductTemplates.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" schemaLocation="PhysicalResourceTemplates.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" schemaLocation="LogicalResourceTemplates.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" schemaLocation="ResourceFacingServiceTemplates.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" schemaLocation="CustomerFacingServiceTemplates.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" schemaLocation="ProductOfferingTemplates.xsd"/>
+    <xs:import namespace="http://www.ibm.com/telecom/templates/schema/business_interaction_extensions/v3_0" schemaLocation="ProductTemplates.xsd"/>
+    <!-- The type: base.BusinessInteraction -->
+    <xs:complexType name="BusinessInteractionExtensions"/>
+    <!-- The type: base.Request -->
+    <xs:complexType name="RequestExtensions"/>
+    <!-- The type: base.BusinessInteractionItem -->
+    <xs:complexType name="BusinessInteractionItemExtensions"/>
+    <!-- The type: businessInteraction.BusinessEvent -->
+    <xs:complexType name="BusinessEventExtensions"/>
+    <!-- The type: businessInteraction.StatusNotification-->
+    <xs:complexType name="StatusNotificationExtensions"/>
+    <!-- The type: customerOrder.StatusNotificationItem -->
+    <xs:complexType name="StatusNotificationItemExtensions"/>
+    <!-- The type: businesInteraction.BusinessInteractionEntity-->
+    <xs:complexType name="BusinessInteractionEntityExtensions">
+        <xs:sequence>
+            <xs:element name="BusinessInteractionEntityChoice" type="tns:BusinessInteractionEntityChoice"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- The type: businesInteraction.Site -->
+    <xs:complexType name="SiteExtensions"/>
+    <xs:complexType name="BusinessInteractionEntityChoice">
+        <xs:choice>
+            <xs:element name="ProductOfferingChoice" type="bons0:ProductOfferingChoice"/>
+            <xs:element name="ProductChoice" type="bons0:ProductChoice"/>
+            <xs:element name="CustomerFacingServiceChoice" type="bons0:CustomerFacingServiceChoice"/>
+            <xs:element name="ResourceFacingServiceChoice" type="bons0:ResourceFacingServiceChoice"/>
+            <xs:element name="LogicalResourceChoice" type="bons0:LogicalResourceChoice"/>
+            <xs:element name="PhysicalResourceChoice" type="bons0:PhysicalResourceChoice"/>
+            <xs:element name="SupplierPartnerProductChoice" type="bons0:SupplierPartnerProductChoice"/>
+        </xs:choice>
+    </xs:complexType>
+</xs:schema>

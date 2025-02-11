@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="irrelevant">
+    <group name="handler">
+        <prop name="processorBean">mailSenderMdbProcessor</prop>
+    </group>
+    <group name="mail">
+		<prop name="email_From">DoNotReply@telus.com</prop>
+		<prop name="email_subject">RTCA credit reAssessment daily report from ${metadata/envId} env</prop>  
+
+        <list name="emailiRecipients_TO">
+        	<string>tim.ding@telus.com,alan.huang@telus.com,James.Villagarcia@telus.com,hongfan.yu@telus.com</string>               
+        </list>
+        <list name="emailiRecipients_CC">
+               <!--<  <string>angela.tseung@telus.com</string>
+       --> </list>					
+        <list name="emailiRecipients_BCC">
+        <!-- 	<string>enter valid bcc emails </string> -->     	     	
+        </list>	
+        
+		<prop name="email_Body">The attachment contains: the RTCA credit reassessment daily report for ${L_CRDA_ODATE} (MS Office Excel spreadsheet).</prop>          
+        				
+    </group>    	
+    
+          
+</group>
+

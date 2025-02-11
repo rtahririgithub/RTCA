@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <import resource="classpath:fw-base.jdef" />
+ 
+   <bean id="telusSpringConfigurer" class="com.telus.framework.config.spring.PlaceholderConfigurer" lazy-init="true">
+   </bean>
+
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+           <bean id="STEP01" parent="baseStep">
+              <property name="moduleName" value="cmdExec-Step01"/>
+           </bean>
+         </list>
+      </property> 
+   </bean>
+
+   <!-- ====================================================================  
+         Archive Step
+         ====================================================================
+   -->
+   <bean id="cmdExec-Step01" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable" value="${archivefile/scriptFileRtca}"/>
+      <property name="arg" value="${report_rtca_2/outputFilename}*.gz ${outbox} ${archive} ${processbox}"/>
+      <property name="output" value="${report_rtca_2/log}"/>
+   </bean>
+</beans>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+<!-- DV-->
+
+
+ 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@AN05103:41521:TCMDV" />
+		<property name="username" value="APPTCM_U1_WK05" />
+		<property name="password" value="APPTCM_U1_WK05" />
+	</bean>
+
+ 
+
+<!-- AT-->
+<!--
+ 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@iedm3301db:41521:TCMAT" />
+		<property name="username" value="APPTCM_U1_AT06" />
+		<property name="password" value="APPTCM_U1_AT06" />
+	</bean>	
+-->
+<!-- ST-->
+<!--
+
+ 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=iedm3303dd-vip)(PORT=41521))(ADDRESS=(PROTOCOL=TCP)(HOST=iedm3304dd-vip)(PORT=41521))(FAILOVER=yes)(LOAD_BALANCE=no)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=PDSCR1STsv1)))" />
+		<property name="username" value="APPCRD_BATCH_PO1" />
+		<property name="password" value="APPCRD_BATCH_PO1PO1M" />
+	</bean>	
+
+-->
+<!-- PR--><!--
+
+ 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=iedm3307db-vip)(PORT=41521))(ADDRESS=(PROTOCOL=TCP)(HOST=iedm3308db-vip)(PORT=41521))(FAILOVER=yes)(LOAD_BALANCE=no)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=PDSCRPRsv1)))"/>
+		<property name="username" value="APPOR_U1_PR" />
+		<property name="password" value="APPOR_U1_PR" />
+	</bean>	 		
+
+
+-->
+
+
+</beans>
+

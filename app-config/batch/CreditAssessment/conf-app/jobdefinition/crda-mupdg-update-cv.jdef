@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:util="http://www.springframework.org/schema/util"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+  <import resource="classpath:fw-base.jdef" />
+<!--  <import resource="classpath:fw-mailsender-smtp-spring.xml"/>
+  <import resource="refpds-access-client-spring.xml"/>
+   -->
+  <bean id="job" parent="baseJob">
+    <property name="steps">
+      <list>
+        <bean id="STEP01" parent="baseStep" >
+          <property name="moduleName"><value>creditValueUpdate</value></property>
+          <property name="commitFrequency"><value>5</value></property>
+          <property name="autoRestartable"><value>true</value></property>
+
+        </bean>
+      </list>
+    </property>
+  </bean>
+  <bean id="creditValueUpdate" class="com.telus.crd.assessment.batch.UpdateCreditValueModule" >
+      <constructor-arg ref="consumerCustMgtService"/>
+      <property name="inputFile"><value>${temp}/${L_CRDA_ODATE}/mupdg-cv${JOB_SUBGROUP}-input-${L_CRDA_ODATE}.dat</value></property>
+      <property name="outputFile"><value>${error}/mupdg-cv-updatederror-msg${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat</value></property>
+      <property name="outputFileSuc"><value>${temp}/${L_CRDA_ODATE}/mupdg-cv-updated${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat</value></property>
+      <property name="outputFileLeftover"><value>${inbox}/leftover/customer-mgt-leftover${JOB_SUBGROUP}-${L_CRDA_ODATE}.dat</value></property>
+  </bean>
+  <!--Definition of consumerCustMgtService client bean. This service call is used to update WIRELINE credit profile.-->
+  <bean id="consumerCustMgtService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+      <property name="serviceInterface" value="com.telus.wsdl.cmo.informationmgmt.consumercustomermanagementservice_2.ConsumerCustomerManagementServicePortType"/>
+      <property name="wsdlDocumentUrl" value="classpath:wsdls/ConsumerCustomerManagementService_v2_6.wsdl" />
+      <!-- Web service URL configured in env.xml file. -->
+      <property name="endpointAddress" value="${connections/SOA/serviceURLs/consumerCustMgtServiceUrl}" />
+      <property name="namespaceUri" value="http://telus.com/wsdl/CMO/InformationMgmt/ConsumerCustomerManagementService_2" />
+      <property name="serviceName" value="ConsumerCustomerManagementService_v2_6" />
+      <property name="portName" value="ConsumerCustomerManagementServicePort" />
+      <property name="lookupServiceOnStartup" value="false" />
+      <property name="username" value="${connections/SOA/soaCreditWsClientUsername}"/>
+      <property name="password" value="${connections/SOA/soaCreditWsClientPassword}"/> 
+  </bean>   
+</beans>

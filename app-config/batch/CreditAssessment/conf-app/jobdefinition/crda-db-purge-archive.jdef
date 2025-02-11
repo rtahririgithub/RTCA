@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <import resource="classpath:fw-base.jdef" />
+
+   <!-- ===================================================================== -->
+   <!-- STEP01 execute sql script to purge expired emails.                    -->
+   <!-- ===================================================================== -->
+   <bean id="job" parent="baseJob">
+      <property name="steps">
+         <list>
+            <bean id="STEP01" parent="baseStep">
+               <property name="moduleName" value="step01" />
+            </bean>
+            <bean id="STEP02" parent="baseStep">
+               <property name="moduleName" value="step02" />
+            </bean>
+            <bean id="STEP03" parent="baseStep">
+               <property name="moduleName" value="step03" />
+            </bean>
+         </list>
+      </property>
+   </bean>
+
+
+   <!-- =================================================================== -->
+   <bean id="step01" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/rtca-db-archive-step01.sql" />
+      <property name="output" value="${logs}/${jobname}-step01.log" />
+   </bean>
+
+   <bean id="step02" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/rtca-db-archive-step02.sql" />
+      <property name="output" value="${logs}/${jobname}-step02.log" />
+   </bean>
+
+   <bean id="step03" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/archiveDbConnection} @${sql}/rtca-db-archive-step03.sql" />
+      <property name="output" value="${logs}/${jobname}-step03.log" />
+   </bean>
+
+</beans>

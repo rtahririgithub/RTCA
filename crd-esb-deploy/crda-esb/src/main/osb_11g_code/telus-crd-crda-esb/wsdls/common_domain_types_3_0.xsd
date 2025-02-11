@@ -1,0 +1,178 @@
+<xsd:schema targetNamespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/common_domain_types_3" xmlns:base_xsd="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/base_types_2_0" xmlns:cd_xsd="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/common_domain_types_3" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/base_types_2_0" schemaLocation="base_types_2_0.xsd"/>
+    <xsd:simpleType name="SubscriptionID">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\S{0,19}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="PIN">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\S{4,6}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="SubscriptionStatus">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="C"/>
+            <xsd:enumeration value="I"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ProviderID">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\S{1,6}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="BrandID">
+        <xsd:restriction base="xsd:positiveInteger">
+            <xsd:pattern value="[1-9]{1}\d{0,21}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="BalanceType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="primary"/>
+            <xsd:enumeration value="secondary"/>
+            <xsd:enumeration value="bonus"/>
+            <xsd:enumeration value="reserved"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="PaymentInstrumentType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CC"/>
+            <!--xsd:enumeration value="BC"/-->
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="PeriodType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="monthly"/>
+            <xsd:enumeration value="daily"/>
+            <xsd:enumeration value="weekly"/>
+            <xsd:enumeration value="quarterly"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="RechargeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="interval"/>
+            <xsd:enumeration value="threshold"/>
+            <xsd:enumeration value="onetime"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="RateType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="local"/>
+            <xsd:enumeration value="ld"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ProductStatusType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="pending"/>
+            <xsd:enumeration value="active"/>
+            <xsd:enumeration value="expired"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="TaxAmount">
+        <xsd:sequence>
+            <xsd:element name="amount" type="xsd:double"/>
+            <xsd:element name="rate" type="xsd:double"/>
+            <xsd:element name="jurisdiction" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="ReferenceNumber">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[a-zA-Z0-9]{10}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="VoucherPIN">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{0,19}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="CardNumberDisplay">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="first6Digits">
+                <xsd:annotation>
+                    <xsd:documentation>First 6 digits</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[0-9]{6}"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="last4Digits">
+                <xsd:annotation>
+                    <xsd:documentation>Last 4 digits</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[0-9]{4}"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="maskedCardNumber" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Masked number</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PaymentInstrument">
+        <xsd:sequence>
+            <xsd:element name="paymentInstrumentType" type="cd_xsd:PaymentInstrumentType"/>
+            <xsd:element minOccurs="0" name="cardType" type="cd_xsd:CardType"/>
+            <xsd:element minOccurs="0" name="cardNumber" type="cd_xsd:CardNumber">
+                <xsd:annotation>
+                    <xsd:documentation>Token number representing credit card.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="cardNumberDisplay" type="cd_xsd:CardNumberDisplay"/>
+            <xsd:element minOccurs="0" name="expiryMonth" type="cd_xsd:Month"/>
+            <xsd:element minOccurs="0" name="expiryYear" type="cd_xsd:ExpiryYear"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ExpiryDate">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="expiryMonth" type="cd_xsd:Month"/>
+            <xsd:element minOccurs="0" name="expiryYear" type="cd_xsd:ExpiryYear"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="CardNumber">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="CardType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="AMEX"/>
+            <xsd:enumeration value="MC"/>
+            <xsd:enumeration value="VISA"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Month">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="0[1-9]|1[0-2]"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ExpiryYear">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{2}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="CVV">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{3}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="RateRoundingType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="minute"/>
+            <xsd:enumeration value="second"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TransactionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="transfer"/>
+            <xsd:enumeration value="debit"/>
+            <xsd:enumeration value="credit"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

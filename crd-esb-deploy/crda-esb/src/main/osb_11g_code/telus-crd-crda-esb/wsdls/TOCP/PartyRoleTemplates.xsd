@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.ibm.com/telecom/templates/schema/party_role_extensions/v3_0"
+    xmlns:tns="http://www.ibm.com/telecom/templates/schema/party_role_extensions/v3_0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="PartyRoleChoice">
+        <xsd:choice>
+            <xsd:element name="AdministrativeContactPartyRole" type="tns:AdministrativeContactPartyRole"/>
+            <xsd:element name="EmployeePartyRole" type="tns:EmployeePartyRole"/>
+            <xsd:element name="FamilyMemberPartyRole" type="tns:FamilyMemberPartyRole"/>
+            <xsd:element name="HouseholdMemberPartyRole" type="tns:HouseholdMemberPartyRole"/>
+            <xsd:element name="MainContactPartyRole" type="tns:MainContactPartyRole"/>
+            <xsd:element name="NextOfKinPartyRole" type="tns:NextOfKinPartyRole"/>
+            <xsd:element name="TechnicalContactPartyRole" type="tns:TechnicalContactPartyRole"/>
+            <xsd:element name="EndUserPartyRole" type="tns:EndUserPartyRole"/>
+            <xsd:element name="SubscriberPartyRole" type="tns:SubscriberPartyRole"/>
+            <xsd:element name="ArchitectPartyRole" type="tns:ArchitectPartyRole"/>
+            <xsd:element name="BusinessAnalystPartyRole" type="tns:BusinessAnalystPartyRole"/>
+            <xsd:element name="BusinessModelerPartyRole" type="tns:BusinessModelerPartyRole"/>
+            <xsd:element name="QualityAssuranceRepresentativePartyRole" type="tns:QualityAssuranceRepresentativePartyRole"/>
+            <xsd:element name="UserConceptualModelerPartyRole" type="tns:UserConceptualModelerPartyRole"/>
+            <xsd:element name="DomainNameRegistrarPartyRole" type="tns:DomainNameRegistrarPartyRole"/>
+            <xsd:element name="NumberPortabilityAdministratorPartyRole" type="tns:NumberPortabilityAdministratorPartyRole"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="AdministrativeContactPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="EmployeePartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="FamilyMemberPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="HouseholdMemberPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="MainContactPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="NextOfKinPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Relationship" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="TechnicalContactPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="EndUserPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UserID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Password" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="SubscriberPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UserID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Password" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="ArchitectPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="BusinessAnalystPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="BusinessModelerPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="QualityAssuranceRepresentativePartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="UserConceptualModelerPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="eMailAddress" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Initials" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Preposition" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="DomainNameRegistrarPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="InteractionProtocol" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="NumberPortabilityAdministratorPartyRole">
+        <xsd:all>
+            <xsd:element minOccurs="0" name="InteractionProtocol" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>

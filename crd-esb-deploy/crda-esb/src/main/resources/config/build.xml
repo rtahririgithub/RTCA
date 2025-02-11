@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="build-ESB-Config-files" default="all">
+	<property name="wl.home" value="C:\Oracle\Middleware\Oracle_Home121300"/>
+	<taskdef name="wsdlc" classname="weblogic.wsee.tools.anttasks.WsdlcTask" classpath="${wl.home}\wlserver\server\lib\weblogic.jar"/>
+	<taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" classpath="${wl.home}\wlserver\server\lib\weblogic.jar"/>
+	<taskdef name="clientgen" classname="weblogic.wsee.tools.anttasks.ClientGenTask" classpath="${wl.home}\wlserver\server\lib\weblogic.jar"/>
+	<taskdef name="xmlbean" classname="com.bea.xbean.tool.XMLBean" classpath="${wl.home}/server/lib/xbean.jar"/>
+	<property name="src" value="${basedir}/../src"/>
+	<target name="all"> 
+
+
+		<!-- Generate the DV01 customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" value="telus-crd-crda-esb-Customization-File_DV01.xml"/>
+
+			<param name="soamptoll8" 			value="soa-mp-toll-dv01.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt168.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-dv01.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-dv01.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it03.tsl.telus.com"/>
+			
+			<param name="WCPMPXY_HOST_QUEUE" 	value="jms://btln000381:10691"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+
+
+		<!-- Generate customization file for AT01  -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_AT01.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-at01.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt168.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it01.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-it01.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it01.tsl.telus.com"/>			
+
+			
+			<param name="WCPMPXY_HOST_QUEUE" 	value="jms://ln98945.corp.ads:21671,ln98946.corp.ads:21671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>		
+
+	
+		
+		<!-- Generate  customization file AT02 -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_AT02.xml"/>
+					
+			<param name="soamptoll8" 			value="soa-mp-toll-at02.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt148.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it02.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-it02.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it02.tsl.telus.com"/>			
+			
+			<param name="WCPMPXY_HOST_QUEUE" 	value="jms://customermanagementwestesb-at02.tsl.telus.com:20671/"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+
+		
+		<!-- Generate  customization file AT03-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_AT03.xml"/>
+					
+			<param name="soamptoll8" 			value="soa-mp-toll-at03.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt148.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it02.tsl.telus.com"/>
+			<param name="soampkidc" 			value="https://soa-mp-kidc-is07.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it02.tsl.telus.com"/>	
+			
+			
+			<param name="WCPMPXY_HOST_QUEUE" 	value="jms://customermanagementwestesb-at03.tsl.telus.com:23670/"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+
+		<!-- Generate  customization file AT04-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_AT04.xml"/>
+					
+			<param name="soamptoll8" 			value="soa-mp-toll-at04.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt148.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it02.tsl.telus.com"/>
+			<param name="soampkidc" 			value="https://soa-mp-kidc-is08.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it02.tsl.telus.com"/>			
+			
+			<param name="WCPMPXY_HOST_QUEUE" 	value="jms://customermanagementwestesb-at04.tsl.telus.com:24671/"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+		
+
+		
+		<!-- Generate for  customization file PT01	)	-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_PT01.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-pt01.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt140.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it03.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-is02.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it03.tsl.telus.com"/>
+			
+			<param name="WCPMPXY_HOST_QUEUE" 	value="jms://customermanagementwestesb-pt01.tsl.telus.com:31671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+		
+		
+		
+		<!-- Generate for  customization file PT02	)	-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_PT02.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-pt02.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt140.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it03.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-is03.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it03.tsl.telus.com"/>
+			
+			<param name="WCPMPXY_HOST_QUEUE" 			value="jms://customermanagementwestesb-pt02.tsl.telus.com:32671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+		
+		<!-- Generate for  customization file PT03	)	-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_PT03.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-pt02.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt140.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it03.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-is04.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it03.tsl.telus.com"/>
+			
+			<param name="WCPMPXY_HOST_QUEUE" 			value="jms://customermanagementwestesb-pt03.tsl.telus.com:33671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>			
+
+		<!-- Generate for  customization file PT04	)	-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_PT04.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-pt02.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt140.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it03.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-is05.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it03.tsl.telus.com"/>
+			
+			<param name="WCPMPXY_HOST_QUEUE" 			value="jms://customermanagementwestesb-pt04.tsl.telus.com:34671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+		
+		<!-- Generate for  customization file PT05	)	-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_PT05.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-pt05.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt140.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it03.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-it03.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it03.tsl.telus.com"/>
+			
+			<param name="WCPMPXY_HOST_QUEUE" 			value="jms://ln98438.corp.ads:30671,ln98439.corp.ads:30671"/>
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+		
+		<!-- Generate for  customization file PT06	)	-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_PT06.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-pt05.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pt140.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it03.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-is06.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 			value="soa-mp-kidcoss-it03.tsl.telus.com"/>
+			
+			<param name="WCPMPXY_HOST_QUEUE" 			value="jms://customermanagementwestesb-pt06.tsl.telus.com:36671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+		
+		
+		<!-- Generate  customization file ST01-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_ST01.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-st01.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-st101.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it04.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-it04.tsl.telus.com"/>	
+			<param name="soamp_kidcoss" 			value="soa-mp-kidcoss-it04.tsl.telus.com"/>			
+			
+			<param name="WCPMPXY_HOST_QUEUE" 			value="jms://customermanagementwestesb-st01.tsl.telus.com:43671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+		
+		<!-- Generate  customization file ST02-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_ST02.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-st02.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-st101.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it04.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-it04.tsl.telus.com"/>	
+			<param name="soamp_kidcoss" 		value="soa-mp-kidcoss-it04.tsl.telus.com"/>			
+			
+			<param name="WCPMPXY_HOST_QUEUE" 	value="jms://customermanagementwestesb-st02.tsl.telus.com:43671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>			
+		
+		
+		<!-- Generate  customization file PS01-->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_PS01.xml"/>
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-ps.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-148.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-it02.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-it02.tsl.telus.com"/>	
+			<param name="soamp_kidcoss" 			value="soa-mp-kidcoss-it02.tsl.telus.com"/>			
+			
+			<param name="WCPMPXY_HOST_QUEUE" 			value="jms://customermanagementwestesb-ps.tsl.telus.com:36671"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://ln98446.ent.agt.ab.ca:40681,ln98447.ent.agt.ab.ca:40681"/>				
+		</antcall>	
+		
+
+		
+		<!-- Generate the PR customization file -->
+		<antcall target="generateCustomizationFile"> 
+			<param name="sourcefile" 			value="telus-crd-crda-esb-Customization-File_Template.xml"/> 
+			<param name="destfile" 				value="telus-crd-crda-esb-Customization-File_PR.xml"/>
+			
+			
+			<param name="soamptoll8" 			value="soa-mp-toll-pr.tsl.telus.com"/>
+			<param name="soamplaird" 			value="soa-mp-laird-pr.tsl.telus.com"/>			
+			<param name="soamprmsk" 			value="soa-mp-rmsk-pr.tsl.telus.com"/>
+			<param name="soampkidc" 			value="soa-mp-kidc-pr.tsl.telus.com"/>
+			<param name="soamp_kidcoss" 			value="soa-mp-kidcoss-pr.tsl.telus.com"/>			
+			
+			
+			<param name="WCPMPXY_HOST_QUEUE" 			value="jms://btlp000870:50691,btlp000871:50691,btlp000872:50691,btlp000873:50691"/>	
+			<param name="FALLOUT_HOST_QUEUE" 	value="jms://lp97302.ent.agt.ab.ca:50681,lp97303.ent.agt.ab.ca:50681"/>		
+		</antcall> 
+
+	
+	</target>
+	
+	<!-- target to generate a enviroment specific customization file -->
+	<target name="generateCustomizationFile">
+		<delete file="${destfile}"/>		
+		<copy file="${sourcefile}" tofile="${destfile}"/>
+
+<!--
+soamptoll8
+soamplaird
+soamprmsk
+soampkidc
+-->
+
+		<replaceregexp file="${destfile}/"
+			match="soamptoll8"  
+			replace="${soamptoll8}"
+			byline="true"/>
+
+		<replaceregexp file="${destfile}/"
+			match="soamplaird"  
+			replace="${soamplaird}"
+			byline="true"/>
+			
+		<replaceregexp file="${destfile}/"
+			match="soamprmsk"  
+			replace="${soamprmsk}"
+			byline="true"/>
+
+		<replaceregexp file="${destfile}/"
+			match="soampkidc"  
+			replace="${soampkidc}"
+			byline="true"/>
+			
+		<replaceregexp file="${destfile}/"
+			match="soamp_kidcoss"  
+			replace="${soamp_kidcoss}"
+			byline="true"/>			
+			
+		<replaceregexp file="${destfile}/"
+			match="WCPMPXY_HOST_QUEUE"  
+			replace="${WCPMPXY_HOST_QUEUE}"
+			byline="true"/>	
+
+			
+			
+		<replaceregexp file="${destfile}/"
+			match="FALLOUT_HOST_QUEUE" 			
+			replace="${FALLOUT_HOST_QUEUE}"
+			byline="true"/>				
+			
+	</target>
+</project>

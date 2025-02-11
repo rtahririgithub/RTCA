@@ -1,0 +1,10 @@
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/UnitTestRequestResponse_v1" 
+targetNamespace="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/UnitTestRequestResponse_v1" version="1.0">
+	<xs:element name="performUnitTestRequest"  type="xs:anyType" >
+	
+	</xs:element>
+	<xs:element name="performUnitTestResponse"  type="xs:anyType" >
+	</xs:element>
+</xs:schema>

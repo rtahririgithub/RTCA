@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+                       "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <import resource="classpath:fw-base.jdef" />
+  
+  <bean id="job" parent="baseJob">
+    <property name="steps">
+      <list>
+        <bean id="STEP01" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-mapSpool</value></property>
+        </bean>
+        <bean id="STEP02" parent="baseStep" >
+          <property name="moduleName"><value>fileSplitter</value></property>
+        </bean>
+        <bean id="STEP03" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-sort</value></property>
+        </bean>
+         <bean id="STEP04" parent="baseStep" >
+          <property name="moduleName"><value>groupExtract</value></property>
+        </bean>
+        <bean id="STEP05" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-merge</value></property>
+        </bean>
+        <bean id="STEP06" parent="baseStep" >
+          <property name="moduleName"><value>fileConverter</value></property>
+        </bean>
+        <bean id="STEP07" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-infoSpool</value></property>
+        </bean>
+        <bean id="STEP08" parent="baseStep" >
+          <property name="moduleName"><value>cproflSpool</value></property>
+        </bean>
+        <bean id="STEP09" parent="baseStep" >
+          <property name="moduleName"><value>idSpool</value></property>
+        </bean>
+        <bean id="STEP10" parent="baseStep" >
+          <property name="moduleName"><value>addressSpool</value></property>
+        </bean>
+        <bean id="STEP11" parent="baseStep" >
+          <property name="moduleName"><value>cmdExec-mvOutputFiles</value></property>
+        </bean>
+      </list>
+    </property>
+  </bean>
+  
+   <bean id="cmdExec-mapSpool" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/CreditProfileCustomerMapping.sql ${processbox}/extract/sbi/creditProfileCustomerMappingData.dat" />
+   </bean>
+   <bean id="cmdExec-sort" parent="baseSyncsortCmdStep">
+    <property name="controlFile" value="${syncsort}/extract/sbi_sortCustomerId.srt" />
+    <property name="output" value="${logs}/${jobname}-sortCustomerId.log" />
+   </bean>
+   
+   <bean id="cmdExec-merge" class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${step}/extract/sbi_merge.sh</value></property>
+    <property name="dir" value="." />
+    <property name="failOnError">   <value>false</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+            <ref bean="path" />
+            
+            <bean class="com.telus.framework.batch.module.support.EnvVariable">
+			      <property name="key" value="PROCESSBOX" />
+			      <property name="value" value="${processbox}" />
+            </bean>
+      </list>
+    </property>
+   </bean>
+   <bean id="cmdExec-mvOutputFiles" class="com.telus.framework.batch.module.ExecModule" >
+    <property name="executable">    <value>${step}/extract/sbi_mvOutputFiles.sh</value></property>
+    <property name="dir" value="." />
+    <property name="failOnError">   <value>false</value></property>
+    <property name="newEnvironment"><value>true</value></property>
+    <property name="env">
+      <list>
+            <ref bean="path" />  
+            <bean class="com.telus.framework.batch.module.support.EnvVariable">
+			      <property name="key" value="PROCESSBOX" />
+			      <property name="value" value="${processbox}" />
+            </bean>
+            <bean class="com.telus.framework.batch.module.support.EnvVariable">
+			      <property name="key" value="OUTBOX" />
+			      <property name="value" value="${outbox}/sbi" />
+            </bean>
+            <bean class="com.telus.framework.batch.module.support.EnvVariable">
+			      <property name="key" value="ARCHIVE" />
+			      <property name="value" value="${archive}" />
+            </bean>
+      </list>
+    </property>
+   </bean>
+    
+   <bean id="cmdExec-infoSpool" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/CreditInfo.sql ${processbox}/extract/sbi/customerCreditInfo.dat" />
+   </bean>
+   
+   <bean id="cproflSpool" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/CREDITPROFILE.sql ${processbox}/extract/sbi/creditProfile.dat" />
+   </bean>
+   
+   <bean id="idSpool" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/CPROFL_IDENTIFICATION.sql ${processbox}/extract/sbi/cproflIdentification.dat" />
+   </bean>
+   
+   <bean id="addressSpool" parent="baseSqlplusStep" >
+    <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/CPROFL_ADDRESS.sql ${processbox}/extract/sbi/cproflAddress.dat" />
+   </bean>
+   
+  <bean id="fileSplitter" class="com.telus.credit.batch.extract.SplitFileBatch" >
+    <property name="inputFile"><value>${fileSplitter/inputFile}</value></property>
+    <property name="singleCustomerOutputFile"><value>${fileSplitter/singleCustomerOutputFile}</value></property>
+    <property name="multiCustomerOutputFile"><value>${fileSplitter/multiCustomerOutputFile}</value></property>
+  </bean>
+  
+  <bean id="groupExtract" class="com.telus.credit.batch.extract.ExtractCustomerGroupBatch" >
+    <property name="inputFileSortByProfileId"><value>${groupExtract/inputFileSortByProfileId}</value></property>
+    <property name="inputFileSortByCustomerId"><value>${groupExtract/inputFileSortByCustomerId}</value></property>
+    <property name="outputFile"><value>${groupExtract/outputFile}</value></property>
+  </bean>
+  
+  <bean id="fileConverter" class="com.telus.credit.batch.extract.ConvertFileBatch" >
+    <property name="inputFile"><value>${fileConverter/inputFile}</value></property>
+    <property name="outputFile"><value>${fileConverter/outputFile}</value></property>
+  </bean>
+
+  <!-- ===================================================================== -->
+</beans>

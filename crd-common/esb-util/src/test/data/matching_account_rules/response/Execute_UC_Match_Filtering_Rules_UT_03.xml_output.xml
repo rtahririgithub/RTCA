@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+javacallout: execute_uc_include_matching_account_rules
+UC_MATCH_FILTERING_RULES Refpds Table :
+Rules to filter customers returned from the search result before applying Unified Credit Top Match selection criteria
+http://customermanagementwestesb-dv01.tsl.telus.com/telus-crd-crda-esb/test/UT/Execute_UC_Match_Filtering_Rules_UT
+http://localhost:7101/telus-crd-crda-esb/test/UT/Execute_UC_Match_Filtering_Rules_UT
+
+input : MDM returned with  one non KB (103) and non Enabler (1001)
+expected result : Filtering rule removed the account
+
+ --><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<performUnitTestRequest>
+<Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Request>
+
+
+	<wcp:findMatchingSearchResultList xmlns:wcp="http://xmlschema.tmi.telus.com/srv/CMO/OrderMgmt/WCPMProxyMDMSearchResult">
+		
+		<wcp:findMatchingSearchResult>
+			<wcp:customerData>
+				<wcp:customerId/>
+				<wcp:customerCreationDate>2018-10-11T00:00:00Z</wcp:customerCreationDate>
+				<wcp:customerStatusCd>2018-10-11T00:00:00Z</wcp:customerStatusCd>
+				<wcp:customerTypeCd>Person</wcp:customerTypeCd>
+				<wcp:customerSubTypeCd/>
+				<wcp:driverLicense>
+					<wcp:driverLicenseNumber>718293817283941</wcp:driverLicenseNumber>
+					<wcp:provinceCd/>
+					<wcp:expiryDate/>
+				</wcp:driverLicense>
+				<wcp:driverLicense>
+					<wcp:driverLicenseNumber>7283941829304</wcp:driverLicenseNumber>
+					<wcp:provinceCd/>
+					<wcp:expiryDate/>
+				</wcp:driverLicense>
+				<wcp:socialInsuranceNum/>
+				<wcp:creditCardTokenTxt/>
+				<wcp:creditCardFirstSixNum/>
+				<wcp:creditCardLastFourNum/>
+				<wcp:healthCardNumber/>
+				<wcp:passport>
+					<wcp:passportNumber/>
+					<wcp:countryCd/>
+				</wcp:passport>
+				<wcp:provincialIdCard>
+					<wcp:provincialId/>
+					<wcp:provinceCd/>
+				</wcp:provincialIdCard>
+				<wcp:firstName>TAMMY</wcp:firstName>
+				<wcp:lastName>BKTAMMY</wcp:lastName>
+				<wcp:middleName/>
+				<wcp:birthDate>1988-01-01T00:00:00Z</wcp:birthDate>
+				<wcp:customerMatchReasonCd>MTCHBYDL</wcp:customerMatchReasonCd>
+			</wcp:customerData>
+			<wcp:accountData>
+				<wcp:billingMasterSourceId>103</wcp:billingMasterSourceId>
+				<wcp:billingAccountNumber>11</wcp:billingAccountNumber>
+				<wcp:brandId>3</wcp:brandId>
+				<wcp:accountType>I</wcp:accountType>
+				<wcp:accountSubType>R</wcp:accountSubType>
+				<wcp:accountCreationDate>2018-08-27T00:00:00Z</wcp:accountCreationDate>
+				<wcp:startServiceDate>2018-08-27T00:00:00Z</wcp:startServiceDate>
+				<wcp:statusCode>O</wcp:statusCode>
+				<wcp:statusDate>2018-08-27T00:00:00Z</wcp:statusDate>
+			</wcp:accountData>
+						
+		</wcp:findMatchingSearchResult>
+	
+		
+		
+	
+	
+	</wcp:findMatchingSearchResultList>
+
+	
+</Exclude_MatchedAccounts_per_UC_MATCH_FILTERING_RULES_Request>
+
+		</performUnitTestRequest>
+	</soapenv:Body>
+</soapenv:Envelope>

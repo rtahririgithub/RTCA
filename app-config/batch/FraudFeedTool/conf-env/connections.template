@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE group PUBLIC 
+          "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="connections">
+   <group name="sqlplus">
+       <group name="connection">
+           <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+           <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+           <prop name="oraclesid">@SID_OMS_REPORT@</prop>
+           <prop name="dbconnectionvalue">${sqlplus/connection/username}/${sqlplus/connection/password}@${sqlplus/connection/oraclesid}</prop>
+       </group>
+   </group>
+   <group name="sftx">
+        <prop name="url">@JDBC_BEC@</prop>
+	    <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+	    <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+    </group>
+	<group name="jdbc">
+	  <prop name="url">@JDBC_BEC@</prop>
+	  <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+	  <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+    </group>
+	
+    <prop name="G_CRD_BATCH1_SVR">@G_CRD_BATCH1_SVR@</prop>
+</group>

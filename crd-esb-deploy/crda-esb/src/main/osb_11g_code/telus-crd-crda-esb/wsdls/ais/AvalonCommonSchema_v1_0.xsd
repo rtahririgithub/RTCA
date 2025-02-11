@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://schemas.telus.com/avalon/common/v1_0"
+    xmlns:tnsc="http://schemas.telus.com/avalon/common/v1_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="UserHeader" type="tnsc:OriginatingUserType">
+        <xs:annotation>
+            <xs:documentation> User Header for FLM Logging</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:simpleType name="IPAddress">
+        <xs:annotation>
+            <xs:documentation> IP Address</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TokenType">
+        <xs:annotation>
+            <xs:documentation> Token Type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer"/>
+    </xs:simpleType>
+    <xs:simpleType name="SourceSystemIdType">
+        <xs:annotation>
+            <xs:documentation>Application Id Type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer"/>
+    </xs:simpleType>
+    <xs:complexType name="AddressType">
+        <xs:annotation>
+            <xs:documentation> Address Type - for Address Verification</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="address" nillable="false">
+                <xs:annotation>
+                    <xs:documentation>Cardholder Billing Address
+                        (maximum 20 characters)e.g. 1520 Main. Note:
+                        City,State,Country is not required.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="20"/>
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="postalCode" nillable="false" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Cardholder Billing Postal Code
+                        (maximum 9 characters left justified -
+                        uppercase, without spaces)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OriginatingUserType">
+        <xs:annotation>
+            <xs:documentation>End User information type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="custId" nillable="false" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Customer Id of the originating
+                        customer. A free flowing field. It may contain
+                        customer id, user id, user name  etc.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="ipAddress" nillable="false" type="tnsc:IPAddress">
+                <xs:annotation>
+                    <xs:documentation>IP Address of Customer who
+                        originated request. For Example, customer buying
+                        Telus products/services. Or a  Telus user logged
+                        in Web Interface.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" name="appInfo">
+                <xs:annotation>
+                    <xs:documentation>Information of the application
+                        dealing with the request - should contain
+                        information on all the applications through
+                        which the request traversed</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="userId" nillable="false" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>Admin/system user id</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="applicationId"
+                            nillable="false" type="xs:integer">
+                            <xs:annotation>
+                                <xs:documentation>Applications Id of
+                                    upstream applications  in Telus - it
+                                    should be sourced from
+                                    http://sedm1059:9000/AppCat/home.do       </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ipAddress" nillable="false" type="tnsc:IPAddress">
+                            <xs:annotation>
+                                <xs:documentation>IP Address of the application</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,8 @@
+//assessmentResultCd=SUCCESS
+//assessmentResultReasonCd=
+#//decisionCd=LTAACMDFLT01
+#//assessmentMessageCd=NOCHG01
+#//fraudIndicatorCd=
+//creditValueCd=R
+//productCategoryList[1]/categoryCd=SLR
+//productCategoryList[1]/qualified=true

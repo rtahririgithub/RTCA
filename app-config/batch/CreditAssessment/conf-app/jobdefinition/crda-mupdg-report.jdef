@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+  <import resource="classpath:fw-base.jdef"/>
+  <import resource="classpath:fw-mailsender-smtp-spring.xml"/>  
+  
+  <bean id="configurationFramework"
+     class="com.telus.framework.config.spring.PlaceholderConfigurer">
+  </bean>
+
+
+  <bean id="job" parent="baseJob">
+    <property name="steps">
+      <list>
+        <bean id="STEP01" parent="baseStep" >
+          <property name="moduleName"><value>reportExtract</value></property>
+        </bean>
+        <bean id="STEP02" parent="baseStep" >
+          <property name="moduleName"><value>reportSummaryAndError</value></property>
+        </bean>
+        <bean id="STEP03" parent="baseStep" >
+          <property name="moduleName"><value>assessmentReport</value></property>
+        </bean>
+        <bean id="STEP04" parent="baseStep" >
+          <property name="moduleName"><value>recordTimestamp</value></property>
+        </bean>
+      </list>
+    </property>
+
+  </bean>
+  <!-- =========================================================================== -->
+  <!--  N.B. lazy-init ensures the module is not instantiated until its required -->
+  <bean id="reportExtract" parent="baseSqlplusStep">
+      <property name="arg" value="${sqlplus/connection/dbconnectionvalue} @${sql}/crda-mupdg-rprt.sql ${outbox}/CreditReAssessmentDailyReport_${L_CRDA_ODATE}.csv ${L_CRDA_MUPDG_LAST_REPORT_TIMESTAMP}"/>
+      <property name="output" value="${report/log}"/>
+  </bean> 
+  <bean id="recordTimestamp" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable">  <value>${step}/rtca-mupdg-report-timestamp.sh</value></property>
+      <property name="arg"> <value>${L_CRDA_MUPDG_REPORT_LIBMEMSYM} </value></property>
+      <property name="output"><value>${report/log1}</value></property>
+   </bean>
+  <bean id="reportSummaryAndError" class="com.telus.framework.batch.module.ExecModule">
+      <property name="executable">  <value>${step}/rtca-mupdg-report-summary-error-count.sh</value></property>
+      <property name="arg"> <value>${L_CRDA_ODATE} ${L_CRDA_PREV} ${outbox}/CreditReAssessmentDailyReport_${L_CRDA_ODATE}.csv ${temp}/${L_CRDA_ODATE}/CustomerDriverFile_${L_CRDA_ODATE}.dat ${error}/crda-mupdg-*-error-record-${L_CRDA_ODATE}.dat ${passbox}/${L_CRDA_PREV}/CRDA_PRE_BAN_NOT_INCLUDED_CLOSED_${L_CRDA_PREV}.dat ${passbox}/${L_CRDA_PREV}/CRDA_PRE_BAN_NOT_INCLUDED_DETAILS_CV_${L_CRDA_PREV}.dat</value>
+      </property>
+      <property name="output"><value>${report/log1}</value></property>
+   </bean>
+  <bean id="assessmentReport" lazy-init="true"
+     class="com.telus.crd.assessment.batch.EmailReportBatch" >
+     <property name="m_filePath">
+        <value>${outbox}</value>
+     </property>  
+     <property name="m_filePattern">
+        <value>CreditReAssessmentDailyReport_</value>
+     </property>    
+  </bean>  
+</beans>

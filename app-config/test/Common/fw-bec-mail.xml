@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group SYSTEM "file:///C:/data/projects/TELUS_Frameworks/code/asyncerrorhandler/sample/config/PropertyNode.dtd">
+<!--DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/propertyNode.dtd"-->
+
+<!--
+# @version 1.2.0.14.0
+#
+# Change Log:
+#  1.2.0.14.0  - Dec 22,2005: 
+#                MYHO Add fw-bec-mail.xml to apps/common/env/${ENV}/Common.
+#                This file is saved in Harvest under
+#                TELUS_Frameworks/code/conf/conf-env/wk/Common 
+#
+#  1.2.0.17.0  - Feb 05,2006:  processorBean: mailRetryMdbProcessor, FrameworkMailRetryQ, FrameworkMailHoldingQ  
+#                retryMaxCount: 2 and retryDelay: 1.
+-->
+
+<group name="irrelevant">
+    <group name="handler">
+        <prop name="processorBean">mailRetryMdbProcessor</prop>
+    </group>
+
+    <group name="mailConfig">
+        <group name="smtp">
+            <!-- Must define the SMTP host for each environment
+	             Use one of the following SMTP hosts for production environment
+                 - bcmsg.tsl.telus.com 
+                 - abmsg.tsl.telus.com 
+                 **********************************************
+            -->     
+            <prop name="host">abmsg.tsl.telus.com</prop> 
+            
+            <!--  Socket connection timeout value in milliseconds  -->
+            <prop name="connectionTimeout">10000</prop> 
+            <!--  Socket I/O timeout value in milliseconds  -->
+            <prop name="timeout">10000</prop> 
+        </group>
+
+
+        <!-- For JMS Implementation -->
+        <group name="queues">
+            <group name="mailSenderMdb"> 
+                <!-- Queue connection factory and input queue are
+                     referenced by fw-mailsender-jms.xml --> 
+                <prop name="jndiConnectionQCF">frameworkQCF</prop>
+                <prop name="jndiMailDestQueue">FrameworkMailInputQ</prop>
+            </group>
+        </group>
+
+    </group>
+</group>
+

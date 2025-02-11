@@ -1,0 +1,39 @@
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+
+   					<bean id="FicoNewCustomerCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.NewCustomerCreditAssessmentRequest" scope="prototype"/>
+                
+                    <bean id="FicoManualInquiryCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.ManualInquiryCreditAssessmentRequest"/>
+                
+                
+                    <bean id="FicoExistingCustomerCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.ExistingCustomerCreditAssessmentRequest"/>
+                
+               
+                    <bean id="FicoMonthlyUDCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.MonthlyUDCreditAssessmentRequest"/>
+                
+                
+                    <bean id="FicoExistingCustomerCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.ExistingCustomerCreditAssessmentRequest"/>
+                
+               
+                    <bean id="FicoExistingCustomerCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.ExistingCustomerCreditAssessmentRequest"/>
+                
+                
+                    <bean id="FicoOverrideCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.OverrideCreditAssessmentRequest"/>
+                
+                
+                    <bean id="FicoOverrideCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.OverrideCreditAssessmentRequest"/>
+                
+                
+                    <bean id="FicoCancelDepositCreditAssessmentRequest" class="com.fico.telus.blaze.creditAsessment.CancelDepositCreditAssessmentRequest"/>
+                
+                 
+                
+</beans>
+
+
+-->

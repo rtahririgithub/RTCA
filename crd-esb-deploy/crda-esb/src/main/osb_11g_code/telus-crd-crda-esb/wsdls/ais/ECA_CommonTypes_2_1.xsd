@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified"
+    targetNamespace="http://schemas.telus.com/eca/common_types_2_1"
+    xmlns="http://schemas.telus.com/eca/common_types_2_1"
+    xmlns:tns="http://schemas.telus.com/eca/common_types_2_1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- simple types -->
+    <xs:simpleType name="AccountNumber">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="[1-9]{1}\d{0,8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CustomerId">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="[1-9]{1}\d{0,8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SubscriberNumber">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{0,19}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BrandId">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="[1-9]{1}\d{0,21}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CreditScenario">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\p{Lu}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OtherPhoneType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FAX"/>
+            <xs:enumeration value="PAGER"/>
+            <xs:enumeration value="CVMS"/>
+            <xs:enumeration value="MOBILE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PhoneNumber">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9]{1}\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PhoneNumberExtension">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{0,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BillCycle">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="[1-9]{1}\d{0,1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SerialNumber">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{1,20}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProductType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\p{Lu}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PoolingGroupId">
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="1"/>
+            <!-- AIRTIME -->
+            <xs:enumeration value="2"/>
+            <!-- DIRECT_CONNECT -->
+            <xs:enumeration value="3"/>
+            <!-- AIRTIME_AND_DIRECT_CONNECT -->
+            <xs:enumeration value="4"/>
+            <!-- LONG_DISTANCE -->
+            <xs:enumeration value="5"/>
+            <!-- DIRECT_CONNECT_LD -->
+            <xs:enumeration value="6"/>
+            <!-- LONG_DISTANCE_AND_DIRECT_CONNECT_LD -->
+            <xs:enumeration value="7"/>
+            <!-- ROAMING_AIRTIME -->
+            <xs:enumeration value="8"/>
+            <!-- ROAMING_LONG_DISTANCE -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PoolingCoverageType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\p{Lu}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="BillState">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="B"/>
+            <!-- Billed -->
+            <xs:enumeration value="U"/>
+            <!-- Unbilled -->
+            <xs:enumeration value="A"/>
+            <!-- All -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Amount">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\-{0,1}\d{1,}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProvinceCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AB"/>
+            <xs:enumeration value="BC"/>
+            <xs:enumeration value="MB"/>
+            <xs:enumeration value="NB"/>
+            <xs:enumeration value="NF"/>
+            <xs:enumeration value="NT"/>
+            <xs:enumeration value="NS"/>
+            <xs:enumeration value="ON"/>
+            <xs:enumeration value="PE"/>
+            <xs:enumeration value="PQ"/>
+            <xs:enumeration value="SK"/>
+            <xs:enumeration value="YT"/>
+            <xs:enumeration value="NU"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DealerCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SalesRepCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PricePlanCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ServiceCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FeatureCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Language">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EN"/>
+            <xs:enumeration value="FR"/>
+            <xs:enumeration value="CA"/>
+            <xs:enumeration value="MA"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InvoiceStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="C"/>
+            <xs:enumeration value="O"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReasonCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ActivityCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OperatorId">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{1,9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CreditClass">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="C"/>
+            <!-- City -->
+            <xs:enumeration value="D"/>
+            <!-- Rural -->
+            <xs:enumeration value="F"/>
+            <!-- Foreign -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PostalCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]\d[A-Z]\d[A-Z]\d"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NameFormat">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="P"/>
+            <!-- Private -->
+            <xs:enumeration value="D"/>
+            <!-- Business -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SOC">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Month">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="12"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MonthDay">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="31"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MemoType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MemoTypeCategory">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NumberLocation">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\p{Lu}{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NetworkID">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="\d{0,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NpaNXX">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CoverageType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EXTENDED"/>
+            <xs:enumeration value="LOCAL"/>
+            <xs:enumeration value="US"/>
+            <xs:enumeration value="WIDE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CategoryCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{1,6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ServiceType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\p{Lu}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="WPSServiceType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="TRACKING"/>
+            <xs:enumeration value="PROMOTIONAL"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EquipmentType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\p{Lu}|\p{Nd}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CorporateId">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="[1-9]{1}\d{0,9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TaxExemptCertNumber">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S.{15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AccountPassword">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\S{4,20}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DeliveryDate">
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:simpleType name="SMSNotificationPriority">
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SMSNotificationTypeCode">
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+            <xs:enumeration value="17"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ApplicationName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="PaymentType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="B"/>
+            <!-- Bill -->
+            <xs:enumeration value="D"/>
+            <!-- Deposit -->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ActivationOptionNameType">
+        <xs:annotation>
+            <xs:documentation>Enum mastered from CreditProfileService
+                (HCD) system.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Deposit"/>
+            <xs:enumeration value="CreditLimit"/>
+            <xs:enumeration value="CreditLimitAndDeposit"/>
+            <xs:enumeration value="DifferentiatedCredit"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DriversLicense">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SocialInsuranceNumber">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- complex types -->
+    <xs:complexType name="Address">
+        <xs:sequence>
+            <xs:element name="addressType" type="AddressType"/>
+            <xs:element name="attention" nillable="true" type="xs:string"/>
+            <xs:element name="primaryLine" nillable="true" type="xs:string"/>
+            <xs:element name="secondaryLine" nillable="true" type="xs:string"/>
+            <xs:element name="city" nillable="true" type="xs:string"/>
+            <xs:element name="province" nillable="true" type="ProvinceCode"/>
+            <xs:element name="postalCode" nillable="true" type="PostalCode"/>
+            <xs:element name="country" nillable="true" type="xs:string"/>
+            <xs:element name="civicNo" nillable="true" type="xs:string"/>
+            <xs:element name="civicNoSuffix" nillable="true" type="xs:string"/>
+            <xs:element name="streetNumber" nillable="true" type="xs:string"/>
+            <xs:element name="streetNumberSuffix" nillable="true" type="xs:string"/>
+            <xs:element name="streetDirection" nillable="true" type="xs:string"/>
+            <xs:element name="streetName" nillable="true" type="xs:string"/>
+            <xs:element name="streetType" nillable="true" type="xs:string"/>
+            <xs:element name="unitType" nillable="true" type="xs:string"/>
+            <xs:element name="unit" nillable="true" type="xs:string"/>
+            <xs:element name="poBox" nillable="true" type="xs:string"/>
+            <xs:element name="ruralLocation" nillable="true" type="xs:string"/>
+            <xs:element name="ruralQualifier" nillable="true" type="xs:string"/>
+            <xs:element name="ruralSite" nillable="true" type="xs:string"/>
+            <xs:element name="ruralCompartment" nillable="true" type="xs:string"/>
+            <xs:element name="ruralDeliveryType" nillable="true" type="xs:string"/>
+            <xs:element name="ruralGroup" nillable="true" type="xs:string"/>
+            <xs:element name="ruralNumber" nillable="true" type="xs:string"/>
+            <xs:element name="ruralType" nillable="true" type="xs:string"/>
+            <xs:element name="zipGeoCode" nillable="true" type="xs:string"/>
+            <xs:element name="foreignState" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ValidationMessage">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+            <xs:element name="severity" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AddressValidationResult">
+        <xs:complexContent>
+            <xs:extension base="Address">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded"
+                        name="validationMessages" type="ValidationMessage"/>
+                    <xs:element name="countValidationMessages" type="xs:int"/>
+                    <xs:element name="countInformationalMessages" type="xs:int"/>
+                    <xs:element name="countWarningMessages" type="xs:int"/>
+                    <xs:element name="countErrorMessages" type="xs:int"/>
+                    <xs:element name="countDBErrorMessages" type="xs:int"/>
+                    <xs:element name="countDBWarningMessages" type="xs:int"/>
+                    <xs:element name="countOtherMessages" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ConsumerName">
+        <xs:sequence>
+            <xs:element name="title" nillable="true" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="middleInitial" nillable="true" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="generation" nillable="true" type="xs:string"/>
+            <xs:element name="additionalLine" nillable="true" type="xs:string"/>
+            <xs:element name="nameFormat" type="NameFormat"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditCard">
+        <xs:sequence>
+            <xs:element name="number" type="xs:string"/>
+            <xs:element name="expiryMonth" type="Month"/>
+            <xs:element name="expiryYear" type="xs:int"/>
+            <xs:element name="holderName" type="xs:string"/>
+            <xs:element name="authorizationCode" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PersonalCreditInformation">
+        <xs:sequence>
+            <xs:element name="creditCard" nillable="true" type="CreditCard"/>
+            <xs:element name="birthDate" nillable="true" type="xs:date"/>
+            <xs:element name="sin" nillable="true" type="xs:string"/>
+            <xs:element name="driversLicense" nillable="true" type="xs:string"/>
+            <xs:element name="driversLicenseExpiry" nillable="true" type="xs:date"/>
+            <xs:element name="driversLicenseProvince" nillable="true" type="ProvinceCode"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BusinessCreditInformation">
+        <xs:sequence>
+            <xs:element name="incorporationNumber" type="xs:string"/>
+            <xs:element name="incorporationDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BankAccount">
+        <xs:sequence>
+            <xs:element name="bankCode" type="xs:string"/>
+            <xs:element name="bankAccountNumber" type="xs:string"/>
+            <xs:element name="bankBranchNumber" type="xs:string"/>
+            <xs:element name="bankAccountHolder" type="xs:string"/>
+            <xs:element name="bankAccountType" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Cheque">
+        <xs:sequence>
+            <xs:element name="number" type="xs:string"/>
+            <xs:element name="bankAccount" type="BankAccount"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PaymentMethod">
+        <xs:sequence>
+            <xs:element name="paymentMethod" type="xs:string"/>
+            <xs:element name="creditCard" nillable="true" type="CreditCard"/>
+            <xs:element name="cheque" nillable="true" type="Cheque"/>
+            <xs:element name="status" nillable="true" type="xs:string"/>
+            <xs:element name="statusReason" nillable="true" type="xs:string"/>
+            <xs:element name="startDate" nillable="true" type="xs:date"/>
+            <xs:element name="endDate" nillable="true" type="xs:date"/>
+            <xs:element name="suppressReturnEnvelope" nillable="true" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FinancialHistory">
+        <xs:sequence>
+            <xs:element name="debtSummary" type="DebtSummary"/>
+            <xs:element maxOccurs="unbounded"
+                name="monthlyFinancialActivities" nillable="true" type="MonthlyFinancialActivity"/>
+            <xs:element name="delinquent" type="xs:boolean"/>
+            <xs:element name="writtenOff" type="xs:boolean"/>
+            <xs:element name="lastPaymentAmount" type="xs:double"/>
+            <xs:element name="lastPaymentDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DebtSummary">
+        <xs:sequence>
+            <xs:element name="currentDue" type="xs:double"/>
+            <xs:element name="pastDue" type="xs:double"/>
+            <xs:element name="pastDue1to30Days" type="xs:double"/>
+            <xs:element name="pastDue31to60Days" type="xs:double"/>
+            <xs:element name="pastDue61to90Days" type="xs:double"/>
+            <xs:element name="pastDueOver90Days" type="xs:double"/>
+            <xs:element name="billDueDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MonthlyFinancialActivity">
+        <xs:sequence>
+            <xs:element name="activity" type="xs:string"/>
+            <xs:element name="year" type="xs:int"/>
+            <xs:element name="month" type="Month"/>
+            <xs:element name="dishonoredPaymentCount" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditCheckResult">
+        <xs:sequence>
+            <xs:element name="creditClass" type="CreditClass"/>
+            <xs:element name="limit" type="xs:double"/>
+            <xs:element maxOccurs="unbounded" name="deposits"
+                nillable="true" type="CreditCheckResultDeposit"/>
+            <xs:element name="message" nillable="true" type="xs:string"/>
+            <xs:element name="messageFrench" nillable="true" type="xs:string"/>
+            <xs:element name="creditScore" type="xs:int"/>
+            <xs:element name="referToCreditAnalyst" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CreditCheckResultDeposit">
+        <xs:sequence>
+            <xs:element name="productType" type="ProductType"/>
+            <xs:element name="depositAmount" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EligibilityResultType">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string"/>
+            <xs:element name="messageFrench" type="xs:string"/>
+            <xs:element name="serviceDeclined" type="xs:boolean"/>
+            <xs:element name="referToCreditAnalyst" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="referralReason" type="ReferralReasonType"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0"
+                name="activationOption" type="ActivationOptionType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ReferralReasonType">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+            <xs:element name="messageFrench" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ActivationOptionType">
+        <xs:sequence>
+            <xs:element name="optionName" type="ActivationOptionNameType"/>
+            <xs:element name="creditClass" type="CreditClass"/>
+            <xs:element name="creditLimit" type="xs:double"/>
+            <xs:element name="deposit" type="xs:double"/>
+            <xs:element name="maxContractTerm" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>Maximum contract term length
+                        allowed (in months).</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CodeMessage">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PortConsumerNameInfo">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="middleInitial" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="generation" type="xs:string"/>
+            <xs:element name="additionalLine" type="xs:string"/>
+            <xs:element name="nameFormat">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FleetIdentity">
+        <xs:sequence>
+            <xs:element name="fleetId" type="xs:int"/>
+            <xs:element name="urbanId" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MemberIdentity">
+        <xs:sequence>
+            <xs:element name="fleetIdentity" type="FleetIdentity"/>
+            <xs:element name="memberId" type="xs:string"/>
+            <xs:element name="resourceStatus" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Commitment">
+        <xs:sequence>
+            <xs:element name="reasonCode" type="xs:string"/>
+            <xs:element name="months" type="xs:int"/>
+            <xs:element name="startDate" type="xs:date"/>
+            <xs:element name="endDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SubscriptionRole">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="dealerCode" type="DealerCode"/>
+            <xs:element name="salesRepCode" type="SalesRepCode"/>
+            <xs:element name="csrId" type="xs:string"/>
+            <xs:element name="modified" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BillingAccountAssociation">
+        <xs:sequence>
+            <xs:element maxOccurs="1" name="billingAccountAssociationId"
+                nillable="true" type="xs:long"/>
+            <xs:element maxOccurs="1" minOccurs="1"
+                name="masterAccountSystemCode" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1"
+                name="masterAccountId" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1"
+                name="associatedAccountSystemCode" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1"
+                name="associatedAccountId" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1"
+                name="billingAccountAssociationType" type="xs:string"/>
+            <xs:element maxOccurs="1" name="startDate" nillable="true" type="xs:date"/>
+            <xs:element maxOccurs="1" name="endDate" nillable="true" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Memo">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="ban" type="AccountNumber"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="memoType" type="MemoType"/>
+            <xs:element name="subscriberId" nillable="true" type="SubscriberNumber"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="productType" type="ProductType"/>
+            <xs:element name="text" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="date" type="xs:date"/>
+            <xs:element name="systemText" nillable="true" type="xs:string"/>
+            <xs:element name="modifyDate" nillable="true" type="xs:dateTime"/>
+            <xs:element name="operatorId" nillable="true" type="OperatorId"/>
+            <xs:element name="memoId" nillable="true" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FollowUpText">
+        <xs:sequence>
+            <xs:element name="text" nillable="true" type="xs:string"/>
+            <xs:element name="operatorId" nillable="true" type="OperatorId"/>
+            <xs:element name="creationDate" nillable="true" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FollowUp">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="ban" type="AccountNumber"/>
+            <xs:element name="followUpId" nillable="true" type="xs:int"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="type" type="MemoType"/>
+            <xs:element name="subscriberId" nillable="true" type="SubscriberNumber"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="dueDate" type="xs:date"/>
+            <xs:element name="phoneNumber" nillable="true" type="PhoneNumber"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="productType" type="ProductType"/>
+            <xs:element name="text" nillable="true" type="xs:string"/>
+            <xs:element default="false" name="considerBanStamp"
+                nillable="true" type="xs:boolean"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="status" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="openDate" type="xs:date"/>
+            <xs:element name="closeDate" nillable="true" type="xs:date"/>
+            <xs:element name="operatorId" nillable="true" type="OperatorId"/>
+            <xs:element name="openedBy" nillable="true" type="OperatorId"/>
+            <xs:element name="closedBy" nillable="true" type="OperatorId"/>
+            <xs:element maxOccurs="1" minOccurs="1"
+                name="assignedToWorkPositionId" type="xs:string"/>
+            <xs:element name="closeReasonCode" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="additionalTextList"
+                nillable="true" type="FollowUpText"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="emailType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="80"/>
+            <xs:pattern value="([\.a-zA-Z0-9_\-])+@([a-zA-Z0-9_\-])+(([a-zA-Z0-9_\-])*\.([a-zA-Z0-9_\-])+)+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="URN">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="urn" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="BusinessRole">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AGENT"/>
+            <xs:enumeration value="AGENTACTV"/>
+            <xs:enumeration value="DEALER"/>
+            <xs:enumeration value="DEALERACTV"/>
+            <xs:enumeration value="CLIENT"/>
+            <xs:enumeration value="CLIENTACTV"/>
+            <xs:enumeration value="IVRCLIENT"/>
+            <xs:enumeration value="CORPORATE"/>
+            <xs:enumeration value="CORPRTSTR"/>
+            <xs:enumeration value="RETAILSTR"/>
+            <xs:enumeration value="CNTRENEWAL"/>
+            <xs:enumeration value="CNTRNCORP"/>
+            <xs:enumeration value="AGENTLNR"/>
+            <xs:enumeration value="ALL"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Privilege">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DISPLAY"/>
+            <xs:enumeration value="ACTIVATEAGENTACTV"/>
+            <xs:enumeration value="ADD"/>
+            <xs:enumeration value="REMOVE"/>
+            <xs:enumeration value="RTNONCHNG"/>
+            <xs:enumeration value="RTNONRENEW"/>
+            <xs:enumeration value="AUTOADD"/>
+            <xs:enumeration value="ADDAOM"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

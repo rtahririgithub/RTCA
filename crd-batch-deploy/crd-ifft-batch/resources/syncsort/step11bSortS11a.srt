@@ -1,0 +1,14 @@
+    ${sortstatistic}
+    ${sortmemory}
+    ${sortworkspace}
+
+   /INFILE ${processbox}/STEP11_JOIN.DAT 
+	/FIELDS BILLING_ACCOUNT_ID 1 character 18
+   /KEYS BILLING_ACCOUNT_ID
+
+   /OUTFILE ${processbox}/STEP11_JOIN_SORTED.DAT OVERWRITE
+   /COLLATINGSEQUENCE DEFAULT ASCII
+   /padbyte x"20"
+   /SILENT
+   /END
+
